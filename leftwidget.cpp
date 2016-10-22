@@ -17,8 +17,11 @@ LeftWidget::LeftWidget(QWidget *parent) : QWidget(parent),
 void LeftWidget::initButtons()
 {
     connectSettingsPB->setText("Connect Settings");
+    connectSettingsPB->setCheckable(true);
     gcodeEditorPB->setText("GCode Editor");
+    gcodeEditorPB->setCheckable(true);
     maintanceMenuPB->setText("Maintance Menu");
+    maintanceMenuPB->setCheckable(true);
 
     connect(connectSettingsPB, &QPushButton::clicked, [=] {
         if(connectSettingsPB->isChecked()) {
