@@ -22,6 +22,7 @@ set(atelier_SRCS
     main.cpp
     atelier.cpp
     toolbarwidget.cpp
+    leftwidget.cpp
     )
 
 set(interface_UI_SRCS
