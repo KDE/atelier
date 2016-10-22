@@ -2,6 +2,7 @@
 #define LEFTWIDGET_H
 #include <QWidget>
 #include <QPushButton>
+#include "connectsettings.h"
 
 class LeftWidget : public QWidget
 {
@@ -14,6 +15,12 @@ private:
     QPushButton *gcodeEditorPB;
     QPushButton *maintanceMenuPB;
     void initButtons();
+
+signals:
+    void loadConnectContainer();
+    void loadGCodeContainer();
+    void loadMaintanceContainer();
+    void hideContainers();
 };
 
 #endif // LEFTWIDGET_H

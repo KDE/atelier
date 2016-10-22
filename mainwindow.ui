@@ -15,10 +15,16 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="1" column="2" rowspan="2">
+    <item row="0" column="0" colspan="5">
+     <widget class="ToolBarWidget" name="toolbarWidget" native="true"/>
+    </item>
+    <item row="1" column="0" rowspan="2">
+     <widget class="LeftWidget" name="leftWidget" native="true"/>
+    </item>
+    <item row="1" column="4" rowspan="2">
      <widget class="QWidget" name="rightWidget" native="true"/>
     </item>
-    <item row="1" column="1" rowspan="2">
+    <item row="1" column="3" rowspan="2">
      <widget class="QWidget" name="middleWidget" native="true">
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
@@ -35,11 +41,18 @@
       </layout>
      </widget>
     </item>
-    <item row="1" column="0" rowspan="2">
-     <widget class="LeftWidget" name="leftWidget" native="true"/>
-    </item>
-    <item row="0" column="0" colspan="3">
-     <widget class="ToolBarWidget" name="toolbarWidget" native="true"/>
+    <item row="1" column="1" rowspan="2">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="ConnectSettings" name="connectContainer" native="true"/>
+      </item>
+      <item>
+       <widget class="QWidget" name="gcodeContainer" native="true"/>
+      </item>
+      <item>
+       <widget class="QWidget" name="maintanceContainer" native="true"/>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>
@@ -65,6 +78,12 @@
    <class>LeftWidget</class>
    <extends>QWidget</extends>
    <header>leftwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ConnectSettings</class>
+   <extends>QWidget</extends>
+   <header>connectsettings.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
