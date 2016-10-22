@@ -6,17 +6,40 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>686</width>
+    <height>366</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Atelier</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
-     <widget class="ToolBarWidget" name="widget" native="true"/>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="1" column="2" rowspan="2">
+     <widget class="QWidget" name="rightWidget" native="true"/>
+    </item>
+    <item row="1" column="1" rowspan="2">
+     <widget class="QWidget" name="middleWidget" native="true">
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Welcome to 
+ Atelier</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="1" column="0" rowspan="2">
+     <widget class="LeftWidget" name="leftWidget" native="true"/>
+    </item>
+    <item row="0" column="0" colspan="3">
+     <widget class="ToolBarWidget" name="toolbarWidget" native="true"/>
     </item>
    </layout>
   </widget>
@@ -25,7 +48,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>686</width>
      <height>30</height>
     </rect>
    </property>
@@ -36,6 +59,12 @@
    <class>ToolBarWidget</class>
    <extends>QWidget</extends>
    <header>toolbarwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>LeftWidget</class>
+   <extends>QWidget</extends>
+   <header>leftwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
