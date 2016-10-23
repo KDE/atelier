@@ -1,4 +1,5 @@
 #include "toolbarwidget.h"
+#include "dialogs/generalsettingsdialog.h"
 #include <QHBoxLayout>
 
 ToolBarWidget::ToolBarWidget(QWidget *parent) : QWidget(parent),
@@ -19,6 +20,10 @@ ToolBarWidget::ToolBarWidget(QWidget *parent) : QWidget(parent),
     layout->addWidget(pauseTB);
     layout->addWidget(stopTB);
     this->setLayout(layout);
+    connect(settingsTB, &QToolButton::clicked, [=]{
+        auto *dialog = new GeneralSettingsDialog();
+        dialog->show();
+    });
 }
 
 void ToolBarWidget::initButtons()

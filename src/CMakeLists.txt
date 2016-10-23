@@ -16,6 +16,8 @@ add_library(AtelierWidgets STATIC ${widgets_SRCS})
 
 target_link_libraries(AtelierWidgets Qt5::Core Qt5::Widgets Qt5::SerialPort)
 
+add_subdirectory(dialogs)
+
 add_executable(atelier ${atelier_SRCS})
 
-target_link_libraries(atelier AtelierWidgets)
+target_link_libraries(atelier AtelierWidgets AtelierDialogs)
