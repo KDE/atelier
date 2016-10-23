@@ -1,5 +1,5 @@
 #include "toolbarwidget.h"
-#include "dialogs/generalsettingsdialog.h"
+#include "../dialogs/generalsettingsdialog.h"
 #include <QHBoxLayout>
 
 ToolBarWidget::ToolBarWidget(QWidget *parent) : QWidget(parent),
