@@ -47,7 +47,7 @@
        <widget class="ConnectSettings" name="connectContainer" native="true"/>
       </item>
       <item>
-       <widget class="QWidget" name="gcodeContainer" native="true"/>
+       <widget class="GCodeEditor" name="gcodeContainer" native="true"/>
       </item>
       <item>
        <widget class="QWidget" name="maintanceContainer" native="true"/>
@@ -84,6 +84,12 @@
    <class>ConnectSettings</class>
    <extends>QWidget</extends>
    <header>connectsettings.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>GCodeEditor</class>
+   <extends>QWidget</extends>
+   <header>gcodeeditor.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

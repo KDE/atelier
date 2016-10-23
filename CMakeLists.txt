@@ -28,6 +28,7 @@ set(atelier_SRCS
 set(interface_UI_SRCS
     mainwindow.ui
     connectsettings.ui
+    gcodeeditor.ui
     )
 
 qt5_wrap_ui(interface_UI_SRCS ${interface_UI})
@@ -35,6 +36,7 @@ qt5_wrap_ui(interface_UI_SRCS ${interface_UI})
 set(interface_SRCS
     mainwindow.cpp
     connectsettings.cpp
+    gcodeeditor.cpp
     ${interface_UI_SRCS}
     )
 
