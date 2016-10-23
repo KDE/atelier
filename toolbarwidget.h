@@ -14,4 +14,5 @@ private:
     QToolButton *startTB;
     QToolButton *pauseTB;
     QToolButton *stopTB;
+    void initButtons();
 };

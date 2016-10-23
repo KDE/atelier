@@ -10,6 +10,7 @@ ToolBarWidget::ToolBarWidget(QWidget *parent) : QWidget(parent),
     stopTB(new QToolButton)
 {
     auto *layout = new QHBoxLayout;
+    initButtons();
     layout->addWidget(settingsTB);
     layout->addWidget(openFileTB);
     layout->addWidget(connectTB);
@@ -18,4 +19,14 @@ ToolBarWidget::ToolBarWidget(QWidget *parent) : QWidget(parent),
     layout->addWidget(pauseTB);
     layout->addWidget(stopTB);
     this->setLayout(layout);
+}
+
+void ToolBarWidget::initButtons()
+{
+    settingsTB->setText("Settings");
+    openFileTB->setText("Open File");
+    connectTB->setText("Connect");
+    startTB->setText("Start");
+    pauseTB->setText("Pause");
+    stopTB->setText("Stop");
 }
