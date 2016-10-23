@@ -1,5 +1,5 @@
-#include "connectsettings.h"
-#include "ui_connectsettings.h"
+#include "connectsettingswidget.h"
+#include "ui_connectsettingswidget.h"
 
 ConnectSettings::ConnectSettings(QWidget *parent) :
     QWidget(parent),

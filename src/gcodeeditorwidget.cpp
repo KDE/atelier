@@ -1,5 +1,5 @@
-#include "gcodeeditor.h"
-#include "ui_gcodeeditor.h"
+#include "gcodeeditorwidget.h"
+#include "ui_gcodeeditorwidget.h"
 
 GCodeEditor::GCodeEditor(QWidget *parent) :
     QWidget(parent),

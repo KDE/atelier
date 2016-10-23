@@ -2,7 +2,7 @@
 #define LEFTWIDGET_H
 #include <QWidget>
 #include <QPushButton>
-#include "connectsettings.h"
+#include "connectsettingswidget.h"
 
 class LeftWidget : public QWidget
 {
