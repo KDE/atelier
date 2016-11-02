@@ -1,5 +1,6 @@
 #include "toolbarwidget.h"
 #include "../dialogs/generalsettingsdialog.h"
+#include "../dialogs/connectsettingsdialog.h"
 #include <QHBoxLayout>
 
 ToolBarWidget::ToolBarWidget(QWidget *parent) : QWidget(parent),
@@ -20,10 +21,21 @@ ToolBarWidget::ToolBarWidget(QWidget *parent) : QWidget(parent),
     layout->addWidget(pauseTB);
     layout->addWidget(stopTB);
     this->setLayout(layout);
+
     connect(settingsTB, &QToolButton::clicked, [=]{
         auto *dialog = new GeneralSettingsDialog();
         dialog->show();
     });
+
+    connect(connectTB, &QToolButton::clicked, [=]{
+       auto *dialog = new ConnectSettingsDialog(firmwaresList);
+       dialog->show();
+    });
+}
+
+void ToolBarWidget::setFirmwaresList(QStringList fw)
+{
+    firmwaresList = fw;
 }
 
 void ToolBarWidget::initButtons()
