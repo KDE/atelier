@@ -1,7 +1,5 @@
 set(widgets_SRCS
-    connectsettingswidget.cpp
     toolbarwidget.cpp
-    leftwidget.cpp
     gcodeeditorwidget.cpp
     )
 
