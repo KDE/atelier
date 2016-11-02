@@ -6,6 +6,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->gcodeEditorWidget->setVisible(false);
+
+    connect(ui->actionGCode, &QAction::triggered, [=]{
+        ui->gcodeEditorWidget->setVisible(true);
+    });
 }
 
 MainWindow::~MainWindow()

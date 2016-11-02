@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>686</width>
-    <height>366</height>
+    <width>601</width>
+    <height>303</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,7 +15,7 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="1" column="0" rowspan="2" colspan="2">
+    <item row="2" column="1">
      <widget class="QLabel" name="label">
       <property name="text">
        <string>Welcome to 
@@ -26,11 +26,14 @@
       </property>
      </widget>
     </item>
+    <item row="2" column="2">
+     <widget class="QWidget" name="rightWidget" native="true"/>
+    </item>
+    <item row="2" column="0">
+     <widget class="GCodeEditor" name="gcodeEditorWidget" native="true"/>
+    </item>
     <item row="0" column="0" colspan="3">
      <widget class="ToolBarWidget" name="toolbarWidget" native="true"/>
-    </item>
-    <item row="1" column="2" rowspan="2">
-     <widget class="QWidget" name="rightWidget" native="true"/>
     </item>
    </layout>
   </widget>
@@ -39,17 +42,56 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>686</width>
+     <width>601</width>
      <height>30</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>Fi&amp;le</string>
+    </property>
+    <addaction name="actionOpen_GCode"/>
+    <addaction name="actionClose"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <addaction name="actionGCode"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
   </widget>
+  <action name="actionGCode">
+   <property name="text">
+    <string>GCode</string>
+   </property>
+   <property name="toolTip">
+    <string>Open GCode Editor</string>
+   </property>
+  </action>
+  <action name="actionOpen_GCode">
+   <property name="text">
+    <string>Open GCode</string>
+   </property>
+  </action>
+  <action name="actionClose">
+   <property name="text">
+    <string>Close</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
    <class>ToolBarWidget</class>
    <extends>QWidget</extends>
-   <header>toolbarwidget.h</header>
+   <header>widgets/toolbarwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>GCodeEditor</class>
+   <extends>QWidget</extends>
+   <header>widgets/gcodeeditorwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
