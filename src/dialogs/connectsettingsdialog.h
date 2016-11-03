@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QDialog>
+#include <Solid/DeviceNotifier>
 
 namespace Ui {
 class ConnectSettingsDialog;
@@ -18,4 +19,5 @@ private:
     Ui::ConnectSettingsDialog *ui;
     void locateSerialPort();
     QStringList serialPortList;
+    Solid::DeviceNotifier *deviceNotifier;
 };
