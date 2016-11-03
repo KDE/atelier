@@ -24,7 +24,11 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="profileCB"/>
+      <widget class="QComboBox" name="profileCB">
+       <property name="editable">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -141,32 +145,14 @@
       <string>Hot End</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="nozzleSizeLE"/>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="extruderTempLE"/>
+      </item>
       <item row="2" column="1">
        <widget class="QLineEdit" name="extruderMaxTempLE"/>
-      </item>
-      <item row="0" column="2">
-       <widget class="QLabel" name="label_15">
-        <property name="text">
-         <string>mm</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="2">
-       <widget class="QLabel" name="label_16">
-        <property name="text">
-         <string>ºC</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="2">
-       <widget class="QLabel" name="label_17">
-        <property name="text">
-         <string>ºC</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="1">
-       <widget class="QLineEdit" name="flowRateLE"/>
       </item>
       <item row="0" column="0">
        <widget class="QLabel" name="label_10">
@@ -175,29 +161,6 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="label_13">
-        <property name="text">
-         <string>Print Speed</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="label_14">
-        <property name="text">
-         <string>Flow Rate</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="nozzleSizeLE"/>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLineEdit" name="extruderTempLE"/>
-      </item>
-      <item row="3" column="1">
-       <widget class="QLineEdit" name="printSpeedLE"/>
-      </item>
       <item row="1" column="0">
        <widget class="QLabel" name="label_11">
         <property name="text">
@@ -205,24 +168,10 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_12">
+      <item row="2" column="2">
+       <widget class="QLabel" name="label_17">
         <property name="text">
-         <string>Max temperature</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="2">
-       <widget class="QLabel" name="label_18">
-        <property name="text">
-         <string>mm/s</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="2">
-       <widget class="QLabel" name="label_19">
-        <property name="text">
-         <string>%</string>
+         <string>ºC</string>
         </property>
        </widget>
       </item>
@@ -238,6 +187,27 @@
          </size>
         </property>
        </spacer>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_12">
+        <property name="text">
+         <string>Max temperature</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLabel" name="label_15">
+        <property name="text">
+         <string>mm</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QLabel" name="label_16">
+        <property name="text">
+         <string>ºC</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
