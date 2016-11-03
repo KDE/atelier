@@ -30,7 +30,7 @@
      <widget class="QWidget" name="rightWidget" native="true"/>
     </item>
     <item row="2" column="0">
-     <widget class="GCodeEditor" name="gcodeEditorWidget" native="true"/>
+     <widget class="GCodeEditorWidget" name="gcodeEditorWidget" native="true"/>
     </item>
     <item row="0" column="0" colspan="3">
      <widget class="ToolBarWidget" name="toolbarWidget" native="true"/>
@@ -89,9 +89,9 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>GCodeEditor</class>
+   <class>GCodeEditorWidget</class>
    <extends>QWidget</extends>
-   <header>gcodeeditor.h</header>
+   <header>widgets/gcodeeditorwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
