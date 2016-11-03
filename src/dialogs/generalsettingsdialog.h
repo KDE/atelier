@@ -16,5 +16,6 @@ public:
 
 private:
     Ui::GeneralSettingsDialog *ui;
+    void saveSettings();
 };
 
