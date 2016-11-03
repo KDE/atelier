@@ -16,4 +16,6 @@ public:
 
 private:
     Ui::ConnectSettingsDialog *ui;
+    void locateSerialPort();
+    QStringList serialPortList;
 };
