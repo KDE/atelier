@@ -1,6 +1,7 @@
 set(widgets_SRCS
     toolbarwidget.cpp
     gcodeeditorwidget.cpp
+    temporaryprintercontrolwidget.cpp
     )
 
 add_library(AtelierWidgets STATIC ${widgets_SRCS})
