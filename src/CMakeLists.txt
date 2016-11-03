@@ -10,4 +10,4 @@ add_subdirectory(widgets)
 
 add_executable(atelier ${atelier_SRCS})
 
-target_link_libraries(atelier AtelierWidgets AtelierDialogs)
+target_link_libraries(atelier AtelierWidgets AtelierDialogs atcore)
