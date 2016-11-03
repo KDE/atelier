@@ -1,6 +1,5 @@
 #include "generalsettingsdialog.h"
 #include "ui_generalsettingsdialog.h"
-#include <QSettings>
 #include <QMessageBox>
 
 GeneralSettingsDialog::GeneralSettingsDialog(QWidget *parent) :
@@ -9,6 +8,14 @@ GeneralSettingsDialog::GeneralSettingsDialog(QWidget *parent) :
 {
     ui->setupUi(this);
     connect(ui->buttonBox, &QDialogButtonBox::accepted, this, &GeneralSettingsDialog::saveSettings);
+
+    settings.beginGroup("GeneralSettings");
+    QStringList groups = settings.childGroups();
+    settings.endGroup();
+
+    ui->profileCB->addItems(groups);
+    loadSettings(ui->profileCB->currentText());
+    connect(ui->profileCB, &QComboBox::editTextChanged, this, &GeneralSettingsDialog::loadSettings);
 }
 
 GeneralSettingsDialog::~GeneralSettingsDialog()
@@ -18,11 +25,8 @@ GeneralSettingsDialog::~GeneralSettingsDialog()
 
 void GeneralSettingsDialog::saveSettings()
 {
-    QSettings settings;
-    QStringList groups;
-
     settings.beginGroup("GeneralSettings");
-        groups = settings.childGroups();
+    QStringList groups = settings.childGroups();
     settings.endGroup();
     QString currentProfile = ui->profileCB->currentText();
     if(groups.contains(currentProfile)) {
@@ -50,4 +54,23 @@ void GeneralSettingsDialog::saveSettings()
         settings.endGroup();
     settings.endGroup();
     return; //TODO Add something to alert the user that the settings where saved
+}
+
+void GeneralSettingsDialog::loadSettings(QString currentProfile)
+{
+    settings.beginGroup(QLatin1String("GeneralSettings"));
+    settings.beginGroup(currentProfile);
+        //BED
+        ui->x_dimensionLE->setText(settings.value(QLatin1String("dimensionX"),QLatin1String("200")).toString());
+        ui->y_dimensionLE->setText(settings.value(QLatin1String("dimensionY"),QLatin1String("200")).toString());
+        ui->z_dimensionLE->setText(settings.value(QLatin1String("dimensionZ"),QLatin1String("200")).toString());
+        ui->heatedBedCK->setChecked(settings.value(QLatin1String("heatedBed"),QLatin1String("200")).toBool());
+        ui->bedTempLE->setText(settings.value(QLatin1String("temperatureBed"),QLatin1String("0")).toString());
+        //HOTEND
+        ui->nozzleSizeLE->setText(settings.value(QLatin1String("nozzleSize"),QLatin1String("0.4")).toString());
+        ui->extruderTempLE->setText(settings.value(QLatin1String("temperatureExtruder"),QLatin1String("0")).toString());
+        ui->extruderMaxTempLE->setText(settings.value(QLatin1String("maxTemperatureExtruder"),QLatin1String("250")).toString());
+    settings.endGroup();
+    settings.endGroup();
+
 }

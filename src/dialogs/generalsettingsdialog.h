@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QDialog>
+#include <QSettings>
 
 namespace Ui {
 class GeneralSettingsDialog;
@@ -17,5 +18,7 @@ public:
 private:
     Ui::GeneralSettingsDialog *ui;
     void saveSettings();
+    void loadSettings(QString currentProfile);
+    QSettings settings;
 };
 
