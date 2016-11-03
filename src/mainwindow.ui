@@ -50,7 +50,7 @@
     <property name="title">
      <string>Fi&amp;le</string>
     </property>
-    <addaction name="actionOpen_GCode"/>
+    <addaction name="actionOpenGCode"/>
     <addaction name="actionClose"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
@@ -62,22 +62,22 @@
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
   </widget>
+  <action name="actionClose">
+   <property name="text">
+    <string>&amp;Close</string>
+   </property>
+  </action>
+  <action name="actionOpenGCode">
+   <property name="text">
+    <string>&amp;Open GCode</string>
+   </property>
+  </action>
   <action name="actionGCode">
    <property name="text">
-    <string>GCode</string>
+    <string>&amp;GCode</string>
    </property>
    <property name="toolTip">
     <string>Open GCode Editor</string>
-   </property>
-  </action>
-  <action name="actionOpen_GCode">
-   <property name="text">
-    <string>Open GCode</string>
-   </property>
-  </action>
-  <action name="actionClose">
-   <property name="text">
-    <string>Close</string>
    </property>
   </action>
  </widget>
@@ -91,7 +91,7 @@
   <customwidget>
    <class>GCodeEditor</class>
    <extends>QWidget</extends>
-   <header>widgets/gcodeeditorwidget.h</header>
+   <header>gcodeeditor.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
