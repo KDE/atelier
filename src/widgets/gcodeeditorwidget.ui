@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>GCodeEditor</class>
- <widget class="QWidget" name="GCodeEditor">
+ <class>GCodeEditorWidget</class>
+ <widget class="QWidget" name="GCodeEditorWidget">
   <property name="geometry">
    <rect>
     <x>0</x>

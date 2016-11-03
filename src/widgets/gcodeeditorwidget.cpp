@@ -1,14 +1,13 @@
 #include "gcodeeditorwidget.h"
 #include "ui_gcodeeditorwidget.h"
-
-GCodeEditor::GCodeEditor(QWidget *parent) :
+GCodeEditorWidget::GCodeEditorWidget(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::GCodeEditor)
+    ui(new Ui::GCodeEditorWidget)
 {
     ui->setupUi(this);
 }
 
-GCodeEditor::~GCodeEditor()
+GCodeEditorWidget::~GCodeEditorWidget()
 {
     delete ui;
 }

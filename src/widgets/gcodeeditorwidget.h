@@ -3,17 +3,17 @@
 #include <QWidget>
 
 namespace Ui {
-class GCodeEditor;
+class GCodeEditorWidget;
 }
 
-class GCodeEditor : public QWidget
+class GCodeEditorWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit GCodeEditor(QWidget *parent = nullptr);
+    explicit GCodeEditorWidget(QWidget *parent = nullptr);
     ~GCodeEditor();
 
 private:
-    Ui::GCodeEditor *ui;
+    Ui::GCodeEditorWidget *ui;
 };
