@@ -16,6 +16,13 @@ GeneralSettingsDialog::GeneralSettingsDialog(QWidget *parent) :
     ui->profileCB->addItems(groups);
     loadSettings(ui->profileCB->currentText());
     connect(ui->profileCB, &QComboBox::editTextChanged, this, &GeneralSettingsDialog::loadSettings);
+
+    connect(ui->heatedBedCK, &QCheckBox::clicked, [=](const bool &status){
+       if(status)
+           ui->bedTempLE->setEnabled(true);
+       else
+           ui->bedTempLE->setEnabled(false);
+    });
 }
 
 GeneralSettingsDialog::~GeneralSettingsDialog()
