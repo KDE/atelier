@@ -22,7 +22,8 @@ endif()
 include(ExternalProject)
 
 ExternalProject_Add(atcore_import
-    GIT_REPOSITORY  git://anongit.kde.org/atcore.git
+    #GIT_REPOSITORY  git://anongit.kde.org/atcore.git
+    GIT_REPOSITORY  https://github.com/lays147/atcore.git
     GIT_TAG "master"
     SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/atcore"
     BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/atcore"
