@@ -2,6 +2,7 @@
 #include "../dialogs/generalsettingsdialog.h"
 #include "../dialogs/connectsettingsdialog.h"
 #include <QHBoxLayout>
+#include <QFileDialog>
 
 ToolBarWidget::ToolBarWidget(QWidget *parent) : QWidget(parent),
     settingsTB(new QToolButton),
@@ -30,6 +31,12 @@ ToolBarWidget::ToolBarWidget(QWidget *parent) : QWidget(parent),
     connect(connectTB, &QToolButton::clicked, [=]{
        auto *dialog = new ConnectSettingsDialog(firmwaresList);
        dialog->show();
+    });
+
+    connect(openFileTB, &QToolButton::clicked, [=]{
+       QString fileName = QFileDialog::getOpenFileName(this, tr("Select a file to print"),
+                                                       QDir::homePath(), tr("GCode(*.gco *gcode)"));
+       emit loadFile(fileName);
     });
 }
 

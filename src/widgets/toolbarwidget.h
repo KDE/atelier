@@ -26,4 +26,8 @@ signals:
     void printFile(QString fileName);
     void pausePrint();
     void stopPrint();
+
+signals:
+    void loadFile(QString file);
+
 };
