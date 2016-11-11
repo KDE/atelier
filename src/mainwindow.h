@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QMainWindow>
+#include "atelier.h"
 
 namespace Ui {
 class MainWindow;
@@ -16,4 +17,6 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    Atelier *atelier;
+    void initConnectsToAtelier();
 };
