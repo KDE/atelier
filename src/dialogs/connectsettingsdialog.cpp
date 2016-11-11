@@ -10,6 +10,7 @@ ConnectSettingsDialog::ConnectSettingsDialog(QStringList firmwaresList, QWidget 
     ui->setupUi(this);
     connect(deviceNotifier, &Solid::DeviceNotifier::deviceAdded, this, &ConnectSettingsDialog::locateSerialPort);
     connect(deviceNotifier, &Solid::DeviceNotifier::deviceRemoved, this, &ConnectSettingsDialog::locateSerialPort);
+    locateSerialPort();
 
     connect(ui->buttonBox, &QDialogButtonBox::accepted,[=]{
         if(ui->profileCB->currentText().isEmpty()) {

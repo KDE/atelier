@@ -22,4 +22,7 @@ private:
     Solid::DeviceNotifier *deviceNotifier;
     void initFirmwareComboBox(QStringList fw);
     void initBaudRateComboBox();
+
+signals:
+    void _connect(QString port, QString baud);
 };
