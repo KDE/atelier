@@ -18,24 +18,10 @@ if(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUXX)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 ")
 endif()
 
-#Import AtCore from KDE Anonimous GIT
-include(ExternalProject)
-
-ExternalProject_Add(atcore_import
-    #GIT_REPOSITORY  git://anongit.kde.org/atcore.git
-    GIT_REPOSITORY  https://github.com/lays147/atcore.git
-    GIT_TAG "master"
-    SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/atcore"
-    BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/atcore"
-)
-
-#Inlude like Static Library
-add_library(atcore STATIC IMPORTED)
-add_dependencies(atcore atcore_import)
-
 #Atelier Dependencies
 find_package(KF5 REQUIRED COMPONENTS
                 Solid
+                AtCore
             )
 
 find_package(Qt5 REQUIRED COMPONENTS
@@ -48,3 +34,5 @@ find_package(Qt5 REQUIRED COMPONENTS
 include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
 
 add_subdirectory(src)
+
+feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
