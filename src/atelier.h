@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QObject>
+#include <QTemporaryFile>
 #include <KAtCore/AtCore>
 
 namespace Ui {
@@ -34,9 +35,21 @@ public:
 private:
     Ui::Atelier *ui;
     AtCore *core;
+    QTemporaryFile *logFile;
     void percentagePrinted();
+    void addLog(QString msg);
+    void addRLog(QString msg);
+    void addSLog(QString msg);
+    void checkReceivedCommand();
+    void checkPushedCommands(QByteArray bmsg);
+    void writeTempFile(QString text);
+    QString getTime();
+    QString logHeader();
+    QString rLogHeader();
+    QString sLogHeader();
 
 signals:
     void percentage(float percent);
     void updateTemperatures(float bed, float ext);
+    void updateLog(QString message);
 };

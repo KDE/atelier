@@ -61,3 +61,7 @@ void TemporaryPrinterControlWidget::updateTemperatures(float bed, float ext)
     ui->currentBedTempLB->setText(QVariant(bed).toString().append("ºC"));
     ui->currentExtTempLB->setText(QVariant(ext).toString().append("ºC"));
 }
+
+void TemporaryPrinterControlWidget::updateLog(QString msg){
+    ui->logPT->appendPlainText(msg);
+}

@@ -45,6 +45,7 @@ void MainWindow::initConnectsToAtelier()
 
     connect(atelier, &Atelier::percentage, ui->rightWidget, &TemporaryPrinterControlWidget::updateProgressBar);
     connect(atelier, &Atelier::updateTemperatures, ui->rightWidget, &TemporaryPrinterControlWidget::updateTemperatures);
+    connect(atelier, &Atelier::updateLog, ui->rightWidget, &TemporaryPrinterControlWidget::updateLog);
 
     connect(ui->toolbarWidget, &ToolBarWidget::printFile, atelier, &Atelier::printFile);
 

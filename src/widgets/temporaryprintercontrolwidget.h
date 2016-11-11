@@ -15,6 +15,7 @@ public:
     ~TemporaryPrinterControlWidget();
     void updateProgressBar(float percent);
     void updateTemperatures(float bed, float ext);
+    void updateLog(QString msg);
 
 private:
     Ui::TemporaryPrinterControlWidget *ui;
