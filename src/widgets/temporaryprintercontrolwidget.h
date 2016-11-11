@@ -16,4 +16,15 @@ public:
 
 private:
     Ui::TemporaryPrinterControlWidget *ui;
+
+signals:
+    void setHeatBed(int temp);
+    void setHeatExtruder(int ext, int temp);
+    void changeFanSpeed(int value);
+    void changePrintSpeed(int value);
+    void homeAll();
+    void homeX();
+    void homeY();
+    void homeZ();
+    void moveAxis(QLatin1Char axis, int dist);
 };

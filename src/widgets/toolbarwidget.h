@@ -1,6 +1,8 @@
 #pragma once
 #include <QWidget>
 #include <QToolButton>
+#include "../dialogs/generalsettingsdialog.h"
+#include "../dialogs/connectsettingsdialog.h"
 class ToolBarWidget : public QWidget
 {
     Q_OBJECT
@@ -26,8 +28,5 @@ signals:
     void printFile(QString fileName);
     void pausePrint();
     void stopPrint();
-
-signals:
-    void loadFile(QString file);
 
 };
