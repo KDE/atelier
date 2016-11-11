@@ -13,6 +13,8 @@ class TemporaryPrinterControlWidget : public QWidget
 public:
     explicit TemporaryPrinterControlWidget(QWidget *parent = nullptr);
     ~TemporaryPrinterControlWidget();
+    void updateProgressBar(float percent);
+    void updateTemperatures(float bed, float ext);
 
 private:
     Ui::TemporaryPrinterControlWidget *ui;

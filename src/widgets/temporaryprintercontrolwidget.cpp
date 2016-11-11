@@ -50,3 +50,14 @@ TemporaryPrinterControlWidget::~TemporaryPrinterControlWidget()
 {
     delete ui;
 }
+
+void TemporaryPrinterControlWidget::updateProgressBar(float percent)
+{
+    ui->printProgressPB->setValue(percent);
+}
+
+void TemporaryPrinterControlWidget::updateTemperatures(float bed, float ext)
+{
+    ui->currentBedTempLB->setText(QVariant(bed).toString().append("ºC"));
+    ui->currentExtTempLB->setText(QVariant(ext).toString().append("ºC"));
+}
