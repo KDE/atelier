@@ -12,7 +12,7 @@ class ConnectSettingsDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit ConnectSettingsDialog(QWidget *parent = nullptr);
+    explicit ConnectSettingsDialog(QStringList firmwaresList, QWidget *parent = nullptr);
     ~ConnectSettingsDialog();
 
 private:
@@ -20,4 +20,6 @@ private:
     void locateSerialPort();
     QStringList serialPortList;
     Solid::DeviceNotifier *deviceNotifier;
+    void initFirmwareComboBox(QStringList fw);
+    void initBaudRateComboBox();
 };

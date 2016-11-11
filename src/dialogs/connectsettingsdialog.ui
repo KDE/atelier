@@ -46,7 +46,11 @@
     </widget>
    </item>
    <item row="4" column="1">
-    <widget class="QComboBox" name="baudCB"/>
+    <widget class="QComboBox" name="baudCB">
+     <property name="editable">
+      <bool>true</bool>
+     </property>
+    </widget>
    </item>
    <item row="7" column="0">
     <widget class="QLabel" name="label_7">
@@ -90,7 +94,11 @@
     </widget>
    </item>
    <item row="2" column="1">
-    <widget class="QComboBox" name="profileCB"/>
+    <widget class="QComboBox" name="profileCB">
+     <property name="editable">
+      <bool>true</bool>
+     </property>
+    </widget>
    </item>
    <item row="0" column="0" colspan="4">
     <widget class="QLabel" name="label">
