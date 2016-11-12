@@ -74,3 +74,11 @@ void ConnectSettingsDialog::initBaudRateComboBox()
     br.append("250000");
     ui->baudCB->addItems(br);
 }
+
+void ConnectSettingsDialog::initProfileComboBox(){
+
+    settings.beginGroup("GeneralSettings");
+    QStringList groups = settings.childGroups();
+    settings.endGroup();
+    ui->profileCB->addItems(groups);
+}

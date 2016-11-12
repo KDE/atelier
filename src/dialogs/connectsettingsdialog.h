@@ -2,6 +2,7 @@
 
 #include <QDialog>
 #include <Solid/DeviceNotifier>
+#include <QSettings>
 
 namespace Ui {
 class ConnectSettingsDialog;
@@ -22,6 +23,8 @@ private:
     Solid::DeviceNotifier *deviceNotifier;
     void initFirmwareComboBox(QStringList fw);
     void initBaudRateComboBox();
+    void initProfileComboBox();
+    QSettings settings;
 
 signals:
     void _connect(QString port, QString baud);
