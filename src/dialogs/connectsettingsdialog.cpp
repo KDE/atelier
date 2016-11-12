@@ -1,6 +1,7 @@
 #include "connectsettingsdialog.h"
 #include "ui_connectsettingsdialog.h"
 #include <QSerialPortInfo>
+#include <QMessageBox>
 
 ConnectSettingsDialog::ConnectSettingsDialog(QStringList firmwaresList, QWidget *parent) :
     QDialog(parent),
