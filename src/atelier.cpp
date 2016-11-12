@@ -39,10 +39,7 @@ void Atelier::checkPrinterStatus(PrinterStatus status)
 
 void Atelier::pausePrint()
 {
-    if (core->state() == PrinterState::PAUSE) {
-        core->setState(PrinterState::IDLE);
-    }
-    core->setState(PrinterState::PAUSE);
+   core->pause(QString());
 }
 
 void Atelier::stopPrint()
@@ -53,7 +50,6 @@ void Atelier::stopPrint()
 void Atelier::emergencyStopPrint()
 {
     core->stop();
-    addRLog(msg);
 }
 
 QStringList Atelier::availablePlugins()

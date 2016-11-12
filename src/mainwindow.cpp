@@ -48,7 +48,6 @@ void MainWindow::initConnectsToAtelier()
     connect(atelier, &Atelier::updateLog, ui->rightWidget, &TemporaryPrinterControlWidget::updateLog);
 
     connect(ui->toolbarWidget, &ToolBarWidget::printFile, atelier, &Atelier::printFile);
-
     connect(ui->toolbarWidget, &ToolBarWidget::pausePrint, atelier, &Atelier::pausePrint);
     connect(ui->toolbarWidget, &ToolBarWidget::stopPrint, atelier, &Atelier::stopPrint);
     ui->toolbarWidget->setFirmwaresList(atelier->availablePlugins());

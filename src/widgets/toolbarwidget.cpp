@@ -41,6 +41,9 @@ ToolBarWidget::ToolBarWidget(QWidget *parent) : QWidget(parent),
     connect(startTB, &QToolButton::clicked, [=]{
         emit printFile(fileName);
     });
+
+    connect(pauseTB, &QToolButton::clicked, this, &ToolBarWidget::pausePrint);
+    connect(stopTB, &QToolButton::clicked, this, &ToolBarWidget::stopPrint);
 }
 
 void ToolBarWidget::setFirmwaresList(QStringList fw)
