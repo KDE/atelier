@@ -2,6 +2,7 @@
 #include "ui_connectsettingsdialog.h"
 #include <QSerialPortInfo>
 #include <QMessageBox>
+#include <KLocalizedString>
 
 ConnectSettingsDialog::ConnectSettingsDialog(QStringList firmwaresList, QWidget *parent) :
     QDialog(parent),
@@ -16,14 +17,14 @@ ConnectSettingsDialog::ConnectSettingsDialog(QStringList firmwaresList, QWidget 
     connect(ui->buttonBox, &QDialogButtonBox::accepted,[=]{
         if(ui->profileCB->currentText().isEmpty()) {
             QMessageBox msg;
-            msg.setText("Please, create a profile to connect on Settings!");
+            msg.setText(i18n("Please, create a profile to connect on Settings!"));
             msg.setIcon(QMessageBox::Information);
             msg.exec();
         } else if(!ui->serialPortCB->currentText().isEmpty()) {
             emit _connect(ui->serialPortCB->currentText(), ui->baudCB->currentText());
         } else {
             QMessageBox msg;
-            msg.setText("Please, connect a serial device to continue!");
+            msg.setText(i18n("Please, connect a serial device to continue!"));
             msg.setIcon(QMessageBox::Information);
             msg.exec();
         }
@@ -63,7 +64,7 @@ void ConnectSettingsDialog::locateSerialPort()
 
 void ConnectSettingsDialog::initFirmwareComboBox(QStringList fw)
 {
-    fw.prepend("Auto-Detect");
+    fw.prepend(i18n("Auto-Detect"));
     ui->firmwareCB->addItems(fw);
 }
 
@@ -77,7 +78,7 @@ void ConnectSettingsDialog::initBaudRateComboBox()
 
 void ConnectSettingsDialog::initProfileComboBox(){
 
-    settings.beginGroup("GeneralSettings");
+    settings.beginGroup(i18n("GeneralSettings"));
     QStringList groups = settings.childGroups();
     settings.endGroup();
     ui->profileCB->addItems(groups);

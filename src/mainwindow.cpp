@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QFileDialog>
+#include <KLocalizedString>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -15,8 +16,8 @@ MainWindow::MainWindow(QWidget *parent) :
     });
 
     connect(ui->actionOpenGCode, &QAction::triggered, [=]{
-        QString fileName = QFileDialog::getOpenFileName(this, tr("Select a file to print"),
-                                                        QDir::homePath(), tr("GCode(*.gco *gcode)"));
+        QString fileName = QFileDialog::getOpenFileName(this, i18n("Select a file to print"),
+                                                        QDir::homePath(), i18n("GCode(*.gco *gcode)"));
         ui->gcodeEditorWidget->loadFile(fileName);
     });
 

@@ -22,6 +22,7 @@ endif()
 find_package(KF5 REQUIRED COMPONENTS
                 Solid
                 AtCore
+                I18n
             )
 
 find_package(Qt5 REQUIRED COMPONENTS

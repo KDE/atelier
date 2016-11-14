@@ -1,6 +1,7 @@
 #include "generalsettingsdialog.h"
 #include "ui_generalsettingsdialog.h"
 #include <QMessageBox>
+#include <KLocalizedString>
 
 GeneralSettingsDialog::GeneralSettingsDialog(QWidget *parent) :
     QDialog(parent),
@@ -9,7 +10,7 @@ GeneralSettingsDialog::GeneralSettingsDialog(QWidget *parent) :
     ui->setupUi(this);
     connect(ui->buttonBox, &QDialogButtonBox::accepted, this, &GeneralSettingsDialog::saveSettings);
 
-    settings.beginGroup("GeneralSettings");
+    settings.beginGroup(i18n("GeneralSettings"));
     QStringList groups = settings.childGroups();
     settings.endGroup();
 
@@ -32,14 +33,14 @@ GeneralSettingsDialog::~GeneralSettingsDialog()
 
 void GeneralSettingsDialog::saveSettings()
 {
-    settings.beginGroup("GeneralSettings");
+    settings.beginGroup(i18n("GeneralSettings"));
     QStringList groups = settings.childGroups();
     settings.endGroup();
     QString currentProfile = ui->profileCB->currentText();
     if(groups.contains(currentProfile)) {
         QMessageBox msgBox;
-        msgBox.setText("The settings has been modified.");
-        msgBox.setInformativeText("Do you want to save your changes?");
+        msgBox.setText(i18n("The settings has been modified."));
+        msgBox.setInformativeText(i18n("Do you want to save your changes?"));
         msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Cancel);
         int ret = msgBox.exec();
         if(ret == QMessageBox::Cancel)

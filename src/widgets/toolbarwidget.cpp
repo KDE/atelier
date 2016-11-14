@@ -1,6 +1,7 @@
 #include "toolbarwidget.h"
 #include <QHBoxLayout>
 #include <QFileDialog>
+#include <KLocalizedString>
 
 ToolBarWidget::ToolBarWidget(QWidget *parent) : QWidget(parent),
     settingsTB(new QToolButton),
@@ -33,8 +34,8 @@ ToolBarWidget::ToolBarWidget(QWidget *parent) : QWidget(parent),
     });
 
     connect(openFileTB, &QToolButton::clicked, [=]{
-       fileName = QFileDialog::getOpenFileName(this, tr("Select a file to print"),
-                                                       QDir::homePath(), tr("GCode(*.gco *gcode)"));
+       fileName = QFileDialog::getOpenFileName(this, i18n("Select a file to print"),
+                                                       QDir::homePath(), i18n("GCode(*.gco *gcode)"));
        emit loadFile(fileName);
     });
 
@@ -53,10 +54,10 @@ void ToolBarWidget::setFirmwaresList(QStringList fw)
 
 void ToolBarWidget::initButtons()
 {
-    settingsTB->setText("Settings");
-    openFileTB->setText("Open File");
-    connectTB->setText("Connect");
-    startTB->setText("Start");
-    pauseTB->setText("Pause");
-    stopTB->setText("Stop");
+    settingsTB->setText(i18n("Settings"));
+    openFileTB->setText(i18n("Open File"));
+    connectTB->setText(i18n("Connect"));
+    startTB->setText(i18n("Start"));
+    pauseTB->setText(i18n("Pause"));
+    stopTB->setText(i18n("Stop"));
 }
