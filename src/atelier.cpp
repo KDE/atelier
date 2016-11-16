@@ -12,6 +12,7 @@ Atelier::Atelier():
     logFile(new QTemporaryFile(QDir::tempPath() + QStringLiteral("/AtCore_")))
 {
     connect(core, &AtCore::printerStatusChanged, this, &Atelier::checkPrinterStatus);
+    connect(core, &AtCore::printProgressChanged, this, &Atelier::percentage);
 }
 
 Atelier::~Atelier()

@@ -49,7 +49,7 @@ private:
     QString sLogHeader();
 
 signals:
-    void percentage(float percent);
+    void percentage(const float &percent);
     void updateTemperatures(float bed, float ext);
     void updateLog(QString message);
 };
