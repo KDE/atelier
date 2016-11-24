@@ -57,7 +57,7 @@ void Atelier::checkPrinterStatus(PrinterStatus status)
 
 void Atelier::pausePrint()
 {
-   core->pause();
+   core->pause(QString());
 }
 
 void Atelier::stopPrint()
