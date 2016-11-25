@@ -1,7 +1,6 @@
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(atelier_SRCS
     main.cpp
-    atelier.cpp
     mainwindow.cpp
     )
 

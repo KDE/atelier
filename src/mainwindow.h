@@ -18,7 +18,7 @@
 #pragma once
 
 #include <QMainWindow>
-#include "atelier.h"
+#include <KAtCore/AtCore>
 
 namespace Ui {
 class MainWindow;
@@ -34,6 +34,6 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    Atelier *atelier;
-    void initConnectsToAtelier();
+    void initConnectsToAtCore();
+    AtCore core;
 };
