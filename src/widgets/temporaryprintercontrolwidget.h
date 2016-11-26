@@ -43,8 +43,6 @@ signals:
     void changeFanSpeed(int value);
     void changePrintSpeed(int value);
     void homeAll();
-    void homeX();
-    void homeY();
-    void homeZ();
-    void moveAxis(QLatin1Char axis, int dist);
+    void home(uchar axis);
+    void moveAxis(uchar axis, uint dist);
 };

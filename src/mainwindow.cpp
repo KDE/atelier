@@ -22,8 +22,7 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow),
-    atelier(new Atelier())
+    ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     ui->gcodeEditorWidget->setVisible(false);
@@ -39,7 +38,7 @@ MainWindow::MainWindow(QWidget *parent) :
     });
 
     connect(ui->toolbarWidget, &ToolBarWidget::loadFile, ui->gcodeEditorWidget, &GCodeEditorWidget::loadFile);
-    initConnectsToAtelier();
+    initConnectsToAtCore();
 }
 
 MainWindow::~MainWindow()
@@ -47,26 +46,36 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::initConnectsToAtelier()
+void MainWindow::initConnectsToAtCore()
 {
-    connect(ui->toolbarWidget, &ToolBarWidget::_connect, atelier, &Atelier::startConnectProccess);
+    connect(ui->toolbarWidget, &ToolBarWidget::_connect, &core, &AtCore::initFirmware);
 
-    connect(ui->rightWidget, &TemporaryPrinterControlWidget::homeAll, atelier, &Atelier::homeAll);
-    connect(ui->rightWidget, &TemporaryPrinterControlWidget::homeX, atelier, &Atelier::homeX);
-    connect(ui->rightWidget, &TemporaryPrinterControlWidget::homeY, atelier, &Atelier::homeY);
-    connect(ui->rightWidget, &TemporaryPrinterControlWidget::homeZ, atelier, &Atelier::homeZ);
-    connect(ui->rightWidget, &TemporaryPrinterControlWidget::moveAxis, atelier, &Atelier::moveAxis);
-    connect(ui->rightWidget, &TemporaryPrinterControlWidget::changeFanSpeed, atelier, &Atelier::fanSpeed);
-    connect(ui->rightWidget, &TemporaryPrinterControlWidget::changePrintSpeed, atelier, &Atelier::printSpeed);
-    connect(ui->rightWidget, &TemporaryPrinterControlWidget::setHeatBed, atelier, &Atelier::setBedTemp);
-    connect(ui->rightWidget, &TemporaryPrinterControlWidget::setHeatExtruder, atelier, &Atelier::setExtTemp);
+    connect(ui->rightWidget, &TemporaryPrinterControlWidget::homeAll, this, [=]{
+        core.home();
+    });
+    connect(ui->rightWidget, &TemporaryPrinterControlWidget::home, this, [=]{
+        core.home(AXIS::X);
+    });
+    connect(ui->rightWidget, &TemporaryPrinterControlWidget::home, this, [=]{
+        core.home(AXIS::Y);
+    });
+    connect(ui->rightWidget, &TemporaryPrinterControlWidget::home, this, [=]{
+        core.home(AXIS::Z);
+    });
+    connect(ui->rightWidget, &TemporaryPrinterControlWidget::moveAxis, &core, &AtCore::move);
+    //TODO Handle more then one fan - Maybe when the final controls are finished?
+    connect(ui->rightWidget, &TemporaryPrinterControlWidget::changeFanSpeed, this, [=](const int value){
+        core.setFanSpeed(value);
+    });
+    connect(ui->rightWidget, &TemporaryPrinterControlWidget::changePrintSpeed, &core, &AtCore::setPrinterSpeed);
+    connect(ui->rightWidget, &TemporaryPrinterControlWidget::setHeatBed, &core, &AtCore::setBedTemp);
+    connect(ui->rightWidget, &TemporaryPrinterControlWidget::setHeatExtruder, &core, &AtCore::setExtruderTemp);
 
-    connect(atelier, &Atelier::percentage, ui->rightWidget, &TemporaryPrinterControlWidget::updateProgressBar);
-    connect(atelier, &Atelier::updateTemperatures, ui->rightWidget, &TemporaryPrinterControlWidget::updateTemperatures);
-    connect(atelier, &Atelier::updateLog, ui->rightWidget, &TemporaryPrinterControlWidget::updateLog);
 
-    connect(ui->toolbarWidget, &ToolBarWidget::printFile, atelier, &Atelier::printFile);
-    connect(ui->toolbarWidget, &ToolBarWidget::pausePrint, atelier, &Atelier::pausePrint);
-    connect(ui->toolbarWidget, &ToolBarWidget::stopPrint, atelier, &Atelier::stopPrint);
-    ui->toolbarWidget->setFirmwaresList(atelier->availablePlugins());
+    connect(ui->toolbarWidget, &ToolBarWidget::printFile, &core, &AtCore::print);
+    connect(ui->toolbarWidget, &ToolBarWidget::pausePrint, this, [=]{
+        core.pause(QString());
+    });
+    connect(ui->toolbarWidget, &ToolBarWidget::stopPrint, &core, &AtCore::stop);
+    ui->toolbarWidget->setFirmwaresList(core.availablePlugins());
 }

@@ -44,5 +44,5 @@ private:
     QSettings settings;
 
 signals:
-    void _connect(QString port, QString baud);
+    void _connect(QString port, int baud);
 };

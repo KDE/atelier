@@ -41,7 +41,7 @@ private:
 
 signals:
     void loadFile(QString file);
-    void _connect(QString port, QString baud);
+    void _connect(QString port, int baud);
     void printFile(QString fileName);
     void pausePrint();
     void stopPrint();
