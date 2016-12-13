@@ -98,6 +98,12 @@ void MainWindow::setupActions()
         ui->gcodeEditorWidget->setVisible(!ui->gcodeEditorWidget->isVisible());
     });
 
+    action = actionCollection()->addAction(QStringLiteral("edit_gcode"));
+    action->setText(i18n("&Edit GCode"));
+    connect(action, &QAction::triggered, this, [ = ] {
+        ui->gcodeEditorWidget->setVisible(!ui->gcodeEditorWidget->isVisible());
+    });
+
     QAction *quit = KStandardAction::quit(qApp, SLOT(quit()), actionCollection());
 
     setupGUI(Default, "atelierui.rc");

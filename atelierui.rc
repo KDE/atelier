@@ -6,20 +6,23 @@
      xsi:schemaLocation="http://www.kde.org/standards/kxmlgui/1.0
                          http://www.kde.org/standards/kxmlgui/1.0/kxmlgui.xsd" >
  
-  <MenuBar>
-    <Menu name="file" >
-      <Action name="open_gcode"/>
-      <Action name="quit" />
-    </Menu>
-  </MenuBar>
+    <MenuBar>
+        <Menu name="file" >
+            <Action name="open_gcode"/>
+            <Action name="quit" />
+        </Menu>
+        <Menu name="edit">
+            <Action name="edit_gcode"/>
+        </Menu>
+    </MenuBar>
  
-  <ToolBar name="mainToolBar" >
-    <text>Main Toolbar</text>
-    <Action name="open_gcode"/>
-    <Action name="connect"/>
-    <Separator/>
-    <Action name="print"/>
-    <Action name="pause"/>
-    <Action name="stop"/>
-  </ToolBar>
+    <ToolBar name="mainToolBar" >
+        <text>Main Toolbar</text>
+        <Action name="open_gcode"/>
+        <Action name="connect"/>
+        <Separator/>
+        <Action name="print"/>
+        <Action name="pause"/>
+        <Action name="stop"/>
+    </ToolBar>
 </gui>
