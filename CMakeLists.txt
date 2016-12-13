@@ -23,6 +23,8 @@ find_package(KF5 REQUIRED COMPONENTS
                 Solid
                 AtCore
                 I18n
+                XmlGui
+                ConfigWidgets
             )
 
 find_package(Qt5 REQUIRED COMPONENTS
@@ -37,3 +39,5 @@ include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
 add_subdirectory(src)
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
+
+install(FILES atelierui.rc DESTINATION ${KXMLGUI_INSTALL_DIR}/atelier)
