@@ -8,14 +8,18 @@
  
   <MenuBar>
     <Menu name="file" >
-      <Action name="open" />
+      <Action name="open_gcode"/>
       <Action name="quit" />
     </Menu>
   </MenuBar>
  
   <ToolBar name="mainToolBar" >
     <text>Main Toolbar</text>
-    <Action name="open" />
+    <Action name="open_gcode"/>
+    <Action name="connect"/>
+    <Separator/>
+    <Action name="print"/>
+    <Action name="pause"/>
+    <Action name="stop"/>
   </ToolBar>
- 
 </gui>
