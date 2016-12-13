@@ -20,6 +20,7 @@
 #include <QMainWindow>
 #include <KAtCore/AtCore>
 #include <KXmlGui/KXmlGuiWindow>
+#include <dialogs/connectsettingsdialog.h>
 
 namespace Ui {
 class MainWindow;
@@ -35,12 +36,16 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    void initConnectsToAtCore();
     AtCore core;
+    QStringList firmwaresList;
+    QString fileName;
+    void initConnectsToAtCore();
+    void initLocalVariables();
     void setupActions();
     void openFile();
     void startConnection();
     void printFile();
     void pausePrint();
     void stopPrint();
+
 };

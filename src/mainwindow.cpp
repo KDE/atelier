@@ -30,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->gcodeEditorWidget->setVisible(false);
     setupActions();
     initConnectsToAtCore();
+    initLocalVariables();
 }
 
 MainWindow::~MainWindow()
@@ -59,6 +60,11 @@ void MainWindow::initConnectsToAtCore()
     connect(ui->rightWidget, &TemporaryPrinterControlWidget::changePrintSpeed, &core, &AtCore::setPrinterSpeed);
     connect(ui->rightWidget, &TemporaryPrinterControlWidget::setHeatBed, &core, &AtCore::setBedTemp);
     connect(ui->rightWidget, &TemporaryPrinterControlWidget::setHeatExtruder, &core, &AtCore::setExtruderTemp);
+}
+
+void MainWindow::initLocalVariables()
+{
+    firmwaresList = core.availablePlugins();
 }
 
 void MainWindow::setupActions()
@@ -99,26 +105,32 @@ void MainWindow::setupActions()
 
 void MainWindow::openFile()
 {
-    QString fileName = QFileDialog::getOpenFileName(this, i18n("Select a file to print"),
-                                                    QDir::homePath(), i18n("GCode(*.gco *gcode)"));
+    QUrl fileNameFromDialog = QFileDialog::getOpenFileUrl(this, i18n("Open GCode"),
+                                                          QDir::homePath(), i18n("GCode (*.gco *.gcode)"));
+    if (!fileNameFromDialog.isEmpty()) {
+        fileName = fileNameFromDialog.toLocalFile();
+    }
 }
 
 void MainWindow::startConnection()
 {
-
+   auto *dialog = new ConnectSettingsDialog(firmwaresList);
+   connect(dialog, &ConnectSettingsDialog::_connect, &core, &AtCore::initFirmware);
 }
 
 void MainWindow::printFile()
 {
-
+    if(!fileName.isEmpty() && (core.state() == PrinterState::IDLE)) {
+        core.print(fileName);
+    }
 }
 
 void MainWindow::pausePrint()
 {
-
+    core.pause(QString());
 }
 
 void MainWindow::stopPrint()
 {
-
+    core.stop();
 }
