@@ -52,8 +52,10 @@ void GCodeEditorWidget::loadFile(const QString &fileName)
         header += (line + QStringLiteral("\n"));
     }
     int last = list.lastIndexOf(catchEnd);
-    for(int i = last; i!= list.size() -1; ++i) {
-        footer += (list.at(i) + QStringLiteral("\n"));
+    if (last != -1) {
+        for(int i = last; i!= list.size() -1; ++i) {
+            footer += (list.at(i) + QStringLiteral("\n"));
+        }
     }
     ui->headerPT->setPlainText(header);
     ui->footerPT->setPlainText(footer);

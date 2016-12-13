@@ -115,6 +115,7 @@ void MainWindow::openFile()
                                                           QDir::homePath(), i18n("GCode (*.gco *.gcode)"));
     if (!fileNameFromDialog.isEmpty()) {
         fileName = fileNameFromDialog.toLocalFile();
+        ui->gcodeEditorWidget->loadFile(fileName);
     }
 }
 
