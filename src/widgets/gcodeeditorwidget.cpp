@@ -33,7 +33,8 @@ GCodeEditorWidget::~GCodeEditorWidget()
 void GCodeEditorWidget::loadFile(const QString &fileName)
 {
     QRegularExpression cacthMov("G(?<command>.) .*\\bX(?<axisX>[0-9.-]+) Y(?<axisY>[0-9.-]+) Z(?<axisZ>[0-9].+)");
-    QRegularExpression catchEnd(";(End)(\\s?\\w+\\s?(\\w+)?)");
+    QRegularExpression catchEnd(";(\\s?)(End)(\\s?\\w+\\s?(\\w+)?)");
+    catchEnd.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
     QRegularExpressionMatch match;
     QFile gcode(fileName);
     if (!gcode.open(QFile::ReadOnly)) {
@@ -53,7 +54,7 @@ void GCodeEditorWidget::loadFile(const QString &fileName)
     }
     int last = list.lastIndexOf(catchEnd);
     if (last != -1) {
-        for(int i = last; i!= list.size() -1; ++i) {
+        for(int i = last; i<= list.size() -1; ++i) {
             footer += (list.at(i) + QStringLiteral("\n"));
         }
     }
