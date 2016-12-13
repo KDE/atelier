@@ -1,5 +1,4 @@
 set(widgets_SRCS
-    toolbarwidget.cpp
     gcodeeditorwidget.cpp
     temporaryprintercontrolwidget.cpp
     printerhostpositionvisualcontroller.cpp
