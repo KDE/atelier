@@ -19,25 +19,16 @@
 #include "ui_mainwindow.h"
 #include <QFileDialog>
 #include <KLocalizedString>
+#include <KStandardAction>
+#include <KActionCollection>
 
 MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
+    KXmlGuiWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     ui->gcodeEditorWidget->setVisible(false);
-
-    connect(ui->actionGCode, &QAction::triggered, [=]{
-        ui->gcodeEditorWidget->setVisible(true);
-    });
-
-    connect(ui->actionOpenGCode, &QAction::triggered, [=]{
-        QString fileName = QFileDialog::getOpenFileName(this, i18n("Select a file to print"),
-                                                        QDir::homePath(), i18n("GCode(*.gco *gcode)"));
-        ui->gcodeEditorWidget->loadFile(fileName);
-    });
-
-    connect(ui->toolbarWidget, &ToolBarWidget::loadFile, ui->gcodeEditorWidget, &GCodeEditorWidget::loadFile);
+    setupActions();
     initConnectsToAtCore();
 }
 
@@ -48,8 +39,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::initConnectsToAtCore()
 {
-    connect(ui->toolbarWidget, &ToolBarWidget::_connect, &core, &AtCore::initFirmware);
-
     connect(ui->rightWidget, &TemporaryPrinterControlWidget::homeAll, this, [=]{
         core.home();
     });
@@ -70,12 +59,66 @@ void MainWindow::initConnectsToAtCore()
     connect(ui->rightWidget, &TemporaryPrinterControlWidget::changePrintSpeed, &core, &AtCore::setPrinterSpeed);
     connect(ui->rightWidget, &TemporaryPrinterControlWidget::setHeatBed, &core, &AtCore::setBedTemp);
     connect(ui->rightWidget, &TemporaryPrinterControlWidget::setHeatExtruder, &core, &AtCore::setExtruderTemp);
+}
 
+void MainWindow::setupActions()
+{
+    //Toolbar Actions
+    QAction *action;
+    action = actionCollection()->addAction(QStringLiteral("open_gcode"));
+    action->setIcon(QIcon::fromTheme("open"));
+    action->setText(i18n("&Open GCode"));
+    connect(action, &QAction::triggered, this, &MainWindow::openFile);
 
-    connect(ui->toolbarWidget, &ToolBarWidget::printFile, &core, &AtCore::print);
-    connect(ui->toolbarWidget, &ToolBarWidget::pausePrint, this, [=]{
-        core.pause(QString());
+    action = actionCollection()->addAction(QStringLiteral("connect"));
+    action->setText(i18n("&Connect"));
+    connect(action, &QAction::triggered, this, &MainWindow::startConnection);
+
+    action = actionCollection()->addAction(QStringLiteral("print"));
+    action->setText(i18n("&Print"));
+    connect(action, &QAction::triggered, this, &MainWindow::printFile);
+
+    action = actionCollection()->addAction(QStringLiteral("pause"));
+    action->setText(i18n("&Pause"));
+    connect(action, &QAction::triggered, this, &MainWindow::pausePrint);
+
+    action = actionCollection()->addAction(QStringLiteral("stop"));
+    action->setText(i18n("&Stop"));
+    connect(action, &QAction::triggered, this, &MainWindow::stopPrint);
+
+    action = actionCollection()->addAction(QStringLiteral("edit_gcode"));
+    action->setText(i18n("&Edit GCode"));
+    connect(action, &QAction::triggered, this, [ = ] {
+        ui->gcodeEditorWidget->setVisible(!ui->gcodeEditorWidget->isVisible());
     });
-    connect(ui->toolbarWidget, &ToolBarWidget::stopPrint, &core, &AtCore::stop);
-    ui->toolbarWidget->setFirmwaresList(core.availablePlugins());
+
+    QAction *quit = KStandardAction::quit(qApp, SLOT(quit()), actionCollection());
+
+    setupGUI(Default, "atelierui.rc");
+}
+
+void MainWindow::openFile()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, i18n("Select a file to print"),
+                                                    QDir::homePath(), i18n("GCode(*.gco *gcode)"));
+}
+
+void MainWindow::startConnection()
+{
+
+}
+
+void MainWindow::printFile()
+{
+
+}
+
+void MainWindow::pausePrint()
+{
+
+}
+
+void MainWindow::stopPrint()
+{
+
 }

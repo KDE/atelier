@@ -19,12 +19,13 @@
 
 #include <QMainWindow>
 #include <KAtCore/AtCore>
+#include <KXmlGui/KXmlGuiWindow>
 
 namespace Ui {
 class MainWindow;
 }
 
-class MainWindow : public QMainWindow
+class MainWindow : public KXmlGuiWindow
 {
     Q_OBJECT
 
@@ -36,4 +37,10 @@ private:
     Ui::MainWindow *ui;
     void initConnectsToAtCore();
     AtCore core;
+    void setupActions();
+    void openFile();
+    void startConnection();
+    void printFile();
+    void pausePrint();
+    void stopPrint();
 };
