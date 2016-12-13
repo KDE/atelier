@@ -40,21 +40,21 @@ MainWindow::~MainWindow()
 
 void MainWindow::initConnectsToAtCore()
 {
-    connect(ui->rightWidget, &TemporaryPrinterControlWidget::homeAll, this, [=]{
+    connect(ui->rightWidget, &TemporaryPrinterControlWidget::homeAll, this, [ = ] {
         core.home();
     });
-    connect(ui->rightWidget, &TemporaryPrinterControlWidget::home, this, [=]{
+    connect(ui->rightWidget, &TemporaryPrinterControlWidget::home, this, [ = ] {
         core.home(AXIS::X);
     });
-    connect(ui->rightWidget, &TemporaryPrinterControlWidget::home, this, [=]{
+    connect(ui->rightWidget, &TemporaryPrinterControlWidget::home, this, [ = ] {
         core.home(AXIS::Y);
     });
-    connect(ui->rightWidget, &TemporaryPrinterControlWidget::home, this, [=]{
+    connect(ui->rightWidget, &TemporaryPrinterControlWidget::home, this, [ = ] {
         core.home(AXIS::Z);
     });
     connect(ui->rightWidget, &TemporaryPrinterControlWidget::moveAxis, &core, &AtCore::move);
     //TODO Handle more then one fan - Maybe when the final controls are finished?
-    connect(ui->rightWidget, &TemporaryPrinterControlWidget::changeFanSpeed, this, [=](const int value){
+    connect(ui->rightWidget, &TemporaryPrinterControlWidget::changeFanSpeed, this, [ = ](const int value) {
         core.setFanSpeed(value);
     });
     connect(ui->rightWidget, &TemporaryPrinterControlWidget::changePrintSpeed, &core, &AtCore::setPrinterSpeed);
@@ -112,7 +112,7 @@ void MainWindow::setupActions()
 void MainWindow::openFile()
 {
     QUrl fileNameFromDialog = QFileDialog::getOpenFileUrl(this, i18n("Open GCode"),
-                                                          QDir::homePath(), i18n("GCode (*.gco *.gcode)"));
+                              QDir::homePath(), i18n("GCode (*.gco *.gcode)"));
     if (!fileNameFromDialog.isEmpty()) {
         fileName = fileNameFromDialog.toLocalFile();
         ui->gcodeEditorWidget->loadFile(fileName);
@@ -121,13 +121,13 @@ void MainWindow::openFile()
 
 void MainWindow::startConnection()
 {
-   auto *dialog = new ConnectSettingsDialog(firmwaresList);
-   connect(dialog, &ConnectSettingsDialog::_connect, &core, &AtCore::initFirmware);
+    auto *dialog = new ConnectSettingsDialog(firmwaresList);
+    connect(dialog, &ConnectSettingsDialog::_connect, &core, &AtCore::initFirmware);
 }
 
 void MainWindow::printFile()
 {
-    if(!fileName.isEmpty() && (core.state() == PrinterState::IDLE)) {
+    if (!fileName.isEmpty() && (core.state() == PrinterState::IDLE)) {
         core.print(fileName);
     }
 }

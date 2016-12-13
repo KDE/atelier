@@ -20,7 +20,8 @@
 #include <QDialog>
 #include <QSettings>
 
-namespace Ui {
+namespace Ui
+{
 class GeneralSettingsDialog;
 }
 

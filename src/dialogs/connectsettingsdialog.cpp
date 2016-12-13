@@ -31,13 +31,15 @@ ConnectSettingsDialog::ConnectSettingsDialog(QStringList firmwaresList, QWidget 
     connect(deviceNotifier, &Solid::DeviceNotifier::deviceRemoved, this, &ConnectSettingsDialog::locateSerialPort);
     locateSerialPort();
 
-    connect(ui->buttonBox, &QDialogButtonBox::accepted,[=]{
-        if(ui->profileCB->currentText().isEmpty()) {
+    connect(ui->buttonBox, &QDialogButtonBox::accepted, [ = ] {
+        if (ui->profileCB->currentText().isEmpty())
+        {
             QMessageBox msg;
             msg.setText(i18n("Please, create a profile to connect on Settings!"));
             msg.setIcon(QMessageBox::Information);
             msg.exec();
-        } else if(!ui->serialPortCB->currentText().isEmpty()) {
+        } else if (!ui->serialPortCB->currentText().isEmpty())
+        {
             emit _connect(ui->serialPortCB->currentText(), ui->baudCB->currentText().toInt());
         } else {
             QMessageBox msg;
@@ -93,7 +95,8 @@ void ConnectSettingsDialog::initBaudRateComboBox()
     ui->baudCB->addItems(br);
 }
 
-void ConnectSettingsDialog::initProfileComboBox(){
+void ConnectSettingsDialog::initProfileComboBox()
+{
 
     settings.beginGroup(i18n("GeneralSettings"));
     QStringList groups = settings.childGroups();

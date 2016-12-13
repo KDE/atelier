@@ -1,9 +1,9 @@
 #include "leftwidget.h"
 #include <QVBoxLayout>
 LeftWidget::LeftWidget(QWidget *parent) : QWidget(parent),
-  connectSettingsPB(new QPushButton),
-  gcodeEditorPB(new QPushButton),
-  maintanceMenuPB(new QPushButton)
+    connectSettingsPB(new QPushButton),
+    gcodeEditorPB(new QPushButton),
+    maintanceMenuPB(new QPushButton)
 {
     auto *layout = new QVBoxLayout;
     initButtons();
@@ -23,32 +23,35 @@ void LeftWidget::initButtons()
     maintanceMenuPB->setText("Maintance Menu");
     maintanceMenuPB->setCheckable(true);
 
-    connect(connectSettingsPB, &QPushButton::clicked, [=] {
-        if(connectSettingsPB->isChecked()) {
+    connect(connectSettingsPB, &QPushButton::clicked, [ = ] {
+        if (connectSettingsPB->isChecked())
+        {
             gcodeEditorPB->setChecked(false);
             maintanceMenuPB->setChecked(false);
             emit loadConnectContainer();
-        }else {
+        } else {
             emit hideContainers();
         }
     });
 
-    connect(gcodeEditorPB, &QPushButton::clicked, [=] {
-        if(gcodeEditorPB->isChecked()) {
+    connect(gcodeEditorPB, &QPushButton::clicked, [ = ] {
+        if (gcodeEditorPB->isChecked())
+        {
             connectSettingsPB->setChecked(false);
             maintanceMenuPB->setChecked(false);
             emit loadGCodeContainer();
-        }else {
+        } else {
             emit hideContainers();
         }
     });
 
-    connect(maintanceMenuPB, &QPushButton::clicked, [=] {
-        if(maintanceMenuPB->isChecked()) {
+    connect(maintanceMenuPB, &QPushButton::clicked, [ = ] {
+        if (maintanceMenuPB->isChecked())
+        {
             connectSettingsPB->setChecked(false);
             gcodeEditorPB->setChecked(false);
             emit loadMaintanceContainer();
-        }else {
+        } else {
             emit hideContainers();
         }
     });

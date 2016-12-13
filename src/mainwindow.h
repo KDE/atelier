@@ -22,7 +22,8 @@
 #include <KXmlGui/KXmlGuiWindow>
 #include <dialogs/connectsettingsdialog.h>
 
-namespace Ui {
+namespace Ui
+{
 class MainWindow;
 }
 

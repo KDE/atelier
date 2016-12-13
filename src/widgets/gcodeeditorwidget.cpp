@@ -47,14 +47,14 @@ void GCodeEditorWidget::loadFile(const QString &fileName)
     QString header, footer;
     foreach (const auto &line, list) {
         match = cacthMov.match(line);
-        if(match.hasMatch()){
+        if (match.hasMatch()) {
             break;
         }
         header += (line + QStringLiteral("\n"));
     }
     int last = list.lastIndexOf(catchEnd);
     if (last != -1) {
-        for(int i = last; i<= list.size() -1; ++i) {
+        for (int i = last; i <= list.size() - 1; ++i) {
             footer += (list.at(i) + QStringLiteral("\n"));
         }
     }

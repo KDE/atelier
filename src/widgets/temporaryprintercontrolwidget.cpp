@@ -25,49 +25,49 @@ TemporaryPrinterControlWidget::TemporaryPrinterControlWidget(QWidget *parent) :
     ui->setupUi(this);
     connect(ui->fanSpeedSB, static_cast<void (QSpinBox::*)(const int)>(&QSpinBox::valueChanged), this, &TemporaryPrinterControlWidget::changeFanSpeed);
     connect(ui->printSpeedSB, static_cast<void (QSpinBox::*)(const int)>(&QSpinBox::valueChanged), this, &TemporaryPrinterControlWidget::changePrintSpeed);
-    connect(ui->homeAllPB, &QPushButton::clicked, this, [=]{
+    connect(ui->homeAllPB, &QPushButton::clicked, this, [ = ] {
         emit homeAll();
     });
-    connect(ui->homeXPB, &QPushButton::clicked, this, [=]{
+    connect(ui->homeXPB, &QPushButton::clicked, this, [ = ] {
         emit home('X');
     });
-    connect(ui->homeYPB, &QPushButton::clicked, this, [=]{
+    connect(ui->homeYPB, &QPushButton::clicked, this, [ = ] {
         emit home('Y');
     });
-    connect(ui->homeZPB, &QPushButton::clicked, this, [=]{
+    connect(ui->homeZPB, &QPushButton::clicked, this, [ = ] {
         emit home('Z');
     });
 
-    connect(ui->heatBedPB, &QPushButton::clicked, [=]{
-       emit setHeatBed(ui->bedTempSB->value());
+    connect(ui->heatBedPB, &QPushButton::clicked, [ = ] {
+        emit setHeatBed(ui->bedTempSB->value());
     });
 
-    connect(ui->heatExtruderPB, &QPushButton::clicked, [=]{
+    connect(ui->heatExtruderPB, &QPushButton::clicked, [ = ] {
         emit setHeatExtruder(ui->extruderCB->currentIndex(), ui->extruderTempSB->value());
     });
 
-    connect(ui->x_leftPB, &QPushButton::clicked, [=]{
-       emit moveAxis('X', ui->distanceSB->value());
+    connect(ui->x_leftPB, &QPushButton::clicked, [ = ] {
+        emit moveAxis('X', ui->distanceSB->value());
     });
 
-    connect(ui->x_rightPB, &QPushButton::clicked, [=]{
-       emit moveAxis('X', ui->distanceSB->value());
+    connect(ui->x_rightPB, &QPushButton::clicked, [ = ] {
+        emit moveAxis('X', ui->distanceSB->value());
     });
 
-    connect(ui->y_upPB, &QPushButton::clicked, [=]{
-       emit moveAxis('Y', ui->distanceSB->value());
+    connect(ui->y_upPB, &QPushButton::clicked, [ = ] {
+        emit moveAxis('Y', ui->distanceSB->value());
     });
 
-    connect(ui->y_downPB, &QPushButton::clicked, [=]{
-       emit moveAxis('Y', ui->distanceSB->value());
+    connect(ui->y_downPB, &QPushButton::clicked, [ = ] {
+        emit moveAxis('Y', ui->distanceSB->value());
     });
 
-    connect(ui->z_downPB, &QPushButton::clicked, [=]{
-       emit moveAxis('Z', ui->distanceSB->value());
+    connect(ui->z_downPB, &QPushButton::clicked, [ = ] {
+        emit moveAxis('Z', ui->distanceSB->value());
     });
 
-    connect(ui->z_upPB, &QPushButton::clicked, [=]{
-       emit moveAxis('Z', ui->distanceSB->value());
+    connect(ui->z_upPB, &QPushButton::clicked, [ = ] {
+        emit moveAxis('Z', ui->distanceSB->value());
     });
 }
 
@@ -87,6 +87,7 @@ void TemporaryPrinterControlWidget::updateTemperatures(float bed, float ext)
     ui->currentExtTempLB->setText(QVariant(ext).toString().append("ºC"));
 }
 
-void TemporaryPrinterControlWidget::updateLog(QString msg){
+void TemporaryPrinterControlWidget::updateLog(QString msg)
+{
     ui->logPT->appendPlainText(msg);
 }

@@ -21,7 +21,8 @@
 #include <Solid/DeviceNotifier>
 #include <QSettings>
 
-namespace Ui {
+namespace Ui
+{
 class ConnectSettingsDialog;
 }
 

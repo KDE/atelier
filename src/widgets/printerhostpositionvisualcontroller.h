@@ -11,7 +11,8 @@
  * that was clicked.
  */
 
-class PieButton : public QObject, public QGraphicsEllipseItem {
+class PieButton : public QObject, public QGraphicsEllipseItem
+{
     Q_OBJECT
 public:
     PieButton(QLatin1Char axis, int value, int size, int angle);
