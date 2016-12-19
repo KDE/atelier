@@ -122,7 +122,7 @@ void MainWindow::openFile()
 void MainWindow::startConnection()
 {
     auto *dialog = new ConnectSettingsDialog(firmwaresList);
-    connect(dialog, &ConnectSettingsDialog::_connect, &core, &AtCore::initFirmware);
+    connect(dialog, &ConnectSettingsDialog::_connect, &core, &AtCore::initSerial);
 }
 
 void MainWindow::printFile()
