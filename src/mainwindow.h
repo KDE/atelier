@@ -43,6 +43,7 @@ private:
     QString fileName;
     void initConnectsToAtCore();
     void initLocalVariables();
+    void initWidgets();
     void setupActions();
     void openFile();
     void openSettingsDialog();
@@ -52,5 +53,9 @@ private:
     void stopPrint();
     GeneralSettingsDialog *generalSettingsDialog;
     ConnectSettingsDialog *connectSettingsDialog;
+    void handlePrinterStatusChanged(PrinterState newState);
+
+signals:
+    void extruderCountChanged(int count);
 
 };

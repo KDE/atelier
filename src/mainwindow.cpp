@@ -29,12 +29,11 @@ MainWindow::MainWindow(QWidget *parent) :
     connectSettingsDialog(new ConnectSettingsDialog(firmwaresList, this))
 {
     ui->setupUi(this);
-    ui->gcodeEditorWidget->setVisible(false);
     setupActions();
     initConnectsToAtCore();
     initLocalVariables();
-
     connect(connectSettingsDialog, &ConnectSettingsDialog::_connect, &core, &AtCore::initSerial);
+    initWidgets();
 }
 
 MainWindow::~MainWindow()
@@ -72,6 +71,12 @@ void MainWindow::initConnectsToAtCore()
 void MainWindow::initLocalVariables()
 {
     firmwaresList = core.availablePlugins();
+}
+
+void MainWindow::initWidgets()
+{
+    ui->bedExtWidget->setEnabled(false);
+    ui->gcodeEditorWidget->setVisible(false);
 }
 
 void MainWindow::setupActions()
@@ -155,4 +160,19 @@ void MainWindow::pausePrint()
 void MainWindow::stopPrint()
 {
     core.stop();
+}
+
+void MainWindow::handlePrinterStatusChanged(PrinterState newState)
+{
+    switch (newState) {
+    case PrinterState::IDLE: {
+        ui->bedExtWidget->setEnabled(true);
+        emit extruderCountChanged(core.extruderCount());
+    }break;
+    case PrinterState::DISCONNECTED: {
+        ui->bedExtWidget->setEnabled(false);
+    }break;
+    default:
+        return;
+    }
 }
