@@ -2,6 +2,7 @@ set(widgets_SRCS
     gcodeeditorwidget.cpp
     temporaryprintercontrolwidget.cpp
     printerhostpositionvisualcontroller.cpp
+    bedextruderwidget.cpp
     )
 
 add_library(AtelierWidgets STATIC ${widgets_SRCS})
