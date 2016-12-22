@@ -64,6 +64,9 @@ void MainWindow::initConnectsToAtCore()
     connect(ui->rightWidget, &TemporaryPrinterControlWidget::changePrintSpeed, &core, &AtCore::setPrinterSpeed);
     connect(ui->rightWidget, &TemporaryPrinterControlWidget::setHeatBed, &core, &AtCore::setBedTemp);
     connect(ui->rightWidget, &TemporaryPrinterControlWidget::setHeatExtruder, &core, &AtCore::setExtruderTemp);
+
+    connect(&core, &AtCore::stateChanged, this, &MainWindow::handlePrinterStatusChanged);
+    connect(this, &MainWindow::extruderCountChanged, ui->bedExtWidget, &BedExtruderWidget::extruderCountChanged);
 }
 
 void MainWindow::initLocalVariables()
