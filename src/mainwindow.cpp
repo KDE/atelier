@@ -132,6 +132,7 @@ void MainWindow::openSettingsDialog()
 void MainWindow::startConnection()
 {
     auto *dialog = new ConnectSettingsDialog(firmwaresList);
+    dialog->show();
     connect(dialog, &ConnectSettingsDialog::_connect, &core, &AtCore::initSerial);
 }
 
