@@ -19,6 +19,7 @@
     <ToolBar name="mainToolBar" >
         <text>Main Toolbar</text>
         <Action name="open_gcode"/>
+        <Action name="settings"/>
         <Action name="connect"/>
         <Separator/>
         <Action name="print"/>

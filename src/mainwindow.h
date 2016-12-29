@@ -21,6 +21,7 @@
 #include <KAtCore/AtCore>
 #include <KXmlGui/KXmlGuiWindow>
 #include <dialogs/connectsettingsdialog.h>
+#include <dialogs/generalsettingsdialog.h>
 
 namespace Ui
 {
@@ -44,6 +45,7 @@ private:
     void initLocalVariables();
     void setupActions();
     void openFile();
+    void openSettingsDialog();
     void startConnection();
     void printFile();
     void pausePrint();
