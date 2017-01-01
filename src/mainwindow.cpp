@@ -24,13 +24,17 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     KXmlGuiWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    generalSettingsDialog(new GeneralSettingsDialog(this)),
+    connectSettingsDialog(new ConnectSettingsDialog(firmwaresList, this))
 {
     ui->setupUi(this);
     ui->gcodeEditorWidget->setVisible(false);
     setupActions();
     initConnectsToAtCore();
     initLocalVariables();
+
+    connect(connectSettingsDialog, &ConnectSettingsDialog::_connect, &core, &AtCore::initSerial);
 }
 
 MainWindow::~MainWindow()
@@ -125,15 +129,12 @@ void MainWindow::openFile()
 
 void MainWindow::openSettingsDialog()
 {
-    auto *dialog = new GeneralSettingsDialog();
-    dialog->show();
+    generalSettingsDialog->show();
 }
 
 void MainWindow::startConnection()
 {
-    auto *dialog = new ConnectSettingsDialog(firmwaresList);
-    dialog->show();
-    connect(dialog, &ConnectSettingsDialog::_connect, &core, &AtCore::initSerial);
+    connectSettingsDialog->show();
 }
 
 void MainWindow::printFile()

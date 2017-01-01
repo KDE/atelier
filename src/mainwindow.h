@@ -50,5 +50,7 @@ private:
     void printFile();
     void pausePrint();
     void stopPrint();
+    GeneralSettingsDialog *generalSettingsDialog;
+    ConnectSettingsDialog *connectSettingsDialog;
 
 };
