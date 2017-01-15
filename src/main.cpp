@@ -19,7 +19,6 @@
 #include <KAboutData>
 #include <KLocalizedString>
 #include "mainwindow.h"
-#include "widgets/printerhostpositionvisualcontroller.h"
 
 int main(int argc, char *argv[])
 {
@@ -62,10 +61,7 @@ int main(int argc, char *argv[])
                         QStringLiteral("http://angrycane.com.br"));
     KAboutData::setApplicationData(aboutData);
 
-    //MainWindow m;
-    //m.show();
-    auto *p = new PrinterHotendPositionVisualController();
-    p->show();
-
+    MainWindow m;
+    m.show();
     return app.exec();
 }
