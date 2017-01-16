@@ -15,7 +15,7 @@ class BedExtruderWidget : public QWidget
 public:
     explicit BedExtruderWidget(QWidget *parent = nullptr);
     ~BedExtruderWidget();
-    void extruderCountChanged(int value);
+    void setExtruderCount(int value);
     void updateBedTemp(const float temp);
     void updateExtTemp(const float temp);
 
@@ -24,9 +24,8 @@ private:
     QMap <int, QRadioButton*> extruderMap;
     void heatExtruderClicked(bool clicked);
     int extruderCount = 0;
-    void reset();
 
 signals:
-    void setBedTemperature(int tmp);
-    void setExtTemperature(int currExt, int tmp);
+    void bedTemperatureChanged(int tmp);
+    void extTemperatureChanged(int currExt, int tmp);
 };

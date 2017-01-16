@@ -9,10 +9,10 @@ BedExtruderWidget::BedExtruderWidget(QWidget *parent) :
     ui->setupUi(this);
 
     //Add Default Extruder
-    extruderCountChanged(1);
+    setExtruderCount(1);
     connect(ui->heatBedPB, &QPushButton::clicked, [ = ](bool clicked) {
-        int temp = ui->bedTempSB->value()*clicked;
-        emit setBedTemperature(temp);
+        int temp = ui->bedTempSB->value() * clicked;
+        emit bedTemperatureChanged(temp);
         ui->bedTargetTempLB->setText(QString::number(temp));
     });
 
@@ -24,20 +24,19 @@ BedExtruderWidget::~BedExtruderWidget()
     delete ui;
 }
 
-void BedExtruderWidget::extruderCountChanged(int value)
+void BedExtruderWidget::setExtruderCount(int value)
 {
-    //To prevent errors
-    if (extruderCount == value) {
+    if (value == extruderCount) {
         return;
     } else if (extruderCount < value) {
         //loop for the new buttons
-        for (int i = extruderCount; i <= value; i++) {
+        for (int i = extruderCount; i < value; i++) {
             auto *rb = new QRadioButton(QString::number(i+1));
             ui->extRadioButtonLayout->addWidget(rb);
             extruderMap.insert(i, rb);
         }
     } else {
-        //remove buttons
+        //remove buttons - need to test it!
         for (int i = extruderCount; i >= value; i--) {
             auto *rb = extruderMap.value(i);
             ui->extRadioButtonLayout->removeWidget(rb);
@@ -72,19 +71,11 @@ void BedExtruderWidget::heatExtruderClicked(bool clicked)
 
     if (clicked) {
         int tmp = ui->extTempSB->value();
-        emit setExtTemperature(currExt, tmp);
+        emit extTemperatureChanged(currExt, tmp);
         ui->extTargetTempLB->setText(QString::number(tmp));
 
-    }else {
-        emit setExtTemperature(currExt, 0);
+    } else {
+        emit extTemperatureChanged(currExt, 0);
         ui->extTargetTempLB->setText(QString::number(0));
     }
-}
-
-void BedExtruderWidget::reset()
-{
-    for (int i = 1; i <= extruderMap.size(); i++) {
-        ui->extRadioButtonLayout->removeWidget(extruderMap[i]);
-    }
-    extruderMap.clear();
 }
