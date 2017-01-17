@@ -1,6 +1,5 @@
 set(widgets_SRCS
     gcodeeditorwidget.cpp
-    temporaryprintercontrolwidget.cpp
     printerhostpositionvisualcontroller.cpp
     bedextruderwidget.cpp
     )
