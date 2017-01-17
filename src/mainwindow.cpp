@@ -43,27 +43,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::initConnectsToAtCore()
 {
-    connect(ui->rightWidget, &TemporaryPrinterControlWidget::homeAll, this, [ = ] {
-        core.home();
-    });
-    connect(ui->rightWidget, &TemporaryPrinterControlWidget::home, this, [ = ] {
-        core.home(AXIS::X);
-    });
-    connect(ui->rightWidget, &TemporaryPrinterControlWidget::home, this, [ = ] {
-        core.home(AXIS::Y);
-    });
-    connect(ui->rightWidget, &TemporaryPrinterControlWidget::home, this, [ = ] {
-        core.home(AXIS::Z);
-    });
-    connect(ui->rightWidget, &TemporaryPrinterControlWidget::moveAxis, &core, &AtCore::move);
-    //TODO Handle more then one fan - Maybe when the final controls are finished?
-    connect(ui->rightWidget, &TemporaryPrinterControlWidget::changeFanSpeed, this, [ = ](const int value) {
-        core.setFanSpeed(value);
-    });
-    connect(ui->rightWidget, &TemporaryPrinterControlWidget::changePrintSpeed, &core, &AtCore::setPrinterSpeed);
-    connect(ui->rightWidget, &TemporaryPrinterControlWidget::setHeatBed, &core, &AtCore::setBedTemp);
-    connect(ui->rightWidget, &TemporaryPrinterControlWidget::setHeatExtruder, &core, &AtCore::setExtruderTemp);
-
     connect(&core, &AtCore::stateChanged, this, &MainWindow::handlePrinterStatusChanged);
     connect(this, &MainWindow::extruderCountChanged, ui->bedExtWidget, &BedExtruderWidget::setExtruderCount);
 }
