@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
                         QStringLiteral("http://angrycane.com.br"));
     KAboutData::setApplicationData(aboutData);
 
-    MainWindow m;
-    m.show();
+    MainWindow *m = new MainWindow();
+    m->show();
     return app.exec();
 }
