@@ -18,12 +18,21 @@
 #include "gcodeeditorwidget.h"
 #include "ui_gcodeeditorwidget.h"
 #include <QTextStream>
+#include <KTextEditor/Document>
+#include <KTextEditor/Editor>
+#include <KTextEditor/View>
 
 GCodeEditorWidget::GCodeEditorWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::GCodeEditorWidget)
 {
     ui->setupUi(this);
+    KTextEditor::Editor *editor = KTextEditor::Editor::instance();
+    // create a new document
+    KTextEditor::Document *doc = editor->createDocument(this);
+    // create a widget to display the document
+    KTextEditor::View *view = doc->createView(ui->containerWidget);
+
 }
 
 GCodeEditorWidget::~GCodeEditorWidget()

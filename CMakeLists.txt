@@ -25,6 +25,7 @@ find_package(KF5 REQUIRED COMPONENTS
                 I18n
                 XmlGui
                 ConfigWidgets
+                TextEditor
             )
 
 find_package(Qt5 REQUIRED COMPONENTS
