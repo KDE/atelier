@@ -93,12 +93,6 @@ void MainWindow::setupActions()
         ui->gcodeEditorWidget->setVisible(!ui->gcodeEditorWidget->isVisible());
     });
 
-    action = actionCollection()->addAction(QStringLiteral("edit_gcode"));
-    action->setText(i18n("&Edit GCode"));
-    connect(action, &QAction::triggered, this, [ = ] {
-        ui->gcodeEditorWidget->setVisible(!ui->gcodeEditorWidget->isVisible());
-    });
-
     QAction *quit = KStandardAction::quit(qApp, SLOT(quit()), actionCollection());
 
     setupGUI(Default, "atelierui.rc");
@@ -109,7 +103,8 @@ void MainWindow::openFile()
     QUrl fileNameFromDialog = QFileDialog::getOpenFileUrl(this, i18n("Open GCode"),
                               QDir::homePath(), i18n("GCode (*.gco *.gcode)"));
     if (!fileNameFromDialog.isEmpty()) {
-        fileName = fileNameFromDialog.toLocalFile();
+        fileName = fileNameFromDialog;
+        ui->gcodeEditorWidget->loadFile(fileName);
     }
 }
 
@@ -126,7 +121,8 @@ void MainWindow::startConnection()
 void MainWindow::printFile()
 {
     if (!fileName.isEmpty() && (core.state() == PrinterState::IDLE)) {
-        core.print(fileName);
+        QString f = fileName.toLocalFile();
+        core.print(f);
     }
 }
 

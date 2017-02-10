@@ -18,10 +18,12 @@
 #pragma once
 
 #include <QMainWindow>
+#include <QUrl>
 #include <KAtCore/AtCore>
 #include <KXmlGui/KXmlGuiWindow>
 #include <dialogs/connectsettingsdialog.h>
 #include <dialogs/generalsettingsdialog.h>
+
 
 namespace Ui
 {
@@ -40,7 +42,7 @@ private:
     Ui::MainWindow *ui;
     AtCore core;
     QStringList firmwaresList;
-    QString fileName;
+    QUrl fileName;
     void initConnectsToAtCore();
     void initLocalVariables();
     void initWidgets();

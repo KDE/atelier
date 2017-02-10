@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>102</width>
-    <height>132</height>
+    <width>94</width>
+    <height>123</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,7 +21,7 @@
     <item row="0" column="1">
      <widget class="PrinterHotendPositionVisualController" name="printerHostAxisControlWidget"/>
     </item>
-    <item row="0" column="0">
+    <item row="0" column="0" rowspan="2">
      <widget class="GCodeEditorWidget" name="gcodeEditorWidget" native="true"/>
     </item>
    </layout>
@@ -31,8 +31,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>102</width>
-     <height>30</height>
+     <width>94</width>
+     <height>19</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
