@@ -31,7 +31,6 @@ class GCodeEditorWidget : public QWidget
 public:
     explicit GCodeEditorWidget(QWidget *parent = nullptr);
     ~GCodeEditorWidget();
-    void loadFile(const QString &fileName);
 
 private:
     Ui::GCodeEditorWidget *ui;
