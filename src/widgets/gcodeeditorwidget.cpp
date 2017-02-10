@@ -17,25 +17,54 @@
 */
 #include "gcodeeditorwidget.h"
 #include "ui_gcodeeditorwidget.h"
-#include <QTextStream>
-#include <KTextEditor/Document>
-#include <KTextEditor/Editor>
-#include <KTextEditor/View>
+#include <QVBoxLayout>
+#include <QPushButton>
 
 GCodeEditorWidget::GCodeEditorWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::GCodeEditorWidget)
 {
     ui->setupUi(this);
-    KTextEditor::Editor *editor = KTextEditor::Editor::instance();
-    // create a new document
-    KTextEditor::Document *doc = editor->createDocument(this);
-    // create a widget to display the document
-    KTextEditor::View *view = doc->createView(ui->containerWidget);
+    setupToolbar();
+    editor = KTextEditor::Editor::instance();
+    doc = editor->createDocument(this);
+    doc->setHighlightingMode(QString("G-Code"));
+    view = doc->createView(ui->containerWidget);
+    QVBoxLayout *layout = new QVBoxLayout();
+    layout->addWidget(view);
+    ui->containerWidget->setLayout(layout);
 
 }
 
 GCodeEditorWidget::~GCodeEditorWidget()
 {
     delete ui;
+}
+
+void GCodeEditorWidget::loadFile(const QUrl &fileName)
+{
+    doc->openUrl(fileName);
+    doc->setHighlightingMode(QString("G-Code"));
+}
+
+void GCodeEditorWidget::setupToolbar()
+{
+    ui->savePB->setIcon(QIcon::fromTheme("document-save"));
+    connect(ui->savePB, &QPushButton::clicked, [ = ](){
+        if(doc->isModified()) {
+            doc->documentSave();
+        }
+    });
+    ui->saveAsPB->setIcon(QIcon::fromTheme("document-save-as"));
+    connect(ui->saveAsPB, &QPushButton::clicked, [ = ] () {
+        if(doc->isModified()) {
+            doc->documentSaveAs();
+        }
+    });
+    ui->redoPB->setIcon(QIcon::fromTheme("edit-redo"));
+    ui->undoPB->setIcon(QIcon::fromTheme("edit-undo"));
+    ui->cancelPB->setIcon(QIcon::fromTheme("edit-clear"));
+    connect(ui->cancelPB, &QPushButton::clicked,[ = ] () {
+        doc->documentReload();
+    });
 }

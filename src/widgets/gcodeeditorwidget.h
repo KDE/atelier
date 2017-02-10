@@ -18,6 +18,9 @@
 #pragma once
 
 #include <QWidget>
+#include <KTextEditor/Document>
+#include <KTextEditor/Editor>
+#include <KTextEditor/View>
 
 namespace Ui
 {
@@ -31,7 +34,12 @@ class GCodeEditorWidget : public QWidget
 public:
     explicit GCodeEditorWidget(QWidget *parent = nullptr);
     ~GCodeEditorWidget();
+    void loadFile(const QUrl &fileName);
 
 private:
+    KTextEditor::Editor *editor;
+    KTextEditor::Document *doc;
+    KTextEditor::View *view;
     Ui::GCodeEditorWidget *ui;
+    void setupToolbar();
 };
