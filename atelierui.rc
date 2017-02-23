@@ -25,5 +25,6 @@
         <Action name="print"/>
         <Action name="pause"/>
         <Action name="stop"/>
+        <Separator/>
     </ToolBar>
 </gui>
