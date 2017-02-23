@@ -16,28 +16,23 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "gcodeeditorwidget.h"
-#include "ui_gcodeeditorwidget.h"
 #include <QVBoxLayout>
-#include <QPushButton>
+#include <QLabel>
+#include <KLocalizedString>
 
 GCodeEditorWidget::GCodeEditorWidget(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::GCodeEditorWidget)
+    QWidget(parent)
 {
-    ui->setupUi(this);
     editor = KTextEditor::Editor::instance();
     doc = editor->createDocument(this);
     doc->setMode("G-Code");
-    view = doc->createView(ui->containerWidget);
+    view = doc->createView(this);
     QVBoxLayout *layout = new QVBoxLayout();
+    QLabel *lb = new QLabel(i18n("G-Code Editor"));
+    layout->addWidget(lb);
     layout->addWidget(view);
-    ui->containerWidget->setLayout(layout);
+    this->setLayout(layout);
     setupInterface();
-}
-
-GCodeEditorWidget::~GCodeEditorWidget()
-{
-    delete ui;
 }
 
 void GCodeEditorWidget::loadFile(const QUrl &fileName)
