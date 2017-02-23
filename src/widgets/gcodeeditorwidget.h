@@ -21,6 +21,7 @@
 #include <KTextEditor/Document>
 #include <KTextEditor/Editor>
 #include <KTextEditor/View>
+#include <KTextEditor/ConfigInterface>
 
 namespace Ui
 {
@@ -35,11 +36,13 @@ public:
     explicit GCodeEditorWidget(QWidget *parent = nullptr);
     ~GCodeEditorWidget();
     void loadFile(const QUrl &fileName);
+    KTextEditor::View* gcodeView() const;
 
 private:
     KTextEditor::Editor *editor;
     KTextEditor::Document *doc;
     KTextEditor::View *view;
+    KTextEditor::ConfigInterface *interface;
     Ui::GCodeEditorWidget *ui;
-    void setupToolbar();
+    void setupInterface();
 };
