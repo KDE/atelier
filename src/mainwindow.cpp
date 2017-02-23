@@ -21,6 +21,7 @@
 #include <KLocalizedString>
 #include <KStandardAction>
 #include <KActionCollection>
+#include <KXMLGUIFactory>
 
 MainWindow::MainWindow(QWidget *parent) :
     KXmlGuiWindow(parent),
@@ -91,6 +92,11 @@ void MainWindow::setupActions()
     action->setText(i18n("&Edit GCode"));
     connect(action, &QAction::triggered, this, [ = ] {
         ui->gcodeEditorWidget->setVisible(!ui->gcodeEditorWidget->isVisible());
+        if(ui->gcodeEditorWidget->isVisible()) {
+            guiFactory()->addClient(ui->gcodeEditorWidget->gcodeView());
+        } else {
+            guiFactory()->removeClient(ui->gcodeEditorWidget->gcodeView());
+        }
     });
 
     QAction *quit = KStandardAction::quit(qApp, SLOT(quit()), actionCollection());
