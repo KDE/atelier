@@ -57,6 +57,7 @@ void MainWindow::initWidgets()
 {
     ui->bedExtWidget->setEnabled(false);
     ui->gcodeEditorWidget->setVisible(false);
+    ui->plotWidget->setVisible(false);
 }
 
 void MainWindow::setupActions()
@@ -100,6 +101,12 @@ void MainWindow::setupActions()
     });
 
     QAction *quit = KStandardAction::quit(qApp, SLOT(quit()), actionCollection());
+
+    action = actionCollection()->addAction(QStringLiteral("plot"));
+    action->setText(i18n("Temperature Plot"));
+    connect(action, &QAction::triggered, [ = ]{
+       ui->plotWidget->setVisible(!ui->plotWidget->isVisible());
+    });
 
     setupGUI(Default, "atelierui.rc");
 }

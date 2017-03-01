@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>94</width>
-    <height>123</height>
+    <width>0</width>
+    <height>0</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,14 +15,17 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="1" column="1">
+    <item row="1" column="2">
      <widget class="BedExtruderWidget" name="bedExtWidget" native="true"/>
     </item>
-    <item row="0" column="1">
+    <item row="0" column="2">
      <widget class="PrinterHotendPositionVisualController" name="printerHostAxisControlWidget"/>
     </item>
     <item row="0" column="0" rowspan="2">
      <widget class="GCodeEditorWidget" name="gcodeEditorWidget" native="true"/>
+    </item>
+    <item row="0" column="1">
+     <widget class="PlotWidget" name="plotWidget" native="true"/>
     </item>
    </layout>
   </widget>
@@ -31,8 +34,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>94</width>
-     <height>19</height>
+     <width>128</width>
+     <height>30</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -66,6 +69,12 @@
    <class>PrinterHotendPositionVisualController</class>
    <extends>QGraphicsView</extends>
    <header>widgets/printerhostpositionvisualcontroller.cpp</header>
+  </customwidget>
+  <customwidget>
+   <class>PlotWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">widgets/plotwidget.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

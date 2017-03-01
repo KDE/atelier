@@ -14,6 +14,9 @@
         <Menu name="edit">
             <Action name="edit_gcode"/>
         </Menu>
+        <Menu name="view">
+            <Action name="plot"/>
+        </Menu>
     </MenuBar>
  
     <ToolBar name="mainToolBar" >
