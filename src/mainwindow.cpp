@@ -23,6 +23,7 @@
 #include <KActionCollection>
 #include <KXMLGUIFactory>
 #include <KF5/KAtCore/SerialLayer>
+#include <KF5/KAtCore/GCodeCommands>
 
 MainWindow::MainWindow(QWidget *parent) :
     KXmlGuiWindow(parent),
@@ -194,11 +195,13 @@ void MainWindow::stopPrint()
 void MainWindow::handlePrinterStatusChanged(PrinterState newState)
 {
     switch (newState) {
+    case PrinterState::CONNECTING:{
+        connect(core.serial(), &SerialLayer::receivedCommand, this, &MainWindow::checkReceivedCommand);
+        connect(core.serial(), &SerialLayer::pushedCommand, this, &MainWindow::checkPushedCommands);
+    }
     case PrinterState::IDLE: {
         ui->bedExtWidget->setEnabled(true);
         emit extruderCountChanged(core.extruderCount());
-        connect(core.serial(), &SerialLayer::receivedCommand, this, &MainWindow::checkReceivedCommand);
-        connect(core.serial(), &SerialLayer::pushedCommand, this, &MainWindow::checkPushedCommands);
         logDialog->addLog(i18n("Serial connected"));
         _connect->setText(i18n("&Disconnect"));
     }break;
