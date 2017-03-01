@@ -48,8 +48,6 @@ private:
     void initWidgets();
     void setupActions();
     void openFile();
-    void openSettingsDialog();
-    void startConnection();
     void printFile();
     void pausePrint();
     void stopPrint();

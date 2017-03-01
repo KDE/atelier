@@ -71,11 +71,11 @@ void MainWindow::setupActions()
 
     action = actionCollection()->addAction(QStringLiteral("connect"));
     action->setText(i18n("&Connect"));
-    connect(action, &QAction::triggered, this, &MainWindow::startConnection);
+    connect(action, &QAction::triggered, connectSettingsDialog, &ConnectSettingsDialog::show);
 
     action = actionCollection()->addAction(QStringLiteral("settings"));
     action->setText(i18n("&Settings"));
-    connect(action, &QAction::triggered, this, &MainWindow::openSettingsDialog);
+    connect(action, &QAction::triggered, generalSettingsDialog, &GeneralSettingsDialog::show);
 
     action = actionCollection()->addAction(QStringLiteral("print"));
     action->setText(i18n("&Print"));
@@ -119,16 +119,6 @@ void MainWindow::openFile()
         fileName = fileNameFromDialog;
         ui->gcodeEditorWidget->loadFile(fileName);
     }
-}
-
-void MainWindow::openSettingsDialog()
-{
-    generalSettingsDialog->show();
-}
-
-void MainWindow::startConnection()
-{
-    connectSettingsDialog->show();
 }
 
 void MainWindow::printFile()
