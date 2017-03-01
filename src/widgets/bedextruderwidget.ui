@@ -34,22 +34,6 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="0">
-       <widget class="QSpinBox" name="bedTempSB">
-        <property name="suffix">
-         <string>ºC</string>
-        </property>
-        <property name="prefix">
-         <string/>
-        </property>
-        <property name="maximum">
-         <number>150</number>
-        </property>
-        <property name="displayIntegerBase">
-         <number>5</number>
-        </property>
-       </widget>
-      </item>
       <item row="0" column="1">
        <widget class="QPushButton" name="heatBedPB">
         <property name="text">
@@ -74,6 +58,19 @@
         </property>
        </widget>
       </item>
+      <item row="0" column="0">
+       <widget class="QDoubleSpinBox" name="bedTempSB">
+        <property name="suffix">
+         <string>ºC</string>
+        </property>
+        <property name="decimals">
+         <number>0</number>
+        </property>
+        <property name="maximum">
+         <double>150.000000000000000</double>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
@@ -83,19 +80,6 @@
       <string>Extruder Control</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
-      <item row="1" column="0">
-       <widget class="QSpinBox" name="extTempSB">
-        <property name="suffix">
-         <string>ºC</string>
-        </property>
-        <property name="maximum">
-         <number>260</number>
-        </property>
-        <property name="value">
-         <number>0</number>
-        </property>
-       </widget>
-      </item>
       <item row="4" column="0">
        <widget class="QLabel" name="label_5">
         <property name="text">
@@ -134,6 +118,19 @@
        <widget class="QLabel" name="extTargetTempLB">
         <property name="text">
          <string>0</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QDoubleSpinBox" name="extTempSB">
+        <property name="suffix">
+         <string>ºC</string>
+        </property>
+        <property name="decimals">
+         <number>0</number>
+        </property>
+        <property name="maximum">
+         <double>250.000000000000000</double>
         </property>
        </widget>
       </item>

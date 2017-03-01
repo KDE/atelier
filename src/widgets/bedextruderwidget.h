@@ -23,6 +23,7 @@ private:
     Ui::BedExtruderWidget *ui;
     QMap <int, QRadioButton*> extruderMap;
     void heatExtruderClicked(bool clicked);
+    void heatBedClicked(bool clicked);
     int extruderCount = 0;
 
 signals:

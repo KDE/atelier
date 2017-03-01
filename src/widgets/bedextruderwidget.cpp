@@ -2,6 +2,7 @@
 #include "ui_bedextruderwidget.h"
 #include <QRadioButton>
 #include <KLocalizedString>
+
 BedExtruderWidget::BedExtruderWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::BedExtruderWidget)
@@ -10,12 +11,7 @@ BedExtruderWidget::BedExtruderWidget(QWidget *parent) :
 
     //Add Default Extruder
     setExtruderCount(1);
-    connect(ui->heatBedPB, &QPushButton::clicked, [ = ](bool clicked) {
-        int temp = ui->bedTempSB->value() * clicked;
-        emit bedTemperatureChanged(temp);
-        ui->bedTargetTempLB->setText(QString::number(temp));
-    });
-
+    connect(ui->heatBedPB, &QPushButton::clicked, this, &BedExtruderWidget::heatBedClicked);
     connect(ui->heatExtPB, &QPushButton::clicked, this, &BedExtruderWidget::heatExtruderClicked);
 }
 
@@ -68,14 +64,14 @@ void BedExtruderWidget::heatExtruderClicked(bool clicked)
             }
         }
     }
+    int tmp = ui->extTempSB->value() * clicked;
+    emit extTemperatureChanged(currExt, tmp);
+    ui->extTargetTempLB->setText(QString::number(tmp));
+}
 
-    if (clicked) {
-        int tmp = ui->extTempSB->value();
-        emit extTemperatureChanged(currExt, tmp);
-        ui->extTargetTempLB->setText(QString::number(tmp));
-
-    } else {
-        emit extTemperatureChanged(currExt, 0);
-        ui->extTargetTempLB->setText(QString::number(0));
-    }
+void BedExtruderWidget::heatBedClicked(bool clicked)
+{
+    int temp = ui->bedTempSB->value() * clicked;
+    emit bedTemperatureChanged(temp);
+    ui->bedTargetTempLB->setText(QString::number(temp));
 }
