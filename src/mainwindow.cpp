@@ -22,6 +22,7 @@
 #include <KStandardAction>
 #include <KActionCollection>
 #include <KXMLGUIFactory>
+#include <KF5/KAtCore/SerialLayer>
 
 MainWindow::MainWindow(QWidget *parent) :
     KXmlGuiWindow(parent),
@@ -172,9 +173,13 @@ void MainWindow::handlePrinterStatusChanged(PrinterState newState)
     case PrinterState::IDLE: {
         ui->bedExtWidget->setEnabled(true);
         emit extruderCountChanged(core.extruderCount());
+        connect(core.serial(), &SerialLayer::receivedCommand, this, &MainWindow::checkReceivedCommand);
+        connect(core.serial(), &SerialLayer::pushedCommand, this, &MainWindow::checkPushedCommands);
     }break;
     case PrinterState::DISCONNECTED: {
         ui->bedExtWidget->setEnabled(false);
+        disconnect(core.serial(), &SerialLayer::receivedCommand, this, &MainWindow::checkReceivedCommand);
+        disconnect(core.serial(), &SerialLayer::pushedCommand, this, &MainWindow::checkPushedCommands);
     }break;
     default:
         return;
@@ -215,4 +220,19 @@ void MainWindow::checkTemperature(uint sensorType, uint number, uint temp)
           .arg(QString::number(temp));
 
     logDialog->addRLog(msg);
+}
+
+void MainWindow::checkReceivedCommand()
+{
+    logDialog->addRLog(QString::fromUtf8(core.popCommand()));
+}
+
+void MainWindow::checkPushedCommands(QByteArray bmsg)
+{
+    QString msg = QString::fromUtf8(bmsg);
+    QRegExp _newLine(QChar::fromLatin1('\n'));
+    QRegExp _return(QChar::fromLatin1('\r'));
+    msg.replace(_newLine, QStringLiteral("\\n"));
+    msg.replace(_return, QStringLiteral("\\r"));
+    logDialog->addSLog(msg);
 }
