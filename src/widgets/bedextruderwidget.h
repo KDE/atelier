@@ -26,6 +26,6 @@ private:
     int extruderCount = 0;
 
 signals:
-    void bedTemperatureChanged(uint tmp);
-    void extTemperatureChanged(int currExt, uint tmp);
+    void bedTemperatureChanged(int tmp);
+    void extTemperatureChanged(int currExt, int tmp);
 };

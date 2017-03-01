@@ -11,7 +11,7 @@ BedExtruderWidget::BedExtruderWidget(QWidget *parent) :
     //Add Default Extruder
     setExtruderCount(1);
     connect(ui->heatBedPB, &QPushButton::clicked, [ = ](bool clicked) {
-        uint temp = ui->bedTempSB->value() * clicked;
+        int temp = ui->bedTempSB->value() * clicked;
         emit bedTemperatureChanged(temp);
         ui->bedTargetTempLB->setText(QString::number(temp));
     });
@@ -68,7 +68,14 @@ void BedExtruderWidget::heatExtruderClicked(bool clicked)
             }
         }
     }
-    uint tmp = ui->extTempSB->value() * clicked;
-    emit extTemperatureChanged(currExt, tmp);
-    ui->extTargetTempLB->setText(QString::number(tmp));
+
+    if (clicked) {
+        int tmp = ui->extTempSB->value();
+        emit extTemperatureChanged(currExt, tmp);
+        ui->extTargetTempLB->setText(QString::number(tmp));
+
+    } else {
+        emit extTemperatureChanged(currExt, 0);
+        ui->extTargetTempLB->setText(QString::number(0));
+    }
 }
