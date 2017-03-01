@@ -124,7 +124,7 @@ void MainWindow::setupActions()
         }
     });
 
-    QAction *quit = KStandardAction::quit(qApp, SLOT(quit()), actionCollection());
+    action = KStandardAction::quit(qApp, SLOT(quit()), actionCollection());
 
     action = actionCollection()->addAction(QStringLiteral("plot"));
     action->setText(i18n("Temperature Plot"));
@@ -175,11 +175,13 @@ void MainWindow::handlePrinterStatusChanged(PrinterState newState)
         emit extruderCountChanged(core.extruderCount());
         connect(core.serial(), &SerialLayer::receivedCommand, this, &MainWindow::checkReceivedCommand);
         connect(core.serial(), &SerialLayer::pushedCommand, this, &MainWindow::checkPushedCommands);
+        logDialog->addLog(i18n("Serial connected"));
     }break;
     case PrinterState::DISCONNECTED: {
         ui->bedExtWidget->setEnabled(false);
         disconnect(core.serial(), &SerialLayer::receivedCommand, this, &MainWindow::checkReceivedCommand);
         disconnect(core.serial(), &SerialLayer::pushedCommand, this, &MainWindow::checkPushedCommands);
+        logDialog->addLog(i18n("Serial disconnected"));
     }break;
     default:
         return;
