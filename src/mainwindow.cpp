@@ -48,12 +48,15 @@ void MainWindow::initConnectsToAtCore()
 {
     connect(&core, &AtCore::stateChanged, this, &MainWindow::handlePrinterStatusChanged);
     connect(this, &MainWindow::extruderCountChanged, ui->bedExtWidget, &BedExtruderWidget::setExtruderCount);
+    connect(ui->bedExtWidget, &BedExtruderWidget::bedTemperatureChanged, &core, &AtCore::setBedTemp);
+    connect(ui->bedExtWidget, &BedExtruderWidget::extTemperatureChanged, &core, &AtCore::setExtruderTemp);
 
     //Connects for Plot
     connect(&core.temperature(), &Temperature::bedTemperatureChanged, [ = ](float temp) {
         checkTemperature(0x00, 0, temp);
         ui->plotWidget->appendPoint(i18n("Actual Bed"), temp);
         ui->plotWidget->update();
+        ui->bedExtWidget->updateBedTemp(temp);
     });
     connect(&core.temperature(), &Temperature::bedTargetTemperatureChanged, [ = ](float temp) {
         checkTemperature(0x01, 0, temp);
@@ -64,6 +67,7 @@ void MainWindow::initConnectsToAtCore()
         checkTemperature(0x02, 0, temp);
         ui->plotWidget->appendPoint(i18n("Actual Ext.1"), temp);
         ui->plotWidget->update();
+        ui->bedExtWidget->updateExtTemp(temp);
     });
     connect(&core.temperature(), &Temperature::extruderTargetTemperatureChanged, [ = ](float temp) {
         checkTemperature(0x03, 0, temp);
