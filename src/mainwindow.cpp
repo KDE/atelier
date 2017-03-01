@@ -27,7 +27,8 @@ MainWindow::MainWindow(QWidget *parent) :
     KXmlGuiWindow(parent),
     ui(new Ui::MainWindow),
     generalSettingsDialog(new GeneralSettingsDialog(this)),
-    connectSettingsDialog(new ConnectSettingsDialog(firmwaresList, this))
+    connectSettingsDialog(new ConnectSettingsDialog(firmwaresList, this)),
+    logDialog(new LogDialog(this))
 {
     ui->setupUi(this);
     setupActions();
@@ -107,6 +108,10 @@ void MainWindow::setupActions()
     connect(action, &QAction::triggered, [ = ]{
        ui->plotWidget->setVisible(!ui->plotWidget->isVisible());
     });
+
+    action = actionCollection()->addAction(QStringLiteral("log"));
+    action->setText(i18n("Log Dialog"));
+    connect(action, &QAction::triggered, logDialog, &LogDialog::show);
 
     setupGUI(Default, "atelierui.rc");
 }

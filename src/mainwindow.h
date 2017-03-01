@@ -23,6 +23,7 @@
 #include <KXmlGui/KXmlGuiWindow>
 #include <dialogs/connectsettingsdialog.h>
 #include <dialogs/generalsettingsdialog.h>
+#include <dialogs/logdialog.h>
 
 
 namespace Ui
@@ -53,6 +54,7 @@ private:
     void stopPrint();
     GeneralSettingsDialog *generalSettingsDialog;
     ConnectSettingsDialog *connectSettingsDialog;
+    LogDialog *logDialog;
     void handlePrinterStatusChanged(PrinterState newState);
 
 signals:
