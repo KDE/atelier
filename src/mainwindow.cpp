@@ -97,9 +97,17 @@ void MainWindow::setupActions()
     action->setText(i18n("&Open GCode"));
     connect(action, &QAction::triggered, this, &MainWindow::openFile);
 
-    action = actionCollection()->addAction(QStringLiteral("connect"));
-    action->setText(i18n("&Connect"));
-    connect(action, &QAction::triggered, connectSettingsDialog, &ConnectSettingsDialog::show);
+    _connect = actionCollection()->addAction(QStringLiteral("connect"));
+    _connect->setText(i18n("&Connect"));
+    _connect->setCheckable(true);
+    connect(_connect, &QAction::toggled, [=](bool clicked){
+        if(clicked){
+            connectSettingsDialog->show();
+        } else {
+            _connect->setText(i18n("&Connect"));
+            core.setState(PrinterState::DISCONNECTED);
+        }
+    });
 
     action = actionCollection()->addAction(QStringLiteral("settings"));
     action->setText(i18n("&Settings"));
@@ -180,12 +188,14 @@ void MainWindow::handlePrinterStatusChanged(PrinterState newState)
         connect(core.serial(), &SerialLayer::receivedCommand, this, &MainWindow::checkReceivedCommand);
         connect(core.serial(), &SerialLayer::pushedCommand, this, &MainWindow::checkPushedCommands);
         logDialog->addLog(i18n("Serial connected"));
+        _connect->setText(i18n("&Disconnect"));
     }break;
     case PrinterState::DISCONNECTED: {
         ui->bedExtWidget->setEnabled(false);
         disconnect(core.serial(), &SerialLayer::receivedCommand, this, &MainWindow::checkReceivedCommand);
         disconnect(core.serial(), &SerialLayer::pushedCommand, this, &MainWindow::checkPushedCommands);
         logDialog->addLog(i18n("Serial disconnected"));
+
     }break;
     default:
         return;

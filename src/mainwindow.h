@@ -47,6 +47,7 @@ private:
     GeneralSettingsDialog *generalSettingsDialog;
     ConnectSettingsDialog *connectSettingsDialog;
     LogDialog *logDialog;
+    QAction *_connect;
     void initConnectsToAtCore();
     void initLocalVariables();
     void initWidgets();

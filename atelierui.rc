@@ -25,6 +25,7 @@
         <Action name="open_gcode"/>
         <Action name="settings"/>
         <Action name="connect"/>
+        <Action name="disconnect"/>
         <Separator/>
         <Action name="print"/>
         <Action name="pause"/>
