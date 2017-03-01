@@ -47,6 +47,28 @@ void MainWindow::initConnectsToAtCore()
 {
     connect(&core, &AtCore::stateChanged, this, &MainWindow::handlePrinterStatusChanged);
     connect(this, &MainWindow::extruderCountChanged, ui->bedExtWidget, &BedExtruderWidget::setExtruderCount);
+
+    //Connects for Plot
+    connect(&core.temperature(), &Temperature::bedTemperatureChanged, [ = ](float temp) {
+        checkTemperature(0x00, 0, temp);
+        ui->plotWidget->appendPoint(i18n("Actual Bed"), temp);
+        ui->plotWidget->update();
+    });
+    connect(&core.temperature(), &Temperature::bedTargetTemperatureChanged, [ = ](float temp) {
+        checkTemperature(0x01, 0, temp);
+        ui->plotWidget->appendPoint(i18n("Target Bed"), temp);
+        ui->plotWidget->update();
+    });
+    connect(&core.temperature(), &Temperature::extruderTemperatureChanged, [ = ](float temp) {
+        checkTemperature(0x02, 0, temp);
+        ui->plotWidget->appendPoint(i18n("Actual Ext.1"), temp);
+        ui->plotWidget->update();
+    });
+    connect(&core.temperature(), &Temperature::extruderTargetTemperatureChanged, [ = ](float temp) {
+        checkTemperature(0x03, 0, temp);
+        ui->plotWidget->appendPoint(i18n("Target Ext.1"), temp);
+        ui->plotWidget->update();
+    });
 }
 
 void MainWindow::initLocalVariables()
@@ -157,4 +179,40 @@ void MainWindow::handlePrinterStatusChanged(PrinterState newState)
     default:
         return;
     }
+}
+
+void MainWindow::checkTemperature(uint sensorType, uint number, uint temp)
+{
+    QString msg;
+    switch (sensorType) {
+    case 0x00: // bed
+        msg = QString::fromLatin1("Bed Temperature ");
+        break;
+
+    case 0x01: // bed target
+        msg = QString::fromLatin1("Bed Target Temperature ");
+        break;
+
+    case 0x02: // extruder
+        msg = QString::fromLatin1("Extruder Temperature ");
+        break;
+
+    case 0x03: // extruder target
+        msg = QString::fromLatin1("Extruder Target Temperature ");
+        break;
+
+    case 0x04: // enclosure
+        msg = QString::fromLatin1("Enclosure Temperature ");
+        break;
+
+    case 0x05: // enclosure target
+        msg = QString::fromLatin1("Enclosure Target Temperature ");
+        break;
+    }
+
+    msg.append(QString::fromLatin1("[%1] : %2"));
+    msg = msg.arg(QString::number(number))
+          .arg(QString::number(temp));
+
+    logDialog->addRLog(msg);
 }

@@ -44,6 +44,9 @@ private:
     AtCore core;
     QStringList firmwaresList;
     QUrl fileName;
+    GeneralSettingsDialog *generalSettingsDialog;
+    ConnectSettingsDialog *connectSettingsDialog;
+    LogDialog *logDialog;
     void initConnectsToAtCore();
     void initLocalVariables();
     void initWidgets();
@@ -52,10 +55,8 @@ private:
     void printFile();
     void pausePrint();
     void stopPrint();
-    GeneralSettingsDialog *generalSettingsDialog;
-    ConnectSettingsDialog *connectSettingsDialog;
-    LogDialog *logDialog;
     void handlePrinterStatusChanged(PrinterState newState);
+    void checkTemperature(uint sensorType, uint number, uint temp);
 
 signals:
     void extruderCountChanged(int count);
