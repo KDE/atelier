@@ -3,6 +3,7 @@ set(widgets_SRCS
     printerhostpositionvisualcontroller.cpp
     bedextruderwidget.cpp
     plotwidget.cpp
+    pushgcodewidget.cpp
     )
 
 add_library(AtelierWidgets STATIC ${widgets_SRCS})
