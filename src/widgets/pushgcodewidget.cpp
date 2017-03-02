@@ -16,7 +16,7 @@ PushGCodeWidget::PushGCodeWidget(QWidget *parent) : QWidget(parent),
     this->setLayout(layout);
 
     connect(bt, &QPushButton::clicked, [=]{
-        push(lb->text());
+        push(input->text());
     });
 }
 
