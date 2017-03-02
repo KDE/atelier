@@ -74,6 +74,8 @@ void MainWindow::initConnectsToAtCore()
         ui->plotWidget->appendPoint(i18n("Target Ext.1"), temp);
         ui->plotWidget->update();
     });
+
+    connect(ui->pushGCodeWidget, &PushGCodeWidget::push, &core, &AtCore::pushCommand);
 }
 
 void MainWindow::initLocalVariables()
@@ -86,6 +88,7 @@ void MainWindow::initWidgets()
     ui->bedExtWidget->setEnabled(false);
     ui->gcodeEditorWidget->setVisible(false);
     ui->plotWidget->setVisible(false);
+    ui->pushGCodeWidget->setVisible(false);
 }
 
 void MainWindow::setupActions()
@@ -147,6 +150,12 @@ void MainWindow::setupActions()
     action = actionCollection()->addAction(QStringLiteral("log"));
     action->setText(i18n("Log Dialog"));
     connect(action, &QAction::triggered, logDialog, &LogDialog::show);
+
+    action = actionCollection()->addAction(QStringLiteral("push"));
+    action->setText(i18n("Push Commands"));
+    connect(action, &QAction::triggered, [=]{
+        ui->pushGCodeWidget->setVisible(!ui->pushGCodeWidget->isVisible());
+    });
 
     setupGUI(Default, "atelierui.rc");
 }

@@ -17,6 +17,7 @@
         <Menu name="view">
             <Action name="plot"/>
             <Action name="log"/>
+            <Action name="push"/>
         </Menu>
     </MenuBar>
  
