@@ -75,7 +75,10 @@ void MainWindow::initConnectsToAtCore()
         ui->plotWidget->update();
     });
 
-    connect(ui->pushGCodeWidget, &PushGCodeWidget::push, &core, &AtCore::pushCommand);
+    connect(ui->pushGCodeWidget, &PushGCodeWidget::push, [=](QString command){
+        logDialog->addLog("Push " + command);
+        core.pushCommand(command);
+    });
 }
 
 void MainWindow::initLocalVariables()
