@@ -13,6 +13,18 @@ BedExtruderWidget::BedExtruderWidget(QWidget *parent) :
     setExtruderCount(1);
     connect(ui->heatBedPB, &QPushButton::clicked, this, &BedExtruderWidget::heatBedClicked);
     connect(ui->heatExtPB, &QPushButton::clicked, this, &BedExtruderWidget::heatExtruderClicked);
+
+    connect(ui->bedTempSB, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), [=](double tmp){
+        if(ui->heatBedPB->isChecked()){
+            emit bedTemperatureChanged(tmp);
+        }
+    });
+
+    connect(ui->extTempSB, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), [ = ](double tmp) {
+        if(ui->heatExtPB->isChecked()){
+            emit extTemperatureChanged(tmp, currentExtruder());
+        }
+    });
 }
 
 BedExtruderWidget::~BedExtruderWidget()
@@ -53,7 +65,40 @@ void BedExtruderWidget::updateExtTemp(const float temp)
     ui->extCurrTempLB->setText(QString::number(temp));
 }
 
+void BedExtruderWidget::updateBedTargetTemp(const float temp)
+{
+    ui->bedTargetTempLB->setText(QString::number(temp) + " ºC");
+}
+
+void BedExtruderWidget::updateExtTargetTemp(const float temp)
+{
+    ui->extTargetTempLB->setText(QString::number(temp) + " ºC");
+}
+
+void BedExtruderWidget::stopHeating()
+{
+    emit bedTemperatureChanged(0);
+    for(int i = 0; i < extruderCount; i++ ){
+        emit extTemperatureChanged(0, i);
+    }
+    ui->heatBedPB->setChecked(false);
+    ui->heatExtPB->setChecked(false);
+}
+
 void BedExtruderWidget::heatExtruderClicked(bool clicked)
+{
+    int temp = ui->extTempSB->value() * clicked;
+    emit extTemperatureChanged(temp, currentExtruder());
+}
+
+void BedExtruderWidget::heatBedClicked(bool clicked)
+{
+    int temp = ui->bedTempSB->value() * clicked;
+    emit bedTemperatureChanged(temp);
+
+}
+
+int BedExtruderWidget::currentExtruder()
 {
     int currExt = 1;
     if (extruderMap.size() > 1) {
@@ -64,14 +109,5 @@ void BedExtruderWidget::heatExtruderClicked(bool clicked)
             }
         }
     }
-    int tmp = ui->extTempSB->value() * clicked;
-    emit extTemperatureChanged(currExt, tmp);
-    ui->extTargetTempLB->setText(QString::number(tmp));
-}
-
-void BedExtruderWidget::heatBedClicked(bool clicked)
-{
-    int temp = ui->bedTempSB->value() * clicked;
-    emit bedTemperatureChanged(temp);
-    ui->bedTargetTempLB->setText(QString::number(temp));
+    return currExt;
 }
