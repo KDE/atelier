@@ -112,6 +112,7 @@ void MainWindow::setupActions()
             connectSettingsDialog->show();
         } else {
             _connect->setText(i18n("&Connect"));
+            ui->bedExtWidget->stopHeating();
             core.setState(PrinterState::DISCONNECTED);
         }
     });
