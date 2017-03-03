@@ -30,7 +30,7 @@
       <item row="3" column="1">
        <widget class="QLabel" name="bedCurrTempLB">
         <property name="text">
-         <string>0</string>
+         <string>0 ºC</string>
         </property>
        </widget>
       </item>
@@ -54,7 +54,7 @@
       <item row="1" column="1">
        <widget class="QLabel" name="bedTargetTempLB">
         <property name="text">
-         <string>0</string>
+         <string>0 ºC</string>
         </property>
        </widget>
       </item>
@@ -100,7 +100,7 @@
       <item row="4" column="1">
        <widget class="QLabel" name="extCurrTempLB">
         <property name="text">
-         <string>0</string>
+         <string>0 ºC</string>
         </property>
        </widget>
       </item>
@@ -117,7 +117,7 @@
       <item row="2" column="1">
        <widget class="QLabel" name="extTargetTempLB">
         <property name="text">
-         <string>0</string>
+         <string>0 ºC</string>
         </property>
        </widget>
       </item>
