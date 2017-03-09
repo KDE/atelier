@@ -100,7 +100,7 @@ void BedExtruderWidget::heatBedClicked(bool clicked)
 
 int BedExtruderWidget::currentExtruder()
 {
-    int currExt = 1;
+    int currExt = 0;
     if (extruderMap.size() > 1) {
         for (int i = 0; i < extruderMap.size(); i++) {
             if (extruderMap.value(i)->isChecked()) {
