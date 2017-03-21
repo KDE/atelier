@@ -63,6 +63,7 @@ void MainWindow::initConnectsToAtCore()
         checkTemperature(0x01, 0, temp);
         ui->plotWidget->appendPoint(i18n("Target Bed"), temp);
         ui->plotWidget->update();
+        ui->bedExtWidget->updateBedTargetTemp(temp);
     });
     connect(&core.temperature(), &Temperature::extruderTemperatureChanged, [ = ](float temp) {
         checkTemperature(0x02, 0, temp);
@@ -74,6 +75,7 @@ void MainWindow::initConnectsToAtCore()
         checkTemperature(0x03, 0, temp);
         ui->plotWidget->appendPoint(i18n("Target Ext.1"), temp);
         ui->plotWidget->update();
+        ui->bedExtWidget->updateExtTargetTemp(temp);
     });
 
     connect(ui->pushGCodeWidget, &PushGCodeWidget::push, [=](QString command){
