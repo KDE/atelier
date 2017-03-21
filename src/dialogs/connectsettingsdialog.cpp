@@ -41,7 +41,8 @@ ConnectSettingsDialog::ConnectSettingsDialog(QStringList firmwaresList, QWidget 
         } else if (!ui->serialPortCB->currentText().isEmpty())
         {
             emit _connect(ui->serialPortCB->currentText(), ui->baudCB->currentText().toInt());
-        } else {
+        } else
+        {
             QMessageBox msg;
             msg.setText(i18n("Please, connect a serial device to continue!"));
             msg.setIcon(QMessageBox::Information);

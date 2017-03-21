@@ -4,7 +4,8 @@
 #include <QRadioButton>
 #include <QMap>
 
-namespace Ui {
+namespace Ui
+{
 class BedExtruderWidget;
 }
 
@@ -24,7 +25,7 @@ public:
 
 private:
     Ui::BedExtruderWidget *ui;
-    QMap <int, QRadioButton*> extruderMap;
+    QMap <int, QRadioButton *> extruderMap;
     void heatExtruderClicked(bool clicked);
     void heatBedClicked(bool clicked);
     int currentExtruder();

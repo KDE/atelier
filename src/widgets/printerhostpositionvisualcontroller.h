@@ -45,7 +45,8 @@ private:
     int _value;
 };
 
-class RectButton : public QObject, public QGraphicsRectItem {
+class RectButton : public QObject, public QGraphicsRectItem
+{
     Q_OBJECT
 
 public:
@@ -69,7 +70,7 @@ public:
     explicit PrinterHotendPositionVisualController(QWidget *parent = 0);
 
 private:
-    void setLabels(QGraphicsItem* item, QLatin1Char axis, int value);
+    void setLabels(QGraphicsItem *item, QLatin1Char axis, int value);
 
 protected:
     void resizeEvent(QResizeEvent *event);

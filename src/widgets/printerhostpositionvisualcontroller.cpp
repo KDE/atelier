@@ -49,7 +49,8 @@ void PieButton::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
     setBrush(QBrush(QColor(Qt::white)));
 }
 
-RectButton::RectButton(QLatin1Char axis, int value, int size) : _axis(axis), _value(value) {
+RectButton::RectButton(QLatin1Char axis, int value, int size) : _axis(axis), _value(value)
+{
     setBrush(QBrush(Qt::white));
     setRect(QRect(QPoint(0, 0), QPoint(size, size)));
     setAcceptHoverEvents(true);
@@ -92,24 +93,26 @@ PrinterHotendPositionVisualController::PrinterHotendPositionVisualController(QWi
     auto createPie = [ = ](QLatin1Char axis, int value, int size, int angle) {
         auto pie = new PieButton(axis, value, size, angle);
         connect(pie, &PieButton::clicked, this, &PrinterHotendPositionVisualController::clicked);
-        if( value == 1000 || value == -1000) {
-           setLabels(pie, axis, value);
+        if (value == 1000 || value == -1000) {
+            setLabels(pie, axis, value);
         }
         scene()->addItem(pie);
     };
 
-    auto createRect = [=](QLatin1Char axis, int value, int size, int xPos, int yPos) {
+    auto createRect = [ = ](QLatin1Char axis, int value, int size, int xPos, int yPos) {
         auto z = new RectButton(axis, value, size);
         z->setPos(xPos, yPos);
         connect(z, &RectButton::clicked, this, &PrinterHotendPositionVisualController::clicked);
-        if(value == 1000 || value == -1000) {
+        if (value == 1000 || value == -1000) {
             setLabels(z, axis, value);
         }
         scene()->addItem(z);
     };
 
     int currPieSize = 25;
-    for (auto value : { 10, 100, 1000 }) {
+    for (auto value : {
+                10, 100, 1000
+            }) {
         createPie(QLatin1Char('X'), value, currPieSize, -45);       // Left
         createPie(QLatin1Char('X'), value * -1, currPieSize, 135);  // Right
         createPie(QLatin1Char('Y'), value, currPieSize, 45);        // Top
@@ -120,11 +123,15 @@ PrinterHotendPositionVisualController::PrinterHotendPositionVisualController(QWi
     int currZSize = 25;
     int xPos = sceneRect().width() - 50;
     int yPos = -75; //Align with the origin of the scene 3 * 25
-    for(auto value: {1000,100,10}) {
+    for (auto value : {
+                1000, 100, 10
+            }) {
         createRect(QLatin1Char('Z'), value, currZSize, xPos, yPos);
         yPos += currZSize;
     }
-    for(auto value: {-10, -100, -1000}) {
+    for (auto value : {
+                -10, -100, -1000
+            }) {
         createRect(QLatin1Char('Z'), value, currZSize, xPos, yPos);
         yPos += currZSize;
     }
@@ -142,29 +149,27 @@ void PrinterHotendPositionVisualController::setLabels(QGraphicsItem *item, QLati
     auto *lb = new QGraphicsSimpleTextItem();
     lb->setText((value < 0) ? "-" + axis : QString(axis));
 
-    if(axis == 'X'){
-        lb->setY(item->y() - lb->boundingRect().width()/2);
-        if(value < 0) {
-            lb->setX(item->x() - item->boundingRect().width()/1.2 - lb->boundingRect().width()/2);
+    if (axis == 'X') {
+        lb->setY(item->y() - lb->boundingRect().width() / 2);
+        if (value < 0) {
+            lb->setX(item->x() - item->boundingRect().width() / 1.2 - lb->boundingRect().width() / 2);
         } else {
-            lb->setX(item->x() + item->boundingRect().width()/1.2 - lb->boundingRect().width()/2);
+            lb->setX(item->x() + item->boundingRect().width() / 1.2 - lb->boundingRect().width() / 2);
         }
-    }else if(axis == 'Y'){
-        lb->setX(item->x() - lb->boundingRect().width()/2);
-        if(value < 0 ){
-            lb->setY(item->y() + item->boundingRect().height()/1.5);
-        }
-        else {
+    } else if (axis == 'Y') {
+        lb->setX(item->x() - lb->boundingRect().width() / 2);
+        if (value < 0) {
+            lb->setY(item->y() + item->boundingRect().height() / 1.5);
+        } else {
             lb->setY(item->y() - item->boundingRect().height());
         }
     } else {
 
-        if(value < 0) {
-            lb->setX(item->x() + lb->boundingRect().width()/2);
-            lb->setY(item->y() + lb->boundingRect().height()/2);
-        }
-        else{
-            lb->setX(item->x() + lb->boundingRect().width()*1.25);
+        if (value < 0) {
+            lb->setX(item->x() + lb->boundingRect().width() / 2);
+            lb->setY(item->y() + lb->boundingRect().height() / 2);
+        } else {
+            lb->setX(item->x() + lb->boundingRect().width() * 1.25);
             lb->setY(item->y());
         }
     }

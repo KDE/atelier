@@ -25,7 +25,6 @@
 #include <dialogs/generalsettingsdialog.h>
 #include <dialogs/logdialog.h>
 
-
 namespace Ui
 {
 class MainWindow;

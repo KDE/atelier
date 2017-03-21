@@ -78,7 +78,7 @@ void MainWindow::initConnectsToAtCore()
         ui->bedExtWidget->updateExtTargetTemp(temp);
     });
 
-    connect(ui->pushGCodeWidget, &PushGCodeWidget::push, [=](QString command){
+    connect(ui->pushGCodeWidget, &PushGCodeWidget::push, [ = ](QString command) {
         logDialog->addLog("Push " + command);
         core.pushCommand(command);
     });
@@ -109,8 +109,8 @@ void MainWindow::setupActions()
     _connect = actionCollection()->addAction(QStringLiteral("connect"));
     _connect->setText(i18n("&Connect"));
     _connect->setCheckable(true);
-    connect(_connect, &QAction::toggled, [=](bool clicked){
-        if(clicked){
+    connect(_connect, &QAction::toggled, [ = ](bool clicked) {
+        if (clicked) {
             connectSettingsDialog->show();
         } else {
             _connect->setText(i18n("&Connect"));
@@ -139,9 +139,11 @@ void MainWindow::setupActions()
     action->setText(i18n("&Edit GCode"));
     connect(action, &QAction::triggered, this, [ = ] {
         ui->gcodeEditorWidget->setVisible(!ui->gcodeEditorWidget->isVisible());
-        if(ui->gcodeEditorWidget->isVisible()) {
+        if (ui->gcodeEditorWidget->isVisible())
+        {
             guiFactory()->addClient(ui->gcodeEditorWidget->gcodeView());
-        } else {
+        } else
+        {
             guiFactory()->removeClient(ui->gcodeEditorWidget->gcodeView());
         }
     });
@@ -150,8 +152,8 @@ void MainWindow::setupActions()
 
     action = actionCollection()->addAction(QStringLiteral("plot"));
     action->setText(i18n("Temperature Plot"));
-    connect(action, &QAction::triggered, [ = ]{
-       ui->plotWidget->setVisible(!ui->plotWidget->isVisible());
+    connect(action, &QAction::triggered, [ = ] {
+        ui->plotWidget->setVisible(!ui->plotWidget->isVisible());
     });
 
     action = actionCollection()->addAction(QStringLiteral("log"));
@@ -160,7 +162,7 @@ void MainWindow::setupActions()
 
     action = actionCollection()->addAction(QStringLiteral("push"));
     action->setText(i18n("Push Commands"));
-    connect(action, &QAction::triggered, [=]{
+    connect(action, &QAction::triggered, [ = ] {
         ui->pushGCodeWidget->setVisible(!ui->pushGCodeWidget->isVisible());
     });
 
@@ -198,7 +200,7 @@ void MainWindow::stopPrint()
 void MainWindow::handlePrinterStatusChanged(PrinterState newState)
 {
     switch (newState) {
-    case PrinterState::CONNECTING:{
+    case PrinterState::CONNECTING: {
         connect(core.serial(), &SerialLayer::receivedCommand, this, &MainWindow::checkReceivedCommand);
         connect(core.serial(), &SerialLayer::pushedCommand, this, &MainWindow::checkPushedCommands);
     }
@@ -207,14 +209,14 @@ void MainWindow::handlePrinterStatusChanged(PrinterState newState)
         emit extruderCountChanged(core.extruderCount());
         logDialog->addLog(i18n("Serial connected"));
         _connect->setText(i18n("&Disconnect"));
-    }break;
+    } break;
     case PrinterState::DISCONNECTED: {
         ui->bedExtWidget->setEnabled(false);
         disconnect(core.serial(), &SerialLayer::receivedCommand, this, &MainWindow::checkReceivedCommand);
         disconnect(core.serial(), &SerialLayer::pushedCommand, this, &MainWindow::checkPushedCommands);
         logDialog->addLog(i18n("Serial disconnected"));
 
-    }break;
+    } break;
     default:
         return;
     }

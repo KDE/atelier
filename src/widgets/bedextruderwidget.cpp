@@ -14,14 +14,14 @@ BedExtruderWidget::BedExtruderWidget(QWidget *parent) :
     connect(ui->heatBedPB, &QPushButton::clicked, this, &BedExtruderWidget::heatBedClicked);
     connect(ui->heatExtPB, &QPushButton::clicked, this, &BedExtruderWidget::heatExtruderClicked);
 
-    connect(ui->bedTempSB, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), [=](double tmp){
-        if(ui->heatBedPB->isChecked()){
+    connect(ui->bedTempSB, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), [ = ](double tmp) {
+        if (ui->heatBedPB->isChecked()) {
             emit bedTemperatureChanged(tmp);
         }
     });
 
     connect(ui->extTempSB, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), [ = ](double tmp) {
-        if(ui->heatExtPB->isChecked()){
+        if (ui->heatExtPB->isChecked()) {
             emit extTemperatureChanged(tmp, currentExtruder());
         }
     });
@@ -39,7 +39,7 @@ void BedExtruderWidget::setExtruderCount(int value)
     } else if (extruderCount < value) {
         //loop for the new buttons
         for (int i = extruderCount; i < value; i++) {
-            auto *rb = new QRadioButton(QString::number(i+1));
+            auto *rb = new QRadioButton(QString::number(i + 1));
             ui->extRadioButtonLayout->addWidget(rb);
             extruderMap.insert(i, rb);
         }
@@ -49,7 +49,7 @@ void BedExtruderWidget::setExtruderCount(int value)
             auto *rb = extruderMap.value(i);
             ui->extRadioButtonLayout->removeWidget(rb);
             extruderMap.remove(i);
-            delete(rb);
+            delete (rb);
         }
     }
     extruderCount = value;
@@ -78,7 +78,7 @@ void BedExtruderWidget::updateExtTargetTemp(const float temp)
 void BedExtruderWidget::stopHeating()
 {
     emit bedTemperatureChanged(0);
-    for(int i = 0; i < extruderCount; i++ ){
+    for (int i = 0; i < extruderCount; i++) {
         emit extTemperatureChanged(0, i);
     }
     ui->heatBedPB->setChecked(false);

@@ -30,7 +30,7 @@ class GCodeEditorWidget : public QWidget
 public:
     explicit GCodeEditorWidget(QWidget *parent = nullptr);
     void loadFile(const QUrl &fileName);
-    KTextEditor::View* gcodeView() const;
+    KTextEditor::View *gcodeView() const;
 
 private:
     KTextEditor::Editor *editor;

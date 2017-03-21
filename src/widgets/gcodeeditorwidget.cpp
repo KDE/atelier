@@ -41,13 +41,13 @@ void GCodeEditorWidget::loadFile(const QUrl &fileName)
     doc->setHighlightingMode(QString("G-Code"));
 }
 
-KTextEditor::View* GCodeEditorWidget::gcodeView() const
+KTextEditor::View *GCodeEditorWidget::gcodeView() const
 {
     return view;
 }
 
 void GCodeEditorWidget::setupInterface()
 {
-    interface = qobject_cast<KTextEditor::ConfigInterface*>(view);
+    interface = qobject_cast<KTextEditor::ConfigInterface *>(view);
     interface->setConfigValue("line-numbers", true);
 }
