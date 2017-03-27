@@ -92,6 +92,7 @@ void MainWindow::initLocalVariables()
 void MainWindow::initWidgets()
 {
     ui->groupBox->setEnabled(false);
+    ui->printProgressWidget->setVisible(false);
 }
 
 void MainWindow::setupActions()
@@ -214,6 +215,15 @@ void MainWindow::handlePrinterStatusChanged(PrinterState newState)
         logDialog->addLog(i18n("Serial disconnected"));
 
     } break;
+    case PrinterState::STARTPRINT: {
+        ui->printProgressWidget->setVisible(true);
+        connect(&core, &AtCore::printProgressChanged, ui->printProgressWidget, &PrintProgressWidget::updateProgressBar);
+    } break;
+    case PrinterState::FINISHEDPRINT: {
+        ui->printProgressWidget->setVisible(false);
+        disconnect(&core, &AtCore::printProgressChanged, ui->printProgressWidget, &PrintProgressWidget::updateProgressBar);
+    } break;
+
     default:
         return;
     }

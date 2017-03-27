@@ -59,6 +59,9 @@
         <widget class="RatesControlWidget" name="ratesControlWidget" native="true"/>
        </item>
        <item>
+        <widget class="PrintProgressWidget" name="printProgressWidget" native="true"/>
+       </item>
+       <item>
         <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -128,6 +131,12 @@
    <class>RatesControlWidget</class>
    <extends>QWidget</extends>
    <header>widgets/ratescontrolwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>PrintProgressWidget</class>
+   <extends>QWidget</extends>
+   <header>widgets/printprogresswidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
