@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>0</width>
-    <height>0</height>
+    <width>513</width>
+    <height>376</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,20 +15,55 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="1" column="1">
-     <widget class="PlotWidget" name="plotWidget" native="true"/>
+    <item row="0" column="0">
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="threeDWidget">
+       <attribute name="title">
+        <string>3DView</string>
+       </attribute>
+      </widget>
+      <widget class="GCodeEditorWidget" name="gcodeEditorWidget">
+       <attribute name="title">
+        <string>GCode Editor</string>
+       </attribute>
+      </widget>
+      <widget class="PlotWidget" name="plotWidget">
+       <attribute name="title">
+        <string>Temperatures Graphs</string>
+       </attribute>
+      </widget>
+     </widget>
     </item>
-    <item row="1" column="2">
-     <widget class="PrinterHotendPositionVisualController" name="printerHostAxisControlWidget"/>
-    </item>
-    <item row="2" column="2">
-     <widget class="BedExtruderWidget" name="bedExtWidget" native="true"/>
-    </item>
-    <item row="1" column="0" rowspan="2">
-     <widget class="GCodeEditorWidget" name="gcodeEditorWidget" native="true"/>
-    </item>
-    <item row="0" column="2">
-     <widget class="PushGCodeWidget" name="pushGCodeWidget" native="true"/>
+    <item row="0" column="1">
+     <widget class="QGroupBox" name="groupBox">
+      <property name="title">
+       <string>Controls</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="PushGCodeWidget" name="pushGCodeWidget" native="true"/>
+       </item>
+       <item>
+        <widget class="BedExtruderWidget" name="bedExtWidget" native="true"/>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -37,7 +72,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>128</width>
+     <width>513</width>
      <height>30</height>
     </rect>
    </property>
@@ -57,26 +92,21 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>GCodeEditorWidget</class>
-   <extends>QWidget</extends>
-   <header>widgets/gcodeeditorwidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>BedExtruderWidget</class>
    <extends>QWidget</extends>
    <header>widgets/bedextruderwidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>PrinterHotendPositionVisualController</class>
-   <extends>QGraphicsView</extends>
-   <header>widgets/printerhostpositionvisualcontroller.cpp</header>
+   <class>GCodeEditorWidget</class>
+   <extends>QWidget</extends>
+   <header>widgets/gcodeeditorwidget.h</header>
+   <container>1</container>
   </customwidget>
   <customwidget>
    <class>PlotWidget</class>
    <extends>QWidget</extends>
-   <header location="global">widgets/plotwidget.h</header>
+   <header>widgets/plotwidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>

@@ -92,9 +92,7 @@ void MainWindow::initLocalVariables()
 void MainWindow::initWidgets()
 {
     ui->bedExtWidget->setEnabled(false);
-    ui->gcodeEditorWidget->setVisible(false);
-    ui->plotWidget->setVisible(false);
-    ui->pushGCodeWidget->setVisible(false);
+    ui->pushGCodeWidget->setEnabled(false);
 }
 
 void MainWindow::setupActions()
@@ -206,6 +204,7 @@ void MainWindow::handlePrinterStatusChanged(PrinterState newState)
     }
     case PrinterState::IDLE: {
         ui->bedExtWidget->setEnabled(true);
+        ui->pushGCodeWidget->setEnabled(true);
         emit extruderCountChanged(core.extruderCount());
         logDialog->addLog(i18n("Serial connected"));
         _connect->setText(i18n("&Disconnect"));
