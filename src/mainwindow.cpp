@@ -82,6 +82,11 @@ void MainWindow::initConnectsToAtCore()
         logDialog->addLog("Push " + command);
         core.pushCommand(command);
     });
+
+    connect(ui->ratesControlWidget, &RatesControlWidget::fanSpeedChanged, &core, &AtCore::setFanSpeed);
+    connect(ui->ratesControlWidget, &RatesControlWidget::flowRateChanged, &core, &AtCore::setFlowRate);
+    connect(ui->ratesControlWidget, &RatesControlWidget::printSpeedChanged, &core, &AtCore::setPrinterSpeed);
+
 }
 
 void MainWindow::initLocalVariables()
