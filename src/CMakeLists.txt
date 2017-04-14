@@ -11,4 +11,4 @@ add_executable(atelier ${atelier_SRCS})
 
 target_link_libraries(atelier AtelierWidgets AtelierDialogs KF5::AtCore KF5::Solid KF5::XmlGui KF5::ConfigWidgets)
 
-install(TARGETS atelier ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS atelier RUNTIME DESTINATION bin)

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Atelier
+GenericName=3D Printer Host
+Exec=atelier
+Icon=atelier.png
+Encoding=UTF-8
+Categories=KDE;Utility;
+StartupNotify=true
+Terminal=false
+Type=Application
+

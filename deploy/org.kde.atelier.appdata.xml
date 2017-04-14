@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component type="desktop">
+  <id>org.kde.atelier.desktop</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license> GPL-3.0</project_license>
+  <name>Atelier</name>
+  <summary> 3D Printing Host </summary>
+  <description>
+      <p> Kde 3D Printer Host</p>
+  </description>
+  <url type="homepage">https://www.kde.org</url>
+  <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=Atelier</url>
+  <url type="donation">https://www.kde.org/community/donations/?app=atelier</url>
+  <screenshots>
+    <screenshot type="default">
+      <image>
+        see https://www.freedesktop.org/software/appstream/docs/chap-Metadata.html#tag-screenshots
+        Central hosting for uploading at https://phabricator.kde.org/source/websites-product-screenshots/
+        Central URL to use here https://cdn.kde.org/screenshots/...
+      </image>
+    </screenshot>
+  </screenshots>
+  <provides>
+    <binary>atelier</binary>
+  </provides>
+  <project_group>KDE</project_group>
+</component>
