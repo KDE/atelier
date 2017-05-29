@@ -92,6 +92,7 @@ void MainWindow::initConnectsToAtCore()
 void MainWindow::initLocalVariables()
 {
     firmwaresList = core.availablePlugins();
+    generalSettingsDialog->setBaudRates(core.serial()->validBaudRates());
 }
 
 void MainWindow::initWidgets()
