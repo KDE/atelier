@@ -2,7 +2,7 @@
 Name=Atelier
 GenericName=3D Printer Host
 Exec=atelier
-Icon=atelier.png
+Icon=atelier
 Encoding=UTF-8
 Categories=KDE;Utility;
 StartupNotify=true
