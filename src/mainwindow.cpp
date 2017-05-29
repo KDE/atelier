@@ -99,6 +99,7 @@ void MainWindow::initWidgets()
 {
     ui->groupBox->setEnabled(false);
     ui->printProgressWidget->setVisible(false);
+    ui->gcodeDockWidget->setVisible(false);
 }
 
 void MainWindow::setupActions()
@@ -140,18 +141,32 @@ void MainWindow::setupActions()
     connect(action, &QAction::triggered, this, &MainWindow::stopPrint);
 
     action = actionCollection()->addAction(QStringLiteral("edit_gcode"));
-    action->setText(i18n("&Edit GCode"));
-    connect(action, &QAction::triggered, this, [ = ] {
-        ui->gcodeEditorWidget->setVisible(!ui->gcodeEditorWidget->isVisible());
-        if (ui->gcodeEditorWidget->isVisible())
-        {
+    action->setText(i18n("&GCode"));
+    action->setCheckable(true);
+    connect(action, &QAction::toggled, this, [ = ](bool checked) {
+        if (checked) {
             guiFactory()->addClient(ui->gcodeEditorWidget->gcodeView());
-        } else
-        {
+        }
+        else{
             guiFactory()->removeClient(ui->gcodeEditorWidget->gcodeView());
         }
     });
+    /*For some ODD reason if you put the code bellow on the above connect
+    this dont work properly*/
+    connect(action, &QAction::toggled, this, [ = ](bool checked){
+        ui->gcodeDockWidget->setVisible(checked);
+    });
 
+    connect(ui->gcodeDockWidget, &QDockWidget::visibilityChanged, [ = ](bool status){
+        if (status) {
+            guiFactory()->addClient(ui->gcodeEditorWidget->gcodeView());
+        }
+        else{
+            guiFactory()->removeClient(ui->gcodeEditorWidget->gcodeView());
+        }
+        // Update the Edit -> GCode checkable item
+        action->setChecked(status);
+    });
     action = KStandardAction::quit(qApp, SLOT(quit()), actionCollection());
 
     action = actionCollection()->addAction(QStringLiteral("plot"));

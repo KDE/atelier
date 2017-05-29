@@ -31,11 +31,6 @@
         <string>3DView</string>
        </attribute>
       </widget>
-      <widget class="GCodeEditorWidget" name="gcodeEditorWidget">
-       <attribute name="title">
-        <string>GCode Editor</string>
-       </attribute>
-      </widget>
       <widget class="PlotWidget" name="plotWidget">
        <attribute name="title">
         <string>Temperatures Graphs</string>
@@ -100,6 +95,15 @@
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
+  </widget>
+  <widget class="QDockWidget" name="gcodeDockWidget">
+   <property name="windowTitle">
+    <string>&amp;GCodeEditor</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="GCodeEditorWidget" name="gcodeEditorWidget"/>
   </widget>
  </widget>
  <customwidgets>
