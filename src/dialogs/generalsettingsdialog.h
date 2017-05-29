@@ -31,12 +31,15 @@ class GeneralSettingsDialog : public QDialog
 
 public:
     explicit GeneralSettingsDialog(QWidget *parent = nullptr);
+    void setBaudRates(const QStringList &list);
     ~GeneralSettingsDialog();
 
 private:
     Ui::GeneralSettingsDialog *ui;
     void saveSettings();
-    void loadSettings(QString currentProfile);
+    void loadSettings(const QString &currentProfile = QString());
     QSettings settings;
+    void updateCBProfiles();
+    void accept();
 };
 

@@ -25,19 +25,45 @@ GeneralSettingsDialog::GeneralSettingsDialog(QWidget *parent) :
     ui(new Ui::GeneralSettingsDialog)
 {
     ui->setupUi(this);
-    connect(ui->buttonBox, &QDialogButtonBox::accepted, this, &GeneralSettingsDialog::saveSettings);
 
-    settings.beginGroup(i18n("GeneralSettings"));
-    QStringList groups = settings.childGroups();
-    settings.endGroup();
+    ui->profileCB->setAutoCompletion(true);
+    connect(ui->profileCB, static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged), [ = ] {
+        loadSettings();
+    });
+    updateCBProfiles();
 
-    ui->profileCB->addItems(groups);
-    loadSettings(ui->profileCB->currentText());
-    connect(ui->profileCB, &QComboBox::editTextChanged, this, &GeneralSettingsDialog::loadSettings);
+    connect(ui->buttonBox, &QDialogButtonBox::clicked, [ = ](QAbstractButton * btn) {
+        switch (ui->buttonBox->buttonRole(btn)) {
+        case QDialogButtonBox::ResetRole:
+            loadSettings();
+            break;
+        case QDialogButtonBox::RejectRole:
+                close();
+            break;
+        default:
+            break;
+        }
+    });
 
     connect(ui->heatedBedCK, &QCheckBox::clicked, [ = ](const bool & status) {
-        ui->bedTempLE->setEnabled(status);
+        ui->bedTempSB->setEnabled(status);
     });
+
+    connect(ui->cartesianRB, &QRadioButton::clicked, [ = ]() {
+        ui->cartesianGB->setHidden(false);
+        ui->deltaGB->setHidden(true);
+    });
+
+    connect(ui->deltaRB, &QRadioButton::clicked, [ = ]() {
+        ui->cartesianGB->setHidden(true);
+        ui->deltaGB->setHidden(false);
+    });
+}
+
+void GeneralSettingsDialog::setBaudRates(const QStringList &list)
+{
+    ui->baudCB->addItems(list);
+    ui->baudCB->setCurrentText(QLatin1String("115200"));
 }
 
 GeneralSettingsDialog::~GeneralSettingsDialog()
@@ -47,53 +73,99 @@ GeneralSettingsDialog::~GeneralSettingsDialog()
 
 void GeneralSettingsDialog::saveSettings()
 {
-    settings.beginGroup(i18n("GeneralSettings"));
+    settings.beginGroup(QStringLiteral("GeneralSettings"));
     QStringList groups = settings.childGroups();
     settings.endGroup();
     QString currentProfile = ui->profileCB->currentText();
     if (groups.contains(currentProfile)) {
-        QMessageBox msgBox;
-        msgBox.setText(i18n("The settings has been modified."));
-        msgBox.setInformativeText(i18n("Do you want to save your changes?"));
-        msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Cancel);
-        int ret = msgBox.exec();
+        int ret = QMessageBox::information(this, i18n("Save?"),
+                                           i18n("The settings has been modified. \n Do you want to save your changes?"),
+                                           QMessageBox::Save, QMessageBox::Cancel);
         if (ret == QMessageBox::Cancel) {
             return;
         }
     }
     //Add indent to better view of the data
-    settings.beginGroup(QLatin1String("GeneralSettings"));
+    settings.beginGroup(QStringLiteral("GeneralSettings"));
     settings.beginGroup(currentProfile);
     //BED
-    settings.setValue(QLatin1String("dimensionX"), ui->x_dimensionLE->text());
-    settings.setValue(QLatin1String("dimensionY"), ui->y_dimensionLE->text());
-    settings.setValue(QLatin1String("dimensionZ"), ui->z_dimensionLE->text());
-    settings.setValue(QLatin1String("heatedBed"), ui->heatedBedCK->isChecked());
-    settings.setValue(QLatin1String("temperatureBed"), ui->bedTempLE->text());
+    if (ui->cartesianRB->isChecked()) {
+        settings.setValue(QStringLiteral("isCartesian"), true);
+        settings.setValue(QStringLiteral("dimensionX"), ui->x_dimensionSB->value());
+        settings.setValue(QStringLiteral("dimensionY"), ui->y_dimensionSB->value());
+        settings.setValue(QStringLiteral("dimensionZ"), ui->z_dimensionSB->value());
+    }
+    else {
+        settings.setValue(QStringLiteral("isCartesian"), false);
+        settings.setValue(QStringLiteral("radius"), ui->radiusSB->value());
+        settings.setValue(QStringLiteral("z_delta_dimension"), ui->z_dimensionSB->value());
+    }
+
+    settings.setValue(QStringLiteral("heatedBed"), ui->heatedBedCK->isChecked());
+    settings.setValue(QStringLiteral("temperatureBed"), ui->bedTempSB->value());
     //HOTEND
-    settings.setValue(QLatin1String("nozzleSize"), ui->nozzleSizeLE->text());
-    settings.setValue(QLatin1String("temperatureExtruder"), ui->extruderTempLE->text());
-    settings.setValue(QLatin1String("maxTemperatureExtruder"), ui->extruderMaxTempLE->text());
+    settings.setValue(QStringLiteral("temperatureExtruder"), ui->extruderTempSB->value());
+    //Baud
+    settings.setValue(QStringLiteral("bps"), ui->baudCB->currentText());
     settings.endGroup();
     settings.endGroup();
-    return; //TODO Add something to alert the user that the settings where saved
+
+    //Load new profile
+    updateCBProfiles();
+    loadSettings(currentProfile);
 }
 
-void GeneralSettingsDialog::loadSettings(QString currentProfile)
+void GeneralSettingsDialog::loadSettings(const QString &currentProfile)
 {
-    settings.beginGroup(QLatin1String("GeneralSettings"));
-    settings.beginGroup(currentProfile);
+    settings.beginGroup(QStringLiteral("GeneralSettings"));
+    const QString profileName = currentProfile.isEmpty() ? ui->profileCB ->currentText() : currentProfile;
+    ui->profileCB->setCurrentText(profileName);
+    settings.beginGroup(profileName);
+
     //BED
-    ui->x_dimensionLE->setText(settings.value(QLatin1String("dimensionX"), QLatin1String("200")).toString());
-    ui->y_dimensionLE->setText(settings.value(QLatin1String("dimensionY"), QLatin1String("200")).toString());
-    ui->z_dimensionLE->setText(settings.value(QLatin1String("dimensionZ"), QLatin1String("200")).toString());
-    ui->heatedBedCK->setChecked(settings.value(QLatin1String("heatedBed"), QLatin1String("200")).toBool());
-    ui->bedTempLE->setText(settings.value(QLatin1String("temperatureBed"), QLatin1String("0")).toString());
+    if (settings.value(QStringLiteral("isCartesian")).toBool()) {
+        ui->cartesianGB->setHidden(false);
+        ui->cartesianRB->setChecked(true);
+        ui->deltaRB->setChecked(false);
+        ui->deltaGB->setHidden(true);
+        ui->x_dimensionSB->setValue(settings.value(QStringLiteral("dimensionX"), QStringLiteral("0")).toInt());
+        ui->y_dimensionSB->setValue(settings.value(QStringLiteral("dimensionY"), QStringLiteral("0")).toInt());
+        ui->z_dimensionSB->setValue(settings.value(QStringLiteral("dimensionZ"), QStringLiteral("0")).toInt());
+    } else {
+        ui->deltaGB->setHidden(false);
+        ui->deltaRB->setChecked(true);
+        ui->cartesianRB->setChecked(false);
+        ui->cartesianGB->setHidden(true);
+        ui->radiusSB->setValue(settings.value(QStringLiteral("radius"), QStringLiteral("0")).toFloat());
+        ui->z_delta_dimensionSB->setValue(settings.value(QStringLiteral("z_delta_dimension"), QStringLiteral("0")).toFloat());
+    }
+
+    ui->heatedBedCK->setChecked(settings.value(QStringLiteral("heatedBed"), QStringLiteral("true")).toBool());
+    ui->bedTempSB->setEnabled(ui->heatedBedCK->isChecked());
+    ui->bedTempSB->setValue(settings.value(QStringLiteral("temperatureBed"), QStringLiteral("0")).toFloat());
+
     //HOTEND
-    ui->nozzleSizeLE->setText(settings.value(QLatin1String("nozzleSize"), QLatin1String("0.4")).toString());
-    ui->extruderTempLE->setText(settings.value(QLatin1String("temperatureExtruder"), QLatin1String("0")).toString());
-    ui->extruderMaxTempLE->setText(settings.value(QLatin1String("maxTemperatureExtruder"), QLatin1String("250")).toString());
+    ui->extruderTempSB->setValue(settings.value(QStringLiteral("temperatureExtruder"), QStringLiteral("0.0")).toFloat());
+    //Baud
+    ui->baudCB->setCurrentText(settings.value(QStringLiteral("bps"), QStringLiteral("115200")).toString());
     settings.endGroup();
     settings.endGroup();
 
+}
+
+void GeneralSettingsDialog::updateCBProfiles()
+{
+    settings.beginGroup(QStringLiteral("GeneralSettings"));
+    QStringList groups = settings.childGroups();
+    settings.endGroup();
+    if (groups.isEmpty()) {
+        ui->deltaGB->setHidden(true);
+    }
+    ui->profileCB->clear();
+    ui->profileCB->addItems(groups);
+}
+
+void GeneralSettingsDialog::accept()
+{
+    saveSettings();
 }
