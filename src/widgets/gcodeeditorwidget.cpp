@@ -28,8 +28,6 @@ GCodeEditorWidget::GCodeEditorWidget(QWidget *parent) :
     doc->setMode("G-Code");
     view = doc->createView(this);
     QVBoxLayout *layout = new QVBoxLayout();
-    QLabel *lb = new QLabel(i18n("G-Code Editor"));
-    layout->addWidget(lb);
     layout->addWidget(view);
     this->setLayout(layout);
     setupInterface();
