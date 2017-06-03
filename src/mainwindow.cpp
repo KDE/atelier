@@ -206,7 +206,7 @@ void MainWindow::handlePrinterStatusChanged(PrinterState newState)
     case PrinterState::CONNECTING: {
         connect(core.serial(), &SerialLayer::receivedCommand, this, &MainWindow::checkReceivedCommand);
         connect(core.serial(), &SerialLayer::pushedCommand, this, &MainWindow::checkPushedCommands);
-    }
+    } break;
     case PrinterState::IDLE: {
         ui->groupBox->setEnabled(true);
         emit extruderCountChanged(core.extruderCount());
