@@ -1,4 +1,5 @@
 #include "pushgcodewidget.h"
+#include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QPushButton>
@@ -7,12 +8,16 @@
 PushGCodeWidget::PushGCodeWidget(QWidget *parent) : QWidget(parent),
     input(new QLineEdit(this))
 {
-    QHBoxLayout *layout = new QHBoxLayout();
+    QVBoxLayout *layout = new QVBoxLayout();
+    QHBoxLayout *items = new QHBoxLayout();
     QLabel *lb = new QLabel(i18n("Push Gcode"));
+    lb->setAlignment(Qt::AlignHCenter);
     QPushButton *bt = new QPushButton(i18n("Send"));
+    items->setSpacing(3);
     layout->addWidget(lb);
-    layout->addWidget(input);
-    layout->addWidget(bt);
+    items->addWidget(input);
+    items->addWidget(bt);
+    layout->addItem(items);
     this->setLayout(layout);
 
     connect(bt, &QPushButton::clicked, [ = ] {
