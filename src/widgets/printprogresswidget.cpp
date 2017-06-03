@@ -9,8 +9,6 @@ PrintProgressWidget::PrintProgressWidget(QWidget *parent) :
 {
     QVBoxLayout *layout = new QVBoxLayout();
     progressbar->setValue(0);
-    QLabel *lb = new QLabel(i18n("Print Progress"));
-    layout->addWidget(lb);
     layout->addWidget(progressbar);
     this->setLayout(layout);
 }
