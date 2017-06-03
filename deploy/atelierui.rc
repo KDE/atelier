@@ -5,26 +5,33 @@
      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
      xsi:schemaLocation="http://www.kde.org/standards/kxmlgui/1.0
                          http://www.kde.org/standards/kxmlgui/1.0/kxmlgui.xsd" >
- 
+
     <MenuBar>
         <Menu name="file" >
             <Action name="open_gcode"/>
             <Action name="quit" />
         </Menu>
-        <Menu name="edit">
-            <Action name="edit_gcode"/>
-        </Menu>
         <Menu name="view">
+            <Action name="gcode"/>
+            <Action name="toolbox"/>
             <Action name="plot"/>
             <Action name="log"/>
-            <Action name="push"/>
+        </Menu>
+        <Menu name="run">
+            <text>Run</text>
+            <Action name="connect"/>
+            <Action name="print"/>
+            <Action name="pause"/>
+            <Action name="stop"/>
+        </Menu>
+        <Menu name="settings">
+            <Action name="profiles"/>
         </Menu>
     </MenuBar>
- 
+
     <ToolBar name="mainToolBar" >
-        <text>Main Toolbar</text>
         <Action name="open_gcode"/>
-        <Action name="settings"/>
+        <Action name="profiles"/>
         <Action name="connect"/>
         <Action name="disconnect"/>
         <Separator/>
