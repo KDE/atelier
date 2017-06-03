@@ -31,7 +31,9 @@ class ConnectSettingsDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit ConnectSettingsDialog(QStringList firmwaresList, QWidget *parent = nullptr);
+    explicit ConnectSettingsDialog(QWidget *parent = nullptr);
+    void updateProfiles();
+    void setFirmwareList(const QStringList fw);
     ~ConnectSettingsDialog();
 
 private:
@@ -39,11 +41,11 @@ private:
     void locateSerialPort();
     QStringList serialPortList;
     Solid::DeviceNotifier *deviceNotifier;
-    void initFirmwareComboBox(QStringList fw);
-    void initBaudRateComboBox();
-    void initProfileComboBox();
     QSettings settings;
+    QMap<QString, QVariant> profileData();
+    void accept();
 
 signals:
-    void _connect(QString port, int baud);
+    void startConnection(const QString port, const QMap<QString, QVariant> data);
+    void setConnectValue(bool b);
 };

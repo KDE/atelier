@@ -20,8 +20,9 @@
 #include <QSerialPortInfo>
 #include <QMessageBox>
 #include <KLocalizedString>
+#include <QCloseEvent>
 
-ConnectSettingsDialog::ConnectSettingsDialog(QStringList firmwaresList, QWidget *parent) :
+ConnectSettingsDialog::ConnectSettingsDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ConnectSettingsDialog),
     deviceNotifier(Solid::DeviceNotifier::instance())
@@ -31,28 +32,14 @@ ConnectSettingsDialog::ConnectSettingsDialog(QStringList firmwaresList, QWidget 
     connect(deviceNotifier, &Solid::DeviceNotifier::deviceRemoved, this, &ConnectSettingsDialog::locateSerialPort);
     locateSerialPort();
 
-    connect(ui->buttonBox, &QDialogButtonBox::accepted, [ = ] {
-        if (ui->profileCB->currentText().isEmpty())
-        {
-            QMessageBox msg;
-            msg.setText(i18n("Please, create a profile to connect on Settings!"));
-            msg.setIcon(QMessageBox::Information);
-            msg.exec();
-        } else if (!ui->serialPortCB->currentText().isEmpty())
-        {
-            emit _connect(ui->serialPortCB->currentText(), ui->baudCB->currentText().toInt());
-        } else
-        {
-            QMessageBox msg;
-            msg.setText(i18n("Please, connect a serial device to continue!"));
-            msg.setIcon(QMessageBox::Information);
-            msg.exec();
+    connect(ui->buttonBox, &QDialogButtonBox::clicked, [ = ](QAbstractButton * btn) {
+        if (ui->buttonBox->buttonRole(btn) == QDialogButtonBox::RejectRole) {
+            close();
+            emit setConnectValue(false);
         }
-
     });
-    initBaudRateComboBox();
-    initFirmwareComboBox(firmwaresList);
-    initProfileComboBox();
+
+    updateProfiles();
 }
 
 ConnectSettingsDialog::~ConnectSettingsDialog()
@@ -82,25 +69,45 @@ void ConnectSettingsDialog::locateSerialPort()
     }
 }
 
-void ConnectSettingsDialog::initFirmwareComboBox(QStringList fw)
+void ConnectSettingsDialog::updateProfiles()
+{
+    settings.beginGroup("GeneralSettings");
+    QStringList groups = settings.childGroups();
+    settings.endGroup();
+    ui->profileCB->clear();
+    ui->profileCB->addItems(groups);
+}
+
+void ConnectSettingsDialog::setFirmwareList(QStringList fw)
 {
     fw.prepend(i18n("Auto-Detect"));
+    ui->firmwareCB->clear();
     ui->firmwareCB->addItems(fw);
 }
 
-void ConnectSettingsDialog::initBaudRateComboBox()
+QMap<QString, QVariant> ConnectSettingsDialog::profileData()
 {
-    QStringList br;
-    br.append("115200");
-    br.append("250000");
-    ui->baudCB->addItems(br);
+    settings.beginGroup("GeneralSettings");
+    settings.beginGroup(ui->profileCB->currentText());
+    QMap<QString, QVariant> data;
+    data["bps"] = settings.value(QStringLiteral("bps"), QStringLiteral("115200"));
+    data["bedTemp"] = settings.value(QStringLiteral("temperatureBed"), QStringLiteral("0"));
+    data["hotendTemp"] = settings.value(QStringLiteral("temperatureExtrude"), QStringLiteral("0"));
+    settings.endGroup();
+    settings.endGroup();
+    return data;
 }
 
-void ConnectSettingsDialog::initProfileComboBox()
+void ConnectSettingsDialog::accept()
 {
-
-    settings.beginGroup(i18n("GeneralSettings"));
-    QStringList groups = settings.childGroups();
-    settings.endGroup();
-    ui->profileCB->addItems(groups);
+    if (ui->profileCB->currentText().isEmpty()) {
+        QMessageBox::warning(this, i18n("Warning"), i18n("Please, create a profile to connect on Settings!"));
+        emit setConnectValue(false);
+    } else if (ui->serialPortCB->currentText().isEmpty()) {
+        QMessageBox::warning(this, i18n("Warning"), i18n("Please, connect a serial device to continue!"));
+        emit setConnectValue(false);
+    } else {
+        emit startConnection(ui->serialPortCB->currentText(), profileData());
+        this->close();
+    }
 }
