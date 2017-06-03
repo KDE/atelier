@@ -41,5 +41,7 @@ private:
     QSettings settings;
     void updateCBProfiles();
     void accept();
+signals:
+    void updateProfiles();
 };
 

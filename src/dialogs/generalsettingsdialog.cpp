@@ -113,6 +113,7 @@ void GeneralSettingsDialog::saveSettings()
     //Load new profile
     updateCBProfiles();
     loadSettings(currentProfile);
+    emit updateProfiles();
 }
 
 void GeneralSettingsDialog::loadSettings(const QString &currentProfile)
