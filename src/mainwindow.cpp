@@ -29,14 +29,13 @@ MainWindow::MainWindow(QWidget *parent) :
     KXmlGuiWindow(parent),
     ui(new Ui::MainWindow),
     generalSettingsDialog(new GeneralSettingsDialog(this)),
-    connectSettingsDialog(new ConnectSettingsDialog(firmwaresList, this)),
+    connectSettingsDialog(new ConnectSettingsDialog(this)),
     logDialog(new LogDialog(this))
 {
     ui->setupUi(this);
     setupActions();
     initConnectsToAtCore();
     initLocalVariables();
-    connect(connectSettingsDialog, &ConnectSettingsDialog::_connect, &core, &AtCore::initSerial);
     initWidgets();
 }
 
