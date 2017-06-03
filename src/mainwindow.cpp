@@ -35,7 +35,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     setupActions();
     initConnectsToAtCore();
-    initLocalVariables();
     initWidgets();
 }
 
@@ -46,12 +45,22 @@ MainWindow::~MainWindow()
 
 void MainWindow::initConnectsToAtCore()
 {
+    // Start Connection to the 3DPrinter
+    connect(connectSettingsDialog, &ConnectSettingsDialog::startConnection, [ = ](QString port, QMap<QString, QVariant> data) {
+        core.initSerial(port, data["bps"].toInt());
+    });
+
+    // Handle AtCore status change
     connect(&core, &AtCore::stateChanged, this, &MainWindow::handlePrinterStatusChanged);
+
+    // If the number of extruders from the printer change, we need to update the radiobuttons on the widget
     connect(this, &MainWindow::extruderCountChanged, ui->bedExtWidget, &BedExtruderWidget::setExtruderCount);
+
+    // Bed and Extruder temperatures management
     connect(ui->bedExtWidget, &BedExtruderWidget::bedTemperatureChanged, &core, &AtCore::setBedTemp);
     connect(ui->bedExtWidget, &BedExtruderWidget::extTemperatureChanged, &core, &AtCore::setExtruderTemp);
 
-    //Connects for Plot
+    // Connect AtCore temperatures changes on Atelier Plot
     connect(&core.temperature(), &Temperature::bedTemperatureChanged, [ = ](float temp) {
         checkTemperature(0x00, 0, temp);
         ui->plotWidget->appendPoint(i18n("Actual Bed"), temp);
@@ -82,28 +91,32 @@ void MainWindow::initConnectsToAtCore()
         core.pushCommand(command);
     });
 
+    // Fan, Flow and Speed management
     connect(ui->ratesControlWidget, &RatesControlWidget::fanSpeedChanged, &core, &AtCore::setFanSpeed);
     connect(ui->ratesControlWidget, &RatesControlWidget::flowRateChanged, &core, &AtCore::setFlowRate);
     connect(ui->ratesControlWidget, &RatesControlWidget::printSpeedChanged, &core, &AtCore::setPrinterSpeed);
 
 }
 
-void MainWindow::initLocalVariables()
-{
-    firmwaresList = core.availablePlugins();
-    generalSettingsDialog->setBaudRates(core.serial()->validBaudRates());
-}
-
 void MainWindow::initWidgets()
 {
-    ui->groupBox->setEnabled(false);
-    ui->printProgressWidget->setVisible(false);
-    ui->gcodeDockWidget->setVisible(false);
+    // Disable Toolbox to prevent the user to mess up without a printer being connected
+    ui->toolboxTabWidget->setDisabled(true);
+
+    // This dock is of Printing Progress. It only need to be show while printing
+    ui->printProgressDockWidget->setVisible(false);
+
+    // When a new profile is added on the Profile Dialog it needs to update the profiles on connection dialog
+    connect(generalSettingsDialog, &GeneralSettingsDialog::updateProfiles,
+            connectSettingsDialog, &ConnectSettingsDialog::updateProfiles);
+
+    connectSettingsDialog->setFirmwareList(core.availablePlugins());
+    generalSettingsDialog->setBaudRates(core.serial()->validBaudRates());
 }
 
 void MainWindow::setupActions()
 {
-    //Toolbar Actions
+    // Actions for the Toolbar
     QAction *action;
     action = actionCollection()->addAction(QStringLiteral("open_gcode"));
     action->setIcon(QIcon::fromTheme("open"));
@@ -113,15 +126,18 @@ void MainWindow::setupActions()
     _connect = actionCollection()->addAction(QStringLiteral("connect"));
     _connect->setText(i18n("&Connect"));
     _connect->setCheckable(true);
-    connect(_connect, &QAction::toggled, [ = ](bool clicked) {
-        if (clicked) {
+    connect(_connect, &QAction::toggled, [ = ](bool checked) {
+        if (checked) {
             connectSettingsDialog->show();
         } else {
+            core.closeConnection();
             _connect->setText(i18n("&Connect"));
             ui->bedExtWidget->stopHeating();
             core.setState(PrinterState::DISCONNECTED);
         }
     });
+
+    connect(connectSettingsDialog, &ConnectSettingsDialog::setConnectValue, _connect, &QAction::setChecked);
 
     action = actionCollection()->addAction(QStringLiteral("settings"));
     action->setText(i18n("&Settings"));
@@ -139,50 +155,39 @@ void MainWindow::setupActions()
     action->setText(i18n("&Stop"));
     connect(action, &QAction::triggered, this, &MainWindow::stopPrint);
 
-    action = actionCollection()->addAction(QStringLiteral("edit_gcode"));
-    action->setText(i18n("&GCode"));
-    action->setCheckable(true);
-    connect(action, &QAction::toggled, this, [ = ](bool checked) {
-        if (checked) {
-            guiFactory()->addClient(ui->gcodeEditorWidget->gcodeView());
-        }
-        else{
-            guiFactory()->removeClient(ui->gcodeEditorWidget->gcodeView());
-        }
-    });
-    /*For some ODD reason if you put the code bellow on the above connect
-    this dont work properly*/
-    connect(action, &QAction::toggled, this, [ = ](bool checked){
-        ui->gcodeDockWidget->setVisible(checked);
-    });
+    // Actions for the Docks
 
-    connect(ui->gcodeDockWidget, &QDockWidget::visibilityChanged, [ = ](bool status){
+    action = actionCollection()->addAction(QStringLiteral("gcode"), ui->gcodeDockWidget->toggleViewAction());
+    action->setText(i18n("&GCode"));
+    /*
+     * Known BUG:
+     * If you try to move the dock, the else on this connect
+     * will enter in infinite loop until the program
+     * crashes.
+     * I have no idea why this happens. =/
+    */
+    connect(action, &QAction::toggled, [ = ](bool status) {
         if (status) {
             guiFactory()->addClient(ui->gcodeEditorWidget->gcodeView());
-        }
-        else{
+        } else {
             guiFactory()->removeClient(ui->gcodeEditorWidget->gcodeView());
         }
-        // Update the Edit -> GCode checkable item
-        action->setChecked(status);
     });
+
     action = KStandardAction::quit(qApp, SLOT(quit()), actionCollection());
 
-    action = actionCollection()->addAction(QStringLiteral("plot"));
-    action->setText(i18n("Temperature Plot"));
-    connect(action, &QAction::triggered, [ = ] {
-        ui->plotWidget->setVisible(!ui->plotWidget->isVisible());
-    });
+    // Plot
+    action = actionCollection()->addAction(QStringLiteral("plot"), ui->plotDockWidget->toggleViewAction());
+    action->setText(i18n("Temperature Timeline"));
 
+    // Toolbox
+    action = actionCollection()->addAction(QStringLiteral("toolbox"), ui->toolboxDockWidget->toggleViewAction());
+    action->setText(i18n("Toolbox"));
+
+    // Actions for the Dialogs
     action = actionCollection()->addAction(QStringLiteral("log"));
     action->setText(i18n("Log Dialog"));
     connect(action, &QAction::triggered, logDialog, &LogDialog::show);
-
-    action = actionCollection()->addAction(QStringLiteral("push"));
-    action->setText(i18n("Push Commands"));
-    connect(action, &QAction::triggered, [ = ] {
-        ui->pushGCodeWidget->setVisible(!ui->pushGCodeWidget->isVisible());
-    });
 
     setupGUI(Default, "atelierui.rc");
 }
@@ -194,6 +199,7 @@ void MainWindow::openFile()
     if (!fileNameFromDialog.isEmpty()) {
         fileName = fileNameFromDialog;
         ui->gcodeEditorWidget->loadFile(fileName);
+        guiFactory()->addClient(ui->gcodeEditorWidget->gcodeView());
     }
 }
 
@@ -223,24 +229,24 @@ void MainWindow::handlePrinterStatusChanged(PrinterState newState)
         connect(core.serial(), &SerialLayer::pushedCommand, this, &MainWindow::checkPushedCommands);
     } break;
     case PrinterState::IDLE: {
-        ui->groupBox->setEnabled(true);
+        ui->toolboxTabWidget->setEnabled(true);
         emit extruderCountChanged(core.extruderCount());
         logDialog->addLog(i18n("Serial connected"));
         _connect->setText(i18n("&Disconnect"));
     } break;
     case PrinterState::DISCONNECTED: {
-        ui->bedExtWidget->setEnabled(false);
+        ui->toolboxTabWidget->setEnabled(false);
         disconnect(core.serial(), &SerialLayer::receivedCommand, this, &MainWindow::checkReceivedCommand);
         disconnect(core.serial(), &SerialLayer::pushedCommand, this, &MainWindow::checkPushedCommands);
         logDialog->addLog(i18n("Serial disconnected"));
 
     } break;
     case PrinterState::STARTPRINT: {
-        ui->printProgressWidget->setVisible(true);
+        ui->printProgressDockWidget->setVisible(true);
         connect(&core, &AtCore::printProgressChanged, ui->printProgressWidget, &PrintProgressWidget::updateProgressBar);
     } break;
     case PrinterState::FINISHEDPRINT: {
-        ui->printProgressWidget->setVisible(false);
+        ui->printProgressDockWidget->setVisible(false);
         disconnect(&core, &AtCore::printProgressChanged, ui->printProgressWidget, &PrintProgressWidget::updateProgressBar);
     } break;
 

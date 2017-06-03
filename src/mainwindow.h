@@ -48,7 +48,6 @@ private:
     LogDialog *logDialog;
     QAction *_connect;
     void initConnectsToAtCore();
-    void initLocalVariables();
     void initWidgets();
     void setupActions();
     void openFile();

@@ -6,70 +6,33 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>513</width>
-    <height>376</height>
+    <width>635</width>
+    <height>398</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Atelier</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <item>
-     <widget class="QTabWidget" name="tabWidget">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QFrame" name="frame">
+      <property name="frameShape">
+       <enum>QFrame::Box</enum>
       </property>
-      <property name="currentIndex">
-       <number>0</number>
-      </property>
-      <widget class="QWidget" name="threeDWidget">
-       <attribute name="title">
+      <widget class="QLabel" name="label">
+       <property name="geometry">
+        <rect>
+         <x>6</x>
+         <y>6</y>
+         <width>47</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
         <string>3DView</string>
-       </attribute>
+       </property>
       </widget>
-      <widget class="PlotWidget" name="plotWidget">
-       <attribute name="title">
-        <string>Temperatures Graphs</string>
-       </attribute>
-      </widget>
-     </widget>
-    </item>
-    <item>
-     <widget class="QGroupBox" name="groupBox">
-      <property name="title">
-       <string>Controls</string>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <item>
-        <widget class="PushGCodeWidget" name="pushGCodeWidget" native="true"/>
-       </item>
-       <item>
-        <widget class="BedExtruderWidget" name="bedExtWidget" native="true"/>
-       </item>
-       <item>
-        <widget class="RatesControlWidget" name="ratesControlWidget" native="true"/>
-       </item>
-       <item>
-        <widget class="PrintProgressWidget" name="printProgressWidget" native="true"/>
-       </item>
-       <item>
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
      </widget>
     </item>
    </layout>
@@ -79,7 +42,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>513</width>
+     <width>635</width>
      <height>30</height>
     </rect>
    </property>
@@ -98,21 +61,107 @@
   </widget>
   <widget class="QDockWidget" name="gcodeDockWidget">
    <property name="windowTitle">
-    <string>&amp;GCodeEditor</string>
+    <string>Edit &amp;GCode</string>
    </property>
    <attribute name="dockWidgetArea">
     <number>1</number>
    </attribute>
    <widget class="GCodeEditorWidget" name="gcodeEditorWidget"/>
   </widget>
+  <widget class="QDockWidget" name="toolboxDockWidget">
+   <property name="windowTitle">
+    <string>Toolbo&amp;x</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents">
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QTabWidget" name="toolboxTabWidget">
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <widget class="QWidget" name="axisTab">
+        <attribute name="title">
+         <string>Axis</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_5">
+         <item>
+          <widget class="PrinterHotendPositionVisualController" name="axisViewWidget"/>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="controlTab">
+        <attribute name="title">
+         <string>Control</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <item>
+          <widget class="QTabWidget" name="controlTabWidget">
+           <property name="currentIndex">
+            <number>0</number>
+           </property>
+           <widget class="BedExtruderWidget" name="bedExtWidget">
+            <attribute name="title">
+             <string>Temperatures</string>
+            </attribute>
+           </widget>
+           <widget class="QWidget" name="printerAdvanced">
+            <attribute name="title">
+             <string>Advanced</string>
+            </attribute>
+            <layout class="QVBoxLayout" name="verticalLayout_6">
+             <item>
+              <widget class="PushGCodeWidget" name="pushGCodeWidget" native="true"/>
+             </item>
+             <item>
+              <widget class="RatesControlWidget" name="ratesControlWidget" native="true"/>
+             </item>
+             <item>
+              <spacer name="verticalSpacer">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="plotDockWidget">
+   <property name="windowTitle">
+    <string>Te&amp;mperatures Timeline</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="PlotWidget" name="plotWidget"/>
+  </widget>
+  <widget class="QDockWidget" name="printProgressDockWidget">
+   <property name="windowTitle">
+    <string>Pri&amp;nt Progress</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="PrintProgressWidget" name="printProgressWidget"/>
+  </widget>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>BedExtruderWidget</class>
-   <extends>QWidget</extends>
-   <header>widgets/bedextruderwidget.h</header>
-   <container>1</container>
-  </customwidget>
   <customwidget>
    <class>GCodeEditorWidget</class>
    <extends>QWidget</extends>
@@ -126,12 +175,6 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>PushGCodeWidget</class>
-   <extends>QWidget</extends>
-   <header>widgets/pushgcodewidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>RatesControlWidget</class>
    <extends>QWidget</extends>
    <header>widgets/ratescontrolwidget.h</header>
@@ -141,6 +184,23 @@
    <class>PrintProgressWidget</class>
    <extends>QWidget</extends>
    <header>widgets/printprogresswidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>PrinterHotendPositionVisualController</class>
+   <extends>QGraphicsView</extends>
+   <header>widgets/printerhostpositionvisualcontroller.h</header>
+  </customwidget>
+  <customwidget>
+   <class>BedExtruderWidget</class>
+   <extends>QWidget</extends>
+   <header>widgets/bedextruderwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>PushGCodeWidget</class>
+   <extends>QWidget</extends>
+   <header>widgets/pushgcodewidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
