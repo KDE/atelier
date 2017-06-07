@@ -159,20 +159,6 @@ void MainWindow::setupActions()
 
     action = actionCollection()->addAction(QStringLiteral("gcode"), ui->gcodeDockWidget->toggleViewAction());
     action->setText(i18n("&GCode"));
-    /*
-     * Known BUG:
-     * If you try to move the dock, the else on this connect
-     * will enter in infinite loop until the program
-     * crashes.
-     * I have no idea why this happens. =/
-    */
-    connect(action, &QAction::toggled, [ = ](bool status) {
-        if (status) {
-            guiFactory()->addClient(ui->gcodeEditorWidget->gcodeView());
-        } else {
-            guiFactory()->removeClient(ui->gcodeEditorWidget->gcodeView());
-        }
-    });
 
     action = KStandardAction::quit(qApp, SLOT(quit()), actionCollection());
 
