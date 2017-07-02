@@ -119,7 +119,7 @@ void MainWindow::setupActions()
     // Actions for the Toolbar
     QAction *action;
     action = actionCollection()->addAction(QStringLiteral("open_gcode"));
-    action->setIcon(QIcon::fromTheme("open"));
+    action->setIcon(QIcon::fromTheme("document-open"));
     action->setText(i18n("&Open GCode"));
     connect(action, &QAction::triggered, this, &MainWindow::openFile);
 
@@ -139,20 +139,24 @@ void MainWindow::setupActions()
 
     connect(connectSettingsDialog, &ConnectSettingsDialog::setConnectValue, _connect, &QAction::setChecked);
 
-    action = actionCollection()->addAction(QStringLiteral("settings"));
-    action->setText(i18n("&Settings"));
+    action = actionCollection()->addAction(QStringLiteral("profiles"));
+    action->setText(i18n("&Profiles"));
+    action->setIcon(QIcon(QIcon::fromTheme("emblem-favorite")));
     connect(action, &QAction::triggered, generalSettingsDialog, &GeneralSettingsDialog::show);
 
     action = actionCollection()->addAction(QStringLiteral("print"));
     action->setText(i18n("&Print"));
+    action->setIcon(QIcon(QIcon::fromTheme("media-playback-start")));
     connect(action, &QAction::triggered, this, &MainWindow::printFile);
 
     action = actionCollection()->addAction(QStringLiteral("pause"));
     action->setText(i18n("&Pause"));
+    action->setIcon(QIcon(QIcon::fromTheme("media-playback-pause")));
     connect(action, &QAction::triggered, this, &MainWindow::pausePrint);
 
     action = actionCollection()->addAction(QStringLiteral("stop"));
     action->setText(i18n("&Stop"));
+    action->setIcon(QIcon(QIcon::fromTheme("media-playback-stop")));
     connect(action, &QAction::triggered, this, &MainWindow::stopPrint);
 
     // Actions for the Docks
