@@ -133,7 +133,7 @@ void MainWindow::setupActions()
             core.closeConnection();
             _connect->setText(i18n("&Connect"));
             ui->bedExtWidget->stopHeating();
-            core.setState(PrinterState::DISCONNECTED);
+            core.setState(AtCore::DISCONNECTED);
         }
     });
 
@@ -195,7 +195,7 @@ void MainWindow::openFile()
 
 void MainWindow::printFile()
 {
-    if (!fileName.isEmpty() && (core.state() == PrinterState::IDLE)) {
+    if (!fileName.isEmpty() && (core.state() == AtCore::IDLE)) {
         QString f = fileName.toLocalFile();
         core.print(f);
     }
@@ -211,31 +211,31 @@ void MainWindow::stopPrint()
     core.stop();
 }
 
-void MainWindow::handlePrinterStatusChanged(PrinterState newState)
+void MainWindow::handlePrinterStatusChanged(AtCore::STATES newState)
 {
     switch (newState) {
-    case PrinterState::CONNECTING: {
+    case AtCore::CONNECTING: {
         connect(core.serial(), &SerialLayer::receivedCommand, this, &MainWindow::checkReceivedCommand);
         connect(core.serial(), &SerialLayer::pushedCommand, this, &MainWindow::checkPushedCommands);
     } break;
-    case PrinterState::IDLE: {
+    case AtCore::IDLE: {
         ui->toolboxTabWidget->setEnabled(true);
         emit extruderCountChanged(core.extruderCount());
         logDialog->addLog(i18n("Serial connected"));
         _connect->setText(i18n("&Disconnect"));
     } break;
-    case PrinterState::DISCONNECTED: {
+    case AtCore::DISCONNECTED: {
         ui->toolboxTabWidget->setEnabled(false);
         disconnect(core.serial(), &SerialLayer::receivedCommand, this, &MainWindow::checkReceivedCommand);
         disconnect(core.serial(), &SerialLayer::pushedCommand, this, &MainWindow::checkPushedCommands);
         logDialog->addLog(i18n("Serial disconnected"));
 
     } break;
-    case PrinterState::STARTPRINT: {
+    case AtCore::STARTPRINT: {
         ui->printProgressDockWidget->setVisible(true);
         connect(&core, &AtCore::printProgressChanged, ui->printProgressWidget, &PrintProgressWidget::updateProgressBar);
     } break;
-    case PrinterState::FINISHEDPRINT: {
+    case AtCore::FINISHEDPRINT: {
         ui->printProgressDockWidget->setVisible(false);
         disconnect(&core, &AtCore::printProgressChanged, ui->printProgressWidget, &PrintProgressWidget::updateProgressBar);
     } break;
