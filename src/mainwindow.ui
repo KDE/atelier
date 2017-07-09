@@ -88,7 +88,7 @@
         </attribute>
         <layout class="QVBoxLayout" name="verticalLayout_5">
          <item>
-          <widget class="PrinterHotendPositionVisualController" name="axisViewWidget"/>
+          <widget class="AxisControl" name="axisViewWidget"/>
          </item>
         </layout>
        </widget>
@@ -200,9 +200,9 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>PrinterHotendPositionVisualController</class>
+   <class>AxisControl</class>
    <extends>QGraphicsView</extends>
-   <header>widgets/printerhostpositionvisualcontroller.h</header>
+   <header>widgets/axiscontrol.h</header>
   </customwidget>
   <customwidget>
    <class>BedExtruderWidget</class>

@@ -1,6 +1,7 @@
 /* Atelier KDE Printer Host for 3D Printing
     Copyright (C) <2016>
     Author: Lays Rodrigues - laysrodriguessilva@gmail.com
+            Chris Rizzitello - rizzitello@kde.org
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -15,14 +16,12 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "printerhostpositionvisualcontroller.h"
-#include <QDebug>
-#include <QResizeEvent>
+#include "axiscontrol.h"
 
 PieButton::PieButton(QLatin1Char axis, int value, int size, int angle) : _axis(axis), _value(value)
 {
     const int delta = 16; // Qt Docs: angle is 16th of a degree.
-    setBrush(QBrush(Qt::white));
+    setBrush(_palette.button());
     setStartAngle(angle * delta);
     setSpanAngle(90 * delta);
     setRect(QRect(QPoint(size * -1, size * -1), QPoint(size, size)));
@@ -31,49 +30,53 @@ PieButton::PieButton(QLatin1Char axis, int value, int size, int angle) : _axis(a
     setToolTip(QStringLiteral("Move the hotend to the %1 by %2 units").arg(axis).arg(value));
 }
 
-void PieButton::mousePressEvent(QGraphicsSceneMouseEvent *event)
+void PieButton::setPalette(QPalette palette)
 {
-    Q_UNUSED(event);
+    _palette = palette;
+}
+
+void PieButton::mousePressEvent(QGraphicsSceneMouseEvent *)
+{
     emit clicked(_axis, _value);
 }
 
-void PieButton::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
+void PieButton::hoverEnterEvent(QGraphicsSceneHoverEvent *)
 {
-    Q_UNUSED(event);
-    setBrush(QBrush(QColor(Qt::white).dark(150)));
+    setBrush(_palette.highlight());
 }
 
-void PieButton::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+void PieButton::hoverLeaveEvent(QGraphicsSceneHoverEvent *)
 {
-    Q_UNUSED(event);
-    setBrush(QBrush(QColor(Qt::white)));
+    setBrush(_palette.button());
 }
 
 RectButton::RectButton(QLatin1Char axis, int value, int size) : _axis(axis), _value(value)
 {
-    setBrush(QBrush(Qt::white));
+    setBrush(_palette.button());
     setRect(QRect(QPoint(0, 0), QPoint(size, size)));
     setAcceptHoverEvents(true);
     setZValue(size * -1);
     setToolTip(QStringLiteral("Move the hotend to the %1 by %2 units").arg(axis).arg(value));
 }
 
-void RectButton::mousePressEvent(QGraphicsSceneMouseEvent *event)
+void RectButton::setPalette(QPalette palette)
 {
-    Q_UNUSED(event);
+    _palette = palette;
+}
+
+void RectButton::mousePressEvent(QGraphicsSceneMouseEvent *)
+{
     emit clicked(_axis, _value);
 }
 
-void RectButton::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
+void RectButton::hoverEnterEvent(QGraphicsSceneHoverEvent *)
 {
-    Q_UNUSED(event);
-    setBrush(QBrush(QColor(Qt::white).dark(150)));
+    setBrush(_palette.highlight());
 }
 
-void RectButton::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+void RectButton::hoverLeaveEvent(QGraphicsSceneHoverEvent *)
 {
-    Q_UNUSED(event);
-    setBrush(QBrush(QColor(Qt::white)));
+    setBrush(_palette.button());
 }
 /*  About the Magic Numbers
         I don't have experience programming with QGraphicsScene,
@@ -83,7 +86,7 @@ void RectButton::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
         in the scene. If you have a better solution, please share with us.
         Lays Rodrigues - Jan/2017
 */
-PrinterHotendPositionVisualController::PrinterHotendPositionVisualController(QWidget *parent) :
+AxisControl::AxisControl(QWidget *parent) :
     QGraphicsView(parent)
 {
     setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
@@ -92,8 +95,9 @@ PrinterHotendPositionVisualController::PrinterHotendPositionVisualController(QWi
 
     auto createPie = [ = ](QLatin1Char axis, int value, int size, int angle) {
         auto pie = new PieButton(axis, value, size, angle);
-        connect(pie, &PieButton::clicked, this, &PrinterHotendPositionVisualController::clicked);
-        if (value == 1000 || value == -1000) {
+        pie->setPalette(this->palette());
+        connect(pie, &PieButton::clicked, this, &AxisControl::clicked);
+        if (abs(value) == 25) {
             setLabels(pie, axis, value);
         }
         scene()->addItem(pie);
@@ -101,9 +105,10 @@ PrinterHotendPositionVisualController::PrinterHotendPositionVisualController(QWi
 
     auto createRect = [ = ](QLatin1Char axis, int value, int size, int xPos, int yPos) {
         auto z = new RectButton(axis, value, size);
+        z->setPalette(this->palette());
         z->setPos(xPos, yPos);
-        connect(z, &RectButton::clicked, this, &PrinterHotendPositionVisualController::clicked);
-        if (value == 1000 || value == -1000) {
+        connect(z, &RectButton::clicked, this, &AxisControl::clicked);
+        if (abs(value) == 25) {
             setLabels(z, axis, value);
         }
         scene()->addItem(z);
@@ -111,7 +116,7 @@ PrinterHotendPositionVisualController::PrinterHotendPositionVisualController(QWi
 
     int currPieSize = 25;
     for (auto value : {
-                10, 100, 1000
+                1, 10, 25
             }) {
         createPie(QLatin1Char('X'), value, currPieSize, -45);       // Left
         createPie(QLatin1Char('X'), value * -1, currPieSize, 135);  // Right
@@ -124,13 +129,7 @@ PrinterHotendPositionVisualController::PrinterHotendPositionVisualController(QWi
     int xPos = sceneRect().width() - 50;
     int yPos = -75; //Align with the origin of the scene 3 * 25
     for (auto value : {
-                1000, 100, 10
-            }) {
-        createRect(QLatin1Char('Z'), value, currZSize, xPos, yPos);
-        yPos += currZSize;
-    }
-    for (auto value : {
-                -10, -100, -1000
+                25, 10, 1, -1, -10, -25
             }) {
         createRect(QLatin1Char('Z'), value, currZSize, xPos, yPos);
         yPos += currZSize;
@@ -138,25 +137,30 @@ PrinterHotendPositionVisualController::PrinterHotendPositionVisualController(QWi
     setSceneRect(scene()->itemsBoundingRect());
 }
 
-void PrinterHotendPositionVisualController::resizeEvent(QResizeEvent *event)
+void AxisControl::resizeEvent(QResizeEvent *)
 {
-    Q_UNUSED(event);
     fitInView(sceneRect(), Qt::KeepAspectRatio);
 }
 
-void PrinterHotendPositionVisualController::setLabels(QGraphicsItem *item, QLatin1Char axis, int value)
+void AxisControl::setLabels(QGraphicsItem *item, QLatin1Char axis, int value)
 {
     auto *lb = new QGraphicsSimpleTextItem();
-    lb->setText((value < 0) ? "-" + axis : QString(axis));
+    lb->setBrush(palette().buttonText());
 
-    if (axis == 'X') {
-        lb->setY(item->y() - lb->boundingRect().width() / 2);
+    if (this->logicalDpiX() <= 96) {
+        lb->setText((value < 0) ? QStringLiteral(" -") + axis : QStringLiteral("  ") + axis);
+    } else {
+        lb->setText((value < 0) ? QStringLiteral("-") + axis : QStringLiteral(" ") + axis);
+    }
+
+    if (axis.toLatin1() == 'X') {
+        lb->setY(item->y() - lb->boundingRect().width());
         if (value < 0) {
             lb->setX(item->x() - item->boundingRect().width() / 1.2 - lb->boundingRect().width() / 2);
         } else {
             lb->setX(item->x() + item->boundingRect().width() / 1.2 - lb->boundingRect().width() / 2);
         }
-    } else if (axis == 'Y') {
+    } else if (axis.toLatin1() == 'Y') {
         lb->setX(item->x() - lb->boundingRect().width() / 2);
         if (value < 0) {
             lb->setY(item->y() + item->boundingRect().height() / 1.5);
@@ -165,13 +169,13 @@ void PrinterHotendPositionVisualController::setLabels(QGraphicsItem *item, QLati
         }
     } else {
 
-        if (value < 0) {
-            lb->setX(item->x() + lb->boundingRect().width() / 2);
-            lb->setY(item->y() + lb->boundingRect().height() / 2);
-        } else {
-            lb->setX(item->x() + lb->boundingRect().width() * 1.25);
-            lb->setY(item->y());
-        }
+        lb->setX(item->x() + lb->boundingRect().width() / fontMetrics().width(lb->text()));
+
+#ifndef Q_OS_WIN
+        lb->setY(item->y() - lb->boundingRect().height() / fontMetrics().xHeight());
+#else
+        lb->setY(item->y() - lb->boundingRect().height() / fontMetrics().height());
+#endif
     }
     scene()->addItem(lb);
 }

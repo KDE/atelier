@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
         QStringLiteral("atelier@bugs.kde.org"));
     aboutData.addAuthor(i18n("Lays Rodrigues"), i18n("Developer"), QStringLiteral("laysrodriguessilva@gmail.com"),
                         QStringLiteral("http://laysrodriguesdev.wordpress.com"));
-    aboutData.addAuthor(i18n("Chris Rizzitello"), i18n("Developer"), QStringLiteral("sithlord48@gmail.com"),
+    aboutData.addAuthor(i18n("Chris Rizzitello"), i18n("Developer"), QStringLiteral("rizzitello@kde.org"),
                         QStringLiteral("http://rizzitello.wordpress.com"));
     aboutData.addAuthor(i18n("Patrick Pereira"), i18n("Developer"), QStringLiteral("patrickelectric@gmail.com"),
                         QStringLiteral("http://patrickjp.com"));

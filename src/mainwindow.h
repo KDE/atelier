@@ -57,6 +57,7 @@ private:
     void checkPushedCommands(QByteArray bmsg);
     void handlePrinterStatusChanged(AtCore::STATES newState);
     void checkTemperature(uint sensorType, uint number, uint temp);
+    void axisControlClicked(QChar axis, int value);
 
 signals:
     void extruderCountChanged(int count);

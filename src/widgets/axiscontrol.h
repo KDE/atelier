@@ -1,6 +1,7 @@
 /* Atelier KDE Printer Host for 3D Printing
     Copyright (C) <2016>
     Author: Lays Rodrigues - laysrodriguessilva@gmail.com
+            Chris Rizzitello - rizzitello@kde.org
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,7 +21,6 @@
 #include <QObject>
 #include <QGraphicsView>
 #include <QGraphicsEllipseItem>
-#include <QList>
 
 /* Usage:
  *
@@ -34,15 +34,17 @@ class PieButton : public QObject, public QGraphicsEllipseItem
     Q_OBJECT
 public:
     PieButton(QLatin1Char axis, int value, int size, int angle);
+    void setPalette(QPalette palette);
 protected:
-    void mousePressEvent(QGraphicsSceneMouseEvent *event);
-    void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
-    void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
+    void mousePressEvent(QGraphicsSceneMouseEvent *);
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *);
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent *);
 signals:
     void clicked(QLatin1Char axis, int value);
 private:
     QLatin1Char _axis;
     int _value;
+    QPalette _palette;
 };
 
 class RectButton : public QObject, public QGraphicsRectItem
@@ -51,29 +53,31 @@ class RectButton : public QObject, public QGraphicsRectItem
 
 public:
     RectButton(QLatin1Char axis, int value, int size);
+    void setPalette(QPalette palette);
 protected:
-    void mousePressEvent(QGraphicsSceneMouseEvent *event);
-    void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
-    void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
+    void mousePressEvent(QGraphicsSceneMouseEvent *);
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *);
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent *);
 signals:
     void clicked(QLatin1Char axis, int value);
 private:
     QLatin1Char _axis;
     int _value;
+    QPalette _palette;
 };
 
-class PrinterHotendPositionVisualController : public QGraphicsView
+class AxisControl : public QGraphicsView
 {
     Q_OBJECT
 
 public:
-    explicit PrinterHotendPositionVisualController(QWidget *parent = 0);
+    explicit AxisControl(QWidget *parent = nullptr);
 
 private:
     void setLabels(QGraphicsItem *item, QLatin1Char axis, int value);
 
 protected:
-    void resizeEvent(QResizeEvent *event);
+    void resizeEvent(QResizeEvent *);
 
 signals:
     void clicked(QLatin1Char axis, int value);

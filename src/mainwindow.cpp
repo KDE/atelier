@@ -95,6 +95,7 @@ void MainWindow::initConnectsToAtCore()
     connect(ui->ratesControlWidget, &RatesControlWidget::fanSpeedChanged, &core, &AtCore::setFanSpeed);
     connect(ui->ratesControlWidget, &RatesControlWidget::flowRateChanged, &core, &AtCore::setFlowRate);
     connect(ui->ratesControlWidget, &RatesControlWidget::printSpeedChanged, &core, &AtCore::setPrinterSpeed);
+    connect(ui->axisViewWidget, &AxisControl::clicked, this, &MainWindow::axisControlClicked);
 
 }
 
@@ -300,4 +301,11 @@ void MainWindow::checkPushedCommands(QByteArray bmsg)
     msg.replace(_newLine, QStringLiteral("\\n"));
     msg.replace(_return, QStringLiteral("\\r"));
     logWidget->addSLog(msg);
+}
+
+void MainWindow::axisControlClicked(QChar axis, int value)
+{
+    core.setRelativePosition();
+    core.pushCommand(GCode::toCommand(GCode::G1, QStringLiteral("%1%2").arg(axis, QString::number(value))));
+    core.setAbsolutePosition();
 }

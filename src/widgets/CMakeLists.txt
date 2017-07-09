@@ -1,6 +1,6 @@
 set(widgets_SRCS
     gcodeeditorwidget.cpp
-    printerhostpositionvisualcontroller.cpp
+    axiscontrol.cpp
     bedextruderwidget.cpp
     plotwidget.cpp
     pushgcodewidget.cpp
