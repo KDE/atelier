@@ -22,8 +22,8 @@
 #include <KStandardAction>
 #include <KActionCollection>
 #include <KXMLGUIFactory>
-#include <KAtCore/SerialLayer>
-#include <KAtCore/GCodeCommands>
+#include <AtCore/SerialLayer>
+#include <AtCore/GCodeCommands>
 
 MainWindow::MainWindow(QWidget *parent) :
     KXmlGuiWindow(parent),

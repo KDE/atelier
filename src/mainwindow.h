@@ -19,7 +19,7 @@
 
 #include <QMainWindow>
 #include <QUrl>
-#include <KAtCore/AtCore>
+#include <AtCore/AtCore>
 #include <KXmlGui/KXmlGuiWindow>
 #include <dialogs/connectsettingsdialog.h>
 #include <dialogs/generalsettingsdialog.h>
