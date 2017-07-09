@@ -119,7 +119,6 @@ void MainWindow::setupActions()
     // Actions for the Toolbar
     QAction *action;
     action = actionCollection()->addAction(QStringLiteral("open_gcode"));
-    action->setIcon(QIcon::fromTheme("document-open"));
     action->setText(i18n("&Open GCode"));
     connect(action, &QAction::triggered, this, &MainWindow::openFile);
 
@@ -141,23 +140,28 @@ void MainWindow::setupActions()
 
     action = actionCollection()->addAction(QStringLiteral("profiles"));
     action->setText(i18n("&Profiles"));
-    action->setIcon(QIcon(QIcon::fromTheme("emblem-favorite")));
     connect(action, &QAction::triggered, generalSettingsDialog, &GeneralSettingsDialog::show);
 
     action = actionCollection()->addAction(QStringLiteral("print"));
     action->setText(i18n("&Print"));
-    action->setIcon(QIcon(QIcon::fromTheme("media-playback-start")));
     connect(action, &QAction::triggered, this, &MainWindow::printFile);
 
     action = actionCollection()->addAction(QStringLiteral("pause"));
     action->setText(i18n("&Pause"));
-    action->setIcon(QIcon(QIcon::fromTheme("media-playback-pause")));
     connect(action, &QAction::triggered, this, &MainWindow::pausePrint);
 
     action = actionCollection()->addAction(QStringLiteral("stop"));
     action->setText(i18n("&Stop"));
-    action->setIcon(QIcon(QIcon::fromTheme("media-playback-stop")));
     connect(action, &QAction::triggered, this, &MainWindow::stopPrint);
+
+    #ifdef Q_OS_LINUX
+    //only set icons from theme on linux
+        actionCollection()->action(QStringLiteral("open_gcode"))->setIcon(QIcon::fromTheme("document-open"));
+        actionCollection()->action(QStringLiteral("profiles"))->setIcon(QIcon::fromTheme("emblem-favorite"));
+        actionCollection()->action(QStringLiteral("print"))->setIcon(QIcon::fromTheme("media-playback-start"));
+        actionCollection()->action(QStringLiteral("pause"))->setIcon(QIcon::fromTheme("media-playback-pause"));
+        actionCollection()->action(QStringLiteral("stop"))->setIcon(QIcon::fromTheme("media-playback-stop"));
+    #endif
 
     // Actions for the Docks
 
