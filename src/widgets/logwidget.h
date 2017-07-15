@@ -1,6 +1,7 @@
 /* Atelier KDE Printer Host for 3D Printing
     Copyright (C) <2017>
     Author: Lays Rodrigues - laysrodrigues@gmail.com
+            Chris Rizzitello - rizzitello@kde.org
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,15 +17,15 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #pragma once
-#include <QDialog>
+#include <QWidget>
 #include <QTemporaryFile>
 #include <QPlainTextEdit>
-#include <QDialogButtonBox>
+#include <QPushButton>
 
-class LogDialog : public QDialog
+class LogWidget : public QWidget
 {
 public:
-    LogDialog(QWidget *parent = nullptr);
+    explicit LogWidget(QWidget *parent = nullptr);
     void addLog(QString msg);
     void addRLog(QString msg);
     void addSLog(QString msg);
@@ -33,7 +34,7 @@ private:
     void saveLog();
     QTemporaryFile *logFile;
     QPlainTextEdit *log;
-    QDialogButtonBox *buttonGroup;
+    QPushButton *btnSave;
     QString logHeader();
     QString rLogHeader();
     QString sLogHeader();

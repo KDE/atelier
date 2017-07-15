@@ -160,6 +160,19 @@
    </attribute>
    <widget class="PrintProgressWidget" name="printProgressWidget"/>
   </widget>
+  <widget class="QDockWidget" name="logDockWidget">
+   <property name="windowTitle">
+    <string>Log</string>
+   </property>
+    <property name="floating">
+    <bool>true</bool>
+   </property>
+   
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="logDockWidgetContents"/>
+  </widget>
  </widget>
  <customwidgets>
   <customwidget>

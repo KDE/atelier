@@ -29,10 +29,10 @@ MainWindow::MainWindow(QWidget *parent) :
     KXmlGuiWindow(parent),
     ui(new Ui::MainWindow),
     generalSettingsDialog(new GeneralSettingsDialog(this)),
-    connectSettingsDialog(new ConnectSettingsDialog(this)),
-    logDialog(new LogDialog(this))
+    connectSettingsDialog(new ConnectSettingsDialog(this))
 {
     ui->setupUi(this);
+    logWidget = new LogWidget;
     setupActions();
     initConnectsToAtCore();
     initWidgets();
@@ -87,7 +87,7 @@ void MainWindow::initConnectsToAtCore()
     });
 
     connect(ui->pushGCodeWidget, &PushGCodeWidget::push, [ = ](QString command) {
-        logDialog->addLog("Push " + command);
+        logWidget->addLog("Push " + command);
         core.pushCommand(command);
     });
 
@@ -106,12 +106,15 @@ void MainWindow::initWidgets()
     // This dock is of Printing Progress. It only need to be show while printing
     ui->printProgressDockWidget->setVisible(false);
 
+    ui->logDockWidget->setWidget(logWidget);
+
     // When a new profile is added on the Profile Dialog it needs to update the profiles on connection dialog
     connect(generalSettingsDialog, &GeneralSettingsDialog::updateProfiles,
             connectSettingsDialog, &ConnectSettingsDialog::updateProfiles);
 
     connectSettingsDialog->setFirmwareList(core.availablePlugins());
     generalSettingsDialog->setBaudRates(core.serial()->validBaudRates());
+
 }
 
 void MainWindow::setupActions()
@@ -179,10 +182,8 @@ void MainWindow::setupActions()
     action = actionCollection()->addAction(QStringLiteral("toolbox"), ui->toolboxDockWidget->toggleViewAction());
     action->setText(i18n("Toolbox"));
 
-    // Actions for the Dialogs
-    action = actionCollection()->addAction(QStringLiteral("log"));
-    action->setText(i18n("Log Dialog"));
-    connect(action, &QAction::triggered, logDialog, &LogDialog::show);
+    action = actionCollection()->addAction(QStringLiteral("log"), ui->logDockWidget->toggleViewAction());
+    action->setText(i18n("Log"));
 
     setupGUI(Default, "atelierui.rc");
 }
@@ -226,14 +227,14 @@ void MainWindow::handlePrinterStatusChanged(AtCore::STATES newState)
     case AtCore::IDLE: {
         ui->toolboxTabWidget->setEnabled(true);
         emit extruderCountChanged(core.extruderCount());
-        logDialog->addLog(i18n("Serial connected"));
+        logWidget->addLog(i18n("Serial connected"));
         _connect->setText(i18n("&Disconnect"));
     } break;
     case AtCore::DISCONNECTED: {
         ui->toolboxTabWidget->setEnabled(false);
         disconnect(core.serial(), &SerialLayer::receivedCommand, this, &MainWindow::checkReceivedCommand);
         disconnect(core.serial(), &SerialLayer::pushedCommand, this, &MainWindow::checkPushedCommands);
-        logDialog->addLog(i18n("Serial disconnected"));
+        logWidget->addLog(i18n("Serial disconnected"));
 
     } break;
     case AtCore::STARTPRINT: {
@@ -283,12 +284,12 @@ void MainWindow::checkTemperature(uint sensorType, uint number, uint temp)
     msg = msg.arg(QString::number(number))
           .arg(QString::number(temp));
 
-    logDialog->addRLog(msg);
+    logWidget->addRLog(msg);
 }
 
 void MainWindow::checkReceivedCommand()
 {
-    logDialog->addRLog(QString::fromUtf8(core.popCommand()));
+    logWidget->addRLog(QString::fromUtf8(core.popCommand()));
 }
 
 void MainWindow::checkPushedCommands(QByteArray bmsg)
@@ -298,5 +299,5 @@ void MainWindow::checkPushedCommands(QByteArray bmsg)
     QRegExp _return(QChar::fromLatin1('\r'));
     msg.replace(_newLine, QStringLiteral("\\n"));
     msg.replace(_return, QStringLiteral("\\r"));
-    logDialog->addSLog(msg);
+    logWidget->addSLog(msg);
 }

@@ -6,6 +6,7 @@ set(widgets_SRCS
     pushgcodewidget.cpp
     ratescontrolwidget.cpp
     printprogresswidget.cpp
+    logwidget.cpp
     )
 
 add_library(AtelierWidgets STATIC ${widgets_SRCS})

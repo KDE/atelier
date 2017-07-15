@@ -23,8 +23,7 @@
 #include <KXmlGui/KXmlGuiWindow>
 #include <dialogs/connectsettingsdialog.h>
 #include <dialogs/generalsettingsdialog.h>
-#include <dialogs/logdialog.h>
-
+#include <widgets/logwidget.h>
 namespace Ui
 {
 class MainWindow;
@@ -45,7 +44,7 @@ private:
     QUrl fileName;
     GeneralSettingsDialog *generalSettingsDialog;
     ConnectSettingsDialog *connectSettingsDialog;
-    LogDialog *logDialog;
+    LogWidget *logWidget;
     QAction *_connect;
     void initConnectsToAtCore();
     void initWidgets();

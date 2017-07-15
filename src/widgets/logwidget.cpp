@@ -1,6 +1,7 @@
 /* Atelier KDE Printer Host for 3D Printing
     Copyright (C) <2017>
     Author: Lays Rodrigues - laysrodrigues@gmail.com
+            Chris Rizzitello - rizzitello@kde.org
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -15,34 +16,31 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "logdialog.h"
+#include "logwidget.h"
 #include <QVBoxLayout>
-
 #include <QTime>
 #include <QFileDialog>
 #include <QTextStream>
 #include <KLocalizedString>
 
-LogDialog::LogDialog(QWidget *parent) : QDialog(parent),
+LogWidget::LogWidget(QWidget *parent) : QWidget(parent),
     logFile(new QTemporaryFile(QDir::tempPath() + QStringLiteral("/Atelier_")))
 {
-    this->setWindowTitle(i18n("Log Dialog"));
     QVBoxLayout *layout = new QVBoxLayout();
-    buttonGroup = new QDialogButtonBox(QDialogButtonBox::Save | QDialogButtonBox::Close);
+    btnSave = new QPushButton(i18n("Save Logfile"));
     log = new QPlainTextEdit();
     log->setReadOnly(true);
     log->setMaximumBlockCount(1000);
 
     layout->addWidget(log);
-    layout->addWidget(buttonGroup);
+    layout->addWidget(btnSave);
     this->setLayout(layout);
 
-    connect(buttonGroup, &QDialogButtonBox::rejected, this, &LogDialog::reject);
-    connect(buttonGroup, &QDialogButtonBox::accepted, this, &LogDialog::saveLog);
+    connect(btnSave, &QPushButton::clicked, this, &LogWidget::saveLog);
 
 }
 
-void LogDialog::saveLog()
+void LogWidget::saveLog()
 {
     QString fileName = QDir::homePath() + QChar::fromLatin1('/') + QFileInfo(logFile->fileName()).fileName();
     QString saveFileName = QFileDialog::getSaveFileName(this, i18n("Save Log to file"), fileName);
@@ -50,22 +48,22 @@ void LogDialog::saveLog()
     logFile->close();
 }
 
-QString LogDialog::logHeader()
+QString LogWidget::logHeader()
 {
     return QStringLiteral("[%1]  ").arg(getTime());
 }
 
-QString LogDialog::rLogHeader()
+QString LogWidget::rLogHeader()
 {
     return QStringLiteral("[%1]< ").arg(getTime());
 }
 
-QString LogDialog::sLogHeader()
+QString LogWidget::sLogHeader()
 {
     return QStringLiteral("[%1]> ").arg(getTime());
 }
 
-void LogDialog::writeTempFile(QString text)
+void LogWidget::writeTempFile(QString text)
 {
     /*
     A QTemporaryFile will always be opened in QIODevice::ReadWrite mode,
@@ -80,28 +78,28 @@ void LogDialog::writeTempFile(QString text)
     logFile->close();
 }
 
-void LogDialog::addLog(QString msg)
+void LogWidget::addLog(QString msg)
 {
     QString message(logHeader() + msg);
     log->appendPlainText(message);
     writeTempFile(message);
 }
 
-void LogDialog::addRLog(QString msg)
+void LogWidget::addRLog(QString msg)
 {
     QString message(rLogHeader() + msg);
     log->appendPlainText(message);
     writeTempFile(message);
 }
 
-void LogDialog::addSLog(QString msg)
+void LogWidget::addSLog(QString msg)
 {
     QString message(sLogHeader() + msg);
     log->appendPlainText(message);
     writeTempFile(message);
 }
 
-QString LogDialog::getTime()
+QString LogWidget::getTime()
 {
     return QTime::currentTime().toString(QStringLiteral("hh:mm:ss:zzz"));
 }
