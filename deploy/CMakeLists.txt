@@ -2,11 +2,6 @@
 install(FILES
     "${CMAKE_CURRENT_SOURCE_DIR}/atelierui.rc"
     DESTINATION ${KXMLGUI_INSTALL_DIR}/${PROJECT_NAME}/)
-
-install(FILES
-    "${CMAKE_CURRENT_SOURCE_DIR}/atelier.menu"
-    RENAME atelier
-    DESTINATION share/menu)
     
 install(FILES
     "${CMAKE_CURRENT_SOURCE_DIR}/atelier.png"

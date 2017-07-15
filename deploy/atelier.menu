@@ -1,2 +1,0 @@
-?package(atelier):needs="x11" section="Utility"\
-  title="Atelier" command="atelier"
