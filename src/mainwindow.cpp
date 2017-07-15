@@ -156,12 +156,13 @@ void MainWindow::setupActions()
 
     #ifdef Q_OS_LINUX
     //only set icons from theme on linux
-        actionCollection()->action(QStringLiteral("open_gcode"))->setIcon(QIcon::fromTheme("document-open"));
         actionCollection()->action(QStringLiteral("profiles"))->setIcon(QIcon::fromTheme("emblem-favorite"));
-        actionCollection()->action(QStringLiteral("print"))->setIcon(QIcon::fromTheme("media-playback-start"));
-        actionCollection()->action(QStringLiteral("pause"))->setIcon(QIcon::fromTheme("media-playback-pause"));
-        actionCollection()->action(QStringLiteral("stop"))->setIcon(QIcon::fromTheme("media-playback-stop"));
     #endif
+    //use style's standardIcon for the icons we can.
+    actionCollection()->action(QStringLiteral("open_gcode"))->setIcon(style()->standardIcon(QStyle::SP_DirOpenIcon));
+    actionCollection()->action(QStringLiteral("print"))->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
+    actionCollection()->action(QStringLiteral("pause"))->setIcon(style()->standardIcon(QStyle::SP_MediaPause));
+    actionCollection()->action(QStringLiteral("stop"))->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
 
     // Actions for the Docks
 
