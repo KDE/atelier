@@ -19,9 +19,12 @@ if(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUXX)
 endif()
 
 #Atelier Dependencies
+find_package(AtCore REQUIRED COMPONENTS
+                AtCore
+            )
+
 find_package(KF5 REQUIRED COMPONENTS
                 Solid
-                AtCore
                 I18n
                 XmlGui
                 ConfigWidgets
