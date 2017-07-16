@@ -22,6 +22,7 @@
 
 int main(int argc, char *argv[])
 {
+
     QApplication app(argc, argv);
 
     QCoreApplication::setOrganizationName("KDE");
@@ -62,6 +63,7 @@ int main(int argc, char *argv[])
     KAboutData::setApplicationData(aboutData);
 
     MainWindow *m = new MainWindow();
+    m->setWindowIcon(QIcon(":/icon/atelier"));
     m->show();
     return app.exec();
 }

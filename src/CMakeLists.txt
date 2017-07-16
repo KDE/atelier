@@ -1,4 +1,5 @@
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_AUTORCC ON)
 set(atelier_SRCS
     main.cpp
     mainwindow.cpp
@@ -7,7 +8,7 @@ set(atelier_SRCS
 add_subdirectory(dialogs)
 add_subdirectory(widgets)
 
-add_executable(atelier ${atelier_SRCS})
+add_executable(atelier ${atelier_SRCS} icons.qrc)
 
 ecm_create_qm_loader(atelier_SRCS atelier)
 

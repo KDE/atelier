@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/icon">
+        <file alias="atelier">../deploy/atelier.png</file>
+    </qresource>
+</RCC>
+
