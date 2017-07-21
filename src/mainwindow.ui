@@ -167,7 +167,9 @@
     <property name="floating">
     <bool>true</bool>
    </property>
-   
+   <property name="hidden">
+    <bool>true</bool>
+   </property>
    <attribute name="dockWidgetArea">
     <number>1</number>
    </attribute>
