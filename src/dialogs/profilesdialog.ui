@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>GeneralSettingsDialog</class>
- <widget class="QDialog" name="GeneralSettingsDialog">
+ <class>ProfilesDialog</class>
+ <widget class="QDialog" name="ProfilesDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>General Settings</string>
+   <string>Profiles</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -288,7 +288,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>GeneralSettingsDialog</receiver>
+   <receiver>ProfilesDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -304,7 +304,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>GeneralSettingsDialog</receiver>
+   <receiver>ProfilesDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

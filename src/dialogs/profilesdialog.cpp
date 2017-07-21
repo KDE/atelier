@@ -15,14 +15,14 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "generalsettingsdialog.h"
-#include "ui_generalsettingsdialog.h"
+#include "profilesdialog.h"
+#include "ui_profilesdialog.h"
 #include <QMessageBox>
 #include <KLocalizedString>
 
-GeneralSettingsDialog::GeneralSettingsDialog(QWidget *parent) :
+ProfilesDialog::ProfilesDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::GeneralSettingsDialog)
+    ui(new Ui::ProfilesDialog)
 {
     ui->setupUi(this);
 
@@ -60,18 +60,18 @@ GeneralSettingsDialog::GeneralSettingsDialog(QWidget *parent) :
     });
 }
 
-void GeneralSettingsDialog::setBaudRates(const QStringList &list)
+void ProfilesDialog::setBaudRates(const QStringList &list)
 {
     ui->baudCB->addItems(list);
     ui->baudCB->setCurrentText(QLatin1String("115200"));
 }
 
-GeneralSettingsDialog::~GeneralSettingsDialog()
+ProfilesDialog::~ProfilesDialog()
 {
     delete ui;
 }
 
-void GeneralSettingsDialog::saveSettings()
+void ProfilesDialog::saveSettings()
 {
     settings.beginGroup(QStringLiteral("GeneralSettings"));
     QStringList groups = settings.childGroups();
@@ -116,7 +116,7 @@ void GeneralSettingsDialog::saveSettings()
     emit updateProfiles();
 }
 
-void GeneralSettingsDialog::loadSettings(const QString &currentProfile)
+void ProfilesDialog::loadSettings(const QString &currentProfile)
 {
     settings.beginGroup(QStringLiteral("GeneralSettings"));
     const QString profileName = currentProfile.isEmpty() ? ui->profileCB ->currentText() : currentProfile;
@@ -154,7 +154,7 @@ void GeneralSettingsDialog::loadSettings(const QString &currentProfile)
 
 }
 
-void GeneralSettingsDialog::updateCBProfiles()
+void ProfilesDialog::updateCBProfiles()
 {
     settings.beginGroup(QStringLiteral("GeneralSettings"));
     QStringList groups = settings.childGroups();
@@ -166,7 +166,7 @@ void GeneralSettingsDialog::updateCBProfiles()
     ui->profileCB->addItems(groups);
 }
 
-void GeneralSettingsDialog::accept()
+void ProfilesDialog::accept()
 {
     saveSettings();
 }

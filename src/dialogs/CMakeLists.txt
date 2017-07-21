@@ -1,5 +1,5 @@
 set(dialogs_SRCS
-    generalsettingsdialog.cpp
+    profilesdialog.cpp
     connectsettingsdialog.cpp
     )
 add_library(AtelierDialogs STATIC ${dialogs_SRCS})

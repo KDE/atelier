@@ -22,20 +22,20 @@
 
 namespace Ui
 {
-class GeneralSettingsDialog;
+class ProfilesDialog;
 }
 
-class GeneralSettingsDialog : public QDialog
+class ProfilesDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit GeneralSettingsDialog(QWidget *parent = nullptr);
+    explicit ProfilesDialog(QWidget *parent = nullptr);
     void setBaudRates(const QStringList &list);
-    ~GeneralSettingsDialog();
+    ~ProfilesDialog();
 
 private:
-    Ui::GeneralSettingsDialog *ui;
+    Ui::ProfilesDialog *ui;
     void saveSettings();
     void loadSettings(const QString &currentProfile = QString());
     QSettings settings;
@@ -44,4 +44,3 @@ private:
 signals:
     void updateProfiles();
 };
-

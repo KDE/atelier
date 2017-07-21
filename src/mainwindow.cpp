@@ -29,7 +29,7 @@
 MainWindow::MainWindow(QWidget *parent) :
     KXmlGuiWindow(parent),
     ui(new Ui::MainWindow),
-    generalSettingsDialog(new GeneralSettingsDialog(this)),
+    profilesDialog(new ProfilesDialog(this)),
     connectSettingsDialog(new ConnectSettingsDialog(this))
 {
     ui->setupUi(this);
@@ -112,11 +112,11 @@ void MainWindow::initWidgets()
     ui->statusBar->addWidget(ui->statusBarWidget);
 
     // When a new profile is added on the Profile Dialog it needs to update the profiles on connection dialog
-    connect(generalSettingsDialog, &GeneralSettingsDialog::updateProfiles,
+    connect(profilesDialog, &ProfilesDialog::updateProfiles,
             connectSettingsDialog, &ConnectSettingsDialog::updateProfiles);
 
     connectSettingsDialog->setFirmwareList(core.availableFirmwarePlugins());
-    generalSettingsDialog->setBaudRates(core.serial()->validBaudRates());
+    profilesDialog->setBaudRates(core.serial()->validBaudRates());
 }
 
 void MainWindow::setupActions()
@@ -145,7 +145,7 @@ void MainWindow::setupActions()
 
     action = actionCollection()->addAction(QStringLiteral("profiles"));
     action->setText(i18n("&Profiles"));
-    connect(action, &QAction::triggered, generalSettingsDialog, &GeneralSettingsDialog::show);
+    connect(action, &QAction::triggered, profilesDialog, &ProfilesDialog::show);
 
     action = actionCollection()->addAction(QStringLiteral("print"));
     action->setText(i18n("&Print"));

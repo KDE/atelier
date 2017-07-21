@@ -22,7 +22,7 @@
 #include <AtCore/AtCore>
 #include <KXmlGui/KXmlGuiWindow>
 #include <dialogs/connectsettingsdialog.h>
-#include <dialogs/generalsettingsdialog.h>
+#include <dialogs/profilesdialog.h>
 #include <widgets/logwidget.h>
 namespace Ui
 {
@@ -42,7 +42,7 @@ private:
     AtCore core;
     QStringList firmwaresList;
     QUrl fileName;
-    GeneralSettingsDialog *generalSettingsDialog;
+    ProfilesDialog *profilesDialog;
     ConnectSettingsDialog *connectSettingsDialog;
     LogWidget *logWidget;
     QAction *_connect;
