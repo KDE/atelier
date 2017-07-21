@@ -58,6 +58,13 @@ ProfilesDialog::ProfilesDialog(QWidget *parent) :
         ui->cartesianGB->setHidden(true);
         ui->deltaGB->setHidden(false);
     });
+
+    connect(ui->removeProfilePB, &QPushButton::clicked, this, &ProfilesDialog::removeProfile);
+#ifdef Q_OS_LINUX
+    ui->removeProfilePB->setIcon(QIcon::fromTheme("edit-delete"));
+#elif
+    ui->removeProfilePB->setIcon(style()->standardIcon(QStyle::SP_TrashIcon));
+#endif
 }
 
 void ProfilesDialog::setBaudRates(const QStringList &list)
@@ -169,4 +176,15 @@ void ProfilesDialog::updateCBProfiles()
 void ProfilesDialog::accept()
 {
     saveSettings();
+}
+
+void ProfilesDialog::removeProfile(){
+    QString currentProfile = ui->profileCB->currentText();
+    settings.beginGroup(QStringLiteral("GeneralSettings"));
+    settings.beginGroup(currentProfile);
+    settings.remove("");
+    settings.endGroup();
+    settings.remove(currentProfile);
+    settings.endGroup();
+    updateCBProfiles();
 }

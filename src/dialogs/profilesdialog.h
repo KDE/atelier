@@ -41,6 +41,7 @@ private:
     QSettings settings;
     void updateCBProfiles();
     void accept();
+    void removeProfile();
 signals:
     void updateProfiles();
 };
