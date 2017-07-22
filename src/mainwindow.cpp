@@ -1,6 +1,7 @@
 /* Atelier KDE Printer Host for 3D Printing
     Copyright (C) <2016>
     Author: Lays Rodrigues - laysrodrigues@gmail.com
+            Chris Rizzitello - rizzitello@kde.org
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -108,6 +109,7 @@ void MainWindow::initWidgets()
     ui->printProgressDockWidget->setVisible(false);
 
     ui->logDockWidget->setWidget(logWidget);
+    ui->statusBar->addWidget(ui->statusBarWidget);
 
     // When a new profile is added on the Profile Dialog it needs to update the profiles on connection dialog
     connect(generalSettingsDialog, &GeneralSettingsDialog::updateProfiles,
@@ -115,7 +117,6 @@ void MainWindow::initWidgets()
 
     connectSettingsDialog->setFirmwareList(core.availablePlugins());
     generalSettingsDialog->setBaudRates(core.serial()->validBaudRates());
-
 }
 
 void MainWindow::setupActions()
@@ -220,18 +221,22 @@ void MainWindow::stopPrint()
 
 void MainWindow::handlePrinterStatusChanged(AtCore::STATES newState)
 {
+    QString stateString;
     switch (newState) {
     case AtCore::CONNECTING: {
+        stateString = i18n("Connecting...");
         connect(core.serial(), &SerialLayer::receivedCommand, this, &MainWindow::checkReceivedCommand);
         connect(core.serial(), &SerialLayer::pushedCommand, this, &MainWindow::checkPushedCommands);
     } break;
     case AtCore::IDLE: {
+        stateString = i18n("Connected to ") + core.serial()->portName();
         ui->toolboxTabWidget->setEnabled(true);
         emit extruderCountChanged(core.extruderCount());
         logWidget->addLog(i18n("Serial connected"));
         _connect->setText(i18n("&Disconnect"));
     } break;
     case AtCore::DISCONNECTED: {
+        stateString = i18n("Not Connected");
         ui->toolboxTabWidget->setEnabled(false);
         disconnect(core.serial(), &SerialLayer::receivedCommand, this, &MainWindow::checkReceivedCommand);
         disconnect(core.serial(), &SerialLayer::pushedCommand, this, &MainWindow::checkPushedCommands);
@@ -239,17 +244,29 @@ void MainWindow::handlePrinterStatusChanged(AtCore::STATES newState)
 
     } break;
     case AtCore::STARTPRINT: {
+        stateString = i18n("Starting Print");
         ui->printProgressDockWidget->setVisible(true);
         connect(&core, &AtCore::printProgressChanged, ui->printProgressWidget, &PrintProgressWidget::updateProgressBar);
     } break;
     case AtCore::FINISHEDPRINT: {
+        stateString = i18n("Finished Print");
         ui->printProgressDockWidget->setVisible(false);
         disconnect(&core, &AtCore::printProgressChanged, ui->printProgressWidget, &PrintProgressWidget::updateProgressBar);
     } break;
-
-    default:
-        return;
+    case AtCore::BUSY: {
+        stateString = i18n("Printing");
+    } break;
+    case AtCore::PAUSE: {
+        stateString = i18n("Paused");
+    } break;
+    case AtCore::STOP: {
+        stateString = i18n("Stoping Print");
+    } break;
+    case AtCore::ERRORSTATE: {
+        stateString = i18n("Error");
+    } break;
     }
+    ui->lblState->setText(stateString);
 }
 
 void MainWindow::checkTemperature(uint sensorType, uint number, uint temp)
