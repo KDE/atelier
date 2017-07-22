@@ -86,7 +86,7 @@ void ProfilesDialog::saveSettings()
     QString currentProfile = ui->profileCB->currentText();
     if (groups.contains(currentProfile)) {
         int ret = QMessageBox::information(this, i18n("Save?"),
-                                           i18n("The settings has been modified. \n Do you want to save your changes?"),
+                                           i18n("A profile with this name already exists. \n Are you sure you want to overwrite it?"),
                                            QMessageBox::Save, QMessageBox::Cancel);
         if (ret == QMessageBox::Cancel) {
             return;
