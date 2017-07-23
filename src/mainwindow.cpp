@@ -115,7 +115,7 @@ void MainWindow::initWidgets()
     connect(generalSettingsDialog, &GeneralSettingsDialog::updateProfiles,
             connectSettingsDialog, &ConnectSettingsDialog::updateProfiles);
 
-    connectSettingsDialog->setFirmwareList(core.availablePlugins());
+    connectSettingsDialog->setFirmwareList(core.availableFirmwarePlugins());
     generalSettingsDialog->setBaudRates(core.serial()->validBaudRates());
 }
 
@@ -225,7 +225,7 @@ void MainWindow::handlePrinterStatusChanged(AtCore::STATES newState)
     switch (newState) {
     case AtCore::CONNECTING: {
         stateString = i18n("Connecting...");
-        connect(core.serial(), &SerialLayer::receivedCommand, this, &MainWindow::checkReceivedCommand);
+        connect(&core, &AtCore::receivedMessage, this, &MainWindow::checkReceivedCommand);
         connect(core.serial(), &SerialLayer::pushedCommand, this, &MainWindow::checkPushedCommands);
     } break;
     case AtCore::IDLE: {
@@ -238,7 +238,7 @@ void MainWindow::handlePrinterStatusChanged(AtCore::STATES newState)
     case AtCore::DISCONNECTED: {
         stateString = i18n("Not Connected");
         ui->toolboxTabWidget->setEnabled(false);
-        disconnect(core.serial(), &SerialLayer::receivedCommand, this, &MainWindow::checkReceivedCommand);
+        disconnect(&core, &AtCore::receivedMessage, this, &MainWindow::checkReceivedCommand);
         disconnect(core.serial(), &SerialLayer::pushedCommand, this, &MainWindow::checkPushedCommands);
         logWidget->addLog(i18n("Serial disconnected"));
 
@@ -305,9 +305,9 @@ void MainWindow::checkTemperature(uint sensorType, uint number, uint temp)
     logWidget->addRLog(msg);
 }
 
-void MainWindow::checkReceivedCommand()
+void MainWindow::checkReceivedCommand(const QByteArray &message)
 {
-    logWidget->addRLog(QString::fromUtf8(core.popCommand()));
+    logWidget->addRLog(QString::fromUtf8(message));
 }
 
 void MainWindow::checkPushedCommands(QByteArray bmsg)

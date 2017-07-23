@@ -53,7 +53,7 @@ private:
     void printFile();
     void pausePrint();
     void stopPrint();
-    void checkReceivedCommand();
+    void checkReceivedCommand(const QByteArray &message);
     void checkPushedCommands(QByteArray bmsg);
     void handlePrinterStatusChanged(AtCore::STATES newState);
     void checkTemperature(uint sensorType, uint number, uint temp);
