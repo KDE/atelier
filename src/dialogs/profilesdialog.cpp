@@ -62,7 +62,7 @@ ProfilesDialog::ProfilesDialog(QWidget *parent) :
     connect(ui->removeProfilePB, &QPushButton::clicked, this, &ProfilesDialog::removeProfile);
 #ifdef Q_OS_LINUX
     ui->removeProfilePB->setIcon(QIcon::fromTheme("edit-delete"));
-#elif
+#else
     ui->removeProfilePB->setIcon(style()->standardIcon(QStyle::SP_TrashIcon));
 #endif
 }
