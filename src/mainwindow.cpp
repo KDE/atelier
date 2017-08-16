@@ -119,6 +119,11 @@ void MainWindow::initWidgets()
     connectSettingsDialog->setFirmwareList(core.availableFirmwarePlugins());
     profilesDialog->setBaudRates(core.serial()->validBaudRates());
 
+    ui->homeAllPB->setIcon(style()->standardIcon(QStyle::SP_DirHomeIcon));
+    ui->homeXPB->setIcon(style()->standardIcon(QStyle::SP_DirHomeIcon));
+    ui->homeYPB->setIcon(style()->standardIcon(QStyle::SP_DirHomeIcon));
+    ui->homeZPB->setIcon(style()->standardIcon(QStyle::SP_DirHomeIcon));
+
     tabifyDockWidget(ui->axisDockWidget, ui->controlDockWidget);
 }
 
@@ -145,6 +150,22 @@ void MainWindow::setupActions()
     });
 
     connect(connectSettingsDialog, &ConnectSettingsDialog::setConnectValue, _connect, &QAction::setChecked);
+
+    connect(ui->homeAllPB, &QPushButton::clicked, [=]{
+        core.home();
+    });
+
+    connect(ui->homeXPB, &QPushButton::clicked, [=]{
+       core.home(AtCore::X);
+    });
+
+    connect(ui->homeYPB, &QPushButton::clicked, [=]{
+       core.home(AtCore::Y);
+    });
+
+    connect(ui->homeZPB, &QPushButton::clicked, [=]{
+       core.home(AtCore::Z);
+    });
 
     action = actionCollection()->addAction(QStringLiteral("profiles"));
     action->setText(i18n("&Profiles"));

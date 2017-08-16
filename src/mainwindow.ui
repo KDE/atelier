@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>661</width>
-    <height>566</height>
+    <width>490</width>
+    <height>446</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -102,7 +102,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>661</width>
+     <width>490</width>
      <height>30</height>
     </rect>
    </property>
@@ -215,7 +215,35 @@
    </attribute>
    <widget class="QWidget" name="dockWidgetContents_2">
     <layout class="QGridLayout" name="gridLayout_2">
-     <item row="3" column="0" colspan="2">
+     <item row="0" column="0">
+      <widget class="QPushButton" name="homeAllPB">
+       <property name="text">
+        <string>All</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QPushButton" name="homeXPB">
+       <property name="text">
+        <string>X</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QPushButton" name="homeYPB">
+       <property name="text">
+        <string>Y</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="3">
+      <widget class="QPushButton" name="homeZPB">
+       <property name="text">
+        <string>Z</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0" rowspan="4" colspan="4">
       <widget class="AxisControl" name="axisViewWidget"/>
      </item>
     </layout>
