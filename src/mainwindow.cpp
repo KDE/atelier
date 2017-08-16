@@ -167,7 +167,7 @@ void MainWindow::setupActions()
     actionCollection()->action(QStringLiteral("open_gcode"))->setIcon(style()->standardIcon(QStyle::SP_DirOpenIcon));
     actionCollection()->action(QStringLiteral("print"))->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
     actionCollection()->action(QStringLiteral("pause"))->setIcon(style()->standardIcon(QStyle::SP_MediaPause));
-    actionCollection()->action(QStringLiteral("stop"))->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
+    actionCollection()->action(QStringLiteral("stop"))->setIcon(style()->standardIcon(QStyle::SP_MediaStop));
 
     // Actions for the Docks
 
