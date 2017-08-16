@@ -103,7 +103,8 @@ void MainWindow::initConnectsToAtCore()
 void MainWindow::initWidgets()
 {
     // Disable Toolbox to prevent the user to mess up without a printer being connected
-    ui->toolboxTabWidget->setDisabled(true);
+    ui->controlDockWidget->setDisabled(true);
+    ui->axisDockWidget->setDisabled(true);
 
     // This dock is of Printing Progress. It only need to be show while printing
     ui->printProgressDockWidget->setVisible(false);
@@ -117,6 +118,8 @@ void MainWindow::initWidgets()
 
     connectSettingsDialog->setFirmwareList(core.availableFirmwarePlugins());
     profilesDialog->setBaudRates(core.serial()->validBaudRates());
+
+    tabifyDockWidget(ui->axisDockWidget, ui->controlDockWidget);
 }
 
 void MainWindow::setupActions()
@@ -180,9 +183,11 @@ void MainWindow::setupActions()
     action = actionCollection()->addAction(QStringLiteral("plot"), ui->plotDockWidget->toggleViewAction());
     action->setText(i18n("Temperature Timeline"));
 
-    // Toolbox
-    action = actionCollection()->addAction(QStringLiteral("toolbox"), ui->toolboxDockWidget->toggleViewAction());
-    action->setText(i18n("Toolbox"));
+    action = actionCollection()->addAction(QStringLiteral("controller"), ui->controlDockWidget->toggleViewAction());
+    action->setText(i18n("Controller"));
+
+    action = actionCollection()->addAction(QStringLiteral("axis"), ui->axisDockWidget->toggleViewAction());
+    action->setText(i18n("Axis"));
 
     action = actionCollection()->addAction(QStringLiteral("log"), ui->logDockWidget->toggleViewAction());
     action->setText(i18n("Log"));
@@ -230,14 +235,16 @@ void MainWindow::handlePrinterStatusChanged(AtCore::STATES newState)
     } break;
     case AtCore::IDLE: {
         stateString = i18n("Connected to ") + core.serial()->portName();
-        ui->toolboxTabWidget->setEnabled(true);
+        ui->controlDockWidget->setEnabled(true);
+        ui->axisDockWidget->setEnabled(true);
         emit extruderCountChanged(core.extruderCount());
         logWidget->addLog(i18n("Serial connected"));
         _connect->setText(i18n("&Disconnect"));
     } break;
     case AtCore::DISCONNECTED: {
         stateString = i18n("Not Connected");
-        ui->toolboxTabWidget->setEnabled(false);
+        ui->controlDockWidget->setEnabled(false);
+        ui->axisDockWidget->setEnabled(false);
         disconnect(&core, &AtCore::receivedMessage, this, &MainWindow::checkReceivedCommand);
         disconnect(core.serial(), &SerialLayer::pushedCommand, this, &MainWindow::checkPushedCommands);
         logWidget->addLog(i18n("Serial disconnected"));

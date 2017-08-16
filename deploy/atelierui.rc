@@ -13,7 +13,8 @@
         </Menu>
         <Menu name="view">
             <Action name="gcode"/>
-            <Action name="toolbox"/>
+            <Action name="axis"/>
+            <Acion  name="controller"/>
             <Action name="plot"/>
             <Action name="log"/>
         </Menu>

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>635</width>
-    <height>398</height>
+    <width>661</width>
+    <height>566</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -86,6 +86,12 @@
        <property name="sizeType">
         <enum>QSizePolicy::Expanding</enum>
        </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
       </spacer>
      </item>
     </layout>
@@ -96,7 +102,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>635</width>
+     <width>661</width>
      <height>30</height>
     </rect>
    </property>
@@ -122,9 +128,9 @@
    </attribute>
    <widget class="GCodeEditorWidget" name="gcodeEditorWidget"/>
   </widget>
-  <widget class="QDockWidget" name="toolboxDockWidget">
+  <widget class="QDockWidget" name="controlDockWidget">
    <property name="windowTitle">
-    <string>Toolbo&amp;x</string>
+    <string>Cont&amp;roller</string>
    </property>
    <attribute name="dockWidgetArea">
     <number>2</number>
@@ -132,62 +138,25 @@
    <widget class="QWidget" name="dockWidgetContents">
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QTabWidget" name="toolboxTabWidget">
+      <widget class="QTabWidget" name="tabWidget">
        <property name="currentIndex">
         <number>0</number>
        </property>
-       <widget class="QWidget" name="axisTab">
+       <widget class="BedExtruderWidget" name="bedExtWidget">
         <attribute name="title">
-         <string>Axis</string>
+         <string>Temperatures</string>
         </attribute>
-        <layout class="QVBoxLayout" name="verticalLayout_5">
-         <item>
-          <widget class="AxisControl" name="axisViewWidget"/>
-         </item>
-        </layout>
        </widget>
-       <widget class="QWidget" name="controlTab">
+       <widget class="QWidget" name="advancedTabWidget">
         <attribute name="title">
-         <string>Control</string>
+         <string>Advanced</string>
         </attribute>
-        <layout class="QVBoxLayout" name="verticalLayout_4">
+        <layout class="QVBoxLayout" name="verticalLayout_3">
          <item>
-          <widget class="QTabWidget" name="controlTabWidget">
-           <property name="currentIndex">
-            <number>0</number>
-           </property>
-           <widget class="BedExtruderWidget" name="bedExtWidget">
-            <attribute name="title">
-             <string>Temperatures</string>
-            </attribute>
-           </widget>
-           <widget class="QWidget" name="printerAdvanced">
-            <attribute name="title">
-             <string>Advanced</string>
-            </attribute>
-            <layout class="QVBoxLayout" name="verticalLayout_6">
-             <item>
-              <widget class="PushGCodeWidget" name="pushGCodeWidget" native="true"/>
-             </item>
-             <item>
-              <widget class="RatesControlWidget" name="ratesControlWidget" native="true"/>
-             </item>
-             <item>
-              <spacer name="verticalSpacer">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>40</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </widget>
-          </widget>
+          <widget class="PushGCodeWidget" name="pushGCodeWidget" native="true"/>
+         </item>
+         <item>
+          <widget class="RatesControlWidget" name="ratesControlWidget" native="true"/>
          </item>
         </layout>
        </widget>
@@ -215,13 +184,13 @@
    <widget class="PrintProgressWidget" name="printProgressWidget"/>
   </widget>
   <widget class="QDockWidget" name="logDockWidget">
-   <property name="windowTitle">
-    <string>Log</string>
-   </property>
-    <property name="floating">
+   <property name="floating">
     <bool>true</bool>
    </property>
-   <property name="hidden">
+   <property name="windowTitle">
+    <string>&amp;Log</string>
+   </property>
+   <property name="hidden" stdset="0">
     <bool>true</bool>
    </property>
    <attribute name="dockWidgetArea">
@@ -229,13 +198,28 @@
    </attribute>
    <widget class="QWidget" name="logDockWidgetContents"/>
   </widget>
- <widget class="QStatusBar" name="statusBar">
+  <widget class="QStatusBar" name="statusBar">
    <property name="contextMenuPolicy">
     <enum>Qt::NoContextMenu</enum>
    </property>
    <property name="sizeGripEnabled">
     <bool>false</bool>
    </property>
+  </widget>
+  <widget class="QDockWidget" name="axisDockWidget">
+   <property name="windowTitle">
+    <string>A&amp;xis</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_2">
+    <layout class="QGridLayout" name="gridLayout_2">
+     <item row="3" column="0" colspan="2">
+      <widget class="AxisControl" name="axisViewWidget"/>
+     </item>
+    </layout>
+   </widget>
   </widget>
  </widget>
  <customwidgets>
