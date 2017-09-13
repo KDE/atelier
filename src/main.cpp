@@ -19,6 +19,7 @@
 #include <KAboutData>
 #include <KLocalizedString>
 #include "mainwindow.h"
+#include "config.h"
 
 int main(int argc, char *argv[])
 {
@@ -37,7 +38,7 @@ int main(int argc, char *argv[])
         // A displayable program name string. (displayName)
         i18n("Atelier"),
         // The program version string. (version)
-        QStringLiteral("1.0"),
+        QStringLiteral(ATELIER_VERSION),
         // Short description of what the app does. (shortDescription)
         i18n("Printer Host for 3DPrinters"),
         // The license this code is released under

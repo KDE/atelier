@@ -47,7 +47,6 @@ if(BUILD_TESTING)
 endif()
 
 # config.h
-# check_function_exists (ctermid HAVE_CTERMID) ???
 configure_file (config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/src/config.h)
 
 include(ECMPoQmTools)
