@@ -1,18 +1,22 @@
+cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
 project(atelier)
-cmake_minimum_required(VERSION 3.0)
 
 find_package(ECM REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
-
 include(KDECompilerSettings)
 include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(ECMInstallIcons)
 
-
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(QT_MIN_VERSION "5.9.0")
+set(KF5_DEP_VERSION "5.30.0")
+set(KDE_APPLICATIONS_VERSION_MAJOR "1")
+set(KDE_APPLICATIONS_VERSION_MINOR "0")
+set(KDE_APPLICATIONS_VERSION_MICRO "0")
+set(KDE_APPLICATIONS_VERSION "${KDE_APPLICATIONS_VERSION_MAJOR}.${KDE_APPLICATIONS_VERSION_MINOR}.${KDE_APPLICATIONS_VERSION_MICRO}")
 
 if(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUXX)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 ")
@@ -23,7 +27,7 @@ find_package(AtCore REQUIRED COMPONENTS
                 AtCore
             )
 
-find_package(KF5 REQUIRED COMPONENTS
+find_package(KF5 ${KF5_DEP_VERSION} REQUIRED COMPONENTS
                 Solid
                 I18n
                 XmlGui
@@ -31,13 +35,20 @@ find_package(KF5 REQUIRED COMPONENTS
                 TextEditor
             )
 
-find_package(Qt5 REQUIRED COMPONENTS
+find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS
                 Core
-                Test
                 Widgets
                 SerialPort
                 Charts
             )
+            
+if(BUILD_TESTING)
+    find_package(Qt5Test ${QT_MIN_VERSION} CONFIG REQUIRED)
+endif()
+
+# config.h
+# check_function_exists (ctermid HAVE_CTERMID) ???
+configure_file (config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/src/config.h)
 
 include(ECMPoQmTools)
 
