@@ -16,24 +16,7 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
-     <widget class="QFrame" name="frame">
-      <property name="frameShape">
-       <enum>QFrame::Box</enum>
-      </property>
-      <widget class="QLabel" name="label">
-       <property name="geometry">
-        <rect>
-         <x>6</x>
-         <y>6</y>
-         <width>47</width>
-         <height>18</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>3DView</string>
-       </property>
-      </widget>
-     </widget>
+     <widget class="Viewer3D" name="view3DWidget" native="true"/>
     </item>
    </layout>
    <widget class="QWidget" name="statusBarWidget" native="true">
@@ -290,6 +273,12 @@
    <class>PushGCodeWidget</class>
    <extends>QWidget</extends>
    <header>widgets/pushgcodewidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Viewer3D</class>
+   <extends>QWidget</extends>
+   <header>widgets/3dview/viewer3d.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

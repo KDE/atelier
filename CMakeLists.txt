@@ -40,6 +40,12 @@ find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS
                 Widgets
                 SerialPort
                 Charts
+                Quick
+                Qml
+                3DCore
+                3DExtras
+                3DRender
+                3DInput
             )
             
 if(BUILD_TESTING)

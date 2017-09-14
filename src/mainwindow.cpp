@@ -224,6 +224,7 @@ void MainWindow::openFile()
         fileName = fileNameFromDialog;
         ui->gcodeEditorWidget->loadFile(fileName);
         guiFactory()->addClient(ui->gcodeEditorWidget->gcodeView());
+        ui->view3DWidget->drawModel(fileName.toString());
     }
 }
 
