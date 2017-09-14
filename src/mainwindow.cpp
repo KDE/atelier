@@ -196,6 +196,14 @@ void MainWindow::setupActions()
     actionCollection()->action(QStringLiteral("stop"))->setIcon(style()->standardIcon(QStyle::SP_MediaStop));
 
     // Actions for the Docks
+    action = actionCollection()->addAction(QStringLiteral("dock_labels"));
+    action->setText(i18n("&Show Dock Labels"));
+    action->setCheckable(true); 
+    action->setChecked(true);
+    connect(action, &QAction::triggered, [=](bool checked){
+        toggleDockTitles(checked);
+    });
+
     action = actionCollection()->addAction(QStringLiteral("3d"), ui->view3DdockWidget->toggleViewAction());
     action->setText(i18n("&3DView"));
 
@@ -358,4 +366,23 @@ void MainWindow::axisControlClicked(QChar axis, int value)
     core.setRelativePosition();
     core.pushCommand(GCode::toCommand(GCode::G1, QStringLiteral("%1%2").arg(axis, QString::number(value))));
     core.setAbsolutePosition();
+}
+
+void MainWindow::toggleDockTitles(bool checked)
+{
+    if(checked){
+        delete ui->axisDockWidget->titleBarWidget();
+        delete ui->view3DdockWidget->titleBarWidget();
+        delete ui->plotDockWidget->titleBarWidget();
+        delete ui->logDockWidget->titleBarWidget();
+        delete ui->controlDockWidget->titleBarWidget();
+        delete ui->gcodeDockWidget->titleBarWidget();
+    }else{
+        ui->axisDockWidget->setTitleBarWidget(new QWidget());
+        ui->view3DdockWidget->setTitleBarWidget(new QWidget());
+        ui->plotDockWidget->setTitleBarWidget(new QWidget());
+        ui->logDockWidget->setTitleBarWidget(new QWidget());
+        ui->controlDockWidget->setTitleBarWidget(new QWidget());
+        ui->gcodeDockWidget->setTitleBarWidget(new QWidget());
+    }
 }

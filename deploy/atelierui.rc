@@ -12,6 +12,7 @@
             <Action name="quit" />
         </Menu>
         <Menu name="view">
+            <Action name="dock_labels"/>
             <Action name="3d"/>
             <Action name="gcode"/>
             <Action name="axis"/>
