@@ -37,6 +37,7 @@ MainWindow::MainWindow(QWidget *parent) :
     setupActions();
     initConnectsToAtCore();
     initWidgets();
+    setCentralWidget(nullptr);
 }
 
 MainWindow::~MainWindow()
@@ -125,6 +126,7 @@ void MainWindow::initWidgets()
     ui->homeZPB->setIcon(style()->standardIcon(QStyle::SP_DirHomeIcon));
 
     tabifyDockWidget(ui->axisDockWidget, ui->controlDockWidget);
+    tabifyDockWidget(ui->view3DdockWidget, ui->gcodeDockWidget);
 }
 
 void MainWindow::setupActions()
@@ -194,6 +196,8 @@ void MainWindow::setupActions()
     actionCollection()->action(QStringLiteral("stop"))->setIcon(style()->standardIcon(QStyle::SP_MediaStop));
 
     // Actions for the Docks
+    action = actionCollection()->addAction(QStringLiteral("3d"), ui->view3DdockWidget->toggleViewAction());
+    action->setText(i18n("&3DView"));
 
     action = actionCollection()->addAction(QStringLiteral("gcode"), ui->gcodeDockWidget->toggleViewAction());
     action->setText(i18n("&GCode"));

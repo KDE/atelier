@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>490</width>
+    <width>484</width>
     <height>446</height>
    </rect>
   </property>
@@ -14,11 +14,7 @@
    <string>Atelier</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
-     <widget class="Viewer3D" name="view3DWidget" native="true"/>
-    </item>
-   </layout>
+   <layout class="QGridLayout" name="gridLayout"/>
    <widget class="QWidget" name="statusBarWidget" native="true">
     <property name="geometry">
      <rect>
@@ -85,7 +81,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>490</width>
+     <width>484</width>
      <height>30</height>
     </rect>
    </property>
@@ -231,6 +227,15 @@
      </item>
     </layout>
    </widget>
+  </widget>
+  <widget class="QDockWidget" name="view3DdockWidget">
+   <property name="windowTitle">
+    <string>&amp;3DView</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="Viewer3D" name="view3DWidget"/>
   </widget>
  </widget>
  <customwidgets>
