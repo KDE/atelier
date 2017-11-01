@@ -18,6 +18,7 @@
 #include <QApplication>
 #include <KAboutData>
 #include <KLocalizedString>
+#include <AtCore/atcore_version.h>
 #include "mainwindow.h"
 #include "config.h"
 
@@ -61,6 +62,8 @@ int main(int argc, char *argv[])
                         QStringLiteral("http://patrickjp.com"));
     aboutData.addAuthor(i18n("Tomaz Canabrava"), i18n("Contributor"), QStringLiteral("tomaz@kde.com"),
                         QStringLiteral("http://angrycane.com.br"));
+    AtCore *core = new AtCore();
+    aboutData.setOtherText(i18n("Using AtCore:%1").arg(ATCORE_VERSION_STRING));
     KAboutData::setApplicationData(aboutData);
 
     MainWindow *m = new MainWindow();
