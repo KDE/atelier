@@ -33,13 +33,13 @@ BedExtruderWidget::BedExtruderWidget(QWidget *parent) :
 
     connect(ui->bedTempSB, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), [ = ](double tmp) {
         if (ui->heatBedPB->isChecked()) {
-            emit bedTemperatureChanged(tmp);
+            emit bedTemperatureChanged(tmp,ui->bedAndWaitCB->isChecked());
         }
     });
 
     connect(ui->extTempSB, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), [ = ](double tmp) {
         if (ui->heatExtPB->isChecked()) {
-            emit extTemperatureChanged(tmp, currentExtruder());
+            emit extTemperatureChanged(tmp, currentExtruder(),ui->extAndWaitCB->isChecked());
         }
     });
 }
@@ -94,9 +94,9 @@ void BedExtruderWidget::updateExtTargetTemp(const float temp)
 
 void BedExtruderWidget::stopHeating()
 {
-    emit bedTemperatureChanged(0);
+    emit bedTemperatureChanged(0,ui->bedAndWaitCB->isChecked());
     for (int i = 0; i < extruderCount; i++) {
-        emit extTemperatureChanged(0, i);
+        emit extTemperatureChanged(0, i,ui->extAndWaitCB->isChecked());
     }
     ui->heatBedPB->setChecked(false);
     ui->heatExtPB->setChecked(false);
@@ -105,13 +105,13 @@ void BedExtruderWidget::stopHeating()
 void BedExtruderWidget::heatExtruderClicked(bool clicked)
 {
     int temp = ui->extTempSB->value() * clicked;
-    emit extTemperatureChanged(temp, currentExtruder());
+    emit extTemperatureChanged(temp, currentExtruder(),ui->extAndWaitCB->isChecked());
 }
 
 void BedExtruderWidget::heatBedClicked(bool clicked)
 {
     int temp = ui->bedTempSB->value() * clicked;
-    emit bedTemperatureChanged(temp);
+    emit bedTemperatureChanged(temp,ui->bedAndWaitCB->isChecked());
 
 }
 

@@ -49,6 +49,6 @@ private:
     int extruderCount = 0;
 
 signals:
-    void bedTemperatureChanged(int tmp);
-    void extTemperatureChanged(int tmp, int currExt);
+    void bedTemperatureChanged(int tmp, bool andWait);
+    void extTemperatureChanged(int tmp, int currExt, bool andWait);
 };
