@@ -46,6 +46,8 @@ find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS
                 3DExtras
                 3DRender
                 3DInput
+                Multimedia
+                MultimediaWidgets
             )
             
 if(BUILD_TESTING)
