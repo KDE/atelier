@@ -18,6 +18,7 @@
             <Action name="axis"/>
             <Acion  name="controller"/>
             <Action name="plot"/>
+            <Action name="video"/>
             <Action name="log"/>
         </Menu>
         <Menu name="run">

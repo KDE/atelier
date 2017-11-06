@@ -127,6 +127,7 @@ void MainWindow::initWidgets()
 
     tabifyDockWidget(ui->axisDockWidget, ui->controlDockWidget);
     tabifyDockWidget(ui->view3DdockWidget, ui->gcodeDockWidget);
+    tabifyDockWidget(ui->view3DdockWidget, ui->videoDockWidget);
 }
 
 void MainWindow::setupActions()
@@ -221,7 +222,10 @@ void MainWindow::setupActions()
 
     action = actionCollection()->addAction(QStringLiteral("axis"), ui->axisDockWidget->toggleViewAction());
     action->setText(i18n("Axis"));
-
+    
+    action = actionCollection()->addAction(QStringLiteral("video"), ui->videoDockWidget->toggleViewAction());
+    action->setText(i18n("Video Monitor"));
+    
     action = actionCollection()->addAction(QStringLiteral("log"), ui->logDockWidget->toggleViewAction());
     action->setText(i18n("Log"));
 

@@ -237,6 +237,15 @@
    </attribute>
    <widget class="Viewer3D" name="view3DWidget"/>
   </widget>
+  <widget class="QDockWidget" name="videoDockWidget">
+   <property name="windowTitle">
+    <string>&amp;Video Monitor</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="VideoMonitorWidget" name="dockWidgetContents_3"/>
+  </widget>
  </widget>
  <customwidgets>
   <customwidget>
@@ -284,6 +293,12 @@
    <class>Viewer3D</class>
    <extends>QWidget</extends>
    <header>widgets/3dview/viewer3d.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>VideoMonitorWidget</class>
+   <extends>QWidget</extends>
+   <header>widgets/videomonitorwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
