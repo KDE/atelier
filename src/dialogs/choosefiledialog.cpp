@@ -53,4 +53,3 @@ const QString& ChooseFileDialog::choosenFile()
 {
     return m_choosen_file;
 }
-
