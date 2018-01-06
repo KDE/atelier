@@ -19,6 +19,7 @@
 
 #include <QMainWindow>
 #include <QUrl>
+#include <KTextEditor/View>
 #include <KXmlGui/KXmlGuiWindow>
 
 namespace Ui
@@ -36,7 +37,9 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    QUrl m_fileName;
+    QList<QUrl> m_openFiles;
+    KTextEditor::View *m_curr_editor_view;
+    void initWidgets();
     void setupActions();
     void openFile();
     void newConnection(const QString& port, const QMap<QString, QVariant>& profile);

@@ -25,10 +25,12 @@
 #include <KXMLGUIFactory>
 #include <dialogs/connectsettingsdialog.h>
 #include <dialogs/profilesdialog.h>
+#include <widgets/gcodeeditorwidget.h>
 #include <memory>
 MainWindow::MainWindow(QWidget *parent) :
     KXmlGuiWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    m_curr_editor_view(nullptr)
 {
     ui->setupUi(this);
     setupActions();
@@ -37,6 +39,15 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::initWidgets()
+{
+    connect(ui->gcodeEditorWidget, &GCodeEditorWidget::updateClientFactory, this, [ & ](KTextEditor::View* view){
+        guiFactory()->removeClient(m_curr_editor_view);
+        guiFactory()->addClient(view);
+        m_curr_editor_view = view;
+    });
 }
 
 void MainWindow::setupActions()
@@ -81,13 +92,11 @@ void MainWindow::openFile()
     QUrl fileNameFromDialog = QFileDialog::getOpenFileUrl(this, i18n("Open GCode"),
                               QDir::homePath(), i18n("GCode (*.gco *.gcode)"));
     if (!fileNameFromDialog.isEmpty()) {
-        m_fileName = fileNameFromDialog;
-        ui->gcodeEditorWidget->loadFile(m_fileName);
-        guiFactory()->addClient(ui->gcodeEditorWidget->gcodeView());
-        ui->view3DWidget->drawModel(m_fileName.toString());
+        ui->gcodeEditorWidget->loadFile(fileNameFromDialog);
+        ui->view3DWidget->drawModel(fileNameFromDialog.toString());
+        m_openFiles.append(fileNameFromDialog);
     }
 }
-
 void MainWindow::newConnection(const QString& port, const QMap<QString, QVariant>& profile)
 {
     const int tabs = ui->tabWidget->count();

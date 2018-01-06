@@ -21,31 +21,69 @@
 #include <KLocalizedString>
 
 GCodeEditorWidget::GCodeEditorWidget(QWidget *parent) :
-    QWidget(parent)
+    QWidget(parent),
+    m_tabwidget(new QTabWidget())
 {
-    editor = KTextEditor::Editor::instance();
-    doc = editor->createDocument(this);
-    doc->setMode("G-Code");
-    view = doc->createView(this);
+    m_editor = KTextEditor::Editor::instance();
+    setupTabWidget();
     QVBoxLayout *layout = new QVBoxLayout();
-    layout->addWidget(view);
-    this->setLayout(layout);
-    setupInterface();
+    layout->addWidget(m_tabwidget);
+    setLayout(layout);
+}
+void GCodeEditorWidget::setupTabWidget()
+{
+    connect(m_tabwidget, &QTabWidget::tabCloseRequested, this, &GCodeEditorWidget::closeTab);
+    connect(m_tabwidget, &QTabWidget::currentChanged, this, &GCodeEditorWidget::currentIndexChanged);
+    m_tabwidget->setTabsClosable(true);
+    m_tabwidget->addTab(newView(newDoc()), i18n("New file"));
 }
 
-void GCodeEditorWidget::loadFile(const QUrl &fileName)
+KTextEditor::View* GCodeEditorWidget::gcodeView() const{
+    return qobject_cast<KTextEditor::View*>(m_editor->documents().first()->views().first());
+}
+void GCodeEditorWidget::loadFile(const QUrl &file)
 {
-    doc->openUrl(fileName);
+    auto doc = m_editor->documents().first();
+    if(!doc->isEmpty()){
+        doc = newDoc();
+        int t = m_tabwidget->addTab(newView(doc), file.fileName());
+        m_tabwidget->setCurrentIndex(t);
+    } else {
+        m_tabwidget->setTabText(0, file.fileName());
+        emit updateClientFactory(doc->views().first());
+    }
+    doc->openUrl(file);
     doc->setHighlightingMode(QString("G-Code"));
 }
 
-KTextEditor::View *GCodeEditorWidget::gcodeView() const
+void GCodeEditorWidget::setupInterface(const KTextEditor::View* view)
 {
+    m_interface = qobject_cast<KTextEditor::ConfigInterface *>(view);
+    m_interface->setConfigValue("line-numbers", true);
+}
+
+KTextEditor::Document* GCodeEditorWidget::newDoc()
+{
+    KTextEditor::Document *doc = m_editor->createDocument(this);
+    doc->setMode("G-Code");
+    return doc;
+}
+
+KTextEditor::View* GCodeEditorWidget::newView(KTextEditor::Document *doc){
+    auto view = doc->createView(this);
+    setupInterface(view);
     return view;
 }
 
-void GCodeEditorWidget::setupInterface()
+void GCodeEditorWidget::closeTab(int index)
 {
-    interface = qobject_cast<KTextEditor::ConfigInterface *>(view);
-    interface->setConfigValue("line-numbers", true);
+    m_tabwidget->removeTab(index);
+    if(!m_tabwidget->count()){
+        m_tabwidget->addTab(newView(newDoc()), i18n("New file"));
+    }
+}
+
+void GCodeEditorWidget::currentIndexChanged(int index){
+    if(index != -1)
+        emit updateClientFactory(qobject_cast<KTextEditor::View*>(m_tabwidget->currentWidget()));
 }
