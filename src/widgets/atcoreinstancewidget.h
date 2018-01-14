@@ -52,9 +52,11 @@ public:
 private:
     Ui::AtCoreInstanceWidget* ui;
     AtCore m_core;
-    QToolBar *toolBar;
+    QToolBar *m_mainToolBar;
+    QToolBar *m_toolBar;
     QMap<QString, QVariant> profileData;
     QList<QUrl> m_files;
+    QAction *m_printAction;
     void initConnectsToAtCore();
     void printFile(const QUrl& fileName);
     void pausePrint();
@@ -67,9 +69,9 @@ private:
     void axisControlClicked(QChar axis, int value);
     void enableControls(bool b);
     void buildToolbar();
-    void setupConnections();
+    void buildMainToolbar();
     void print();
-
 signals:
     void extruderCountChanged(int count);
+    void disableDisconnect(bool b);
 };

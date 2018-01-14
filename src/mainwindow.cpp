@@ -33,6 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_curr_editor_view(nullptr)
 {
     ui->setupUi(this);
+    initWidgets();
     setupActions();
 }
 

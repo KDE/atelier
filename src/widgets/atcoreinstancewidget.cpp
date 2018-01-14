@@ -25,32 +25,19 @@
 #include "choosefiledialog.h"
 
 AtCoreInstanceWidget::AtCoreInstanceWidget(QWidget *parent):
-    QWidget(parent)
+    QWidget(parent),
+    m_mainToolBar(nullptr),
+    m_toolBar(nullptr),
+    m_printAction(nullptr)
 {
     ui = new Ui::AtCoreInstanceWidget;
     ui->setupUi(this);
-    ui->printPB->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
-    ui->pausePB->setIcon(style()->standardIcon(QStyle::SP_MediaPause));
-    ui->stopPB->setIcon(style()->standardIcon(QStyle::SP_MediaStop));
-    ui->disableMotorsPB->setIcon(style()->standardIcon(QStyle::SP_DockWidgetCloseButton));
+
     ui->printProgressWidget->setVisible(false);
-
-    setupConnections();
-    enableControls(false);
-}
-
-void AtCoreInstanceWidget::setupConnections(){
-    connect(ui->pausePB, &QPushButton::clicked, this, &AtCoreInstanceWidget::pausePrint);
-    connect(ui->stopPB, &QPushButton::clicked, this, &AtCoreInstanceWidget::stopPrint);
-    connect(ui->disableMotorsPB, &QPushButton::clicked, this, &AtCoreInstanceWidget::disableMotors);
-
+    buildMainToolbar();
     buildToolbar();
-    connect(ui->disconnectPB, &QPushButton::clicked, [ & ]{
-        m_core.setState(AtCore::DISCONNECTED);
-    });
-    connect(ui->printPB, &QPushButton::clicked, this, &AtCoreInstanceWidget::print);
-
     enableControls(false);
+    initConnectsToAtCore();
 }
 
 AtCoreInstanceWidget::~AtCoreInstanceWidget()
@@ -60,28 +47,28 @@ AtCoreInstanceWidget::~AtCoreInstanceWidget()
 
 void AtCoreInstanceWidget::buildToolbar()
 {
-    toolBar = new QToolBar();
+    m_toolBar = new QToolBar();
 
     auto lb = new QAction;
     lb->setIcon(style()->standardIcon(QStyle::SP_DirHomeIcon));
     lb->setDisabled(true);
-    toolBar->addAction(lb);
+    m_toolBar->addAction(lb);
 
     auto homeAll = new QAction("All");
-    connect(homeAll, &QAction::triggered, [=]{
+    connect(homeAll, &QAction::triggered, [&]{
        m_core.home();
     });
-    toolBar->addAction(homeAll);
-    
+    m_toolBar->addAction(homeAll);
+
     for(auto homes : std::map<QString, int>{{"X", AtCore::X}, {"Y", AtCore::Y}, {"Z", AtCore::Z}}) {
         auto home = new QAction(homes.first);
-        connect(home, &QAction::triggered, [this, &homes] {
+        connect(home, &QAction::triggered, [&, homes] {
             m_core.home(homes.second);
         });
-        toolBar->addAction(home);
+        m_toolBar->addAction(home);
     }
 
-    toolBar->addSeparator();
+    m_toolBar->addSeparator();
 
     auto *axis = new QAction("Axis");
     axis->setCheckable(true);
@@ -98,16 +85,61 @@ void AtCoreInstanceWidget::buildToolbar()
     plot->setChecked(true);
     connect(plot, &QAction::toggled, ui->plotWidget, &PlotWidget::setVisible);
 
-    toolBar->addAction(axis);
-    toolBar->addAction(controls);
-    toolBar->addAction(plot);
-    ui->toolBarLayout->addWidget(toolBar);
+    m_toolBar->addAction(axis);
+    m_toolBar->addAction(controls);
+    m_toolBar->addAction(plot);
+    ui->toolBarLayout->addWidget(m_toolBar);
     ui->toolBarLayout->addStretch();
 }
-void AtCoreInstanceWidget::startConnection(const QString& serialPort, const QMap<QString, QVariant>& profile){
-    m_core.initSerial(serialPort, profile["bps"].toInt());
-    profileData = profile;
-    initConnectsToAtCore();
+
+void AtCoreInstanceWidget::buildMainToolbar(){
+    m_mainToolBar = new QToolBar();
+    m_mainToolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+
+    auto disconnectAction = new QAction(style()->standardIcon(QStyle::SP_DialogCloseButton), i18n("Disconnect"));
+    connect(this, &AtCoreInstanceWidget::disableDisconnect, disconnectAction, &QAction::setDisabled);
+    connect(disconnectAction, &QAction::triggered, [&](){
+        m_core.closeConnection();
+    });
+    m_mainToolBar->addAction(disconnectAction);
+
+    m_printAction = new QAction(style()->standardIcon(QStyle::SP_MediaPlay),i18n("Print"));
+    connect(m_printAction, &QAction::triggered, [ & ](){
+        if(m_core.state() == AtCore::BUSY) {
+            pausePrint();
+            return;
+        }
+        if (m_core.state() == AtCore::IDLE){
+            print();
+        } else if (m_core.state() == AtCore::PAUSE) {
+            m_core.resume();
+        }
+    });
+    m_mainToolBar->addAction(m_printAction);
+
+    auto stopAction = new QAction(style()->standardIcon(QStyle::SP_MediaStop),i18n("Stop"));
+    connect(stopAction, &QAction::triggered, this, &AtCoreInstanceWidget::stopPrint);
+    connect(stopAction, &QAction::triggered, [&](){
+        m_printAction->setText(i18n("Print"));
+        m_printAction->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
+    });
+    m_mainToolBar->addAction(stopAction);
+
+    auto disableMotorsAction = new QAction(style()->standardIcon(QStyle::SP_MediaStop),i18n("Disable Motors"));
+    connect(disableMotorsAction, &QAction::triggered, this, &AtCoreInstanceWidget::disableMotors);
+    m_mainToolBar->addAction(disableMotorsAction);
+
+    ui->mainToolBarLayout->addWidget(m_mainToolBar);
+    ui->mainToolBarLayout->addStretch();
+}
+void AtCoreInstanceWidget::startConnection(const QString& serialPort, const QMap<QString, QVariant>& profiles){
+    m_core.initSerial(serialPort, profiles["bps"].toInt());
+    if(m_core.state() == AtCore::CONNECTING){
+        QString fw = profiles["firmware"].toString();
+        if( fw != QString("Auto-Detect")){
+            m_core.loadFirmwarePlugin(fw);
+        }
+    }
 }
 
 void AtCoreInstanceWidget::initConnectsToAtCore()
@@ -216,7 +248,7 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
             stateString = i18n("Connected to ") + m_core.serial()->portName();
             emit extruderCountChanged(m_core.extruderCount());
             ui->logWidget->addLog(i18n("Serial connected"));
-            ui->disconnectPB->setEnabled(true);
+            emit disableDisconnect(false);
             enableControls(true);
         } break;
         case AtCore::DISCONNECTED: {
@@ -235,13 +267,19 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
             stateString = i18n("Finished Print");
             ui->printProgressWidget->setVisible(false);
             disconnect(&m_core, &AtCore::printProgressChanged, ui->printProgressWidget, &PrintProgressWidget::updateProgressBar);
+            m_printAction->setText(i18n("Print"));
+            m_printAction->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
         } break;
         case AtCore::BUSY: {
             stateString = i18n("Printing");
-            ui->disconnectPB->setDisabled(true);
+            emit disableDisconnect(true);
+            m_printAction->setText(i18n("Pause"));
+            m_printAction->setIcon(style()->standardIcon(QStyle::SP_MediaPause));
         } break;
         case AtCore::PAUSE: {
             stateString = i18n("Paused");
+            m_printAction->setText(i18n("Resume"));
+            m_printAction->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
         } break;
         case AtCore::STOP: {
             stateString = i18n("Stoping Print");
@@ -317,12 +355,8 @@ void AtCoreInstanceWidget::axisControlClicked(QChar axis, int value)
 void AtCoreInstanceWidget::enableControls(bool b)
 {
     ui->mainTab->setEnabled(b);
-    ui->printPB->setEnabled(b);
-    ui->pausePB->setEnabled(b);
-    ui->stopPB->setEnabled(b);
-    ui->disconnectPB->setEnabled(b);
-    ui->disableMotorsPB->setEnabled(b);
-    toolBar->setEnabled(b);
+    m_mainToolBar->setEnabled(b);
+    m_toolBar->setEnabled(b);
 }
 
 bool AtCoreInstanceWidget::connected()
