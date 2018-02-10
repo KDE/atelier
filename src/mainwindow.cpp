@@ -16,6 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QFileDialog>
@@ -31,6 +32,7 @@
 #include <memory>
 #include <QSplitter>
 #include <QHBoxLayout>
+#include <widgets/atcoreinstancewidget.h>
 #include <QStackedWidget>
 #include <widgets/3dview/viewer3d.h>
 #include <widgets/videomonitorwidget.h>
@@ -38,7 +40,8 @@
 MainWindow::MainWindow(QWidget *parent) :
     KXmlGuiWindow(parent),
     ui(new Ui::MainWindow),
-    m_curr_editor_view(nullptr)
+    m_curr_editor_view(nullptr),
+    m_instances(new QTabWidget(this))
 {
     ui->setupUi(this);
     initWidgets();
@@ -52,11 +55,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::initWidgets()
 {
-    /*
-    auto instance = qobject_cast<AtCoreInstanceWidget*>(ui->tabWidget->currentWidget());
-    connectSettingsDialog->setFirmwareList(instance->firmwares());
-    profilesDialog->setBaudRates(instance->baudRates());
-    */
+    auto newInstanceWidget = new AtCoreInstanceWidget();
+    m_instances->addTab(newInstanceWidget, i18n("Connect your printer"));
 
     setupLateralArea();
 
@@ -66,7 +66,7 @@ void MainWindow::initWidgets()
     auto *centralLayout = new QHBoxLayout();
     auto splitter = new QSplitter();
     splitter->addWidget(m_lateral.m_stack);
-    splitter->addWidget(new QTabWidget());
+    splitter->addWidget(m_instances);
     centralLayout->addWidget(m_lateral.m_toolBar);
     centralLayout->addWidget(splitter);
     ui->centralwidget->setLayout(centralLayout);
@@ -107,8 +107,6 @@ void MainWindow::setupLateralArea()
     setupButton(i18n("&Video"), new VideoMonitorWidget(this));
     buttonLayout->addStretch();
     m_lateral.m_toolBar->setLayout(buttonLayout);
-    m_lateral.m_toolBar->show();
-    m_lateral.m_stack->show();
 }
 
 void MainWindow::setupActions()

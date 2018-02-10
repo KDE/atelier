@@ -58,6 +58,8 @@ private:
     QList<QUrl> m_openFiles;
     KTextEditor::View *m_currEditorView;
     LateralArea m_lateral;
+    QTabWidget *m_instances;
+
     void setupLateralArea();
     void initWidgets();
     void setupActions();
