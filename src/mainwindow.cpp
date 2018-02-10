@@ -26,7 +26,13 @@
 #include <dialogs/connectsettingsdialog.h>
 #include <dialogs/profilesdialog.h>
 #include <widgets/gcodeeditorwidget.h>
+#include <set>
+#include <QToolButton>
 #include <memory>
+#include <QStackedWidget>
+#include <widgets/3dview/viewer3d.h>
+#include <widgets/videomonitorwidget.h>
+
 MainWindow::MainWindow(QWidget *parent) :
     KXmlGuiWindow(parent),
     ui(new Ui::MainWindow),
@@ -44,11 +50,54 @@ MainWindow::~MainWindow()
 
 void MainWindow::initWidgets()
 {
-    connect(ui->gcodeEditorWidget, &GCodeEditorWidget::updateClientFactory, this, [ & ](KTextEditor::View* view){
-        guiFactory()->removeClient(m_curr_editor_view);
-        guiFactory()->addClient(view);
-        m_curr_editor_view = view;
-    });
+    /*
+    auto instance = qobject_cast<AtCoreInstanceWidget*>(ui->tabWidget->currentWidget());
+    connectSettingsDialog->setFirmwareList(instance->firmwares());
+    profilesDialog->setBaudRates(instance->baudRates());
+    */
+
+    setupLateralArea();
+}
+
+// Move to LateralArea.
+void MainWindow::setupLateralArea()
+{
+    m_lateral.m_toolBar = new QWidget();
+    m_lateral.m_stack = new QStackedWidget();
+    auto *buttonLayout = new QVBoxLayout();
+
+    auto setupButton = [this, buttonLayout](const QString& s, QWidget *w) {
+        QToolButton *btn = nullptr;
+        btn = new QToolButton(m_lateral.m_toolBar);
+        btn->setText(s);
+        btn->setAutoExclusive(true);
+        btn->setCheckable(true);
+        m_lateral.m_stack->addWidget(w);
+        m_lateral.m_map[s] = {btn, w};
+
+        buttonLayout->addWidget(btn);
+        connect(btn, &QToolButton::toggled, [this, w](bool checked) {
+            if (checked)
+                m_lateral.m_stack->setCurrentWidget(w);
+        });
+    };
+
+    auto *gcodeEditor = new GCodeEditorWidget(this);
+     connect(gcodeEditor, &GCodeEditorWidget::updateClientFactory, this, [&](KTextEditor::View* view){
+         guiFactory()->removeClient(m_curr_editor_view);
+         guiFactory()->addClient(view);
+         m_curr_editor_view = view;
+     });
+
+    setupButton(i18n("&3D"), new Viewer3D(this));
+    setupButton(i18n("&GCode"), gcodeEditor);
+    setupButton(i18n("&Video"), new VideoMonitorWidget(this));
+
+    m_lateral.m_toolBar->setLayout(buttonLayout);
+    m_lateral.m_toolBar->show();
+    m_lateral.m_stack->show();
+
+
 }
 
 void MainWindow::setupActions()
@@ -92,14 +141,17 @@ void MainWindow::openFile()
 {
     QUrl fileNameFromDialog = QFileDialog::getOpenFileUrl(this, i18n("Open GCode"),
                               QDir::homePath(), i18n("GCode (*.gco *.gcode)"));
+/*
     if (!fileNameFromDialog.isEmpty()) {
         ui->gcodeEditorWidget->loadFile(fileNameFromDialog);
         ui->view3DWidget->drawModel(fileNameFromDialog.toString());
         m_openFiles.append(fileNameFromDialog);
     }
+    */
 }
 void MainWindow::newConnection(const QString& port, const QMap<QString, QVariant>& profile)
 {
+    /*
     const int tabs = ui->tabWidget->count();
     if(tabs == 1){
         auto instance = qobject_cast<AtCoreInstanceWidget*>(ui->tabWidget->currentWidget());
@@ -112,4 +164,5 @@ void MainWindow::newConnection(const QString& port, const QMap<QString, QVariant
     auto newInstanceWidget = new AtCoreInstanceWidget();
     ui->tabWidget->addTab(newInstanceWidget, profile["name"].toString());
     newInstanceWidget->startConnection(port, profile);
+    */
 }

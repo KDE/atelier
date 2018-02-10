@@ -21,11 +21,29 @@
 #include <QUrl>
 #include <KTextEditor/View>
 #include <KXmlGui/KXmlGuiWindow>
+#include <dialogs/connectsettingsdialog.h>
+#include <dialogs/profilesdialog.h>
+#include <QStackedWidget>
+#include <QToolButton>
+#include <QMap>
+#include <QPair>
+#include <QToolButton>
 
 namespace Ui
 {
 class MainWindow;
 }
+
+struct LateralArea {
+    // Area with the the lateral buttons that will open the views.
+    // Kind like the KDevelop stuff but way simpler.
+    using Btn2Widget = QPair<QToolButton*, QWidget*>;
+    using WidgetMap = QMap<QString, Btn2Widget>;
+
+    QWidget *m_toolBar;
+    QStackedWidget *m_stack;
+    WidgetMap m_map;
+};
 
 class MainWindow : public KXmlGuiWindow
 {
@@ -38,7 +56,9 @@ public:
 private:
     Ui::MainWindow *ui;
     QList<QUrl> m_openFiles;
-    KTextEditor::View *m_curr_editor_view;
+    KTextEditor::View *m_currEditorView;
+    LateralArea m_lateral;
+    void setupLateralArea();
     void initWidgets();
     void setupActions();
     void openFile();
