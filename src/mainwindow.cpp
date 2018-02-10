@@ -29,6 +29,8 @@
 #include <set>
 #include <QToolButton>
 #include <memory>
+#include <QSplitter>
+#include <QHBoxLayout>
 #include <QStackedWidget>
 #include <widgets/3dview/viewer3d.h>
 #include <widgets/videomonitorwidget.h>
@@ -57,6 +59,17 @@ void MainWindow::initWidgets()
     */
 
     setupLateralArea();
+
+    // View:
+    // Sidebar, Sidevar Controls, Printer Tabs.
+    // Sidevar Controls and Printer Tabs can be resized, Sidebar cant.
+    auto *centralLayout = new QHBoxLayout();
+    auto splitter = new QSplitter();
+    splitter->addWidget(m_lateral.m_stack);
+    splitter->addWidget(new QTabWidget());
+    centralLayout->addWidget(m_lateral.m_toolBar);
+    centralLayout->addWidget(splitter);
+    ui->centralwidget->setLayout(centralLayout);
 }
 
 // Move to LateralArea.
@@ -92,12 +105,10 @@ void MainWindow::setupLateralArea()
     setupButton(i18n("&3D"), new Viewer3D(this));
     setupButton(i18n("&GCode"), gcodeEditor);
     setupButton(i18n("&Video"), new VideoMonitorWidget(this));
-
+    buttonLayout->addStretch();
     m_lateral.m_toolBar->setLayout(buttonLayout);
     m_lateral.m_toolBar->show();
     m_lateral.m_stack->show();
-
-
 }
 
 void MainWindow::setupActions()
