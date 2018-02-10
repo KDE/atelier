@@ -105,10 +105,11 @@ void MainWindow::newConnection(const QString& port, const QMap<QString, QVariant
         auto instance = qobject_cast<AtCoreInstanceWidget*>(ui->tabWidget->currentWidget());
         if(!instance->connected()){
             instance->startConnection(port, profile);
+            ui->tabWidget->setTabText(ui->tabWidget->currentIndex(), profile["name"].toString());
             return;
         }
     }
-    auto newInstance = new AtCoreInstanceWidget();
-    ui->tabWidget->addTab(newInstance, QString::number(tabs+1));
-    newInstance->startConnection(port, profile);
+    auto newInstanceWidget = new AtCoreInstanceWidget();
+    ui->tabWidget->addTab(newInstanceWidget, profile["name"].toString());
+    newInstanceWidget->startConnection(port, profile);
 }
