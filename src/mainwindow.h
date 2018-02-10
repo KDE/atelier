@@ -43,6 +43,9 @@ struct LateralArea {
     QWidget *m_toolBar;
     QStackedWidget *m_stack;
     WidgetMap m_map;
+    template<typename T> T* get(const QString& s) {
+        return qobject_cast<T*>(m_map[s].second);
+    }
 };
 
 class MainWindow : public KXmlGuiWindow

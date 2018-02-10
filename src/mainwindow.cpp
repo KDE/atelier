@@ -148,30 +148,35 @@ void MainWindow::setupActions()
 
 void MainWindow::openFile()
 {
-    QUrl fileNameFromDialog = QFileDialog::getOpenFileUrl(this, i18n("Open GCode"),
+    QUrl fileName = QFileDialog::getOpenFileUrl(this, i18n("Open GCode"),
                               QDir::homePath(), i18n("GCode (*.gco *.gcode)"));
-/*
-    if (!fileNameFromDialog.isEmpty()) {
-        ui->gcodeEditorWidget->loadFile(fileNameFromDialog);
-        ui->view3DWidget->drawModel(fileNameFromDialog.toString());
-        m_openFiles.append(fileNameFromDialog);
+
+    if (!fileName.isEmpty()) {
+
+        m_lateral.get<GCodeEditorWidget>("gcode")->loadFile(fileName);
+        m_lateral.get<Viewer3D>("3d")->drawModel(fileName.toString());
+
+        const int tabs = m_instances->count();
+        m_openFiles.append(fileName);
+
+        for(int i=0; i < tabs; ++i){
+            auto instance = qobject_cast<AtCoreInstanceWidget*>(m_instances->widget(i));
+            instance->setOpenFiles(m_openFiles);
+        }
     }
-    */
 }
 void MainWindow::newConnection(const QString& port, const QMap<QString, QVariant>& profile)
 {
-    /*
-    const int tabs = ui->tabWidget->count();
+    const int tabs = m_instances->count();
     if(tabs == 1){
-        auto instance = qobject_cast<AtCoreInstanceWidget*>(ui->tabWidget->currentWidget());
+        auto instance = qobject_cast<AtCoreInstanceWidget*>(m_instances->currentWidget());
         if(!instance->connected()){
             instance->startConnection(port, profile);
-            ui->tabWidget->setTabText(ui->tabWidget->currentIndex(), profile["name"].toString());
+            m_instances->setTabText(m_instances->currentIndex(), profile["name"].toString());
             return;
         }
     }
     auto newInstanceWidget = new AtCoreInstanceWidget();
-    ui->tabWidget->addTab(newInstanceWidget, profile["name"].toString());
+    m_instances->addTab(newInstanceWidget, profile["name"].toString());
     newInstanceWidget->startConnection(port, profile);
-    */
 }
