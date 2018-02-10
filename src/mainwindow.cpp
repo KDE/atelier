@@ -80,11 +80,13 @@ void MainWindow::setupLateralArea()
     auto *buttonLayout = new QVBoxLayout();
 
     auto setupButton = [this, buttonLayout](const QString& key, const QString& text, const QIcon& icon, QWidget *w) {
-        QToolButton *btn = nullptr;
-        btn = new QToolButton(m_lateral.m_toolBar);
-        btn->setText(text);
+        auto *btn = new QPushButton(m_lateral.m_toolBar);
+        btn->setToolTip(text);
         btn->setAutoExclusive(true);
         btn->setCheckable(true);
+        btn->setIcon(icon);
+        btn->setIconSize(QSize(64,64));
+        btn->setFlat(true);
         m_lateral.m_stack->addWidget(w);
         m_lateral.m_map[key] = {btn, w};
 
@@ -102,9 +104,9 @@ void MainWindow::setupLateralArea()
          m_curr_editor_view = view;
      });
 
-    setupButton("3d",    i18n("&3D"), QIcon("fake"), new Viewer3D(this));
-    setupButton("gcode", i18n("&GCode"), QIcon("fake"), gcodeEditor);
-    setupButton("video", i18n("&Video"), QIcon("fake"), new VideoMonitorWidget(this));
+    setupButton("3d",    i18n("&3D"), QIcon(":/icon/atelier"), new Viewer3D(this));
+    setupButton("gcode", i18n("&GCode"), QIcon(":/icon/atelier"), gcodeEditor);
+    setupButton("video", i18n("&Video"), QIcon(":/icon/atelier"), new VideoMonitorWidget(this));
     buttonLayout->addStretch();
     m_lateral.m_toolBar->setLayout(buttonLayout);
 }

@@ -27,7 +27,7 @@
 #include <QToolButton>
 #include <QMap>
 #include <QPair>
-#include <QToolButton>
+#include <QPushButton>
 
 namespace Ui
 {
@@ -37,7 +37,7 @@ class MainWindow;
 struct LateralArea {
     // Area with the the lateral buttons that will open the views.
     // Kind like the KDevelop stuff but way simpler.
-    using Btn2Widget = QPair<QToolButton*, QWidget*>;
+    using Btn2Widget = QPair<QPushButton*, QWidget*>;
     using WidgetMap = QMap<QString, Btn2Widget>;
 
     QWidget *m_toolBar;
