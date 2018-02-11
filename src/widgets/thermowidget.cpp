@@ -16,6 +16,9 @@ void ThermoWidget::drawNeedle( QPainter *painter, const QPointF &center, double 
 {
     Q_UNUSED( dir );
 
+    qDebug() << "############################";
+    qDebug() << "Drawing for" << minScaleArc() << " to " << maxScaleArc() << "and values" << lowerBound() << "and" << upperBound();
+
     const double startAngle = minScaleArc();
     const double endAngle = maxScaleArc();
 
@@ -28,11 +31,16 @@ void ThermoWidget::drawNeedle( QPainter *painter, const QPointF &center, double 
     const double currentTemperaturePercent = (m_currentTemperature - minValue) / relativePercent;
     const double targetTemperaturePercent = (m_targetTemperature - minValue) / relativePercent;
 
-    const double currentTemperatureAngle = (endAngle - startAngle) * currentTemperaturePercent + startAngle;
-    const double targetTemperatureAngle = (endAngle - startAngle) * targetTemperatureAngle + startAngle;
+    qDebug() << "Values" << m_currentTemperature << m_targetTemperature;
+    qDebug() << "Percentages" << currentTemperaturePercent << targetTemperaturePercent;
 
-    m_targetTemperatureNeedle->draw(painter, center, radius, currentTemperatureAngle, colorGroup);
-    m_currentTemperatureNeedle->draw(painter, center, radius, targetTemperatureAngle, colorGroup);
+    const double currentTemperatureAngle = (endAngle - startAngle) * currentTemperaturePercent + startAngle;
+    const double targetTemperatureAngle = (endAngle - startAngle) * targetTemperaturePercent + startAngle;
+
+    qDebug() << "Angles" << currentTemperatureAngle << targetTemperatureAngle;
+
+    m_targetTemperatureNeedle->draw(painter, center, radius, 360 - currentTemperatureAngle - origin(), colorGroup);
+    m_currentTemperatureNeedle->draw(painter, center, radius, 360 - targetTemperatureAngle - origin(), colorGroup);
 }
 
 void ThermoWidget::setCurrentTemperature(double temperature)
