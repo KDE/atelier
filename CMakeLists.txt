@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
 project(atelier)
 
 find_package(ECM REQUIRED NO_MODULE)
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 include(KDECompilerSettings)
 include(KDEInstallDirs)
 include(KDECMakeSettings)
@@ -26,6 +26,8 @@ endif()
 find_package(AtCore REQUIRED COMPONENTS
                 AtCore
             )
+
+find_package(Qwt6 REQUIRED)
 
 find_package(KF5 ${KF5_DEP_VERSION} REQUIRED COMPONENTS
                 I18n
