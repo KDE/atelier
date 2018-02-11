@@ -1,43 +1,78 @@
 #include "thermowidget.h"
+#include <QKeyEvent>
+#include <QPaintEvent>
+#include <QFocusEvent>
+#include <QPainter>
+#include <QBrush>
+#include <QPen>
 
 ThermoWidget::ThermoWidget(QWidget *parent) : QwtDial(parent),
     m_currentTemperatureNeedle(new QwtDialSimpleNeedle(QwtDialSimpleNeedle::Arrow)),
-    m_targetTemperatureNeedle(new QwtDialSimpleNeedle(QwtDialSimpleNeedle::Arrow))
+    m_targetTemperatureNeedle(new QwtDialSimpleNeedle(QwtDialSimpleNeedle::Arrow)),
+    m_currentTemperature(0),
+    m_targetTemperature(0)
 {
     setScaleArc(40, 320);
     setNeedle(m_currentTemperatureNeedle);
+    setReadOnly(false);
+    setFocusPolicy(Qt::StrongFocus);
+}
 
-    m_currentTemperature = 100;
-    m_targetTemperature = 120;
+void ThermoWidget::keyPressEvent(QKeyEvent* event)
+{
+    if (event->key() >= Qt::Key_0 && event->key() <= Qt::Key_9) {
+        auto tmp = m_currentTemperatureTextFromEditor + event->key();
+        if (tmp.toInt() <= upperBound() && tmp.toInt() >= lowerBound()) {
+            m_currentTemperatureTextFromEditor = tmp;
+        }
+    } else if (event->key() == Qt::Key_Backspace && m_currentTemperatureTextFromEditor.count()) {
+        m_currentTemperatureTextFromEditor.remove(m_currentTemperatureTextFromEditor.count() - 1, 1);
+    } else if (event->key() == Qt::Key_Enter) {
+        m_targetTemperature = m_currentTemperatureTextFromEditor.toInt();
+    } else if (event->key() == Qt::Key_Escape) {
+        m_currentTemperatureTextFromEditor = '0';
+    } else {
+        QwtDial::keyPressEvent(event);
+        return;
+    }
 
+    m_targetTemperature = m_currentTemperatureTextFromEditor.toInt();
+    update();
+}
+
+void ThermoWidget::focusOutEvent(QFocusEvent* event)
+{
+    m_targetTemperature = m_currentTemperatureTextFromEditor.toInt();
+    update();
+    event->accept();
+}
+
+
+void ThermoWidget::paintEvent(QPaintEvent* event)
+{
+    QwtDial::paintEvent(event);
+
+    QFontMetrics fm(font());
+    const double width = fm.width(m_currentTemperatureTextFromEditor);
+    const double height = fm.height();
+    const double xpos = (geometry().width() / 2) - (width / 2);
+    const double ypos = geometry().height() - height * 2  - 2;
+
+    QPainter p(this);
+    p.setBrush(Qt::white);
+    p.setPen(Qt::white);
+    p.drawText(xpos, ypos, m_currentTemperatureTextFromEditor);
 }
 
 void ThermoWidget::drawNeedle( QPainter *painter, const QPointF &center, double radius, double dir, QPalette::ColorGroup colorGroup ) const
 {
     Q_UNUSED( dir );
 
-    qDebug() << "############################";
-    qDebug() << "Drawing for" << minScaleArc() << " to " << maxScaleArc() << "and values" << lowerBound() << "and" << upperBound();
-
-    const double startAngle = minScaleArc();
-    const double endAngle = maxScaleArc();
-
-
-    const double minValue = lowerBound();
-    const double maxValue = upperBound();
-
-    const double relativePercent = maxValue - minValue;
-
-    const double currentTemperaturePercent = (m_currentTemperature - minValue) / relativePercent;
-    const double targetTemperaturePercent = (m_targetTemperature - minValue) / relativePercent;
-
-    qDebug() << "Values" << m_currentTemperature << m_targetTemperature;
-    qDebug() << "Percentages" << currentTemperaturePercent << targetTemperaturePercent;
-
-    const double currentTemperatureAngle = (endAngle - startAngle) * currentTemperaturePercent + startAngle;
-    const double targetTemperatureAngle = (endAngle - startAngle) * targetTemperaturePercent + startAngle;
-
-    qDebug() << "Angles" << currentTemperatureAngle << targetTemperatureAngle;
+    const double relativePercent = upperBound() - lowerBound();
+    const double currentTemperaturePercent = (m_currentTemperature - lowerBound()) / relativePercent;
+    const double targetTemperaturePercent = (m_targetTemperature - lowerBound()) / relativePercent;
+    const double currentTemperatureAngle = (maxScaleArc() - minScaleArc()) * currentTemperaturePercent + minScaleArc();
+    const double targetTemperatureAngle = (maxScaleArc() - minScaleArc()) * targetTemperaturePercent + minScaleArc();
 
     m_targetTemperatureNeedle->draw(painter, center, radius, 360 - currentTemperatureAngle - origin(), colorGroup);
     m_currentTemperatureNeedle->draw(painter, center, radius, 360 - targetTemperatureAngle - origin(), colorGroup);
@@ -46,9 +81,11 @@ void ThermoWidget::drawNeedle( QPainter *painter, const QPointF &center, double 
 void ThermoWidget::setCurrentTemperature(double temperature)
 {
     m_currentTemperature = temperature;
+    update();
 }
 
 void ThermoWidget::setTargetTemperature(double temperature)
 {
     m_targetTemperature = temperature;
+    update();
 }

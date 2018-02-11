@@ -2,6 +2,7 @@
     Copyright (C) <2016>
     Author: Lays Rodrigues - laysrodriguessilva@gmail.com
             Tomaz Canabraza - tcanabrava@kde.org
+            Chris Rizzitello - rizzitello@kde.org
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -85,22 +86,22 @@ void BedExtruderWidget::setExtruderCount(int value)
 
 void BedExtruderWidget::updateBedTemp(const float temp)
 {
-//    ui->bedCurrTempLB->setText(QString::number(temp));
+    m_bedThermo->setCurrentTemperature(temp);
 }
 
 void BedExtruderWidget::updateExtTemp(const float temp)
 {
-//    ui->extCurrTempLB->setText(QString::number(temp));
+    m_exturderThermo->setCurrentTemperature(temp);
 }
 
 void BedExtruderWidget::updateBedTargetTemp(const float temp)
 {
-//    ui->bedTargetTempLB->setText(QString::number(temp) + " ºC");
+    m_bedThermo->setTargetTemperature(temp);
 }
 
 void BedExtruderWidget::updateExtTargetTemp(const float temp)
 {
-//    ui->extTargetTempLB->setText(QString::number(temp) + " ºC");
+    m_exturderThermo->setTargetTemperature(temp);
 }
 
 void BedExtruderWidget::stopHeating()
