@@ -1,6 +1,7 @@
 /* Atelier KDE Printer Host for 3D Printing
     Copyright (C) <2016>
     Author: Lays Rodrigues - laysrodriguessilva@gmail.com
+            Tomaz Canabraza - tcanabrava@kde.org
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,14 +18,11 @@
 */
 #pragma once
 
-#include <QWidget>
-#include <QRadioButton>
 #include <QMap>
+#include <QRadioButton>
+#include <QWidget>
 
-namespace Ui
-{
-class BedExtruderWidget;
-}
+class ThermoWidget;
 
 class BedExtruderWidget : public QWidget
 {
@@ -41,12 +39,15 @@ public:
     void stopHeating();
 
 private:
-    Ui::BedExtruderWidget *ui;
+//    Ui::BedExtruderWidget *ui;
     QMap <int, QRadioButton *> extruderMap;
     void heatExtruderClicked(bool clicked);
     void heatBedClicked(bool clicked);
     int currentExtruder();
     int extruderCount = 0;
+
+    ThermoWidget *m_exturderThermo = nullptr;
+    ThermoWidget *m_bedThermo = nullptr;
 
 signals:
     void bedTemperatureChanged(int tmp, bool andWait);
