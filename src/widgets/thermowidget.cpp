@@ -140,6 +140,16 @@ void ThermoWidget::drawNeedle( QPainter *painter, const QPointF &center, double 
 
     m_targetTemperatureNeedle->draw(painter, center, radius, 360 - targetTemperatureAngle - origin(), colorGroup);
     m_currentTemperatureNeedle->draw(painter, center, radius, 360 - currentTemperatureAngle - origin(), colorGroup);
+
+    int startangle = 360 - targetTemperatureAngle - origin();
+    int endAngle = maxScaleArc();
+    int yPos = geometry().height() / 2 - radius;
+    int xPos = geometry().width() / 2 - radius;
+
+    painter->setPen(Qt::red);
+    painter->setBrush(Qt::red);
+    painter->drawPie(xPos,yPos, radius * 2, radius * 2, startangle, endAngle);
+    qDebug() << startangle << endAngle;
 }
 
 void ThermoWidget::setCurrentTemperature(double temperature)
