@@ -79,17 +79,27 @@ void ThermoWidget::focusOutEvent(QFocusEvent* event)
 void ThermoWidget::paintEvent(QPaintEvent* event)
 {
     QwtDial::paintEvent(event);
+    const QString currentText = QString::number(m_currentTemperature);
 
     QFontMetrics fm(font());
-    const double width = fm.width(m_currentTemperatureTextFromEditor);
+    const double targetWidth = fm.width(m_currentTemperatureTextFromEditor);
+    const double currentWidth = fm.width(currentText);
+
     const double height = fm.height();
-    const double xpos = (geometry().width() / 2) - (width / 2);
+    const double halfWidth = geometry().width() / 2;
+    const double xposTarget = halfWidth - (targetWidth / 2);
+    const double xposCurrent = halfWidth - (currentWidth / 2);
     const double ypos = geometry().height() - height * 2  - 2;
 
     QPainter p(this);
+
+    p.setBrush(Qt::red);
+    p.setPen(Qt::red);
+    p.drawText(xposTarget, ypos - height, m_currentTemperatureTextFromEditor);
+
     p.setBrush(Qt::white);
     p.setPen(Qt::white);
-    p.drawText(xpos, ypos, m_currentTemperatureTextFromEditor);
+    p.drawText(xposCurrent, ypos, QString::number(m_currentTemperature));
 }
 
 void ThermoWidget::drawNeedle( QPainter *painter, const QPointF &center, double radius, double dir, QPalette::ColorGroup colorGroup ) const
