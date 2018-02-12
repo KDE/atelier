@@ -6,6 +6,7 @@
 class QKeyEvent;
 class QPaintEvent;
 class QFocusEvent;
+class QWheelEvent;
 
 class ThermoWidget : public QwtDial {
     Q_OBJECT
@@ -25,13 +26,14 @@ protected:
     void focusOutEvent(QFocusEvent *event);
     void keyPressEvent (QKeyEvent *event);
     void paintEvent(QPaintEvent *event);
+    void wheelEvent(QWheelEvent *event);
 
 private:
     QwtDialSimpleNeedle *m_currentTemperatureNeedle;
     QwtDialSimpleNeedle *m_targetTemperatureNeedle;
 
+    QString m_currentTemperatureTextFromEditor;
+    
     double m_currentTemperature;
     double m_targetTemperature;
-
-    QString m_currentTemperatureTextFromEditor;
 };

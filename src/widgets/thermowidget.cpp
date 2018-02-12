@@ -5,6 +5,7 @@
 #include <QPainter>
 #include <QBrush>
 #include <QPen>
+#include <QWheelEvent>
 
 ThermoWidget::ThermoWidget(QWidget *parent) : QwtDial(parent),
     m_currentTemperatureNeedle(new QwtDialSimpleNeedle(QwtDialSimpleNeedle::Arrow)),
@@ -62,7 +63,32 @@ void ThermoWidget::keyPressEvent(QKeyEvent* event)
         m_targetTemperature = m_currentTemperatureTextFromEditor.toInt();
         emit targetTemperatureChanged(m_targetTemperature);
         update();
+        event->accept();
     }
+}
+
+void ThermoWidget::wheelEvent(QWheelEvent* event)
+{
+    if (event->angleDelta().y() > 0) {
+        if (m_targetTemperature + 10 > upperBound()) {
+            m_currentTemperatureTextFromEditor = QString::number(upperBound());
+        } else {
+            m_currentTemperatureTextFromEditor = QString::number(m_targetTemperature + 10);
+        }
+    } else if (event->angleDelta().y() < 0) {
+        if (m_targetTemperature - 10 < lowerBound()) {
+            m_currentTemperatureTextFromEditor = QString::number(lowerBound());
+        } else {
+            m_currentTemperatureTextFromEditor = QString::number(m_targetTemperature - 10);
+        }
+    }
+
+    if (m_targetTemperature != m_currentTemperatureTextFromEditor.toInt()) {
+        m_targetTemperature = m_currentTemperatureTextFromEditor.toInt();
+        emit targetTemperatureChanged(m_targetTemperature);
+        update();
+    }
+    event->accept();
 }
 
 void ThermoWidget::focusOutEvent(QFocusEvent* event)
