@@ -31,6 +31,14 @@ void ThermoWidget::keyPressEvent(QKeyEvent* event)
         m_targetTemperature = m_currentTemperatureTextFromEditor.toInt();
     } else if (event->key() == Qt::Key_Escape) {
         m_currentTemperatureTextFromEditor = '0';
+    } else if (ev->key() == Qt::Key_Up || ev->key() == Qt::Key_Right) {
+        if (m_targetTemperature != upperBound()) {
+            m_currentTemperatureTextFromEditor = QString::number(m_targetTemperature + 1);
+        }
+    } else if (ev->key() == Qt::Key_Down || ev->key() == Qt::Key_Left) {
+        if (m_targetTemperature != lowerBound()) {
+            m_currentTemperatureTextFromEditor = QString::number(m_targetTemperature - 1);
+        }
     } else {
         QwtDial::keyPressEvent(event);
         return;
