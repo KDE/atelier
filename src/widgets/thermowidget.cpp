@@ -138,23 +138,23 @@ void ThermoWidget::drawNeedle( QPainter *painter, const QPointF &center, double 
     const double currentTemperatureAngle = (maxScaleArc() - minScaleArc()) * currentTemperaturePercent + minScaleArc();
     const double targetTemperatureAngle = (maxScaleArc() - minScaleArc()) * targetTemperaturePercent + minScaleArc();
 
-    m_targetTemperatureNeedle->draw(painter, center, radius, 360 - targetTemperatureAngle - origin(), colorGroup);
-    m_currentTemperatureNeedle->draw(painter, center, radius, 360 - currentTemperatureAngle - origin(), colorGroup);
-
     // Qt coordinates and Qwt coordinates differ.
     // the "begin" of our coordinates in Qt: -130
     // the "span" of our coordinates in Qt: -180
     // Negative values means clockwise in Qt dialect.
     const double qtBeginAngle = -130;
-    double startangle = -1 * (targetTemperatureAngle - minScaleArc()) + qtBeginAngle;
-    double spanAnge =  startangle - 340;
+    const double coolZone =  - (targetTemperatureAngle - minScaleArc());
     int yPos = geometry().height() / 2 - radius;
     int xPos = geometry().width() / 2 - radius;
 
-    painter->setPen(Qt::red);
-    painter->setBrush(Qt::red);                               // Negative values are clockwise
-    painter->drawPie(xPos,yPos, radius * 2, radius * 2, startangle * 16, -280 * 16);
-    qDebug() << startangle << spanAnge;
+    painter->setPen(Qt::darkBlue);
+    painter->setBrush(QBrush(QColor(Qt::darkBlue).darker()));                               // Negative values are clockwise
+    painter->drawPie(xPos,yPos, radius * 2, radius * 2, qtBeginAngle * 16, coolZone* 16);
+
+    m_targetTemperatureNeedle->draw(painter, center, radius, 360 - targetTemperatureAngle - origin(), colorGroup);
+    m_currentTemperatureNeedle->draw(painter, center, radius, 360 - currentTemperatureAngle - origin(), colorGroup);
+
+
 }
 
 void ThermoWidget::setCurrentTemperature(double temperature)
