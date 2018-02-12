@@ -24,6 +24,8 @@
 #include "thermowidget.h"
 #include "ui_bedextruderwidget.h"
 
+#include "thermowidget.h"
+
 BedExtruderWidget::BedExtruderWidget(QWidget *parent) :
     QWidget(parent),
     m_bedThermo(new ThermoWidget(this)),
@@ -39,22 +41,16 @@ BedExtruderWidget::BedExtruderWidget(QWidget *parent) :
     setLayout(centralLayout);
     //Add Default Extruder
     setExtruderCount(1);
-/*
-    connect(ui->heatBedPB, &QPushButton::clicked, this, &BedExtruderWidget::heatBedClicked);
-    connect(ui->heatExtPB, &QPushButton::clicked, this, &BedExtruderWidget::heatExtruderClicked);
 
-    connect(ui->bedTempSB, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), [ this ](double tmp) {
-        if (ui->heatBedPB->isChecked()) {
-            emit bedTemperatureChanged(tmp,ui->bedAndWaitCB->isChecked());
-        }
+    connect(m_bedThermo, &ThermoWidget::targetTemperatureChanged, [this](double v) {
+        qDebug() << "Receiving the temperature change for bed";
+        emit bedTemperatureChanged((int)v, false);
     });
 
-    connect(ui->extTempSB, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), [ this ](double tmp) {
-        if (ui->heatExtPB->isChecked()) {
-            emit extTemperatureChanged(tmp, currentExtruder(),ui->extAndWaitCB->isChecked());
-        }
+    connect(m_exturderThermo, &ThermoWidget::targetTemperatureChanged, [this](double v) {
+        qDebug() << "Receiving the temperature changed for thermo";
+        emit extTemperatureChanged((int)v, currentExtruder(), false);
     });
-*/
 }
 
 BedExtruderWidget::~BedExtruderWidget()

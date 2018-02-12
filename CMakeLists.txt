@@ -50,7 +50,7 @@ find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS
                 Multimedia
                 MultimediaWidgets
             )
-            
+
 if(BUILD_TESTING)
     find_package(Qt5Test ${QT_MIN_VERSION} CONFIG REQUIRED)
 endif()

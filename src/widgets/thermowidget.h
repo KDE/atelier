@@ -9,16 +9,22 @@ class QFocusEvent;
 
 class ThermoWidget : public QwtDial {
     Q_OBJECT
+
 public:
     ThermoWidget(QWidget *parent);
     void drawNeedle( QPainter *painter, const QPointF &center,
                      double radius, double dir, QPalette::ColorGroup colorGroup ) const;
 
+    void setCurrentTemperature(double temperature);
+    void setTargetTemperature(double temperature);
+
+signals:
+    void targetTemperatureChanged(double targetTemperature);
+
+protected:
     void focusOutEvent(QFocusEvent *event);
     void keyPressEvent (QKeyEvent *event);
     void paintEvent(QPaintEvent *event);
-    void setCurrentTemperature(double temperature);
-    void setTargetTemperature(double temperature);
 
 private:
     QwtDialSimpleNeedle *m_currentTemperatureNeedle;

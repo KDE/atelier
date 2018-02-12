@@ -8,7 +8,7 @@
 
 ThermoWidget::ThermoWidget(QWidget *parent) : QwtDial(parent),
     m_currentTemperatureNeedle(new QwtDialSimpleNeedle(QwtDialSimpleNeedle::Arrow)),
-    m_targetTemperatureNeedle(new QwtDialSimpleNeedle(QwtDialSimpleNeedle::Arrow)),
+    m_targetTemperatureNeedle(new QwtDialSimpleNeedle(QwtDialSimpleNeedle::Arrow, Qt::red, Qt::darkRed)),
     m_currentTemperature(0),
     m_targetTemperature(0)
 {
@@ -36,15 +36,21 @@ void ThermoWidget::keyPressEvent(QKeyEvent* event)
         return;
     }
 
-    m_targetTemperature = m_currentTemperatureTextFromEditor.toInt();
-    update();
+    if (m_targetTemperature != m_currentTemperatureTextFromEditor.toInt()) {
+        m_targetTemperature = m_currentTemperatureTextFromEditor.toInt();
+        emit targetTemperatureChanged(m_targetTemperature);
+        update();
+    }
 }
 
 void ThermoWidget::focusOutEvent(QFocusEvent* event)
 {
-    m_targetTemperature = m_currentTemperatureTextFromEditor.toInt();
-    update();
-    event->accept();
+    if (m_targetTemperature != m_currentTemperatureTextFromEditor.toInt()) {
+        m_targetTemperature = m_currentTemperatureTextFromEditor.toInt();
+        emit targetTemperatureChanged(m_targetTemperature);
+        update();
+        event->accept();
+    }
 }
 
 
@@ -74,18 +80,24 @@ void ThermoWidget::drawNeedle( QPainter *painter, const QPointF &center, double 
     const double currentTemperatureAngle = (maxScaleArc() - minScaleArc()) * currentTemperaturePercent + minScaleArc();
     const double targetTemperatureAngle = (maxScaleArc() - minScaleArc()) * targetTemperaturePercent + minScaleArc();
 
-    m_targetTemperatureNeedle->draw(painter, center, radius, 360 - currentTemperatureAngle - origin(), colorGroup);
-    m_currentTemperatureNeedle->draw(painter, center, radius, 360 - targetTemperatureAngle - origin(), colorGroup);
+    m_targetTemperatureNeedle->draw(painter, center, radius, 360 - targetTemperatureAngle - origin(), colorGroup);
+    m_currentTemperatureNeedle->draw(painter, center, radius, 360 - currentTemperatureAngle - origin(), colorGroup);
 }
 
 void ThermoWidget::setCurrentTemperature(double temperature)
 {
-    m_currentTemperature = temperature;
-    update();
+    if (m_currentTemperature != temperature) {
+        m_currentTemperature = temperature;
+        update();
+    }
 }
 
 void ThermoWidget::setTargetTemperature(double temperature)
 {
-    m_targetTemperature = temperature;
-    update();
+    if (m_targetTemperature != temperature) {
+        m_currentTemperatureTextFromEditor = QString::number(temperature);
+        m_targetTemperature = temperature;
+        emit targetTemperatureChanged(m_targetTemperature);
+        update();
+    }
 }
