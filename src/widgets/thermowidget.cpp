@@ -119,11 +119,9 @@ void ThermoWidget::paintEvent(QPaintEvent* event)
 
     QPainter p(this);
 
-    p.setBrush(Qt::red);
     p.setPen(Qt::red);
     p.drawText(xposTarget, ypos - height, m_currentTemperatureTextFromEditor);
 
-    p.setBrush(Qt::white);
     p.setPen(Qt::white);
     p.drawText(xposCurrent, ypos, QString::number(m_currentTemperature));
 }
@@ -147,11 +145,15 @@ void ThermoWidget::drawNeedle( QPainter *painter, const QPointF &center, double 
     int yPos = geometry().height() / 2 - radius;
     int xPos = geometry().width() / 2 - radius;
 
-    painter->setPen(Qt::darkBlue);
-    painter->setBrush(QBrush(QColor(Qt::darkBlue).darker()));                               // Negative values are clockwise
+    QRadialGradient grad(center,radius);
+    grad.setColorAt(0.75,QColor(0,0,0,0));
+    grad.setColorAt(0.85,QColor(255,0,0,196));
+    grad.setColorAt(0.95,QColor(255,110,60,196));
+
+    painter->setBrush(grad);
     painter->drawPie(xPos,yPos, radius * 2, radius * 2, qtBeginAngle * 16, coolZone* 16);
 
-    m_targetTemperatureNeedle->draw(painter, center, radius, 360 - targetTemperatureAngle - origin(), colorGroup);
+    m_targetTemperatureNeedle->draw(painter, center, radius * 1.3, 360 - targetTemperatureAngle - origin(), colorGroup);
     m_currentTemperatureNeedle->draw(painter, center, radius, 360 - currentTemperatureAngle - origin(), colorGroup);
 
 
