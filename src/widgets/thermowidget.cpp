@@ -7,9 +7,10 @@
 #include <QPen>
 #include <QWheelEvent>
 
-ThermoWidget::ThermoWidget(QWidget *parent) : QwtDial(parent),
+ThermoWidget::ThermoWidget(QWidget *parent, QString name) : QwtDial(parent),
     m_currentTemperatureNeedle(new QwtDialSimpleNeedle(QwtDialSimpleNeedle::Arrow)),
     m_targetTemperatureNeedle(new QwtDialSimpleNeedle(QwtDialSimpleNeedle::Arrow, Qt::red, Qt::darkRed)),
+    m_name(name),
     m_currentTemperature(0),
     m_targetTemperature(0)
 {
@@ -101,7 +102,6 @@ void ThermoWidget::focusOutEvent(QFocusEvent* event)
     }
 }
 
-
 void ThermoWidget::paintEvent(QPaintEvent* event)
 {
     QwtDial::paintEvent(event);
@@ -110,20 +110,27 @@ void ThermoWidget::paintEvent(QPaintEvent* event)
     QFontMetrics fm(font());
     const double targetWidth = fm.width(m_currentTemperatureTextFromEditor);
     const double currentWidth = fm.width(currentText);
+    const double nameWidth = fm.width(m_name);
 
     const double height = fm.height();
     const double halfWidth = geometry().width() / 2;
     const double xposTarget = halfWidth - (targetWidth / 2);
     const double xposCurrent = halfWidth - (currentWidth / 2);
+    const double xposName = halfWidth - (nameWidth / 2);
     const double ypos = geometry().height() - height * 2  - 2;
 
     QPainter p(this);
 
-    p.setPen(Qt::red);
-    p.drawText(xposTarget, ypos - height, m_currentTemperatureTextFromEditor);
+    QColor color = palette().color(QPalette::Text);
 
-    p.setPen(Qt::white);
-    p.drawText(xposCurrent, ypos, QString::number(m_currentTemperature));
+    p.setPen(Qt::red);
+    p.drawText(xposTarget, ypos - 2 * height, m_currentTemperatureTextFromEditor);
+
+    p.setPen(color);
+    p.drawText(xposCurrent, ypos - height, QString::number(m_currentTemperature));
+
+    p.setPen(color);
+    p.drawText(xposName, ypos, m_name);
 }
 
 void ThermoWidget::drawNeedle( QPainter *painter, const QPointF &center, double radius, double dir, QPalette::ColorGroup colorGroup ) const
@@ -155,8 +162,6 @@ void ThermoWidget::drawNeedle( QPainter *painter, const QPointF &center, double 
 
     m_targetTemperatureNeedle->draw(painter, center, radius * 1.3, 360 - targetTemperatureAngle - origin(), colorGroup);
     m_currentTemperatureNeedle->draw(painter, center, radius, 360 - currentTemperatureAngle - origin(), colorGroup);
-
-
 }
 
 void ThermoWidget::setCurrentTemperature(double temperature)

@@ -27,8 +27,8 @@
 
 BedExtruderWidget::BedExtruderWidget(QWidget *parent) :
     QWidget(parent),
-    m_bedThermo(new ThermoWidget(this)),
-    m_extruderThermo(new ThermoWidget(this)),
+    m_bedThermo(new ThermoWidget(this, QString(i18n("Bed")))),
+    m_extruderThermo(new ThermoWidget(this, QString(i18n("HotEnd")))),
     m_extruderBox(new QWidget(this)),
     m_extrudersLayout(new QHBoxLayout)
 {
