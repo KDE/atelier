@@ -19,6 +19,7 @@
 */
 #pragma once
 
+#include <QHBoxLayout>
 #include <QMap>
 #include <QRadioButton>
 #include <QWidget>
@@ -37,18 +38,16 @@ public:
     void updateExtTemp(const float temp);
     void updateBedTargetTemp(const float temp);
     void updateExtTargetTemp(const float temp);
-    void stopHeating();
 
 private:
-//    Ui::BedExtruderWidget *ui;
     QMap <int, QRadioButton *> extruderMap;
-    void heatExtruderClicked(bool clicked);
-    void heatBedClicked(bool clicked);
-    int currentExtruder();
-    int extruderCount = 0;
-
-    ThermoWidget *m_exturderThermo = nullptr;
     ThermoWidget *m_bedThermo = nullptr;
+    ThermoWidget *m_extruderThermo = nullptr;
+    QWidget *m_extruderBox = nullptr;
+    QHBoxLayout *m_extrudersLayout = nullptr;
+
+    int currentExtruder();
+    int m_extruderCount = 0;
 
 signals:
     void bedTemperatureChanged(int tmp, bool andWait);

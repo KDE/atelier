@@ -19,38 +19,46 @@
 */
 #include <KLocalizedString>
 #include <QBoxLayout>
+#include <QLabel>
 #include <QRadioButton>
 #include "bedextruderwidget.h"
 #include "thermowidget.h"
-#include "ui_bedextruderwidget.h"
 
-#include "thermowidget.h"
 
 BedExtruderWidget::BedExtruderWidget(QWidget *parent) :
     QWidget(parent),
     m_bedThermo(new ThermoWidget(this)),
-    m_exturderThermo(new ThermoWidget(this))
+    m_extruderThermo(new ThermoWidget(this)),
+    m_extruderBox(new QWidget(this)),
+    m_extrudersLayout(new QHBoxLayout)
 {
     m_bedThermo->setScale(0, 150);
-    m_exturderThermo->setScale(0, 250);
+    m_extruderThermo->setScale(0, 250);
+    m_extruderBox->setLayout(m_extrudersLayout);
 
-    auto centralLayout = new QBoxLayout(QBoxLayout::Direction::LeftToRight);
-    centralLayout->addWidget(m_bedThermo);
-    centralLayout->addWidget(m_exturderThermo);
+    auto *layout = new QGridLayout;
 
-    setLayout(centralLayout);
+    auto *label = new QLabel(i18n("Active Extruder:"));
+    m_extrudersLayout->addWidget(label);
+
+    layout->addWidget(m_extruderBox, 0, 0, 1, -1);
+    layout->addWidget(m_bedThermo, 1, 0);
+    layout->addWidget(m_extruderThermo, 1, 1);
+
+    setLayout(layout);
+
     //Add Default Extruder
     setExtruderCount(1);
 
     connect(m_bedThermo, &ThermoWidget::targetTemperatureChanged, [this](double v) {
-        qDebug() << "Receiving the temperature change for bed";
-        emit bedTemperatureChanged((int)v, false);
-    });
+         qDebug() << "Receiving the temperature change for bed";
+         emit bedTemperatureChanged((int)v, false);
+     });
 
-    connect(m_exturderThermo, &ThermoWidget::targetTemperatureChanged, [this](double v) {
-        qDebug() << "Receiving the temperature changed for thermo";
-        emit extTemperatureChanged((int)v, currentExtruder(), false);
-    });
+     connect(m_extruderThermo, &ThermoWidget::targetTemperatureChanged, [this](double v) {
+         qDebug() << "Receiving the temperature changed for thermo";
+         emit extTemperatureChanged((int)v, currentExtruder(), false);
+     });
 }
 
 BedExtruderWidget::~BedExtruderWidget()
@@ -59,25 +67,26 @@ BedExtruderWidget::~BedExtruderWidget()
 
 void BedExtruderWidget::setExtruderCount(int value)
 {
-    if (value == extruderCount) {
+    value > 1 ? m_extruderBox->setVisible(true) : m_extruderBox->setVisible(false);
+    if (value == m_extruderCount) {
         return;
-    } else if (extruderCount < value) {
+    } else if (m_extruderCount < value) {
         //loop for the new buttons
-        for (int i = extruderCount; i < value; i++) {
+        for (int i = m_extruderCount; i < value; i++) {
             auto *rb = new QRadioButton(QString::number(i + 1));
-//            ui->extRadioButtonLayout->addWidget(rb);
+            m_extrudersLayout->addWidget(rb);
             extruderMap.insert(i, rb);
         }
     } else {
         //remove buttons - need to test it!
-        for (int i = extruderCount; i >= value; i--) {
+        for (int i = m_extruderCount; i >= value; i--) {
             auto *rb = extruderMap.value(i);
-//            ui->extRadioButtonLayout->removeWidget(rb);
+            m_extrudersLayout->removeWidget(rb);
             extruderMap.remove(i);
             delete (rb);
         }
     }
-    extruderCount = value;
+    m_extruderCount = value;
 }
 
 void BedExtruderWidget::updateBedTemp(const float temp)
@@ -87,7 +96,7 @@ void BedExtruderWidget::updateBedTemp(const float temp)
 
 void BedExtruderWidget::updateExtTemp(const float temp)
 {
-    m_exturderThermo->setCurrentTemperature(temp);
+    m_extruderThermo->setCurrentTemperature(temp);
 }
 
 void BedExtruderWidget::updateBedTargetTemp(const float temp)
@@ -97,37 +106,7 @@ void BedExtruderWidget::updateBedTargetTemp(const float temp)
 
 void BedExtruderWidget::updateExtTargetTemp(const float temp)
 {
-    m_exturderThermo->setTargetTemperature(temp);
-}
-
-void BedExtruderWidget::stopHeating()
-{
-    /*
-    emit bedTemperatureChanged(0,ui->bedAndWaitCB->isChecked());
-    for (int i = 0; i < extruderCount; i++) {
-        emit extTemperatureChanged(0, i,ui->extAndWaitCB->isChecked());
-    }
-    ui->heatBedPB->setChecked(false);
-    ui->heatExtPB->setChecked(false);
-
-    */
-}
-
-void BedExtruderWidget::heatExtruderClicked(bool clicked)
-{
-    /*
-    int temp = ui->extTempSB->value() * clicked;
-    emit extTemperatureChanged(temp, currentExtruder(),ui->extAndWaitCB->isChecked());
-
-    */
-}
-
-void BedExtruderWidget::heatBedClicked(bool clicked)
-{
-    /*
-    int temp = ui->bedTempSB->value() * clicked;
-    emit bedTemperatureChanged(temp,ui->bedAndWaitCB->isChecked());
-    */
+    m_extruderThermo->setTargetTemperature(temp);
 }
 
 int BedExtruderWidget::currentExtruder()
