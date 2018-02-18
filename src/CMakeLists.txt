@@ -8,7 +8,7 @@ set(atelier_SRCS
 add_subdirectory(dialogs)
 add_subdirectory(widgets)
 
-add_executable(atelier ${atelier_SRCS} icons.qrc)
+add_executable(atelier ${atelier_SRCS} resources.qrc)
 
 ecm_create_qm_loader(atelier_SRCS atelier)
 
