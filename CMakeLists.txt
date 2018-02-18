@@ -28,7 +28,6 @@ find_package(AtCore REQUIRED COMPONENTS
             )
 
 find_package(KF5 ${KF5_DEP_VERSION} REQUIRED COMPONENTS
-                Solid
                 I18n
                 XmlGui
                 ConfigWidgets

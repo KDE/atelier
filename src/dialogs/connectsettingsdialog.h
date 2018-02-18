@@ -1,6 +1,7 @@
 /* Atelier KDE Printer Host for 3D Printing
     Copyright (C) <2016>
     Author: Lays Rodrigues - laysrodrigues@gmail.com
+            Chris Rizzitello - rizzitello@kde.org
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,14 +18,11 @@
 */
 #pragma once
 
+#include <AtCore/atcore.h>
+#include <QComboBox>
 #include <QDialog>
-#include <Solid/DeviceNotifier>
+#include <QDialogButtonBox>
 #include <QSettings>
-
-namespace Ui
-{
-class ConnectSettingsDialog;
-}
 
 class ConnectSettingsDialog : public QDialog
 {
@@ -32,20 +30,18 @@ class ConnectSettingsDialog : public QDialog
 
 public:
     explicit ConnectSettingsDialog(QWidget *parent = nullptr);
-    void updateProfiles();
-    void setFirmwareList(const QStringList fw);
-    ~ConnectSettingsDialog();
 
 private:
-    Ui::ConnectSettingsDialog *ui;
-    void locateSerialPort();
-    QStringList serialPortList;
-    Solid::DeviceNotifier *deviceNotifier;
+    void initDisplay();
+    void initData();
+    void updateSerialPort(const QStringList &ports);
+    AtCore *atcore;
     QSettings settings;
     QMap<QString, QVariant> profileData();
     void accept();
-
+    QComboBox *serialPortCB;
+    QComboBox *deviceProfileCB;
+    QDialogButtonBox *buttonBox;
 signals:
     void startConnection(const QString port, const QMap<QString, QVariant> data);
-    void setConnectValue(bool b);
 };

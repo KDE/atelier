@@ -1,6 +1,7 @@
 /* Atelier KDE Printer Host for 3D Printing
     Copyright (C) <2016>
     Author: Lays Rodrigues - laysrodrigues@gmail.com
+            Chris Rizzitello - rizzitello@kde.org
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,90 +17,79 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "connectsettingsdialog.h"
-#include "ui_connectsettingsdialog.h"
-#include <QSerialPortInfo>
-#include <QMessageBox>
-#include <KLocalizedString>
 #include <QCloseEvent>
+#include <KLocalizedString>
+#include <QLabel>
+#include <QLayout>
+#include <QMessageBox>
 
 ConnectSettingsDialog::ConnectSettingsDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::ConnectSettingsDialog),
-    deviceNotifier(Solid::DeviceNotifier::instance())
+    atcore(new AtCore)
 {
-    ui->setupUi(this);
-    connect(deviceNotifier, &Solid::DeviceNotifier::deviceAdded, this, &ConnectSettingsDialog::locateSerialPort);
-    connect(deviceNotifier, &Solid::DeviceNotifier::deviceRemoved, this, &ConnectSettingsDialog::locateSerialPort);
-    locateSerialPort();
-
-    connect(ui->buttonBox, &QDialogButtonBox::clicked, [ = ](QAbstractButton * btn) {
-        if (ui->buttonBox->buttonRole(btn) == QDialogButtonBox::RejectRole) {
-            close();
-            emit setConnectValue(false);
-        }
-    });
-
-    updateProfiles();
+    initDisplay();
+    initData();
+    setWindowTitle(i18n("Connect to Printer"));
+    atcore->setSerialTimerInterval(100);
+    connect(atcore, &AtCore::portsChanged, this, &ConnectSettingsDialog::updateSerialPort);
+    connect(buttonBox, &QDialogButtonBox::accepted, this, &ConnectSettingsDialog::accept);
+    connect(buttonBox, &QDialogButtonBox::rejected, this, &ConnectSettingsDialog::close);
 }
 
-ConnectSettingsDialog::~ConnectSettingsDialog()
+void ConnectSettingsDialog::initDisplay()
 {
-    delete ui;
+    serialPortCB = new QComboBox;
+    serialPortCB->setEditable(true);
+    QLabel *deviceLabel = new QLabel(i18n("Device"));
+    QHBoxLayout *deviceLayout = new QHBoxLayout;
+    deviceLayout->addWidget(deviceLabel);
+    deviceLayout->addWidget(serialPortCB);
+
+    deviceProfileCB = new QComboBox;
+    QHBoxLayout *profileLayout = new QHBoxLayout;
+    QLabel *profileLabel = new QLabel(i18n("Profile"));
+    profileLayout->addWidget(profileLabel);
+    profileLayout->addWidget(deviceProfileCB);
+
+    buttonBox = new QDialogButtonBox();
+    buttonBox->addButton(i18n("Connect"),QDialogButtonBox::AcceptRole);
+    buttonBox->addButton(QDialogButtonBox::Cancel);
+
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    mainLayout->addLayout(deviceLayout);
+    mainLayout->addLayout(profileLayout);
+    mainLayout->addWidget(buttonBox);
+
+    setLayout(mainLayout);
 }
 
-void ConnectSettingsDialog::locateSerialPort()
-{
-    QStringList ports;
-    QList<QSerialPortInfo> serialPortInfoList = QSerialPortInfo::availablePorts();
-    if (!serialPortInfoList.isEmpty()) {
-        foreach (const QSerialPortInfo &serialPortInfo, serialPortInfoList) {
-#ifdef Q_OS_MAC
-            //Mac os has callout serial ports starting with cu. they can only recv data. filter them out
-            if (!serialPortInfo.portName().startsWith(QStringLiteral("cu."), Qt::CaseInsensitive)) {
-                ports.append(serialPortInfo.portName());
-            }
-#else
-            ports.append(serialPortInfo.portName());
-#endif
-        }
-        if (ports == serialPortList) {
-            return;
-        } else {
-            serialPortList.clear();
-            serialPortList = ports;
-            ui->serialPortCB->clear();
-            ui->serialPortCB->addItems(serialPortList);
-        }
-    } else {
-        serialPortList.clear();
-        ui->serialPortCB->clear();
-    }
-}
-
-void ConnectSettingsDialog::updateProfiles()
+void ConnectSettingsDialog::initData()
 {
     settings.beginGroup("GeneralSettings");
-    QStringList groups = settings.childGroups();
+    QStringList profiles = settings.childGroups();
     settings.endGroup();
-    ui->profileCB->clear();
-    ui->profileCB->addItems(groups);
+    deviceProfileCB->addItems(profiles);
 }
 
-void ConnectSettingsDialog::setFirmwareList(QStringList fw)
+void ConnectSettingsDialog::updateSerialPort(const QStringList &ports)
 {
-    fw.prepend(i18n("Auto-Detect"));
-    ui->firmwareCB->clear();
-    ui->firmwareCB->addItems(fw);
+    serialPortCB->clear();
+    if(!ports.isEmpty()) {
+        serialPortCB->addItems(ports);
+    }
 }
 
 QMap<QString, QVariant> ConnectSettingsDialog::profileData()
 {
+    QString profile = deviceProfileCB->currentText();
     settings.beginGroup("GeneralSettings");
-    settings.beginGroup(ui->profileCB->currentText());
+    settings.beginGroup(profile);
     QMap<QString, QVariant> data;
     data["bps"] = settings.value(QStringLiteral("bps"), QStringLiteral("115200"));
-    data["bedTemp"] = settings.value(QStringLiteral("temperatureBed"), QStringLiteral("0"));
-    data["hotendTemp"] = settings.value(QStringLiteral("temperatureExtrude"), QStringLiteral("0"));
+    data["bedTemp"] = settings.value(QStringLiteral("maximumTemperatureBed"), QStringLiteral("0"));
+    data["hotendTemp"] = settings.value(QStringLiteral("maximumTemperatureExtruder"), QStringLiteral("0"));
+    data["firmware"] = settings.value(QStringLiteral("firmware"),QStringLiteral("Auto-Detect"));
+    data["name"] = profile;
     settings.endGroup();
     settings.endGroup();
     return data;
@@ -107,14 +97,14 @@ QMap<QString, QVariant> ConnectSettingsDialog::profileData()
 
 void ConnectSettingsDialog::accept()
 {
-    if (ui->profileCB->currentText().isEmpty()) {
-        QMessageBox::warning(this, i18n("Warning"), i18n("Please, create a profile to connect on Settings!"));
-        emit setConnectValue(false);
-    } else if (ui->serialPortCB->currentText().isEmpty()) {
-        QMessageBox::warning(this, i18n("Warning"), i18n("Please, connect a serial device to continue!"));
-        emit setConnectValue(false);
-    } else {
-        emit startConnection(ui->serialPortCB->currentText(), profileData());
-        this->close();
+    if (deviceProfileCB->currentText().isEmpty()) {
+        QMessageBox::critical(this, i18n("Error"), i18n("Please, create a profile to connect on Settings!"));
+        return;
     }
+    if (serialPortCB->currentText().isEmpty()) {
+        QMessageBox::critical(this, i18n("Error"), i18n("Please, connect a serial device to continue!"));
+        return;
+    }
+    emit startConnection(serialPortCB->currentText(), profileData());
+    close();
 }
