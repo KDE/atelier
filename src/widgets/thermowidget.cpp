@@ -1,3 +1,22 @@
+/* Atelier KDE Printer Host for 3D Printing
+    Copyright (C) <2018>
+    Author: Tomaz Canabrava - tcanabrava@kde.org
+            Chris Rizzitello - rizzitello@kde.org
+            Lays Rodrigues - laysrodriguessilva@gmail.com
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
 #include "thermowidget.h"
 #include <QKeyEvent>
 #include <QPaintEvent>
@@ -117,17 +136,19 @@ void ThermoWidget::paintEvent(QPaintEvent* event)
     const double xposTarget = halfWidth - (targetWidth / 2);
     const double xposCurrent = halfWidth - (currentWidth / 2);
     const double xposName = halfWidth - (nameWidth / 2);
-    const double ypos = geometry().height() - height * 2  - 2;
-
+    double ypos = geometry().height() / 2 + height * 2;
     QPainter p(this);
-
     QColor color = palette().color(QPalette::Text);
 
     p.setPen(Qt::red);
-    p.drawText(xposTarget, ypos - 2 * height, m_currentTemperatureTextFromEditor);
+    p.drawText(xposTarget, ypos, m_currentTemperatureTextFromEditor);
+
+    ypos += height + 2;
 
     p.setPen(color);
-    p.drawText(xposCurrent, ypos - height, QString::number(m_currentTemperature));
+    p.drawText(xposCurrent, ypos, QString::number(m_currentTemperature));
+
+    ypos += height + 2;
 
     p.setPen(color);
     p.drawText(xposName, ypos, m_name);
