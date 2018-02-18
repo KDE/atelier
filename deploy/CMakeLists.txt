@@ -1,8 +1,3 @@
- 
-install(FILES
-    "${CMAKE_CURRENT_SOURCE_DIR}/atelierui.rc"
-    DESTINATION ${KXMLGUI_INSTALL_DIR}/${PROJECT_NAME}/)
-    
 install(FILES
     "${CMAKE_CURRENT_SOURCE_DIR}/atelier.png"
     DESTINATION share/pixmaps)

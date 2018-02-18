@@ -229,7 +229,7 @@ void MainWindow::setupActions()
     action = actionCollection()->addAction(QStringLiteral("log"), ui->logDockWidget->toggleViewAction());
     action->setText(i18n("Log"));
 
-    setupGUI(Default, "atelierui.rc");
+    setupGUI(Default, ":/atelierui");
 }
 
 void MainWindow::openFile()
