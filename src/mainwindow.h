@@ -21,7 +21,6 @@
 #include <QUrl>
 #include <AtCore/AtCore>
 #include <KXmlGui/KXmlGuiWindow>
-#include <dialogs/connectsettingsdialog.h>
 #include <dialogs/profilesdialog.h>
 #include <widgets/logwidget.h>
 namespace Ui
@@ -43,7 +42,6 @@ private:
     QStringList firmwaresList;
     QUrl fileName;
     ProfilesDialog *profilesDialog;
-    ConnectSettingsDialog *connectSettingsDialog;
     LogWidget *logWidget;
     QAction *_connect;
     void initConnectsToAtCore();

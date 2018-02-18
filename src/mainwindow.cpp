@@ -25,12 +25,12 @@
 #include <KXMLGUIFactory>
 #include <AtCore/SerialLayer>
 #include <AtCore/GCodeCommands>
+#include <dialogs/connectsettingsdialog.h>
 
 MainWindow::MainWindow(QWidget *parent) :
     KXmlGuiWindow(parent),
     ui(new Ui::MainWindow),
-    profilesDialog(new ProfilesDialog(this)),
-    connectSettingsDialog(new ConnectSettingsDialog(this))
+    profilesDialog(new ProfilesDialog(this))
 {
     ui->setupUi(this);
     logWidget = new LogWidget;
@@ -47,11 +47,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::initConnectsToAtCore()
 {
-    // Start Connection to the 3DPrinter
-    connect(connectSettingsDialog, &ConnectSettingsDialog::startConnection, [ = ](QString port, QMap<QString, QVariant> data) {
-        core.initSerial(port, data["bps"].toInt());
-    });
-
     // Handle AtCore status change
     connect(&core, &AtCore::stateChanged, this, &MainWindow::handlePrinterStatusChanged);
 
@@ -113,11 +108,6 @@ void MainWindow::initWidgets()
     ui->logDockWidget->setWidget(logWidget);
     ui->statusBar->addWidget(ui->statusBarWidget);
 
-    // When a new profile is added on the Profile Dialog it needs to update the profiles on connection dialog
-    connect(profilesDialog, &ProfilesDialog::updateProfiles,
-            connectSettingsDialog, &ConnectSettingsDialog::updateProfiles);
-
-    connectSettingsDialog->setFirmwareList(core.availableFirmwarePlugins());
     profilesDialog->setBaudRates(core.serial()->validBaudRates());
 
     ui->homeAllPB->setIcon(style()->standardIcon(QStyle::SP_DirHomeIcon));
@@ -143,7 +133,11 @@ void MainWindow::setupActions()
     _connect->setCheckable(true);
     connect(_connect, &QAction::toggled, [ = ](bool checked) {
         if (checked) {
-            connectSettingsDialog->show();
+            std::unique_ptr<ConnectSettingsDialog> csd(new ConnectSettingsDialog);
+            connect(csd.get(), &ConnectSettingsDialog::startConnection, [ & ](QString port, QMap<QString, QVariant> data) {
+                core.initSerial(port, data["bps"].toInt());
+            });
+            csd->exec();
         } else {
             core.closeConnection();
             _connect->setText(i18n("&Connect"));
@@ -151,8 +145,6 @@ void MainWindow::setupActions()
             core.setState(AtCore::DISCONNECTED);
         }
     });
-
-    connect(connectSettingsDialog, &ConnectSettingsDialog::setConnectValue, _connect, &QAction::setChecked);
 
     connect(ui->homeAllPB, &QPushButton::clicked, [=]{
         core.home();
