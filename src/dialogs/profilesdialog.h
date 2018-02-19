@@ -30,8 +30,7 @@ class ProfilesDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit ProfilesDialog(QWidget *parent = nullptr);
-    void setBaudRates(const QStringList &list);
+    explicit ProfilesDialog(const QStringList &firmwares, const QStringList &baudList, QWidget *parent = nullptr);
     ~ProfilesDialog();
 
 private:

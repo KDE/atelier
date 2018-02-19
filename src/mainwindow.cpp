@@ -26,11 +26,11 @@
 #include <AtCore/SerialLayer>
 #include <AtCore/GCodeCommands>
 #include <dialogs/connectsettingsdialog.h>
+#include <dialogs/profilesdialog.h>
 
 MainWindow::MainWindow(QWidget *parent) :
     KXmlGuiWindow(parent),
-    ui(new Ui::MainWindow),
-    profilesDialog(new ProfilesDialog(this))
+    ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     logWidget = new LogWidget;
@@ -108,8 +108,6 @@ void MainWindow::initWidgets()
     ui->logDockWidget->setWidget(logWidget);
     ui->statusBar->addWidget(ui->statusBarWidget);
 
-    profilesDialog->setBaudRates(core.serial()->validBaudRates());
-
     ui->homeAllPB->setIcon(style()->standardIcon(QStyle::SP_DirHomeIcon));
     ui->homeXPB->setIcon(style()->standardIcon(QStyle::SP_DirHomeIcon));
     ui->homeYPB->setIcon(style()->standardIcon(QStyle::SP_DirHomeIcon));
@@ -164,7 +162,10 @@ void MainWindow::setupActions()
 
     action = actionCollection()->addAction(QStringLiteral("profiles"));
     action->setText(i18n("&Profiles"));
-    connect(action, &QAction::triggered, profilesDialog, &ProfilesDialog::show);
+    connect(action, &QAction::triggered, [ & ] {
+        std::unique_ptr<ProfilesDialog> pd(new ProfilesDialog(core.availableFirmwarePlugins(),core.portSpeeds()));
+        pd->exec();
+    });
 
     action = actionCollection()->addAction(QStringLiteral("print"));
     action->setText(i18n("&Print"));

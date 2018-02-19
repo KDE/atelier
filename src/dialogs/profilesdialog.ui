@@ -228,34 +228,34 @@
           <item row="1" column="0">
            <widget class="QLabel" name="label_2">
             <property name="text">
-             <string>Bed</string>
+             <string>Maximum Bed</string>
             </property>
            </widget>
           </item>
           <item row="1" column="1" colspan="2">
-           <widget class="QDoubleSpinBox" name="bedTempSB">
+           <widget class="QSpinBox" name="bedTempSB">
             <property name="suffix">
              <string> ºC</string>
             </property>
             <property name="maximum">
-             <double>200.000000000000000</double>
+             <number>999</number>
             </property>
            </widget>
           </item>
           <item row="2" column="0">
            <widget class="QLabel" name="label_11">
             <property name="text">
-             <string>Hotend</string>
+             <string>Maximum Hotend</string>
             </property>
            </widget>
           </item>
           <item row="2" column="1" colspan="2">
-           <widget class="QDoubleSpinBox" name="extruderTempSB">
+           <widget class="QSpinBox" name="extruderTempSB">
             <property name="suffix">
              <string> ºC</string>
             </property>
             <property name="maximum">
-             <double>400.000000000000000</double>
+             <number>999</number>
             </property>
            </widget>
           </item>
@@ -268,7 +268,31 @@
       <attribute name="title">
        <string>Advanced</string>
       </attribute>
-      <layout class="QGridLayout" name="gridLayout_7"/>
+       <layout class="QGridLayout" name="gridLayout_7">
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_6">
+          <property name="text">
+           <string>Firmware</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QComboBox" name="firmwareCB"/>
+        </item>
+        <item row="1" column="0">
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
      </widget>
     </widget>
    </item>
