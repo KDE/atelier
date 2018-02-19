@@ -20,12 +20,15 @@
 #include <QMessageBox>
 #include <KLocalizedString>
 
-ProfilesDialog::ProfilesDialog(QWidget *parent) :
+ProfilesDialog::ProfilesDialog(const QStringList &firmwares, const QStringList &baudList, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ProfilesDialog)
 {
     ui->setupUi(this);
-
+    ui->firmwareCB->addItem(QStringLiteral("Auto-Detect"));
+    ui->firmwareCB->addItems(firmwares);
+    ui->baudCB->addItems(baudList);
+    ui->baudCB->setCurrentText(QLatin1String("115200"));
     ui->profileCB->setAutoCompletion(true);
     connect(ui->profileCB, static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged), [ = ] {
         loadSettings();
@@ -67,12 +70,6 @@ ProfilesDialog::ProfilesDialog(QWidget *parent) :
 #endif
 }
 
-void ProfilesDialog::setBaudRates(const QStringList &list)
-{
-    ui->baudCB->addItems(list);
-    ui->baudCB->setCurrentText(QLatin1String("115200"));
-}
-
 ProfilesDialog::~ProfilesDialog()
 {
     delete ui;
@@ -109,11 +106,12 @@ void ProfilesDialog::saveSettings()
     }
 
     settings.setValue(QStringLiteral("heatedBed"), ui->heatedBedCK->isChecked());
-    settings.setValue(QStringLiteral("temperatureBed"), ui->bedTempSB->value());
+    settings.setValue(QStringLiteral("maximumTemperatureBed"), ui->bedTempSB->value());
     //HOTEND
-    settings.setValue(QStringLiteral("temperatureExtruder"), ui->extruderTempSB->value());
+    settings.setValue(QStringLiteral("maximumTemperatureExtruder"), ui->extruderTempSB->value());
     //Baud
     settings.setValue(QStringLiteral("bps"), ui->baudCB->currentText());
+    settings.setValue(QStringLiteral("firmware"),ui->firmwareCB->currentText());
     settings.endGroup();
     settings.endGroup();
 
@@ -150,12 +148,13 @@ void ProfilesDialog::loadSettings(const QString &currentProfile)
 
     ui->heatedBedCK->setChecked(settings.value(QStringLiteral("heatedBed"), QStringLiteral("true")).toBool());
     ui->bedTempSB->setEnabled(ui->heatedBedCK->isChecked());
-    ui->bedTempSB->setValue(settings.value(QStringLiteral("temperatureBed"), QStringLiteral("0")).toFloat());
+    ui->bedTempSB->setValue(settings.value(QStringLiteral("maximumTemperatureBed"), QStringLiteral("0")).toInt());
 
     //HOTEND
-    ui->extruderTempSB->setValue(settings.value(QStringLiteral("temperatureExtruder"), QStringLiteral("0.0")).toFloat());
+    ui->extruderTempSB->setValue(settings.value(QStringLiteral("maximumTemperatureExtruder"), QStringLiteral("0")).toInt());
     //Baud
     ui->baudCB->setCurrentText(settings.value(QStringLiteral("bps"), QStringLiteral("115200")).toString());
+    ui->firmwareCB->setCurrentText(settings.value(QStringLiteral("firmware"), QStringLiteral("Auto-Detect")).toString());
     settings.endGroup();
     settings.endGroup();
 

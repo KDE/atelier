@@ -21,7 +21,6 @@
 #include <QUrl>
 #include <AtCore/AtCore>
 #include <KXmlGui/KXmlGuiWindow>
-#include <dialogs/profilesdialog.h>
 #include <widgets/logwidget.h>
 namespace Ui
 {
@@ -41,7 +40,6 @@ private:
     AtCore core;
     QStringList firmwaresList;
     QUrl fileName;
-    ProfilesDialog *profilesDialog;
     LogWidget *logWidget;
     QAction *_connect;
     void initConnectsToAtCore();
