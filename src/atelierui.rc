@@ -12,21 +12,13 @@
             <Action name="quit" />
         </Menu>
         <Menu name="view">
-            <Action name="dock_labels"/>
             <Action name="3d"/>
             <Action name="gcode"/>
-            <Action name="axis"/>
-            <Acion  name="controller"/>
-            <Action name="plot"/>
             <Action name="video"/>
-            <Action name="log"/>
         </Menu>
         <Menu name="run">
             <text>Run</text>
             <Action name="connect"/>
-            <Action name="print"/>
-            <Action name="pause"/>
-            <Action name="stop"/>
         </Menu>
         <Menu name="settings">
             <Action name="profiles"/>
@@ -37,11 +29,6 @@
         <Action name="open_gcode"/>
         <Action name="profiles"/>
         <Action name="connect"/>
-        <Action name="disconnect"/>
-        <Separator/>
-        <Action name="print"/>
-        <Action name="pause"/>
-        <Action name="stop"/>
         <Separator/>
     </ToolBar>
 </gui>

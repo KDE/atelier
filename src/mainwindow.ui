@@ -14,7 +14,58 @@
    <string>Atelier</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout"/>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QToolBox" name="toolBox">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="Viewer3D" name="view3DWidget">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>233</width>
+         <height>285</height>
+        </rect>
+       </property>
+       <attribute name="label">
+        <string>Page 1</string>
+       </attribute>
+      </widget>
+      <widget class="VideoMonitorWidget" name="videoMonitorWidget">
+       <attribute name="label">
+        <string>Page</string>
+       </attribute>
+      </widget>
+      <widget class="GCodeEditorWidget" name="gcodeEditorWidget">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>233</width>
+         <height>285</height>
+        </rect>
+       </property>
+       <attribute name="label">
+        <string>Page 2</string>
+       </attribute>
+      </widget>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="AtCoreInstanceWidget" name="tab">
+       <attribute name="title">
+        <string>Tab 1</string>
+       </attribute>
+      </widget>
+     </widget>
+    </item>
+   </layout>
    <widget class="QWidget" name="statusBarWidget" native="true">
     <property name="geometry">
      <rect>
@@ -98,85 +149,6 @@
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
   </widget>
-  <widget class="QDockWidget" name="gcodeDockWidget">
-   <property name="windowTitle">
-    <string>Edit &amp;GCode</string>
-   </property>
-   <attribute name="dockWidgetArea">
-    <number>1</number>
-   </attribute>
-   <widget class="GCodeEditorWidget" name="gcodeEditorWidget"/>
-  </widget>
-  <widget class="QDockWidget" name="controlDockWidget">
-   <property name="windowTitle">
-    <string>Cont&amp;roller</string>
-   </property>
-   <attribute name="dockWidgetArea">
-    <number>2</number>
-   </attribute>
-   <widget class="QWidget" name="dockWidgetContents">
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="QTabWidget" name="tabWidget">
-       <property name="currentIndex">
-        <number>0</number>
-       </property>
-       <widget class="BedExtruderWidget" name="bedExtWidget">
-        <attribute name="title">
-         <string>Temperatures</string>
-        </attribute>
-       </widget>
-       <widget class="QWidget" name="advancedTabWidget">
-        <attribute name="title">
-         <string>Advanced</string>
-        </attribute>
-        <layout class="QVBoxLayout" name="verticalLayout_3">
-         <item>
-          <widget class="PushGCodeWidget" name="pushGCodeWidget" native="true"/>
-         </item>
-         <item>
-          <widget class="RatesControlWidget" name="ratesControlWidget" native="true"/>
-         </item>
-        </layout>
-       </widget>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-  </widget>
-  <widget class="QDockWidget" name="plotDockWidget">
-   <property name="windowTitle">
-    <string>Te&amp;mperatures Timeline</string>
-   </property>
-   <attribute name="dockWidgetArea">
-    <number>2</number>
-   </attribute>
-   <widget class="PlotWidget" name="plotWidget"/>
-  </widget>
-  <widget class="QDockWidget" name="printProgressDockWidget">
-   <property name="windowTitle">
-    <string>Pri&amp;nt Progress</string>
-   </property>
-   <attribute name="dockWidgetArea">
-    <number>2</number>
-   </attribute>
-   <widget class="PrintProgressWidget" name="printProgressWidget"/>
-  </widget>
-  <widget class="QDockWidget" name="logDockWidget">
-   <property name="floating">
-    <bool>true</bool>
-   </property>
-   <property name="windowTitle">
-    <string>&amp;Log</string>
-   </property>
-   <property name="hidden" stdset="0">
-    <bool>true</bool>
-   </property>
-   <attribute name="dockWidgetArea">
-    <number>1</number>
-   </attribute>
-   <widget class="QWidget" name="logDockWidgetContents"/>
-  </widget>
   <widget class="QStatusBar" name="statusBar">
    <property name="contextMenuPolicy">
     <enum>Qt::NoContextMenu</enum>
@@ -185,108 +157,12 @@
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QDockWidget" name="axisDockWidget">
-   <property name="windowTitle">
-    <string>A&amp;xis</string>
-   </property>
-   <attribute name="dockWidgetArea">
-    <number>2</number>
-   </attribute>
-   <widget class="QWidget" name="dockWidgetContents_2">
-    <layout class="QGridLayout" name="gridLayout_2">
-     <item row="0" column="0">
-      <widget class="QPushButton" name="homeAllPB">
-       <property name="text">
-        <string>All</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QPushButton" name="homeXPB">
-       <property name="text">
-        <string>X</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="2">
-      <widget class="QPushButton" name="homeYPB">
-       <property name="text">
-        <string>Y</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="3">
-      <widget class="QPushButton" name="homeZPB">
-       <property name="text">
-        <string>Z</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0" rowspan="4" colspan="4">
-      <widget class="AxisControl" name="axisViewWidget"/>
-     </item>
-    </layout>
-   </widget>
-  </widget>
-  <widget class="QDockWidget" name="view3DdockWidget">
-   <property name="windowTitle">
-    <string>&amp;3DView</string>
-   </property>
-   <attribute name="dockWidgetArea">
-    <number>1</number>
-   </attribute>
-   <widget class="Viewer3D" name="view3DWidget"/>
-  </widget>
-  <widget class="QDockWidget" name="videoDockWidget">
-   <property name="windowTitle">
-    <string>&amp;Video Monitor</string>
-   </property>
-   <attribute name="dockWidgetArea">
-    <number>1</number>
-   </attribute>
-   <widget class="VideoMonitorWidget" name="dockWidgetContents_3"/>
-  </widget>
  </widget>
  <customwidgets>
   <customwidget>
    <class>GCodeEditorWidget</class>
    <extends>QWidget</extends>
    <header>widgets/gcodeeditorwidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>PlotWidget</class>
-   <extends>QWidget</extends>
-   <header>widgets/plotwidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>RatesControlWidget</class>
-   <extends>QWidget</extends>
-   <header>widgets/ratescontrolwidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>PrintProgressWidget</class>
-   <extends>QWidget</extends>
-   <header>widgets/printprogresswidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>AxisControl</class>
-   <extends>QGraphicsView</extends>
-   <header>widgets/axiscontrol.h</header>
-  </customwidget>
-  <customwidget>
-   <class>BedExtruderWidget</class>
-   <extends>QWidget</extends>
-   <header>widgets/bedextruderwidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>PushGCodeWidget</class>
-   <extends>QWidget</extends>
-   <header>widgets/pushgcodewidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
@@ -299,6 +175,12 @@
    <class>VideoMonitorWidget</class>
    <extends>QWidget</extends>
    <header>widgets/videomonitorwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>AtCoreInstanceWidget</class>
+   <extends>QWidget</extends>
+   <header>widgets/atcoreinstancewidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

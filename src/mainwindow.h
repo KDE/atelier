@@ -19,9 +19,8 @@
 
 #include <QMainWindow>
 #include <QUrl>
-#include <AtCore/AtCore>
 #include <KXmlGui/KXmlGuiWindow>
-#include <widgets/logwidget.h>
+
 namespace Ui
 {
 class MainWindow;
@@ -37,23 +36,9 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    AtCore core;
     QUrl fileName;
-    LogWidget *logWidget;
-    QAction *_connect;
-    void initConnectsToAtCore();
-    void initWidgets();
     void setupActions();
     void openFile();
-    void printFile();
-    void pausePrint();
-    void stopPrint();
-    void checkReceivedCommand(const QByteArray &message);
-    void checkPushedCommands(QByteArray bmsg);
-    void handlePrinterStatusChanged(AtCore::STATES newState);
-    void checkTemperature(uint sensorType, uint number, uint temp);
-    void axisControlClicked(QChar axis, int value);
-    void toggleDockTitles(bool checked);
 
 signals:
     void extruderCountChanged(int count);
