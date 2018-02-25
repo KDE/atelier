@@ -121,6 +121,7 @@ void ProfilesDialog::saveSettings()
     //Baud
     settings.setValue(QStringLiteral("bps"), ui->baudCB->currentText());
     settings.setValue(QStringLiteral("firmware"),ui->firmwareCB->currentText());
+    settings.setValue(QStringLiteral("postPause"), ui->postPauseLE->text());
     settings.endGroup();
     settings.endGroup();
 
@@ -164,6 +165,7 @@ void ProfilesDialog::loadSettings(const QString &currentProfile)
     //Baud
     ui->baudCB->setCurrentText(settings.value(QStringLiteral("bps"), QStringLiteral("115200")).toString());
     ui->firmwareCB->setCurrentText(settings.value(QStringLiteral("firmware"), QStringLiteral("Auto-Detect")).toString());
+    ui->postPauseLE->setText(settings.value(QStringLiteral("postPause"),QStringLiteral("")).toString());
     settings.endGroup();
     settings.endGroup();
 

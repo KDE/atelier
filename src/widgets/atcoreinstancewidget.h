@@ -44,13 +44,14 @@ public:
      * Destructor
      */
     ~AtCoreInstanceWidget();
-    void startConnection(const QString& serialPort, const QMap<QString, QVariant>& profiles);
+    void startConnection(const QString& serialPort, const QMap<QString, QVariant>& profile);
     bool connected();
 
 private:
     Ui::AtCoreInstanceWidget* ui;
     AtCore m_core;
     QToolBar *toolBar;
+    QMap<QString, QVariant> profileData;
     void initConnectsToAtCore();
     void printFile(const QUrl& fileName);
     void pausePrint();

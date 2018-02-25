@@ -80,8 +80,9 @@ void AtCoreInstanceWidget::buildToolbar()
     ui->toolBarLayout->addWidget(toolBar);
     ui->toolBarLayout->addStretch();
 }
-void AtCoreInstanceWidget::startConnection(const QString& serialPort, const QMap<QString, QVariant>& profiles){
-    m_core.initSerial(serialPort, profiles["bps"].toInt());
+void AtCoreInstanceWidget::startConnection(const QString& serialPort, const QMap<QString, QVariant>& profile){
+    m_core.initSerial(serialPort, profile["bps"].toInt());
+    profileData = profile;
     initConnectsToAtCore();
 }
 
@@ -144,7 +145,11 @@ void AtCoreInstanceWidget::printFile(const QUrl& fileName)
 
 void AtCoreInstanceWidget::pausePrint()
 {
-    m_core.pause(QString());
+    if(m_core.state() == AtCore::BUSY) {
+        m_core.pause(profileData["postPause"].toString());
+    } else if (m_core.state() == AtCore::PAUSE) {
+        m_core.resume();
+    }
 }
 
 void AtCoreInstanceWidget::stopPrint()
