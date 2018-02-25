@@ -21,6 +21,7 @@
 #include <QUrl>
 #include <QToolBar>
 #include <AtCore/AtCore>
+#include <QList>
 
 namespace Ui
 {
@@ -46,12 +47,14 @@ public:
     ~AtCoreInstanceWidget();
     void startConnection(const QString& serialPort, const QMap<QString, QVariant>& profile);
     bool connected();
+    void setOpenFiles(const QList<QUrl>& files);
 
 private:
     Ui::AtCoreInstanceWidget* ui;
     AtCore m_core;
     QToolBar *toolBar;
     QMap<QString, QVariant> profileData;
+    QList<QUrl> m_files;
     void initConnectsToAtCore();
     void printFile(const QUrl& fileName);
     void pausePrint();
@@ -65,6 +68,7 @@ private:
     void enableControls(bool b);
     void buildToolbar();
     void setupConnections();
+    void print();
 
 signals:
     void extruderCountChanged(int count);

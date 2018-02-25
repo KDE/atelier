@@ -1,3 +1,5 @@
+include_directories(../dialogs)
+
 set(widgets_SRCS
     gcodeeditorwidget.cpp
     axiscontrol.cpp

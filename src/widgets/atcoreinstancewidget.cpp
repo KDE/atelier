@@ -22,6 +22,7 @@
 #include <AtCore/SerialLayer>
 #include <AtCore/GCodeCommands>
 #include <KLocalizedString>
+#include "choosefiledialog.h"
 
 AtCoreInstanceWidget::AtCoreInstanceWidget(QWidget *parent):
     QWidget(parent)
@@ -47,6 +48,9 @@ void AtCoreInstanceWidget::setupConnections(){
     connect(ui->disconnectPB, &QPushButton::clicked, [ & ]{
         m_core.setState(AtCore::DISCONNECTED);
     });
+    connect(ui->printPB, &QPushButton::clicked, this, &AtCoreInstanceWidget::print);
+
+    enableControls(false);
 }
 
 AtCoreInstanceWidget::~AtCoreInstanceWidget()
@@ -143,6 +147,23 @@ void AtCoreInstanceWidget::printFile(const QUrl& fileName)
     }
 }
 
+void AtCoreInstanceWidget::print(){
+    switch (m_files.size()){
+        case 0:
+            QMessageBox::warning(this, i18n("Error"),
+                                 i18n("There's no GCode File open. \n Please select a file and try again."),
+                                 QMessageBox::Ok);
+            break;
+        case 1:
+            printFile(m_files.at(0));
+            break;
+        default:
+            auto dialog = new ChooseFileDialog(this, m_files);
+            if(dialog->exec() == QDialog::Accepted){
+                    printFile(dialog->choosenFile());
+            }
+    }
+}
 void AtCoreInstanceWidget::pausePrint()
 {
     if(m_core.state() == AtCore::BUSY) {
@@ -287,4 +308,9 @@ void AtCoreInstanceWidget::enableControls(bool b)
 bool AtCoreInstanceWidget::connected()
 {
     return (m_core.state() != AtCore::DISCONNECTED);
+}
+
+void AtCoreInstanceWidget::setOpenFiles(const QList<QUrl>& files)
+{
+    m_files = files;
 }
