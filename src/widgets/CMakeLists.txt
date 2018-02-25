@@ -8,6 +8,7 @@ set(widgets_SRCS
     printprogresswidget.cpp
     logwidget.cpp
     videomonitorwidget.cpp
+    atcoreinstancewidget.cpp
     )
 
 add_library(AtelierWidgets STATIC ${widgets_SRCS})
@@ -21,6 +22,7 @@ target_link_libraries(AtelierWidgets
     KF5::TextEditor 
     Qt5::Charts
     Qt5::Multimedia
-    Qt5::MultimediaWidgets)
+    Qt5::MultimediaWidgets
+    AtCore::AtCore)
 
 add_subdirectory(3dview)
