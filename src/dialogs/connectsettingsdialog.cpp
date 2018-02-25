@@ -89,6 +89,7 @@ QMap<QString, QVariant> ConnectSettingsDialog::profileData()
     data["bedTemp"] = settings.value(QStringLiteral("maximumTemperatureBed"), QStringLiteral("0"));
     data["hotendTemp"] = settings.value(QStringLiteral("maximumTemperatureExtruder"), QStringLiteral("0"));
     data["firmware"] = settings.value(QStringLiteral("firmware"),QStringLiteral("Auto-Detect"));
+    data["postPause"] = settings.value(QStringLiteral("postPause"),QStringLiteral(""));
     data["name"] = profile;
     settings.endGroup();
     settings.endGroup();
