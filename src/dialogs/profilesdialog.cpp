@@ -1,6 +1,7 @@
 /* Atelier KDE Printer Host for 3D Printing
     Copyright (C) <2016>
     Author: Lays Rodrigues - laysrodrigues@gmail.com
+            Chris Rizzitello - rizzitello@kde.org
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -28,14 +29,14 @@
     #endif
 #endif
 
-ProfilesDialog::ProfilesDialog(const QStringList &baudList, QWidget *parent) :
+ProfilesDialog::ProfilesDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ProfilesDialog)
 {
     ui->setupUi(this);
     ui->firmwareCB->addItem(QStringLiteral("Auto-Detect"));
     ui->firmwareCB->addItems(detectFWPlugins());
-    ui->baudCB->addItems(baudList);
+    ui->baudCB->addItems(SERIAL::BAUDS);
     ui->baudCB->setCurrentText(QLatin1String("115200"));
     ui->profileCB->setAutoCompletion(true);
     connect(ui->profileCB, static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged), [ = ] {
