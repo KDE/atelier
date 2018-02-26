@@ -30,7 +30,7 @@ class ProfilesDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit ProfilesDialog(const QStringList &firmwares, const QStringList &baudList, QWidget *parent = nullptr);
+    explicit ProfilesDialog(QWidget *parent = nullptr);
     ~ProfilesDialog();
 
 private:
@@ -41,6 +41,27 @@ private:
     void updateCBProfiles();
     void accept();
     void removeProfile();
+    QStringList detectFWPlugins() const;
+
 signals:
     void updateProfiles();
 };
+
+namespace SERIAL
+{
+static const QStringList BAUDS = {
+    QStringList() <<
+                  QStringLiteral("9600") <<
+                  QStringLiteral("14400") <<
+                  QStringLiteral("19200") <<
+                  QStringLiteral("28800") <<
+                  QStringLiteral("38400") <<
+                  QStringLiteral("57600") <<
+                  QStringLiteral("76800") <<
+                  QStringLiteral("115200") <<
+                  QStringLiteral("230400") <<
+                  QStringLiteral("250000") <<
+                  QStringLiteral("500000") <<
+                  QStringLiteral("1000000")
+    };
+}

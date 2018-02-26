@@ -1,6 +1,7 @@
 /* Atelier KDE Printer Host for 3D Printing
     Copyright (C) <2016>
     Author: Lays Rodrigues - laysrodrigues@gmail.com
+            Chris Rizzitello - rizzitello@kde.org
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,15 +20,23 @@
 #include "ui_profilesdialog.h"
 #include <QMessageBox>
 #include <KLocalizedString>
+#include <QDir>
 
-ProfilesDialog::ProfilesDialog(const QStringList &firmwares, const QStringList &baudList, QWidget *parent) :
+//Do not include for windows/mac os
+#ifndef Q_OS_WIN
+    #ifndef Q_OS_MAC
+        #include <AtCore/atcore_default_folders.h>
+    #endif
+#endif
+
+ProfilesDialog::ProfilesDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ProfilesDialog)
 {
     ui->setupUi(this);
     ui->firmwareCB->addItem(QStringLiteral("Auto-Detect"));
-    ui->firmwareCB->addItems(firmwares);
-    ui->baudCB->addItems(baudList);
+    ui->firmwareCB->addItems(detectFWPlugins());
+    ui->baudCB->addItems(SERIAL::BAUDS);
     ui->baudCB->setCurrentText(QLatin1String("115200"));
     ui->profileCB->setAutoCompletion(true);
     connect(ui->profileCB, static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged), [ = ] {
@@ -186,4 +195,43 @@ void ProfilesDialog::removeProfile(){
     settings.remove(currentProfile);
     settings.endGroup();
     updateCBProfiles();
+}
+
+QStringList ProfilesDialog::detectFWPlugins() const
+{
+    //Path used if for windows/ mac os only.
+    QDir pluginDir(qApp->applicationDirPath() + QStringLiteral("/plugins"));
+
+#if defined(Q_OS_WIN)
+    pluginDir.setNameFilters(QStringList() << "*.dll");
+
+#elif defined(Q_OS_MAC)
+    pluginDir.setNameFilters(QStringList() << "*.dylib");
+
+#else //Not Windows || Not MAC
+    QStringList pathList = AtCoreDirectories::pluginDir;
+    pathList.append(QLibraryInfo::location(QLibraryInfo::PluginsPath) + QStringLiteral("/AtCore"));
+
+    for (const auto &path : pathList) {
+        if (QDir(path).exists()) {
+            //use path where plugins were detected.
+            pluginDir = QDir(path);
+            break;
+        }
+    }
+    pluginDir.setNameFilters(QStringList() << "*.so");
+#endif
+
+    QStringList firmwares;
+    QStringList files = pluginDir.entryList(QDir::Files);
+    foreach (const QString &f, files) {
+        QString file = f;
+            file = file.split(QChar::fromLatin1('.')).at(0);
+        if (file.startsWith(QStringLiteral("lib"))) {
+            file = file.remove(QStringLiteral("lib"));
+        }
+        file = file.toLower().simplified();
+        firmwares.append(file);
+    }
+    return firmwares;
 }

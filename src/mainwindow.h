@@ -38,7 +38,6 @@ public:
 private:
     Ui::MainWindow *ui;
     AtCore core;
-    QStringList firmwaresList;
     QUrl fileName;
     LogWidget *logWidget;
     QAction *_connect;
@@ -58,5 +57,4 @@ private:
 
 signals:
     void extruderCountChanged(int count);
-
 };

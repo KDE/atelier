@@ -163,7 +163,7 @@ void MainWindow::setupActions()
     action = actionCollection()->addAction(QStringLiteral("profiles"));
     action->setText(i18n("&Profiles"));
     connect(action, &QAction::triggered, [ & ] {
-        std::unique_ptr<ProfilesDialog> pd(new ProfilesDialog(core.availableFirmwarePlugins(),core.portSpeeds()));
+        std::unique_ptr<ProfilesDialog> pd(new ProfilesDialog);
         pd->exec();
     });
 
