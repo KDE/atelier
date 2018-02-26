@@ -30,7 +30,7 @@ class ProfilesDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit ProfilesDialog(const QStringList &firmwares, const QStringList &baudList, QWidget *parent = nullptr);
+    explicit ProfilesDialog(const QStringList &baudList, QWidget *parent = nullptr);
     ~ProfilesDialog();
 
 private:
@@ -41,6 +41,8 @@ private:
     void updateCBProfiles();
     void accept();
     void removeProfile();
+    QStringList detectFWPlugins() const;
+
 signals:
     void updateProfiles();
 };
