@@ -36,9 +36,10 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    QUrl fileName;
+    QUrl m_fileName;
     void setupActions();
     void openFile();
+    void newConnection(const QString& port, const QMap<QString, QVariant>& profile);
 
 signals:
     void extruderCountChanged(int count);

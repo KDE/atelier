@@ -49,9 +49,10 @@ void MainWindow::setupActions()
 
     action = actionCollection()->addAction(QStringLiteral("connect"));
     action->setText(i18n("&Connect"));
-    connect(action, &QAction::triggered, [ = ]{
+    connect(action, &QAction::triggered, [ & ]{
             std::unique_ptr<ConnectSettingsDialog> csd(new ConnectSettingsDialog);
-            connect(csd.get(), &ConnectSettingsDialog::startConnection, [ & ](QString port, QMap<QString, QVariant> data) {
+            connect(csd.get(), &ConnectSettingsDialog::startConnection, [ & ](const QString& port, const QMap<QString, QVariant>& data) {
+                newConnection(port, data);
             });
             csd->exec();
     });
@@ -85,4 +86,19 @@ void MainWindow::openFile()
         guiFactory()->addClient(ui->gcodeEditorWidget->gcodeView());
         ui->view3DWidget->drawModel(m_fileName.toString());
     }
+}
+
+void MainWindow::newConnection(const QString& port, const QMap<QString, QVariant>& profile)
+{
+    const int tabs = ui->tabWidget->count();
+    if(tabs == 1){
+        auto instance = qobject_cast<AtCoreInstanceWidget*>(ui->tabWidget->currentWidget());
+        if(!instance->connected()){
+            instance->startConnection(port, profile);
+            return;
+        }
+    }
+    auto newInstance = new AtCoreInstanceWidget();
+    ui->tabWidget->addTab(newInstance, QString::number(tabs+1));
+    newInstance->startConnection(port, profile);
 }
