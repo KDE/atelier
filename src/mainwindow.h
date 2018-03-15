@@ -17,17 +17,13 @@
 */
 #pragma once
 
-#include <QMainWindow>
-#include <QUrl>
 #include <KTextEditor/View>
 #include <KXmlGui/KXmlGuiWindow>
-#include <dialogs/connectsettingsdialog.h>
-#include <dialogs/profilesdialog.h>
-#include <QStackedWidget>
-#include <QToolButton>
 #include <QMap>
 #include <QPair>
 #include <QPushButton>
+#include <QStackedWidget>
+#include <QUrl>
 
 namespace Ui
 {

@@ -16,31 +16,29 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QFileDialog>
+#include <dialogs/connectsettingsdialog.h>
+#include <dialogs/profilesdialog.h>
 #include <KLocalizedString>
 #include <KStandardAction>
 #include <KActionCollection>
 #include <KXMLGUIFactory>
-#include <dialogs/connectsettingsdialog.h>
-#include <dialogs/profilesdialog.h>
-#include <widgets/gcodeeditorwidget.h>
-#include <set>
-#include <QToolButton>
 #include <memory>
-#include <QSplitter>
+#include <QFileDialog>
 #include <QHBoxLayout>
-#include <widgets/atcoreinstancewidget.h>
-#include <QStackedWidget>
+#include <QSplitter>
+#include <QToolButton>
 #include <widgets/3dview/viewer3d.h>
+#include <widgets/atcoreinstancewidget.h>
+#include <widgets/gcodeeditorwidget.h>
 #include <widgets/videomonitorwidget.h>
+
 
 MainWindow::MainWindow(QWidget *parent) :
     KXmlGuiWindow(parent),
     ui(new Ui::MainWindow),
-    m_curr_editor_view(nullptr),
+    m_currEditorView(nullptr),
     m_instances(new QTabWidget(this))
 {
     ui->setupUi(this);
@@ -99,9 +97,9 @@ void MainWindow::setupLateralArea()
 
     auto *gcodeEditor = new GCodeEditorWidget(this);
      connect(gcodeEditor, &GCodeEditorWidget::updateClientFactory, this, [&](KTextEditor::View* view){
-         guiFactory()->removeClient(m_curr_editor_view);
+         guiFactory()->removeClient(m_currEditorView);
          guiFactory()->addClient(view);
-         m_curr_editor_view = view;
+         m_currEditorView = view;
      });
 
     setupButton("3d",    i18n("&3D"), QIcon(":/icon/atelier"), new Viewer3D(this));
