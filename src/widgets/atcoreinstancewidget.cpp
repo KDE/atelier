@@ -232,7 +232,7 @@ void AtCoreInstanceWidget::stopPrint()
 
 void AtCoreInstanceWidget::disableMotors()
 {
-    m_core.setIdleHold(0);
+    m_core.disableMotors(0);
 }
 
 void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
