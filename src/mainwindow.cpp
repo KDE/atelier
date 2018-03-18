@@ -103,7 +103,7 @@ void MainWindow::setupLateralArea()
         btn->setAutoExclusive(true);
         btn->setCheckable(true);
         btn->setIcon(icon);
-        btn->setIconSize(QSize(64,64));
+        btn->setIconSize(QSize(48,48));
         btn->setFlat(true);
         m_lateral.m_stack->addWidget(w);
         m_lateral.m_map[key] = {btn, w};
@@ -122,9 +122,9 @@ void MainWindow::setupLateralArea()
          m_currEditorView = view;
      });
 
-    setupButton("3d",    i18n("&3D"), QIcon(":/icon/atelier"), new Viewer3D(this));
-    setupButton("gcode", i18n("&GCode"), QIcon(":/icon/atelier"), gcodeEditor);
-    setupButton("video", i18n("&Video"), QIcon(":/icon/atelier"), new VideoMonitorWidget(this));
+    setupButton("3d",    i18n("&3D"), QIcon::fromTheme("draw-cuboid", QIcon(":/icon/atelier")), new Viewer3D(this));
+    setupButton("gcode", i18n("&GCode"), QIcon::fromTheme("accessories-text-editor", QIcon(":/icon/atelier")), gcodeEditor);
+    setupButton("video", i18n("&Video"), QIcon::fromTheme("camera-web", QIcon(":/icon/atelier")), new VideoMonitorWidget(this));
     buttonLayout->addStretch();
     m_lateral.m_toolBar->setLayout(buttonLayout);
 }
@@ -134,27 +134,23 @@ void MainWindow::setupActions()
     // Actions for the Toolbar
     QAction *action;
     action = actionCollection()->addAction(QStringLiteral("open_gcode"));
+    action->setIcon(QIcon::fromTheme("document-open", style()->standardIcon(QStyle::SP_DirOpenIcon)));
     action->setText(i18n("&Open GCode"));
     connect(action, &QAction::triggered, this, &MainWindow::openFile);
 
     action = actionCollection()->addAction(QStringLiteral("new_instance"));
+    action->setIcon(QIcon::fromTheme("list-add", QIcon()));
     action->setText(i18n("&New Connection"));
     connect(action, &QAction::triggered, this, &MainWindow::newAtCoreInstance);
 
     action = actionCollection()->addAction(QStringLiteral("profiles"));
+    action->setIcon(QIcon::fromTheme("document-properties", QIcon()));
     action->setText(i18n("&Profiles"));
     connect(action, &QAction::triggered, [this] {
         std::unique_ptr<ProfilesDialog> pd(new ProfilesDialog);
         pd->exec();
         emit(profilesChanged());
     });
-
-    #ifdef Q_OS_LINUX
-    //only set icons from theme on linux
-        actionCollection()->action(QStringLiteral("profiles"))->setIcon(QIcon::fromTheme("emblem-favorite"));
-    #endif
-    //use style's standardIcon for the icons we can.
-    actionCollection()->action(QStringLiteral("open_gcode"))->setIcon(style()->standardIcon(QStyle::SP_DirOpenIcon));
 
     action = KStandardAction::quit(qApp, SLOT(quit()), actionCollection());
 
