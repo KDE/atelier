@@ -54,7 +54,7 @@ void AtCoreInstanceWidget::buildToolbar()
     m_toolBar = new QToolBar();
 
     auto lb = new QAction;
-    lb->setIcon(style()->standardIcon(QStyle::SP_DirHomeIcon));
+    lb->setIcon(QIcon::fromTheme("go-home", style()->standardIcon(QStyle::SP_DirHomeIcon)));
     lb->setDisabled(true);
     m_toolBar->addAction(lb);
 
@@ -100,7 +100,7 @@ void AtCoreInstanceWidget::buildMainToolbar(){
     m_mainToolBar = new QToolBar();
     m_mainToolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
 
-    m_printAction = new QAction(style()->standardIcon(QStyle::SP_MediaPlay),i18n("Print"));
+    m_printAction = new QAction(QIcon::fromTheme("media-playback-start", style()->standardIcon(QStyle::SP_MediaPlay)),i18n("Print"));
     connect(m_printAction, &QAction::triggered, [ this ](){
         if(m_core.state() == AtCore::BUSY) {
             pausePrint();
@@ -114,11 +114,11 @@ void AtCoreInstanceWidget::buildMainToolbar(){
     });
     m_mainToolBar->addAction(m_printAction);
 
-    auto stopAction = new QAction(style()->standardIcon(QStyle::SP_MediaStop),i18n("Stop"));
+    auto stopAction = new QAction(QIcon::fromTheme("media-playback-stop", style()->standardIcon(QStyle::SP_MediaStop)), i18n("Stop"));
     connect(stopAction, &QAction::triggered, this, &AtCoreInstanceWidget::stopPrint);
     connect(stopAction, &QAction::triggered, [this](){
         m_printAction->setText(i18n("Print"));
-        m_printAction->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
+        m_printAction->setIcon(QIcon::fromTheme("media-playback-start", style()->standardIcon(QStyle::SP_MediaPlay)));
     });
     m_mainToolBar->addAction(stopAction);
 
@@ -154,7 +154,7 @@ void AtCoreInstanceWidget::buildConnectionToolbar()
     m_connectWidget->setLayout(connectLayout);
     m_connectToolBar->addWidget(m_connectWidget);
 
-    m_connectButton = new QPushButton(i18n("Connect"));
+    m_connectButton = new QPushButton(QIcon::fromTheme("network-connect", style()->standardIcon(QStyle::SP_DialogCloseButton)), i18n("Connect"));
     m_connectButton->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
     connect(this, &AtCoreInstanceWidget::disableDisconnect, m_connectButton, &QPushButton::setDisabled);
     connect(m_connectButton, &QPushButton::clicked, this, &AtCoreInstanceWidget::connectButtonClicked);
@@ -310,6 +310,7 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
         case AtCore::CONNECTING: {
             m_core.setSerialTimerInterval(0);
             m_connectButton->setText(i18n("Disconnect"));
+            m_connectButton->setIcon(QIcon::fromTheme("network-disconnect"));
             m_connectToolBar->setHidden(true);
             m_mainToolBar->setHidden(false);
             stateString = i18n("Connecting...");
@@ -330,6 +331,7 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
             ui->logWidget->addLog(i18n("Serial disconnected"));
             m_core.setSerialTimerInterval(100);
             m_connectButton->setText(i18n("Connect"));
+            m_connectButton->setIcon(QIcon::fromTheme("network-connect"));
             m_connectToolBar->setHidden(false);
             m_mainToolBar->setHidden(true);
             enableControls(false);
@@ -344,18 +346,18 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
             ui->printProgressWidget->setVisible(false);
             disconnect(&m_core, &AtCore::printProgressChanged, ui->printProgressWidget, &PrintProgressWidget::updateProgressBar);
             m_printAction->setText(i18n("Print"));
-            m_printAction->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
+            m_printAction->setIcon(QIcon::fromTheme("document-edit", style()->standardIcon(QStyle::SP_MediaPlay)));
         } break;
         case AtCore::BUSY: {
             stateString = i18n("Printing");
             emit disableDisconnect(true);
             m_printAction->setText(i18n("Pause"));
-            m_printAction->setIcon(style()->standardIcon(QStyle::SP_MediaPause));
+            m_printAction->setIcon(QIcon::fromTheme("media-playback-pause", style()->standardIcon(QStyle::SP_MediaPause)));
         } break;
         case AtCore::PAUSE: {
             stateString = i18n("Paused");
             m_printAction->setText(i18n("Resume"));
-            m_printAction->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
+            m_printAction->setIcon(QIcon::fromTheme("media-playback-start", style()->standardIcon(QStyle::SP_MediaPlay)));
         } break;
         case AtCore::STOP: {
             stateString = i18n("Stoping Print");
