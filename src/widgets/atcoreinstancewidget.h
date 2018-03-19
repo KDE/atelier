@@ -17,12 +17,14 @@
 */
 
 #pragma once
-#include <QWidget>
-#include <QUrl>
-#include <QToolBar>
 #include <AtCore/AtCore>
+#include <QComboBox>
 #include <QList>
-
+#include <QPushButton>
+#include <QSettings>
+#include <QToolBar>
+#include <QUrl>
+#include <QWidget>
 namespace Ui
 {
 class AtCoreInstanceWidget;
@@ -49,14 +51,23 @@ public:
     bool connected();
     void setOpenFiles(const QList<QUrl>& files);
 
+public slots:
+    void updateProfileData();
+
 private:
     Ui::AtCoreInstanceWidget* ui;
     AtCore m_core;
     QToolBar *m_mainToolBar;
+    QComboBox *m_comboPort;
+    QComboBox *m_comboProfile;
+    QPushButton *m_connectButton;
+    QToolBar *m_connectToolBar;
+    QWidget *m_connectWidget;
     QToolBar *m_toolBar;
     QMap<QString, QVariant> profileData;
     QList<QUrl> m_files;
     QAction *m_printAction;
+    QSettings m_settings;
     void initConnectsToAtCore();
     void printFile(const QUrl& fileName);
     void pausePrint();
@@ -71,7 +82,11 @@ private:
     void buildToolbar();
     void buildMainToolbar();
     void print();
+    void updateSerialPort(const QStringList &ports);
+    void buildConnectionToolbar();
+    void connectButtonClicked();
 signals:
     void extruderCountChanged(int count);
     void disableDisconnect(bool b);
+    void connectionChanged(QString name);
 };

@@ -60,11 +60,13 @@ private:
     QTabWidget *m_instances;
 
     void setupLateralArea();
+    void newAtCoreInstance();
     void initWidgets();
     void setupActions();
     void openFile();
-    void newConnection(const QString& port, const QMap<QString, QVariant>& profile);
+    void atCoreInstanceNameChange(const QString &name);
 
 signals:
     void extruderCountChanged(int count);
+    void profilesChanged();
 };
