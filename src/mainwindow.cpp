@@ -43,6 +43,16 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     initWidgets();
     setupActions();
+    connect(m_instances, &QTabWidget::tabCloseRequested, [this] (int index){
+        QWidget *tempWidget= m_instances->widget(index);
+        delete tempWidget;
+
+        if(m_instances->count() == 1) {
+            m_instances->setTabsClosable(false);
+            m_instances->setMovable(false);
+        }
+    });
+
 }
 
 MainWindow::~MainWindow()
@@ -66,7 +76,6 @@ void MainWindow::initWidgets()
     centralLayout->addWidget(m_lateral.m_toolBar);
     centralLayout->addWidget(splitter);
     ui->centralwidget->setLayout(centralLayout);
-
 }
 void MainWindow::newAtCoreInstance()
 {
@@ -75,6 +84,11 @@ void MainWindow::newAtCoreInstance()
     newInstanceWidget->setObjectName(name);
     connect(this, &MainWindow::profilesChanged, newInstanceWidget, &AtCoreInstanceWidget::updateProfileData);
     connect(newInstanceWidget, &AtCoreInstanceWidget::connectionChanged, this, &MainWindow::atCoreInstanceNameChange);
+
+    if(m_instances->count() > 1) {
+        m_instances->setTabsClosable(true);
+        m_instances->setMovable(true);
+    }
 }
 // Move to LateralArea.
 void MainWindow::setupLateralArea()

@@ -45,6 +45,7 @@ AtCoreInstanceWidget::AtCoreInstanceWidget(QWidget *parent):
 
 AtCoreInstanceWidget::~AtCoreInstanceWidget()
 {
+    m_core.closeConnection();
     delete ui;
 }
 
