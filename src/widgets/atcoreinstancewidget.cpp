@@ -36,8 +36,11 @@ AtCoreInstanceWidget::AtCoreInstanceWidget(QWidget *parent):
     ui->printProgressWidget->setVisible(false);
     buildMainToolbar();
     buildToolbar();
+    buildConnectionToolbar();
     enableControls(false);
+    updateProfileData();
     initConnectsToAtCore();
+    m_mainToolBar->setHidden(true);
 }
 
 AtCoreInstanceWidget::~AtCoreInstanceWidget()
@@ -96,13 +99,6 @@ void AtCoreInstanceWidget::buildMainToolbar(){
     m_mainToolBar = new QToolBar();
     m_mainToolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
 
-    auto disconnectAction = new QAction(style()->standardIcon(QStyle::SP_DialogCloseButton), i18n("Disconnect"));
-    connect(this, &AtCoreInstanceWidget::disableDisconnect, disconnectAction, &QAction::setDisabled);
-    connect(disconnectAction, &QAction::triggered, [this](){
-        m_core.closeConnection();
-    });
-    m_mainToolBar->addAction(disconnectAction);
-
     m_printAction = new QAction(style()->standardIcon(QStyle::SP_MediaPlay),i18n("Print"));
     connect(m_printAction, &QAction::triggered, [ this ](){
         if(m_core.state() == AtCore::BUSY) {
@@ -130,20 +126,91 @@ void AtCoreInstanceWidget::buildMainToolbar(){
     m_mainToolBar->addAction(disableMotorsAction);
 
     ui->mainToolBarLayout->addWidget(m_mainToolBar);
-    ui->mainToolBarLayout->addStretch();
 }
-void AtCoreInstanceWidget::startConnection(const QString& serialPort, const QMap<QString, QVariant>& profiles){
-    m_core.initSerial(serialPort, profiles["bps"].toInt());
-    if(m_core.state() == AtCore::CONNECTING){
-        QString fw = profiles["firmware"].toString();
-        if( fw != QString("Auto-Detect")){
-            m_core.loadFirmwarePlugin(fw);
+
+void AtCoreInstanceWidget::buildConnectionToolbar()
+{
+    m_connectToolBar = new QToolBar();
+    m_comboPort = new QComboBox;
+    m_comboPort->setEditable(true);
+    QLabel *deviceLabel = new QLabel(i18n("Device"));
+    QHBoxLayout *deviceLayout = new QHBoxLayout;
+    deviceLayout->addWidget(deviceLabel);
+    deviceLayout->addWidget(m_comboPort,100);
+
+    m_comboProfile = new QComboBox;
+    m_comboProfile->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Fixed);
+    QHBoxLayout *profileLayout = new QHBoxLayout;
+    QLabel *profileLabel = new QLabel(i18n("Profile"));
+    profileLayout->addWidget(profileLabel);
+    profileLayout->addWidget(m_comboProfile,100);
+
+    QHBoxLayout *connectLayout = new QHBoxLayout;
+    connectLayout->addLayout(deviceLayout,50);
+    connectLayout->addLayout(profileLayout,50);
+
+    m_connectWidget = new QWidget();
+    m_connectWidget->setLayout(connectLayout);
+    m_connectToolBar->addWidget(m_connectWidget);
+
+    m_connectButton = new QPushButton(i18n("Connect"));
+    m_connectButton->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
+    connect(this, &AtCoreInstanceWidget::disableDisconnect, m_connectButton, &QPushButton::setDisabled);
+    connect(m_connectButton, &QPushButton::clicked, this, &AtCoreInstanceWidget::connectButtonClicked);
+    ui->mainToolBarLayout->addWidget(m_connectToolBar);
+    ui->mainToolBarLayout->addWidget(m_connectButton);
+
+}
+
+void AtCoreInstanceWidget::connectButtonClicked()
+{
+    if(m_core.state() == AtCore::DISCONNECTED) {
+        if (m_comboProfile->currentText().isEmpty()) {
+            QMessageBox::critical(this, i18n("Error"), i18n("Please, create a profile to connect on Settings!"));
+            return;
         }
+
+        if (m_comboPort->currentText().isEmpty()) {
+            QMessageBox::critical(this, i18n("Error"), i18n("Please, connect a serial device to continue!"));
+            return;
+        }
+
+        //Get profile data before connecting.
+        QString profile = m_comboProfile->currentText();
+        m_settings.beginGroup("GeneralSettings");
+        m_settings.beginGroup(profile);
+        QMap<QString, QVariant> data;
+        data["bps"] = m_settings.value(QStringLiteral("bps"), QStringLiteral("115200"));
+        data["bedTemp"] = m_settings.value(QStringLiteral("maximumTemperatureBed"), QStringLiteral("0"));
+        data["hotendTemp"] = m_settings.value(QStringLiteral("maximumTemperatureExtruder"), QStringLiteral("0"));
+        data["firmware"] = m_settings.value(QStringLiteral("firmware"),QStringLiteral("Auto-Detect"));
+        data["postPause"] = m_settings.value(QStringLiteral("postPause"),QStringLiteral(""));
+        data["name"] = profile;
+        m_settings.endGroup();
+        m_settings.endGroup();
+
+        //then connect
+        m_core.initSerial(m_comboPort->currentText(), data["bps"].toInt());
+        if(m_core.state() == AtCore::CONNECTING){
+            profileData = data;
+            QString fw = profileData["firmware"].toString();
+            if( fw != QString("Auto-Detect")){
+                m_core.loadFirmwarePlugin(fw);
+            }
+            emit(connectionChanged(profileData["name"].toString()));
+        }
+    } else {
+        m_core.closeConnection();
+        emit(connectionChanged(i18n("Connect a Printer")));
     }
 }
 
 void AtCoreInstanceWidget::initConnectsToAtCore()
 {
+    m_core.setSerialTimerInterval(100);
+    // Handle device changes
+    connect(&m_core, &AtCore::portsChanged, this, &AtCoreInstanceWidget::updateSerialPort);
+
     // Handle AtCore status change
     connect(&m_core, &AtCore::stateChanged, this, &AtCoreInstanceWidget::handlePrinterStatusChanged);
 
@@ -240,6 +307,10 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
     static QString stateString;
     switch (newState) {
         case AtCore::CONNECTING: {
+            m_core.setSerialTimerInterval(0);
+            m_connectButton->setText(i18n("Disconnect"));
+            m_connectToolBar->setHidden(true);
+            m_mainToolBar->setHidden(false);
             stateString = i18n("Connecting...");
             connect(&m_core, &AtCore::receivedMessage, this, &AtCoreInstanceWidget::checkReceivedCommand);
             connect(m_core.serial(), &SerialLayer::pushedCommand, this, &AtCoreInstanceWidget::checkPushedCommands);
@@ -256,6 +327,10 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
             disconnect(&m_core, &AtCore::receivedMessage, this, &AtCoreInstanceWidget::checkReceivedCommand);
             disconnect(m_core.serial(), &SerialLayer::pushedCommand, this, &AtCoreInstanceWidget::checkPushedCommands);
             ui->logWidget->addLog(i18n("Serial disconnected"));
+            m_core.setSerialTimerInterval(100);
+            m_connectButton->setText(i18n("Connect"));
+            m_connectToolBar->setHidden(false);
+            m_mainToolBar->setHidden(true);
             enableControls(false);
         } break;
         case AtCore::STARTPRINT: {
@@ -367,4 +442,19 @@ bool AtCoreInstanceWidget::connected()
 void AtCoreInstanceWidget::setOpenFiles(const QList<QUrl>& files)
 {
     m_files = files;
+}
+
+void AtCoreInstanceWidget::updateSerialPort(const QStringList &ports)
+{
+    m_comboPort->clear();
+    m_comboPort->addItems(ports);
+}
+
+void AtCoreInstanceWidget::updateProfileData()
+{
+    m_settings.beginGroup("GeneralSettings");
+    QStringList profiles = m_settings.childGroups();
+    m_settings.endGroup();
+    m_comboProfile->clear();
+    m_comboProfile->addItems(profiles);
 }

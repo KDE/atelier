@@ -8,6 +8,7 @@
 
     <MenuBar>
         <Menu name="file" >
+            <Action name="new_instance"/>
             <Action name="open_gcode"/>
             <Action name="quit" />
         </Menu>
@@ -15,10 +16,6 @@
             <Action name="3d"/>
             <Action name="gcode"/>
             <Action name="video"/>
-        </Menu>
-        <Menu name="run">
-            <text>Run</text>
-            <Action name="connect"/>
         </Menu>
         <Menu name="settings">
             <Action name="profiles"/>
@@ -28,7 +25,7 @@
     <ToolBar name="mainToolBar" >
         <Action name="open_gcode"/>
         <Action name="profiles"/>
-        <Action name="connect"/>
+        <Action name="new_instance"/>
         <Separator/>
     </ToolBar>
 </gui>

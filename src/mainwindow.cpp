@@ -18,7 +18,6 @@
 */
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <dialogs/connectsettingsdialog.h>
 #include <dialogs/profilesdialog.h>
 #include <KLocalizedString>
 #include <KStandardAction>
@@ -53,10 +52,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::initWidgets()
 {
-    auto newInstanceWidget = new AtCoreInstanceWidget();
-    m_instances->addTab(newInstanceWidget, i18n("Connect your printer"));
 
     setupLateralArea();
+    newAtCoreInstance();
 
     // View:
     // Sidebar, Sidevar Controls, Printer Tabs.
@@ -68,14 +66,22 @@ void MainWindow::initWidgets()
     centralLayout->addWidget(m_lateral.m_toolBar);
     centralLayout->addWidget(splitter);
     ui->centralwidget->setLayout(centralLayout);
-}
 
+}
+void MainWindow::newAtCoreInstance()
+{
+    auto newInstanceWidget = new AtCoreInstanceWidget();
+    QString name = QString::number(m_instances->addTab(newInstanceWidget, i18n("Connect a printer")));
+    newInstanceWidget->setObjectName(name);
+    connect(this, &MainWindow::profilesChanged, newInstanceWidget, &AtCoreInstanceWidget::updateProfileData);
+    connect(newInstanceWidget, &AtCoreInstanceWidget::connectionChanged, this, &MainWindow::atCoreInstanceNameChange);
+}
 // Move to LateralArea.
 void MainWindow::setupLateralArea()
 {
     m_lateral.m_toolBar = new QWidget();
     m_lateral.m_stack = new QStackedWidget();
-    auto *buttonLayout = new QVBoxLayout();
+    auto buttonLayout = new QVBoxLayout();
 
     auto setupButton = [this, buttonLayout](const QString& key, const QString& text, const QIcon& icon, QWidget *w) {
         auto *btn = new QPushButton(m_lateral.m_toolBar);
@@ -117,21 +123,16 @@ void MainWindow::setupActions()
     action->setText(i18n("&Open GCode"));
     connect(action, &QAction::triggered, this, &MainWindow::openFile);
 
-    action = actionCollection()->addAction(QStringLiteral("connect"));
-    action->setText(i18n("&Connect"));
-    connect(action, &QAction::triggered, [ & ]{
-            std::unique_ptr<ConnectSettingsDialog> csd(new ConnectSettingsDialog);
-            connect(csd.get(), &ConnectSettingsDialog::startConnection, [this](const QString& port, const QMap<QString, QVariant>& data) {
-                newConnection(port, data);
-            });
-            csd->exec();
-    });
+    action = actionCollection()->addAction(QStringLiteral("new_instance"));
+    action->setText(i18n("&New Connection"));
+    connect(action, &QAction::triggered, this, &MainWindow::newAtCoreInstance);
 
     action = actionCollection()->addAction(QStringLiteral("profiles"));
     action->setText(i18n("&Profiles"));
     connect(action, &QAction::triggered, [this] {
         std::unique_ptr<ProfilesDialog> pd(new ProfilesDialog);
         pd->exec();
+        emit(profilesChanged());
     });
 
     #ifdef Q_OS_LINUX
@@ -165,18 +166,8 @@ void MainWindow::openFile()
         }
     }
 }
-void MainWindow::newConnection(const QString& port, const QMap<QString, QVariant>& profile)
+
+void MainWindow::atCoreInstanceNameChange(const QString &name)
 {
-    const int tabs = m_instances->count();
-    if(tabs == 1){
-        auto instance = qobject_cast<AtCoreInstanceWidget*>(m_instances->currentWidget());
-        if(!instance->connected()){
-            instance->startConnection(port, profile);
-            m_instances->setTabText(m_instances->currentIndex(), profile["name"].toString());
-            return;
-        }
-    }
-    auto newInstanceWidget = new AtCoreInstanceWidget();
-    m_instances->addTab(newInstanceWidget, profile["name"].toString());
-    newInstanceWidget->startConnection(port, profile);
+    m_instances->setTabText(sender()->objectName().toInt(),name);
 }
