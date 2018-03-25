@@ -17,26 +17,35 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "thermowidget.h"
-#include <QKeyEvent>
-#include <QPaintEvent>
-#include <QFocusEvent>
-#include <QPainter>
 #include <QBrush>
+#include <QFocusEvent>
+#include <QKeyEvent>
+#include <QPainter>
+#include <QPaintEvent>
 #include <QPen>
+#include <QTimer>
 #include <QWheelEvent>
 
+#include "thermowidget.h"
+
 ThermoWidget::ThermoWidget(QWidget *parent, QString name) : QwtDial(parent),
-    m_currentTemperatureNeedle(new QwtDialSimpleNeedle(QwtDialSimpleNeedle::Arrow)),
     m_targetTemperatureNeedle(new QwtDialSimpleNeedle(QwtDialSimpleNeedle::Arrow, Qt::red, Qt::darkRed)),
     m_name(name),
     m_currentTemperature(0),
     m_targetTemperature(0)
 {
     setScaleArc(40, 320);
+    //make our current temperature needle here so we can set it to match text color.
+    m_currentTemperatureNeedle = new QwtDialSimpleNeedle(QwtDialSimpleNeedle::Arrow, true, palette().text().color());
     setNeedle(m_currentTemperatureNeedle);
     setReadOnly(false);
     setFocusPolicy(Qt::StrongFocus);
+
+    m_cursorTimer = new QTimer();
+    connect (m_cursorTimer, &QTimer::timeout, [&] {
+            m_paintCursor = !m_paintCursor;
+            update();
+    });
 }
 
 void ThermoWidget::keyPressEvent(QKeyEvent* event)
@@ -46,17 +55,17 @@ void ThermoWidget::keyPressEvent(QKeyEvent* event)
         if (tmp.toInt() <= upperBound() && tmp.toInt() >= lowerBound()) {
             m_currentTemperatureTextFromEditor = tmp;
         }
-    } else if (event->key() == Qt::Key_Backspace && m_currentTemperatureTextFromEditor.count()) {
-        m_currentTemperatureTextFromEditor.remove(m_currentTemperatureTextFromEditor.count() - 1, 1);
+    } else if ( (event->key() == Qt::Key_Backspace  || event->key() == Qt::Key_Delete) && m_currentTemperatureTextFromEditor.count()) {
+        m_currentTemperatureTextFromEditor.remove(m_currentTemperatureTextFromEditor.length()-1, 1);
     } else if (event->key() == Qt::Key_Enter) {
         m_targetTemperature = m_currentTemperatureTextFromEditor.toInt();
     } else if (event->key() == Qt::Key_Escape) {
         m_currentTemperatureTextFromEditor = '0';
-    } else if (event->key() == Qt::Key_Up || event->key() == Qt::Key_Right) {
+    } else if (event->key() == Qt::Key_Up || event->key() == Qt::Key_Right || event->key() == Qt::Key_Plus) {
         if (m_targetTemperature != upperBound()) {
             m_currentTemperatureTextFromEditor = QString::number(m_targetTemperature + 1);
         }
-    } else if (event->key() == Qt::Key_Down || event->key() == Qt::Key_Left) {
+    } else if (event->key() == Qt::Key_Down || event->key() == Qt::Key_Left || event->key() == Qt::Key_Minus) {
         if (m_targetTemperature != lowerBound()) {
             m_currentTemperatureTextFromEditor = QString::number(m_targetTemperature - 1);
         }
@@ -116,9 +125,17 @@ void ThermoWidget::focusOutEvent(QFocusEvent* event)
     if (m_targetTemperature != m_currentTemperatureTextFromEditor.toInt()) {
         m_targetTemperature = m_currentTemperatureTextFromEditor.toInt();
         emit targetTemperatureChanged(m_targetTemperature);
-        update();
         event->accept();
     }
+    m_cursorTimer->stop();
+    m_paintCursor = false;
+    update();
+}
+
+void ThermoWidget::focusInEvent(QFocusEvent* event)
+{
+        m_cursorTimer->start(1000);
+        event->accept();
 }
 
 void ThermoWidget::paintEvent(QPaintEvent* event)
@@ -130,22 +147,33 @@ void ThermoWidget::paintEvent(QPaintEvent* event)
     const double targetWidth = fm.width(m_currentTemperatureTextFromEditor);
     const double currentWidth = fm.width(currentText);
     const double nameWidth = fm.width(m_name);
+    const double wWidth = fm.width('W');
+
 
     const double height = fm.height();
     const double halfWidth = geometry().width() / 2;
     const double xposTarget = halfWidth - (targetWidth / 2);
     const double xposCurrent = halfWidth - (currentWidth / 2);
+    const double xposCursor = halfWidth + fm.width('_') + 2;
     const double xposName = halfWidth - (nameWidth / 2);
     double ypos = geometry().height() / 2 + height * 2;
     QPainter p(this);
     QColor color = palette().color(QPalette::Text);
 
+    //draw a box to put our target into as a user hint.
+    p.fillRect(QRect(halfWidth - wWidth , ypos - (height * 0.66), wWidth * 2, (height * 0.9)),palette().color(QPalette::AlternateBase));
+
+    if(m_paintCursor) {
+        p.setPen(palette().color(QPalette::Text));
+        p.drawText(xposCursor, ypos, QChar('|'));
+    }
     p.setPen(Qt::red);
     p.drawText(xposTarget, ypos, m_currentTemperatureTextFromEditor);
 
     ypos += height + 2;
 
     p.setPen(color);
+
     p.drawText(xposCurrent, ypos, QString::number(m_currentTemperature));
 
     ypos += height + 2;

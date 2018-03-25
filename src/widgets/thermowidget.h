@@ -43,6 +43,7 @@ signals:
     void targetTemperatureChanged(double targetTemperature);
 
 protected:
+    void focusInEvent(QFocusEvent *event);
     void focusOutEvent(QFocusEvent *event);
     void keyPressEvent (QKeyEvent *event);
     void paintEvent(QPaintEvent *event);
@@ -55,6 +56,8 @@ private:
     QString m_currentTemperatureTextFromEditor;
     QString m_name;
 
+    QTimer *m_cursorTimer = nullptr;
+    bool m_paintCursor = false;
     double m_currentTemperature;
     double m_targetTemperature;
 };
