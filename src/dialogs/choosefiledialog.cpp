@@ -33,7 +33,7 @@ ChooseFileDialog::ChooseFileDialog(QWidget *parent, QList<QUrl> files) :
         files_list.append(file.toLocalFile());
     }
     listWigdet->addItems(files_list);
-    connect(listWigdet, &QListWidget::currentTextChanged, [ & ](const QString& t){
+    connect(listWigdet, &QListWidget::currentTextChanged, [ this ](const QString& t){
         m_choosen_file = t;
     });
     auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);

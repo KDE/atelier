@@ -39,12 +39,12 @@ ProfilesDialog::ProfilesDialog(QWidget *parent) :
     ui->baudCB->addItems(SERIAL::BAUDS);
     ui->baudCB->setCurrentText(QLatin1String("115200"));
     ui->profileCB->setAutoCompletion(true);
-    connect(ui->profileCB, static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged), [ = ] {
+    connect(ui->profileCB, static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged), [ this ] {
         loadSettings();
     });
     updateCBProfiles();
 
-    connect(ui->buttonBox, &QDialogButtonBox::clicked, [ = ](QAbstractButton * btn) {
+    connect(ui->buttonBox, &QDialogButtonBox::clicked, [ this ](QAbstractButton * btn) {
         switch (ui->buttonBox->buttonRole(btn)) {
         case QDialogButtonBox::ResetRole:
             loadSettings();
@@ -57,16 +57,16 @@ ProfilesDialog::ProfilesDialog(QWidget *parent) :
         }
     });
 
-    connect(ui->heatedBedCK, &QCheckBox::clicked, [ = ](const bool & status) {
+    connect(ui->heatedBedCK, &QCheckBox::clicked, [ this ](const bool & status) {
         ui->bedTempSB->setEnabled(status);
     });
 
-    connect(ui->cartesianRB, &QRadioButton::clicked, [ = ]() {
+    connect(ui->cartesianRB, &QRadioButton::clicked, [ this ]() {
         ui->cartesianGB->setHidden(false);
         ui->deltaGB->setHidden(true);
     });
 
-    connect(ui->deltaRB, &QRadioButton::clicked, [ = ]() {
+    connect(ui->deltaRB, &QRadioButton::clicked, [ this ]() {
         ui->cartesianGB->setHidden(true);
         ui->deltaGB->setHidden(false);
     });
