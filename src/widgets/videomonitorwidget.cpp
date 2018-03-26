@@ -64,7 +64,7 @@ VideoMonitorWidget::VideoMonitorWidget(QWidget *parent) :
         .replaceInStrings( QRegExp("^"), "v4l2:///dev/"));
 #endif
     
-    connect(_playPB, &QPushButton::clicked, [=](bool b){
+    connect(_playPB, &QPushButton::clicked, [this, _playPB, _sourceCB](bool b){
         if(b){
             _playPB->setIcon(style()->standardIcon(QStyle::SP_MediaPause));
             QString source = _sourceCB->currentText();
@@ -84,7 +84,7 @@ VideoMonitorWidget::VideoMonitorWidget(QWidget *parent) :
 
 VideoMonitorWidget::~VideoMonitorWidget()
 {
-    
+
 }
 
 void VideoMonitorWidget::handleError()
