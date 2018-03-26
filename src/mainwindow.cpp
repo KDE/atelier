@@ -96,7 +96,7 @@ void MainWindow::setupLateralArea()
     };
 
     auto *gcodeEditor = new GCodeEditorWidget(this);
-     connect(gcodeEditor, &GCodeEditorWidget::updateClientFactory, this, [&](KTextEditor::View* view){
+     connect(gcodeEditor, &GCodeEditorWidget::updateClientFactory, this, [this](KTextEditor::View* view){
          guiFactory()->removeClient(m_currEditorView);
          guiFactory()->addClient(view);
          m_currEditorView = view;
@@ -121,7 +121,7 @@ void MainWindow::setupActions()
     action->setText(i18n("&Connect"));
     connect(action, &QAction::triggered, [ & ]{
             std::unique_ptr<ConnectSettingsDialog> csd(new ConnectSettingsDialog);
-            connect(csd.get(), &ConnectSettingsDialog::startConnection, [ & ](const QString& port, const QMap<QString, QVariant>& data) {
+            connect(csd.get(), &ConnectSettingsDialog::startConnection, [this](const QString& port, const QMap<QString, QVariant>& data) {
                 newConnection(port, data);
             });
             csd->exec();
@@ -129,7 +129,7 @@ void MainWindow::setupActions()
 
     action = actionCollection()->addAction(QStringLiteral("profiles"));
     action->setText(i18n("&Profiles"));
-    connect(action, &QAction::triggered, [ & ] {
+    connect(action, &QAction::triggered, [this] {
         std::unique_ptr<ProfilesDialog> pd(new ProfilesDialog);
         pd->exec();
     });
