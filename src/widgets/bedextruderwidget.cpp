@@ -31,13 +31,13 @@ BedExtruderWidget::BedExtruderWidget(QWidget *parent) :
     connect(ui->heatBedPB, &QPushButton::clicked, this, &BedExtruderWidget::heatBedClicked);
     connect(ui->heatExtPB, &QPushButton::clicked, this, &BedExtruderWidget::heatExtruderClicked);
 
-    connect(ui->bedTempSB, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), [ = ](double tmp) {
+    connect(ui->bedTempSB, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), [ this ](double tmp) {
         if (ui->heatBedPB->isChecked()) {
             emit bedTemperatureChanged(tmp,ui->bedAndWaitCB->isChecked());
         }
     });
 
-    connect(ui->extTempSB, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), [ = ](double tmp) {
+    connect(ui->extTempSB, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), [ this ](double tmp) {
         if (ui->heatExtPB->isChecked()) {
             emit extTemperatureChanged(tmp, currentExtruder(),ui->extAndWaitCB->isChecked());
         }
