@@ -50,22 +50,60 @@ ThermoWidget::ThermoWidget(QWidget *parent, QString name) : QwtDial(parent),
 
 void ThermoWidget::keyPressEvent(QKeyEvent* event)
 {
+    //set our target text length.
+    int slen = m_currentTemperatureTextFromEditor.length() -1;
+    // be sure our cursor posistion is valid.
+    if(slen < 0) {
+        m_currentTemperatureTextFromEditor = '-';
+        m_cursorPos = 0;
+    } else if(slen > 2) {
+        m_cursorPos = 2;
+    }
+    //parse the key events.
     if (event->key() >= Qt::Key_0 && event->key() <= Qt::Key_9) {
-        auto tmp = m_currentTemperatureTextFromEditor + event->key();
+        auto tmp = m_currentTemperatureTextFromEditor;
+
+        if(m_cursorPos == slen) {
+            tmp.append(event->key());
+        } else {
+            tmp.insert(m_cursorPos,event->key());
+        }
+
+        if(tmp.startsWith('0')) {
+            tmp.remove(0,1);
+        }
+
+        if(tmp.contains('-')) {
+            tmp.remove('-');
+            //push the cursor back to negate advancement;
+            m_cursorPos--;
+        }
         if (tmp.toInt() <= upperBound() && tmp.toInt() >= lowerBound()) {
             m_currentTemperatureTextFromEditor = tmp;
+            if (m_cursorPos <= slen) {
+                m_cursorPos++;
+            }
         }
-    } else if ( (event->key() == Qt::Key_Backspace  || event->key() == Qt::Key_Delete) && m_currentTemperatureTextFromEditor.count()) {
-        m_currentTemperatureTextFromEditor.remove(m_currentTemperatureTextFromEditor.length()-1, 1);
+    } else if ( event->key() == Qt::Key_Delete && m_currentTemperatureTextFromEditor.count()) {
+        m_currentTemperatureTextFromEditor.remove(m_cursorPos, 1);
+        if(m_cursorPos < slen) {
+            m_cursorPos = slen;
+        }
+        m_cursorPos--;
+    } else if ( event->key() == Qt::Key_Backspace && m_currentTemperatureTextFromEditor.count()) {
+        if(m_cursorPos <= slen) {
+            m_cursorPos--;
+            m_currentTemperatureTextFromEditor.remove(m_cursorPos, 1);
+        }
     } else if (event->key() == Qt::Key_Enter) {
         m_targetTemperature = m_currentTemperatureTextFromEditor.toInt();
     } else if (event->key() == Qt::Key_Escape) {
         m_currentTemperatureTextFromEditor = '0';
-    } else if (event->key() == Qt::Key_Up || event->key() == Qt::Key_Right || event->key() == Qt::Key_Plus) {
+    } else if (event->key() == Qt::Key_Up || event->key() == Qt::Key_Plus) {
         if (m_targetTemperature != upperBound()) {
             m_currentTemperatureTextFromEditor = QString::number(m_targetTemperature + 1);
         }
-    } else if (event->key() == Qt::Key_Down || event->key() == Qt::Key_Left || event->key() == Qt::Key_Minus) {
+    } else if (event->key() == Qt::Key_Down || event->key() == Qt::Key_Minus) {
         if (m_targetTemperature != lowerBound()) {
             m_currentTemperatureTextFromEditor = QString::number(m_targetTemperature - 1);
         }
@@ -83,6 +121,15 @@ void ThermoWidget::keyPressEvent(QKeyEvent* event)
         }
     }
 
+    else if (event->key() == Qt::Key_Right) {
+        if(m_cursorPos < slen) {
+            m_cursorPos++;
+        }
+    } else if (event->key() == Qt::Key_Left) {
+        if(m_cursorPos > 0) {
+            m_cursorPos--;
+        }
+    }
     else {
         QwtDial::keyPressEvent(event);
         return;
@@ -148,14 +195,15 @@ void ThermoWidget::paintEvent(QPaintEvent* event)
     const double currentWidth = fm.width(currentText);
     const double nameWidth = fm.width(m_name);
     const double wWidth = fm.width('W');
+    const double cursorWidth = fm.width('0');
 
 
     const double height = fm.height();
     const double halfWidth = geometry().width() / 2;
     const double xposTarget = halfWidth - (targetWidth / 2);
     const double xposCurrent = halfWidth - (currentWidth / 2);
-    const double xposCursor = halfWidth + fm.width('_') + 2;
     const double xposName = halfWidth - (nameWidth / 2);
+    const double xposCursor = xposTarget + (cursorWidth * m_cursorPos);
     double ypos = geometry().height() / 2 + height * 2;
     QPainter p(this);
     QColor color = palette().color(QPalette::Text);
@@ -165,17 +213,16 @@ void ThermoWidget::paintEvent(QPaintEvent* event)
 
     if(m_paintCursor) {
         p.setPen(palette().color(QPalette::Text));
-        p.drawText(xposCursor, ypos, QChar('|'));
+        p.drawText(xposCursor , ypos, QChar('_'));
     }
+
     p.setPen(Qt::red);
     p.drawText(xposTarget, ypos, m_currentTemperatureTextFromEditor);
 
     ypos += height + 2;
 
     p.setPen(color);
-
     p.drawText(xposCurrent, ypos, QString::number(m_currentTemperature));
-
     ypos += height + 2;
 
     p.setPen(color);
@@ -229,4 +276,5 @@ void ThermoWidget::setTargetTemperature(double temperature)
         emit targetTemperatureChanged(m_targetTemperature);
         update();
     }
+
 }

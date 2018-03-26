@@ -53,11 +53,12 @@ private:
     QwtDialSimpleNeedle *m_currentTemperatureNeedle;
     QwtDialSimpleNeedle *m_targetTemperatureNeedle;
 
-    QString m_currentTemperatureTextFromEditor;
+    QString m_currentTemperatureTextFromEditor = QString("-");
     QString m_name;
 
     QTimer *m_cursorTimer = nullptr;
     bool m_paintCursor = false;
+    int m_cursorPos = 0;
     double m_currentTemperature;
     double m_targetTemperature;
 };
