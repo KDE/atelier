@@ -55,14 +55,14 @@ void AtCoreInstanceWidget::buildToolbar()
     m_toolBar->addAction(lb);
 
     auto homeAll = new QAction("All");
-    connect(homeAll, &QAction::triggered, [&]{
+    connect(homeAll, &QAction::triggered, [this]{
        m_core.home();
     });
     m_toolBar->addAction(homeAll);
 
     for(auto homes : std::map<QString, int>{{"X", AtCore::X}, {"Y", AtCore::Y}, {"Z", AtCore::Z}}) {
         auto home = new QAction(homes.first);
-        connect(home, &QAction::triggered, [&, homes] {
+        connect(home, &QAction::triggered, [this, homes] {
             m_core.home(homes.second);
         });
         m_toolBar->addAction(home);
@@ -98,13 +98,13 @@ void AtCoreInstanceWidget::buildMainToolbar(){
 
     auto disconnectAction = new QAction(style()->standardIcon(QStyle::SP_DialogCloseButton), i18n("Disconnect"));
     connect(this, &AtCoreInstanceWidget::disableDisconnect, disconnectAction, &QAction::setDisabled);
-    connect(disconnectAction, &QAction::triggered, [&](){
+    connect(disconnectAction, &QAction::triggered, [this](){
         m_core.closeConnection();
     });
     m_mainToolBar->addAction(disconnectAction);
 
     m_printAction = new QAction(style()->standardIcon(QStyle::SP_MediaPlay),i18n("Print"));
-    connect(m_printAction, &QAction::triggered, [ & ](){
+    connect(m_printAction, &QAction::triggered, [ this ](){
         if(m_core.state() == AtCore::BUSY) {
             pausePrint();
             return;
@@ -119,7 +119,7 @@ void AtCoreInstanceWidget::buildMainToolbar(){
 
     auto stopAction = new QAction(style()->standardIcon(QStyle::SP_MediaStop),i18n("Stop"));
     connect(stopAction, &QAction::triggered, this, &AtCoreInstanceWidget::stopPrint);
-    connect(stopAction, &QAction::triggered, [&](){
+    connect(stopAction, &QAction::triggered, [this](){
         m_printAction->setText(i18n("Print"));
         m_printAction->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
     });
@@ -155,32 +155,32 @@ void AtCoreInstanceWidget::initConnectsToAtCore()
     connect(ui->bedExtWidget, &BedExtruderWidget::extTemperatureChanged, &m_core, &AtCore::setExtruderTemp);
 
     // Connect AtCore temperatures changes on Atelier Plot
-    connect(&m_core.temperature(), &Temperature::bedTemperatureChanged, [ & ](const float& temp) {
+    connect(&m_core.temperature(), &Temperature::bedTemperatureChanged, [ this ](const float& temp) {
         checkTemperature(0x00, 0, temp);
         ui->plotWidget->appendPoint(i18n("Actual Bed"), temp);
         ui->plotWidget->update();
         ui->bedExtWidget->updateBedTemp(temp);
     });
-    connect(&m_core.temperature(), &Temperature::bedTargetTemperatureChanged, [ & ](const float& temp) {
+    connect(&m_core.temperature(), &Temperature::bedTargetTemperatureChanged, [ this ](const float& temp) {
         checkTemperature(0x01, 0, temp);
         ui->plotWidget->appendPoint(i18n("Target Bed"), temp);
         ui->plotWidget->update();
         ui->bedExtWidget->updateBedTargetTemp(temp);
     });
-    connect(&m_core.temperature(), &Temperature::extruderTemperatureChanged, [ & ](const float& temp) {
+    connect(&m_core.temperature(), &Temperature::extruderTemperatureChanged, [ this ](const float& temp) {
         checkTemperature(0x02, 0, temp);
         ui->plotWidget->appendPoint(i18n("Actual Ext.1"), temp);
         ui->plotWidget->update();
         ui->bedExtWidget->updateExtTemp(temp);
     });
-    connect(&m_core.temperature(), &Temperature::extruderTargetTemperatureChanged, [ & ](const float& temp) {
+    connect(&m_core.temperature(), &Temperature::extruderTargetTemperatureChanged, [ this ](const float& temp) {
         checkTemperature(0x03, 0, temp);
         ui->plotWidget->appendPoint(i18n("Target Ext.1"), temp);
         ui->plotWidget->update();
         ui->bedExtWidget->updateExtTargetTemp(temp);
     });
 
-    connect(ui->pushGCodeWidget, &PushGCodeWidget::push, [ & ](QString command) {
+    connect(ui->pushGCodeWidget, &PushGCodeWidget::push, [ this ](QString command) {
         ui->logWidget->addLog("Push " + command);
         m_core.pushCommand(command);
     });
