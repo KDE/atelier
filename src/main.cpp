@@ -54,13 +54,13 @@ int main(int argc, char *argv[])
         // The bug report email address
         // (bugsEmailAddress = QLatin1String("submit@bugs.kde.org")
         QStringLiteral("atelier@bugs.kde.org"));
-    aboutData.addAuthor(i18n("Lays Rodrigues"), i18n("Developer"), QStringLiteral("laysrodriguessilva@gmail.com"),
+    aboutData.addAuthor(i18n("Lays Rodrigues"), i18n("Developer"), QStringLiteral("lays.rodrigues@kde.org"),
                         QStringLiteral("http://laysrodriguesdev.wordpress.com"));
     aboutData.addAuthor(i18n("Chris Rizzitello"), i18n("Developer"), QStringLiteral("rizzitello@kde.org"),
                         QStringLiteral("http://rizzitello.wordpress.com"));
-    aboutData.addAuthor(i18n("Patrick Pereira"), i18n("Developer"), QStringLiteral("patrickelectric@gmail.com"),
+    aboutData.addAuthor(i18n("Patrick Pereira"), i18n("Developer"), QStringLiteral("patrickjp@kde.org"),
                         QStringLiteral("http://patrickjp.com"));
-    aboutData.addAuthor(i18n("Tomaz Canabrava"), i18n("Contributor"), QStringLiteral("tomaz@kde.com"),
+    aboutData.addAuthor(i18n("Tomaz Canabrava"), i18n("Contributor"), QStringLiteral("tcanabrava@kde.org"),
                         QStringLiteral("http://angrycane.com.br"));
     aboutData.setOtherText(i18n("Using AtCore:%1").arg(ATCORE_VERSION_STRING));
     KAboutData::setApplicationData(aboutData);
