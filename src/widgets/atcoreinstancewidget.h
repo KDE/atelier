@@ -86,7 +86,8 @@ private:
     void buildConnectionToolbar();
     void connectButtonClicked();
 signals:
-    void extruderCountChanged(int count);
-    void disableDisconnect(bool b);
     void connectionChanged(QString name);
+    void disableDisconnect(bool b);
+    void extruderCountChanged(int count);
+    void requestProfileDialog();
 };
