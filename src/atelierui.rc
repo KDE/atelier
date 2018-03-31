@@ -24,8 +24,6 @@
 
     <ToolBar name="mainToolBar" >
         <Action name="open_gcode"/>
-        <Action name="profiles"/>
-        <Action name="new_instance"/>
         <Separator/>
     </ToolBar>
 </gui>
