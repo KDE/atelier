@@ -167,7 +167,8 @@ void AtCoreInstanceWidget::connectButtonClicked()
 {
     if(m_core.state() == AtCore::DISCONNECTED) {
         if (m_comboProfile->currentText().isEmpty()) {
-            QMessageBox::critical(this, i18n("Error"), i18n("Please, create a profile to connect on Settings!"));
+            QMessageBox::information(this, i18n("No Profiles!"), i18n("Connecting Requires creating a profile for your printer. Create a profile in the next dialog then try again."));
+            emit(requestProfileDialog());
             return;
         }
 

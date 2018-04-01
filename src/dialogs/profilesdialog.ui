@@ -21,6 +21,9 @@
        <property name="text">
         <string>Profile</string>
        </property>
+        <property name="buddy">
+        <cstring>profileCB</cstring>
+       </property>
       </widget>
      </item>
      <item row="3" column="1">
@@ -76,6 +79,9 @@
        <property name="text">
         <string>Bits per second</string>
        </property>
+       <property name="buddy">
+        <cstring>baudCB</cstring>
+       </property>
       </widget>
      </item>
      <item>
@@ -110,6 +116,9 @@
             <property name="text">
              <string>Dimension Z</string>
             </property>
+            <property name="buddy">
+             <cstring>z_delta_dimensionSB</cstring>
+            </property>
            </widget>
           </item>
           <item row="0" column="0">
@@ -117,6 +126,9 @@
             <property name="text">
              <string>Radius</string>
             </property>
+            <property name="buddy">
+             <cstring>radiusSB</cstring>
+            </property>            
            </widget>
           </item>
           <item row="0" column="1">
@@ -153,6 +165,9 @@
             <property name="text">
              <string>Dimension Z</string>
             </property>
+            <property name="buddy">
+             <cstring>z_dimensionSB</cstring>
+            </property>            
            </widget>
           </item>
           <item row="1" column="1">
@@ -160,6 +175,9 @@
             <property name="text">
              <string>Dimension Y</string>
             </property>
+            <property name="buddy">
+             <cstring>y_dimensionSB</cstring>
+            </property>            
            </widget>
           </item>
           <item row="0" column="1">
@@ -167,6 +185,9 @@
             <property name="text">
              <string>Dimension X</string>
             </property>
+            <property name="buddy">
+             <cstring>x_dimensionSB</cstring>
+            </property>            
            </widget>
           </item>
           <item row="0" column="2">
@@ -213,6 +234,9 @@
             <property name="text">
              <string>Heated bed?</string>
             </property>
+            <property name="buddy">
+             <cstring>heatedBedCK</cstring>
+            </property>            
            </widget>
           </item>
           <item row="0" column="1">
@@ -230,6 +254,9 @@
             <property name="text">
              <string>Maximum Bed</string>
             </property>
+            <property name="buddy">
+             <cstring>bedTempSB</cstring>
+            </property>            
            </widget>
           </item>
           <item row="1" column="1" colspan="2">
@@ -247,6 +274,9 @@
             <property name="text">
              <string>Maximum Hotend</string>
             </property>
+            <property name="buddy">
+             <cstring>extruderTempSB</cstring>
+            </property>            
            </widget>
           </item>
           <item row="2" column="1" colspan="2">
@@ -274,6 +304,9 @@
           <property name="text">
            <string>Firmware</string>
           </property>
+          <property name="buddy">
+           <cstring>firmwareCB</cstring>
+          </property>
          </widget>
         </item>
         <item row="1" column="1">
@@ -297,6 +330,9 @@
           <property name="text">
            <string>PostPause</string>
           </property>
+         <property name="buddy">
+          <cstring>postPauseLE</cstring>
+         </property>          
          </widget>
         </item>
         <item row="0" column="1">
@@ -320,7 +356,10 @@
  </widget>
  <tabstops>
   <tabstop>profileCB</tabstop>
+  <tabstop>removeProfilePB</tabstop>
   <tabstop>cartesianRB</tabstop>
+  <tabstop>baudCB</tabstop>
+  <tabstop>tabWidget</tabstop>
   <tabstop>deltaRB</tabstop>
   <tabstop>radiusSB</tabstop>
   <tabstop>z_delta_dimensionSB</tabstop>
@@ -329,6 +368,10 @@
   <tabstop>z_dimensionSB</tabstop>
   <tabstop>heatedBedCK</tabstop>
   <tabstop>bedTempSB</tabstop>
+  <tabstop>extruderTempSB</tabstop>
+  <tabstop>postPauseLE</tabstop>
+  <tabstop>firmwareCB</tabstop>
+  <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources/>
  <connections>

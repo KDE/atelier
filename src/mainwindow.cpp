@@ -77,6 +77,11 @@ void MainWindow::newAtCoreInstance()
     QString name = QString::number(m_instances->addTab(newInstanceWidget, i18n("Connect a printer")));
     newInstanceWidget->setObjectName(name);
     connect(this, &MainWindow::profilesChanged, newInstanceWidget, &AtCoreInstanceWidget::updateProfileData);
+    connect(newInstanceWidget, &AtCoreInstanceWidget::requestProfileDialog, [ this ] {
+        std::unique_ptr<ProfilesDialog> pd(new ProfilesDialog);
+        pd->exec();
+        emit(profilesChanged());
+    });
     connect(newInstanceWidget, &AtCoreInstanceWidget::connectionChanged, this, &MainWindow::atCoreInstanceNameChange);
 
     if(m_instances->count() > 1) {
@@ -96,7 +101,10 @@ void MainWindow::setupLateralArea()
         btn->setToolTip(text);
         btn->setAutoExclusive(true);
         btn->setCheckable(true);
+        //3d view is on top set it checked so users see its selected.
+        btn->setChecked(key == "3d");
         btn->setIcon(icon);
+        btn->setFixedSize(48,48);
         btn->setIconSize(QSize(48,48));
         btn->setFlat(true);
         m_lateral.m_stack->addWidget(w);
@@ -130,11 +138,13 @@ void MainWindow::setupActions()
     action = actionCollection()->addAction(QStringLiteral("open_gcode"));
     action->setIcon(QIcon::fromTheme("document-open", style()->standardIcon(QStyle::SP_DirOpenIcon)));
     action->setText(i18n("&Open GCode"));
+    action->setShortcut(QKeySequence::Open);
     connect(action, &QAction::triggered, this, &MainWindow::openFile);
 
     action = actionCollection()->addAction(QStringLiteral("new_instance"));
     action->setIcon(QIcon::fromTheme("list-add", QIcon()));
     action->setText(i18n("&New Connection"));
+    action->setShortcut(QKeySequence::AddTab);
     connect(action, &QAction::triggered, this, &MainWindow::newAtCoreInstance);
 
     action = actionCollection()->addAction(QStringLiteral("profiles"));
