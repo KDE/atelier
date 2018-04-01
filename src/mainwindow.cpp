@@ -101,7 +101,10 @@ void MainWindow::setupLateralArea()
         btn->setToolTip(text);
         btn->setAutoExclusive(true);
         btn->setCheckable(true);
+        //3d view is on top set it checked so users see its selected.
+        btn->setChecked(key == "3d");
         btn->setIcon(icon);
+        btn->setFixedSize(48,48);
         btn->setIconSize(QSize(48,48));
         btn->setFlat(true);
         m_lateral.m_stack->addWidget(w);
