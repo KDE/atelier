@@ -25,11 +25,6 @@
 #include <QStackedWidget>
 #include <QUrl>
 
-namespace Ui
-{
-class MainWindow;
-}
-
 struct LateralArea {
     // Area with the the lateral buttons that will open the views.
     // Kind like the KDevelop stuff but way simpler.
@@ -50,10 +45,8 @@ class MainWindow : public KXmlGuiWindow
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
 
 private:
-    Ui::MainWindow *ui;
     QList<QUrl> m_openFiles;
     KTextEditor::View *m_currEditorView;
     LateralArea m_lateral;
