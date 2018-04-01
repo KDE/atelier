@@ -36,11 +36,9 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     KXmlGuiWindow(parent),
-    ui(new Ui::MainWindow),
     m_currEditorView(nullptr),
     m_instances(new QTabWidget(this))
 {
-    ui->setupUi(this);
     initWidgets();
     setupActions();
     connect(m_instances, &QTabWidget::tabCloseRequested, [this] (int index){
@@ -53,11 +51,6 @@ MainWindow::MainWindow(QWidget *parent) :
         }
     });
 
-}
-
-MainWindow::~MainWindow()
-{
-    delete ui;
 }
 
 void MainWindow::initWidgets()
@@ -75,7 +68,9 @@ void MainWindow::initWidgets()
     splitter->addWidget(m_instances);
     centralLayout->addWidget(m_lateral.m_toolBar);
     centralLayout->addWidget(splitter);
-    ui->centralwidget->setLayout(centralLayout);
+    auto *centralWidget = new QWidget();
+    centralWidget->setLayout(centralLayout);
+    setCentralWidget(centralWidget);
 }
 void MainWindow::newAtCoreInstance()
 {
