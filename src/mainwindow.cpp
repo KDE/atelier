@@ -17,7 +17,6 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
 #include <dialogs/profilesdialog.h>
 #include <KLocalizedString>
 #include <KStandardAction>
@@ -147,7 +146,7 @@ void MainWindow::setupActions()
         emit(profilesChanged());
     });
 
-    action = KStandardAction::quit(qApp, SLOT(quit()), actionCollection());
+    action = KStandardAction::quit(this, SLOT(close()), actionCollection());
 
     setupGUI(Default, ":/atelierui");
 }
