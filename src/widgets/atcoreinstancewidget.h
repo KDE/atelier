@@ -18,6 +18,9 @@
 
 #pragma once
 #include <AtCore/AtCore>
+#include <AtCore/AxisControl>
+#include <AtCore/LogWidget>
+#include <AtCore/PlotWidget>
 #include <QComboBox>
 #include <QList>
 #include <QPushButton>
@@ -69,13 +72,14 @@ private:
     QAction *m_stopAction;
     QSettings m_settings;
     QString m_theme;
+    AxisControl *m_axisControl;
+    LogWidget *m_logWidget;
+    PlotWidget *m_plotWidget;
     void initConnectsToAtCore();
     void printFile(const QUrl& fileName);
     void pausePrint();
     void stopPrint();
     void disableMotors();
-    void checkReceivedCommand(const QByteArray &message);
-    void checkPushedCommands(const QByteArray &bmsg);
     void handlePrinterStatusChanged(AtCore::STATES newState);
     void checkTemperature(uint sensorType, uint number, uint temp);
     void axisControlClicked(QChar axis, int value);

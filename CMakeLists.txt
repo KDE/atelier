@@ -25,6 +25,7 @@ endif()
 #Atelier Dependencies
 find_package(AtCore REQUIRED COMPONENTS
                 AtCore
+                AtCoreWidgets
             )
 
 find_package(Qwt6 REQUIRED)
