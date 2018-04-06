@@ -27,16 +27,10 @@
        <string>Controllers</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_3">
-       <item row="2" column="2">
-        <widget class="AxisControl" name="axisViewWidget"/>
-       </item>
-       <item row="3" column="0" colspan="4">
-        <widget class="PlotWidget" name="plotWidget" native="true"/>
-       </item>
        <item row="4" column="0" colspan="4">
         <widget class="PrintProgressWidget" name="printProgressWidget" native="true"/>
        </item>
-       <item row="2" column="1">
+       <item row="2" column="0">
         <widget class="BedExtruderWidget" name="bedExtWidget" native="true"/>
        </item>
       </layout>
@@ -46,9 +40,6 @@
        <string>Advanced</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_2">
-       <item row="2" column="0">
-        <widget class="LogWidget" name="logWidget" native="true"/>
-       </item>
        <item row="1" column="0">
         <widget class="PushGCodeWidget" name="pushGCodeWidget" native="true"/>
        </item>
@@ -94,32 +85,15 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>PlotWidget</class>
-   <extends>QWidget</extends>
-   <header>plotwidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>PrintProgressWidget</class>
    <extends>QWidget</extends>
    <header>printprogresswidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>AxisControl</class>
-   <extends>QGraphicsView</extends>
-   <header>axiscontrol.h</header>
-  </customwidget>
-  <customwidget>
    <class>BedExtruderWidget</class>
    <extends>QWidget</extends>
    <header>bedextruderwidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>LogWidget</class>
-   <extends>QWidget</extends>
-   <header>logwidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>

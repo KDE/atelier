@@ -34,6 +34,22 @@ AtCoreInstanceWidget::AtCoreInstanceWidget(QWidget *parent):
     m_theme = palette().text().color().value() >= QColor(Qt::lightGray).value() ? QString("dark") : QString("light") ;
     ui = new Ui::AtCoreInstanceWidget;
     ui->setupUi(this);
+
+    auto layout = new QHBoxLayout();
+    m_axisControl = new AxisControl();
+    layout->addWidget(m_axisControl);
+    ui->gridLayout_3->addLayout(layout, 2, 2, Qt::AlignHCenter);
+
+    m_plotWidget = new PlotWidget();
+    layout = new QHBoxLayout();
+    layout->addWidget(m_plotWidget);
+    ui->gridLayout_3->addLayout(layout, 3, 0, 1, 3, Qt::AlignHCenter);
+
+    m_logWidget = new LogWidget(new QTemporaryFile(QDir::tempPath() + QStringLiteral("/Atelier_")));
+    layout = new QHBoxLayout();
+    layout->addWidget(m_logWidget);
+    ui->gridLayout_2->addLayout(layout, 2, 0, Qt::AlignHCenter);
+
     ui->printProgressWidget->setVisible(false);
     buildToolbar();
     buildConnectionToolbar();
@@ -203,31 +219,31 @@ void AtCoreInstanceWidget::initConnectsToAtCore()
     // Connect AtCore temperatures changes on Atelier Plot
     connect(&m_core.temperature(), &Temperature::bedTemperatureChanged, [ this ](const float& temp) {
         checkTemperature(0x00, 0, temp);
-        ui->plotWidget->appendPoint(i18n("Actual Bed"), temp);
-        ui->plotWidget->update();
+        m_plotWidget->appendPoint(i18n("Actual Bed"), temp);
+        m_plotWidget->update();
         ui->bedExtWidget->updateBedTemp(temp);
     });
     connect(&m_core.temperature(), &Temperature::bedTargetTemperatureChanged, [ this ](const float& temp) {
         checkTemperature(0x01, 0, temp);
-        ui->plotWidget->appendPoint(i18n("Target Bed"), temp);
-        ui->plotWidget->update();
+        m_plotWidget->appendPoint(i18n("Target Bed"), temp);
+        m_plotWidget->update();
         ui->bedExtWidget->updateBedTargetTemp(temp);
     });
     connect(&m_core.temperature(), &Temperature::extruderTemperatureChanged, [ this ](const float& temp) {
         checkTemperature(0x02, 0, temp);
-        ui->plotWidget->appendPoint(i18n("Actual Ext.1"), temp);
-        ui->plotWidget->update();
+        m_plotWidget->appendPoint(i18n("Actual Ext.1"), temp);
+        m_plotWidget->update();
         ui->bedExtWidget->updateExtTemp(temp);
     });
     connect(&m_core.temperature(), &Temperature::extruderTargetTemperatureChanged, [ this ](const float& temp) {
         checkTemperature(0x03, 0, temp);
-        ui->plotWidget->appendPoint(i18n("Target Ext.1"), temp);
-        ui->plotWidget->update();
+        m_plotWidget->appendPoint(i18n("Target Ext.1"), temp);
+        m_plotWidget->update();
         ui->bedExtWidget->updateExtTargetTemp(temp);
     });
 
     connect(ui->pushGCodeWidget, &PushGCodeWidget::push, [ this ](QString command) {
-        ui->logWidget->addLog("Push " + command);
+        m_logWidget->appendLog("Push " + command);
         m_core.pushCommand(command);
     });
 
@@ -235,7 +251,7 @@ void AtCoreInstanceWidget::initConnectsToAtCore()
     connect(ui->ratesControlWidget, &RatesControlWidget::fanSpeedChanged, &m_core, &AtCore::setFanSpeed);
     connect(ui->ratesControlWidget, &RatesControlWidget::flowRateChanged, &m_core, &AtCore::setFlowRate);
     connect(ui->ratesControlWidget, &RatesControlWidget::printSpeedChanged, &m_core, &AtCore::setPrinterSpeed);
-    connect(ui->axisViewWidget, &AxisControl::clicked, this, &AtCoreInstanceWidget::axisControlClicked);
+    connect(m_axisControl, &AxisControl::clicked, this, &AtCoreInstanceWidget::axisControlClicked);
 }
 
 void AtCoreInstanceWidget::printFile(const QUrl& fileName)
@@ -292,21 +308,21 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
             m_connectToolBar->setHidden(true);
             m_toolBar->setHidden(false);
             stateString = i18n("Connecting...");
-            connect(&m_core, &AtCore::receivedMessage, this, &AtCoreInstanceWidget::checkReceivedCommand);
-            connect(m_core.serial(), &SerialLayer::pushedCommand, this, &AtCoreInstanceWidget::checkPushedCommands);
+            connect(&m_core, &AtCore::receivedMessage, m_logWidget, &LogWidget::appendRLog);
+            connect(m_core.serial(), &SerialLayer::pushedCommand, m_logWidget, &LogWidget::appendSLog);
         } break;
         case AtCore::IDLE: {
             stateString = i18n("Connected to ") + m_core.serial()->portName();
             emit extruderCountChanged(m_core.extruderCount());
-            ui->logWidget->addLog(i18n("Serial connected"));
+            m_logWidget->appendLog(i18n("Serial connected"));
             emit disableDisconnect(false);
             enableControls(true);
         } break;
         case AtCore::DISCONNECTED: {
             stateString = i18n("Not Connected");
-            disconnect(&m_core, &AtCore::receivedMessage, this, &AtCoreInstanceWidget::checkReceivedCommand);
-            disconnect(m_core.serial(), &SerialLayer::pushedCommand, this, &AtCoreInstanceWidget::checkPushedCommands);
-            ui->logWidget->addLog(i18n("Serial disconnected"));
+            disconnect(&m_core, &AtCore::receivedMessage, m_logWidget, &LogWidget::appendRLog);
+            disconnect(m_core.serial(), &SerialLayer::pushedCommand, m_logWidget, &LogWidget::appendSLog);
+            m_logWidget->appendLog(i18n("Serial disconnected"));
             m_core.setSerialTimerInterval(100);
             m_connectButton->setText(i18n("Connect"));
             m_connectButton->setIcon(QIcon::fromTheme("network-connect",QIcon(QString(":/%1/connect").arg(m_theme))));
@@ -383,22 +399,7 @@ void AtCoreInstanceWidget::checkTemperature(uint sensorType, uint number, uint t
     msg = msg.arg(QString::number(number))
           .arg(QString::number(temp));
 
-    ui->logWidget->addRLog(msg);
-}
-
-void AtCoreInstanceWidget::checkReceivedCommand(const QByteArray &message)
-{
-    ui->logWidget->addRLog(QString::fromUtf8(message));
-}
-
-void AtCoreInstanceWidget::checkPushedCommands(const QByteArray &bmsg)
-{
-    QString msg = QString::fromUtf8(bmsg);
-    QRegExp _newLine(QChar::fromLatin1('\n'));
-    QRegExp _return(QChar::fromLatin1('\r'));
-    msg.replace(_newLine, QStringLiteral("\\n"));
-    msg.replace(_return, QStringLiteral("\\r"));
-    ui->logWidget->addSLog(msg);
+    m_logWidget->appendLog(msg);
 }
 
 void AtCoreInstanceWidget::axisControlClicked(QChar axis, int value)
