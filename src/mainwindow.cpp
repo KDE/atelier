@@ -138,13 +138,13 @@ void MainWindow::setupActions()
     action = actionCollection()->addAction(QStringLiteral("open_gcode"));
     action->setIcon(QIcon::fromTheme("document-open", style()->standardIcon(QStyle::SP_DirOpenIcon)));
     action->setText(i18n("&Open GCode"));
-    action->setShortcut(QKeySequence::Open);
+    actionCollection()->setDefaultShortcut(action, QKeySequence::Open);
     connect(action, &QAction::triggered, this, &MainWindow::openFile);
 
     action = actionCollection()->addAction(QStringLiteral("new_instance"));
     action->setIcon(QIcon::fromTheme("list-add", QIcon()));
     action->setText(i18n("&New Connection"));
-    action->setShortcut(QKeySequence::AddTab);
+    actionCollection()->setDefaultShortcut(action, QKeySequence::AddTab);
     connect(action, &QAction::triggered, this, &MainWindow::newAtCoreInstance);
 
     action = actionCollection()->addAction(QStringLiteral("profiles"));
