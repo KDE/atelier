@@ -49,7 +49,6 @@ MainWindow::MainWindow(QWidget *parent) :
             m_instances->setMovable(false);
         }
     });
-
 }
 
 void MainWindow::initWidgets()
@@ -65,12 +64,21 @@ void MainWindow::initWidgets()
     auto splitter = new QSplitter();
     splitter->addWidget(m_lateral.m_stack);
     splitter->addWidget(m_instances);
+
+    auto addTabBtn =new QToolButton();
+    addTabBtn->setText("+");
+    addTabBtn->setToolTip(i18n("Create new instance"));
+    addTabBtn->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_T));
+    connect(addTabBtn, &QToolButton::clicked, this, &MainWindow::newAtCoreInstance);
+    m_instances->setCornerWidget(addTabBtn, Qt::TopLeftCorner);
+
     centralLayout->addWidget(m_lateral.m_toolBar);
     centralLayout->addWidget(splitter);
     auto *centralWidget = new QWidget();
     centralWidget->setLayout(centralLayout);
     setCentralWidget(centralWidget);
 }
+
 void MainWindow::newAtCoreInstance()
 {
     auto newInstanceWidget = new AtCoreInstanceWidget();
@@ -87,6 +95,7 @@ void MainWindow::newAtCoreInstance()
     if(m_instances->count() > 1) {
         m_instances->setTabsClosable(true);
         m_instances->setMovable(true);
+        m_instances->setCurrentIndex(m_instances->count()-1);
     }
 }
 // Move to LateralArea.
