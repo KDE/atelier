@@ -1,6 +1,7 @@
 /* Atelier KDE Printer Host for 3D Printing
     Copyright (C) <2017>
     Author: Lays Rodrigues - laysrodriguessilva@gmail.com
+            Chris Rizzitello - rizzitello@kde.org
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -54,11 +55,12 @@ void AtCoreInstanceWidget::buildToolbar()
 {
     m_toolBar = new QToolBar();
 
-    auto lb = new QAction;
-    lb->setIcon(QIcon::fromTheme("go-home", QIcon(QString(":/%1/home").arg(m_theme))));
-
-    lb->setDisabled(true);
-    m_toolBar->addAction(lb);
+    auto lb = new QLabel;
+    QIcon icon = QIcon::fromTheme("go-home", QIcon(QString(":/%1/home").arg(m_theme)));
+    lb->setPixmap(icon.pixmap(fontMetrics().height()));
+    m_toolBar->addWidget(lb);
+    lb = new QLabel(i18n("Home:"));
+    m_toolBar->addWidget(lb);
 
     auto homeAll = new QAction("All");
     connect(homeAll, &QAction::triggered, [this]{
