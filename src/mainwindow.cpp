@@ -173,7 +173,7 @@ void MainWindow::setupActions()
 void MainWindow::openFile()
 {
     QUrl fileName = QFileDialog::getOpenFileUrl(this, i18n("Open GCode"),
-                              QDir::homePath(), i18n("GCode (*.gco *.gcode)"));
+                        QUrl::fromLocalFile(QDir::homePath()), i18n("GCode(*.gco *.gcode);;All Files(*.*)"));
 
     if (!fileName.isEmpty()) {
 
