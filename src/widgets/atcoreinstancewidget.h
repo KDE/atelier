@@ -57,13 +57,12 @@ public slots:
 private:
     Ui::AtCoreInstanceWidget* ui;
     AtCore m_core;
-    QToolBar *m_mainToolBar;
+    QToolBar *m_toolBar;
     QComboBox *m_comboPort;
     QComboBox *m_comboProfile;
     QPushButton *m_connectButton;
     QToolBar *m_connectToolBar;
     QWidget *m_connectWidget;
-    QToolBar *m_toolBar;
     QMap<QString, QVariant> profileData;
     QList<QUrl> m_files;
     QAction *m_printAction;
@@ -82,7 +81,6 @@ private:
     void axisControlClicked(QChar axis, int value);
     void enableControls(bool b);
     void buildToolbar();
-    void buildMainToolbar();
     void print();
     void updateSerialPort(const QStringList &ports);
     void buildConnectionToolbar();

@@ -27,7 +27,6 @@
 
 AtCoreInstanceWidget::AtCoreInstanceWidget(QWidget *parent):
     QWidget(parent),
-    m_mainToolBar(nullptr),
     m_toolBar(nullptr),
     m_printAction(nullptr),
     m_stopAction(nullptr)
@@ -36,14 +35,12 @@ AtCoreInstanceWidget::AtCoreInstanceWidget(QWidget *parent):
     ui = new Ui::AtCoreInstanceWidget;
     ui->setupUi(this);
     ui->printProgressWidget->setVisible(false);
-    buildMainToolbar();
     buildToolbar();
     buildConnectionToolbar();
     enableControls(false);
     updateProfileData();
     initConnectsToAtCore();
-    m_mainToolBar->setHidden(true);
-
+    m_toolBar->setHidden(true);
 }
 
 AtCoreInstanceWidget::~AtCoreInstanceWidget()
@@ -55,6 +52,7 @@ AtCoreInstanceWidget::~AtCoreInstanceWidget()
 void AtCoreInstanceWidget::buildToolbar()
 {
     m_toolBar = new QToolBar();
+    m_toolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
 
     auto lb = new QLabel;
     QIcon icon = QIcon::fromTheme("go-home", QIcon(QString(":/%1/home").arg(m_theme)));
@@ -78,13 +76,6 @@ void AtCoreInstanceWidget::buildToolbar()
     }
 
     m_toolBar->addSeparator();
-    ui->toolBarLayout->addWidget(m_toolBar);
-    ui->toolBarLayout->addStretch();
-}
-
-void AtCoreInstanceWidget::buildMainToolbar(){
-    m_mainToolBar = new QToolBar();
-    m_mainToolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
 
     m_printAction = new QAction(QIcon::fromTheme("media-playback-start", style()->standardIcon(QStyle::SP_MediaPlay)),i18n("Print"));
     connect(m_printAction, &QAction::triggered, [ this ](){
@@ -98,7 +89,7 @@ void AtCoreInstanceWidget::buildMainToolbar(){
             m_core.resume();
         }
     });
-    m_mainToolBar->addAction(m_printAction);
+    m_toolBar->addAction(m_printAction);
 
     m_stopAction = new QAction(QIcon::fromTheme("media-playback-stop", QIcon(QString(":/%1/stop").arg(m_theme))), i18n("Stop"));
     connect(m_stopAction, &QAction::triggered, this, &AtCoreInstanceWidget::stopPrint);
@@ -106,13 +97,13 @@ void AtCoreInstanceWidget::buildMainToolbar(){
         m_printAction->setText(i18n("Print"));
         m_printAction->setIcon(QIcon::fromTheme("media-playback-start", QIcon(QString(":/%1/start").arg(m_theme))));
     });
-    m_mainToolBar->addAction(m_stopAction);
+    m_toolBar->addAction(m_stopAction);
 
     auto disableMotorsAction = new QAction(style()->standardIcon(QStyle::SP_MediaStop),i18n("Disable Motors"));
     connect(disableMotorsAction, &QAction::triggered, this, &AtCoreInstanceWidget::disableMotors);
-    m_mainToolBar->addAction(disableMotorsAction);
+    m_toolBar->addAction(disableMotorsAction);
 
-    ui->mainToolBarLayout->addWidget(m_mainToolBar);
+    ui->toolBarLayout->addWidget(m_toolBar);
     togglePrintButtons(m_files.size());
 }
 
@@ -145,9 +136,8 @@ void AtCoreInstanceWidget::buildConnectionToolbar()
     m_connectButton->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
     connect(this, &AtCoreInstanceWidget::disableDisconnect, m_connectButton, &QPushButton::setDisabled);
     connect(m_connectButton, &QPushButton::clicked, this, &AtCoreInstanceWidget::connectButtonClicked);
-    ui->mainToolBarLayout->addWidget(m_connectToolBar);
-    ui->mainToolBarLayout->addWidget(m_connectButton);
-
+    ui->toolBarLayout->addWidget(m_connectToolBar);
+    ui->toolBarLayout->addWidget(m_connectButton);
 }
 
 void AtCoreInstanceWidget::connectButtonClicked()
@@ -300,7 +290,7 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
             m_connectButton->setText(i18n("Disconnect"));
             m_connectButton->setIcon(QIcon::fromTheme("network-disconnect", QIcon(QString(":/%1/disconnect").arg(m_theme))));
             m_connectToolBar->setHidden(true);
-            m_mainToolBar->setHidden(false);
+            m_toolBar->setHidden(false);
             stateString = i18n("Connecting...");
             connect(&m_core, &AtCore::receivedMessage, this, &AtCoreInstanceWidget::checkReceivedCommand);
             connect(m_core.serial(), &SerialLayer::pushedCommand, this, &AtCoreInstanceWidget::checkPushedCommands);
@@ -321,7 +311,7 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
             m_connectButton->setText(i18n("Connect"));
             m_connectButton->setIcon(QIcon::fromTheme("network-connect",QIcon(QString(":/%1/connect").arg(m_theme))));
             m_connectToolBar->setHidden(false);
-            m_mainToolBar->setHidden(true);
+            m_toolBar->setHidden(true);
             enableControls(false);
         } break;
         case AtCore::STARTPRINT: {
@@ -421,7 +411,6 @@ void AtCoreInstanceWidget::axisControlClicked(QChar axis, int value)
 void AtCoreInstanceWidget::enableControls(bool b)
 {
     ui->mainTab->setEnabled(b);
-    m_mainToolBar->setEnabled(b);
     m_toolBar->setEnabled(b);
 }
 
