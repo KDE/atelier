@@ -52,7 +52,6 @@ int main(int argc, char *argv[])
         // The program homepage string. (homePageAddress = QString())
         QStringLiteral("http://atelier.kde.org"),
         // The bug report email address
-        // (bugsEmailAddress = QLatin1String("submit@bugs.kde.org")
         QStringLiteral("atelier@bugs.kde.org"));
     aboutData.addAuthor(i18n("Lays Rodrigues"), i18n("Developer"), QStringLiteral("lays.rodrigues@kde.org"),
                         QStringLiteral("http://laysrodriguesdev.wordpress.com"));
@@ -62,7 +61,7 @@ int main(int argc, char *argv[])
                         QStringLiteral("http://patrickjp.com"));
     aboutData.addAuthor(i18n("Tomaz Canabrava"), i18n("Contributor"), QStringLiteral("tcanabrava@kde.org"),
                         QStringLiteral("http://angrycane.com.br"));
-    aboutData.setOtherText(i18n("Using AtCore:%1").arg(ATCORE_VERSION_STRING));
+    aboutData.setOtherText(i18n("Using AtCore:%1", QString(ATCORE_VERSION_STRING)));
     KAboutData::setApplicationData(aboutData);
 
     MainWindow *m = new MainWindow();
