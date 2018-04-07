@@ -27,7 +27,6 @@ class VideoMonitorWidget : public QWidget
 
 public:
     explicit VideoMonitorWidget(QWidget *parent = nullptr);
-    ~VideoMonitorWidget();
 
 private:
     QMediaPlayer _mediaplayer;

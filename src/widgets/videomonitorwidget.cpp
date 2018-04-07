@@ -26,7 +26,7 @@
 
 VideoMonitorWidget::VideoMonitorWidget(QWidget *parent) :
     QWidget(parent),
-    _mediaplayer(nullptr, QMediaPlayer::VideoSurface)
+    _mediaplayer(nullptr, QMediaPlayer::StreamPlayback)
 {    
     auto _layout = new QGridLayout();
     auto _label = new QLabel(i18n("Source url:"));
@@ -43,7 +43,7 @@ VideoMonitorWidget::VideoMonitorWidget(QWidget *parent) :
     
     auto _playPB = new QPushButton();
     _playPB->setCheckable(true);
-    _playPB->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
+    _playPB->setIcon(QIcon::fromTheme("media-playback-start", style()->standardIcon(QStyle::SP_MediaPlay)));
     _layout->addWidget(_playPB, 0, 2);
     
     auto _videoWidget = new QVideoWidget();
@@ -55,7 +55,7 @@ VideoMonitorWidget::VideoMonitorWidget(QWidget *parent) :
     this->setLayout(_layout);
     
     _mediaplayer.setVideoOutput(_videoWidget);
-       
+
 #ifdef Q_OS_LINUX
     QStringList sources;
     sources << QString("video*");
@@ -63,28 +63,25 @@ VideoMonitorWidget::VideoMonitorWidget(QWidget *parent) :
         .entryList(sources, QDir::System)\
         .replaceInStrings( QRegExp("^"), "v4l2:///dev/"));
 #endif
-    
-    connect(_playPB, &QPushButton::clicked, [this, _playPB, _sourceCB](bool b){
+
+    connect(_playPB, &QPushButton::clicked, [this, _playPB, _sourceCB, _videoWidget](bool b){
         if(b){
-            _playPB->setIcon(style()->standardIcon(QStyle::SP_MediaPause));
-            QString source = _sourceCB->currentText();
-            _mediaplayer.setMedia(QUrl(source));
+            if(_mediaplayer.state() != QMediaPlayer::PausedState) {
+                QString source = _sourceCB->currentText();
+                _mediaplayer.setMedia(QUrl(source));
+            }
+            _playPB->setIcon(QIcon::fromTheme("media-playback-pause", style()->standardIcon(QStyle::SP_MediaPause)));
             _mediaplayer.play();
         }else{
             _mediaplayer.pause();
-            _playPB->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
+            _playPB->setIcon(QIcon::fromTheme("media-playback-start", style()->standardIcon(QStyle::SP_MediaPlay)));
         }
+        _videoWidget->setVisible(b);
     });
     
     typedef void (QMediaPlayer::*ErrorSignal)(QMediaPlayer::Error);
     connect(&_mediaplayer, static_cast<ErrorSignal>(&QMediaPlayer::error),
             this, &VideoMonitorWidget::handleError);
-}
-
-
-VideoMonitorWidget::~VideoMonitorWidget()
-{
-
 }
 
 void VideoMonitorWidget::handleError()
