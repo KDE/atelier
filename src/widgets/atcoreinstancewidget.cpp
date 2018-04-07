@@ -78,25 +78,6 @@ void AtCoreInstanceWidget::buildToolbar()
     }
 
     m_toolBar->addSeparator();
-
-    auto *axis = new QAction("Axis");
-    axis->setCheckable(true);
-    axis->setChecked(true);
-    connect(axis, &QAction::toggled, ui->axisViewWidget, &AxisControl::setVisible);
-
-    auto controls = new QAction("Controls");
-    controls->setCheckable(true);
-    controls->setChecked(true);
-    connect(controls, &QAction::toggled, ui->bedExtWidget, &BedExtruderWidget::setVisible);
-
-    auto plot = new QAction("Temperature Plot");
-    plot->setCheckable(true);
-    plot->setChecked(true);
-    connect(plot, &QAction::toggled, ui->plotWidget, &PlotWidget::setVisible);
-
-    m_toolBar->addAction(axis);
-    m_toolBar->addAction(controls);
-    m_toolBar->addAction(plot);
     ui->toolBarLayout->addWidget(m_toolBar);
     ui->toolBarLayout->addStretch();
 }
