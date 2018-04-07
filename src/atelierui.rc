@@ -9,21 +9,15 @@
     <MenuBar>
         <Menu name="file" >
             <Action name="new_instance"/>
-            <Action name="open_gcode"/>
+            <Action name="open"/>
             <Action name="quit" />
-        </Menu>
-        <Menu name="view">
-            <Action name="3d"/>
-            <Action name="gcode"/>
-            <Action name="video"/>
         </Menu>
         <Menu name="settings">
             <Action name="profiles"/>
         </Menu>
     </MenuBar>
-
     <ToolBar name="mainToolBar" >
-        <Action name="open_gcode"/>
+        <Action name="open"/>
         <Separator/>
     </ToolBar>
 </gui>

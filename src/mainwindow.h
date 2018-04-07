@@ -48,10 +48,10 @@ public:
 
 private:
     QList<QUrl> m_openFiles;
+    QString m_theme;
     KTextEditor::View *m_currEditorView;
     LateralArea m_lateral;
     QTabWidget *m_instances;
-
     void setupLateralArea();
     void newAtCoreInstance();
     void initWidgets();
