@@ -38,6 +38,8 @@ MainWindow::MainWindow(QWidget *parent) :
     m_currEditorView(nullptr),
     m_instances(new QTabWidget(this))
 {
+    m_theme = palette().text().color().value() >= QColor(Qt::lightGray).value() ? QString("dark") : QString("light");
+
     initWidgets();
     setupActions();
     connect(m_instances, &QTabWidget::tabCloseRequested, [this] (int index){
@@ -132,10 +134,9 @@ void MainWindow::setupLateralArea()
          guiFactory()->addClient(view);
          m_currEditorView = view;
      });
-
-    setupButton("3d",    i18n("&3D"), QIcon::fromTheme("draw-cuboid", QIcon(":/icon/atelier")), new Viewer3D(this));
-    setupButton("gcode", i18n("&GCode"), QIcon::fromTheme("accessories-text-editor", QIcon(":/icon/atelier")), gcodeEditor);
-    setupButton("video", i18n("&Video"), QIcon::fromTheme("camera-web", QIcon(":/icon/atelier")), new VideoMonitorWidget(this));
+    setupButton("3d",    i18n("&3D"), QIcon::fromTheme("draw-cuboid", QIcon(QString(":/%1/3d").arg(m_theme))), new Viewer3D(this));
+    setupButton("gcode", i18n("&GCode"), QIcon::fromTheme("accessories-text-editor", QIcon(":/icon/edit")), gcodeEditor);
+    setupButton("video", i18n("&Video"), QIcon::fromTheme("camera-web", QIcon(":/icon/video")), new VideoMonitorWidget(this));
     buttonLayout->addStretch();
     m_lateral.m_toolBar->setLayout(buttonLayout);
 }
@@ -144,20 +145,23 @@ void MainWindow::setupActions()
 {
     // Actions for the Toolbar
     QAction *action;
-    action = actionCollection()->addAction(QStringLiteral("open_gcode"));
-    action->setIcon(QIcon::fromTheme("document-open", style()->standardIcon(QStyle::SP_DirOpenIcon)));
-    action->setText(i18n("&Open GCode"));
+    action = actionCollection()->addAction(QStringLiteral("open"));
+    action->setIcon(QIcon::fromTheme("document-open", QIcon(QString(":/%1/open").arg(m_theme))));
+
+    action->setText(i18n("&Open"));
     actionCollection()->setDefaultShortcut(action, QKeySequence::Open);
     connect(action, &QAction::triggered, this, &MainWindow::openFile);
 
     action = actionCollection()->addAction(QStringLiteral("new_instance"));
-    action->setIcon(QIcon::fromTheme("list-add", QIcon()));
+    action->setIcon(QIcon::fromTheme("list-add", QIcon(QString(":/%1/addTab").arg(m_theme))));
+
     action->setText(i18n("&New Connection"));
     actionCollection()->setDefaultShortcut(action, QKeySequence::AddTab);
     connect(action, &QAction::triggered, this, &MainWindow::newAtCoreInstance);
 
     action = actionCollection()->addAction(QStringLiteral("profiles"));
-    action->setIcon(QIcon::fromTheme("document-properties", QIcon()));
+    action->setIcon(QIcon::fromTheme("document-properties", QIcon(QString(":/%1/configure").arg(m_theme))));
+
     action->setText(i18n("&Profiles"));
     connect(action, &QAction::triggered, [this] {
         std::unique_ptr<ProfilesDialog> pd(new ProfilesDialog);
@@ -165,7 +169,12 @@ void MainWindow::setupActions()
         emit(profilesChanged());
     });
 
-    action = KStandardAction::quit(this, SLOT(close()), actionCollection());
+    action = actionCollection()->addAction(QStringLiteral("quit"));
+    action->setIcon(QIcon::fromTheme("application-exit", QIcon(":/icon/exit")));
+
+    action->setText(i18n("&Quit"));
+    actionCollection()->setDefaultShortcut(action, QKeySequence::Quit);
+    connect(action, &QAction::triggered, this, &MainWindow::close);
 
     setupGUI(Default, ":/atelierui");
 }

@@ -68,6 +68,7 @@ private:
     QList<QUrl> m_files;
     QAction *m_printAction;
     QSettings m_settings;
+    QString m_theme;
     void initConnectsToAtCore();
     void printFile(const QUrl& fileName);
     void pausePrint();

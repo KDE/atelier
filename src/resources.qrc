@@ -1,9 +1,36 @@
 <RCC>
     <qresource prefix="/icon">
         <file alias="atelier">../deploy/atelier.png</file>
+        <file alias="exit">icons/application-exit.svg</file>
+        <file alias="video">icons/camera-web.svg</file>
+        <file alias="edit">icons/kwrite.svg</file>
     </qresource>
+    <qresource prefix="/light">
+        <file alias="configure">icons/light_configure.svg</file>
+        <file alias="open">icons/light_open.svg</file>
+        <file alias="3d">icons/light_3d.svg</file>
+        <file alias="addTab">icons/light_add.svg</file>
+        <file alias="home">icons/light_home.svg</file>
+        <file alias="connect">icons/light_connect.svg</file>
+        <file alias="disconnect">icons/light_disconnect.svg</file>
+        <file alias="start">icons/light_start.svg</file>
+        <file alias="stop">icons/light_stop.svg</file>
+        <file alias="pause">icons/light_pause.svg</file>
+    </qresource>
+        <qresource prefix="/dark">
+        <file alias="configure">icons/dark_configure.svg</file>
+        <file alias="open">icons/dark_open.svg</file>
+        <file alias="3d">icons/dark_3d.svg</file>
+        <file alias="addTab">icons/dark_add.svg</file>
+        <file alias="home">icons/dark_home.svg</file>
+        <file alias="connect">icons/dark_connect.svg</file>
+        <file alias="disconnect">icons/dark_disconnect.svg</file>
+        <file alias="start">icons/dark_start.svg</file>
+        <file alias="stop">icons/dark_stop.svg</file>
+        <file alias="pause">icons/dark_pause.svg</file>
+    </qresource>
+        
     <qresource prefix="/">
         <file alias="atelierui">atelierui.rc</file>
     </qresource>
 </RCC>
-
