@@ -7,17 +7,19 @@
                          http://www.kde.org/standards/kxmlgui/1.0/kxmlgui.xsd" >
 
     <MenuBar>
-        <Menu name="file" >
+        <Menu name="file">
             <Action name="new_instance"/>
             <Action name="open"/>
-            <Action name="quit" />
+            <Separator/>
+            <Merge/>
+            <Action name="quit"/>
         </Menu>
+        <Merge/>
         <Menu name="settings">
             <Action name="profiles"/>
         </Menu>
     </MenuBar>
-    <ToolBar name="mainToolBar" >
+    <ToolBar name="mainToolBar">
         <Action name="open"/>
-        <Separator/>
     </ToolBar>
 </gui>
