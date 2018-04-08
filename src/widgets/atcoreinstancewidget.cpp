@@ -29,7 +29,8 @@ AtCoreInstanceWidget::AtCoreInstanceWidget(QWidget *parent):
     QWidget(parent),
     m_mainToolBar(nullptr),
     m_toolBar(nullptr),
-    m_printAction(nullptr)
+    m_printAction(nullptr),
+    m_stopAction(nullptr)
 {
     m_theme = palette().text().color().value() >= QColor(Qt::lightGray).value() ? QString("dark") : QString("light") ;
     ui = new Ui::AtCoreInstanceWidget;
@@ -118,20 +119,20 @@ void AtCoreInstanceWidget::buildMainToolbar(){
     });
     m_mainToolBar->addAction(m_printAction);
 
-    auto stopAction = new QAction(QIcon::fromTheme("media-playback-stop", QIcon(QString(":/%1/stop").arg(m_theme))), i18n("Stop"));
-
-    connect(stopAction, &QAction::triggered, this, &AtCoreInstanceWidget::stopPrint);
-    connect(stopAction, &QAction::triggered, [this](){
+    m_stopAction = new QAction(QIcon::fromTheme("media-playback-stop", QIcon(QString(":/%1/stop").arg(m_theme))), i18n("Stop"));
+    connect(m_stopAction, &QAction::triggered, this, &AtCoreInstanceWidget::stopPrint);
+    connect(m_stopAction, &QAction::triggered, [this](){
         m_printAction->setText(i18n("Print"));
         m_printAction->setIcon(QIcon::fromTheme("media-playback-start", QIcon(QString(":/%1/start").arg(m_theme))));
     });
-    m_mainToolBar->addAction(stopAction);
+    m_mainToolBar->addAction(m_stopAction);
 
     auto disableMotorsAction = new QAction(style()->standardIcon(QStyle::SP_MediaStop),i18n("Disable Motors"));
     connect(disableMotorsAction, &QAction::triggered, this, &AtCoreInstanceWidget::disableMotors);
     m_mainToolBar->addAction(disableMotorsAction);
 
     ui->mainToolBarLayout->addWidget(m_mainToolBar);
+    togglePrintButtons(m_files.size());
 }
 
 void AtCoreInstanceWidget::buildConnectionToolbar()
@@ -451,6 +452,7 @@ bool AtCoreInstanceWidget::connected()
 void AtCoreInstanceWidget::setOpenFiles(const QList<QUrl>& files)
 {
     m_files = files;
+    togglePrintButtons(m_files.size());
 }
 
 void AtCoreInstanceWidget::updateSerialPort(const QStringList &ports)
@@ -466,4 +468,10 @@ void AtCoreInstanceWidget::updateProfileData()
     m_settings.endGroup();
     m_comboProfile->clear();
     m_comboProfile->addItems(profiles);
+}
+
+void AtCoreInstanceWidget::togglePrintButtons(bool shown)
+{
+    m_printAction->setVisible(shown);
+    m_stopAction->setVisible(shown);
 }
