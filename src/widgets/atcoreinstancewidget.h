@@ -67,6 +67,7 @@ private:
     QMap<QString, QVariant> profileData;
     QList<QUrl> m_files;
     QAction *m_printAction;
+    QAction *m_stopAction;
     QSettings m_settings;
     QString m_theme;
     void initConnectsToAtCore();
@@ -86,6 +87,7 @@ private:
     void updateSerialPort(const QStringList &ports);
     void buildConnectionToolbar();
     void connectButtonClicked();
+    void togglePrintButtons(bool shown);
 signals:
     void connectionChanged(QString name);
     void disableDisconnect(bool b);

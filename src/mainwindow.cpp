@@ -86,6 +86,7 @@ void MainWindow::newAtCoreInstance()
     auto newInstanceWidget = new AtCoreInstanceWidget();
     QString name = QString::number(m_instances->addTab(newInstanceWidget, i18n("Connect a printer")));
     newInstanceWidget->setObjectName(name);
+    newInstanceWidget->setOpenFiles(m_openFiles);
     connect(this, &MainWindow::profilesChanged, newInstanceWidget, &AtCoreInstanceWidget::updateProfileData);
     connect(newInstanceWidget, &AtCoreInstanceWidget::requestProfileDialog, [ this ] {
         std::unique_ptr<ProfilesDialog> pd(new ProfilesDialog);
