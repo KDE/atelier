@@ -50,6 +50,10 @@ AtCoreInstanceWidget::AtCoreInstanceWidget(QWidget *parent):
     layout->addWidget(m_logWidget);
     ui->gridLayout_2->addLayout(layout, 2, 0, Qt::AlignHCenter);
 
+    m_sdWidget = new SdWidget;
+
+    ui->mainTab->addTab(m_sdWidget, i18n("Sd Card"));
+
     ui->printProgressWidget->setVisible(false);
     buildToolbar();
     buildConnectionToolbar();
@@ -252,6 +256,28 @@ void AtCoreInstanceWidget::initConnectsToAtCore()
     connect(ui->ratesControlWidget, &RatesControlWidget::flowRateChanged, &m_core, &AtCore::setFlowRate);
     connect(ui->ratesControlWidget, &RatesControlWidget::printSpeedChanged, &m_core, &AtCore::setPrinterSpeed);
     connect(m_axisControl, &AxisControl::clicked, this, &AtCoreInstanceWidget::axisControlClicked);
+
+    //Sd Card Stuff
+    connect(&m_core, &AtCore::sdCardFileListChanged, m_sdWidget, &SdWidget::updateFilelist);
+    connect(m_sdWidget, &SdWidget::requestSdList, &m_core, &AtCore::sdFileList);
+
+    connect(m_sdWidget, &SdWidget::printSdFile, [this](const QString & fileName) {
+        if (fileName.isEmpty()) {
+            QMessageBox::information(this, tr("Print Error"), tr("You must Select a file from the list"));
+        } else  {
+            m_core.print(fileName, true);
+            togglePrintButtons(true);
+        }
+    });
+
+    connect(m_sdWidget, &SdWidget::deleteSdFile, [this](const QString & fileName) {
+        if (fileName.isEmpty()) {
+            QMessageBox::information(this, tr("Delete Error"), tr("You must Select a file from the list"));
+        } else  {
+            m_core.sdDelete(fileName);
+        }
+});
+
 }
 
 void AtCoreInstanceWidget::printFile(const QUrl& fileName)
