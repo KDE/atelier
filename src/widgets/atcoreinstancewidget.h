@@ -21,6 +21,7 @@
 #include <AtCore/AxisControl>
 #include <AtCore/LogWidget>
 #include <AtCore/PlotWidget>
+#include <AtCore/SdWidget>
 #include <QComboBox>
 #include <QList>
 #include <QPushButton>
@@ -75,6 +76,7 @@ private:
     AxisControl *m_axisControl;
     LogWidget *m_logWidget;
     PlotWidget *m_plotWidget;
+    SdWidget *m_sdWidget;
     void initConnectsToAtCore();
     void printFile(const QUrl& fileName);
     void pausePrint();
