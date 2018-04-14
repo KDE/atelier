@@ -28,16 +28,13 @@
       </attribute>
       <layout class="QVBoxLayout" name="controlTabLayout">
        <item>
-        <widget class="PrintProgressWidget" name="printProgressWidget" native="true"/>
-       </item>
-       <item>
        <layout class="QHBoxLayout" name="controlsLayout">
         <item>
-            <widget class="BedExtruderWidget" name="bedExtWidget" native="true"/>
-        </item>
-       </layout>
+        <widget class="BedExtruderWidget" name="bedExtWidget" native="true"/>
        </item>
       </layout>
+    </item>
+    </layout>
      </widget>
      <widget class="QWidget" name="advancedTab">
       <attribute name="title">
@@ -55,45 +52,12 @@
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>Printer Status:</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="lblState">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
+    <layout class="QHBoxLayout" name="statusLayout">
     </layout>
    </item>
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>PrintProgressWidget</class>
-   <extends>QWidget</extends>
-   <header>printprogresswidget.h</header>
-   <container>1</container>
-  </customwidget>
   <customwidget>
    <class>BedExtruderWidget</class>
    <extends>QWidget</extends>

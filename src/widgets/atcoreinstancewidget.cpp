@@ -47,9 +47,12 @@ AtCoreInstanceWidget::AtCoreInstanceWidget(QWidget *parent):
 
     m_sdWidget = new SdWidget;
 
+    m_statusWidget = new StatusWidget(false);
+    m_statusWidget->showPrintArea(false);
+    ui->statusLayout->addWidget(m_statusWidget);
+
     ui->mainTab->addTab(m_sdWidget, i18n("Sd Card"));
 
-    ui->printProgressWidget->setVisible(false);
     buildToolbar();
     buildConnectionToolbar();
     enableControls(false);
@@ -273,8 +276,10 @@ void AtCoreInstanceWidget::initConnectsToAtCore()
         } else  {
             m_core.sdDelete(fileName);
         }
-});
+    });
 
+    //Status Area
+    connect(&m_core, &AtCore::sdMountChanged, m_statusWidget, &StatusWidget::setSD);
 }
 
 void AtCoreInstanceWidget::printFile(const QUrl& fileName)
@@ -355,13 +360,13 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
         } break;
         case AtCore::STARTPRINT: {
             stateString = i18n("Starting Print");
-            ui->printProgressWidget->setVisible(true);
-            connect(&m_core, &AtCore::printProgressChanged, ui->printProgressWidget, &PrintProgressWidget::updateProgressBar);
+            m_statusWidget->showPrintArea(true);
+            connect(&m_core, &AtCore::printProgressChanged, m_statusWidget, &StatusWidget::updatePrintProgress);
         } break;
         case AtCore::FINISHEDPRINT: {
             stateString = i18n("Finished Print");
-            ui->printProgressWidget->setVisible(false);
-            disconnect(&m_core, &AtCore::printProgressChanged, ui->printProgressWidget, &PrintProgressWidget::updateProgressBar);
+            m_statusWidget->showPrintArea(false);
+            disconnect(&m_core, &AtCore::printProgressChanged, m_statusWidget, &StatusWidget::updatePrintProgress);
             m_printAction->setText(i18n("Print"));
             m_printAction->setIcon(QIcon::fromTheme("media-playback-start", QIcon(QString(":/%1/start").arg(m_theme))));
         } break;
@@ -386,7 +391,7 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
           qWarning("AtCore State not Recognized.");
           break;
     }
-     ui->lblState->setText(stateString);
+     m_statusWidget->setState(stateString);
 }
 
 void AtCoreInstanceWidget::checkTemperature(uint sensorType, uint number, uint temp)

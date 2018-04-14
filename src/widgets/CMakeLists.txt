@@ -6,7 +6,6 @@ set(widgets_SRCS
     bedextruderwidget.cpp
     pushgcodewidget.cpp
     ratescontrolwidget.cpp
-    printprogresswidget.cpp
     videomonitorwidget.cpp
     atcoreinstancewidget.cpp
     thermowidget.cpp
