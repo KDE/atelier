@@ -30,7 +30,7 @@
         <file alias="pause">icons/dark_pause.svg</file>
     </qresource>
         
-    <qresource prefix="/">
+    <qresource prefix="/kxmlgui5/atelier">
         <file alias="atelierui">atelierui.rc</file>
     </qresource>
 </RCC>
