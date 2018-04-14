@@ -42,9 +42,6 @@
       </attribute>
       <layout class="QVBoxLayout" name="advancedTabLayout">
        <item>
-        <widget class="RatesControlWidget" name="ratesControlWidget" native="true"/>
-       </item>
-       <item>
         <widget class="PushGCodeWidget" name="pushGCodeWidget" native="true"/>
        </item>
       </layout>
@@ -68,12 +65,6 @@
    <class>PushGCodeWidget</class>
    <extends>QWidget</extends>
    <header>pushgcodewidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>RatesControlWidget</class>
-   <extends>QWidget</extends>
-   <header>ratescontrolwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
