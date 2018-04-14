@@ -4,7 +4,6 @@ include_directories(${QWT_INCLUDE_DIR})
 set(widgets_SRCS
     gcodeeditorwidget.cpp
     bedextruderwidget.cpp
-    pushgcodewidget.cpp
     videomonitorwidget.cpp
     atcoreinstancewidget.cpp
     thermowidget.cpp

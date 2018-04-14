@@ -43,7 +43,10 @@ AtCoreInstanceWidget::AtCoreInstanceWidget(QWidget *parent):
     ui->controlTabLayout->addWidget(m_plotWidget);
 
     m_printWidget = new PrintWidget(false);
-    ui->advancedTabLayout->insertWidget(0, m_printWidget);
+    ui->advancedTabLayout->addWidget(m_printWidget);
+
+    m_commandWidget = new CommandWidget;
+    ui->advancedTabLayout->addWidget(m_commandWidget);
 
     m_logWidget = new LogWidget(new QTemporaryFile(QDir::tempPath() + QStringLiteral("/Atelier_")));
     ui->advancedTabLayout->addWidget(m_logWidget);
@@ -250,10 +253,15 @@ void AtCoreInstanceWidget::initConnectsToAtCore()
         m_plotWidget->update();
         ui->bedExtWidget->updateExtTargetTemp(temp);
     });
-
-    connect(ui->pushGCodeWidget, &PushGCodeWidget::push, [ this ](QString command) {
-        m_logWidget->appendLog("Push " + command);
+    //command Widget
+    connect(m_commandWidget, &CommandWidget::commandPressed, [ this ](const QString &command) {
+        m_logWidget->appendLog("Push: " + command);
         m_core.pushCommand(command);
+    });
+
+    connect(m_commandWidget, &CommandWidget::messagePressed, [ this ](const QString &message) {
+        m_logWidget->appendLog("Display: " + message);
+        m_core.showMessage(message);
     });
 
     // Fan, Flow and Speed management

@@ -41,9 +41,6 @@
        <string>Advanced</string>
       </attribute>
       <layout class="QVBoxLayout" name="advancedTabLayout">
-       <item>
-        <widget class="PushGCodeWidget" name="pushGCodeWidget" native="true"/>
-       </item>
       </layout>
      </widget>
     </widget>
@@ -59,12 +56,6 @@
    <class>BedExtruderWidget</class>
    <extends>QWidget</extends>
    <header>bedextruderwidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>PushGCodeWidget</class>
-   <extends>QWidget</extends>
-   <header>pushgcodewidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
