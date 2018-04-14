@@ -61,10 +61,6 @@ BedExtruderWidget::BedExtruderWidget(QWidget *parent) :
      });
 }
 
-BedExtruderWidget::~BedExtruderWidget()
-{
-}
-
 void BedExtruderWidget::setExtruderCount(int value)
 {
     value > 1 ? m_extruderBox->setVisible(true) : m_extruderBox->setVisible(false);
@@ -119,4 +115,14 @@ int BedExtruderWidget::currentExtruder()
         }
     }
     return currExt;
+}
+
+void BedExtruderWidget::setBedMaxTemperature(int value)
+{
+    m_bedThermo->setScale(0, value);
+}
+
+void BedExtruderWidget::setExtruderMaxTemperature(int value)
+{
+    m_extruderThermo->setScale(0, value);
 }

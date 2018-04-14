@@ -32,8 +32,9 @@ class BedExtruderWidget : public QWidget
 
 public:
     explicit BedExtruderWidget(QWidget *parent = nullptr);
-    ~BedExtruderWidget();
     void setExtruderCount(int value);
+    void setBedMaxTemperature(int value);
+    void setExtruderMaxTemperature(int value);
     void updateBedTemp(const float temp);
     void updateExtTemp(const float temp);
     void updateBedTargetTemp(const float temp);

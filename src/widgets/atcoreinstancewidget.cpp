@@ -192,6 +192,8 @@ void AtCoreInstanceWidget::connectButtonClicked()
                 m_core.loadFirmwarePlugin(fw);
             }
             emit(connectionChanged(profileData["name"].toString()));
+            ui->bedExtWidget->setBedMaxTemperature(profileData["bedTemp"].toInt());
+            ui->bedExtWidget->setExtruderMaxTemperature(profileData["hotendTemp"].toInt());
         }
     } else {
         m_core.closeConnection();
