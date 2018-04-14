@@ -18,8 +18,8 @@
 
 #pragma once
 #include <AtCore/AtCore>
-#include <AtCore/AxisControl>
 #include <AtCore/LogWidget>
+#include <AtCore/MovementWidget>
 #include <AtCore/PlotWidget>
 #include <AtCore/PrintWidget>
 #include <AtCore/SdWidget>
@@ -75,8 +75,8 @@ private:
     QAction *m_stopAction;
     QSettings m_settings;
     QString m_theme;
-    AxisControl *m_axisControl;
     LogWidget *m_logWidget;
+    MovementWidget *m_movementWidget;
     PlotWidget *m_plotWidget;
     PrintWidget *m_printWidget;
     SdWidget *m_sdWidget;
@@ -88,7 +88,6 @@ private:
     void disableMotors();
     void handlePrinterStatusChanged(AtCore::STATES newState);
     void checkTemperature(uint sensorType, uint number, uint temp);
-    void axisControlClicked(QChar axis, int value);
     void enableControls(bool b);
     void buildToolbar();
     void print();

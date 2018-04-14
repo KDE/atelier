@@ -35,9 +35,9 @@ AtCoreInstanceWidget::AtCoreInstanceWidget(QWidget *parent):
     ui = new Ui::AtCoreInstanceWidget;
     ui->setupUi(this);
 
-    m_axisControl = new AxisControl();
-    m_axisControl->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum);
-    ui->controlsLayout->addWidget(m_axisControl);
+    m_movementWidget = new MovementWidget(false);
+    m_movementWidget->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum);
+    ui->controlsLayout->addWidget(m_movementWidget);
 
     m_plotWidget = new PlotWidget();
     ui->controlTabLayout->addWidget(m_plotWidget);
@@ -260,7 +260,17 @@ void AtCoreInstanceWidget::initConnectsToAtCore()
     connect(m_printWidget, &PrintWidget::fanSpeedChanged, &m_core, &AtCore::setFanSpeed);
     connect(m_printWidget, &PrintWidget::flowRateChanged, &m_core, &AtCore::setFlowRate);
     connect(m_printWidget, &PrintWidget::printSpeedChanged, &m_core, &AtCore::setPrinterSpeed);
-    connect(m_axisControl, &AxisControl::clicked, this, &AtCoreInstanceWidget::axisControlClicked);
+    //Movement Widget
+    connect(m_movementWidget, &MovementWidget::absoluteMove, [this](const QLatin1Char & axis, const double value) {
+        m_logWidget->appendLog(GCode::description(GCode::G1));
+        m_core.move(axis, value);
+    });
+    connect(m_movementWidget, &MovementWidget::relativeMove, [this](const QLatin1Char & axis, const double value) {
+       m_logWidget->appendLog(i18n("Relative Move: %1, %2", axis, QString::number(value)));
+       m_core.setRelativePosition();
+       m_core.move(axis, value);
+       m_core.setAbsolutePosition();
+    });
 
     //Sd Card Stuff
     connect(&m_core, &AtCore::sdCardFileListChanged, m_sdWidget, &SdWidget::updateFilelist);
@@ -433,13 +443,6 @@ void AtCoreInstanceWidget::checkTemperature(uint sensorType, uint number, uint t
           .arg(QString::number(temp));
 
     m_logWidget->appendLog(msg);
-}
-
-void AtCoreInstanceWidget::axisControlClicked(QChar axis, int value)
-{
-  m_core.setRelativePosition();
-  m_core.pushCommand(GCode::toCommand(GCode::G1, QStringLiteral("%1%2").arg(axis, QString::number(value))));
-  m_core.setAbsolutePosition();
 }
 
 void AtCoreInstanceWidget::enableControls(bool b)
