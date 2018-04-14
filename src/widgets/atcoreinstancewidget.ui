@@ -26,12 +26,16 @@
       <attribute name="title">
        <string>Controllers</string>
       </attribute>
-      <layout class="QGridLayout" name="gridLayout_3">
-       <item row="4" column="0" colspan="4">
+      <layout class="QVBoxLayout" name="controlTabLayout">
+       <item>
         <widget class="PrintProgressWidget" name="printProgressWidget" native="true"/>
        </item>
-       <item row="2" column="0">
-        <widget class="BedExtruderWidget" name="bedExtWidget" native="true"/>
+       <item>
+       <layout class="QHBoxLayout" name="controlsLayout">
+        <item>
+            <widget class="BedExtruderWidget" name="bedExtWidget" native="true"/>
+        </item>
+       </layout>
        </item>
       </layout>
      </widget>
@@ -39,12 +43,12 @@
       <attribute name="title">
        <string>Advanced</string>
       </attribute>
-      <layout class="QGridLayout" name="gridLayout_2">
-       <item row="1" column="0">
-        <widget class="PushGCodeWidget" name="pushGCodeWidget" native="true"/>
-       </item>
-       <item row="0" column="0">
+      <layout class="QVBoxLayout" name="advancedTabLayout">
+       <item>
         <widget class="RatesControlWidget" name="ratesControlWidget" native="true"/>
+       </item>
+       <item>
+        <widget class="PushGCodeWidget" name="pushGCodeWidget" native="true"/>
        </item>
       </layout>
      </widget>
