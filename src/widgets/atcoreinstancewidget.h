@@ -18,6 +18,7 @@
 
 #pragma once
 #include <AtCore/AtCore>
+#include <AtCore/CommandWidget>
 #include <AtCore/LogWidget>
 #include <AtCore/MovementWidget>
 #include <AtCore/PlotWidget>
@@ -75,6 +76,7 @@ private:
     QAction *m_stopAction;
     QSettings m_settings;
     QString m_theme;
+    CommandWidget *m_commandWidget;
     LogWidget *m_logWidget;
     MovementWidget *m_movementWidget;
     PlotWidget *m_plotWidget;
