@@ -35,20 +35,15 @@ AtCoreInstanceWidget::AtCoreInstanceWidget(QWidget *parent):
     ui = new Ui::AtCoreInstanceWidget;
     ui->setupUi(this);
 
-    auto layout = new QHBoxLayout();
     m_axisControl = new AxisControl();
-    layout->addWidget(m_axisControl);
-    ui->gridLayout_3->addLayout(layout, 2, 2, Qt::AlignHCenter);
+    m_axisControl->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum);
+    ui->controlsLayout->addWidget(m_axisControl);
 
     m_plotWidget = new PlotWidget();
-    layout = new QHBoxLayout();
-    layout->addWidget(m_plotWidget);
-    ui->gridLayout_3->addLayout(layout, 3, 0, 1, 3, Qt::AlignHCenter);
+    ui->controlTabLayout->addWidget(m_plotWidget);
 
     m_logWidget = new LogWidget(new QTemporaryFile(QDir::tempPath() + QStringLiteral("/Atelier_")));
-    layout = new QHBoxLayout();
-    layout->addWidget(m_logWidget);
-    ui->gridLayout_2->addLayout(layout, 2, 0, Qt::AlignHCenter);
+    ui->advancedTabLayout->addWidget(m_logWidget);
 
     m_sdWidget = new SdWidget;
 
