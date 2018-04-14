@@ -21,6 +21,7 @@
 #include <AtCore/AxisControl>
 #include <AtCore/LogWidget>
 #include <AtCore/PlotWidget>
+#include <AtCore/PrintWidget>
 #include <AtCore/SdWidget>
 #include <AtCore/StatusWidget>
 #include <QComboBox>
@@ -77,6 +78,7 @@ private:
     AxisControl *m_axisControl;
     LogWidget *m_logWidget;
     PlotWidget *m_plotWidget;
+    PrintWidget *m_printWidget;
     SdWidget *m_sdWidget;
     StatusWidget *m_statusWidget;
     void initConnectsToAtCore();

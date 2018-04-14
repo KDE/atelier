@@ -42,6 +42,9 @@ AtCoreInstanceWidget::AtCoreInstanceWidget(QWidget *parent):
     m_plotWidget = new PlotWidget();
     ui->controlTabLayout->addWidget(m_plotWidget);
 
+    m_printWidget = new PrintWidget(false);
+    ui->advancedTabLayout->insertWidget(0, m_printWidget);
+
     m_logWidget = new LogWidget(new QTemporaryFile(QDir::tempPath() + QStringLiteral("/Atelier_")));
     ui->advancedTabLayout->addWidget(m_logWidget);
 
@@ -197,6 +200,8 @@ void AtCoreInstanceWidget::connectButtonClicked()
             emit(connectionChanged(profileData["name"].toString()));
             ui->bedExtWidget->setBedMaxTemperature(profileData["bedTemp"].toInt());
             ui->bedExtWidget->setExtruderMaxTemperature(profileData["hotendTemp"].toInt());
+            //AddFan Support to profile
+            m_printWidget->updateFanCount(2);
         }
     } else {
         m_core.closeConnection();
@@ -252,9 +257,9 @@ void AtCoreInstanceWidget::initConnectsToAtCore()
     });
 
     // Fan, Flow and Speed management
-    connect(ui->ratesControlWidget, &RatesControlWidget::fanSpeedChanged, &m_core, &AtCore::setFanSpeed);
-    connect(ui->ratesControlWidget, &RatesControlWidget::flowRateChanged, &m_core, &AtCore::setFlowRate);
-    connect(ui->ratesControlWidget, &RatesControlWidget::printSpeedChanged, &m_core, &AtCore::setPrinterSpeed);
+    connect(m_printWidget, &PrintWidget::fanSpeedChanged, &m_core, &AtCore::setFanSpeed);
+    connect(m_printWidget, &PrintWidget::flowRateChanged, &m_core, &AtCore::setFlowRate);
+    connect(m_printWidget, &PrintWidget::printSpeedChanged, &m_core, &AtCore::setPrinterSpeed);
     connect(m_axisControl, &AxisControl::clicked, this, &AtCoreInstanceWidget::axisControlClicked);
 
     //Sd Card Stuff
