@@ -177,7 +177,7 @@ void MainWindow::setupActions()
     actionCollection()->setDefaultShortcut(action, QKeySequence::Quit);
     connect(action, &QAction::triggered, this, &MainWindow::close);
 
-    setupGUI(Default, ":/atelierui");
+    setupGUI(Default, "atelierui");
 }
 
 void MainWindow::openFile()
