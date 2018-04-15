@@ -18,7 +18,6 @@
 */
 
 #include "atcoreinstancewidget.h"
-#include "ui_atcoreinstancewidget.h"
 #include <QToolBar>
 #include <AtCore/SerialLayer>
 #include <AtCore/GCodeCommands>
@@ -32,45 +31,69 @@ AtCoreInstanceWidget::AtCoreInstanceWidget(QWidget *parent):
     m_stopAction(nullptr)
 {
     m_theme = palette().text().color().value() >= QColor(Qt::lightGray).value() ? QString("dark") : QString("light") ;
-    ui = new Ui::AtCoreInstanceWidget;
-    ui->setupUi(this);
+
+    QHBoxLayout *HLayout = new QHBoxLayout;
+    m_bedExtWidget = new BedExtruderWidget;
+    HLayout->addWidget(m_bedExtWidget);
 
     m_movementWidget = new MovementWidget(false);
-    m_movementWidget->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum);
-    ui->controlsLayout->addWidget(m_movementWidget);
+    m_movementWidget->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+    HLayout->addWidget(m_movementWidget);
+
+    QVBoxLayout *VLayout = new QVBoxLayout;
+    VLayout->addLayout(HLayout);
 
     m_plotWidget = new PlotWidget();
-    ui->controlTabLayout->addWidget(m_plotWidget);
+    VLayout->addWidget(m_plotWidget);
 
+    QWidget *controlTab = new QWidget();
+    controlTab->setLayout(VLayout);
+
+    //AdvancedTab
+    VLayout = new QVBoxLayout;
     m_printWidget = new PrintWidget(false);
-    ui->advancedTabLayout->addWidget(m_printWidget);
+    VLayout->addWidget(m_printWidget);
 
     m_commandWidget = new CommandWidget;
-    ui->advancedTabLayout->addWidget(m_commandWidget);
+    VLayout->addWidget(m_commandWidget);
 
     m_logWidget = new LogWidget(new QTemporaryFile(QDir::tempPath() + QStringLiteral("/Atelier_")));
-    ui->advancedTabLayout->addWidget(m_logWidget);
+    VLayout->addWidget(m_logWidget);
+
+    auto advancedTab = new QWidget;
+    advancedTab->setLayout(VLayout);
 
     m_sdWidget = new SdWidget;
 
-    m_statusWidget = new StatusWidget(false);
-    m_statusWidget->showPrintArea(false);
-    ui->statusLayout->addWidget(m_statusWidget);
-
-    ui->mainTab->addTab(m_sdWidget, i18n("Sd Card"));
-
+    VLayout = new QVBoxLayout();
     buildToolbar();
     buildConnectionToolbar();
+    HLayout = new QHBoxLayout;
+    HLayout->addWidget(m_toolBar);
+    HLayout->addWidget(m_connectToolBar);
+    HLayout->addWidget(m_connectButton);
+    VLayout->addLayout(HLayout);
+    m_toolBar->setHidden(true);
+
+    m_tabWidget = new QTabWidget;
+    m_tabWidget->addTab(controlTab, i18n("Controls"));
+    m_tabWidget->addTab(advancedTab, i18n("Advanced"));
+    m_tabWidget->addTab(m_sdWidget, i18n("Sd Card"));
+    VLayout->addWidget(m_tabWidget);
+
+    m_statusWidget = new StatusWidget(false);
+    m_statusWidget->showPrintArea(false);
+    VLayout->addWidget(m_statusWidget);
+    setLayout(VLayout);
+
     enableControls(false);
     updateProfileData();
     initConnectsToAtCore();
-    m_toolBar->setHidden(true);
 }
 
 AtCoreInstanceWidget::~AtCoreInstanceWidget()
 {
     m_core.closeConnection();
-    delete ui;
 }
 
 void AtCoreInstanceWidget::buildToolbar()
@@ -127,7 +150,6 @@ void AtCoreInstanceWidget::buildToolbar()
     connect(disableMotorsAction, &QAction::triggered, this, &AtCoreInstanceWidget::disableMotors);
     m_toolBar->addAction(disableMotorsAction);
 
-    ui->toolBarLayout->addWidget(m_toolBar);
     togglePrintButtons(m_files.size());
 }
 
@@ -160,8 +182,6 @@ void AtCoreInstanceWidget::buildConnectionToolbar()
     m_connectButton->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
     connect(this, &AtCoreInstanceWidget::disableDisconnect, m_connectButton, &QPushButton::setDisabled);
     connect(m_connectButton, &QPushButton::clicked, this, &AtCoreInstanceWidget::connectButtonClicked);
-    ui->toolBarLayout->addWidget(m_connectToolBar);
-    ui->toolBarLayout->addWidget(m_connectButton);
 }
 
 void AtCoreInstanceWidget::connectButtonClicked()
@@ -201,8 +221,8 @@ void AtCoreInstanceWidget::connectButtonClicked()
                 m_core.loadFirmwarePlugin(fw);
             }
             emit(connectionChanged(profileData["name"].toString()));
-            ui->bedExtWidget->setBedMaxTemperature(profileData["bedTemp"].toInt());
-            ui->bedExtWidget->setExtruderMaxTemperature(profileData["hotendTemp"].toInt());
+            m_bedExtWidget->setBedMaxTemperature(profileData["bedTemp"].toInt());
+            m_bedExtWidget->setExtruderMaxTemperature(profileData["hotendTemp"].toInt());
             //AddFan Support to profile
             m_printWidget->updateFanCount(2);
         }
@@ -222,36 +242,36 @@ void AtCoreInstanceWidget::initConnectsToAtCore()
     connect(&m_core, &AtCore::stateChanged, this, &AtCoreInstanceWidget::handlePrinterStatusChanged);
 
     // If the number of extruders from the printer change, we need to update the radiobuttons on the widget
-    connect(this, &AtCoreInstanceWidget::extruderCountChanged, ui->bedExtWidget, &BedExtruderWidget::setExtruderCount);
+    connect(this, &AtCoreInstanceWidget::extruderCountChanged, m_bedExtWidget, &BedExtruderWidget::setExtruderCount);
 
     // Bed and Extruder temperatures management
-    connect(ui->bedExtWidget, &BedExtruderWidget::bedTemperatureChanged, &m_core, &AtCore::setBedTemp);
-    connect(ui->bedExtWidget, &BedExtruderWidget::extTemperatureChanged, &m_core, &AtCore::setExtruderTemp);
+    connect(m_bedExtWidget, &BedExtruderWidget::bedTemperatureChanged, &m_core, &AtCore::setBedTemp);
+    connect(m_bedExtWidget, &BedExtruderWidget::extTemperatureChanged, &m_core, &AtCore::setExtruderTemp);
 
     // Connect AtCore temperatures changes on Atelier Plot
     connect(&m_core.temperature(), &Temperature::bedTemperatureChanged, [ this ](const float& temp) {
         checkTemperature(0x00, 0, temp);
         m_plotWidget->appendPoint(i18n("Actual Bed"), temp);
         m_plotWidget->update();
-        ui->bedExtWidget->updateBedTemp(temp);
+        m_bedExtWidget->updateBedTemp(temp);
     });
     connect(&m_core.temperature(), &Temperature::bedTargetTemperatureChanged, [ this ](const float& temp) {
         checkTemperature(0x01, 0, temp);
         m_plotWidget->appendPoint(i18n("Target Bed"), temp);
         m_plotWidget->update();
-        ui->bedExtWidget->updateBedTargetTemp(temp);
+        m_bedExtWidget->updateBedTargetTemp(temp);
     });
     connect(&m_core.temperature(), &Temperature::extruderTemperatureChanged, [ this ](const float& temp) {
         checkTemperature(0x02, 0, temp);
         m_plotWidget->appendPoint(i18n("Actual Ext.1"), temp);
         m_plotWidget->update();
-        ui->bedExtWidget->updateExtTemp(temp);
+        m_bedExtWidget->updateExtTemp(temp);
     });
     connect(&m_core.temperature(), &Temperature::extruderTargetTemperatureChanged, [ this ](const float& temp) {
         checkTemperature(0x03, 0, temp);
         m_plotWidget->appendPoint(i18n("Target Ext.1"), temp);
         m_plotWidget->update();
-        ui->bedExtWidget->updateExtTargetTemp(temp);
+        m_bedExtWidget->updateExtTargetTemp(temp);
     });
     //command Widget
     connect(m_commandWidget, &CommandWidget::commandPressed, [ this ](const QString &command) {
@@ -455,7 +475,7 @@ void AtCoreInstanceWidget::checkTemperature(uint sensorType, uint number, uint t
 
 void AtCoreInstanceWidget::enableControls(bool b)
 {
-    ui->mainTab->setEnabled(b);
+    m_tabWidget->setEnabled(b);
     m_toolBar->setEnabled(b);
 }
 

@@ -25,6 +25,7 @@
 #include <AtCore/PrintWidget>
 #include <AtCore/SdWidget>
 #include <AtCore/StatusWidget>
+#include "bedextruderwidget.h"
 #include <QComboBox>
 #include <QList>
 #include <QPushButton>
@@ -32,10 +33,6 @@
 #include <QToolBar>
 #include <QUrl>
 #include <QWidget>
-namespace Ui
-{
-class AtCoreInstanceWidget;
-}
 
 /**
  * @todo write docs
@@ -62,7 +59,6 @@ public slots:
     void updateProfileData();
 
 private:
-    Ui::AtCoreInstanceWidget* ui;
     AtCore m_core;
     QToolBar *m_toolBar;
     QComboBox *m_comboPort;
@@ -76,6 +72,8 @@ private:
     QAction *m_stopAction;
     QSettings m_settings;
     QString m_theme;
+    QTabWidget *m_tabWidget;
+    BedExtruderWidget *m_bedExtWidget;
     CommandWidget *m_commandWidget;
     LogWidget *m_logWidget;
     MovementWidget *m_movementWidget;
