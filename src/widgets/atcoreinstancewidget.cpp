@@ -37,14 +37,14 @@ AtCoreInstanceWidget::AtCoreInstanceWidget(QWidget *parent):
     HLayout->addWidget(m_bedExtWidget);
 
     m_movementWidget = new MovementWidget(false);
-    m_movementWidget->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+    m_movementWidget->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Minimum);
     HLayout->addWidget(m_movementWidget);
 
     QVBoxLayout *VLayout = new QVBoxLayout;
     VLayout->addLayout(HLayout);
 
     m_plotWidget = new PlotWidget();
-    VLayout->addWidget(m_plotWidget);
+    VLayout->addWidget(m_plotWidget,80);
 
     QWidget *controlTab = new QWidget();
     controlTab->setLayout(VLayout);
