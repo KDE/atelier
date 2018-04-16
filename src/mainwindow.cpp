@@ -121,11 +121,19 @@ void MainWindow::setupLateralArea()
         btn->setFlat(true);
         m_lateral.m_stack->addWidget(w);
         m_lateral.m_map[key] = {btn, w};
-
         buttonLayout->addWidget(btn);
-        connect(btn, &QToolButton::toggled, [this, w](bool checked) {
-            if (checked)
+
+        connect(btn, &QPushButton::clicked, [this, w, btn] {
+            if (m_lateral.m_stack->currentWidget() == w) {
+                    m_lateral.m_stack->setHidden(m_lateral.m_stack->isVisible());
+                    if(m_lateral.m_stack->isHidden()){
+                        btn->setCheckable(false);
+                        btn->setCheckable(true);
+                    }
+            } else {
+                m_lateral.m_stack->setHidden(false);
                 m_lateral.m_stack->setCurrentWidget(w);
+            }
         });
     };
 
