@@ -197,7 +197,6 @@ void ThermoWidget::paintEvent(QPaintEvent* event)
     const double wWidth = fm.width('W');
     const double cursorWidth = fm.width('0');
 
-
     const double height = fm.height();
     const double halfWidth = geometry().width() / 2;
     const double xposTarget = halfWidth - (targetWidth / 2);
@@ -218,15 +217,19 @@ void ThermoWidget::paintEvent(QPaintEvent* event)
 
     p.setPen(Qt::red);
     p.drawText(xposTarget, ypos, m_currentTemperatureTextFromEditor);
-
     ypos += height + 2;
 
     p.setPen(color);
     p.drawText(xposCurrent, ypos, QString::number(m_currentTemperature));
-    ypos += height + 2;
 
     p.setPen(color);
-    p.drawText(xposName, ypos, m_name);
+    if( size().height() <= height*6.5 && innerRect().width() <= nameWidth * 4 ) {
+        p.drawText(xposName, 0 + height, m_name);
+    } else if( size().height() >= height *8 ){
+        p.drawText(xposName, ypos + height + 2, m_name);
+    } else {
+        p.drawText(xposName, geometry().height()/2 - 12, m_name);
+    }
 }
 
 void ThermoWidget::drawNeedle( QPainter *painter, const QPointF &center, double radius, double dir, QPalette::ColorGroup colorGroup ) const
