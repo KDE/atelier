@@ -42,10 +42,12 @@
 # either expressed or implied, of the FreeBSD Project.
 #=============================================================================
 
+find_package( PkgConfig QUIET )
+pkg_search_module( PKG_QWT QUIET qwt>=6.0.0 Qt5Qwt6>=6.0.0 )
 
 find_path ( QWT_INCLUDE_DIR
   NAMES qwt_plot.h
-  HINTS ${QT_INCLUDE_DIR}
+  HINTS ${PKG_QWT_INCLUDEDIR} ${QT_INCLUDE_DIR}
   PATH_SUFFIXES qwt qwt-qt3 qwt-qt4 qwt-qt5
   )
 
