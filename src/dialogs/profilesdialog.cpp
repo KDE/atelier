@@ -25,7 +25,7 @@
 //Do not include for windows/mac os
 #ifndef Q_OS_WIN
     #ifndef Q_OS_MAC
-        #include <AtCore/atcore_default_folders.h>
+        #include <atcore_default_folders.h>
     #endif
 #endif
 
