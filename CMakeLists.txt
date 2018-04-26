@@ -8,6 +8,10 @@ include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(ECMInstallIcons)
 
+if (POLICY CMP0063)
+    cmake_policy(SET CMP0063 NEW)
+endif()
+
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
