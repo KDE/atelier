@@ -18,7 +18,7 @@
 #include <QApplication>
 #include <KAboutData>
 #include <KLocalizedString>
-#include <atcore_version.h>
+#include <AtCore/atcore_version.h>
 #include "mainwindow.h"
 #include "config.h"
 

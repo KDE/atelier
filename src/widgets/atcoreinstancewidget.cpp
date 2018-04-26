@@ -19,8 +19,8 @@
 
 #include "atcoreinstancewidget.h"
 #include <QToolBar>
-#include <SerialLayer>
-#include <GCodeCommands>
+#include <AtCore/SerialLayer>
+#include <AtCore/GCodeCommands>
 #include <KLocalizedString>
 #include "choosefiledialog.h"
 

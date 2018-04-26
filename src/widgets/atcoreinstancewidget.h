@@ -17,14 +17,14 @@
 */
 
 #pragma once
-#include <AtCore>
-#include <CommandWidget>
-#include <LogWidget>
-#include <MovementWidget>
-#include <PlotWidget>
-#include <PrintWidget>
-#include <SdWidget>
-#include <StatusWidget>
+#include <AtCore/AtCore>
+#include <AtCore/CommandWidget>
+#include <AtCore/LogWidget>
+#include <AtCore/MovementWidget>
+#include <AtCore/PlotWidget>
+#include <AtCore/PrintWidget>
+#include <AtCore/SdWidget>
+#include <AtCore/StatusWidget>
 #include "bedextruderwidget.h"
 #include <QComboBox>
 #include <QList>
