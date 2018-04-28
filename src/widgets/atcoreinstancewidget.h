@@ -73,6 +73,7 @@ private:
     QSettings m_settings;
     QString m_theme;
     QTabWidget *m_tabWidget;
+    QWidget *m_advancedTab;
     BedExtruderWidget *m_bedExtWidget;
     CommandWidget *m_commandWidget;
     LogWidget *m_logWidget;

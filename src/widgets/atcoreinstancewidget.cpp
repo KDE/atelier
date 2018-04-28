@@ -60,8 +60,8 @@ AtCoreInstanceWidget::AtCoreInstanceWidget(QWidget *parent):
     m_logWidget = new LogWidget(new QTemporaryFile(QDir::tempPath() + QStringLiteral("/Atelier_")));
     VLayout->addWidget(m_logWidget);
 
-    auto advancedTab = new QWidget;
-    advancedTab->setLayout(VLayout);
+    m_advancedTab = new QWidget;
+    m_advancedTab->setLayout(VLayout);
 
     m_sdWidget = new SdWidget;
 
@@ -77,7 +77,7 @@ AtCoreInstanceWidget::AtCoreInstanceWidget(QWidget *parent):
 
     m_tabWidget = new QTabWidget;
     m_tabWidget->addTab(controlTab, i18n("Controls"));
-    m_tabWidget->addTab(advancedTab, i18n("Advanced"));
+    m_tabWidget->addTab(m_advancedTab, i18n("Advanced"));
     m_tabWidget->addTab(m_sdWidget, i18n("Sd Card"));
     VLayout->addWidget(m_tabWidget);
 
@@ -88,7 +88,7 @@ AtCoreInstanceWidget::AtCoreInstanceWidget(QWidget *parent):
 
     enableControls(false);
     updateProfileData();
-    initConnectsToAtCore();
+    initConnectsToAtCore();    
 }
 
 AtCoreInstanceWidget::~AtCoreInstanceWidget()
@@ -213,8 +213,8 @@ void AtCoreInstanceWidget::connectButtonClicked()
         m_settings.endGroup();
 
         //then connect
-        m_core.initSerial(m_comboPort->currentText(), data["bps"].toInt());
-        if(m_core.state() == AtCore::CONNECTING){
+        if (m_core.initSerial(m_comboPort->currentText(), data["bps"].toInt()) ) {
+            m_logWidget->appendLog(tr("Serial connected"));
             profileData = data;
             QString fw = profileData["firmware"].toString();
             if( fw != QString("Auto-Detect")){
@@ -225,6 +225,8 @@ void AtCoreInstanceWidget::connectButtonClicked()
             m_bedExtWidget->setExtruderMaxTemperature(profileData["hotendTemp"].toInt());
             //AddFan Support to profile
             m_printWidget->updateFanCount(2);
+        } else {
+            m_logWidget->appendLog(tr("Failed to open serial in r/w mode"));
         }
     } else {
         m_core.closeConnection();
@@ -399,7 +401,7 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
             m_connectButton->setIcon(QIcon::fromTheme("network-connect",QIcon(QString(":/%1/connect").arg(m_theme))));
             m_connectToolBar->setHidden(false);
             m_toolBar->setHidden(true);
-            enableControls(false);
+            enableControls(false);            
         } break;
         case AtCore::STARTPRINT: {
             stateString = i18n("Starting Print");
@@ -475,7 +477,18 @@ void AtCoreInstanceWidget::checkTemperature(uint sensorType, uint number, uint t
 
 void AtCoreInstanceWidget::enableControls(bool b)
 {
-    m_tabWidget->setEnabled(b);
+    if(b) {
+        layout()->removeWidget(m_logWidget);
+        layout()->removeWidget(m_statusWidget);
+        layout()->addWidget(m_statusWidget);
+        m_advancedTab->layout()->addWidget(m_logWidget);
+    } else {
+        m_advancedTab->layout()->removeWidget(m_logWidget);
+        layout()->addWidget(m_logWidget);
+        layout()->removeWidget(m_statusWidget);
+        layout()->addWidget(m_statusWidget);
+    }
+    m_tabWidget->setHidden(!b);
     m_toolBar->setEnabled(b);
 }
 
@@ -493,7 +506,15 @@ void AtCoreInstanceWidget::setOpenFiles(const QList<QUrl>& files)
 void AtCoreInstanceWidget::updateSerialPort(const QStringList &ports)
 {
     m_comboPort->clear();
-    m_comboPort->addItems(ports);
+    if (!ports.isEmpty()) {
+        m_comboPort->addItems(ports);
+        m_logWidget->appendLog(tr("Found %1 Ports").arg(QString::number(ports.count())));
+    } else {
+        QString portError(tr("No available ports! Please connect a serial device to continue!"));
+        if (! m_logWidget->endsWith(portError)) {
+            m_logWidget->appendLog(portError);
+        }
+    }
 }
 
 void AtCoreInstanceWidget::updateProfileData()
