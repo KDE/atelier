@@ -42,7 +42,6 @@ Dependencies for Atelier:
  - Qt3D
 
  KDE API's
- - Solid
  - KI18n
  - KXMLGui
  - KConfigWidgets
