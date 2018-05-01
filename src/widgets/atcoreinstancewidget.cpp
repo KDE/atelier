@@ -214,7 +214,7 @@ void AtCoreInstanceWidget::connectButtonClicked()
 
         //then connect
         if (m_core.initSerial(m_comboPort->currentText(), data["bps"].toInt()) ) {
-            m_logWidget->appendLog(tr("Serial connected"));
+            m_logWidget->appendLog(i18n("Serial connected"));
             profileData = data;
             QString fw = profileData["firmware"].toString();
             if( fw != QString("Auto-Detect")){
@@ -226,7 +226,7 @@ void AtCoreInstanceWidget::connectButtonClicked()
             //AddFan Support to profile
             m_printWidget->updateFanCount(2);
         } else {
-            m_logWidget->appendLog(tr("Failed to open serial in r/w mode"));
+            m_logWidget->appendLog(i18n("Failed to open serial in r/w mode"));
         }
     } else {
         m_core.closeConnection();
@@ -308,7 +308,7 @@ void AtCoreInstanceWidget::initConnectsToAtCore()
 
     connect(m_sdWidget, &SdWidget::printSdFile, [this](const QString & fileName) {
         if (fileName.isEmpty()) {
-            QMessageBox::information(this, tr("Print Error"), tr("You must Select a file from the list"));
+            QMessageBox::information(this, i18n("Print Error"), i18n("You must Select a file from the list"));
         } else  {
             m_core.print(fileName, true);
             togglePrintButtons(true);
@@ -317,7 +317,7 @@ void AtCoreInstanceWidget::initConnectsToAtCore()
 
     connect(m_sdWidget, &SdWidget::deleteSdFile, [this](const QString & fileName) {
         if (fileName.isEmpty()) {
-            QMessageBox::information(this, tr("Delete Error"), tr("You must Select a file from the list"));
+            QMessageBox::information(this, i18n("Delete Error"), i18n("You must Select a file from the list"));
         } else  {
             m_core.sdDelete(fileName);
         }
@@ -385,7 +385,7 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
             connect(m_core.serial(), &SerialLayer::pushedCommand, m_logWidget, &LogWidget::appendSLog);
         } break;
         case AtCore::IDLE: {
-            stateString = i18n("Connected to ") + m_core.serial()->portName();
+            stateString = i18n("Connected to %1", m_core.serial()->portName());
             emit extruderCountChanged(m_core.extruderCount());
             m_logWidget->appendLog(i18n("Serial connected"));
             emit disableDisconnect(false);
@@ -508,9 +508,9 @@ void AtCoreInstanceWidget::updateSerialPort(const QStringList &ports)
     m_comboPort->clear();
     if (!ports.isEmpty()) {
         m_comboPort->addItems(ports);
-        m_logWidget->appendLog(tr("Found %1 Ports").arg(QString::number(ports.count())));
+        m_logWidget->appendLog(i18n("Found %1 Ports", QString::number(ports.count())));
     } else {
-        QString portError(tr("No available ports! Please connect a serial device to continue!"));
+        QString portError(i18n("No available ports! Please connect a serial device to continue!"));
         if (! m_logWidget->endsWith(portError)) {
             m_logWidget->appendLog(portError);
         }
