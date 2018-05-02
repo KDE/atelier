@@ -26,7 +26,7 @@ class ChooseFileDialog : public QDialog
     Q_OBJECT
 public:
     ChooseFileDialog(QWidget *parent=nullptr, QList<QUrl> files = QList<QUrl>());
-    ~ChooseFileDialog();
+    virtual ~ChooseFileDialog() {}
     const QString& choosenFile();
 private:
     QString m_choosen_file;

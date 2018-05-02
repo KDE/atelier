@@ -26,8 +26,10 @@ ChooseFileDialog::ChooseFileDialog(QWidget *parent, QList<QUrl> files) :
     QDialog(parent)
 {
     auto layout = new QVBoxLayout;
-    auto label = new QLabel(i18n("Choose a file to print: "));
+    auto label = new QLabel(i18n("Choose a file to print:"));
     auto listWigdet = new QListWidget();
+    const int padding = 30;
+    listWigdet->setMinimumWidth(fontMetrics().height()/2  * padding);
     QStringList files_list;
     foreach(const auto &file, files){
         files_list.append(file.toLocalFile());
@@ -43,10 +45,6 @@ ChooseFileDialog::ChooseFileDialog(QWidget *parent, QList<QUrl> files) :
     layout->addWidget(listWigdet);
     layout->addWidget(buttonBox);
     setLayout(layout);
-}
-
-ChooseFileDialog::~ChooseFileDialog()
-{
 }
 
 const QString& ChooseFileDialog::choosenFile()
