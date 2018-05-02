@@ -34,9 +34,9 @@
 
 
 MainWindow::MainWindow(QWidget *parent) :
-    KXmlGuiWindow(parent),
-    m_currEditorView(nullptr),
-    m_instances(new QTabWidget(this))
+    KXmlGuiWindow(parent)
+    ,m_currEditorView(nullptr)
+    ,m_instances(new QTabWidget(this))
 {
     m_theme = palette().text().color().value() >= QColor(Qt::lightGray).value() ? QString("dark") : QString("light");
 
