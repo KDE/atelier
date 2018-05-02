@@ -18,6 +18,7 @@
 */
 #include "mainwindow.h"
 #include <dialogs/profilesdialog.h>
+#include <dialogs/choosefiledialog.h>
 #include <KLocalizedString>
 #include <KStandardAction>
 #include <KActionCollection>
@@ -86,13 +87,32 @@ void MainWindow::newAtCoreInstance()
     auto newInstanceWidget = new AtCoreInstanceWidget();
     QString name = QString::number(m_instances->addTab(newInstanceWidget, i18n("Connect a printer")));
     newInstanceWidget->setObjectName(name);
-    newInstanceWidget->setOpenFiles(m_openFiles);
+    newInstanceWidget->setFileCount(m_openFiles.size());
     connect(this, &MainWindow::profilesChanged, newInstanceWidget, &AtCoreInstanceWidget::updateProfileData);
     connect(newInstanceWidget, &AtCoreInstanceWidget::requestProfileDialog, [ this ] {
         std::unique_ptr<ProfilesDialog> pd(new ProfilesDialog);
         pd->exec();
         emit(profilesChanged());
     });
+
+    connect(newInstanceWidget, &AtCoreInstanceWidget::requestFileChooser, [ newInstanceWidget, this ] {
+        switch (m_openFiles.size()){
+            case 0:
+                QMessageBox::warning(this, i18n("Error"),
+                                     i18n("There's no GCode File open. \n Please select a file and try again."),
+                                     QMessageBox::Ok);
+                break;
+            case 1:
+                newInstanceWidget->printFile(m_openFiles.at(0));
+                break;
+            default:
+                ChooseFileDialog dialog(this,m_openFiles);
+                if(dialog.exec() == QDialog::Accepted){
+                    newInstanceWidget->printFile(dialog.choosenFile());
+                }
+        }
+    });
+
     connect(newInstanceWidget, &AtCoreInstanceWidget::connectionChanged, this, &MainWindow::atCoreInstanceNameChange);
 
     if(m_instances->count() > 1) {
@@ -203,7 +223,7 @@ void MainWindow::openFile()
 
         for(int i=0; i < tabs; ++i){
             auto instance = qobject_cast<AtCoreInstanceWidget*>(m_instances->widget(i));
-            instance->setOpenFiles(m_openFiles);
+            instance->setFileCount(m_openFiles.size());
         }
     }
 }

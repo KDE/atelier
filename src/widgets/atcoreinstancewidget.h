@@ -53,13 +53,15 @@ public:
     ~AtCoreInstanceWidget();
     void startConnection(const QString& serialPort, const QMap<QString, QVariant>& profile);
     bool connected();
-    void setOpenFiles(const QList<QUrl>& files);
+    void setFileCount(int count);
 
 public slots:
     void updateProfileData();
+    void printFile(const QUrl& fileName);
 
 private:
     AtCore m_core;
+    int m_fileCount;
     QToolBar *m_toolBar;
     QComboBox *m_comboPort;
     QComboBox *m_comboProfile;
@@ -67,7 +69,6 @@ private:
     QToolBar *m_connectToolBar;
     QWidget *m_connectWidget;
     QMap<QString, QVariant> profileData;
-    QList<QUrl> m_files;
     QAction *m_printAction;
     QAction *m_stopAction;
     QSettings m_settings;
@@ -83,7 +84,6 @@ private:
     SdWidget *m_sdWidget;
     StatusWidget *m_statusWidget;
     void initConnectsToAtCore();
-    void printFile(const QUrl& fileName);
     void pausePrint();
     void stopPrint();
     void disableMotors();
@@ -101,4 +101,5 @@ signals:
     void disableDisconnect(bool b);
     void extruderCountChanged(int count);
     void requestProfileDialog();
+    void requestFileChooser();
 };

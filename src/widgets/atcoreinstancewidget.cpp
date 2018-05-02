@@ -22,16 +22,15 @@
 #include <AtCore/SerialLayer>
 #include <AtCore/GCodeCommands>
 #include <KLocalizedString>
-#include "choosefiledialog.h"
 
 AtCoreInstanceWidget::AtCoreInstanceWidget(QWidget *parent):
     QWidget(parent),
+    m_fileCount(0),
     m_toolBar(nullptr),
     m_printAction(nullptr),
     m_stopAction(nullptr)
 {
     m_theme = palette().text().color().value() >= QColor(Qt::lightGray).value() ? QString("dark") : QString("light") ;
-
     QHBoxLayout *HLayout = new QHBoxLayout;
     m_bedExtWidget = new BedExtruderWidget;
     HLayout->addWidget(m_bedExtWidget);
@@ -150,7 +149,7 @@ void AtCoreInstanceWidget::buildToolbar()
     connect(disableMotorsAction, &QAction::triggered, this, &AtCoreInstanceWidget::disableMotors);
     m_toolBar->addAction(disableMotorsAction);
 
-    togglePrintButtons(m_files.size());
+    togglePrintButtons(m_fileCount);
 }
 
 void AtCoreInstanceWidget::buildConnectionToolbar()
@@ -334,23 +333,11 @@ void AtCoreInstanceWidget::printFile(const QUrl& fileName)
     }
 }
 
-void AtCoreInstanceWidget::print(){
-    switch (m_files.size()){
-        case 0:
-            QMessageBox::warning(this, i18n("Error"),
-                                 i18n("There's no GCode File open. \n Please select a file and try again."),
-                                 QMessageBox::Ok);
-            break;
-        case 1:
-            printFile(m_files.at(0));
-            break;
-        default:
-            auto dialog = new ChooseFileDialog(this, m_files);
-            if(dialog->exec() == QDialog::Accepted){
-                    printFile(dialog->choosenFile());
-            }
-    }
+void AtCoreInstanceWidget::print()
+{
+    emit (requestFileChooser());
 }
+
 void AtCoreInstanceWidget::pausePrint()
 {
     if(m_core.state() == AtCore::BUSY) {
@@ -497,10 +484,10 @@ bool AtCoreInstanceWidget::connected()
     return (m_core.state() != AtCore::DISCONNECTED);
 }
 
-void AtCoreInstanceWidget::setOpenFiles(const QList<QUrl>& files)
+void AtCoreInstanceWidget::setFileCount(int count)
 {
-    m_files = files;
-    togglePrintButtons(m_files.size());
+    m_fileCount = count;
+    togglePrintButtons(m_fileCount);
 }
 
 void AtCoreInstanceWidget::updateSerialPort(const QStringList &ports)
