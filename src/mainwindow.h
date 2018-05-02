@@ -58,6 +58,7 @@ private:
     void setupActions();
     void openFile();
     void atCoreInstanceNameChange(const QString &name);
+    QString getTheme();
 
 signals:
     void extruderCountChanged(int count);

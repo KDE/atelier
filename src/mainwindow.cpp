@@ -35,11 +35,10 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     KXmlGuiWindow(parent)
+    ,m_theme(getTheme())
     ,m_currEditorView(nullptr)
     ,m_instances(new QTabWidget(this))
 {
-    m_theme = palette().text().color().value() >= QColor(Qt::lightGray).value() ? QString("dark") : QString("light");
-
     initWidgets();
     setupActions();
     connect(m_instances, &QTabWidget::tabCloseRequested, [this] (int index){
@@ -211,4 +210,10 @@ void MainWindow::openFile()
 void MainWindow::atCoreInstanceNameChange(const QString &name)
 {
     m_instances->setTabText(sender()->objectName().toInt(),name);
+}
+
+QString MainWindow::getTheme()
+{
+    return palette().text().color().value() >= QColor(Qt::lightGray).value() ? \
+        QString("dark") : QString("light");
 }
