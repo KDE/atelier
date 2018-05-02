@@ -1,7 +1,7 @@
 /* Atelier KDE Printer Host for 3D Printing
     Copyright (C) <2017>
     Author: Lays Rodrigues - laysrodriguessilva@gmail.com
-
+            Chris Rizzitello - rizzitello@kde.org
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -35,8 +35,8 @@ ChooseFileDialog::ChooseFileDialog(QWidget *parent, QList<QUrl> files) :
         files_list.append(file.toLocalFile());
     }
     listWigdet->addItems(files_list);
-    connect(listWigdet, &QListWidget::currentTextChanged, [ this ](const QString& t){
-        m_choosen_file = t;
+    connect(listWigdet, &QListWidget::currentRowChanged, [ this, &files ](const int t){
+        m_choosen_file = files.at(t);
     });
     auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
     connect(buttonBox, &QDialogButtonBox::accepted, this, &ChooseFileDialog::accept);
@@ -47,7 +47,7 @@ ChooseFileDialog::ChooseFileDialog(QWidget *parent, QList<QUrl> files) :
     setLayout(layout);
 }
 
-const QString& ChooseFileDialog::choosenFile()
+const QUrl ChooseFileDialog::choosenFile()
 {
     return m_choosen_file;
 }
