@@ -50,9 +50,9 @@ void FileLoader::run()
     QList<QVector4D> pos;
     qint64 totalSize = _file.bytesAvailable();
     qint64 stillSize = totalSize;
-    float lastPerc = 0.0;
 
     if (_file.open(QIODevice::ReadOnly)) {
+        float lastPerc = 0.0;
         QTextStream in(&_file);
         while (!in.atEnd()) {
             //Get each line
