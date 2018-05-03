@@ -30,7 +30,6 @@
 #include <QToolButton>
 #include <widgets/3dview/viewer3d.h>
 #include <widgets/atcoreinstancewidget.h>
-#include <widgets/gcodeeditorwidget.h>
 #include <widgets/videomonitorwidget.h>
 
 
@@ -77,6 +76,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
             event->ignore();
         }
     }
+    disconnect(m_gcodeEditor, &GCodeEditorWidget::updateClientFactory, this, &MainWindow::updateClientFactory);
 }
 
 void MainWindow::initWidgets()
@@ -183,16 +183,10 @@ void MainWindow::setupLateralArea()
         });
     };
 
-    auto *gcodeEditor = new GCodeEditorWidget(this);
-     connect(gcodeEditor, &GCodeEditorWidget::updateClientFactory, this, [this](KTextEditor::View* view){
-         if(m_lateral.m_stack->currentWidget() == m_lateral.m_map["gcode"].second) {
-           guiFactory()->removeClient(m_currEditorView);
-           guiFactory()->addClient(view);
-         }
-         m_currEditorView = view;
-     });
+    m_gcodeEditor = new GCodeEditorWidget(this);
+    connect(m_gcodeEditor, &GCodeEditorWidget::updateClientFactory, this, &MainWindow::updateClientFactory);
     setupButton("3d",    i18n("&3D"), QIcon::fromTheme("draw-cuboid", QIcon(QString(":/%1/3d").arg(m_theme))), new Viewer3D(this));
-    setupButton("gcode", i18n("&GCode"), QIcon::fromTheme("accessories-text-editor", QIcon(":/icon/edit")), gcodeEditor);
+    setupButton("gcode", i18n("&GCode"), QIcon::fromTheme("accessories-text-editor", QIcon(":/icon/edit")), m_gcodeEditor);
     setupButton("video", i18n("&Video"), QIcon::fromTheme("camera-web", QIcon(":/icon/video")), new VideoMonitorWidget(this));
     buttonLayout->addStretch();
     m_lateral.m_toolBar->setLayout(buttonLayout);
@@ -294,4 +288,17 @@ void MainWindow::toggleGCodeActions()
     } else {
         guiFactory()->removeClient(m_currEditorView);
     }
+}
+
+void MainWindow::updateClientFactory(KTextEditor::View* view)
+{
+    if(m_lateral.m_stack->currentWidget() == m_lateral.m_map["gcode"].second) {
+        if(m_currEditorView) {
+            guiFactory()->removeClient(m_currEditorView);
+        }
+        if (view) {
+            guiFactory()->addClient(view);
+        }
+    }
+    m_currEditorView = view;
 }
