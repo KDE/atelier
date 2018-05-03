@@ -24,6 +24,7 @@
 #include <QPushButton>
 #include <QStackedWidget>
 #include <QUrl>
+#include <widgets/gcodeeditorwidget.h>
 
 struct LateralArea {
     // Area with the the lateral buttons that will open the views.
@@ -54,6 +55,7 @@ private:
     QString m_theme;
     KTextEditor::View *m_currEditorView;
     LateralArea m_lateral;
+    GCodeEditorWidget* m_gcodeEditor;
     QTabWidget *m_instances;
     void setupLateralArea();
     void newAtCoreInstance();
@@ -61,6 +63,7 @@ private:
     void setupActions();
     void openFile();
     bool askToClose();
+    void updateClientFactory(KTextEditor::View* view);
     void atCoreInstanceNameChange(const QString &name);
     QString getTheme();
     void toggleGCodeActions();
