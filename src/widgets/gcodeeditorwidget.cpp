@@ -1,6 +1,7 @@
 /* Atelier KDE Printer Host for 3D Printing
     Copyright (C) <2016>
     Author: Lays Rodrigues - lays.rodrigues@kde.org
+            Chris Rizzitello - rizzitello@kde.org
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -36,7 +37,6 @@ void GCodeEditorWidget::setupTabWidget()
     connect(m_tabwidget, &QTabWidget::tabCloseRequested, this, &GCodeEditorWidget::closeTab);
     connect(m_tabwidget, &QTabWidget::currentChanged, this, &GCodeEditorWidget::currentIndexChanged);
     m_tabwidget->setTabsClosable(true);
-    m_tabwidget->addTab(newView(newDoc()), i18n("New file"));
 }
 
 KTextEditor::View *GCodeEditorWidget::gcodeView() const
@@ -46,17 +46,23 @@ KTextEditor::View *GCodeEditorWidget::gcodeView() const
 
 void GCodeEditorWidget::loadFile(const QUrl &file)
 {
-    auto doc = m_editor->documents().first();
-    if (!doc->isEmpty()) {
-        doc = newDoc();
-        int t = m_tabwidget->addTab(newView(doc), file.fileName());
-        m_tabwidget->setCurrentIndex(t);
-    } else {
-        m_tabwidget->setTabText(0, file.fileName());
-        emit updateClientFactory(doc->views().first());
+    //if the file is loaded then reload the document.
+    for (const auto &doc : m_editor->documents())
+    {
+        if (doc->url() == file) {
+                doc->documentReload();
+                m_tabwidget->setCurrentIndex(m_tabwidget->indexOf(urlTab[doc->url()]));
+                return;
+        }
     }
+    auto doc = newDoc();
+    int t = m_tabwidget->addTab(newView(doc), file.fileName());
+    m_tabwidget->setCurrentIndex(t);
     doc->openUrl(file);
     doc->setHighlightingMode(QString("G-Code"));
+    emit updateClientFactory(doc->views().first());
+    urlTab.insert(doc->url(), m_tabwidget->widget(t));
+    urlDoc.insert(doc->url(),m_editor->documents().count()-1);
 }
 
 void GCodeEditorWidget::setupInterface(const KTextEditor::View *view)
@@ -81,10 +87,10 @@ KTextEditor::View *GCodeEditorWidget::newView(KTextEditor::Document *doc)
 
 void GCodeEditorWidget::closeTab(int index)
 {
+    QUrl url = urlTab.key(m_tabwidget->widget(index));
     m_tabwidget->removeTab(index);
-    if (!m_tabwidget->count()) {
-        m_tabwidget->addTab(newView(newDoc()), i18n("New file"));
-    }
+    urlTab.remove(url);
+    urlDoc.remove(url);
 }
 
 void GCodeEditorWidget::currentIndexChanged(int index)

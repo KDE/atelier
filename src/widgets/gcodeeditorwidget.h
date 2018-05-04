@@ -1,6 +1,7 @@
 /* Atelier KDE Printer Host for 3D Printing
     Copyright (C) <2016>
     Author: Lays Rodrigues - lays.rodrigues@kde.org
+            Chris Rizzitello - rizzitello@kde.org
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -34,6 +35,8 @@ public:
     void loadFile(const QUrl &file);
 
 private:
+    QMap<QUrl, int> urlDoc;
+    QMap<QUrl, QWidget*> urlTab;
     KTextEditor::ConfigInterface *m_interface;
     KTextEditor::Document *newDoc();
     KTextEditor::Editor *m_editor;
