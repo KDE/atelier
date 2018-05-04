@@ -283,7 +283,9 @@ void MainWindow::loadFile(const QUrl &fileName)
         m_lateral.get<Viewer3D>("3d")->drawModel(fileName.toString());
 
         const int tabs = m_instances->count();
-        m_openFiles.append(fileName);
+        if(!m_openFiles.contains(fileName)) {
+            m_openFiles.append(fileName);
+        }
 
         for (int i = 0; i < tabs; ++i) {
             auto instance = qobject_cast<AtCoreInstanceWidget *>(m_instances->widget(i));
