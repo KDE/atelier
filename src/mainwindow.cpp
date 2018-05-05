@@ -213,10 +213,12 @@ void MainWindow::setupLateralArea()
 
     m_gcodeEditor = new GCodeEditorWidget(this);
     connect(m_gcodeEditor, &GCodeEditorWidget::updateClientFactory, this, &MainWindow::updateClientFactory);
+    connect(m_gcodeEditor, &GCodeEditorWidget::fileClosed, [this](const QUrl & file) {
+        m_openFiles.removeAll(file);
+    });
 
     auto *viewer3D = new Viewer3D(this);
     connect(viewer3D, &Viewer3D::droppedUrls, this, &MainWindow::processDropEvent);
-
     setupButton("3d", i18n("&3D"), QIcon::fromTheme("draw-cuboid", QIcon(QString(":/%1/3d").arg(m_theme))), viewer3D);
     setupButton("gcode", i18n("&GCode"), QIcon::fromTheme("accessories-text-editor", QIcon(":/icon/edit")), m_gcodeEditor);
     setupButton("video", i18n("&Video"), QIcon::fromTheme("camera-web", QIcon(":/icon/video")), new VideoMonitorWidget(this));
@@ -283,7 +285,9 @@ void MainWindow::loadFile(const QUrl &fileName)
         m_lateral.get<Viewer3D>("3d")->drawModel(fileName.toString());
 
         const int tabs = m_instances->count();
-        m_openFiles.append(fileName);
+        if (!m_openFiles.contains(fileName)) {
+            m_openFiles.append(fileName);
+        }
 
         for (int i = 0; i < tabs; ++i) {
             auto instance = qobject_cast<AtCoreInstanceWidget *>(m_instances->widget(i));
