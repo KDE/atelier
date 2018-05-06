@@ -202,7 +202,7 @@ void MainWindow::setupActions()
 
     action->setText(i18n("&Open"));
     actionCollection()->setDefaultShortcut(action, QKeySequence::Open);
-    connect(action, &QAction::triggered, this, &MainWindow::openFile);
+    connect(action, &QAction::triggered, this, &MainWindow::openActionTriggered);
 
     action = actionCollection()->addAction(QStringLiteral("new_instance"));
     action->setIcon(QIcon::fromTheme("list-add", QIcon(QString(":/%1/addTab").arg(m_theme))));
@@ -231,7 +231,7 @@ void MainWindow::setupActions()
     setupGUI(Default, "atelierui");
 }
 
-void MainWindow::openFile()
+void MainWindow::openActionTriggered()
 {
     QUrl fileName = QFileDialog::getOpenFileUrl(
                         this
@@ -240,6 +240,13 @@ void MainWindow::openFile()
                         , i18n("GCode(*.gco *.gcode);;All Files(*.*)")
                     );
 
+    if (!fileName.isEmpty()) {
+        loadFile(fileName);
+    }
+}
+
+void MainWindow::loadFile(const QUrl &fileName)
+{
     if (!fileName.isEmpty()) {
 
         m_lateral.get<GCodeEditorWidget>("gcode")->loadFile(fileName);

@@ -64,7 +64,8 @@ private:
     QString getTheme();
     void initWidgets();
     void newAtCoreInstance();
-    void openFile();
+    void openActionTriggered();
+    void loadFile(const QUrl &fileName);
     void setupActions();
     void setupLateralArea();
     void toggleGCodeActions();
