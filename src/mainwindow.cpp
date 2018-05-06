@@ -40,10 +40,12 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     initWidgets();
     setupActions();
+    setAcceptDrops(true);
+
     connect(m_instances, &QTabWidget::tabCloseRequested, [this](int index) {
-        auto tempWidget = qobject_cast<AtCoreInstanceWidget *>(m_instances->widget(index));
-        if (tempWidget->isPrinting()) {
-            if (askToClose()) {
+        auto tempWidget= qobject_cast<AtCoreInstanceWidget*>(m_instances->widget(index));
+        if(tempWidget->isPrinting()) {
+            if(askToClose()) {
                 delete tempWidget;
             } else {
                 return;
@@ -76,6 +78,28 @@ void MainWindow::closeEvent(QCloseEvent *event)
         }
     }
     disconnect(m_gcodeEditor, &GCodeEditorWidget::updateClientFactory, this, &MainWindow::updateClientFactory);
+}
+
+void MainWindow::dragEnterEvent(QDragEnterEvent *event)
+{
+    event->accept();
+}
+
+void MainWindow::dropEvent(QDropEvent *event)
+{
+    const QMimeData *mimeData = event->mimeData();
+    if(mimeData->hasUrls())
+    {
+        for(const auto& url : mimeData->urls())
+        {
+            //Loop thru the urls and only load ones ending our "supported" formats
+            QString ext = url.toLocalFile().split('.').last();
+            if(ext.contains("gcode", Qt::CaseInsensitive)
+             || ext.contains("gco", Qt::CaseInsensitive)) {
+                loadFile(url);
+            }
+        }
+    }
 }
 
 void MainWindow::initWidgets()
