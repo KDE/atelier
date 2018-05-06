@@ -58,6 +58,7 @@ public:
 public slots:
     void updateProfileData();
     void printFile(const QUrl& fileName);
+    bool isPrinting();
 
 private:
     AtCore m_core;

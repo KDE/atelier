@@ -46,6 +46,9 @@ class MainWindow : public KXmlGuiWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
 
+protected:
+    void closeEvent(QCloseEvent *event);
+
 private:
     QList<QUrl> m_openFiles;
     QString m_theme;
@@ -57,6 +60,7 @@ private:
     void initWidgets();
     void setupActions();
     void openFile();
+    bool askToClose();
     void atCoreInstanceNameChange(const QString &name);
     QString getTheme();
 

@@ -43,14 +43,40 @@ MainWindow::MainWindow(QWidget *parent) :
     initWidgets();
     setupActions();
     connect(m_instances, &QTabWidget::tabCloseRequested, [this] (int index){
-        QWidget *tempWidget= m_instances->widget(index);
-        delete tempWidget;
-
+        auto tempWidget= qobject_cast<AtCoreInstanceWidget*>(m_instances->widget(index));
+        if(tempWidget->isPrinting()) {
+            if(askToClose()) {
+                delete tempWidget;
+            } else {
+                return;
+            }
+        } else {
+            delete tempWidget;
+        }
         if(m_instances->count() == 1) {
             m_instances->setTabsClosable(false);
             m_instances->setMovable(false);
         }
     });
+}
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    bool closePrompt = false;
+    for(int i=0; i < m_instances->count(); i++)
+    {
+        AtCoreInstanceWidget *instance = qobject_cast<AtCoreInstanceWidget*>(m_instances->widget(i));
+        if (instance->isPrinting()) {
+             closePrompt = true;
+             break;
+        }
+    }
+    if(closePrompt) {
+        if(askToClose()) {
+            event->accept();
+        } else {
+            event->ignore();
+        }
+    }
 }
 
 void MainWindow::initWidgets()
@@ -236,4 +262,22 @@ QString MainWindow::getTheme()
 {
     return palette().text().color().value() >= QColor(Qt::lightGray).value() ? \
         QString("dark") : QString("light");
+}
+
+bool MainWindow::askToClose()
+{
+    bool rtn = false;
+    int result = QMessageBox::question(this,
+            i18n("Printing"),
+            i18n("Currently printing! \nAre you sure you want to close?"),
+            QMessageBox::Close,QMessageBox::Cancel);
+    switch(result)
+    {
+        case QMessageBox::Close:
+            rtn = true;
+            break;
+        default:
+            break;
+    }
+    return rtn;
 }
