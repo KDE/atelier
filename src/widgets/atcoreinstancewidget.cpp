@@ -518,3 +518,8 @@ void AtCoreInstanceWidget::togglePrintButtons(bool shown)
     m_printAction->setVisible(shown);
     m_stopAction->setVisible(shown);
 }
+
+bool AtCoreInstanceWidget::isPrinting()
+{
+    return (m_core.state() == AtCore::BUSY);
+}
