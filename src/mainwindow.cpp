@@ -179,13 +179,16 @@ void MainWindow::setupLateralArea()
                 m_lateral.m_stack->setHidden(false);
                 m_lateral.m_stack->setCurrentWidget(w);
             }
+            toggleGCodeActions();
         });
     };
 
     auto *gcodeEditor = new GCodeEditorWidget(this);
      connect(gcodeEditor, &GCodeEditorWidget::updateClientFactory, this, [this](KTextEditor::View* view){
-         guiFactory()->removeClient(m_currEditorView);
-         guiFactory()->addClient(view);
+         if(m_lateral.m_stack->currentWidget() == m_lateral.m_map["gcode"].second) {
+           guiFactory()->removeClient(m_currEditorView);
+           guiFactory()->addClient(view);
+         }
          m_currEditorView = view;
      });
     setupButton("3d",    i18n("&3D"), QIcon::fromTheme("draw-cuboid", QIcon(QString(":/%1/3d").arg(m_theme))), new Viewer3D(this));
@@ -280,4 +283,15 @@ bool MainWindow::askToClose()
             break;
     }
     return rtn;
+}
+
+void MainWindow::toggleGCodeActions()
+{
+    if(m_lateral.m_stack->currentWidget() == m_lateral.m_map["gcode"].second && m_lateral.m_stack->isVisible()) {
+        if(m_currEditorView){
+            guiFactory()->addClient(m_currEditorView);
+        }
+    } else {
+        guiFactory()->removeClient(m_currEditorView);
+    }
 }

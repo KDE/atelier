@@ -63,6 +63,7 @@ private:
     bool askToClose();
     void atCoreInstanceNameChange(const QString &name);
     QString getTheme();
+    void toggleGCodeActions();
 
 signals:
     void extruderCountChanged(int count);
