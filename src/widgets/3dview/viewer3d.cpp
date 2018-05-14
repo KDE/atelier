@@ -1,6 +1,7 @@
 /* Atelier KDE Printer Host for 3D Printing
     Copyright (C) <2017>
     Author: Patrick José Pereira - patrickjp@kde.org
+            Chris Rizzitello - rizzitello@kde.org
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -50,11 +51,19 @@ Viewer3D::Viewer3D(QWidget *parent) :
     _view->setSource(QUrl(QStringLiteral("qrc:/viewer3d.qml")));
     QHBoxLayout *mainLayout = new QHBoxLayout;
     mainLayout->addWidget(QWidget::createWindowContainer(_view));
+    QObject *item = _view->rootObject();
+    //Connect the drop pass from the QML part.
+    connect(item, SIGNAL(droppedUrls(QVariant)), this, SLOT(dropCatch(QVariant)));
     this->setLayout(mainLayout);
 }
 
 Viewer3D::~Viewer3D()
 {
+}
+
+void Viewer3D::dropCatch(const QVariant &var)
+{
+    emit droppedUrls(var.value<QList<QUrl> >());
 }
 
 void Viewer3D::drawModel(QString file)

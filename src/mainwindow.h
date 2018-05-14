@@ -51,6 +51,8 @@ public:
 
 protected:
     void closeEvent(QCloseEvent *event);
+    void dragEnterEvent(QDragEnterEvent *event);
+    void dropEvent(QDropEvent *event);
 
 private:
     GCodeEditorWidget *m_gcodeEditor;
@@ -63,8 +65,10 @@ private:
     void atCoreInstanceNameChange(const QString &name);
     QString getTheme();
     void initWidgets();
+    void loadFile(const QUrl &fileName);
     void newAtCoreInstance();
-    void openFile();
+    void openActionTriggered();;
+    void processDropEvent(const QList<QUrl> &fileList);
     void setupActions();
     void setupLateralArea();
     void toggleGCodeActions();

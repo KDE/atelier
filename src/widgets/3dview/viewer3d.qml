@@ -6,6 +6,16 @@ Item {
     id: item
     width: 1000
     height: 1000
+    signal droppedUrls (var urls)
+
+    DropArea {
+        id: dropArea
+        anchors.fill: parent
+        onDropped: if(drop.hasUrls) {
+            droppedUrls(drop.urls)
+        }
+    }
+
     Rectangle {
         id: scene
         anchors.fill: parent
