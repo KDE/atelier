@@ -233,15 +233,16 @@ void MainWindow::setupActions()
 
 void MainWindow::openActionTriggered()
 {
-    QUrl fileName = QFileDialog::getOpenFileUrl(
+    QList<QUrl> fileList = QFileDialog::getOpenFileUrls(
                         this
                         , i18n("Open GCode")
                         , QUrl::fromLocalFile(QDir::homePath())
                         , i18n("GCode(*.gco *.gcode);;All Files(*.*)")
                     );
 
-    if (!fileName.isEmpty()) {
-        loadFile(fileName);
+    for (const auto &url : fileList)
+    {
+        loadFile(url);
     }
 }
 
