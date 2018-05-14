@@ -1,6 +1,7 @@
 /* Atelier KDE Printer Host for 3D Printing
     Copyright (C) <2017>
     Author: Patrick José Pereira - patrickjp@kde.org
+            Chris Rizzitello - rizzitello@kde.org
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -31,6 +32,9 @@ class Viewer3D : public QWidget
 {
     Q_OBJECT
 
+public slots:
+    void dropCatch(const QVariant &var);
+
 public:
     explicit Viewer3D(QWidget *parent = nullptr);
     ~Viewer3D() override;
@@ -40,4 +44,7 @@ private:
     LineMesh *_lineMesh;
     QQmlApplicationEngine _engine;
     QQuickView *_view;
+
+signals:
+    void droppedUrls(QList<QUrl> fileList);
 };

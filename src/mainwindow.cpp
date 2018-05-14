@@ -43,9 +43,9 @@ MainWindow::MainWindow(QWidget *parent) :
     setAcceptDrops(true);
 
     connect(m_instances, &QTabWidget::tabCloseRequested, [this](int index) {
-        auto tempWidget= qobject_cast<AtCoreInstanceWidget*>(m_instances->widget(index));
-        if(tempWidget->isPrinting()) {
-            if(askToClose()) {
+        auto tempWidget = qobject_cast<AtCoreInstanceWidget *>(m_instances->widget(index));
+        if (tempWidget->isPrinting()) {
+            if (askToClose()) {
                 delete tempWidget;
             } else {
                 return;
@@ -88,16 +88,19 @@ void MainWindow::dragEnterEvent(QDragEnterEvent *event)
 void MainWindow::dropEvent(QDropEvent *event)
 {
     const QMimeData *mimeData = event->mimeData();
-    if(mimeData->hasUrls())
-    {
-        for(const auto& url : mimeData->urls())
-        {
-            //Loop thru the urls and only load ones ending our "supported" formats
-            QString ext = url.toLocalFile().split('.').last();
-            if(ext.contains("gcode", Qt::CaseInsensitive)
-             || ext.contains("gco", Qt::CaseInsensitive)) {
-                loadFile(url);
-            }
+    if (mimeData->hasUrls()) {
+        processDropEvent(mimeData->urls());
+    }
+}
+
+void MainWindow::processDropEvent(const QList<QUrl> &fileList)
+{
+    for (const auto &url : fileList) {
+        //Loop thru the urls and only load ones ending our "supported" formats
+        QString ext = url.toLocalFile().split('.').last();
+        if (ext.contains("gcode", Qt::CaseInsensitive)
+                || ext.contains("gco", Qt::CaseInsensitive)) {
+            loadFile(url);
         }
     }
 }
@@ -210,7 +213,11 @@ void MainWindow::setupLateralArea()
 
     m_gcodeEditor = new GCodeEditorWidget(this);
     connect(m_gcodeEditor, &GCodeEditorWidget::updateClientFactory, this, &MainWindow::updateClientFactory);
-    setupButton("3d", i18n("&3D"), QIcon::fromTheme("draw-cuboid", QIcon(QString(":/%1/3d").arg(m_theme))), new Viewer3D(this));
+
+    auto *viewer3D = new Viewer3D(this);
+    connect(viewer3D, &Viewer3D::droppedUrls, this, &MainWindow::processDropEvent);
+
+    setupButton("3d", i18n("&3D"), QIcon::fromTheme("draw-cuboid", QIcon(QString(":/%1/3d").arg(m_theme))), viewer3D);
     setupButton("gcode", i18n("&GCode"), QIcon::fromTheme("accessories-text-editor", QIcon(":/icon/edit")), m_gcodeEditor);
     setupButton("video", i18n("&Video"), QIcon::fromTheme("camera-web", QIcon(":/icon/video")), new VideoMonitorWidget(this));
     buttonLayout->addStretch();
@@ -258,14 +265,12 @@ void MainWindow::setupActions()
 void MainWindow::openActionTriggered()
 {
     QList<QUrl> fileList = QFileDialog::getOpenFileUrls(
-                        this
-                        , i18n("Open GCode")
-                        , QUrl::fromLocalFile(QDir::homePath())
-                        , i18n("GCode(*.gco *.gcode);;All Files(*.*)")
-                    );
-
-    for (const auto &url : fileList)
-    {
+                               this
+                               , i18n("Open GCode")
+                               , QUrl::fromLocalFile(QDir::homePath())
+                               , i18n("GCode(*.gco *.gcode);;All Files(*.*)")
+                           );
+    for (const auto &url : fileList) {
         loadFile(url);
     }
 }

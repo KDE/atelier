@@ -65,9 +65,10 @@ private:
     void atCoreInstanceNameChange(const QString &name);
     QString getTheme();
     void initWidgets();
-    void newAtCoreInstance();
-    void openActionTriggered();
     void loadFile(const QUrl &fileName);
+    void newAtCoreInstance();
+    void openActionTriggered();;
+    void processDropEvent(const QList<QUrl> &fileList);
     void setupActions();
     void setupLateralArea();
     void toggleGCodeActions();
