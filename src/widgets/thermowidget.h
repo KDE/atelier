@@ -2,7 +2,7 @@
     Copyright (C) <2018>
     Author: Tomaz Canabrava - tcanabrava@kde.org
             Chris Rizzitello - rizzitello@kde.org
-            Lays Rodrigues - laysrodriguessilva@gmail.com
+            Lays Rodrigues - lays.rodrigues@kde.org
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -53,10 +53,8 @@ protected:
 private:
     QwtDialSimpleNeedle *m_currentTemperatureNeedle;
     QwtDialSimpleNeedle *m_targetTemperatureNeedle;
-
     QString m_currentTemperatureTextFromEditor = QString("-");
     QString m_name;
-
     QTimer *m_cursorTimer = nullptr;
     bool m_paintCursor = false;
     int m_cursorPos = 0;

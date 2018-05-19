@@ -2,7 +2,7 @@
     Copyright (C) <2018>
     Author: Tomaz Canabrava - tcanabrava@kde.org
             Chris Rizzitello - rizzitello@kde.org
-            Lays Rodrigues - laysrodriguessilva@gmail.com
+            Lays Rodrigues - lays.rodrigues@kde.org
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -25,14 +25,14 @@
 #include <QPen>
 #include <QTimer>
 #include <QWheelEvent>
-
 #include "thermowidget.h"
 
-ThermoWidget::ThermoWidget(QWidget *parent, QString name) : QwtDial(parent),
-    m_targetTemperatureNeedle(new QwtDialSimpleNeedle(QwtDialSimpleNeedle::Arrow, Qt::red, Qt::darkRed)),
-    m_name(name),
-    m_currentTemperature(0),
-    m_targetTemperature(0)
+ThermoWidget::ThermoWidget(QWidget *parent, QString name) :
+    QwtDial(parent)
+    , m_targetTemperatureNeedle(new QwtDialSimpleNeedle(QwtDialSimpleNeedle::Arrow, Qt::red, Qt::darkRed))
+    , m_name(name)
+    , m_currentTemperature(0)
+    , m_targetTemperature(0)
 {
     setScaleArc(40, 320);
     //make our current temperature needle here so we can set it to match text color.
@@ -195,7 +195,6 @@ void ThermoWidget::paintEvent(QPaintEvent *event)
     const double nameWidth = fm.width(m_name);
     const double wWidth = fm.width('W');
     const double cursorWidth = fm.width('0');
-
     const double height = fm.height();
     const double halfWidth = geometry().width() / 2;
     const double xposTarget = halfWidth - (targetWidth / 2);
@@ -205,7 +204,6 @@ void ThermoWidget::paintEvent(QPaintEvent *event)
     double ypos = geometry().height() / 2 + height * 2;
     QPainter p(this);
     QColor color = palette().color(QPalette::Text);
-
     //draw a box to put our target into as a user hint.
     p.fillRect(QRect(halfWidth - wWidth, ypos - (height * 0.66), wWidth * 2, (height * 0.9)), palette().color(QPalette::AlternateBase));
 
@@ -234,13 +232,11 @@ void ThermoWidget::paintEvent(QPaintEvent *event)
 void ThermoWidget::drawNeedle(QPainter *painter, const QPointF &center, double radius, double dir, QPalette::ColorGroup colorGroup) const
 {
     Q_UNUSED(dir);
-
     const double relativePercent = upperBound() - lowerBound();
     const double currentTemperaturePercent = (m_currentTemperature - lowerBound()) / relativePercent;
     const double targetTemperaturePercent = (m_targetTemperature - lowerBound()) / relativePercent;
     const double currentTemperatureAngle = (maxScaleArc() - minScaleArc()) * currentTemperaturePercent + minScaleArc();
     const double targetTemperatureAngle = (maxScaleArc() - minScaleArc()) * targetTemperaturePercent + minScaleArc();
-
     // Qt coordinates and Qwt coordinates differ.
     // the "begin" of our coordinates in Qt: -130
     // the "span" of our coordinates in Qt: -180
@@ -278,5 +274,4 @@ void ThermoWidget::setTargetTemperature(double temperature)
         emit targetTemperatureChanged(m_targetTemperature);
         update();
     }
-
 }
