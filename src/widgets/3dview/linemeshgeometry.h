@@ -18,20 +18,19 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 #pragma once
 
-#include <Qt3DRender/QAttribute>
+#include <QAttribute>
+#include <QGeometry>
 #include <Qt3DRender/QBuffer>
-#include <Qt3DRender/QGeometry>
 
 class LineMeshGeometry : public Qt3DRender::QGeometry
 {
     Q_OBJECT
+
 public:
     LineMeshGeometry(const QList<QVector4D> &vertices, Qt3DCore::QNode *parent = Q_NULLPTR);
     ~LineMeshGeometry();
-
     int vertexCount();
 
 private:

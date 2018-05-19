@@ -18,14 +18,12 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 #pragma once
 
 #include <QList>
 #include <QObject>
-#include <Qt3DCore/QNode>
-#include <Qt3DRender/QGeometryRenderer>
-
+#include <QNode>
+#include <QGeometryRenderer>
 #include "gcodeto4d.h"
 
 class LineMeshGeometry;
@@ -35,11 +33,12 @@ class QVector4D;
 class LineMesh : public Qt3DRender::QGeometryRenderer
 {
     Q_OBJECT
+
 public:
     explicit LineMesh(Qt3DCore::QNode *parent = Q_NULLPTR);
     ~LineMesh();
-    Q_INVOKABLE void readAndRun(const QString &path);
     void read(const QString &path);
+    Q_INVOKABLE void readAndRun(const QString &path);
     void posUpdate(const QList<QVector4D> &pos);
 
 signals:
@@ -47,7 +46,7 @@ signals:
     void run(const QString &path);
 
 private:
-    QList<QVector4D> _vertices;
-    LineMeshGeometry *_lineMeshGeo;
     GcodeTo4D _gcode;
+    LineMeshGeometry *_lineMeshGeo;
+    QList<QVector4D> _vertices;
 };

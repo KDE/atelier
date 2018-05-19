@@ -18,16 +18,16 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 #pragma once
 
 #include <QObject>
-#include <Qt3DCore/QNode>
-#include <Qt3DRender/QGeometryRenderer>
+#include <QNode>
+#include <QGeometryRenderer>
 
 class GridMesh : public Qt3DRender::QGeometryRenderer
 {
     Q_OBJECT
+
 public:
     explicit GridMesh(Qt3DCore::QNode *parent = nullptr);
     ~GridMesh();

@@ -18,24 +18,21 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
-#include "linemesh.h"
+#include <QDebug>
+#include <QDirIterator>
+#include <QHBoxLayout>
+#include <QObject>
+#include <QString>
+#include <QQmlContext>
+#include <QQmlEngine>
+#include <QQuickItem>
+#include <QQuickView>
 #include "gridmesh.h"
 #include "viewer3d.h"
+#include "linemesh.h"
 
-#include <QHBoxLayout>
-#include <QQmlEngine>
-#include <QString>
-#include <QtQuick/QQuickView>
-
-#include <QObject>
-#include <QDirIterator>
-#include <QDebug>
-#include <QQmlContext>
-#include <QQuickItem>
-
-Viewer3D::Viewer3D(QWidget *parent)
-    : QWidget(parent)
+Viewer3D::Viewer3D(QWidget *parent) :
+    QWidget(parent)
     , _lineMesh(new LineMesh)
 {
     Q_INIT_RESOURCE(viewer3d);
@@ -56,14 +53,13 @@ Viewer3D::Viewer3D(QWidget *parent)
     this->setLayout(mainLayout);
 }
 
+Viewer3D::~Viewer3D()
+{
+}
+
 void Viewer3D::drawModel(QString file)
 {
-
     QObject *object = _view->rootObject();
     QObject *fileName = object->findChild<QObject *>(QStringLiteral("fileName"));
     fileName->setProperty("text", QVariant(file));
-}
-
-Viewer3D::~Viewer3D()
-{
 }

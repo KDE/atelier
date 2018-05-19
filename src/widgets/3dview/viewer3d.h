@@ -18,12 +18,11 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 #pragma once
 
-#include <QtQuick/QQuickView>
-#include <QWidget>
+#include <QQuickView>
 #include <QQmlApplicationEngine>
+#include <QWidget>
 
 class LineMesh;
 class QString;
@@ -35,10 +34,10 @@ class Viewer3D : public QWidget
 public:
     explicit Viewer3D(QWidget *parent = nullptr);
     ~Viewer3D() override;
-
     void drawModel(QString file);
+
 private:
-    QQuickView *_view;
     LineMesh *_lineMesh;
     QQmlApplicationEngine _engine;
+    QQuickView *_view;
 };

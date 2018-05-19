@@ -18,12 +18,10 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
-#include "linemeshgeometry.h"
-
 #include <QList>
 #include <QVector3D>
 #include <QVector4D>
+#include "linemeshgeometry.h"
 
 LineMeshGeometry::LineMeshGeometry(const QList<QVector4D> &vertices, Qt3DCore::QNode *parent) :
     Qt3DRender::QGeometry(parent)
@@ -52,11 +50,11 @@ LineMeshGeometry::LineMeshGeometry(const QList<QVector4D> &vertices, Qt3DCore::Q
     addAttribute(_positionAttribute);
 }
 
+LineMeshGeometry::~LineMeshGeometry()
+{
+}
+
 int LineMeshGeometry::vertexCount()
 {
     return _vertices.size();
-}
-
-LineMeshGeometry::~LineMeshGeometry()
-{
 }
