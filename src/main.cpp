@@ -1,6 +1,7 @@
 /* Atelier KDE Printer Host for 3D Printing
     Copyright (C) <2016>
-    Author: Lays Rodrigues - laysrodrigues@gmail.com
+    Author: Lays Rodrigues - lays.rodrigues@kde.org
+            Chris Rizzitello - rizzitello@kde.org
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -15,12 +16,12 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include <QApplication>
+#include <atcore_version.h>
 #include <KAboutData>
 #include <KLocalizedString>
-#include <AtCore/atcore_version.h>
-#include "mainwindow.h"
+#include <QApplication>
 #include "config.h"
+#include "mainwindow.h"
 
 int main(int argc, char *argv[])
 {
