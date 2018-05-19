@@ -1,6 +1,6 @@
 /* Atelier KDE Printer Host for 3D Printing
     Copyright (C) <2016>
-    Author: Lays Rodrigues - laysrodrigues@gmail.com
+    Author: Lays Rodrigues - lays.rodrigues@kde.org
             Chris Rizzitello - rizzitello@kde.org
 
     This program is free software: you can redistribute it and/or modify
@@ -16,26 +16,26 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "mainwindow.h"
-#include <dialogs/profilesdialog.h>
-#include <dialogs/choosefiledialog.h>
+#include <KActionCollection>
 #include <KLocalizedString>
 #include <KStandardAction>
-#include <KActionCollection>
 #include <KXMLGUIFactory>
 #include <memory>
 #include <QFileDialog>
 #include <QHBoxLayout>
 #include <QSplitter>
 #include <QToolButton>
-#include <widgets/3dview/viewer3d.h>
-#include <widgets/atcoreinstancewidget.h>
-#include <widgets/videomonitorwidget.h>
+#include "dialogs/choosefiledialog.h"
+#include "dialogs/profilesdialog.h"
+#include "mainwindow.h"
+#include "widgets/3dview/viewer3d.h"
+#include "widgets/atcoreinstancewidget.h"
+#include "widgets/videomonitorwidget.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     KXmlGuiWindow(parent)
-    , m_theme(getTheme())
     , m_currEditorView(nullptr)
+    , m_theme(getTheme())
     , m_instances(new QTabWidget(this))
 {
     initWidgets();
@@ -57,6 +57,7 @@ MainWindow::MainWindow(QWidget *parent) :
         }
     });
 }
+
 void MainWindow::closeEvent(QCloseEvent *event)
 {
     bool closePrompt = false;
@@ -79,14 +80,11 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::initWidgets()
 {
-
     setupLateralArea();
     newAtCoreInstance();
-
     // View:
-    // Sidebar, Sidevar Controls, Printer Tabs.
-    // Sidevar Controls and Printer Tabs can be resized, Sidebar cant.
-    auto *centralLayout = new QHBoxLayout();
+    // Sidebar, Sidebar Controls, Printer Tabs.
+    // Sidebar Controls and Printer Tabs can be resized, Sidebar can't.
     auto splitter = new QSplitter();
     splitter->addWidget(m_lateral.m_stack);
     splitter->addWidget(m_instances);
@@ -98,8 +96,10 @@ void MainWindow::initWidgets()
     connect(addTabBtn, &QToolButton::clicked, this, &MainWindow::newAtCoreInstance);
     m_instances->setCornerWidget(addTabBtn, Qt::TopLeftCorner);
 
+    auto *centralLayout = new QHBoxLayout();
     centralLayout->addWidget(m_lateral.m_toolBar);
     centralLayout->addWidget(splitter);
+
     auto *centralWidget = new QWidget();
     centralWidget->setLayout(centralLayout);
     setCentralWidget(centralWidget);
@@ -112,13 +112,13 @@ void MainWindow::newAtCoreInstance()
     newInstanceWidget->setObjectName(name);
     newInstanceWidget->setFileCount(m_openFiles.size());
     connect(this, &MainWindow::profilesChanged, newInstanceWidget, &AtCoreInstanceWidget::updateProfileData);
-    connect(newInstanceWidget, &AtCoreInstanceWidget::requestProfileDialog, [ this ] {
+    connect(newInstanceWidget, &AtCoreInstanceWidget::requestProfileDialog, [this] {
         std::unique_ptr<ProfilesDialog> pd(new ProfilesDialog);
         pd->exec();
         emit(profilesChanged());
     });
 
-    connect(newInstanceWidget, &AtCoreInstanceWidget::requestFileChooser, [ newInstanceWidget, this ] {
+    connect(newInstanceWidget, &AtCoreInstanceWidget::requestFileChooser, [newInstanceWidget, this] {
         switch (m_openFiles.size())
         {
         case 0:
@@ -186,7 +186,7 @@ void MainWindow::setupLateralArea()
 
     m_gcodeEditor = new GCodeEditorWidget(this);
     connect(m_gcodeEditor, &GCodeEditorWidget::updateClientFactory, this, &MainWindow::updateClientFactory);
-    setupButton("3d",    i18n("&3D"), QIcon::fromTheme("draw-cuboid", QIcon(QString(":/%1/3d").arg(m_theme))), new Viewer3D(this));
+    setupButton("3d", i18n("&3D"), QIcon::fromTheme("draw-cuboid", QIcon(QString(":/%1/3d").arg(m_theme))), new Viewer3D(this));
     setupButton("gcode", i18n("&GCode"), QIcon::fromTheme("accessories-text-editor", QIcon(":/icon/edit")), m_gcodeEditor);
     setupButton("video", i18n("&Video"), QIcon::fromTheme("camera-web", QIcon(":/icon/video")), new VideoMonitorWidget(this));
     buttonLayout->addStretch();
@@ -233,8 +233,12 @@ void MainWindow::setupActions()
 
 void MainWindow::openFile()
 {
-    QUrl fileName = QFileDialog::getOpenFileUrl(this, i18n("Open GCode"),
-                    QUrl::fromLocalFile(QDir::homePath()), i18n("GCode(*.gco *.gcode);;All Files(*.*)"));
+    QUrl fileName = QFileDialog::getOpenFileUrl(
+                        this
+                        , i18n("Open GCode")
+                        , QUrl::fromLocalFile(QDir::homePath())
+                        , i18n("GCode(*.gco *.gcode);;All Files(*.*)")
+                    );
 
     if (!fileName.isEmpty()) {
 
@@ -265,10 +269,14 @@ QString MainWindow::getTheme()
 bool MainWindow::askToClose()
 {
     bool rtn = false;
-    int result = QMessageBox::question(this,
-                                       i18n("Printing"),
-                                       i18n("Currently printing! \nAre you sure you want to close?"),
-                                       QMessageBox::Close, QMessageBox::Cancel);
+    int result = QMessageBox::question(
+                     this
+                     , i18n("Printing")
+                     , i18n("Currently printing! \nAre you sure you want to close?")
+                     , QMessageBox::Close
+                     , QMessageBox::Cancel
+                 );
+
     switch (result) {
     case QMessageBox::Close:
         rtn = true;

@@ -1,6 +1,7 @@
 /* Atelier KDE Printer Host for 3D Printing
     Copyright (C) <2016>
-    Author: Lays Rodrigues - laysrodrigues@gmail.com
+    Author: Lays Rodrigues - lays.rodrigues@kde.org
+            Chris Rizzitello - rizzitello@kde.org
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -24,7 +25,7 @@
 #include <QPushButton>
 #include <QStackedWidget>
 #include <QUrl>
-#include <widgets/gcodeeditorwidget.h>
+#include "widgets/gcodeeditorwidget.h"
 
 struct LateralArea {
     // Area with the the lateral buttons that will open the views.
@@ -52,22 +53,22 @@ protected:
     void closeEvent(QCloseEvent *event);
 
 private:
-    QList<QUrl> m_openFiles;
-    QString m_theme;
+    GCodeEditorWidget *m_gcodeEditor;
     KTextEditor::View *m_currEditorView;
     LateralArea m_lateral;
-    GCodeEditorWidget *m_gcodeEditor;
+    QList<QUrl> m_openFiles;
+    QString m_theme;
     QTabWidget *m_instances;
-    void setupLateralArea();
-    void newAtCoreInstance();
-    void initWidgets();
-    void setupActions();
-    void openFile();
     bool askToClose();
-    void updateClientFactory(KTextEditor::View *view);
     void atCoreInstanceNameChange(const QString &name);
     QString getTheme();
+    void initWidgets();
+    void newAtCoreInstance();
+    void openFile();
+    void setupActions();
+    void setupLateralArea();
     void toggleGCodeActions();
+    void updateClientFactory(KTextEditor::View *view);
 
 signals:
     void extruderCountChanged(int count);
