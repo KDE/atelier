@@ -1,6 +1,6 @@
 /* Atelier KDE Printer Host for 3D Printing
     Copyright (C) <2017>
-    Author: Patrick José Pereira - patrickelectric@gmail.com
+    Author: Patrick José Pereira - patrickjp@kde.org
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -18,16 +18,16 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 #pragma once
 
 #include <QObject>
-#include <Qt3DCore/QNode>
-#include <Qt3DRender/QGeometryRenderer>
+#include <QNode>
+#include <QGeometryRenderer>
 
 class GridMesh : public Qt3DRender::QGeometryRenderer
 {
     Q_OBJECT
+
 public:
     explicit GridMesh(Qt3DCore::QNode *parent = nullptr);
     ~GridMesh();

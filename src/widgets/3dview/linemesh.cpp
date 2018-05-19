@@ -1,6 +1,6 @@
 /* Atelier KDE Printer Host for 3D Printing
     Copyright (C) <2017>
-    Author: Patrick José Pereira - patrickelectric@gmail.com
+    Author: Patrick José Pereira - patrickjp@kde.org
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -18,17 +18,15 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
+#include <QGeometryRenderer>
+#include <QVector3D>
+#include <QVector4D>
 #include "gcodeto4d.h"
 #include "linemesh.h"
 #include "linemeshgeometry.h"
 
-#include <QVector3D>
-#include <QVector4D>
-#include <Qt3DRender/QGeometryRenderer>
-
-LineMesh::LineMesh(Qt3DCore::QNode *parent)
-    : Qt3DRender::QGeometryRenderer(parent)
+LineMesh::LineMesh(Qt3DCore::QNode *parent) :
+    Qt3DRender::QGeometryRenderer(parent)
     , _lineMeshGeo(nullptr)
 {
     setInstanceCount(1);
@@ -36,8 +34,12 @@ LineMesh::LineMesh(Qt3DCore::QNode *parent)
     setFirstInstance(0);
     setPrimitiveType(Qt3DRender::QGeometryRenderer::LineStrip);
 
-    qRegisterMetaType<QList<QVector4D> >("QList<QVector4D>");
+    qRegisterMetaType<QList<QVector4D>>("QList<QVector4D>");
     connect(&_gcode, &GcodeTo4D::posFinished, this, &LineMesh::posUpdate);
+}
+
+LineMesh::~LineMesh()
+{
 }
 
 void LineMesh::readAndRun(const QString &path)
@@ -57,8 +59,4 @@ void LineMesh::posUpdate(const QList<QVector4D> &pos)
     setVertexCount(_lineMeshGeo->vertexCount());
     setGeometry(_lineMeshGeo);
     emit finished();
-}
-
-LineMesh::~LineMesh()
-{
 }

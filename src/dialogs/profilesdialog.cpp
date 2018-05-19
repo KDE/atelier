@@ -1,6 +1,6 @@
 /* Atelier KDE Printer Host for 3D Printing
     Copyright (C) <2016>
-    Author: Lays Rodrigues - laysrodrigues@gmail.com
+    Author: Lays Rodrigues - lays.rodrigues@kde.org
             Chris Rizzitello - rizzitello@kde.org
 
     This program is free software: you can redistribute it and/or modify
@@ -16,22 +16,22 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "profilesdialog.h"
-#include "ui_profilesdialog.h"
-#include <QMessageBox>
 #include <KLocalizedString>
 #include <QDir>
+#include <QMessageBox>
+#include "profilesdialog.h"
+#include "ui_profilesdialog.h"
 
 //Do not include for windows/mac os
 #ifndef Q_OS_WIN
-    #ifndef Q_OS_MAC
-        #include <AtCore/atcore_default_folders.h>
-    #endif
+#ifndef Q_OS_MAC
+#include <atcore_default_folders.h>
+#endif
 #endif
 
 ProfilesDialog::ProfilesDialog(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::ProfilesDialog)
+    QDialog(parent)
+    , ui(new Ui::ProfilesDialog)
 {
     ui->setupUi(this);
     ui->firmwareCB->addItem(QStringLiteral("Auto-Detect"));
@@ -39,34 +39,34 @@ ProfilesDialog::ProfilesDialog(QWidget *parent) :
     ui->baudCB->addItems(SERIAL::BAUDS);
     ui->baudCB->setCurrentText(QLatin1String("115200"));
     ui->profileCB->setAutoCompletion(true);
-    connect(ui->profileCB, static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged), [ this ] {
+    connect(ui->profileCB, static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged), [this] {
         loadSettings();
     });
     updateCBProfiles();
 
-    connect(ui->buttonBox, &QDialogButtonBox::clicked, [ this ](QAbstractButton * btn) {
+    connect(ui->buttonBox, &QDialogButtonBox::clicked, [this](QAbstractButton * btn) {
         switch (ui->buttonBox->buttonRole(btn)) {
         case QDialogButtonBox::ResetRole:
             loadSettings();
             break;
         case QDialogButtonBox::RejectRole:
-                close();
+            close();
             break;
         default:
             break;
         }
     });
 
-    connect(ui->heatedBedCK, &QCheckBox::clicked, [ this ](const bool & status) {
+    connect(ui->heatedBedCK, &QCheckBox::clicked, [this](const bool & status) {
         ui->bedTempSB->setEnabled(status);
     });
 
-    connect(ui->cartesianRB, &QRadioButton::clicked, [ this ]() {
+    connect(ui->cartesianRB, &QRadioButton::clicked, [this] {
         ui->cartesianGB->setHidden(false);
         ui->deltaGB->setHidden(true);
     });
 
-    connect(ui->deltaRB, &QRadioButton::clicked, [ this ]() {
+    connect(ui->deltaRB, &QRadioButton::clicked, [this] {
         ui->cartesianGB->setHidden(true);
         ui->deltaGB->setHidden(false);
     });
@@ -91,9 +91,14 @@ void ProfilesDialog::saveSettings()
     settings.endGroup();
     QString currentProfile = ui->profileCB->currentText();
     if (groups.contains(currentProfile)) {
-        int ret = QMessageBox::information(this, i18n("Save?"),
-                                           i18n("A profile with this name already exists. \n Are you sure you want to overwrite it?"),
-                                           QMessageBox::Save, QMessageBox::Cancel);
+        int ret = QMessageBox::information(
+                      this
+                      , i18n("Save?")
+                      , i18n("A profile with this name already exists. \n Are you sure you want to overwrite it?")
+                      , QMessageBox::Save
+                      , QMessageBox::Cancel
+                  );
+
         if (ret == QMessageBox::Cancel) {
             return;
         }
@@ -107,8 +112,7 @@ void ProfilesDialog::saveSettings()
         settings.setValue(QStringLiteral("dimensionX"), ui->x_dimensionSB->value());
         settings.setValue(QStringLiteral("dimensionY"), ui->y_dimensionSB->value());
         settings.setValue(QStringLiteral("dimensionZ"), ui->z_dimensionSB->value());
-    }
-    else {
+    } else {
         settings.setValue(QStringLiteral("isCartesian"), false);
         settings.setValue(QStringLiteral("radius"), ui->radiusSB->value());
         settings.setValue(QStringLiteral("z_delta_dimension"), ui->z_dimensionSB->value());
@@ -120,7 +124,7 @@ void ProfilesDialog::saveSettings()
     settings.setValue(QStringLiteral("maximumTemperatureExtruder"), ui->extruderTempSB->value());
     //Baud
     settings.setValue(QStringLiteral("bps"), ui->baudCB->currentText());
-    settings.setValue(QStringLiteral("firmware"),ui->firmwareCB->currentText());
+    settings.setValue(QStringLiteral("firmware"), ui->firmwareCB->currentText());
     settings.setValue(QStringLiteral("postPause"), ui->postPauseLE->text());
     settings.endGroup();
     settings.endGroup();
@@ -165,7 +169,7 @@ void ProfilesDialog::loadSettings(const QString &currentProfile)
     //Baud
     ui->baudCB->setCurrentText(settings.value(QStringLiteral("bps"), QStringLiteral("115200")).toString());
     ui->firmwareCB->setCurrentText(settings.value(QStringLiteral("firmware"), QStringLiteral("Auto-Detect")).toString());
-    ui->postPauseLE->setText(settings.value(QStringLiteral("postPause"),QStringLiteral("")).toString());
+    ui->postPauseLE->setText(settings.value(QStringLiteral("postPause"), QStringLiteral("")).toString());
     settings.endGroup();
     settings.endGroup();
 
@@ -188,7 +192,8 @@ void ProfilesDialog::accept()
     saveSettings();
 }
 
-void ProfilesDialog::removeProfile(){
+void ProfilesDialog::removeProfile()
+{
     QString currentProfile = ui->profileCB->currentText();
     settings.beginGroup(QStringLiteral("GeneralSettings"));
     settings.beginGroup(currentProfile);
@@ -228,7 +233,7 @@ QStringList ProfilesDialog::detectFWPlugins() const
     QStringList files = pluginDir.entryList(QDir::Files);
     foreach (const QString &f, files) {
         QString file = f;
-            file = file.split(QChar::fromLatin1('.')).at(0);
+        file = file.split(QChar::fromLatin1('.')).at(0);
         if (file.startsWith(QStringLiteral("lib"))) {
             file = file.remove(QStringLiteral("lib"));
         }

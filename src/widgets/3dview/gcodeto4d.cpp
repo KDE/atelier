@@ -1,6 +1,6 @@
 /* Atelier KDE Printer Host for 3D Printing
     Copyright (C) <2017>
-    Author: Patrick José Pereira - patrickelectric@gmail.com
+    Author: Patrick José Pereira - patrickjp@kde.org
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -18,18 +18,19 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
-#include "gcodeto4d.h"
-#include "fileloader.h"
-
 #include <QFile>
 #include <QThread>
 #include <QUrl>
 #include <QVector4D>
 #include <QVariant>
+#include "fileloader.h"
+#include "gcodeto4d.h"
 
-GcodeTo4D::GcodeTo4D(QObject *parent) :
-    QObject(parent)
+GcodeTo4D::GcodeTo4D(QObject *parent) : QObject(parent)
+{
+}
+
+GcodeTo4D::~GcodeTo4D()
 {
 }
 
@@ -47,6 +48,3 @@ void GcodeTo4D::read(const QString &url)
     _thread->start();
 }
 
-GcodeTo4D::~GcodeTo4D()
-{
-}

@@ -1,6 +1,6 @@
 /* Atelier KDE Printer Host for 3D Printing
     Copyright (C) <2016>
-    Author: Lays Rodrigues - laysrodriguessilva@gmail.com
+    Author: Lays Rodrigues - lays.rodrigues@kde.org
             Tomaz Canabraza - tcanabrava@kde.org
             Chris Rizzitello - rizzitello@kde.org
 
@@ -24,41 +24,38 @@
 #include "bedextruderwidget.h"
 #include "thermowidget.h"
 
-
 BedExtruderWidget::BedExtruderWidget(QWidget *parent) :
-    QWidget(parent),
-    m_bedThermo(new ThermoWidget(this, QString(i18n("Bed")))),
-    m_extruderThermo(new ThermoWidget(this, QString(i18n("HotEnd")))),
-    m_extruderBox(new QWidget(this)),
-    m_extrudersLayout(new QHBoxLayout)
+    QWidget(parent)
+    , m_bedThermo(new ThermoWidget(this, QString(i18n("Bed"))))
+    , m_extruderThermo(new ThermoWidget(this, QString(i18n("HotEnd"))))
+    , m_extrudersLayout(new QHBoxLayout)
+    , m_extruderBox(new QWidget(this))
 {
     m_bedThermo->setScale(0, 150);
     m_extruderThermo->setScale(0, 250);
     m_extruderBox->setLayout(m_extrudersLayout);
 
-    auto *layout = new QGridLayout;
-
     auto *label = new QLabel(i18n("Active Extruder:"));
     m_extrudersLayout->addWidget(label);
 
+    auto *layout = new QGridLayout;
     layout->addWidget(m_extruderBox, 0, 0, 1, -1);
     layout->addWidget(m_bedThermo, 1, 0);
     layout->addWidget(m_extruderThermo, 1, 1);
 
     setLayout(layout);
-
     //Add Default Extruder
     setExtruderCount(1);
 
     connect(m_bedThermo, &ThermoWidget::targetTemperatureChanged, [this](double v) {
-         qDebug() << "Receiving the temperature change for bed";
-         emit bedTemperatureChanged((int)v, false);
-     });
+        qDebug() << "Receiving the temperature change for bed";
+        emit bedTemperatureChanged((int)v, false);
+    });
 
-     connect(m_extruderThermo, &ThermoWidget::targetTemperatureChanged, [this](double v) {
-         qDebug() << "Receiving the temperature changed for thermo";
-         emit extTemperatureChanged((int)v, currentExtruder(), false);
-     });
+    connect(m_extruderThermo, &ThermoWidget::targetTemperatureChanged, [this](double v) {
+        qDebug() << "Receiving the temperature changed for thermo";
+        emit extTemperatureChanged((int)v, currentExtruder(), false);
+    });
 }
 
 void BedExtruderWidget::setExtruderCount(int value)

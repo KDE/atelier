@@ -1,6 +1,6 @@
 /* Atelier KDE Printer Host for 3D Printing
     Copyright (C) <2017>
-    Author: Patrick José Pereira - patrickelectric@gmail.com
+    Author: Patrick José Pereira - patrickjp@kde.org
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -18,30 +18,31 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
-#include "fileloader.h"
-
 #include <QList>
 #include <QString>
 #include <QTextStream>
 #include <QVariant>
 #include <QVector4D>
+#include "fileloader.h"
 
 namespace
 {
 const static QString _commentChar = QStringLiteral(";");
 const static QStringList _moveCommands = {QStringLiteral("G0"), QStringLiteral("G1")};
 const static QString _space = QStringLiteral(" ");
-
 const static QString _E = QStringLiteral("E");
 const static QString _X = QStringLiteral("X");
 const static QString _Y = QStringLiteral("Y");
 const static QString _Z = QStringLiteral("Z");
-};
+}
 
-FileLoader::FileLoader(QString &fileName, QObject *parent)
-    : QObject(parent)
+FileLoader::FileLoader(QString &fileName, QObject *parent) :
+    QObject(parent)
     , _file(fileName)
+{
+}
+
+FileLoader::~FileLoader()
 {
 }
 
@@ -124,8 +125,4 @@ void FileLoader::run()
         emit percentUpdate(100);
         emit posFinished(pos);
     }
-};
-
-FileLoader::~FileLoader()
-{
-};
+}

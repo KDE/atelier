@@ -1,6 +1,6 @@
 /* Atelier KDE Printer Host for 3D Printing
     Copyright (C) <2016>
-    Author: Lays Rodrigues - laysrodrigues@gmail.com
+    Author: Lays Rodrigues - lays.rodrigues@kde.org
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -15,14 +15,14 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "gcodeeditorwidget.h"
-#include <QVBoxLayout>
-#include <QLabel>
 #include <KLocalizedString>
+#include <QLabel>
+#include <QVBoxLayout>
+#include "gcodeeditorwidget.h"
 
 GCodeEditorWidget::GCodeEditorWidget(QWidget *parent) :
-    QWidget(parent),
-    m_tabwidget(new QTabWidget())
+    QWidget(parent)
+    , m_tabwidget(new QTabWidget())
 {
     m_editor = KTextEditor::Editor::instance();
     setupTabWidget();
@@ -30,6 +30,7 @@ GCodeEditorWidget::GCodeEditorWidget(QWidget *parent) :
     layout->addWidget(m_tabwidget);
     setLayout(layout);
 }
+
 void GCodeEditorWidget::setupTabWidget()
 {
     connect(m_tabwidget, &QTabWidget::tabCloseRequested, this, &GCodeEditorWidget::closeTab);
@@ -38,13 +39,15 @@ void GCodeEditorWidget::setupTabWidget()
     m_tabwidget->addTab(newView(newDoc()), i18n("New file"));
 }
 
-KTextEditor::View* GCodeEditorWidget::gcodeView() const{
-    return qobject_cast<KTextEditor::View*>(m_editor->documents().first()->views().first());
+KTextEditor::View *GCodeEditorWidget::gcodeView() const
+{
+    return qobject_cast<KTextEditor::View *>(m_editor->documents().first()->views().first());
 }
+
 void GCodeEditorWidget::loadFile(const QUrl &file)
 {
     auto doc = m_editor->documents().first();
-    if(!doc->isEmpty()){
+    if (!doc->isEmpty()) {
         doc = newDoc();
         int t = m_tabwidget->addTab(newView(doc), file.fileName());
         m_tabwidget->setCurrentIndex(t);
@@ -56,20 +59,21 @@ void GCodeEditorWidget::loadFile(const QUrl &file)
     doc->setHighlightingMode(QString("G-Code"));
 }
 
-void GCodeEditorWidget::setupInterface(const KTextEditor::View* view)
+void GCodeEditorWidget::setupInterface(const KTextEditor::View *view)
 {
     m_interface = qobject_cast<KTextEditor::ConfigInterface *>(view);
     m_interface->setConfigValue("line-numbers", true);
 }
 
-KTextEditor::Document* GCodeEditorWidget::newDoc()
+KTextEditor::Document *GCodeEditorWidget::newDoc()
 {
     KTextEditor::Document *doc = m_editor->createDocument(this);
     doc->setMode("G-Code");
     return doc;
 }
 
-KTextEditor::View* GCodeEditorWidget::newView(KTextEditor::Document *doc){
+KTextEditor::View *GCodeEditorWidget::newView(KTextEditor::Document *doc)
+{
     auto view = doc->createView(this);
     setupInterface(view);
     return view;
@@ -78,12 +82,14 @@ KTextEditor::View* GCodeEditorWidget::newView(KTextEditor::Document *doc){
 void GCodeEditorWidget::closeTab(int index)
 {
     m_tabwidget->removeTab(index);
-    if(!m_tabwidget->count()){
+    if (!m_tabwidget->count()) {
         m_tabwidget->addTab(newView(newDoc()), i18n("New file"));
     }
 }
 
-void GCodeEditorWidget::currentIndexChanged(int index){
-    if(index != -1)
-        emit updateClientFactory(qobject_cast<KTextEditor::View*>(m_tabwidget->currentWidget()));
+void GCodeEditorWidget::currentIndexChanged(int index)
+{
+    if (index != -1) {
+        emit updateClientFactory(qobject_cast<KTextEditor::View *>(m_tabwidget->currentWidget()));
+    }
 }

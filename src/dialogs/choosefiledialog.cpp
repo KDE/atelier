@@ -1,6 +1,6 @@
 /* Atelier KDE Printer Host for 3D Printing
     Copyright (C) <2017>
-    Author: Lays Rodrigues - laysrodriguessilva@gmail.com
+    Author: Lays Rodrigues - lays.rodrigues@kde.org
             Chris Rizzitello - rizzitello@kde.org
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -15,32 +15,33 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "choosefiledialog.h"
 #include <KLocalizedString>
 #include <QDialogButtonBox>
 #include <QLabel>
 #include <QListWidget>
 #include <QVBoxLayout>
+#include "choosefiledialog.h"
 
 ChooseFileDialog::ChooseFileDialog(QWidget *parent, QList<QUrl> files) :
     QDialog(parent)
 {
-    auto layout = new QVBoxLayout;
-    auto label = new QLabel(i18n("Choose a file to print:"));
-    auto listWigdet = new QListWidget();
     const int padding = 30;
-    listWigdet->setMinimumWidth(fontMetrics().height()/2  * padding);
-    QStringList files_list;
-    foreach(const auto &file, files){
-        files_list.append(file.toLocalFile());
+    auto listWigdet = new QListWidget();
+    listWigdet->setMinimumWidth(fontMetrics().height() / 2  * padding);
+
+    foreach (const auto &url, files) {
+        listWigdet->addItem(url.toLocalFile());
     }
-    listWigdet->addItems(files_list);
-    connect(listWigdet, &QListWidget::currentRowChanged, [ this, &files ](const int t){
+    connect(listWigdet, &QListWidget::currentRowChanged, [this, &files](const int t) {
         m_choosen_file = files.at(t);
     });
+
     auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
     connect(buttonBox, &QDialogButtonBox::accepted, this, &ChooseFileDialog::accept);
     connect(buttonBox, &QDialogButtonBox::rejected, this, &ChooseFileDialog::reject);
+
+    auto layout = new QVBoxLayout;
+    auto label = new QLabel(i18n("Choose a file to print:"));
     layout->addWidget(label);
     layout->addWidget(listWigdet);
     layout->addWidget(buttonBox);
