@@ -1,6 +1,6 @@
 /* Atelier KDE Printer Host for 3D Printing
     Copyright (C) <2016>
-    Author: Lays Rodrigues - laysrodriguessilva@gmail.com
+    Author: Lays Rodrigues - lays.rodrigues@kde.org
             Tomaz Canabraza - tcanabrava@kde.org
             Chris Rizzitello - rizzitello@kde.org
 
@@ -41,14 +41,13 @@ public:
     void updateExtTargetTemp(const float temp);
 
 private:
-    QMap <int, QRadioButton *> extruderMap;
+    int m_extruderCount = 0;
     ThermoWidget *m_bedThermo = nullptr;
     ThermoWidget *m_extruderThermo = nullptr;
-    QWidget *m_extruderBox = nullptr;
+    QMap <int, QRadioButton *> extruderMap;
     QHBoxLayout *m_extrudersLayout = nullptr;
-
+    QWidget *m_extruderBox = nullptr;
     int currentExtruder();
-    int m_extruderCount = 0;
 
 signals:
     void bedTemperatureChanged(int tmp, bool andWait);
