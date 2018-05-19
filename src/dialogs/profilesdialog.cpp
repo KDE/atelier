@@ -1,6 +1,6 @@
 /* Atelier KDE Printer Host for 3D Printing
     Copyright (C) <2016>
-    Author: Lays Rodrigues - laysrodrigues@gmail.com
+    Author: Lays Rodrigues - lays.rodrigues@kde.org
             Chris Rizzitello - rizzitello@kde.org
 
     This program is free software: you can redistribute it and/or modify
@@ -16,22 +16,22 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "profilesdialog.h"
-#include "ui_profilesdialog.h"
-#include <QMessageBox>
 #include <KLocalizedString>
 #include <QDir>
+#include <QMessageBox>
+#include "profilesdialog.h"
+#include "ui_profilesdialog.h"
 
 //Do not include for windows/mac os
 #ifndef Q_OS_WIN
 #ifndef Q_OS_MAC
-#include <AtCore/atcore_default_folders.h>
+#include <atcore_default_folders.h>
 #endif
 #endif
 
 ProfilesDialog::ProfilesDialog(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::ProfilesDialog)
+    QDialog(parent)
+    , ui(new Ui::ProfilesDialog)
 {
     ui->setupUi(this);
     ui->firmwareCB->addItem(QStringLiteral("Auto-Detect"));
@@ -39,12 +39,12 @@ ProfilesDialog::ProfilesDialog(QWidget *parent) :
     ui->baudCB->addItems(SERIAL::BAUDS);
     ui->baudCB->setCurrentText(QLatin1String("115200"));
     ui->profileCB->setAutoCompletion(true);
-    connect(ui->profileCB, static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged), [ this ] {
+    connect(ui->profileCB, static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged), [this] {
         loadSettings();
     });
     updateCBProfiles();
 
-    connect(ui->buttonBox, &QDialogButtonBox::clicked, [ this ](QAbstractButton * btn) {
+    connect(ui->buttonBox, &QDialogButtonBox::clicked, [this](QAbstractButton * btn) {
         switch (ui->buttonBox->buttonRole(btn)) {
         case QDialogButtonBox::ResetRole:
             loadSettings();
@@ -57,16 +57,16 @@ ProfilesDialog::ProfilesDialog(QWidget *parent) :
         }
     });
 
-    connect(ui->heatedBedCK, &QCheckBox::clicked, [ this ](const bool & status) {
+    connect(ui->heatedBedCK, &QCheckBox::clicked, [this](const bool & status) {
         ui->bedTempSB->setEnabled(status);
     });
 
-    connect(ui->cartesianRB, &QRadioButton::clicked, [ this ]() {
+    connect(ui->cartesianRB, &QRadioButton::clicked, [this] {
         ui->cartesianGB->setHidden(false);
         ui->deltaGB->setHidden(true);
     });
 
-    connect(ui->deltaRB, &QRadioButton::clicked, [ this ]() {
+    connect(ui->deltaRB, &QRadioButton::clicked, [this] {
         ui->cartesianGB->setHidden(true);
         ui->deltaGB->setHidden(false);
     });
@@ -91,9 +91,14 @@ void ProfilesDialog::saveSettings()
     settings.endGroup();
     QString currentProfile = ui->profileCB->currentText();
     if (groups.contains(currentProfile)) {
-        int ret = QMessageBox::information(this, i18n("Save?"),
-                                           i18n("A profile with this name already exists. \n Are you sure you want to overwrite it?"),
-                                           QMessageBox::Save, QMessageBox::Cancel);
+        int ret = QMessageBox::information(
+                      this
+                      , i18n("Save?")
+                      , i18n("A profile with this name already exists. \n Are you sure you want to overwrite it?")
+                      , QMessageBox::Save
+                      , QMessageBox::Cancel
+                  );
+
         if (ret == QMessageBox::Cancel) {
             return;
         }
