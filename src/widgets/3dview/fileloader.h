@@ -1,6 +1,6 @@
 /* Atelier KDE Printer Host for 3D Printing
     Copyright (C) <2017>
-    Author: Patrick José Pereira - patrickelectric@gmail.com
+    Author: Patrick José Pereira - patrickjp@kde.org
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
