@@ -1,6 +1,6 @@
 /* Atelier KDE Printer Host for 3D Printing
     Copyright (C) <2017>
-    Author: Lays Rodrigues - laysrodriguessilva@gmail.com
+    Author: Lays Rodrigues - lays.rodrigues@kde.org
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -15,17 +15,17 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "videomonitorwidget.h"
-#include <QDir>
-#include <QComboBox>
-#include <QPushButton>
-#include <QGridLayout>
-#include <QtMultimediaWidgets/QVideoWidget>
 #include <KLocalizedString>
+#include <QComboBox>
+#include <QDir>
+#include <QGridLayout>
+#include <QPushButton>
+#include <QVideoWidget>
+#include "videomonitorwidget.h"
 
 VideoMonitorWidget::VideoMonitorWidget(QWidget *parent) :
-    QWidget(parent),
-    _mediaplayer(nullptr, QMediaPlayer::StreamPlayback)
+    QWidget(parent)
+    , _mediaplayer(nullptr, QMediaPlayer::StreamPlayback)
 {
     auto _layout = new QGridLayout();
     auto _label = new QLabel(i18n("Source url:"));
