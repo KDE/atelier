@@ -1,6 +1,7 @@
 /* Atelier KDE Printer Host for 3D Printing
     Copyright (C) <2017>
-    Author: Lays Rodrigues - laysrodriguessilva@gmail.com
+    Author: Lays Rodrigues - lays.rodrigues@kde.org
+            Chris Rizzitello - rizzitello@kde.org
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,15 +18,14 @@
 */
 
 #pragma once
-#include <AtCore/AtCore>
-#include <AtCore/CommandWidget>
-#include <AtCore/LogWidget>
-#include <AtCore/MovementWidget>
-#include <AtCore/PlotWidget>
-#include <AtCore/PrintWidget>
-#include <AtCore/SdWidget>
-#include <AtCore/StatusWidget>
-#include "bedextruderwidget.h"
+#include <AtCore>
+#include <CommandWidget>
+#include <LogWidget>
+#include <MovementWidget>
+#include <PlotWidget>
+#include <PrintWidget>
+#include <SdWidget>
+#include <StatusWidget>
 #include <QComboBox>
 #include <QList>
 #include <QPushButton>
@@ -33,6 +33,7 @@
 #include <QToolBar>
 #include <QUrl>
 #include <QWidget>
+#include "bedextruderwidget.h"
 
 /**
  * @todo write docs
@@ -42,61 +43,55 @@ class AtCoreInstanceWidget : public QWidget
     Q_OBJECT
 
 public:
-    /**
-     * Default constructor
-     */
     AtCoreInstanceWidget(QWidget *parent = nullptr);
-
-    /**
-     * Destructor
-     */
     ~AtCoreInstanceWidget();
-    void startConnection(const QString &serialPort, const QMap<QString, QVariant> &profile);
     bool connected();
     void setFileCount(int count);
+    void startConnection(const QString &serialPort, const QMap<QString, QVariant> &profile);
 
 public slots:
-    void updateProfileData();
-    void printFile(const QUrl &fileName);
     bool isPrinting();
+    void printFile(const QUrl &fileName);
+    void updateProfileData();
 
 private:
     AtCore m_core;
-    int m_fileCount;
-    QToolBar *m_toolBar;
-    QComboBox *m_comboPort;
-    QComboBox *m_comboProfile;
-    QPushButton *m_connectButton;
-    QToolBar *m_connectToolBar;
-    QWidget *m_connectWidget;
-    QMap<QString, QVariant> profileData;
-    QAction *m_printAction;
-    QAction *m_stopAction;
-    QSettings m_settings;
-    QString m_theme;
-    QTabWidget *m_tabWidget;
-    QWidget *m_advancedTab;
     BedExtruderWidget *m_bedExtWidget;
     CommandWidget *m_commandWidget;
+    int m_fileCount;
     LogWidget *m_logWidget;
     MovementWidget *m_movementWidget;
     PlotWidget *m_plotWidget;
     PrintWidget *m_printWidget;
     SdWidget *m_sdWidget;
     StatusWidget *m_statusWidget;
-    void initConnectsToAtCore();
-    void pausePrint();
-    void stopPrint();
-    void disableMotors();
-    void handlePrinterStatusChanged(AtCore::STATES newState);
-    void checkTemperature(uint sensorType, uint number, uint temp);
-    void enableControls(bool b);
+    QAction *m_printAction;
+    QAction *m_stopAction;
+    QComboBox *m_comboPort;
+    QComboBox *m_comboProfile;
+    QMap<QString, QVariant> profileData;
+    QPushButton *m_connectButton;
+    QSettings m_settings;
+    QString m_theme;
+    QTabWidget *m_tabWidget;
+    QToolBar *m_connectToolBar;
+    QToolBar *m_toolBar;
+    QWidget *m_advancedTab;
+    QWidget *m_connectWidget;
+    void buildConnectionToolbar();
     void buildToolbar();
+    void checkTemperature(uint sensorType, uint number, uint temp);
+    void connectButtonClicked();
+    void disableMotors();
+    void enableControls(bool b);
+    void handlePrinterStatusChanged(AtCore::STATES newState);
+    void initConnectsToAtCore();
+    void stopPrint();
+    void pausePrint();
     void print();
     void updateSerialPort(const QStringList &ports);
-    void buildConnectionToolbar();
-    void connectButtonClicked();
     void togglePrintButtons(bool shown);
+
 signals:
     void connectionChanged(QString name);
     void disableDisconnect(bool b);

@@ -1,6 +1,6 @@
 /* Atelier KDE Printer Host for 3D Printing
     Copyright (C) <2017>
-    Author: Lays Rodrigues - laysrodriguessilva@gmail.com
+    Author: Lays Rodrigues - lays.rodrigues@kde.org
             Chris Rizzitello - rizzitello@kde.org
 
     This program is free software: you can redistribute it and/or modify
@@ -17,18 +17,18 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "atcoreinstancewidget.h"
-#include <QToolBar>
-#include <AtCore/SerialLayer>
-#include <AtCore/GCodeCommands>
+#include <GCodeCommands>
 #include <KLocalizedString>
+#include <SerialLayer>
+#include <QToolBar>
+#include "atcoreinstancewidget.h"
 
 AtCoreInstanceWidget::AtCoreInstanceWidget(QWidget *parent):
-    QWidget(parent),
-    m_fileCount(0),
-    m_toolBar(nullptr),
-    m_printAction(nullptr),
-    m_stopAction(nullptr)
+    QWidget(parent)
+    , m_fileCount(0)
+    , m_printAction(nullptr)
+    , m_stopAction(nullptr)
+    , m_toolBar(nullptr)
 {
     m_theme = palette().text().color().value() >= QColor(Qt::lightGray).value() ? QString("dark") : QString("light") ;
     QHBoxLayout *HLayout = new QHBoxLayout;
@@ -124,14 +124,19 @@ void AtCoreInstanceWidget::buildToolbar()
     m_toolBar->addSeparator();
 
     m_printAction = new QAction(QIcon::fromTheme("media-playback-start", style()->standardIcon(QStyle::SP_MediaPlay)), i18n("Print"));
-    connect(m_printAction, &QAction::triggered, [ this ]() {
-        if (m_core.state() == AtCore::BUSY) {
+    connect(m_printAction, &QAction::triggered, [this] {
+
+        if (m_core.state() == AtCore::BUSY)
+        {
             pausePrint();
             return;
         }
-        if (m_core.state() == AtCore::IDLE) {
+
+        if (m_core.state() == AtCore::IDLE)
+        {
             print();
-        } else if (m_core.state() == AtCore::PAUSE) {
+        } else if (m_core.state() == AtCore::PAUSE)
+        {
             m_core.resume();
         }
     });
@@ -139,7 +144,7 @@ void AtCoreInstanceWidget::buildToolbar()
 
     m_stopAction = new QAction(QIcon::fromTheme("media-playback-stop", QIcon(QString(":/%1/stop").arg(m_theme))), i18n("Stop"));
     connect(m_stopAction, &QAction::triggered, this, &AtCoreInstanceWidget::stopPrint);
-    connect(m_stopAction, &QAction::triggered, [this]() {
+    connect(m_stopAction, &QAction::triggered, [this] {
         m_printAction->setText(i18n("Print"));
         m_printAction->setIcon(QIcon::fromTheme("media-playback-start", QIcon(QString(":/%1/start").arg(m_theme))));
     });
@@ -187,16 +192,23 @@ void AtCoreInstanceWidget::connectButtonClicked()
 {
     if (m_core.state() == AtCore::DISCONNECTED) {
         if (m_comboProfile->currentText().isEmpty()) {
-            QMessageBox::information(this, i18n("No Profiles!"), i18n("Connecting Requires creating a profile for your printer. Create a profile in the next dialog then try again."));
+            QMessageBox::information(
+                this
+                , i18n("No Profiles!")
+                , i18n("Connecting Requires creating a profile for your printer. Create a profile in the next dialog then try again.")
+            );
             emit(requestProfileDialog());
             return;
         }
 
         if (m_comboPort->currentText().isEmpty()) {
-            QMessageBox::critical(this, i18n("Error"), i18n("Please, connect a serial device to continue!"));
+            QMessageBox::critical(
+                this
+                , i18n("Error")
+                , i18n("Please, connect a serial device to continue!")
+            );
             return;
         }
-
         //Get profile data before connecting.
         QString profile = m_comboProfile->currentText();
         m_settings.beginGroup("GeneralSettings");
@@ -238,49 +250,45 @@ void AtCoreInstanceWidget::initConnectsToAtCore()
     m_core.setSerialTimerInterval(100);
     // Handle device changes
     connect(&m_core, &AtCore::portsChanged, this, &AtCoreInstanceWidget::updateSerialPort);
-
     // Handle AtCore status change
     connect(&m_core, &AtCore::stateChanged, this, &AtCoreInstanceWidget::handlePrinterStatusChanged);
-
     // If the number of extruders from the printer change, we need to update the radiobuttons on the widget
     connect(this, &AtCoreInstanceWidget::extruderCountChanged, m_bedExtWidget, &BedExtruderWidget::setExtruderCount);
-
     // Bed and Extruder temperatures management
     connect(m_bedExtWidget, &BedExtruderWidget::bedTemperatureChanged, &m_core, &AtCore::setBedTemp);
     connect(m_bedExtWidget, &BedExtruderWidget::extTemperatureChanged, &m_core, &AtCore::setExtruderTemp);
-
     // Connect AtCore temperatures changes on Atelier Plot
-    connect(&m_core.temperature(), &Temperature::bedTemperatureChanged, [ this ](const float & temp) {
+    connect(&m_core.temperature(), &Temperature::bedTemperatureChanged, [this](const float & temp) {
         checkTemperature(0x00, 0, temp);
         m_plotWidget->appendPoint(i18n("Actual Bed"), temp);
         m_plotWidget->update();
         m_bedExtWidget->updateBedTemp(temp);
     });
-    connect(&m_core.temperature(), &Temperature::bedTargetTemperatureChanged, [ this ](const float & temp) {
+    connect(&m_core.temperature(), &Temperature::bedTargetTemperatureChanged, [this](const float & temp) {
         checkTemperature(0x01, 0, temp);
         m_plotWidget->appendPoint(i18n("Target Bed"), temp);
         m_plotWidget->update();
         m_bedExtWidget->updateBedTargetTemp(temp);
     });
-    connect(&m_core.temperature(), &Temperature::extruderTemperatureChanged, [ this ](const float & temp) {
+    connect(&m_core.temperature(), &Temperature::extruderTemperatureChanged, [this](const float & temp) {
         checkTemperature(0x02, 0, temp);
         m_plotWidget->appendPoint(i18n("Actual Ext.1"), temp);
         m_plotWidget->update();
         m_bedExtWidget->updateExtTemp(temp);
     });
-    connect(&m_core.temperature(), &Temperature::extruderTargetTemperatureChanged, [ this ](const float & temp) {
+    connect(&m_core.temperature(), &Temperature::extruderTargetTemperatureChanged, [this](const float & temp) {
         checkTemperature(0x03, 0, temp);
         m_plotWidget->appendPoint(i18n("Target Ext.1"), temp);
         m_plotWidget->update();
         m_bedExtWidget->updateExtTargetTemp(temp);
     });
     //command Widget
-    connect(m_commandWidget, &CommandWidget::commandPressed, [ this ](const QString & command) {
+    connect(m_commandWidget, &CommandWidget::commandPressed, [this](const QString & command) {
         m_logWidget->appendLog("Push: " + command);
         m_core.pushCommand(command);
     });
 
-    connect(m_commandWidget, &CommandWidget::messagePressed, [ this ](const QString & message) {
+    connect(m_commandWidget, &CommandWidget::messagePressed, [this](const QString & message) {
         m_logWidget->appendLog("Display: " + message);
         m_core.showMessage(message);
     });
@@ -304,10 +312,15 @@ void AtCoreInstanceWidget::initConnectsToAtCore()
     //Sd Card Stuff
     connect(&m_core, &AtCore::sdCardFileListChanged, m_sdWidget, &SdWidget::updateFilelist);
     connect(m_sdWidget, &SdWidget::requestSdList, &m_core, &AtCore::sdFileList);
+    connect(&m_core, &AtCore::sdMountChanged, m_statusWidget, &StatusWidget::setSD);
 
     connect(m_sdWidget, &SdWidget::printSdFile, [this](const QString & fileName) {
         if (fileName.isEmpty()) {
-            QMessageBox::information(this, i18n("Print Error"), i18n("You must Select a file from the list"));
+            QMessageBox::information(
+                this
+                , i18n("Print Error")
+                , i18n("You must Select a file from the list")
+            );
         } else  {
             m_core.print(fileName, true);
             togglePrintButtons(true);
@@ -316,14 +329,15 @@ void AtCoreInstanceWidget::initConnectsToAtCore()
 
     connect(m_sdWidget, &SdWidget::deleteSdFile, [this](const QString & fileName) {
         if (fileName.isEmpty()) {
-            QMessageBox::information(this, i18n("Delete Error"), i18n("You must Select a file from the list"));
+            QMessageBox::information(
+                this
+                , i18n("Delete Error")
+                , i18n("You must Select a file from the list")
+            );
         } else  {
             m_core.sdDelete(fileName);
         }
     });
-
-    //Status Area
-    connect(&m_core, &AtCore::sdMountChanged, m_statusWidget, &StatusWidget::setSD);
 }
 
 void AtCoreInstanceWidget::printFile(const QUrl &fileName)
@@ -458,7 +472,6 @@ void AtCoreInstanceWidget::checkTemperature(uint sensorType, uint number, uint t
     msg.append(QString::fromLatin1("[%1] : %2"));
     msg = msg.arg(QString::number(number))
           .arg(QString::number(temp));
-
     m_logWidget->appendLog(msg);
 }
 
@@ -498,7 +511,7 @@ void AtCoreInstanceWidget::updateSerialPort(const QStringList &ports)
         m_logWidget->appendLog(i18n("Found %1 Ports", QString::number(ports.count())));
     } else {
         QString portError(i18n("No available ports! Please connect a serial device to continue!"));
-        if (! m_logWidget->endsWith(portError)) {
+        if (!m_logWidget->endsWith(portError)) {
             m_logWidget->appendLog(portError);
         }
     }
