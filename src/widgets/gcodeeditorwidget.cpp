@@ -38,13 +38,14 @@ void GCodeEditorWidget::setupTabWidget()
     m_tabwidget->addTab(newView(newDoc()), i18n("New file"));
 }
 
-KTextEditor::View* GCodeEditorWidget::gcodeView() const{
-    return qobject_cast<KTextEditor::View*>(m_editor->documents().first()->views().first());
+KTextEditor::View *GCodeEditorWidget::gcodeView() const
+{
+    return qobject_cast<KTextEditor::View *>(m_editor->documents().first()->views().first());
 }
 void GCodeEditorWidget::loadFile(const QUrl &file)
 {
     auto doc = m_editor->documents().first();
-    if(!doc->isEmpty()){
+    if (!doc->isEmpty()) {
         doc = newDoc();
         int t = m_tabwidget->addTab(newView(doc), file.fileName());
         m_tabwidget->setCurrentIndex(t);
@@ -56,20 +57,21 @@ void GCodeEditorWidget::loadFile(const QUrl &file)
     doc->setHighlightingMode(QString("G-Code"));
 }
 
-void GCodeEditorWidget::setupInterface(const KTextEditor::View* view)
+void GCodeEditorWidget::setupInterface(const KTextEditor::View *view)
 {
     m_interface = qobject_cast<KTextEditor::ConfigInterface *>(view);
     m_interface->setConfigValue("line-numbers", true);
 }
 
-KTextEditor::Document* GCodeEditorWidget::newDoc()
+KTextEditor::Document *GCodeEditorWidget::newDoc()
 {
     KTextEditor::Document *doc = m_editor->createDocument(this);
     doc->setMode("G-Code");
     return doc;
 }
 
-KTextEditor::View* GCodeEditorWidget::newView(KTextEditor::Document *doc){
+KTextEditor::View *GCodeEditorWidget::newView(KTextEditor::Document *doc)
+{
     auto view = doc->createView(this);
     setupInterface(view);
     return view;
@@ -78,12 +80,14 @@ KTextEditor::View* GCodeEditorWidget::newView(KTextEditor::Document *doc){
 void GCodeEditorWidget::closeTab(int index)
 {
     m_tabwidget->removeTab(index);
-    if(!m_tabwidget->count()){
+    if (!m_tabwidget->count()) {
         m_tabwidget->addTab(newView(newDoc()), i18n("New file"));
     }
 }
 
-void GCodeEditorWidget::currentIndexChanged(int index){
-    if(index != -1)
-        emit updateClientFactory(qobject_cast<KTextEditor::View*>(m_tabwidget->currentWidget()));
+void GCodeEditorWidget::currentIndexChanged(int index)
+{
+    if (index != -1) {
+        emit updateClientFactory(qobject_cast<KTextEditor::View *>(m_tabwidget->currentWidget()));
+    }
 }

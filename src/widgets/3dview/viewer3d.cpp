@@ -60,7 +60,7 @@ void Viewer3D::drawModel(QString file)
 {
 
     QObject *object = _view->rootObject();
-    QObject *fileName = object->findChild<QObject*>(QStringLiteral("fileName"));
+    QObject *fileName = object->findChild<QObject *>(QStringLiteral("fileName"));
     fileName->setProperty("text", QVariant(file));
 }
 

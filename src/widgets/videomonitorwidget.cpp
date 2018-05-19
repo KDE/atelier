@@ -23,15 +23,14 @@
 #include <QtMultimediaWidgets/QVideoWidget>
 #include <KLocalizedString>
 
-
 VideoMonitorWidget::VideoMonitorWidget(QWidget *parent) :
     QWidget(parent),
     _mediaplayer(nullptr, QMediaPlayer::StreamPlayback)
-{    
+{
     auto _layout = new QGridLayout();
     auto _label = new QLabel(i18n("Source url:"));
     _layout->addWidget(_label, 0, 0);
-    
+
     auto _sourceCB = new QComboBox();
     _sourceCB->setEditable(true);
     _sourceCB->setToolTip(i18n("Valid Urls:\n\
@@ -40,45 +39,45 @@ VideoMonitorWidget::VideoMonitorWidget(QWidget *parent) :
         mms://mms.examples.com/stream.asx\n\
         rtsp://server.example.org:8080/test.sdp"));
     _layout->addWidget(_sourceCB, 0, 1);
-    
+
     auto _playPB = new QPushButton();
     _playPB->setCheckable(true);
     _playPB->setIcon(QIcon::fromTheme("media-playback-start", style()->standardIcon(QStyle::SP_MediaPlay)));
     _layout->addWidget(_playPB, 0, 2);
-    
+
     auto _videoWidget = new QVideoWidget();
     _layout->addWidget(_videoWidget, 1, 0, -1, -1);
-    
+
     _errorlabel = new QLabel;
     _layout->addWidget(_errorlabel, 2, 0, 0, -1);
-    
+
     this->setLayout(_layout);
-    
+
     _mediaplayer.setVideoOutput(_videoWidget);
 
 #ifdef Q_OS_LINUX
     QStringList sources;
     sources << QString("video*");
     _sourceCB->addItems(QDir("/dev/")\
-        .entryList(sources, QDir::System)\
-        .replaceInStrings( QRegExp("^"), "v4l2:///dev/"));
+                        .entryList(sources, QDir::System)\
+                        .replaceInStrings(QRegExp("^"), "v4l2:///dev/"));
 #endif
 
-    connect(_playPB, &QPushButton::clicked, [this, _playPB, _sourceCB, _videoWidget](bool b){
-        if(b){
-            if(_mediaplayer.state() != QMediaPlayer::PausedState) {
+    connect(_playPB, &QPushButton::clicked, [this, _playPB, _sourceCB, _videoWidget](bool b) {
+        if (b) {
+            if (_mediaplayer.state() != QMediaPlayer::PausedState) {
                 QString source = _sourceCB->currentText();
                 _mediaplayer.setMedia(QUrl(source));
             }
             _playPB->setIcon(QIcon::fromTheme("media-playback-pause", style()->standardIcon(QStyle::SP_MediaPause)));
             _mediaplayer.play();
-        }else{
+        } else {
             _mediaplayer.pause();
             _playPB->setIcon(QIcon::fromTheme("media-playback-start", style()->standardIcon(QStyle::SP_MediaPlay)));
         }
         _videoWidget->setVisible(b);
     });
-    
+
     typedef void (QMediaPlayer::*ErrorSignal)(QMediaPlayer::Error);
     connect(&_mediaplayer, static_cast<ErrorSignal>(&QMediaPlayer::error),
             this, &VideoMonitorWidget::handleError);
@@ -88,9 +87,10 @@ void VideoMonitorWidget::handleError()
 {
     const QString errorString = _mediaplayer.errorString();
     QString message = "Error: ";
-    if (errorString.isEmpty())
+    if (errorString.isEmpty()) {
         message += " #" + QString::number(int(_mediaplayer.error()));
-    else
+    } else {
         message += errorString;
+    }
     _errorlabel->setText(message);
 }

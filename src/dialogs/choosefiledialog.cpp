@@ -29,13 +29,13 @@ ChooseFileDialog::ChooseFileDialog(QWidget *parent, QList<QUrl> files) :
     auto label = new QLabel(i18n("Choose a file to print:"));
     auto listWigdet = new QListWidget();
     const int padding = 30;
-    listWigdet->setMinimumWidth(fontMetrics().height()/2  * padding);
+    listWigdet->setMinimumWidth(fontMetrics().height() / 2  * padding);
     QStringList files_list;
-    foreach(const auto &file, files){
+    foreach (const auto &file, files) {
         files_list.append(file.toLocalFile());
     }
     listWigdet->addItems(files_list);
-    connect(listWigdet, &QListWidget::currentRowChanged, [ this, &files ](const int t){
+    connect(listWigdet, &QListWidget::currentRowChanged, [ this, &files ](const int t) {
         m_choosen_file = files.at(t);
     });
     auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);

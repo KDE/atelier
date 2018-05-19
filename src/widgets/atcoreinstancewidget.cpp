@@ -43,7 +43,7 @@ AtCoreInstanceWidget::AtCoreInstanceWidget(QWidget *parent):
     VLayout->addLayout(HLayout);
 
     m_plotWidget = new PlotWidget();
-    VLayout->addWidget(m_plotWidget,80);
+    VLayout->addWidget(m_plotWidget, 80);
 
     QWidget *controlTab = new QWidget();
     controlTab->setLayout(VLayout);
@@ -87,7 +87,7 @@ AtCoreInstanceWidget::AtCoreInstanceWidget(QWidget *parent):
 
     enableControls(false);
     updateProfileData();
-    initConnectsToAtCore();    
+    initConnectsToAtCore();
 }
 
 AtCoreInstanceWidget::~AtCoreInstanceWidget()
@@ -108,12 +108,12 @@ void AtCoreInstanceWidget::buildToolbar()
     m_toolBar->addWidget(lb);
 
     auto homeAll = new QAction("All");
-    connect(homeAll, &QAction::triggered, [this]{
-       m_core.home();
+    connect(homeAll, &QAction::triggered, [this] {
+        m_core.home();
     });
     m_toolBar->addAction(homeAll);
 
-    for(auto homes : std::map<QString, int>{{"X", AtCore::X}, {"Y", AtCore::Y}, {"Z", AtCore::Z}}) {
+    for (auto homes : std::map<QString, int> {{"X", AtCore::X}, {"Y", AtCore::Y}, {"Z", AtCore::Z}}) {
         auto home = new QAction(homes.first);
         connect(home, &QAction::triggered, [this, homes] {
             m_core.home(homes.second);
@@ -123,13 +123,13 @@ void AtCoreInstanceWidget::buildToolbar()
 
     m_toolBar->addSeparator();
 
-    m_printAction = new QAction(QIcon::fromTheme("media-playback-start", style()->standardIcon(QStyle::SP_MediaPlay)),i18n("Print"));
-    connect(m_printAction, &QAction::triggered, [ this ](){
-        if(m_core.state() == AtCore::BUSY) {
+    m_printAction = new QAction(QIcon::fromTheme("media-playback-start", style()->standardIcon(QStyle::SP_MediaPlay)), i18n("Print"));
+    connect(m_printAction, &QAction::triggered, [ this ]() {
+        if (m_core.state() == AtCore::BUSY) {
             pausePrint();
             return;
         }
-        if (m_core.state() == AtCore::IDLE){
+        if (m_core.state() == AtCore::IDLE) {
             print();
         } else if (m_core.state() == AtCore::PAUSE) {
             m_core.resume();
@@ -139,13 +139,13 @@ void AtCoreInstanceWidget::buildToolbar()
 
     m_stopAction = new QAction(QIcon::fromTheme("media-playback-stop", QIcon(QString(":/%1/stop").arg(m_theme))), i18n("Stop"));
     connect(m_stopAction, &QAction::triggered, this, &AtCoreInstanceWidget::stopPrint);
-    connect(m_stopAction, &QAction::triggered, [this](){
+    connect(m_stopAction, &QAction::triggered, [this]() {
         m_printAction->setText(i18n("Print"));
         m_printAction->setIcon(QIcon::fromTheme("media-playback-start", QIcon(QString(":/%1/start").arg(m_theme))));
     });
     m_toolBar->addAction(m_stopAction);
 
-    auto disableMotorsAction = new QAction(style()->standardIcon(QStyle::SP_MediaStop),i18n("Disable Motors"));
+    auto disableMotorsAction = new QAction(style()->standardIcon(QStyle::SP_MediaStop), i18n("Disable Motors"));
     connect(disableMotorsAction, &QAction::triggered, this, &AtCoreInstanceWidget::disableMotors);
     m_toolBar->addAction(disableMotorsAction);
 
@@ -160,32 +160,32 @@ void AtCoreInstanceWidget::buildConnectionToolbar()
     QLabel *deviceLabel = new QLabel(i18n("Device"));
     QHBoxLayout *deviceLayout = new QHBoxLayout;
     deviceLayout->addWidget(deviceLabel);
-    deviceLayout->addWidget(m_comboPort,100);
+    deviceLayout->addWidget(m_comboPort, 100);
 
     m_comboProfile = new QComboBox;
-    m_comboProfile->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Fixed);
+    m_comboProfile->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     QHBoxLayout *profileLayout = new QHBoxLayout;
     QLabel *profileLabel = new QLabel(i18n("Profile"));
     profileLayout->addWidget(profileLabel);
-    profileLayout->addWidget(m_comboProfile,100);
+    profileLayout->addWidget(m_comboProfile, 100);
 
     QHBoxLayout *connectLayout = new QHBoxLayout;
-    connectLayout->addLayout(deviceLayout,50);
-    connectLayout->addLayout(profileLayout,50);
+    connectLayout->addLayout(deviceLayout, 50);
+    connectLayout->addLayout(profileLayout, 50);
 
     m_connectWidget = new QWidget();
     m_connectWidget->setLayout(connectLayout);
     m_connectToolBar->addWidget(m_connectWidget);
 
     m_connectButton = new QPushButton(QIcon::fromTheme("network-connect", QIcon(QString(":/%1/connect").arg(m_theme))), i18n("Connect"));
-    m_connectButton->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
+    m_connectButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     connect(this, &AtCoreInstanceWidget::disableDisconnect, m_connectButton, &QPushButton::setDisabled);
     connect(m_connectButton, &QPushButton::clicked, this, &AtCoreInstanceWidget::connectButtonClicked);
 }
 
 void AtCoreInstanceWidget::connectButtonClicked()
 {
-    if(m_core.state() == AtCore::DISCONNECTED) {
+    if (m_core.state() == AtCore::DISCONNECTED) {
         if (m_comboProfile->currentText().isEmpty()) {
             QMessageBox::information(this, i18n("No Profiles!"), i18n("Connecting Requires creating a profile for your printer. Create a profile in the next dialog then try again."));
             emit(requestProfileDialog());
@@ -205,18 +205,18 @@ void AtCoreInstanceWidget::connectButtonClicked()
         data["bps"] = m_settings.value(QStringLiteral("bps"), QStringLiteral("115200"));
         data["bedTemp"] = m_settings.value(QStringLiteral("maximumTemperatureBed"), QStringLiteral("0"));
         data["hotendTemp"] = m_settings.value(QStringLiteral("maximumTemperatureExtruder"), QStringLiteral("0"));
-        data["firmware"] = m_settings.value(QStringLiteral("firmware"),QStringLiteral("Auto-Detect"));
-        data["postPause"] = m_settings.value(QStringLiteral("postPause"),QStringLiteral(""));
+        data["firmware"] = m_settings.value(QStringLiteral("firmware"), QStringLiteral("Auto-Detect"));
+        data["postPause"] = m_settings.value(QStringLiteral("postPause"), QStringLiteral(""));
         data["name"] = profile;
         m_settings.endGroup();
         m_settings.endGroup();
 
         //then connect
-        if (m_core.initSerial(m_comboPort->currentText(), data["bps"].toInt()) ) {
+        if (m_core.initSerial(m_comboPort->currentText(), data["bps"].toInt())) {
             m_logWidget->appendLog(i18n("Serial connected"));
             profileData = data;
             QString fw = profileData["firmware"].toString();
-            if( fw != QString("Auto-Detect")){
+            if (fw != QString("Auto-Detect")) {
                 m_core.loadFirmwarePlugin(fw);
             }
             emit(connectionChanged(profileData["name"].toString()));
@@ -250,37 +250,37 @@ void AtCoreInstanceWidget::initConnectsToAtCore()
     connect(m_bedExtWidget, &BedExtruderWidget::extTemperatureChanged, &m_core, &AtCore::setExtruderTemp);
 
     // Connect AtCore temperatures changes on Atelier Plot
-    connect(&m_core.temperature(), &Temperature::bedTemperatureChanged, [ this ](const float& temp) {
+    connect(&m_core.temperature(), &Temperature::bedTemperatureChanged, [ this ](const float & temp) {
         checkTemperature(0x00, 0, temp);
         m_plotWidget->appendPoint(i18n("Actual Bed"), temp);
         m_plotWidget->update();
         m_bedExtWidget->updateBedTemp(temp);
     });
-    connect(&m_core.temperature(), &Temperature::bedTargetTemperatureChanged, [ this ](const float& temp) {
+    connect(&m_core.temperature(), &Temperature::bedTargetTemperatureChanged, [ this ](const float & temp) {
         checkTemperature(0x01, 0, temp);
         m_plotWidget->appendPoint(i18n("Target Bed"), temp);
         m_plotWidget->update();
         m_bedExtWidget->updateBedTargetTemp(temp);
     });
-    connect(&m_core.temperature(), &Temperature::extruderTemperatureChanged, [ this ](const float& temp) {
+    connect(&m_core.temperature(), &Temperature::extruderTemperatureChanged, [ this ](const float & temp) {
         checkTemperature(0x02, 0, temp);
         m_plotWidget->appendPoint(i18n("Actual Ext.1"), temp);
         m_plotWidget->update();
         m_bedExtWidget->updateExtTemp(temp);
     });
-    connect(&m_core.temperature(), &Temperature::extruderTargetTemperatureChanged, [ this ](const float& temp) {
+    connect(&m_core.temperature(), &Temperature::extruderTargetTemperatureChanged, [ this ](const float & temp) {
         checkTemperature(0x03, 0, temp);
         m_plotWidget->appendPoint(i18n("Target Ext.1"), temp);
         m_plotWidget->update();
         m_bedExtWidget->updateExtTargetTemp(temp);
     });
     //command Widget
-    connect(m_commandWidget, &CommandWidget::commandPressed, [ this ](const QString &command) {
+    connect(m_commandWidget, &CommandWidget::commandPressed, [ this ](const QString & command) {
         m_logWidget->appendLog("Push: " + command);
         m_core.pushCommand(command);
     });
 
-    connect(m_commandWidget, &CommandWidget::messagePressed, [ this ](const QString &message) {
+    connect(m_commandWidget, &CommandWidget::messagePressed, [ this ](const QString & message) {
         m_logWidget->appendLog("Display: " + message);
         m_core.showMessage(message);
     });
@@ -295,10 +295,10 @@ void AtCoreInstanceWidget::initConnectsToAtCore()
         m_core.move(axis, value);
     });
     connect(m_movementWidget, &MovementWidget::relativeMove, [this](const QLatin1Char & axis, const double value) {
-       m_logWidget->appendLog(i18n("Relative Move: %1, %2", axis, QString::number(value)));
-       m_core.setRelativePosition();
-       m_core.move(axis, value);
-       m_core.setAbsolutePosition();
+        m_logWidget->appendLog(i18n("Relative Move: %1, %2", axis, QString::number(value)));
+        m_core.setRelativePosition();
+        m_core.move(axis, value);
+        m_core.setAbsolutePosition();
     });
 
     //Sd Card Stuff
@@ -326,7 +326,7 @@ void AtCoreInstanceWidget::initConnectsToAtCore()
     connect(&m_core, &AtCore::sdMountChanged, m_statusWidget, &StatusWidget::setSD);
 }
 
-void AtCoreInstanceWidget::printFile(const QUrl& fileName)
+void AtCoreInstanceWidget::printFile(const QUrl &fileName)
 {
     if (!fileName.isEmpty() && (m_core.state() == AtCore::IDLE)) {
         m_core.print(fileName.toLocalFile());
@@ -335,12 +335,12 @@ void AtCoreInstanceWidget::printFile(const QUrl& fileName)
 
 void AtCoreInstanceWidget::print()
 {
-    emit (requestFileChooser());
+    emit(requestFileChooser());
 }
 
 void AtCoreInstanceWidget::pausePrint()
 {
-    if(m_core.state() == AtCore::BUSY) {
+    if (m_core.state() == AtCore::BUSY) {
         m_core.pause(profileData["postPause"].toString());
     } else if (m_core.state() == AtCore::PAUSE) {
         m_core.resume();
@@ -361,69 +361,69 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
 {
     static QString stateString;
     switch (newState) {
-        case AtCore::CONNECTING: {
-            m_core.setSerialTimerInterval(0);
-            m_connectButton->setText(i18n("Disconnect"));
-            m_connectButton->setIcon(QIcon::fromTheme("network-disconnect", QIcon(QString(":/%1/disconnect").arg(m_theme))));
-            m_connectToolBar->setHidden(true);
-            m_toolBar->setHidden(false);
-            stateString = i18n("Connecting...");
-            connect(&m_core, &AtCore::receivedMessage, m_logWidget, &LogWidget::appendRLog);
-            connect(m_core.serial(), &SerialLayer::pushedCommand, m_logWidget, &LogWidget::appendSLog);
-        } break;
-        case AtCore::IDLE: {
-            stateString = i18n("Connected to %1", m_core.serial()->portName());
-            emit extruderCountChanged(m_core.extruderCount());
-            m_logWidget->appendLog(i18n("Serial connected"));
-            emit disableDisconnect(false);
-            enableControls(true);
-        } break;
-        case AtCore::DISCONNECTED: {
-            stateString = i18n("Not Connected");
-            disconnect(&m_core, &AtCore::receivedMessage, m_logWidget, &LogWidget::appendRLog);
-            disconnect(m_core.serial(), &SerialLayer::pushedCommand, m_logWidget, &LogWidget::appendSLog);
-            m_logWidget->appendLog(i18n("Serial disconnected"));
-            m_core.setSerialTimerInterval(100);
-            m_connectButton->setText(i18n("Connect"));
-            m_connectButton->setIcon(QIcon::fromTheme("network-connect",QIcon(QString(":/%1/connect").arg(m_theme))));
-            m_connectToolBar->setHidden(false);
-            m_toolBar->setHidden(true);
-            enableControls(false);            
-        } break;
-        case AtCore::STARTPRINT: {
-            stateString = i18n("Starting Print");
-            m_statusWidget->showPrintArea(true);
-            connect(&m_core, &AtCore::printProgressChanged, m_statusWidget, &StatusWidget::updatePrintProgress);
-        } break;
-        case AtCore::FINISHEDPRINT: {
-            stateString = i18n("Finished Print");
-            m_statusWidget->showPrintArea(false);
-            disconnect(&m_core, &AtCore::printProgressChanged, m_statusWidget, &StatusWidget::updatePrintProgress);
-            m_printAction->setText(i18n("Print"));
-            m_printAction->setIcon(QIcon::fromTheme("media-playback-start", QIcon(QString(":/%1/start").arg(m_theme))));
-        } break;
-        case AtCore::BUSY: {
-            stateString = i18n("Printing");
-            emit disableDisconnect(true);
-            m_printAction->setText(i18n("Pause"));
-            m_printAction->setIcon(QIcon::fromTheme("media-playback-pause", QIcon(QString(":/%1/pause").arg(m_theme))));
-        } break;
-        case AtCore::PAUSE: {
-            stateString = i18n("Paused");
-            m_printAction->setText(i18n("Resume"));
-            m_printAction->setIcon(QIcon::fromTheme("media-playback-start", QIcon(QString(":/%1/start").arg(m_theme))));
-        } break;
-        case AtCore::STOP: {
-            stateString = i18n("Stoping Print");
-        } break;
-        case AtCore::ERRORSTATE: {
-            stateString = i18n("Error");
-        } break;
-        default:
-          qWarning("AtCore State not Recognized.");
-          break;
+    case AtCore::CONNECTING: {
+        m_core.setSerialTimerInterval(0);
+        m_connectButton->setText(i18n("Disconnect"));
+        m_connectButton->setIcon(QIcon::fromTheme("network-disconnect", QIcon(QString(":/%1/disconnect").arg(m_theme))));
+        m_connectToolBar->setHidden(true);
+        m_toolBar->setHidden(false);
+        stateString = i18n("Connecting...");
+        connect(&m_core, &AtCore::receivedMessage, m_logWidget, &LogWidget::appendRLog);
+        connect(m_core.serial(), &SerialLayer::pushedCommand, m_logWidget, &LogWidget::appendSLog);
+    } break;
+    case AtCore::IDLE: {
+        stateString = i18n("Connected to %1", m_core.serial()->portName());
+        emit extruderCountChanged(m_core.extruderCount());
+        m_logWidget->appendLog(i18n("Serial connected"));
+        emit disableDisconnect(false);
+        enableControls(true);
+    } break;
+    case AtCore::DISCONNECTED: {
+        stateString = i18n("Not Connected");
+        disconnect(&m_core, &AtCore::receivedMessage, m_logWidget, &LogWidget::appendRLog);
+        disconnect(m_core.serial(), &SerialLayer::pushedCommand, m_logWidget, &LogWidget::appendSLog);
+        m_logWidget->appendLog(i18n("Serial disconnected"));
+        m_core.setSerialTimerInterval(100);
+        m_connectButton->setText(i18n("Connect"));
+        m_connectButton->setIcon(QIcon::fromTheme("network-connect", QIcon(QString(":/%1/connect").arg(m_theme))));
+        m_connectToolBar->setHidden(false);
+        m_toolBar->setHidden(true);
+        enableControls(false);
+    } break;
+    case AtCore::STARTPRINT: {
+        stateString = i18n("Starting Print");
+        m_statusWidget->showPrintArea(true);
+        connect(&m_core, &AtCore::printProgressChanged, m_statusWidget, &StatusWidget::updatePrintProgress);
+    } break;
+    case AtCore::FINISHEDPRINT: {
+        stateString = i18n("Finished Print");
+        m_statusWidget->showPrintArea(false);
+        disconnect(&m_core, &AtCore::printProgressChanged, m_statusWidget, &StatusWidget::updatePrintProgress);
+        m_printAction->setText(i18n("Print"));
+        m_printAction->setIcon(QIcon::fromTheme("media-playback-start", QIcon(QString(":/%1/start").arg(m_theme))));
+    } break;
+    case AtCore::BUSY: {
+        stateString = i18n("Printing");
+        emit disableDisconnect(true);
+        m_printAction->setText(i18n("Pause"));
+        m_printAction->setIcon(QIcon::fromTheme("media-playback-pause", QIcon(QString(":/%1/pause").arg(m_theme))));
+    } break;
+    case AtCore::PAUSE: {
+        stateString = i18n("Paused");
+        m_printAction->setText(i18n("Resume"));
+        m_printAction->setIcon(QIcon::fromTheme("media-playback-start", QIcon(QString(":/%1/start").arg(m_theme))));
+    } break;
+    case AtCore::STOP: {
+        stateString = i18n("Stoping Print");
+    } break;
+    case AtCore::ERRORSTATE: {
+        stateString = i18n("Error");
+    } break;
+    default:
+        qWarning("AtCore State not Recognized.");
+        break;
     }
-     m_statusWidget->setState(stateString);
+    m_statusWidget->setState(stateString);
 }
 
 void AtCoreInstanceWidget::checkTemperature(uint sensorType, uint number, uint temp)
@@ -464,7 +464,7 @@ void AtCoreInstanceWidget::checkTemperature(uint sensorType, uint number, uint t
 
 void AtCoreInstanceWidget::enableControls(bool b)
 {
-    if(b) {
+    if (b) {
         layout()->removeWidget(m_logWidget);
         layout()->removeWidget(m_statusWidget);
         layout()->addWidget(m_statusWidget);

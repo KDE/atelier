@@ -45,19 +45,19 @@ public:
     /**
      * Default constructor
      */
-    AtCoreInstanceWidget(QWidget* parent = nullptr);
+    AtCoreInstanceWidget(QWidget *parent = nullptr);
 
     /**
      * Destructor
      */
     ~AtCoreInstanceWidget();
-    void startConnection(const QString& serialPort, const QMap<QString, QVariant>& profile);
+    void startConnection(const QString &serialPort, const QMap<QString, QVariant> &profile);
     bool connected();
     void setFileCount(int count);
 
 public slots:
     void updateProfileData();
-    void printFile(const QUrl& fileName);
+    void printFile(const QUrl &fileName);
     bool isPrinting();
 
 private:

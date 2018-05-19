@@ -32,19 +32,18 @@
 #include <widgets/atcoreinstancewidget.h>
 #include <widgets/videomonitorwidget.h>
 
-
 MainWindow::MainWindow(QWidget *parent) :
     KXmlGuiWindow(parent)
-    ,m_theme(getTheme())
-    ,m_currEditorView(nullptr)
-    ,m_instances(new QTabWidget(this))
+    , m_theme(getTheme())
+    , m_currEditorView(nullptr)
+    , m_instances(new QTabWidget(this))
 {
     initWidgets();
     setupActions();
-    connect(m_instances, &QTabWidget::tabCloseRequested, [this] (int index){
-        auto tempWidget= qobject_cast<AtCoreInstanceWidget*>(m_instances->widget(index));
-        if(tempWidget->isPrinting()) {
-            if(askToClose()) {
+    connect(m_instances, &QTabWidget::tabCloseRequested, [this](int index) {
+        auto tempWidget = qobject_cast<AtCoreInstanceWidget *>(m_instances->widget(index));
+        if (tempWidget->isPrinting()) {
+            if (askToClose()) {
                 delete tempWidget;
             } else {
                 return;
@@ -52,7 +51,7 @@ MainWindow::MainWindow(QWidget *parent) :
         } else {
             delete tempWidget;
         }
-        if(m_instances->count() == 1) {
+        if (m_instances->count() == 1) {
             m_instances->setTabsClosable(false);
             m_instances->setMovable(false);
         }
@@ -61,16 +60,15 @@ MainWindow::MainWindow(QWidget *parent) :
 void MainWindow::closeEvent(QCloseEvent *event)
 {
     bool closePrompt = false;
-    for(int i=0; i < m_instances->count(); i++)
-    {
-        AtCoreInstanceWidget *instance = qobject_cast<AtCoreInstanceWidget*>(m_instances->widget(i));
+    for (int i = 0; i < m_instances->count(); i++) {
+        AtCoreInstanceWidget *instance = qobject_cast<AtCoreInstanceWidget *>(m_instances->widget(i));
         if (instance->isPrinting()) {
-             closePrompt = true;
-             break;
+            closePrompt = true;
+            break;
         }
     }
-    if(closePrompt) {
-        if(askToClose()) {
+    if (closePrompt) {
+        if (askToClose()) {
             event->accept();
         } else {
             event->ignore();
@@ -93,7 +91,7 @@ void MainWindow::initWidgets()
     splitter->addWidget(m_lateral.m_stack);
     splitter->addWidget(m_instances);
 
-    auto addTabBtn =new QToolButton();
+    auto addTabBtn = new QToolButton();
     addTabBtn->setText("+");
     addTabBtn->setToolTip(i18n("Create new instance"));
     addTabBtn->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_T));
@@ -121,29 +119,30 @@ void MainWindow::newAtCoreInstance()
     });
 
     connect(newInstanceWidget, &AtCoreInstanceWidget::requestFileChooser, [ newInstanceWidget, this ] {
-        switch (m_openFiles.size()){
-            case 0:
-                QMessageBox::warning(this, i18n("Error"),
-                                     i18n("There's no GCode File open. \n Please select a file and try again."),
-                                     QMessageBox::Ok);
-                break;
-            case 1:
-                newInstanceWidget->printFile(m_openFiles.at(0));
-                break;
-            default:
-                ChooseFileDialog dialog(this,m_openFiles);
-                if(dialog.exec() == QDialog::Accepted){
-                    newInstanceWidget->printFile(dialog.choosenFile());
-                }
+        switch (m_openFiles.size())
+        {
+        case 0:
+            QMessageBox::warning(this, i18n("Error"),
+                                 i18n("There's no GCode File open. \n Please select a file and try again."),
+                                 QMessageBox::Ok);
+            break;
+        case 1:
+            newInstanceWidget->printFile(m_openFiles.at(0));
+            break;
+        default:
+            ChooseFileDialog dialog(this, m_openFiles);
+            if (dialog.exec() == QDialog::Accepted) {
+                newInstanceWidget->printFile(dialog.choosenFile());
+            }
         }
     });
 
     connect(newInstanceWidget, &AtCoreInstanceWidget::connectionChanged, this, &MainWindow::atCoreInstanceNameChange);
 
-    if(m_instances->count() > 1) {
+    if (m_instances->count() > 1) {
         m_instances->setTabsClosable(true);
         m_instances->setMovable(true);
-        m_instances->setCurrentIndex(m_instances->count()-1);
+        m_instances->setCurrentIndex(m_instances->count() - 1);
     }
 }
 // Move to LateralArea.
@@ -153,7 +152,7 @@ void MainWindow::setupLateralArea()
     m_lateral.m_stack = new QStackedWidget();
     auto buttonLayout = new QVBoxLayout();
 
-    auto setupButton = [this, buttonLayout](const QString& key, const QString& text, const QIcon& icon, QWidget *w) {
+    auto setupButton = [this, buttonLayout](const QString & key, const QString & text, const QIcon & icon, QWidget * w) {
         auto *btn = new QPushButton(m_lateral.m_toolBar);
         btn->setToolTip(text);
         btn->setAutoExclusive(true);
@@ -161,21 +160,23 @@ void MainWindow::setupLateralArea()
         //3d view is on top set it checked so users see its selected.
         btn->setChecked(key == "3d");
         btn->setIcon(icon);
-        btn->setFixedSize(48,48);
-        btn->setIconSize(QSize(48,48));
+        btn->setFixedSize(48, 48);
+        btn->setIconSize(QSize(48, 48));
         btn->setFlat(true);
         m_lateral.m_stack->addWidget(w);
         m_lateral.m_map[key] = {btn, w};
         buttonLayout->addWidget(btn);
 
         connect(btn, &QPushButton::clicked, [this, w, btn] {
-            if (m_lateral.m_stack->currentWidget() == w) {
-                    m_lateral.m_stack->setHidden(m_lateral.m_stack->isVisible());
-                    if(m_lateral.m_stack->isHidden()){
-                        btn->setCheckable(false);
-                        btn->setCheckable(true);
-                    }
-            } else {
+            if (m_lateral.m_stack->currentWidget() == w)
+            {
+                m_lateral.m_stack->setHidden(m_lateral.m_stack->isVisible());
+                if (m_lateral.m_stack->isHidden()) {
+                    btn->setCheckable(false);
+                    btn->setCheckable(true);
+                }
+            } else
+            {
                 m_lateral.m_stack->setHidden(false);
                 m_lateral.m_stack->setCurrentWidget(w);
             }
@@ -233,7 +234,7 @@ void MainWindow::setupActions()
 void MainWindow::openFile()
 {
     QUrl fileName = QFileDialog::getOpenFileUrl(this, i18n("Open GCode"),
-                        QUrl::fromLocalFile(QDir::homePath()), i18n("GCode(*.gco *.gcode);;All Files(*.*)"));
+                    QUrl::fromLocalFile(QDir::homePath()), i18n("GCode(*.gco *.gcode);;All Files(*.*)"));
 
     if (!fileName.isEmpty()) {
 
@@ -243,8 +244,8 @@ void MainWindow::openFile()
         const int tabs = m_instances->count();
         m_openFiles.append(fileName);
 
-        for(int i=0; i < tabs; ++i){
-            auto instance = qobject_cast<AtCoreInstanceWidget*>(m_instances->widget(i));
+        for (int i = 0; i < tabs; ++i) {
+            auto instance = qobject_cast<AtCoreInstanceWidget *>(m_instances->widget(i));
             instance->setFileCount(m_openFiles.size());
         }
     }
@@ -252,37 +253,36 @@ void MainWindow::openFile()
 
 void MainWindow::atCoreInstanceNameChange(const QString &name)
 {
-    m_instances->setTabText(sender()->objectName().toInt(),name);
+    m_instances->setTabText(sender()->objectName().toInt(), name);
 }
 
 QString MainWindow::getTheme()
 {
     return palette().text().color().value() >= QColor(Qt::lightGray).value() ? \
-        QString("dark") : QString("light");
+           QString("dark") : QString("light");
 }
 
 bool MainWindow::askToClose()
 {
     bool rtn = false;
     int result = QMessageBox::question(this,
-            i18n("Printing"),
-            i18n("Currently printing! \nAre you sure you want to close?"),
-            QMessageBox::Close,QMessageBox::Cancel);
-    switch(result)
-    {
-        case QMessageBox::Close:
-            rtn = true;
-            break;
-        default:
-            break;
+                                       i18n("Printing"),
+                                       i18n("Currently printing! \nAre you sure you want to close?"),
+                                       QMessageBox::Close, QMessageBox::Cancel);
+    switch (result) {
+    case QMessageBox::Close:
+        rtn = true;
+        break;
+    default:
+        break;
     }
     return rtn;
 }
 
 void MainWindow::toggleGCodeActions()
 {
-    if(m_lateral.m_stack->currentWidget() == m_lateral.m_map["gcode"].second && m_lateral.m_stack->isVisible()) {
-        if(m_currEditorView){
+    if (m_lateral.m_stack->currentWidget() == m_lateral.m_map["gcode"].second && m_lateral.m_stack->isVisible()) {
+        if (m_currEditorView) {
             guiFactory()->addClient(m_currEditorView);
         }
     } else {
@@ -290,10 +290,10 @@ void MainWindow::toggleGCodeActions()
     }
 }
 
-void MainWindow::updateClientFactory(KTextEditor::View* view)
+void MainWindow::updateClientFactory(KTextEditor::View *view)
 {
-    if(m_lateral.m_stack->currentWidget() == m_lateral.m_map["gcode"].second) {
-        if(m_currEditorView) {
+    if (m_lateral.m_stack->currentWidget() == m_lateral.m_map["gcode"].second) {
+        if (m_currEditorView) {
             guiFactory()->removeClient(m_currEditorView);
         }
         if (view) {

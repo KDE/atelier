@@ -24,7 +24,6 @@
 #include "bedextruderwidget.h"
 #include "thermowidget.h"
 
-
 BedExtruderWidget::BedExtruderWidget(QWidget *parent) :
     QWidget(parent),
     m_bedThermo(new ThermoWidget(this, QString(i18n("Bed")))),
@@ -51,14 +50,14 @@ BedExtruderWidget::BedExtruderWidget(QWidget *parent) :
     setExtruderCount(1);
 
     connect(m_bedThermo, &ThermoWidget::targetTemperatureChanged, [this](double v) {
-         qDebug() << "Receiving the temperature change for bed";
-         emit bedTemperatureChanged((int)v, false);
-     });
+        qDebug() << "Receiving the temperature change for bed";
+        emit bedTemperatureChanged((int)v, false);
+    });
 
-     connect(m_extruderThermo, &ThermoWidget::targetTemperatureChanged, [this](double v) {
-         qDebug() << "Receiving the temperature changed for thermo";
-         emit extTemperatureChanged((int)v, currentExtruder(), false);
-     });
+    connect(m_extruderThermo, &ThermoWidget::targetTemperatureChanged, [this](double v) {
+        qDebug() << "Receiving the temperature changed for thermo";
+        emit extTemperatureChanged((int)v, currentExtruder(), false);
+    });
 }
 
 void BedExtruderWidget::setExtruderCount(int value)

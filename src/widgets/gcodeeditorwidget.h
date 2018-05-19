@@ -38,12 +38,12 @@ private:
     KTextEditor::ConfigInterface *m_interface;
     QTabWidget *m_tabwidget;
     void setupTabWidget();
-    void setupInterface(const KTextEditor::View* view);
-    KTextEditor::Document* newDoc();
-    KTextEditor::View* newView(KTextEditor::Document* doc);
+    void setupInterface(const KTextEditor::View *view);
+    KTextEditor::Document *newDoc();
+    KTextEditor::View *newView(KTextEditor::Document *doc);
     void closeTab(int index);
     void currentIndexChanged(int index);
 
 signals:
-    void updateClientFactory(KTextEditor::View* view);
+    void updateClientFactory(KTextEditor::View *view);
 };

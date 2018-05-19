@@ -29,14 +29,15 @@
 struct LateralArea {
     // Area with the the lateral buttons that will open the views.
     // Kind like the KDevelop stuff but way simpler.
-    using Btn2Widget = QPair<QPushButton*, QWidget*>;
+    using Btn2Widget = QPair<QPushButton *, QWidget *>;
     using WidgetMap = QMap<QString, Btn2Widget>;
 
     QWidget *m_toolBar;
     QStackedWidget *m_stack;
     WidgetMap m_map;
-    template<typename T> T* get(const QString& s) {
-        return qobject_cast<T*>(m_map[s].second);
+    template<typename T> T *get(const QString &s)
+    {
+        return qobject_cast<T *>(m_map[s].second);
     }
 };
 
@@ -55,7 +56,7 @@ private:
     QString m_theme;
     KTextEditor::View *m_currEditorView;
     LateralArea m_lateral;
-    GCodeEditorWidget* m_gcodeEditor;
+    GCodeEditorWidget *m_gcodeEditor;
     QTabWidget *m_instances;
     void setupLateralArea();
     void newAtCoreInstance();
@@ -63,7 +64,7 @@ private:
     void setupActions();
     void openFile();
     bool askToClose();
-    void updateClientFactory(KTextEditor::View* view);
+    void updateClientFactory(KTextEditor::View *view);
     void atCoreInstanceNameChange(const QString &name);
     QString getTheme();
     void toggleGCodeActions();

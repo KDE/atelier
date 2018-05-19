@@ -24,9 +24,9 @@
 
 //Do not include for windows/mac os
 #ifndef Q_OS_WIN
-    #ifndef Q_OS_MAC
-        #include <AtCore/atcore_default_folders.h>
-    #endif
+#ifndef Q_OS_MAC
+#include <AtCore/atcore_default_folders.h>
+#endif
 #endif
 
 ProfilesDialog::ProfilesDialog(QWidget *parent) :
@@ -50,7 +50,7 @@ ProfilesDialog::ProfilesDialog(QWidget *parent) :
             loadSettings();
             break;
         case QDialogButtonBox::RejectRole:
-                close();
+            close();
             break;
         default:
             break;
@@ -107,8 +107,7 @@ void ProfilesDialog::saveSettings()
         settings.setValue(QStringLiteral("dimensionX"), ui->x_dimensionSB->value());
         settings.setValue(QStringLiteral("dimensionY"), ui->y_dimensionSB->value());
         settings.setValue(QStringLiteral("dimensionZ"), ui->z_dimensionSB->value());
-    }
-    else {
+    } else {
         settings.setValue(QStringLiteral("isCartesian"), false);
         settings.setValue(QStringLiteral("radius"), ui->radiusSB->value());
         settings.setValue(QStringLiteral("z_delta_dimension"), ui->z_dimensionSB->value());
@@ -120,7 +119,7 @@ void ProfilesDialog::saveSettings()
     settings.setValue(QStringLiteral("maximumTemperatureExtruder"), ui->extruderTempSB->value());
     //Baud
     settings.setValue(QStringLiteral("bps"), ui->baudCB->currentText());
-    settings.setValue(QStringLiteral("firmware"),ui->firmwareCB->currentText());
+    settings.setValue(QStringLiteral("firmware"), ui->firmwareCB->currentText());
     settings.setValue(QStringLiteral("postPause"), ui->postPauseLE->text());
     settings.endGroup();
     settings.endGroup();
@@ -165,7 +164,7 @@ void ProfilesDialog::loadSettings(const QString &currentProfile)
     //Baud
     ui->baudCB->setCurrentText(settings.value(QStringLiteral("bps"), QStringLiteral("115200")).toString());
     ui->firmwareCB->setCurrentText(settings.value(QStringLiteral("firmware"), QStringLiteral("Auto-Detect")).toString());
-    ui->postPauseLE->setText(settings.value(QStringLiteral("postPause"),QStringLiteral("")).toString());
+    ui->postPauseLE->setText(settings.value(QStringLiteral("postPause"), QStringLiteral("")).toString());
     settings.endGroup();
     settings.endGroup();
 
@@ -188,7 +187,8 @@ void ProfilesDialog::accept()
     saveSettings();
 }
 
-void ProfilesDialog::removeProfile(){
+void ProfilesDialog::removeProfile()
+{
     QString currentProfile = ui->profileCB->currentText();
     settings.beginGroup(QStringLiteral("GeneralSettings"));
     settings.beginGroup(currentProfile);
@@ -228,7 +228,7 @@ QStringList ProfilesDialog::detectFWPlugins() const
     QStringList files = pluginDir.entryList(QDir::Files);
     foreach (const QString &f, files) {
         QString file = f;
-            file = file.split(QChar::fromLatin1('.')).at(0);
+        file = file.split(QChar::fromLatin1('.')).at(0);
         if (file.startsWith(QStringLiteral("lib"))) {
             file = file.remove(QStringLiteral("lib"));
         }
