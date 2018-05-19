@@ -1,6 +1,6 @@
 /* Atelier KDE Printer Host for 3D Printing
     Copyright (C) <2016>
-    Author: Lays Rodrigues - laysrodrigues@gmail.com
+    Author: Lays Rodrigues - lays.rodrigues@kde.org
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,12 +17,12 @@
 */
 #pragma once
 
-#include <QTabWidget>
-#include <QWidget>
+#include <KTextEditor/ConfigInterface>
 #include <KTextEditor/Document>
 #include <KTextEditor/Editor>
 #include <KTextEditor/View>
-#include <KTextEditor/ConfigInterface>
+#include <QTabWidget>
+#include <QWidget>
 
 class GCodeEditorWidget : public QWidget
 {
@@ -30,19 +30,19 @@ class GCodeEditorWidget : public QWidget
 
 public:
     explicit GCodeEditorWidget(QWidget *parent = nullptr);
-    void loadFile(const QUrl &file);
     KTextEditor::View *gcodeView() const;
+    void loadFile(const QUrl &file);
 
 private:
-    KTextEditor::Editor *m_editor;
     KTextEditor::ConfigInterface *m_interface;
-    QTabWidget *m_tabwidget;
-    void setupTabWidget();
-    void setupInterface(const KTextEditor::View *view);
     KTextEditor::Document *newDoc();
+    KTextEditor::Editor *m_editor;
     KTextEditor::View *newView(KTextEditor::Document *doc);
+    QTabWidget *m_tabwidget;
     void closeTab(int index);
     void currentIndexChanged(int index);
+    void setupInterface(const KTextEditor::View *view);
+    void setupTabWidget();
 
 signals:
     void updateClientFactory(KTextEditor::View *view);

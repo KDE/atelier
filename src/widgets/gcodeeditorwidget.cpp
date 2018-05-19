@@ -1,6 +1,6 @@
 /* Atelier KDE Printer Host for 3D Printing
     Copyright (C) <2016>
-    Author: Lays Rodrigues - laysrodrigues@gmail.com
+    Author: Lays Rodrigues - lays.rodrigues@kde.org
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -15,14 +15,14 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "gcodeeditorwidget.h"
-#include <QVBoxLayout>
-#include <QLabel>
 #include <KLocalizedString>
+#include <QLabel>
+#include <QVBoxLayout>
+#include "gcodeeditorwidget.h"
 
 GCodeEditorWidget::GCodeEditorWidget(QWidget *parent) :
-    QWidget(parent),
-    m_tabwidget(new QTabWidget())
+    QWidget(parent)
+    , m_tabwidget(new QTabWidget())
 {
     m_editor = KTextEditor::Editor::instance();
     setupTabWidget();
@@ -30,6 +30,7 @@ GCodeEditorWidget::GCodeEditorWidget(QWidget *parent) :
     layout->addWidget(m_tabwidget);
     setLayout(layout);
 }
+
 void GCodeEditorWidget::setupTabWidget()
 {
     connect(m_tabwidget, &QTabWidget::tabCloseRequested, this, &GCodeEditorWidget::closeTab);
@@ -42,6 +43,7 @@ KTextEditor::View *GCodeEditorWidget::gcodeView() const
 {
     return qobject_cast<KTextEditor::View *>(m_editor->documents().first()->views().first());
 }
+
 void GCodeEditorWidget::loadFile(const QUrl &file)
 {
     auto doc = m_editor->documents().first();
