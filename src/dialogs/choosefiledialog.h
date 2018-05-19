@@ -1,6 +1,6 @@
 /* Atelier KDE Printer Host for 3D Printing
     Copyright (C) <2017>
-    Author: Lays Rodrigues - laysrodriguessilva@gmail.com
+    Author: Lays Rodrigues - lays.rodrigues@kde.org
             Chris Rizzitello - rizzitello@kde.org
 
     This program is free software: you can redistribute it and/or modify
@@ -25,10 +25,12 @@
 class ChooseFileDialog : public QDialog
 {
     Q_OBJECT
+
 public:
     ChooseFileDialog(QWidget *parent = nullptr, QList<QUrl> files = QList<QUrl>());
     virtual ~ChooseFileDialog() {}
     const QUrl choosenFile();
+
 private:
     QUrl m_choosen_file;
 };
