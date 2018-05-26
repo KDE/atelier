@@ -34,7 +34,7 @@ public:
     void loadFile(const QUrl &file);
 
 private:
-    QMap<QUrl, int> urlDoc;
+    QMap<QUrl, KTextEditor::Document *> urlDoc;
     QMap<QUrl, QWidget *> urlTab;
     KTextEditor::ConfigInterface *m_interface;
     KTextEditor::Document *newDoc();
