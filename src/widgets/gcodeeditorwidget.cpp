@@ -43,7 +43,7 @@ void GCodeEditorWidget::loadFile(const QUrl &file)
 {
     //if the file is loaded then reload the document.
     if (urlDoc.contains(file)) {
-        m_editor->documents().at(urlDoc[file])->documentReload();
+        urlDoc[file]->documentReload();
         m_tabwidget->setCurrentIndex(m_tabwidget->indexOf(urlTab[file]));
         return;
     }
@@ -52,9 +52,8 @@ void GCodeEditorWidget::loadFile(const QUrl &file)
     doc->openUrl(file);
     doc->setHighlightingMode(QString("G-Code"));
     urlTab[doc->url()] = m_tabwidget->widget(t);
-    urlDoc[doc->url()] = m_editor->documents().count() - 1;
+    urlDoc[doc->url()] = doc;
     m_tabwidget->setCurrentIndex(t);
-    qDebug() << "LOAD " << doc->url() << "DOC:" << m_editor->documents().count() - 1  << "Tab:" << t << m_tabwidget->widget(t);
 }
 
 void GCodeEditorWidget::setupInterface(const KTextEditor::View *view)
@@ -80,14 +79,12 @@ KTextEditor::View *GCodeEditorWidget::newView(KTextEditor::Document *doc)
 void GCodeEditorWidget::closeTab(int index)
 {
     QUrl url = urlTab.key(m_tabwidget->widget(index));
-    auto doc = m_editor->documents().at(urlDoc[url]);
+    auto doc = urlDoc[url];
     if (doc->closeUrl()) {
-        qDebug() << "Closing:" << url << "Tab:" << index << m_tabwidget->tabText(index);
         m_tabwidget->removeTab(index);
         urlTab.remove(url);
         urlDoc.remove(url);
         emit fileClosed(url);
-        qDebug() << "NEWTAB:" << m_tabwidget->tabText(index);
     }
 }
 
