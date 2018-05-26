@@ -54,6 +54,14 @@ void GCodeEditorWidget::loadFile(const QUrl &file)
     urlTab[doc->url()] = m_tabwidget->widget(t);
     urlDoc[doc->url()] = doc;
     m_tabwidget->setCurrentIndex(t);
+    //connect our new document's modified state changed signal.
+    connect(doc, &KTextEditor::Document::modifiedChanged, [this, t](const KTextEditor::Document * document) {
+        QString filename = document->url().fileName(QUrl::FullyDecoded);
+        if (document->isModified()) {
+            filename.append(" *");
+        }
+        m_tabwidget->setTabText(t, filename);
+    });
 }
 
 void GCodeEditorWidget::setupInterface(const KTextEditor::View *view)
