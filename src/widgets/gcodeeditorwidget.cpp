@@ -98,9 +98,6 @@ void GCodeEditorWidget::closeTab(int index)
 
 void GCodeEditorWidget::currentIndexChanged(int index)
 {
-    if (index != -1) {
-        emit updateClientFactory(qobject_cast<KTextEditor::View *>(m_tabwidget->currentWidget()));
-    } else {
-        emit(updateClientFactory(nullptr));
-    }
+    emit currentFileChanged(urlTab.key(m_tabwidget->widget(index)));
+    emit updateClientFactory(qobject_cast<KTextEditor::View *>(m_tabwidget->widget(index)));
 }

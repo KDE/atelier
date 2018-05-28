@@ -47,6 +47,7 @@ private:
     void setupTabWidget();
 
 signals:
+    void currentFileChanged(const QUrl &file);
     void updateClientFactory(KTextEditor::View *view);
     void fileClosed(const QUrl &file);
 };
