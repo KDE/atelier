@@ -218,6 +218,11 @@ void MainWindow::setupLateralArea()
 
     auto *viewer3D = new Viewer3D(this);
     connect(viewer3D, &Viewer3D::droppedUrls, this, &MainWindow::processDropEvent);
+
+    connect(m_gcodeEditor, &GCodeEditorWidget::currentFileChanged, [this, viewer3D](const QUrl & url) {
+        viewer3D->drawModel(url.toString());
+    });
+
     setupButton("3d", i18n("&3D"), QIcon::fromTheme("draw-cuboid", QIcon(QString(":/%1/3d").arg(m_theme))), viewer3D);
     setupButton("gcode", i18n("&GCode"), QIcon::fromTheme("accessories-text-editor", QIcon(":/icon/edit")), m_gcodeEditor);
     setupButton("video", i18n("&Video"), QIcon::fromTheme("camera-web", QIcon(":/icon/video")), new VideoMonitorWidget(this));
