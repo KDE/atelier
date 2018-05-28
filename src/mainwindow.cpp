@@ -77,7 +77,6 @@ void MainWindow::closeEvent(QCloseEvent *event)
             event->ignore();
         }
     }
-    disconnect(m_gcodeEditor, &GCodeEditorWidget::updateClientFactory, this, &MainWindow::updateClientFactory);
 }
 
 void MainWindow::dragEnterEvent(QDragEnterEvent *event)
