@@ -122,7 +122,7 @@ void FileLoader::run()
                 pos.append(actualPos);
             }
         }
-        emit percentUpdate(100);
-        emit posFinished(pos);
     }
-}
+    emit percentUpdate(100);
+    emit posFinished(pos);
+};
