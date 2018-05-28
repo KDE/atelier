@@ -37,7 +37,7 @@ private:
     QMap<QUrl, KTextEditor::Document *> urlDoc;
     QMap<QUrl, QWidget *> urlTab;
     KTextEditor::ConfigInterface *m_interface;
-    KTextEditor::Document *newDoc();
+    KTextEditor::Document *newDoc(const QUrl &file);
     KTextEditor::Editor *m_editor;
     KTextEditor::View *newView(KTextEditor::Document *doc);
     QTabWidget *m_tabwidget;
@@ -47,6 +47,7 @@ private:
     void setupTabWidget();
 
 signals:
+    void currentFileChanged(const QUrl &file);
     void updateClientFactory(KTextEditor::View *view);
     void fileClosed(const QUrl &file);
 };

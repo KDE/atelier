@@ -38,11 +38,6 @@ Viewer3D::Viewer3D(QWidget *parent) :
 {
     Q_INIT_RESOURCE(viewer3d);
 
-    QDirIterator it(QStringLiteral(":"), QDirIterator::Subdirectories);
-    while (it.hasNext()) {
-        qDebug() << it.next();
-    }
-
     qmlRegisterType<GridMesh>("GridMesh", 1, 0, "GridMesh");
     qmlRegisterType<LineMesh>("LineMesh", 1, 0, "LineMesh");
 
