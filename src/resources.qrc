@@ -4,6 +4,7 @@
         <file alias="exit">icons/application-exit.svg</file>
         <file alias="video">icons/camera-web.svg</file>
         <file alias="edit">icons/kwrite.svg</file>
+        <file alias="logo">icons/logo.svg</file>
     </qresource>
     <qresource prefix="/light">
         <file alias="configure">icons/light_configure.svg</file>
@@ -29,7 +30,6 @@
         <file alias="stop">icons/dark_stop.svg</file>
         <file alias="pause">icons/dark_pause.svg</file>
     </qresource>
-        
     <qresource prefix="/kxmlgui5/atelier">
         <file alias="atelierui">atelierui.rc</file>
     </qresource>
