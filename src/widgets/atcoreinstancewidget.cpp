@@ -510,9 +510,11 @@ void AtCoreInstanceWidget::setFileCount(int count)
     togglePrintButtons(m_fileCount);
 }
 
-void AtCoreInstanceWidget::updateSerialPort(const QStringList &ports)
+void AtCoreInstanceWidget::updateSerialPort(QStringList ports)
 {
     m_comboPort->clear();
+    //Remove any strings that match ttyS## from the port list.
+    ports = ports.filter(QRegularExpression("^((?!ttyS\\d+).)*$"));
     if (!ports.isEmpty()) {
         m_comboPort->addItems(ports);
         m_logWidget->appendLog(i18n("Found %1 Ports", QString::number(ports.count())));
