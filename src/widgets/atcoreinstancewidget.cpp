@@ -107,7 +107,7 @@ void AtCoreInstanceWidget::buildToolbar()
     lb = new QLabel(i18n("Home:"));
     m_toolBar->addWidget(lb);
 
-    auto homeAll = new QAction("All");
+    auto homeAll = new QAction(i18n("All"));
     connect(homeAll, &QAction::triggered, [this] {
         m_core.home();
     });
@@ -128,6 +128,7 @@ void AtCoreInstanceWidget::buildToolbar()
 
         if (m_core.state() == AtCore::BUSY)
         {
+            m_logWidget->appendLog(i18n("Pause Print"));
             pausePrint();
             return;
         }
@@ -137,6 +138,7 @@ void AtCoreInstanceWidget::buildToolbar()
             print();
         } else if (m_core.state() == AtCore::PAUSE)
         {
+            m_logWidget->appendLog(i18n("Resume Print"));
             m_core.resume();
         }
     });
@@ -225,9 +227,9 @@ void AtCoreInstanceWidget::connectButtonClicked()
 
         //then connect
         if (m_core.initSerial(m_comboPort->currentText(), data["bps"].toInt())) {
-            m_logWidget->appendLog(i18n("Serial connected"));
             profileData = data;
             QString fw = profileData["firmware"].toString();
+            m_logWidget->appendLog(i18n("Firmware: %1", fw));
             if (fw != QString("Auto-Detect")) {
                 m_core.loadFirmwarePlugin(fw);
             }
@@ -284,12 +286,12 @@ void AtCoreInstanceWidget::initConnectsToAtCore()
     });
     //command Widget
     connect(m_commandWidget, &CommandWidget::commandPressed, [this](const QString & command) {
-        m_logWidget->appendLog("Push: " + command);
+        m_logWidget->appendLog(i18n("Push: %1", command));
         m_core.pushCommand(command);
     });
 
     connect(m_commandWidget, &CommandWidget::messagePressed, [this](const QString & message) {
-        m_logWidget->appendLog("Display: " + message);
+        m_logWidget->appendLog(i18n("Display: %1", message));
         m_core.showMessage(message);
     });
 
@@ -343,6 +345,7 @@ void AtCoreInstanceWidget::initConnectsToAtCore()
 void AtCoreInstanceWidget::printFile(const QUrl &fileName)
 {
     if (!fileName.isEmpty() && (m_core.state() == AtCore::IDLE)) {
+        m_logWidget->appendLog(i18n("Printing:%1", fileName.toLocalFile()));
         m_core.print(fileName.toLocalFile());
     }
 }
@@ -382,13 +385,14 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
         m_connectToolBar->setHidden(true);
         m_toolBar->setHidden(false);
         stateString = i18n("Connecting...");
+        m_logWidget->appendLog(i18n("Attempting to Connect"));
         connect(&m_core, &AtCore::receivedMessage, m_logWidget, &LogWidget::appendRLog);
         connect(m_core.serial(), &SerialLayer::pushedCommand, m_logWidget, &LogWidget::appendSLog);
     } break;
     case AtCore::IDLE: {
         stateString = i18n("Connected to %1", m_core.serial()->portName());
         emit extruderCountChanged(m_core.extruderCount());
-        m_logWidget->appendLog(i18n("Serial connected"));
+        m_logWidget->appendLog(stateString);
         emit disableDisconnect(false);
         enableControls(true);
     } break;
@@ -415,6 +419,7 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
         disconnect(&m_core, &AtCore::printProgressChanged, m_statusWidget, &StatusWidget::updatePrintProgress);
         m_printAction->setText(i18n("Print"));
         m_printAction->setIcon(QIcon::fromTheme("media-playback-start", QIcon(QString(":/%1/start").arg(m_theme))));
+        m_logWidget->appendLog(i18n("Finished Print Job"));
     } break;
     case AtCore::BUSY: {
         stateString = i18n("Printing");
@@ -429,11 +434,13 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
     } break;
     case AtCore::STOP: {
         stateString = i18n("Stoping Print");
+        m_logWidget->appendLog(stateString);
     } break;
     case AtCore::ERRORSTATE: {
         stateString = i18n("Error");
     } break;
     default:
+        m_logWidget->appendLog(i18n("Unknown AtCore State, %1", newState));
         qWarning("AtCore State not Recognized.");
         break;
     }
