@@ -89,7 +89,7 @@ private:
     void stopPrint();
     void pausePrint();
     void print();
-    void updateSerialPort(const QStringList &ports);
+    void updateSerialPort(QStringList ports);
     void togglePrintButtons(bool shown);
 
 signals:
