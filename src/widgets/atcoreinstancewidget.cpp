@@ -238,8 +238,6 @@ void AtCoreInstanceWidget::connectButtonClicked()
             m_bedExtWidget->setExtruderMaxTemperature(profileData["hotendTemp"].toInt());
             //AddFan Support to profile
             m_printWidget->updateFanCount(2);
-        } else {
-            m_logWidget->appendLog(i18n("Failed to open serial in r/w mode"));
         }
     } else {
         m_core.closeConnection();
@@ -249,6 +247,8 @@ void AtCoreInstanceWidget::connectButtonClicked()
 
 void AtCoreInstanceWidget::initConnectsToAtCore()
 {
+    //connect log to atcoreMessages
+    connect(&m_core, &AtCore::atcoreMessage, m_logWidget, &LogWidget::appendLog);
     m_core.setSerialTimerInterval(100);
     // Handle device changes
     connect(&m_core, &AtCore::portsChanged, this, &AtCoreInstanceWidget::updateSerialPort);
