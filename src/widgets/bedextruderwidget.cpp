@@ -124,7 +124,7 @@ void BedExtruderWidget::setExtruderMaxTemperature(int value)
     m_extruderThermo->setScale(0, value);
 }
 
-void BedExtruderWidget::hideBedThermo()
+void BedExtruderWidget::setBedThermoHidden(bool hidden)
 {
-    m_bedThermo->hide();
+    m_bedThermo->setHidden(hidden);
 }

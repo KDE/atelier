@@ -39,7 +39,7 @@ public:
     void updateExtTemp(const float temp);
     void updateBedTargetTemp(const float temp);
     void updateExtTargetTemp(const float temp);
-    void hideBedThermo();
+    void setBedThermoHidden(bool hidden);
 
 private:
     int m_extruderCount = 0;

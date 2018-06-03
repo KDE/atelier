@@ -221,6 +221,7 @@ void AtCoreInstanceWidget::connectButtonClicked()
         data["hotendTemp"] = m_settings.value(QStringLiteral("maximumTemperatureExtruder"), QStringLiteral("0"));
         data["firmware"] = m_settings.value(QStringLiteral("firmware"), QStringLiteral("Auto-Detect"));
         data["postPause"] = m_settings.value(QStringLiteral("postPause"), QStringLiteral(""));
+        data["heatedBed"] = m_settings.value(QStringLiteral("heatedBed"), true);
         data["name"] = profile;
         m_settings.endGroup();
         m_settings.endGroup();
@@ -234,7 +235,9 @@ void AtCoreInstanceWidget::connectButtonClicked()
                 m_core.loadFirmwarePlugin(fw);
             }
             emit(connectionChanged(m_profileData["name"].toString()));
-            m_bedExtWidget->setBedMaxTemperature(m_profileData["bedTemp"].toInt());
+            m_profileData["heatedBed"].toBool() ? m_bedExtWidget->setBedMaxTemperature(m_profileData["bedTemp"].toInt()) :
+            m_bedExtWidget->setBedThermoHidden(true);
+
             m_bedExtWidget->setExtruderMaxTemperature(m_profileData["hotendTemp"].toInt());
             //AddFan Support to profile
             m_printWidget->updateFanCount(2);
