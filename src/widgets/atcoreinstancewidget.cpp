@@ -227,15 +227,15 @@ void AtCoreInstanceWidget::connectButtonClicked()
 
         //then connect
         if (m_core.initSerial(m_comboPort->currentText(), data["bps"].toInt())) {
-            profileData = data;
-            QString fw = profileData["firmware"].toString();
+            m_profileData = data;
+            QString fw = m_profileData["firmware"].toString();
             m_logWidget->appendLog(i18n("Firmware: %1", fw));
             if (fw != QString("Auto-Detect")) {
                 m_core.loadFirmwarePlugin(fw);
             }
-            emit(connectionChanged(profileData["name"].toString()));
-            m_bedExtWidget->setBedMaxTemperature(profileData["bedTemp"].toInt());
-            m_bedExtWidget->setExtruderMaxTemperature(profileData["hotendTemp"].toInt());
+            emit(connectionChanged(m_profileData["name"].toString()));
+            m_bedExtWidget->setBedMaxTemperature(m_profileData["bedTemp"].toInt());
+            m_bedExtWidget->setExtruderMaxTemperature(m_profileData["hotendTemp"].toInt());
             //AddFan Support to profile
             m_printWidget->updateFanCount(2);
         }
@@ -358,7 +358,7 @@ void AtCoreInstanceWidget::print()
 void AtCoreInstanceWidget::pausePrint()
 {
     if (m_core.state() == AtCore::BUSY) {
-        m_core.pause(profileData["postPause"].toString());
+        m_core.pause(m_profileData["postPause"].toString());
     } else if (m_core.state() == AtCore::PAUSE) {
         m_core.resume();
     }
