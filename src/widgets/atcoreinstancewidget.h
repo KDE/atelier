@@ -87,6 +87,7 @@ private:
     void handlePrinterStatusChanged(AtCore::STATES newState);
     void initConnectsToAtCore();
     void stopPrint();
+    QMap<QString, QVariant> readProfile();
     void pausePrint();
     void print();
     void updateSerialPort(QStringList ports);

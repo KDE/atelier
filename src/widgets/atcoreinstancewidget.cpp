@@ -212,23 +212,9 @@ void AtCoreInstanceWidget::connectButtonClicked()
             return;
         }
         //Get profile data before connecting.
-        QString profile = m_comboProfile->currentText();
-        m_settings.beginGroup("Profiles");
-        m_settings.beginGroup(profile);
-        QMap<QString, QVariant> data;
-        data["bps"] = m_settings.value(QStringLiteral("bps"), QStringLiteral("115200"));
-        data["bedTemp"] = m_settings.value(QStringLiteral("maximumTemperatureBed"), QStringLiteral("0"));
-        data["hotendTemp"] = m_settings.value(QStringLiteral("maximumTemperatureExtruder"), QStringLiteral("0"));
-        data["firmware"] = m_settings.value(QStringLiteral("firmware"), QStringLiteral("Auto-Detect"));
-        data["postPause"] = m_settings.value(QStringLiteral("postPause"), QStringLiteral(""));
-        data["heatedBed"] = m_settings.value(QStringLiteral("heatedBed"), true);
-        data["name"] = profile;
-        m_settings.endGroup();
-        m_settings.endGroup();
-
+        m_profileData = readProfile();
         //then connect
-        if (m_core.initSerial(m_comboPort->currentText(), data["bps"].toInt())) {
-            m_profileData = data;
+        if (m_core.initSerial(m_comboPort->currentText(), m_profileData["bps"].toInt())) {
             QString fw = m_profileData["firmware"].toString();
             m_logWidget->appendLog(i18n("Firmware: %1", fw));
             if (fw != QString("Auto-Detect")) {
@@ -536,6 +522,13 @@ void AtCoreInstanceWidget::updateProfileData()
     m_settings.endGroup();
     m_comboProfile->clear();
     m_comboProfile->addItems(profiles);
+
+    if (m_core.state() != AtCore::DISCONNECTED) {
+        m_profileData = readProfile();
+        m_bedExtWidget->setBedMaxTemperature(m_profileData["bedTemp"].toInt());
+        m_bedExtWidget->setExtruderMaxTemperature(m_profileData["hotendTemp"].toInt());
+        m_bedExtWidget->setBedThermoHidden(!m_profileData["heatedBed"].toBool());
+    }
 }
 
 void AtCoreInstanceWidget::togglePrintButtons(bool shown)
@@ -547,4 +540,21 @@ void AtCoreInstanceWidget::togglePrintButtons(bool shown)
 bool AtCoreInstanceWidget::isPrinting()
 {
     return (m_core.state() == AtCore::BUSY);
+}
+
+QMap<QString, QVariant> AtCoreInstanceWidget::readProfile()
+{
+    QString profile = m_comboProfile->currentText();
+    m_settings.beginGroup("Profiles");
+    m_settings.beginGroup(profile);
+    QMap<QString, QVariant> data{
+        {"bps", m_settings.value(QStringLiteral("bps"), QStringLiteral("115200"))}
+        , {"bedTemp", m_settings.value(QStringLiteral("maximumTemperatureBed"), QStringLiteral("0"))}
+        , {"hotendTemp", m_settings.value(QStringLiteral("maximumTemperatureExtruder"), QStringLiteral("0"))}
+        , {"firmware", m_settings.value(QStringLiteral("firmware"), QStringLiteral("Auto-Detect"))}
+        , {"postPause", m_settings.value(QStringLiteral("postPause"), QStringLiteral(""))}
+        , {"heatedBed", m_settings.value(QStringLiteral("heatedBed"), true)}
+        , {"name", profile}
+    };
+    return data;
 }
