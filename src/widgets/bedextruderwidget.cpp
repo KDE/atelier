@@ -38,10 +38,10 @@ BedExtruderWidget::BedExtruderWidget(QWidget *parent) :
     auto *label = new QLabel(i18n("Active Extruder:"));
     m_extrudersLayout->addWidget(label);
 
-    auto *layout = new QGridLayout;
-    layout->addWidget(m_extruderBox, 0, 0, 1, -1);
-    layout->addWidget(m_bedThermo, 1, 0);
-    layout->addWidget(m_extruderThermo, 1, 1);
+    auto *layout = new QHBoxLayout;
+    layout->addWidget(m_extruderBox);
+    layout->addWidget(m_bedThermo);
+    layout->addWidget(m_extruderThermo);
 
     setLayout(layout);
     //Add Default Extruder
@@ -122,4 +122,9 @@ void BedExtruderWidget::setBedMaxTemperature(int value)
 void BedExtruderWidget::setExtruderMaxTemperature(int value)
 {
     m_extruderThermo->setScale(0, value);
+}
+
+void BedExtruderWidget::setBedThermoHidden(bool hidden)
+{
+    m_bedThermo->setHidden(hidden);
 }

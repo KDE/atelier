@@ -69,7 +69,7 @@ private:
     QAction *m_stopAction;
     QComboBox *m_comboPort;
     QComboBox *m_comboProfile;
-    QMap<QString, QVariant> profileData;
+    QMap<QString, QVariant> m_profileData;
     QPushButton *m_connectButton;
     QSettings m_settings;
     QString m_theme;
