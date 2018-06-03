@@ -35,7 +35,7 @@ public:
 
 private:
     Ui::ProfilesDialog *ui;
-    QSettings settings;
+    QSettings m_settings;
     QStringList detectFWPlugins() const;
     void accept();
     void loadSettings(const QString &currentProfile = QString());

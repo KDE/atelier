@@ -86,9 +86,9 @@ ProfilesDialog::~ProfilesDialog()
 
 void ProfilesDialog::saveSettings()
 {
-    settings.beginGroup(QStringLiteral("GeneralSettings"));
-    QStringList groups = settings.childGroups();
-    settings.endGroup();
+    m_settings.beginGroup(QStringLiteral("Profiles"));
+    QStringList groups = m_settings.childGroups();
+    m_settings.endGroup();
     QString currentProfile = ui->profileCB->currentText();
     if (groups.contains(currentProfile)) {
         int ret = QMessageBox::information(
@@ -104,30 +104,30 @@ void ProfilesDialog::saveSettings()
         }
     }
     //Add indent to better view of the data
-    settings.beginGroup(QStringLiteral("GeneralSettings"));
-    settings.beginGroup(currentProfile);
+    m_settings.beginGroup(QStringLiteral("Profiles"));
+    m_settings.beginGroup(currentProfile);
     //BED
     if (ui->cartesianRB->isChecked()) {
-        settings.setValue(QStringLiteral("isCartesian"), true);
-        settings.setValue(QStringLiteral("dimensionX"), ui->x_dimensionSB->value());
-        settings.setValue(QStringLiteral("dimensionY"), ui->y_dimensionSB->value());
-        settings.setValue(QStringLiteral("dimensionZ"), ui->z_dimensionSB->value());
+        m_settings.setValue(QStringLiteral("isCartesian"), true);
+        m_settings.setValue(QStringLiteral("dimensionX"), ui->x_dimensionSB->value());
+        m_settings.setValue(QStringLiteral("dimensionY"), ui->y_dimensionSB->value());
+        m_settings.setValue(QStringLiteral("dimensionZ"), ui->z_dimensionSB->value());
     } else {
-        settings.setValue(QStringLiteral("isCartesian"), false);
-        settings.setValue(QStringLiteral("radius"), ui->radiusSB->value());
-        settings.setValue(QStringLiteral("z_delta_dimension"), ui->z_dimensionSB->value());
+        m_settings.setValue(QStringLiteral("isCartesian"), false);
+        m_settings.setValue(QStringLiteral("radius"), ui->radiusSB->value());
+        m_settings.setValue(QStringLiteral("z_delta_dimension"), ui->z_dimensionSB->value());
     }
 
-    settings.setValue(QStringLiteral("heatedBed"), ui->heatedBedCK->isChecked());
-    settings.setValue(QStringLiteral("maximumTemperatureBed"), ui->bedTempSB->value());
+    m_settings.setValue(QStringLiteral("heatedBed"), ui->heatedBedCK->isChecked());
+    m_settings.setValue(QStringLiteral("maximumTemperatureBed"), ui->bedTempSB->value());
     //HOTEND
-    settings.setValue(QStringLiteral("maximumTemperatureExtruder"), ui->extruderTempSB->value());
+    m_settings.setValue(QStringLiteral("maximumTemperatureExtruder"), ui->extruderTempSB->value());
     //Baud
-    settings.setValue(QStringLiteral("bps"), ui->baudCB->currentText());
-    settings.setValue(QStringLiteral("firmware"), ui->firmwareCB->currentText());
-    settings.setValue(QStringLiteral("postPause"), ui->postPauseLE->text());
-    settings.endGroup();
-    settings.endGroup();
+    m_settings.setValue(QStringLiteral("bps"), ui->baudCB->currentText());
+    m_settings.setValue(QStringLiteral("firmware"), ui->firmwareCB->currentText());
+    m_settings.setValue(QStringLiteral("postPause"), ui->postPauseLE->text());
+    m_settings.endGroup();
+    m_settings.endGroup();
 
     //Load new profile
     updateCBProfiles();
@@ -137,49 +137,49 @@ void ProfilesDialog::saveSettings()
 
 void ProfilesDialog::loadSettings(const QString &currentProfile)
 {
-    settings.beginGroup(QStringLiteral("GeneralSettings"));
+    m_settings.beginGroup(QStringLiteral("Profiles"));
     const QString profileName = currentProfile.isEmpty() ? ui->profileCB ->currentText() : currentProfile;
     ui->profileCB->setCurrentText(profileName);
-    settings.beginGroup(profileName);
+    m_settings.beginGroup(profileName);
 
     //BED
-    if (settings.value(QStringLiteral("isCartesian")).toBool()) {
+    if (m_settings.value(QStringLiteral("isCartesian")).toBool()) {
         ui->cartesianGB->setHidden(false);
         ui->cartesianRB->setChecked(true);
         ui->deltaRB->setChecked(false);
         ui->deltaGB->setHidden(true);
-        ui->x_dimensionSB->setValue(settings.value(QStringLiteral("dimensionX"), QStringLiteral("0")).toInt());
-        ui->y_dimensionSB->setValue(settings.value(QStringLiteral("dimensionY"), QStringLiteral("0")).toInt());
-        ui->z_dimensionSB->setValue(settings.value(QStringLiteral("dimensionZ"), QStringLiteral("0")).toInt());
+        ui->x_dimensionSB->setValue(m_settings.value(QStringLiteral("dimensionX"), QStringLiteral("0")).toInt());
+        ui->y_dimensionSB->setValue(m_settings.value(QStringLiteral("dimensionY"), QStringLiteral("0")).toInt());
+        ui->z_dimensionSB->setValue(m_settings.value(QStringLiteral("dimensionZ"), QStringLiteral("0")).toInt());
     } else {
         ui->deltaGB->setHidden(false);
         ui->deltaRB->setChecked(true);
         ui->cartesianRB->setChecked(false);
         ui->cartesianGB->setHidden(true);
-        ui->radiusSB->setValue(settings.value(QStringLiteral("radius"), QStringLiteral("0")).toFloat());
-        ui->z_delta_dimensionSB->setValue(settings.value(QStringLiteral("z_delta_dimension"), QStringLiteral("0")).toFloat());
+        ui->radiusSB->setValue(m_settings.value(QStringLiteral("radius"), QStringLiteral("0")).toFloat());
+        ui->z_delta_dimensionSB->setValue(m_settings.value(QStringLiteral("z_delta_dimension"), QStringLiteral("0")).toFloat());
     }
 
-    ui->heatedBedCK->setChecked(settings.value(QStringLiteral("heatedBed"), QStringLiteral("true")).toBool());
+    ui->heatedBedCK->setChecked(m_settings.value(QStringLiteral("heatedBed"), QStringLiteral("true")).toBool());
     ui->bedTempSB->setEnabled(ui->heatedBedCK->isChecked());
-    ui->bedTempSB->setValue(settings.value(QStringLiteral("maximumTemperatureBed"), QStringLiteral("0")).toInt());
+    ui->bedTempSB->setValue(m_settings.value(QStringLiteral("maximumTemperatureBed"), QStringLiteral("0")).toInt());
 
     //HOTEND
-    ui->extruderTempSB->setValue(settings.value(QStringLiteral("maximumTemperatureExtruder"), QStringLiteral("0")).toInt());
+    ui->extruderTempSB->setValue(m_settings.value(QStringLiteral("maximumTemperatureExtruder"), QStringLiteral("0")).toInt());
     //Baud
-    ui->baudCB->setCurrentText(settings.value(QStringLiteral("bps"), QStringLiteral("115200")).toString());
-    ui->firmwareCB->setCurrentText(settings.value(QStringLiteral("firmware"), QStringLiteral("Auto-Detect")).toString());
-    ui->postPauseLE->setText(settings.value(QStringLiteral("postPause"), QStringLiteral("")).toString());
-    settings.endGroup();
-    settings.endGroup();
+    ui->baudCB->setCurrentText(m_settings.value(QStringLiteral("bps"), QStringLiteral("115200")).toString());
+    ui->firmwareCB->setCurrentText(m_settings.value(QStringLiteral("firmware"), QStringLiteral("Auto-Detect")).toString());
+    ui->postPauseLE->setText(m_settings.value(QStringLiteral("postPause"), QStringLiteral("")).toString());
+    m_settings.endGroup();
+    m_settings.endGroup();
 
 }
 
 void ProfilesDialog::updateCBProfiles()
 {
-    settings.beginGroup(QStringLiteral("GeneralSettings"));
-    QStringList groups = settings.childGroups();
-    settings.endGroup();
+    m_settings.beginGroup(QStringLiteral("Profiles"));
+    QStringList groups = m_settings.childGroups();
+    m_settings.endGroup();
     if (groups.isEmpty()) {
         ui->deltaGB->setHidden(true);
     }
@@ -195,12 +195,12 @@ void ProfilesDialog::accept()
 void ProfilesDialog::removeProfile()
 {
     QString currentProfile = ui->profileCB->currentText();
-    settings.beginGroup(QStringLiteral("GeneralSettings"));
-    settings.beginGroup(currentProfile);
-    settings.remove("");
-    settings.endGroup();
-    settings.remove(currentProfile);
-    settings.endGroup();
+    m_settings.beginGroup(QStringLiteral("Profiles"));
+    m_settings.beginGroup(currentProfile);
+    m_settings.remove("");
+    m_settings.endGroup();
+    m_settings.remove(currentProfile);
+    m_settings.endGroup();
     updateCBProfiles();
 }
 

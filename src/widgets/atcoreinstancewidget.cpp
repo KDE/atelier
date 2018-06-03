@@ -213,7 +213,7 @@ void AtCoreInstanceWidget::connectButtonClicked()
         }
         //Get profile data before connecting.
         QString profile = m_comboProfile->currentText();
-        m_settings.beginGroup("GeneralSettings");
+        m_settings.beginGroup("Profiles");
         m_settings.beginGroup(profile);
         QMap<QString, QVariant> data;
         data["bps"] = m_settings.value(QStringLiteral("bps"), QStringLiteral("115200"));
@@ -528,7 +528,7 @@ void AtCoreInstanceWidget::updateSerialPort(QStringList ports)
 
 void AtCoreInstanceWidget::updateProfileData()
 {
-    m_settings.beginGroup("GeneralSettings");
+    m_settings.beginGroup("Profiles");
     QStringList profiles = m_settings.childGroups();
     m_settings.endGroup();
     m_comboProfile->clear();
