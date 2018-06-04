@@ -16,7 +16,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #pragma once
-
+#include <QAbstractButton>
 #include <QDialog>
 #include <QSettings>
 
@@ -39,6 +39,7 @@ private:
     QStringList detectFWPlugins();
     void accept();
     void askToSave();
+    void buttonBoxClicked(QAbstractButton *btn);
     QStringList firmwaresInPath(const QString &path);
     void loadSettings(const QString &currentProfile = QString());
     void removeProfile();

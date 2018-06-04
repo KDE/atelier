@@ -40,21 +40,7 @@ ProfilesDialog::ProfilesDialog(QWidget *parent) :
     });
     updateCBProfiles();
 
-    connect(ui->buttonBox, &QDialogButtonBox::clicked, [this](QAbstractButton * btn) {
-        switch (ui->buttonBox->buttonRole(btn)) {
-        case QDialogButtonBox::ResetRole:
-            askToSave();
-            loadSettings();
-            break;
-        case QDialogButtonBox::RejectRole:
-            askToSave();
-            close();
-            break;
-        default:
-            break;
-        }
-    });
-
+    connect(ui->buttonBox, &QDialogButtonBox::clicked, this, &ProfilesDialog::buttonBoxClicked);
     connect(ui->heatedBedCK, &QCheckBox::clicked, [this](const bool & status) {
         ui->bedTempSB->setEnabled(status);
     });
@@ -93,6 +79,22 @@ ProfilesDialog::ProfilesDialog(QWidget *parent) :
 ProfilesDialog::~ProfilesDialog()
 {
     delete ui;
+}
+
+void ProfilesDialog::buttonBoxClicked(QAbstractButton *btn)
+{
+    switch (ui->buttonBox->buttonRole(btn)) {
+    case QDialogButtonBox::ResetRole:
+        askToSave();
+        loadSettings();
+        break;
+    case QDialogButtonBox::RejectRole:
+        askToSave();
+        close();
+        break;
+    default:
+        break;
+    }
 }
 
 void ProfilesDialog::saveSettings()
