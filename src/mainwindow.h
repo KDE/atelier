@@ -67,7 +67,7 @@ private:
     void initWidgets();
     void loadFile(const QUrl &fileName);
     void newAtCoreInstance();
-    void openActionTriggered();;
+    void openActionTriggered();
     void processDropEvent(const QList<QUrl> &fileList);
     void setupActions();
     void setupLateralArea();
