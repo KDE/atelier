@@ -16,18 +16,12 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+#include <atcore_default_folders.h>
 #include <KLocalizedString>
 #include <QDir>
 #include <QMessageBox>
 #include "profilesdialog.h"
 #include "ui_profilesdialog.h"
-
-//Do not include for windows/mac os
-#ifndef Q_OS_WIN
-#ifndef Q_OS_MAC
-#include <atcore_default_folders.h>
-#endif
-#endif
 
 ProfilesDialog::ProfilesDialog(QWidget *parent) :
     QDialog(parent)
@@ -204,36 +198,38 @@ void ProfilesDialog::removeProfile()
     updateCBProfiles();
 }
 
-QStringList ProfilesDialog::detectFWPlugins() const
+QStringList ProfilesDialog::detectFWPlugins()
 {
-    //Path used if for windows/ mac os only.
-    QDir pluginDir(qApp->applicationDirPath() + QStringLiteral("/plugins"));
-
-#if defined(Q_OS_WIN)
-    pluginDir.setNameFilters(QStringList() << "*.dll");
-
-#elif defined(Q_OS_MAC)
-    pluginDir.setNameFilters(QStringList() << "*.dylib");
-
-#else //Not Windows || Not MAC
-    QStringList pathList = AtCoreDirectories::pluginDir;
-    pathList.append(QLibraryInfo::location(QLibraryInfo::PluginsPath) + QStringLiteral("/AtCore"));
-
-    for (const auto &path : pathList) {
-        if (QDir(path).exists()) {
+    QStringList firmwares;
+    QStringList paths = AtCoreDirectories::pluginDir;
+    paths.prepend(qApp->applicationDirPath() + QStringLiteral("/plugins"));
+    for (const QString &path : paths) {
+        firmwares = firmwaresInPath(path);
+        if (!firmwares.isEmpty()) {
             //use path where plugins were detected.
-            pluginDir = QDir(path);
             break;
         }
     }
-    pluginDir.setNameFilters(QStringList() << "*.so");
-#endif
+    return firmwares;
+}
 
+QStringList ProfilesDialog::firmwaresInPath(const QString &path)
+{
     QStringList firmwares;
-    QStringList files = pluginDir.entryList(QDir::Files);
-    foreach (const QString &f, files) {
+    QStringList files = QDir(path).entryList(QDir::Files);
+    for (const QString &f : files) {
         QString file = f;
-        file = file.split(QChar::fromLatin1('.')).at(0);
+#if defined(Q_OS_WIN)
+        if (file.endsWith(QStringLiteral(".dll")))
+#elif defined(Q_OS_MAC)
+        if (file.endsWith(QStringLiteral(".dylib")))
+#else
+        if (file.endsWith(QStringLiteral(".so")))
+#endif
+            file = file.split(QChar::fromLatin1('.')).at(0);
+        else {
+            continue;
+        }
         if (file.startsWith(QStringLiteral("lib"))) {
             file = file.remove(QStringLiteral("lib"));
         }
