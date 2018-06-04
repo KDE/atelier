@@ -85,9 +85,9 @@ void ProfilesDialog::saveSettings()
     m_settings.endGroup();
     QString currentProfile = ui->profileCB->currentText();
     if (groups.contains(currentProfile)) {
-        int ret = QMessageBox::information(
+        int ret = QMessageBox::warning(
                       this
-                      , i18n("Save?")
+                      , i18n("Overwrite Profile?")
                       , i18n("A profile with this name already exists. \n Are you sure you want to overwrite it?")
                       , QMessageBox::Save
                       , QMessageBox::Cancel
@@ -97,6 +97,12 @@ void ProfilesDialog::saveSettings()
             return;
         }
     }
+    save();
+}
+
+void ProfilesDialog::save()
+{
+    QString currentProfile = ui->profileCB->currentText();
     //Add indent to better view of the data
     m_settings.beginGroup(QStringLiteral("Profiles"));
     m_settings.beginGroup(currentProfile);
