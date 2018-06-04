@@ -100,8 +100,7 @@ void ProfilesDialog::saveSettings()
     m_settings.beginGroup(QStringLiteral("Profiles"));
     QStringList groups = m_settings.childGroups();
     m_settings.endGroup();
-    QString currentProfile = ui->profileCB->currentText();
-    if (groups.contains(currentProfile)) {
+    if (groups.contains(ui->profileCB->currentText())) {
         int ret = QMessageBox::warning(
                       this
                       , i18n("Overwrite Profile?")
