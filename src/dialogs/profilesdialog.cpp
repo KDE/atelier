@@ -26,6 +26,7 @@
 ProfilesDialog::ProfilesDialog(QWidget *parent) :
     QDialog(parent)
     , ui(new Ui::ProfilesDialog)
+    , m_modified(false)
 {
     ui->setupUi(this);
     ui->firmwareCB->addItem(QStringLiteral("Auto-Detect"));
@@ -34,6 +35,7 @@ ProfilesDialog::ProfilesDialog(QWidget *parent) :
     ui->baudCB->setCurrentText(QLatin1String("115200"));
     ui->profileCB->setAutoCompletion(true);
     connect(ui->profileCB, static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged), [this] {
+        askToSave();
         loadSettings();
     });
     updateCBProfiles();
@@ -41,9 +43,11 @@ ProfilesDialog::ProfilesDialog(QWidget *parent) :
     connect(ui->buttonBox, &QDialogButtonBox::clicked, [this](QAbstractButton * btn) {
         switch (ui->buttonBox->buttonRole(btn)) {
         case QDialogButtonBox::ResetRole:
+            askToSave();
             loadSettings();
             break;
         case QDialogButtonBox::RejectRole:
+            askToSave();
             close();
             break;
         default:
@@ -71,6 +75,19 @@ ProfilesDialog::ProfilesDialog(QWidget *parent) :
 #else
     ui->removeProfilePB->setIcon(style()->standardIcon(QStyle::SP_TrashIcon));
 #endif
+//if any control is modifed and no load / save has happend contents are not saved.
+    auto modify = [this] {setModified(true);};
+    connect(ui->baudCB, &QComboBox::currentTextChanged, modify);
+    connect(ui->radiusSB, &QSpinBox::editingFinished, modify);
+    connect(ui->z_delta_dimensionSB, &QSpinBox::editingFinished, modify);
+    connect(ui->x_dimensionSB, &QSpinBox::editingFinished, modify);
+    connect(ui->y_dimensionSB, &QSpinBox::editingFinished, modify);
+    connect(ui->z_dimensionSB, &QSpinBox::editingFinished, modify);
+    connect(ui->heatedBedCK, &QCheckBox::stateChanged, modify);
+    connect(ui->bedTempSB, &QSpinBox::editingFinished, modify);
+    connect(ui->extruderTempSB, &QSpinBox::editingFinished, modify);
+    connect(ui->postPauseLE, &QLineEdit::editingFinished, modify);
+    connect(ui->firmwareCB, &QComboBox::currentTextChanged, modify);
 }
 
 ProfilesDialog::~ProfilesDialog()
@@ -130,6 +147,7 @@ void ProfilesDialog::save()
     m_settings.endGroup();
 
     //Load new profile
+    setModified(false);
     updateCBProfiles();
     loadSettings(currentProfile);
     emit updateProfiles();
@@ -172,6 +190,7 @@ void ProfilesDialog::loadSettings(const QString &currentProfile)
     ui->postPauseLE->setText(m_settings.value(QStringLiteral("postPause"), QStringLiteral("")).toString());
     m_settings.endGroup();
     m_settings.endGroup();
+    setModified(false);
 
 }
 
@@ -243,4 +262,25 @@ QStringList ProfilesDialog::firmwaresInPath(const QString &path)
         firmwares.append(file);
     }
     return firmwares;
+}
+
+void ProfilesDialog::setModified(bool modified)
+{
+    m_modified = modified;
+}
+
+void ProfilesDialog::askToSave()
+{
+    if (m_modified) {
+        int ret = QMessageBox::question(
+                      this
+                      , i18n("Save?")
+                      , i18n("This Profile has been modified, Would you like to Save it?")
+                      , QMessageBox::Save
+                      , QMessageBox::No
+                  );
+        if (ret == QMessageBox::Save) {
+            save();
+        }
+    }
 }

@@ -38,12 +38,15 @@ private:
     QSettings m_settings;
     QStringList detectFWPlugins();
     void accept();
+    void askToSave();
     QStringList firmwaresInPath(const QString &path);
     void loadSettings(const QString &currentProfile = QString());
     void removeProfile();
     void save();
     void saveSettings();
     void updateCBProfiles();
+    void setModified(bool modified);
+    bool m_modified;
 
 signals:
     void updateProfiles();
