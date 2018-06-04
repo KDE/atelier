@@ -92,6 +92,9 @@ void ProfilesDialog::buttonBoxClicked(QAbstractButton *btn)
         askToSave();
         close();
         break;
+    case QDialogButtonBox::AcceptRole:
+        saveSettings();
+        break;
     default:
         break;
     }
@@ -205,11 +208,6 @@ void ProfilesDialog::updateCBProfiles()
     }
     ui->profileCB->clear();
     ui->profileCB->addItems(groups);
-}
-
-void ProfilesDialog::accept()
-{
-    saveSettings();
 }
 
 void ProfilesDialog::removeProfile()

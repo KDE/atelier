@@ -36,10 +36,9 @@ public:
 private:
     Ui::ProfilesDialog *ui;
     QSettings m_settings;
-    QStringList detectFWPlugins();
-    void accept();
     void askToSave();
     void buttonBoxClicked(QAbstractButton *btn);
+    QStringList detectFWPlugins();
     QStringList firmwaresInPath(const QString &path);
     void loadSettings(const QString &currentProfile = QString());
     void removeProfile();
