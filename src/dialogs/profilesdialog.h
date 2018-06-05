@@ -1,7 +1,7 @@
 /* Atelier KDE Printer Host for 3D Printing
     Copyright (C) <2016>
     Author: Lays Rodrigues - lays.rodrigues@kde.org
-
+            Chris Rizzitello - rizzitello@kde.org
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -16,7 +16,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #pragma once
-
+#include <QAbstractButton>
 #include <QDialog>
 #include <QSettings>
 
@@ -36,12 +36,17 @@ public:
 private:
     Ui::ProfilesDialog *ui;
     QSettings m_settings;
-    QStringList detectFWPlugins() const;
-    void accept();
+    void askToSave();
+    void buttonBoxClicked(QAbstractButton *btn);
+    QStringList detectFWPlugins();
+    QStringList firmwaresInPath(const QString &path);
     void loadSettings(const QString &currentProfile = QString());
     void removeProfile();
+    void save();
     void saveSettings();
     void updateCBProfiles();
+    void setModified(bool modified);
+    bool m_modified;
 
 signals:
     void updateProfiles();

@@ -16,22 +16,17 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+#include <atcore_default_folders.h>
 #include <KLocalizedString>
 #include <QDir>
 #include <QMessageBox>
 #include "profilesdialog.h"
 #include "ui_profilesdialog.h"
 
-//Do not include for windows/mac os
-#ifndef Q_OS_WIN
-#ifndef Q_OS_MAC
-#include <atcore_default_folders.h>
-#endif
-#endif
-
 ProfilesDialog::ProfilesDialog(QWidget *parent) :
     QDialog(parent)
     , ui(new Ui::ProfilesDialog)
+    , m_modified(false)
 {
     ui->setupUi(this);
     ui->firmwareCB->addItem(QStringLiteral("Auto-Detect"));
@@ -40,35 +35,22 @@ ProfilesDialog::ProfilesDialog(QWidget *parent) :
     ui->baudCB->setCurrentText(QLatin1String("115200"));
     ui->profileCB->setAutoCompletion(true);
     connect(ui->profileCB, static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged), [this] {
+        askToSave();
         loadSettings();
     });
     updateCBProfiles();
 
-    connect(ui->buttonBox, &QDialogButtonBox::clicked, [this](QAbstractButton * btn) {
-        switch (ui->buttonBox->buttonRole(btn)) {
-        case QDialogButtonBox::ResetRole:
-            loadSettings();
-            break;
-        case QDialogButtonBox::RejectRole:
-            close();
-            break;
-        default:
-            break;
-        }
-    });
-
+    connect(ui->buttonBox, &QDialogButtonBox::clicked, this, &ProfilesDialog::buttonBoxClicked);
     connect(ui->heatedBedCK, &QCheckBox::clicked, [this](const bool & status) {
         ui->bedTempSB->setEnabled(status);
     });
 
     connect(ui->cartesianRB, &QRadioButton::clicked, [this] {
-        ui->cartesianGB->setHidden(false);
-        ui->deltaGB->setHidden(true);
+        ui->printerTypeStack->setCurrentIndex(1);
     });
 
     connect(ui->deltaRB, &QRadioButton::clicked, [this] {
-        ui->cartesianGB->setHidden(true);
-        ui->deltaGB->setHidden(false);
+        ui->printerTypeStack->setCurrentIndex(0);
     });
 
     connect(ui->removeProfilePB, &QPushButton::clicked, this, &ProfilesDialog::removeProfile);
@@ -77,6 +59,19 @@ ProfilesDialog::ProfilesDialog(QWidget *parent) :
 #else
     ui->removeProfilePB->setIcon(style()->standardIcon(QStyle::SP_TrashIcon));
 #endif
+//if any control is modifed and no load / save has happend contents are not saved.
+    auto modify = [this] {setModified(true);};
+    connect(ui->baudCB, &QComboBox::currentTextChanged, modify);
+    connect(ui->radiusSB, &QSpinBox::editingFinished, modify);
+    connect(ui->z_delta_dimensionSB, &QSpinBox::editingFinished, modify);
+    connect(ui->x_dimensionSB, &QSpinBox::editingFinished, modify);
+    connect(ui->y_dimensionSB, &QSpinBox::editingFinished, modify);
+    connect(ui->z_dimensionSB, &QSpinBox::editingFinished, modify);
+    connect(ui->heatedBedCK, &QCheckBox::stateChanged, modify);
+    connect(ui->bedTempSB, &QSpinBox::editingFinished, modify);
+    connect(ui->extruderTempSB, &QSpinBox::editingFinished, modify);
+    connect(ui->postPauseLE, &QLineEdit::editingFinished, modify);
+    connect(ui->firmwareCB, &QComboBox::currentTextChanged, modify);
 }
 
 ProfilesDialog::~ProfilesDialog()
@@ -84,16 +79,34 @@ ProfilesDialog::~ProfilesDialog()
     delete ui;
 }
 
+void ProfilesDialog::buttonBoxClicked(QAbstractButton *btn)
+{
+    switch (ui->buttonBox->buttonRole(btn)) {
+    case QDialogButtonBox::ResetRole:
+        askToSave();
+        loadSettings();
+        break;
+    case QDialogButtonBox::RejectRole:
+        askToSave();
+        close();
+        break;
+    case QDialogButtonBox::AcceptRole:
+        saveSettings();
+        break;
+    default:
+        break;
+    }
+}
+
 void ProfilesDialog::saveSettings()
 {
     m_settings.beginGroup(QStringLiteral("Profiles"));
     QStringList groups = m_settings.childGroups();
     m_settings.endGroup();
-    QString currentProfile = ui->profileCB->currentText();
-    if (groups.contains(currentProfile)) {
-        int ret = QMessageBox::information(
+    if (groups.contains(ui->profileCB->currentText())) {
+        int ret = QMessageBox::warning(
                       this
-                      , i18n("Save?")
+                      , i18n("Overwrite Profile?")
                       , i18n("A profile with this name already exists. \n Are you sure you want to overwrite it?")
                       , QMessageBox::Save
                       , QMessageBox::Cancel
@@ -103,6 +116,12 @@ void ProfilesDialog::saveSettings()
             return;
         }
     }
+    save();
+}
+
+void ProfilesDialog::save()
+{
+    QString currentProfile = ui->profileCB->currentText();
     //Add indent to better view of the data
     m_settings.beginGroup(QStringLiteral("Profiles"));
     m_settings.beginGroup(currentProfile);
@@ -130,6 +149,7 @@ void ProfilesDialog::saveSettings()
     m_settings.endGroup();
 
     //Load new profile
+    setModified(false);
     updateCBProfiles();
     loadSettings(currentProfile);
     emit updateProfiles();
@@ -144,18 +164,16 @@ void ProfilesDialog::loadSettings(const QString &currentProfile)
 
     //BED
     if (m_settings.value(QStringLiteral("isCartesian")).toBool()) {
-        ui->cartesianGB->setHidden(false);
+        ui->printerTypeStack->setCurrentIndex(1);
         ui->cartesianRB->setChecked(true);
         ui->deltaRB->setChecked(false);
-        ui->deltaGB->setHidden(true);
         ui->x_dimensionSB->setValue(m_settings.value(QStringLiteral("dimensionX"), QStringLiteral("0")).toInt());
         ui->y_dimensionSB->setValue(m_settings.value(QStringLiteral("dimensionY"), QStringLiteral("0")).toInt());
         ui->z_dimensionSB->setValue(m_settings.value(QStringLiteral("dimensionZ"), QStringLiteral("0")).toInt());
     } else {
-        ui->deltaGB->setHidden(false);
+        ui->printerTypeStack->setCurrentIndex(0);
         ui->deltaRB->setChecked(true);
         ui->cartesianRB->setChecked(false);
-        ui->cartesianGB->setHidden(true);
         ui->radiusSB->setValue(m_settings.value(QStringLiteral("radius"), QStringLiteral("0")).toFloat());
         ui->z_delta_dimensionSB->setValue(m_settings.value(QStringLiteral("z_delta_dimension"), QStringLiteral("0")).toFloat());
     }
@@ -172,6 +190,7 @@ void ProfilesDialog::loadSettings(const QString &currentProfile)
     ui->postPauseLE->setText(m_settings.value(QStringLiteral("postPause"), QStringLiteral("")).toString());
     m_settings.endGroup();
     m_settings.endGroup();
+    setModified(false);
 
 }
 
@@ -181,15 +200,10 @@ void ProfilesDialog::updateCBProfiles()
     QStringList groups = m_settings.childGroups();
     m_settings.endGroup();
     if (groups.isEmpty()) {
-        ui->deltaGB->setHidden(true);
+        ui->printerTypeStack->setCurrentIndex(1);
     }
     ui->profileCB->clear();
     ui->profileCB->addItems(groups);
-}
-
-void ProfilesDialog::accept()
-{
-    saveSettings();
 }
 
 void ProfilesDialog::removeProfile()
@@ -204,36 +218,38 @@ void ProfilesDialog::removeProfile()
     updateCBProfiles();
 }
 
-QStringList ProfilesDialog::detectFWPlugins() const
+QStringList ProfilesDialog::detectFWPlugins()
 {
-    //Path used if for windows/ mac os only.
-    QDir pluginDir(qApp->applicationDirPath() + QStringLiteral("/plugins"));
-
-#if defined(Q_OS_WIN)
-    pluginDir.setNameFilters(QStringList() << "*.dll");
-
-#elif defined(Q_OS_MAC)
-    pluginDir.setNameFilters(QStringList() << "*.dylib");
-
-#else //Not Windows || Not MAC
-    QStringList pathList = AtCoreDirectories::pluginDir;
-    pathList.append(QLibraryInfo::location(QLibraryInfo::PluginsPath) + QStringLiteral("/AtCore"));
-
-    for (const auto &path : pathList) {
-        if (QDir(path).exists()) {
+    QStringList firmwares;
+    QStringList paths = AtCoreDirectories::pluginDir;
+    paths.prepend(qApp->applicationDirPath() + QStringLiteral("/plugins"));
+    for (const QString &path : paths) {
+        firmwares = firmwaresInPath(path);
+        if (!firmwares.isEmpty()) {
             //use path where plugins were detected.
-            pluginDir = QDir(path);
             break;
         }
     }
-    pluginDir.setNameFilters(QStringList() << "*.so");
-#endif
+    return firmwares;
+}
 
+QStringList ProfilesDialog::firmwaresInPath(const QString &path)
+{
     QStringList firmwares;
-    QStringList files = pluginDir.entryList(QDir::Files);
-    foreach (const QString &f, files) {
+    QStringList files = QDir(path).entryList(QDir::Files);
+    for (const QString &f : files) {
         QString file = f;
-        file = file.split(QChar::fromLatin1('.')).at(0);
+#if defined(Q_OS_WIN)
+        if (file.endsWith(QStringLiteral(".dll")))
+#elif defined(Q_OS_MAC)
+        if (file.endsWith(QStringLiteral(".dylib")))
+#else
+        if (file.endsWith(QStringLiteral(".so")))
+#endif
+            file = file.split(QChar::fromLatin1('.')).at(0);
+        else {
+            continue;
+        }
         if (file.startsWith(QStringLiteral("lib"))) {
             file = file.remove(QStringLiteral("lib"));
         }
@@ -241,4 +257,25 @@ QStringList ProfilesDialog::detectFWPlugins() const
         firmwares.append(file);
     }
     return firmwares;
+}
+
+void ProfilesDialog::setModified(bool modified)
+{
+    m_modified = modified;
+}
+
+void ProfilesDialog::askToSave()
+{
+    if (m_modified) {
+        int ret = QMessageBox::question(
+                      this
+                      , i18n("Save?")
+                      , i18n("This Profile has been modified, Would you like to Save it?")
+                      , QMessageBox::Save
+                      , QMessageBox::No
+                  );
+        if (ret == QMessageBox::Save) {
+            save();
+        }
+    }
 }

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>301</width>
-    <height>622</height>
+    <width>0</width>
+    <height>0</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,49 +15,31 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <layout class="QGridLayout" name="gridLayout_3">
-     <item row="0" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
       <widget class="QLabel" name="label_20">
        <property name="text">
         <string>Profile</string>
        </property>
-        <property name="buddy">
+       <property name="buddy">
         <cstring>profileCB</cstring>
        </property>
       </widget>
      </item>
-     <item row="3" column="1">
-      <widget class="QRadioButton" name="cartesianRB">
-       <property name="text">
-        <string>&amp;Cartesian</string>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="label_7">
-       <property name="text">
-        <string>Printer Type</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="2">
-      <widget class="QRadioButton" name="deltaRB">
-       <property name="text">
-        <string>Delta</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1" colspan="2">
+     <item>
       <widget class="QComboBox" name="profileCB">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="editable">
         <bool>true</bool>
        </property>
       </widget>
      </item>
-     <item row="0" column="3">
+     <item>
       <widget class="QPushButton" name="removeProfilePB">
        <property name="toolTip">
         <string>Remove Profile</string>
@@ -73,233 +55,272 @@
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QLabel" name="label_9">
-       <property name="text">
-        <string>Bits per second</string>
-       </property>
-       <property name="buddy">
-        <cstring>baudCB</cstring>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QComboBox" name="baudCB"/>
-     </item>
-    </layout>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="title">
+      <string>Mechanics</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_6">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QLabel" name="label_7">
+          <property name="text">
+           <string>Printer Type</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="cartesianRB">
+          <property name="text">
+           <string>&amp;Cartesian</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="deltaRB">
+          <property name="text">
+           <string>&amp;Delta</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QStackedWidget" name="printerTypeStack">
+        <property name="currentIndex">
+         <number>1</number>
+        </property>
+        <widget class="QWidget" name="pageDelta">
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_9">
+            <item>
+             <widget class="QLabel" name="label_13">
+              <property name="text">
+               <string>Radi&amp;us</string>
+              </property>
+              <property name="buddy">
+               <cstring>radiusSB</cstring>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="radiusSB">
+              <property name="suffix">
+               <string> mm</string>
+              </property>
+              <property name="maximum">
+               <number>999999999</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_10">
+            <item>
+             <widget class="QLabel" name="label_14">
+              <property name="text">
+               <string>Dimension &amp;Z</string>
+              </property>
+              <property name="buddy">
+               <cstring>z_delta_dimensionSB</cstring>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="z_delta_dimensionSB">
+              <property name="suffix">
+               <string> mm</string>
+              </property>
+              <property name="maximum">
+               <number>999999999</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="pageCartesian">
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_6">
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Dimension &amp;X</string>
+              </property>
+              <property name="buddy">
+               <cstring>x_dimensionSB</cstring>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="x_dimensionSB">
+              <property name="suffix">
+               <string> mm</string>
+              </property>
+              <property name="maximum">
+               <number>999999999</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_7">
+            <item>
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string>Dimension &amp;Y</string>
+              </property>
+              <property name="buddy">
+               <cstring>y_dimensionSB</cstring>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="y_dimensionSB">
+              <property name="suffix">
+               <string> mm</string>
+              </property>
+              <property name="maximum">
+               <number>999999999</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_8">
+            <item>
+             <widget class="QLabel" name="label_4">
+              <property name="text">
+               <string>Dimension &amp;Z</string>
+              </property>
+              <property name="buddy">
+               <cstring>z_dimensionSB</cstring>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="z_dimensionSB">
+              <property name="suffix">
+               <string> mm</string>
+              </property>
+              <property name="maximum">
+               <number>999999999</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </item>
    <item>
-    <widget class="QTabWidget" name="tabWidget">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
+    <widget class="QGroupBox" name="bedTempsGB">
+     <property name="title">
+      <string>Temperatures</string>
      </property>
-     <property name="currentIndex">
-      <number>0</number>
+     <layout class="QGridLayout" name="gridLayout_5">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>Hea&amp;ted bed?</string>
+        </property>
+        <property name="buddy">
+         <cstring>heatedBedCK</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QCheckBox" name="heatedBedCK">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Maxim&amp;um Bed</string>
+        </property>
+        <property name="buddy">
+         <cstring>bedTempSB</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1" colspan="2">
+       <widget class="QSpinBox" name="bedTempSB">
+        <property name="suffix">
+         <string> ºC</string>
+        </property>
+        <property name="maximum">
+         <number>999</number>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_11">
+        <property name="text">
+         <string>Ma&amp;ximum Hotend</string>
+        </property>
+        <property name="buddy">
+         <cstring>extruderTempSB</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1" colspan="2">
+       <widget class="QSpinBox" name="extruderTempSB">
+        <property name="suffix">
+         <string> ºC</string>
+        </property>
+        <property name="maximum">
+         <number>999</number>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>Advanced</string>
      </property>
-     <widget class="QWidget" name="tab">
-      <attribute name="title">
-       <string>General</string>
-      </attribute>
-      <layout class="QGridLayout" name="gridLayout_6">
-       <item row="0" column="0">
-        <widget class="QGroupBox" name="deltaGB">
-         <property name="title">
-          <string>Dimension</string>
-         </property>
-         <layout class="QGridLayout" name="gridLayout_4">
-          <item row="1" column="0">
-           <widget class="QLabel" name="label_14">
-            <property name="text">
-             <string>Dimension Z</string>
-            </property>
-            <property name="buddy">
-             <cstring>z_delta_dimensionSB</cstring>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_13">
-            <property name="text">
-             <string>Radius</string>
-            </property>
-            <property name="buddy">
-             <cstring>radiusSB</cstring>
-            </property>            
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QSpinBox" name="radiusSB">
-            <property name="suffix">
-             <string> mm</string>
-            </property>
-            <property name="maximum">
-             <number>999999999</number>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QSpinBox" name="z_delta_dimensionSB">
-            <property name="suffix">
-             <string> mm</string>
-            </property>
-            <property name="maximum">
-             <number>999999999</number>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QGroupBox" name="cartesianGB">
-         <property name="title">
-          <string>Dimension</string>
-         </property>
-         <layout class="QGridLayout" name="gridLayout">
-          <item row="2" column="1">
-           <widget class="QLabel" name="label_4">
-            <property name="text">
-             <string>Dimension Z</string>
-            </property>
-            <property name="buddy">
-             <cstring>z_dimensionSB</cstring>
-            </property>            
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLabel" name="label_3">
-            <property name="text">
-             <string>Dimension Y</string>
-            </property>
-            <property name="buddy">
-             <cstring>y_dimensionSB</cstring>
-            </property>            
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QLabel" name="label">
-            <property name="text">
-             <string>Dimension X</string>
-            </property>
-            <property name="buddy">
-             <cstring>x_dimensionSB</cstring>
-            </property>            
-           </widget>
-          </item>
-          <item row="0" column="2">
-           <widget class="QSpinBox" name="x_dimensionSB">
-            <property name="suffix">
-             <string> mm</string>
-            </property>
-            <property name="maximum">
-             <number>999999999</number>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="2">
-           <widget class="QSpinBox" name="z_dimensionSB">
-            <property name="suffix">
-             <string> mm</string>
-            </property>
-            <property name="maximum">
-             <number>999999999</number>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="2">
-           <widget class="QSpinBox" name="y_dimensionSB">
-            <property name="suffix">
-             <string> mm</string>
-            </property>
-            <property name="maximum">
-             <number>999999999</number>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QGroupBox" name="bedTempsGB">
-         <property name="title">
-          <string>Temperatures</string>
-         </property>
-         <layout class="QGridLayout" name="gridLayout_5">
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_5">
-            <property name="text">
-             <string>Heated bed?</string>
-            </property>
-            <property name="buddy">
-             <cstring>heatedBedCK</cstring>
-            </property>            
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QCheckBox" name="heatedBedCK">
-            <property name="text">
-             <string/>
-            </property>
-            <property name="checked">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label_2">
-            <property name="text">
-             <string>Maximum Bed</string>
-            </property>
-            <property name="buddy">
-             <cstring>bedTempSB</cstring>
-            </property>            
-           </widget>
-          </item>
-          <item row="1" column="1" colspan="2">
-           <widget class="QSpinBox" name="bedTempSB">
-            <property name="suffix">
-             <string> ºC</string>
-            </property>
-            <property name="maximum">
-             <number>999</number>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="label_11">
-            <property name="text">
-             <string>Maximum Hotend</string>
-            </property>
-            <property name="buddy">
-             <cstring>extruderTempSB</cstring>
-            </property>            
-           </widget>
-          </item>
-          <item row="2" column="1" colspan="2">
-           <widget class="QSpinBox" name="extruderTempSB">
-            <property name="suffix">
-             <string> ºC</string>
-            </property>
-            <property name="maximum">
-             <number>999</number>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="tab_3">
-      <attribute name="title">
-       <string>Advanced</string>
-      </attribute>
-    <layout class="QGridLayout" name="gridLayout_7">
-        <item row="1" column="0">
+     <layout class="QVBoxLayout" name="verticalLayout_4">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QLabel" name="label_9">
+          <property name="text">
+           <string>Bi&amp;ts per second</string>
+          </property>
+          <property name="buddy">
+           <cstring>baudCB</cstring>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="baudCB"/>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <item>
          <widget class="QLabel" name="label_6">
           <property name="text">
            <string>Firmware</string>
@@ -309,37 +330,29 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="1">
+        <item>
          <widget class="QComboBox" name="firmwareCB"/>
         </item>
-        <item row="3" column="0">
-         <spacer name="verticalSpacer">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="0" column="0">
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <item>
          <widget class="QLabel" name="label_8">
           <property name="text">
-           <string>PostPause</string>
+           <string>PostPa&amp;use</string>
           </property>
-         <property name="buddy">
-          <cstring>postPauseLE</cstring>
-         </property>          
+          <property name="buddy">
+           <cstring>postPauseLE</cstring>
+          </property>
          </widget>
         </item>
-        <item row="0" column="1">
+        <item>
          <widget class="QLineEdit" name="postPauseLE"/>
         </item>
        </layout>
-     </widget>
+      </item>
+     </layout>
     </widget>
    </item>
    <item>
@@ -359,7 +372,6 @@
   <tabstop>removeProfilePB</tabstop>
   <tabstop>cartesianRB</tabstop>
   <tabstop>baudCB</tabstop>
-  <tabstop>tabWidget</tabstop>
   <tabstop>deltaRB</tabstop>
   <tabstop>radiusSB</tabstop>
   <tabstop>z_delta_dimensionSB</tabstop>
@@ -369,43 +381,8 @@
   <tabstop>heatedBedCK</tabstop>
   <tabstop>bedTempSB</tabstop>
   <tabstop>extruderTempSB</tabstop>
-  <tabstop>postPauseLE</tabstop>
-  <tabstop>firmwareCB</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources/>
- <connections>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>ProfilesDialog</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>rejected()</signal>
-   <receiver>ProfilesDialog</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>286</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>
