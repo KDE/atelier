@@ -46,13 +46,11 @@ ProfilesDialog::ProfilesDialog(QWidget *parent) :
     });
 
     connect(ui->cartesianRB, &QRadioButton::clicked, [this] {
-        ui->cartesianGB->setHidden(false);
-        ui->deltaGB->setHidden(true);
+        ui->printerTypeStack->setCurrentIndex(1);
     });
 
     connect(ui->deltaRB, &QRadioButton::clicked, [this] {
-        ui->cartesianGB->setHidden(true);
-        ui->deltaGB->setHidden(false);
+        ui->printerTypeStack->setCurrentIndex(0);
     });
 
     connect(ui->removeProfilePB, &QPushButton::clicked, this, &ProfilesDialog::removeProfile);
@@ -166,18 +164,16 @@ void ProfilesDialog::loadSettings(const QString &currentProfile)
 
     //BED
     if (m_settings.value(QStringLiteral("isCartesian")).toBool()) {
-        ui->cartesianGB->setHidden(false);
+        ui->printerTypeStack->setCurrentIndex(1);
         ui->cartesianRB->setChecked(true);
         ui->deltaRB->setChecked(false);
-        ui->deltaGB->setHidden(true);
         ui->x_dimensionSB->setValue(m_settings.value(QStringLiteral("dimensionX"), QStringLiteral("0")).toInt());
         ui->y_dimensionSB->setValue(m_settings.value(QStringLiteral("dimensionY"), QStringLiteral("0")).toInt());
         ui->z_dimensionSB->setValue(m_settings.value(QStringLiteral("dimensionZ"), QStringLiteral("0")).toInt());
     } else {
-        ui->deltaGB->setHidden(false);
+        ui->printerTypeStack->setCurrentIndex(0);
         ui->deltaRB->setChecked(true);
         ui->cartesianRB->setChecked(false);
-        ui->cartesianGB->setHidden(true);
         ui->radiusSB->setValue(m_settings.value(QStringLiteral("radius"), QStringLiteral("0")).toFloat());
         ui->z_delta_dimensionSB->setValue(m_settings.value(QStringLiteral("z_delta_dimension"), QStringLiteral("0")).toFloat());
     }
@@ -204,7 +200,7 @@ void ProfilesDialog::updateCBProfiles()
     QStringList groups = m_settings.childGroups();
     m_settings.endGroup();
     if (groups.isEmpty()) {
-        ui->deltaGB->setHidden(true);
+        ui->printerTypeStack->setCurrentIndex(1);
     }
     ui->profileCB->clear();
     ui->profileCB->addItems(groups);
