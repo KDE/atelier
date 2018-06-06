@@ -556,5 +556,7 @@ QMap<QString, QVariant> AtCoreInstanceWidget::readProfile()
         , {"heatedBed", m_settings.value(QStringLiteral("heatedBed"), true)}
         , {"name", profile}
     };
+    m_settings.endGroup();
+    m_settings.endGroup();
     return data;
 }
