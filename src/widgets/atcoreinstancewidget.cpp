@@ -248,31 +248,6 @@ void AtCoreInstanceWidget::initConnectsToAtCore()
     // Bed and Extruder temperatures management
     connect(m_bedExtWidget, &BedExtruderWidget::bedTemperatureChanged, &m_core, &AtCore::setBedTemp);
     connect(m_bedExtWidget, &BedExtruderWidget::extTemperatureChanged, &m_core, &AtCore::setExtruderTemp);
-    // Connect AtCore temperatures changes on Atelier Plot
-    connect(&m_core.temperature(), &Temperature::bedTemperatureChanged, [this](const float & temp) {
-        checkTemperature(0x00, 0, temp);
-        m_plotWidget->appendPoint(i18n("Actual Bed"), temp);
-        m_plotWidget->update();
-        m_bedExtWidget->updateBedTemp(temp);
-    });
-    connect(&m_core.temperature(), &Temperature::bedTargetTemperatureChanged, [this](const float & temp) {
-        checkTemperature(0x01, 0, temp);
-        m_plotWidget->appendPoint(i18n("Target Bed"), temp);
-        m_plotWidget->update();
-        m_bedExtWidget->updateBedTargetTemp(temp);
-    });
-    connect(&m_core.temperature(), &Temperature::extruderTemperatureChanged, [this](const float & temp) {
-        checkTemperature(0x02, 0, temp);
-        m_plotWidget->appendPoint(i18n("Actual Ext.1"), temp);
-        m_plotWidget->update();
-        m_bedExtWidget->updateExtTemp(temp);
-    });
-    connect(&m_core.temperature(), &Temperature::extruderTargetTemperatureChanged, [this](const float & temp) {
-        checkTemperature(0x03, 0, temp);
-        m_plotWidget->appendPoint(i18n("Target Ext.1"), temp);
-        m_plotWidget->update();
-        m_bedExtWidget->updateExtTargetTemp(temp);
-    });
     //command Widget
     connect(m_commandWidget, &CommandWidget::commandPressed, [this](const QString & command) {
         m_logWidget->appendLog(i18n("Push: %1", command));
@@ -384,6 +359,10 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
         m_logWidget->appendLog(stateString);
         emit disableDisconnect(false);
         enableControls(true);
+        connectExtruderTemperatureData(true);
+        if (m_profileData["heatedBed"].toBool()) {
+            connectBedTemperatureData(true);
+        }
     } break;
     case AtCore::DISCONNECTED: {
         stateString = i18n("Not Connected");
@@ -396,6 +375,10 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
         m_connectToolBar->setHidden(false);
         m_toolBar->setHidden(true);
         enableControls(false);
+        connectExtruderTemperatureData(false);
+        if (m_profileData["heatedBed"].toBool()) {
+            connectBedTemperatureData(false);
+        }
     } break;
     case AtCore::STARTPRINT: {
         stateString = i18n("Starting Print");
@@ -525,9 +508,11 @@ void AtCoreInstanceWidget::updateProfileData()
 
     if (m_core.state() != AtCore::DISCONNECTED) {
         m_profileData = readProfile();
+        bool hBed = m_profileData["heatedBed"].toBool();
+        m_bedExtWidget->setBedThermoHidden(!hBed);
+        connectBedTemperatureData(hBed);
         m_bedExtWidget->setBedMaxTemperature(m_profileData["bedTemp"].toInt());
         m_bedExtWidget->setExtruderMaxTemperature(m_profileData["hotendTemp"].toInt());
-        m_bedExtWidget->setBedThermoHidden(!m_profileData["heatedBed"].toBool());
     }
 }
 
@@ -559,4 +544,61 @@ QMap<QString, QVariant> AtCoreInstanceWidget::readProfile()
     m_settings.endGroup();
     m_settings.endGroup();
     return data;
+}
+
+void AtCoreInstanceWidget::connectBedTemperatureData(bool connected)
+{
+    if (connected) {
+        if (m_plotWidget->plots().contains((i18n("Actual Bed")))) {
+            return;
+        }
+        m_plotWidget->addPlot(i18n("Actual Bed"));
+        connect(&m_core.temperature(), &Temperature::bedTemperatureChanged, [this](const float & temp) {
+            checkTemperature(0x00, 0, temp);
+            m_plotWidget->appendPoint(i18n("Actual Bed"), temp);
+            m_bedExtWidget->updateBedTemp(temp);
+        });
+        m_plotWidget->addPlot(i18n("Target Bed"));
+        connect(&m_core.temperature(), &Temperature::bedTargetTemperatureChanged, [this](const float & temp) {
+            checkTemperature(0x01, 0, temp);
+            m_plotWidget->appendPoint(i18n("Target Bed"), temp);
+            m_bedExtWidget->updateBedTargetTemp(temp);
+        });
+    } else {
+        if (m_plotWidget->plots().contains(i18n("Actual Bed"))) {
+            m_plotWidget->removePlot(i18n("Actual Bed"));
+            disconnect(&m_core.temperature(), &Temperature::bedTemperatureChanged, this, nullptr);
+            m_plotWidget->removePlot(i18n("Target Bed"));
+            disconnect(&m_core.temperature(), &Temperature::bedTargetTemperatureChanged, this, nullptr);
+        }
+    }
+}
+
+void AtCoreInstanceWidget::connectExtruderTemperatureData(bool connected)
+{
+    if (connected) {
+        if (m_plotWidget->plots().contains((i18n("Actual Ext.1")))) {
+            return;
+        }
+        //Add Extruder.
+        m_plotWidget->addPlot(i18n("Actual Ext.1"));
+        connect(&m_core.temperature(), &Temperature::extruderTemperatureChanged, [this](const float & temp) {
+            checkTemperature(0x02, 0, temp);
+            m_plotWidget->appendPoint(i18n("Actual Ext.1"), temp);
+            m_bedExtWidget->updateExtTemp(temp);
+        });
+        m_plotWidget->addPlot(i18n("Target Ext.1"));
+        connect(&m_core.temperature(), &Temperature::extruderTargetTemperatureChanged, [this](const float & temp) {
+            checkTemperature(0x03, 0, temp);
+            m_plotWidget->appendPoint(i18n("Target Ext.1"), temp);
+            m_bedExtWidget->updateExtTargetTemp(temp);
+        });
+    } else {
+        if (m_plotWidget->plots().contains(i18n("Actual Ext.1"))) {
+            m_plotWidget->removePlot(i18n("Actual Ext.1"));
+            disconnect(&m_core.temperature(), &Temperature::extruderTemperatureChanged, this, nullptr);
+            m_plotWidget->removePlot(i18n("Target Ext.1"));
+            disconnect(&m_core.temperature(), &Temperature::extruderTargetTemperatureChanged, this, nullptr);
+        }
+    }
 }

@@ -82,6 +82,8 @@ private:
     void buildToolbar();
     void checkTemperature(uint sensorType, uint number, uint temp);
     void connectButtonClicked();
+    void connectBedTemperatureData(bool connected);
+    void connectExtruderTemperatureData(bool connected);
     void disableMotors();
     void enableControls(bool b);
     void handlePrinterStatusChanged(AtCore::STATES newState);
