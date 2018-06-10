@@ -40,6 +40,10 @@ struct LateralArea {
     {
         return qobject_cast<T *>(m_map[s].second);
     }
+    template<typename T> T *getButton(const QString &s)
+    {
+        return qobject_cast<T *>(m_map[s].first);
+    }
 };
 
 class MainWindow : public KXmlGuiWindow

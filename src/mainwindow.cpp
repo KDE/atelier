@@ -289,6 +289,11 @@ void MainWindow::loadFile(const QUrl &fileName)
 
         m_lateral.get<GCodeEditorWidget>("gcode")->loadFile(fileName);
         m_lateral.get<Viewer3D>("3d")->drawModel(fileName.toString());
+        // Make 3dview focused when opening a file
+        if (m_openFiles.isEmpty() && m_lateral.m_stack->currentWidget() == m_lateral.get<WelcomeWidget>("welcome")){
+            m_lateral.getButton<QPushButton>("3d")->setChecked(true);
+            m_lateral.m_stack->setCurrentWidget(m_lateral.get<Viewer3D>("3d"));
+        }
 
         const int tabs = m_instances->count();
         if (!m_openFiles.contains(fileName)) {
