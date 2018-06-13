@@ -24,4 +24,8 @@ target_link_libraries(AtelierWidgets
     ${QWT_LIBRARY}
     )
 
+if(WIN32)
+    target_compile_definitions(AtelierWidgets PRIVATE -DQWT_DLL)
+endif()
+
 add_subdirectory(3dview)
