@@ -187,8 +187,14 @@ void MainWindow::setupLateralArea()
         //3d view is on top set it checked so users see its selected.
         btn->setChecked(key == QStringLiteral("welcome"));
         btn->setIcon(icon);
-        btn->setFixedSize(48, 48);
-        btn->setIconSize(QSize(48, 48));
+        //Set an iconSize based on the DPI.
+        //96 was considered to be the "standard" DPI for years.
+        //Hi-dpi monitors have a higher DPI
+        //Tiny or old screen could have a lower DPI.
+        //Start our iconSize at 16 so with a DPI less then 96 we get a sane iconsize.
+        int iconSize = 16 + ((logicalDpiX() / 96) * 16);
+        btn->setIconSize(QSize(iconSize, iconSize));
+        btn->setFixedSize(btn->iconSize());
         btn->setFlat(true);
         m_lateral.m_stack->addWidget(w);
         m_lateral.m_map[key] = {btn, w};
@@ -290,7 +296,7 @@ void MainWindow::loadFile(const QUrl &fileName)
         m_lateral.get<GCodeEditorWidget>("gcode")->loadFile(fileName);
         m_lateral.get<Viewer3D>("3d")->drawModel(fileName.toString());
         // Make 3dview focused when opening a file
-        if (m_openFiles.isEmpty() && m_lateral.m_stack->currentWidget() == m_lateral.get<WelcomeWidget>("welcome")){
+        if (m_openFiles.isEmpty() && m_lateral.m_stack->currentWidget() == m_lateral.get<WelcomeWidget>("welcome")) {
             m_lateral.getButton<QPushButton>("3d")->setChecked(true);
             m_lateral.m_stack->setCurrentWidget(m_lateral.get<Viewer3D>("3d"));
         }
