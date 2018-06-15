@@ -187,8 +187,14 @@ void MainWindow::setupLateralArea()
         //3d view is on top set it checked so users see its selected.
         btn->setChecked(key == QStringLiteral("welcome"));
         btn->setIcon(icon);
-        btn->setFixedSize(48, 48);
-        btn->setIconSize(QSize(48, 48));
+        //Set an iconSize based on the DPI.
+        //96 was considered to be the "standard" DPI for years.
+        //Hi-dpi monitors have a higher DPI
+        //Tiny or old screen could have a lower DPI.
+        //Start our iconSize at 16 so with a DPI less then 96 we get a sane iconsize.
+        int iconSize = 16 + ((logicalDpiX() / 96) * 16);
+        btn->setIconSize(QSize(iconSize, iconSize));
+        btn->setFixedSize(btn->iconSize());
         btn->setFlat(true);
         m_lateral.m_stack->addWidget(w);
         m_lateral.m_map[key] = {btn, w};
