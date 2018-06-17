@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
         // Short description of what the app does. (shortDescription)
         i18n("Printer Host for 3DPrinters"),
         // The license this code is released under
-        KAboutLicense::GPL,
+        KAboutLicense::GPL_V3,
         // Copyright Statement (copyrightStatement = QString())
         i18n("(c) 2016"),
         // Optional text shown in the About box.
