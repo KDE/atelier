@@ -31,6 +31,7 @@
 #include "widgets/3dview/viewer3d.h"
 #include "widgets/atcoreinstancewidget.h"
 #include "widgets/videomonitorwidget.h"
+#include "widgets/welcomewidget.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     KXmlGuiWindow(parent)
@@ -184,7 +185,7 @@ void MainWindow::setupLateralArea()
         btn->setAutoExclusive(true);
         btn->setCheckable(true);
         //3d view is on top set it checked so users see its selected.
-        btn->setChecked(key == "3d");
+        btn->setChecked(key == QStringLiteral("welcome"));
         btn->setIcon(icon);
         btn->setFixedSize(48, 48);
         btn->setIconSize(QSize(48, 48));
@@ -223,6 +224,7 @@ void MainWindow::setupLateralArea()
         viewer3D->drawModel(url.toString());
     });
 
+    setupButton("welcome", i18n("&Welcome"), QIcon::fromTheme("go-home", QIcon(QString(":/%1/home").arg(m_theme))), new WelcomeWidget(this));
     setupButton("3d", i18n("&3D"), QIcon::fromTheme("draw-cuboid", QIcon(QString(":/%1/3d").arg(m_theme))), viewer3D);
     setupButton("gcode", i18n("&GCode"), QIcon::fromTheme("accessories-text-editor", QIcon(":/icon/edit")), m_gcodeEditor);
     setupButton("video", i18n("&Video"), QIcon::fromTheme("camera-web", QIcon(":/icon/video")), new VideoMonitorWidget(this));
@@ -287,6 +289,11 @@ void MainWindow::loadFile(const QUrl &fileName)
 
         m_lateral.get<GCodeEditorWidget>("gcode")->loadFile(fileName);
         m_lateral.get<Viewer3D>("3d")->drawModel(fileName.toString());
+        // Make 3dview focused when opening a file
+        if (m_openFiles.isEmpty() && m_lateral.m_stack->currentWidget() == m_lateral.get<WelcomeWidget>("welcome")){
+            m_lateral.getButton<QPushButton>("3d")->setChecked(true);
+            m_lateral.m_stack->setCurrentWidget(m_lateral.get<Viewer3D>("3d"));
+        }
 
         const int tabs = m_instances->count();
         if (!m_openFiles.contains(fileName)) {

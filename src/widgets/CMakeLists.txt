@@ -7,6 +7,7 @@ set(widgets_SRCS
     videomonitorwidget.cpp
     atcoreinstancewidget.cpp
     thermowidget.cpp
+    welcomewidget.cpp
     )
 
 add_library(AtelierWidgets STATIC ${widgets_SRCS})
