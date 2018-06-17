@@ -17,6 +17,7 @@
         <file alias="start">icons/light_start.svg</file>
         <file alias="stop">icons/light_stop.svg</file>
         <file alias="pause">icons/light_pause.svg</file>
+        <file alias="refresh">icons/light_view_refresh.svg</file>
     </qresource>
         <qresource prefix="/dark">
         <file alias="configure">icons/dark_configure.svg</file>
@@ -29,6 +30,7 @@
         <file alias="start">icons/dark_start.svg</file>
         <file alias="stop">icons/dark_stop.svg</file>
         <file alias="pause">icons/dark_pause.svg</file>
+        <file alias="refresh">icons/dark_view_refresh.svg</file>
     </qresource>
     <qresource prefix="/kxmlgui5/atelier">
         <file alias="atelierui">atelierui.rc</file>

@@ -21,6 +21,7 @@
 #include <QWidget>
 
 class QDomDocument;
+class QLayout;
 class QUrl;
 
 struct Post{
@@ -38,7 +39,11 @@ public:
     ~WelcomeWidget();
 
 private:
-    void retrieveRssFeed(const QUrl& url);
+    void retrieveRssFeed();
     void parseRss(const QDomDocument& document);
+    void setupRssFeed();
+    void fallback();
+    void setNewsLayout(QLayout *newLayout);
     QWidget *m_newsFeedWidget;
+    QList<Post> m_postList;
 };

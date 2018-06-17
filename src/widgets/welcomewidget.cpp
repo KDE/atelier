@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
+#include <algorithm>
 #include <KLocalizedString>
 #include <QDomDocument>
 #include <QHBoxLayout>
@@ -26,8 +26,10 @@
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
 #include <QScrollArea>
+#include <QStyle>
+#include <QTimer>
+#include <QToolButton>
 #include <QVBoxLayout>
-
 #include "welcomewidget.h"
 
 #define POSTS_LIMIT 5
@@ -39,7 +41,6 @@ WelcomeWidget::WelcomeWidget(QWidget *parent): QWidget(parent), m_newsFeedWidget
     auto hlayout = new QHBoxLayout;
     auto layout = new QVBoxLayout;
     auto label = new QLabel;
-
 
     label->setText(i18n("Welcome to Atelier!"));
     appFont.setPointSize(font().pointSize() + 4);
@@ -80,7 +81,7 @@ WelcomeWidget::WelcomeWidget(QWidget *parent): QWidget(parent), m_newsFeedWidget
     label = new QLabel(i18n("Check our last news!"));
     label->setFont(appFont);
     layout->addWidget(label);
-    retrieveRssFeed(QUrl("https://rizzitello.wordpress.com/author/sithlord48/feed/"));
+    retrieveRssFeed();
     layout->addWidget(m_newsFeedWidget);
 
     label = new QLabel(i18n("Get Involved"));
@@ -98,11 +99,11 @@ WelcomeWidget::WelcomeWidget(QWidget *parent): QWidget(parent), m_newsFeedWidget
 
     auto infoWidget = new QWidget();
     infoWidget->setLayout(layout);
-    
+
     auto scrollArea = new QScrollArea(this);
     scrollArea->setWidget(infoWidget);
     scrollArea->setWidgetResizable(true);
-    
+
     layout = new QVBoxLayout;
     layout->addWidget(scrollArea);
     setLayout(layout);
@@ -112,30 +113,33 @@ WelcomeWidget::~WelcomeWidget(){
 
 }
 
-void WelcomeWidget::retrieveRssFeed(const QUrl& url){
-
+void WelcomeWidget::retrieveRssFeed(){
     auto manager = new QNetworkAccessManager();
-    QNetworkRequest request(url);
-    request.setRawHeader("User-Agent", "Atelier 1.0");
-
-    connect(manager, &QNetworkAccessManager::finished, [&](QNetworkReply *reply){
-        if(reply->error()){
-            auto layout = new QHBoxLayout;
-            layout->addWidget(new QLabel(i18n("Failed to fetch News.")));
-            m_newsFeedWidget->setLayout(layout);
-        }else{
-            QDomDocument document;
-            if(document.setContent(reply->readAll())){
-                parseRss(document);
+    for(const QUrl url : {
+            QUrl("https://rizzitello.wordpress.com/category/atelier/feed/"),
+            QUrl("https://laysrodriguesdev.wordpress.com/category/atelier/feed/")
+            })
+    {
+        QNetworkRequest request(url);
+        request.setRawHeader("User-Agent", "Atelier 1.0");
+        manager->get(request);
+        connect(manager, &QNetworkAccessManager::finished, [&](QNetworkReply *reply){
+            if(reply->error()){
+                return;
+            }else{
+                QDomDocument document;
+                if(document.setContent(reply->readAll())){
+                    parseRss(document);
+                }
             }
-        }
-    });
-
-    manager->get(request);
+        });
+    }
+    // Since the calls above are async, I need to wait a little time
+    // to have the responses processed before building the widget feed
+    QTimer::singleShot(500, this, &WelcomeWidget::setupRssFeed);
 }
 
 void WelcomeWidget::parseRss(const QDomDocument& document){
-    QList<Post> postList;
     auto itemList = document.elementsByTagName("item");
     QRegularExpression dateRegex("(?<date>\\d{2} \\w{3} \\d{4})");
 
@@ -150,18 +154,49 @@ void WelcomeWidget::parseRss(const QDomDocument& document){
                 p.title = node.firstChildElement("title").toElement().text();
                 p.url = node.firstChildElement("link").toElement().text();
                 p.date = match.captured("date");
-                postList.append(p);
+                m_postList.append(p);
             }
         }
     }
+}
+
+void WelcomeWidget::setupRssFeed(){
+    if(m_postList.empty()){
+        fallback();
+        return;
+    }
+    QLocale locale(QLocale::English);
+    std::stable_sort(m_postList.begin(), m_postList.end(), [locale](const Post& p1, const Post& p2){
+        return locale.toDate(p1.date, "dd MMM yyyy") > locale.toDate(p2.date, "dd MMM yyyy");
+    });
     auto layout = new QVBoxLayout;
-    int count = postList.count() > POSTS_LIMIT ? POSTS_LIMIT : postList.count();
+    int count = m_postList.count() > POSTS_LIMIT ? POSTS_LIMIT : m_postList.count();
     for(int i =0; i < count; ++i){
-        Post item = postList.at(i);
+        Post item = m_postList.at(i);
         QString url = QString("<a href=\"%1\">%2</a>").arg(item.url).arg(QString(item.title + " - " + item.date));
         auto lb = new QLabel(url);
         lb->setOpenExternalLinks(true);
         layout->addWidget(lb);
     }
-    m_newsFeedWidget->setLayout(layout);
+    setNewsLayout(layout);
+}
+
+void WelcomeWidget::fallback(){
+    auto theme = palette().text().color().value() >= QColor(Qt::lightGray).value() ? QString("dark") : QString("light") ;
+    auto layout = new QHBoxLayout;
+    layout->addWidget(new QLabel(i18n("Failed to fetch the News.")));
+    auto button = new QToolButton;
+    button->setIcon(QIcon::fromTheme("view-refresh", QIcon(QString(":/%1/refresh").arg(theme))));
+    button->setIconSize(QSize(fontMetrics().lineSpacing(),fontMetrics().lineSpacing()));
+    layout->addWidget(button);
+    layout->addStretch();
+    connect(button, &QToolButton::clicked, this, &WelcomeWidget::retrieveRssFeed);
+    setNewsLayout(layout);
+}
+
+void WelcomeWidget::setNewsLayout(QLayout *newLayout){
+    if (m_newsFeedWidget->layout()) {
+        qDeleteAll(m_newsFeedWidget->children());
+    }
+    m_newsFeedWidget->setLayout(newLayout);
 }
