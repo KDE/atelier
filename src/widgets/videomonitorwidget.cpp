@@ -63,7 +63,7 @@ VideoMonitorWidget::VideoMonitorWidget(QWidget *parent) :
                         .replaceInStrings(QRegExp("^"), "v4l2:///dev/"));
 #endif
 
-    connect(_playPB, &QPushButton::clicked, [this, _playPB, _sourceCB, _videoWidget](bool b) {
+    connect(_playPB, &QPushButton::clicked, this, [this, _playPB, _sourceCB, _videoWidget](bool b) {
         if (b) {
             if (_mediaplayer.state() != QMediaPlayer::PausedState) {
                 QString source = _sourceCB->currentText();

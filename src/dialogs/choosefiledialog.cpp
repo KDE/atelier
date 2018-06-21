@@ -32,7 +32,7 @@ ChooseFileDialog::ChooseFileDialog(QWidget *parent, QList<QUrl> files) :
     foreach (const auto &url, files) {
         listWigdet->addItem(url.toLocalFile());
     }
-    connect(listWigdet, &QListWidget::currentRowChanged, [this, &files](const int t) {
+    connect(listWigdet, &QListWidget::currentRowChanged, this, [this, &files](const int t) {
         m_choosen_file = files.at(t);
     });
 
