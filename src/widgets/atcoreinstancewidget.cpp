@@ -108,14 +108,14 @@ void AtCoreInstanceWidget::buildToolbar()
     m_toolBar->addWidget(lb);
 
     auto homeAll = new QAction(i18n("All"));
-    connect(homeAll, &QAction::triggered, [this] {
+    connect(homeAll, &QAction::triggered, this, [this] {
         m_core.home();
     });
     m_toolBar->addAction(homeAll);
 
     for (auto homes : std::map<QString, int> {{"X", AtCore::X}, {"Y", AtCore::Y}, {"Z", AtCore::Z}}) {
         auto home = new QAction(homes.first);
-        connect(home, &QAction::triggered, [this, homes] {
+        connect(home, &QAction::triggered, this, [this, homes] {
             m_core.home(homes.second);
         });
         m_toolBar->addAction(home);
@@ -124,7 +124,7 @@ void AtCoreInstanceWidget::buildToolbar()
     m_toolBar->addSeparator();
 
     m_printAction = new QAction(QIcon::fromTheme("media-playback-start", style()->standardIcon(QStyle::SP_MediaPlay)), i18n("Print"));
-    connect(m_printAction, &QAction::triggered, [this] {
+    connect(m_printAction, &QAction::triggered, this, [this] {
 
         if (m_core.state() == AtCore::BUSY)
         {
@@ -146,7 +146,7 @@ void AtCoreInstanceWidget::buildToolbar()
 
     m_stopAction = new QAction(QIcon::fromTheme("media-playback-stop", QIcon(QString(":/%1/stop").arg(m_theme))), i18n("Stop"));
     connect(m_stopAction, &QAction::triggered, this, &AtCoreInstanceWidget::stopPrint);
-    connect(m_stopAction, &QAction::triggered, [this] {
+    connect(m_stopAction, &QAction::triggered, this, [this] {
         m_printAction->setText(i18n("Print"));
         m_printAction->setIcon(QIcon::fromTheme("media-playback-start", QIcon(QString(":/%1/start").arg(m_theme))));
     });
@@ -249,7 +249,7 @@ void AtCoreInstanceWidget::initConnectsToAtCore()
     connect(m_bedExtWidget, &BedExtruderWidget::bedTemperatureChanged, &m_core, &AtCore::setBedTemp);
     connect(m_bedExtWidget, &BedExtruderWidget::extTemperatureChanged, &m_core, &AtCore::setExtruderTemp);
     //command Widget
-    connect(m_commandWidget, &CommandWidget::commandPressed, [this](const QString & command) {
+    connect(m_commandWidget, &CommandWidget::commandPressed, this, [this](const QString & command) {
         m_logWidget->appendLog(i18n("Push: %1", command));
         m_core.pushCommand(command);
     });
@@ -264,11 +264,11 @@ void AtCoreInstanceWidget::initConnectsToAtCore()
     connect(m_printWidget, &PrintWidget::flowRateChanged, &m_core, &AtCore::setFlowRate);
     connect(m_printWidget, &PrintWidget::printSpeedChanged, &m_core, &AtCore::setPrinterSpeed);
     //Movement Widget
-    connect(m_movementWidget, &MovementWidget::absoluteMove, [this](const QLatin1Char & axis, const double value) {
+    connect(m_movementWidget, &MovementWidget::absoluteMove, this, [this](const QLatin1Char & axis, const double value) {
         m_logWidget->appendLog(GCode::description(GCode::G1));
         m_core.move(axis, value);
     });
-    connect(m_movementWidget, &MovementWidget::relativeMove, [this](const QLatin1Char & axis, const double value) {
+    connect(m_movementWidget, &MovementWidget::relativeMove, this, [this](const QLatin1Char & axis, const double value) {
         m_logWidget->appendLog(i18n("Relative Move: %1, %2", axis, QString::number(value)));
         m_core.setRelativePosition();
         m_core.move(axis, value);
@@ -280,7 +280,7 @@ void AtCoreInstanceWidget::initConnectsToAtCore()
     connect(m_sdWidget, &SdWidget::requestSdList, &m_core, &AtCore::sdFileList);
     connect(&m_core, &AtCore::sdMountChanged, m_statusWidget, &StatusWidget::setSD);
 
-    connect(m_sdWidget, &SdWidget::printSdFile, [this](const QString & fileName) {
+    connect(m_sdWidget, &SdWidget::printSdFile, this, [this](const QString & fileName) {
         if (fileName.isEmpty()) {
             QMessageBox::information(
                 this
@@ -293,7 +293,7 @@ void AtCoreInstanceWidget::initConnectsToAtCore()
         }
     });
 
-    connect(m_sdWidget, &SdWidget::deleteSdFile, [this](const QString & fileName) {
+    connect(m_sdWidget, &SdWidget::deleteSdFile, this, [this](const QString & fileName) {
         if (fileName.isEmpty()) {
             QMessageBox::information(
                 this
@@ -582,13 +582,13 @@ void AtCoreInstanceWidget::connectExtruderTemperatureData(bool connected)
         }
         //Add Extruder.
         m_plotWidget->addPlot(i18n("Actual Ext.1"));
-        connect(&m_core.temperature(), &Temperature::extruderTemperatureChanged, [this](const float & temp) {
+        connect(&m_core.temperature(), &Temperature::extruderTemperatureChanged, this, [this](const float & temp) {
             checkTemperature(0x02, 0, temp);
             m_plotWidget->appendPoint(i18n("Actual Ext.1"), temp);
             m_bedExtWidget->updateExtTemp(temp);
         });
         m_plotWidget->addPlot(i18n("Target Ext.1"));
-        connect(&m_core.temperature(), &Temperature::extruderTargetTemperatureChanged, [this](const float & temp) {
+        connect(&m_core.temperature(), &Temperature::extruderTargetTemperatureChanged, this, [this](const float & temp) {
             checkTemperature(0x03, 0, temp);
             m_plotWidget->appendPoint(i18n("Target Ext.1"), temp);
             m_bedExtWidget->updateExtTargetTemp(temp);

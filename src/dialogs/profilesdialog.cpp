@@ -34,22 +34,22 @@ ProfilesDialog::ProfilesDialog(QWidget *parent) :
     ui->baudCB->addItems(SERIAL::BAUDS);
     ui->baudCB->setCurrentText(QLatin1String("115200"));
     ui->profileCB->setAutoCompletion(true);
-    connect(ui->profileCB, static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged), [this] {
+    connect(ui->profileCB, static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, [this] {
         askToSave();
         loadSettings();
     });
     updateCBProfiles();
 
     connect(ui->buttonBox, &QDialogButtonBox::clicked, this, &ProfilesDialog::buttonBoxClicked);
-    connect(ui->heatedBedCK, &QCheckBox::clicked, [this](const bool & status) {
+    connect(ui->heatedBedCK, &QCheckBox::clicked, this, [this](const bool & status) {
         ui->bedTempSB->setEnabled(status);
     });
 
-    connect(ui->cartesianRB, &QRadioButton::clicked, [this] {
+    connect(ui->cartesianRB, &QRadioButton::clicked, this, [this] {
         ui->printerTypeStack->setCurrentIndex(1);
     });
 
-    connect(ui->deltaRB, &QRadioButton::clicked, [this] {
+    connect(ui->deltaRB, &QRadioButton::clicked, this, [this] {
         ui->printerTypeStack->setCurrentIndex(0);
     });
 

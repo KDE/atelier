@@ -52,7 +52,7 @@ void GCodeEditorWidget::loadFile(const QUrl &file)
     urlDoc[doc->url()] = doc;
     urlTab[doc->url()] = m_tabwidget->widget(t);
     //connect our new document's modified state changed signal.
-    connect(doc, &KTextEditor::Document::modifiedChanged, [this, t](const KTextEditor::Document * document) {
+    connect(doc, &KTextEditor::Document::modifiedChanged, this, [this, t](const KTextEditor::Document * document) {
         QString filename = document->url().fileName(QUrl::FullyDecoded);
         if (document->isModified()) {
             filename.append(" *");

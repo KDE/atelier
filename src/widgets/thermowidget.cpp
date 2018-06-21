@@ -42,7 +42,7 @@ ThermoWidget::ThermoWidget(QWidget *parent, QString name) :
     setFocusPolicy(Qt::StrongFocus);
 
     m_cursorTimer = new QTimer();
-    connect(m_cursorTimer, &QTimer::timeout, [&] {
+    connect(m_cursorTimer, &QTimer::timeout, this, [this] {
         m_paintCursor = !m_paintCursor;
         update();
     });

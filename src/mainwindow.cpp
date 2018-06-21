@@ -43,7 +43,7 @@ MainWindow::MainWindow(QWidget *parent) :
     setupActions();
     setAcceptDrops(true);
 
-    connect(m_instances, &QTabWidget::tabCloseRequested, [this](int index) {
+    connect(m_instances, &QTabWidget::tabCloseRequested, this, [this](int index) {
         auto tempWidget = qobject_cast<AtCoreInstanceWidget *>(m_instances->widget(index));
         if (tempWidget->isPrinting()) {
             if (askToClose()) {
@@ -139,13 +139,13 @@ void MainWindow::newAtCoreInstance()
     newInstanceWidget->setObjectName(name);
     newInstanceWidget->setFileCount(m_openFiles.size());
     connect(this, &MainWindow::profilesChanged, newInstanceWidget, &AtCoreInstanceWidget::updateProfileData);
-    connect(newInstanceWidget, &AtCoreInstanceWidget::requestProfileDialog, [this] {
+    connect(newInstanceWidget, &AtCoreInstanceWidget::requestProfileDialog, this, [this] {
         std::unique_ptr<ProfilesDialog> pd(new ProfilesDialog);
         pd->exec();
         emit(profilesChanged());
     });
 
-    connect(newInstanceWidget, &AtCoreInstanceWidget::requestFileChooser, [newInstanceWidget, this] {
+    connect(newInstanceWidget, &AtCoreInstanceWidget::requestFileChooser, this, [newInstanceWidget, this] {
         switch (m_openFiles.size())
         {
         case 0:
@@ -200,7 +200,7 @@ void MainWindow::setupLateralArea()
         m_lateral.m_map[key] = {btn, w};
         buttonLayout->addWidget(btn);
 
-        connect(btn, &QPushButton::clicked, [this, w, btn] {
+        connect(btn, &QPushButton::clicked, this, [this, w, btn] {
             if (m_lateral.m_stack->currentWidget() == w)
             {
                 m_lateral.m_stack->setHidden(m_lateral.m_stack->isVisible());
@@ -219,14 +219,14 @@ void MainWindow::setupLateralArea()
 
     m_gcodeEditor = new GCodeEditorWidget(this);
     connect(m_gcodeEditor, &GCodeEditorWidget::updateClientFactory, this, &MainWindow::updateClientFactory);
-    connect(m_gcodeEditor, &GCodeEditorWidget::fileClosed, [this](const QUrl & file) {
+    connect(m_gcodeEditor, &GCodeEditorWidget::fileClosed, this, [this](const QUrl & file) {
         m_openFiles.removeAll(file);
     });
 
     auto *viewer3D = new Viewer3D(this);
     connect(viewer3D, &Viewer3D::droppedUrls, this, &MainWindow::processDropEvent);
 
-    connect(m_gcodeEditor, &GCodeEditorWidget::currentFileChanged, [this, viewer3D](const QUrl & url) {
+    connect(m_gcodeEditor, &GCodeEditorWidget::currentFileChanged, this, [this, viewer3D](const QUrl & url) {
         viewer3D->drawModel(url.toString());
     });
 
@@ -260,7 +260,7 @@ void MainWindow::setupActions()
     action->setIcon(QIcon::fromTheme("document-properties", QIcon(QString(":/%1/configure").arg(m_theme))));
 
     action->setText(i18n("&Profiles"));
-    connect(action, &QAction::triggered, [this] {
+    connect(action, &QAction::triggered, this, [this] {
         std::unique_ptr<ProfilesDialog> pd(new ProfilesDialog);
         pd->exec();
         emit(profilesChanged());
