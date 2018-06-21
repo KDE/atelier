@@ -24,10 +24,10 @@ class QDomDocument;
 class QLayout;
 class QUrl;
 
-struct Post{
+struct Post {
+    QString date;
     QString title;
     QString url;
-    QString date;
 };
 
 class WelcomeWidget : public QWidget
@@ -35,15 +35,15 @@ class WelcomeWidget : public QWidget
     Q_OBJECT
 
 public:
-    WelcomeWidget(QWidget *parent=nullptr);
+    WelcomeWidget(QWidget *parent = nullptr);
     ~WelcomeWidget();
 
 private:
-    void retrieveRssFeed();
-    void parseRss(const QDomDocument& document);
-    void setupRssFeed();
-    void fallback();
-    void setNewsLayout(QLayout *newLayout);
     QWidget *m_newsFeedWidget;
     QList<Post> m_postList;
+    void fallback();
+    void parseRss(const QDomDocument &document);
+    void retrieveRssFeed();
+    void setNewsLayout(QLayout *newLayout);
+    void setupRssFeed();
 };
