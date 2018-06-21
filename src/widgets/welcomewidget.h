@@ -24,7 +24,7 @@ class QDomDocument;
 class QLayout;
 class QUrl;
 
-struct Post{
+struct Post {
     QString date;
     QString title;
     QString url;
@@ -35,7 +35,7 @@ class WelcomeWidget : public QWidget
     Q_OBJECT
 
 public:
-    WelcomeWidget(QWidget *parent=nullptr);
+    WelcomeWidget(QWidget *parent = nullptr);
     ~WelcomeWidget();
 
 private:
