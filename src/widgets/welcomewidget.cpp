@@ -62,7 +62,7 @@ WelcomeWidget::WelcomeWidget(QWidget *parent): QWidget(parent), m_newsFeedWidget
     label->setFont(appFont);
     layout->addWidget(label);
 
-    for(QString sentence : {i18n("1 - Create a Profile."), i18n("2 - Select the device."), i18n("3 - Select the profile and connect.")}){
+    for(const QString &sentence : {i18n("1 - Create a Profile."), i18n("2 - Select the device."), i18n("3 - Select the profile and connect.")}){
         label = new QLabel(sentence);
         layout->addWidget(label);
     }
@@ -115,7 +115,7 @@ WelcomeWidget::~WelcomeWidget(){
 
 void WelcomeWidget::retrieveRssFeed(){
     auto manager = new QNetworkAccessManager();
-    for(const QUrl url : {
+    for(const QUrl &url : {
             QUrl("https://rizzitello.wordpress.com/category/atelier/feed/"),
             QUrl("https://laysrodriguesdev.wordpress.com/category/atelier/feed/")
             })
@@ -123,7 +123,7 @@ void WelcomeWidget::retrieveRssFeed(){
         QNetworkRequest request(url);
         request.setRawHeader("User-Agent", "Atelier 1.0");
         manager->get(request);
-        connect(manager, &QNetworkAccessManager::finished, [&](QNetworkReply *reply){
+        connect(manager, &QNetworkAccessManager::finished, this, [&](QNetworkReply *reply){
             if(reply->error()){
                 return;
             }else{
@@ -139,7 +139,7 @@ void WelcomeWidget::retrieveRssFeed(){
     QTimer::singleShot(500, this, &WelcomeWidget::setupRssFeed);
 }
 
-void WelcomeWidget::parseRss(const QDomDocument& document){
+void WelcomeWidget::parseRss(const QDomDocument &document){
     auto itemList = document.elementsByTagName("item");
     QRegularExpression dateRegex("(?<date>\\d{2} \\w{3} \\d{4})");
 
@@ -166,14 +166,14 @@ void WelcomeWidget::setupRssFeed(){
         return;
     }
     QLocale locale(QLocale::English);
-    std::stable_sort(m_postList.begin(), m_postList.end(), [locale](const Post& p1, const Post& p2){
+    std::stable_sort(m_postList.begin(), m_postList.end(), [locale](const Post &p1, const Post &p2){
         return locale.toDate(p1.date, "dd MMM yyyy") > locale.toDate(p2.date, "dd MMM yyyy");
     });
     auto layout = new QVBoxLayout;
     int count = m_postList.count() > POSTS_LIMIT ? POSTS_LIMIT : m_postList.count();
     for(int i =0; i < count; ++i){
         Post item = m_postList.at(i);
-        QString url = QString("<a href=\"%1\">%2</a>").arg(item.url).arg(QString(item.title + " - " + item.date));
+        QString url = QString("<a href=\"%1\">%2</a>").arg(item.url, QString(item.title + " - " + item.date));
         auto lb = new QLabel(url);
         lb->setOpenExternalLinks(true);
         layout->addWidget(lb);
@@ -182,7 +182,7 @@ void WelcomeWidget::setupRssFeed(){
 }
 
 void WelcomeWidget::fallback(){
-    auto theme = palette().text().color().value() >= QColor(Qt::lightGray).value() ? QString("dark") : QString("light") ;
+    auto theme = palette().text().color().value() >= QColor(Qt::lightGray).value() ? QStringLiteral("dark") : QStringLiteral("light") ;
     auto layout = new QHBoxLayout;
     layout->addWidget(new QLabel(i18n("Failed to fetch the News.")));
     auto button = new QToolButton;
