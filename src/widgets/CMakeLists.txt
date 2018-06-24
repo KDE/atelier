@@ -2,28 +2,27 @@ include_directories(../dialogs)
 include_directories(${QWT_INCLUDE_DIR})
 
 set(widgets_SRCS
-    gcodeeditorwidget.cpp
-    bedextruderwidget.cpp
-    videomonitorwidget.cpp
     atcoreinstancewidget.cpp
+    bedextruderwidget.cpp
+    gcodeeditorwidget.cpp
     thermowidget.cpp
+    videomonitorwidget.cpp
     welcomewidget.cpp
-    )
+)
 
 add_library(AtelierWidgets STATIC ${widgets_SRCS})
 
 target_link_libraries(AtelierWidgets
-    Qt5::Core
-    Qt5::Widgets
-    Qt5::SerialPort
+    AtCore::AtCore
     KF5::I18n
     KF5::TextEditor
     Qt5::Charts
+    Qt5::Core
     Qt5::Multimedia
     Qt5::MultimediaWidgets
-    AtCore::AtCore
+    Qt5::Widgets
     ${QWT_LIBRARY}
-    )
+)
 
 if(WIN32)
     target_compile_definitions(AtelierWidgets PRIVATE -DQWT_DLL)

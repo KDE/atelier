@@ -1,12 +1,14 @@
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTORCC ON)
+
 set(atelier_SRCS
     main.cpp
     mainwindow.cpp
-    )
+)
 
 add_subdirectory(dialogs)
 add_subdirectory(widgets)
+
 ecm_create_qm_loader(atelier_SRCS atelier)
 
 if (NOT APPLE)
@@ -27,4 +29,12 @@ else()
     install(TARGETS atelier BUNDLE DESTINATION bin)
 endif()
 
-target_link_libraries(atelier AtelierWidgets AtelierDialogs Atelier3D AtCore::AtCoreWidgets AtCore::AtCore KF5::XmlGui KF5::ConfigWidgets)
+target_link_libraries(atelier 
+    Atelier3D
+    AtelierDialogs
+    AtelierWidgets
+    AtCore::AtCore
+    AtCore::AtCoreWidgets
+    KF5::ConfigWidgets
+    KF5::XmlGui
+)
