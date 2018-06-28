@@ -8,18 +8,14 @@
   <description>
       <p> Kde 3D Printer Host</p>
   </description>
-  <url type="homepage">https://www.kde.org</url>
+  <url type="homepage">https://atelier.kde.org</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=Atelier</url>
   <url type="donation">https://www.kde.org/community/donations/?app=atelier</url>
   <screenshots>
     <screenshot type="default">
-      <image>
-        see https://www.freedesktop.org/software/appstream/docs/chap-Metadata.html#tag-screenshots
-        Central hosting for uploading at https://phabricator.kde.org/source/websites-product-screenshots/
-        Central URL to use here https://cdn.kde.org/screenshots/...
-      </image>
-    </screenshot>
-  </screenshots>
+    <caption>The Atelier main window.</caption>
+​    <image type="source" width="1600" height="900">https://cdn.kde.org/screenshots/atelier/atelier.png</image>
+​   </screenshots>
   <provides>
     <binary>atelier</binary>
   </provides>
