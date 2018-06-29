@@ -4,9 +4,9 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license> GPL-3.0</project_license>
   <name>Atelier</name>
-  <summary> 3D Printing Host </summary>
+  <summary> 3D Printer Host </summary>
   <description>
-      <p> Kde 3D Printer Host</p>
+      <p>Atelier allows you to connect to and control a 3D printer from your computer. You can control any number of printers and open any number of files. Aside from printing, you can preview the gcodes, view an attached camera, edit your files, and manage your machine(s). </p>
   </description>
   <url type="homepage">https://atelier.kde.org</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=Atelier</url>
