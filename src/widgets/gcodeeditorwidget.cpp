@@ -17,7 +17,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include <KLocalizedString>
+#include <QDropEvent>
 #include <QLabel>
+#include <QMimeData>
 #include <QVBoxLayout>
 #include "gcodeeditorwidget.h"
 
@@ -25,6 +27,7 @@ GCodeEditorWidget::GCodeEditorWidget(QWidget *parent) :
     QWidget(parent)
     , m_tabwidget(new QTabWidget())
 {
+    setAcceptDrops(true);
     m_editor = KTextEditor::Editor::instance();
     setupTabWidget();
     QVBoxLayout *layout = new QVBoxLayout();
@@ -80,6 +83,11 @@ KTextEditor::Document *GCodeEditorWidget::newDoc(const QUrl &file)
 KTextEditor::View *GCodeEditorWidget::newView(KTextEditor::Document *doc)
 {
     auto view = doc->createView(this);
+    // Connection is a hack using undocumented parts of KTextEditor::View.
+    // One day this may break, KTextEditor::View needs this added correcty as a real slot to the API.
+    // Hopefully we can get that added and use it in the future.
+    // This must be the older style connect string or it will not work.
+    connect(view, SIGNAL(dropEventPass(QDropEvent *)), this, SLOT(dropCatch(QDropEvent *)));
     setupInterface(view);
     return view;
 }
@@ -100,4 +108,11 @@ void GCodeEditorWidget::currentIndexChanged(int index)
 {
     emit currentFileChanged(urlTab.key(m_tabwidget->widget(index)));
     emit updateClientFactory(qobject_cast<KTextEditor::View *>(m_tabwidget->widget(index)));
+}
+
+void GCodeEditorWidget::dropCatch(QDropEvent *event)
+{
+    if (event->mimeData()->hasUrls()) {
+        emit droppedUrls(event->mimeData()->urls());
+    }
 }
