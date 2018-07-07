@@ -50,4 +50,8 @@ signals:
     void currentFileChanged(const QUrl &file);
     void updateClientFactory(KTextEditor::View *view);
     void fileClosed(const QUrl &file);
+    void droppedUrls(QList<QUrl> fileList);
+
+private slots:
+    void dropCatch(QDropEvent *event);
 };

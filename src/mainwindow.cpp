@@ -220,6 +220,7 @@ void MainWindow::setupLateralArea()
 
     m_gcodeEditor = new GCodeEditorWidget(this);
     connect(m_gcodeEditor, &GCodeEditorWidget::updateClientFactory, this, &MainWindow::updateClientFactory);
+    connect(m_gcodeEditor, &GCodeEditorWidget::droppedUrls, this, &MainWindow::processDropEvent);
     connect(m_gcodeEditor, &GCodeEditorWidget::fileClosed, this, [this](const QUrl & file) {
         m_openFiles.removeAll(file);
     });
