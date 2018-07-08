@@ -151,6 +151,7 @@ void MainWindow::newAtCoreInstance()
     });
 
     connect(newInstanceWidget, &AtCoreInstanceWidget::requestFileChooser, this, [newInstanceWidget, this] {
+        QUrl file;
         switch (m_openFiles.size())
         {
         case 0:
@@ -159,14 +160,32 @@ void MainWindow::newAtCoreInstance()
                                  QMessageBox::Ok);
             break;
         case 1:
-            newInstanceWidget->printFile(m_openFiles.at(0));
+            file = m_openFiles.at(0);
             break;
         default:
             ChooseFileDialog dialog(this, m_openFiles);
             if (dialog.exec() == QDialog::Accepted) {
-                newInstanceWidget->printFile(dialog.choosenFile());
+                file = dialog.choosenFile();
+            }
+            break;
+        }
+        if (m_gcodeEditor->modifiedFiles().contains(file))
+        {
+            int result = QMessageBox::question(
+                             this
+                             , i18n("Document Modified")
+                             , i18n("%1 \n Contains Unsaved Changes That will not be in the print.\n Would you like to Save before printing?", file.toLocalFile())
+                             , QMessageBox::Save
+                             , QMessageBox::Cancel
+                             , QMessageBox::Ignore
+                         );
+            if (result == QMessageBox::Cancel) {
+                return;
+            } else if (result == QMessageBox::Save) {
+                m_gcodeEditor->saveFile(file);
             }
         }
+        newInstanceWidget->printFile(file);
     });
 
     connect(newInstanceWidget, &AtCoreInstanceWidget::connectionChanged, this, &MainWindow::atCoreInstanceNameChange);
