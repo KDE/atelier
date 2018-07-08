@@ -66,6 +66,7 @@ private:
     QString m_theme;
     QTabWidget *m_instances;
     bool askToClose();
+    bool askToSave(const QVector<QUrl> &fileList);
     void atCoreInstanceNameChange(const QString &name);
     QString getTheme();
     void initWidgets();
