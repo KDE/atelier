@@ -31,6 +31,7 @@ AtCoreInstanceWidget::AtCoreInstanceWidget(QWidget *parent):
     , m_toolBar(nullptr)
 {
     m_theme = palette().text().color().value() >= QColor(Qt::lightGray).value() ? QString("dark") : QString("light") ;
+    m_iconSize = QSize(fontMetrics().lineSpacing(), fontMetrics().lineSpacing());
     QHBoxLayout *HLayout = new QHBoxLayout;
     m_bedExtWidget = new BedExtruderWidget;
     HLayout->addWidget(m_bedExtWidget);
@@ -98,11 +99,12 @@ AtCoreInstanceWidget::~AtCoreInstanceWidget()
 void AtCoreInstanceWidget::buildToolbar()
 {
     m_toolBar = new QToolBar();
+    m_toolBar->setIconSize(m_iconSize);
     m_toolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
 
     auto lb = new QLabel;
     QIcon icon = QIcon::fromTheme("go-home", QIcon(QString(":/%1/home").arg(m_theme)));
-    lb->setPixmap(icon.pixmap(fontMetrics().height()));
+    lb->setPixmap(icon.pixmap(m_iconSize));
     m_toolBar->addWidget(lb);
     lb = new QLabel(i18n("Home:"));
     m_toolBar->addWidget(lb);
@@ -185,6 +187,7 @@ void AtCoreInstanceWidget::buildConnectionToolbar()
     m_connectToolBar->addWidget(m_connectWidget);
 
     m_connectButton = new QPushButton(QIcon::fromTheme("network-connect", QIcon(QString(":/%1/connect").arg(m_theme))), i18n("Connect"));
+    m_connectButton->setIconSize(m_iconSize);
     m_connectButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     connect(this, &AtCoreInstanceWidget::disableDisconnect, m_connectButton, &QPushButton::setDisabled);
     connect(m_connectButton, &QPushButton::clicked, this, &AtCoreInstanceWidget::connectButtonClicked);

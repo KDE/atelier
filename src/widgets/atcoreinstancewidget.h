@@ -72,6 +72,7 @@ private:
     QMap<QString, QVariant> m_profileData;
     QPushButton *m_connectButton;
     QSettings m_settings;
+    QSize m_iconSize;
     QString m_theme;
     QTabWidget *m_tabWidget;
     QToolBar *m_connectToolBar;
