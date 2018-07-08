@@ -69,6 +69,9 @@ void GCodeEditorWidget::setupInterface(const KTextEditor::View *view)
 {
     m_interface = qobject_cast<KTextEditor::ConfigInterface *>(view);
     m_interface->setConfigValue("line-numbers", true);
+    m_interface->setConfigValue("dynamic-word-wrap", false);
+    m_interface->setConfigValue("modification-markers", true);
+    m_interface->setConfigValue("scrollbar-minimap", false);
 }
 
 KTextEditor::Document *GCodeEditorWidget::newDoc(const QUrl &file)
