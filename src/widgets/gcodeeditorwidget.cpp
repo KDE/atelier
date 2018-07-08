@@ -118,4 +118,16 @@ void GCodeEditorWidget::dropCatch(QDropEvent *event)
     if (event->mimeData()->hasUrls()) {
         emit droppedUrls(event->mimeData()->urls());
     }
+
+}
+
+QVector<QUrl> GCodeEditorWidget::modifiedFiles()
+{
+    QVector<QUrl> modList;
+    for (auto const &doc : m_editor->documents()) {
+        if (doc->isModified()) {
+            modList.append(doc->url());
+        }
+    }
+    return modList;
 }
