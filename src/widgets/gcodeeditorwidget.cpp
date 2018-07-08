@@ -131,3 +131,12 @@ QVector<QUrl> GCodeEditorWidget::modifiedFiles()
     }
     return modList;
 }
+
+bool GCodeEditorWidget::saveFile(const QUrl &url)
+{
+    if (!urlDoc.contains(url)) {
+        return false;
+    }
+    KTextEditor::Document *doc = urlDoc[url];
+    return doc->save();
+}
