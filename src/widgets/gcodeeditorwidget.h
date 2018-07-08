@@ -28,10 +28,11 @@
 class GCodeEditorWidget : public QWidget
 {
     Q_OBJECT
-
 public:
     explicit GCodeEditorWidget(QWidget *parent = nullptr);
     void loadFile(const QUrl &file);
+    QVector<QUrl> modifiedFiles();
+    bool saveFile(const QUrl &url);
 
 private:
     QMap<QUrl, KTextEditor::Document *> urlDoc;
