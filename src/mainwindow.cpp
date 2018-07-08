@@ -117,7 +117,8 @@ void MainWindow::initWidgets()
     splitter->addWidget(m_instances);
 
     auto addTabBtn = new QToolButton();
-    addTabBtn->setText("+");
+    addTabBtn->setIconSize(QSize(fontMetrics().lineSpacing(), fontMetrics().lineSpacing()));
+    addTabBtn->setIcon(QIcon::fromTheme("list-add", QIcon(QString(":/%1/addTab").arg(m_theme))));
     addTabBtn->setToolTip(i18n("Create new instance"));
     addTabBtn->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_T));
     connect(addTabBtn, &QToolButton::clicked, this, &MainWindow::newAtCoreInstance);
