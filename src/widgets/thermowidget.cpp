@@ -31,6 +31,7 @@ ThermoWidget::ThermoWidget(QWidget *parent, QString name) :
     QwtDial(parent)
     , m_targetTemperatureNeedle(new QwtDialSimpleNeedle(QwtDialSimpleNeedle::Arrow, Qt::red, Qt::darkRed))
     , m_name(name)
+    , m_tempChangedTimer(new QTimer())
     , m_currentTemperature(0)
     , m_targetTemperature(0)
 {
@@ -45,6 +46,11 @@ ThermoWidget::ThermoWidget(QWidget *parent, QString name) :
     connect(m_cursorTimer, &QTimer::timeout, this, [this] {
         m_paintCursor = !m_paintCursor;
         update();
+    });
+
+    m_tempChangedTimer->setSingleShot(true);
+    connect(m_tempChangedTimer, &QTimer::timeout, this, [this] {
+        emit targetTemperatureChanged(m_targetTemperature);
     });
 }
 
@@ -136,7 +142,7 @@ void ThermoWidget::keyPressEvent(QKeyEvent *event)
 
     if (m_targetTemperature != m_currentTemperatureTextFromEditor.toInt()) {
         m_targetTemperature = m_currentTemperatureTextFromEditor.toInt();
-        emit targetTemperatureChanged(m_targetTemperature);
+        resetTimer();
         update();
         event->accept();
     }
@@ -160,7 +166,7 @@ void ThermoWidget::wheelEvent(QWheelEvent *event)
 
     if (m_targetTemperature != m_currentTemperatureTextFromEditor.toInt()) {
         m_targetTemperature = m_currentTemperatureTextFromEditor.toInt();
-        emit targetTemperatureChanged(m_targetTemperature);
+        resetTimer();
         update();
     }
     event->accept();
@@ -170,7 +176,7 @@ void ThermoWidget::focusOutEvent(QFocusEvent *event)
 {
     if (m_targetTemperature != m_currentTemperatureTextFromEditor.toInt()) {
         m_targetTemperature = m_currentTemperatureTextFromEditor.toInt();
-        emit targetTemperatureChanged(m_targetTemperature);
+        resetTimer();
         event->accept();
     }
     m_cursorTimer->stop();
@@ -271,7 +277,12 @@ void ThermoWidget::setTargetTemperature(double temperature)
     if (m_targetTemperature != temperature) {
         m_currentTemperatureTextFromEditor = QString::number(temperature);
         m_targetTemperature = temperature;
-        emit targetTemperatureChanged(m_targetTemperature);
+        resetTimer();
         update();
     }
+}
+
+void ThermoWidget::resetTimer()
+{
+    m_tempChangedTimer->start(500);
 }
