@@ -221,7 +221,12 @@ void ProfilesDialog::removeProfile()
 QStringList ProfilesDialog::detectFWPlugins()
 {
     QStringList firmwares;
-    for (const QString &path : AtCoreDirectories::pluginDir) {
+    QStringList paths = AtCoreDirectories::pluginDir;
+    //Add our runtime paths
+    paths.prepend(qApp->applicationDirPath() + QStringLiteral("/../Plugins/AtCore"));
+    paths.prepend(qApp->applicationDirPath() + QStringLiteral("/AtCore"));
+    paths.prepend(qApp->applicationDirPath() + QStringLiteral("/plugins"));
+    for (const QString &path : paths) {
         firmwares = firmwaresInPath(path);
         if (!firmwares.isEmpty()) {
             //use path where plugins were detected.
