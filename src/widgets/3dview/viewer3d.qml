@@ -25,7 +25,7 @@ Item {
             focus: true
             aspects: ["input", "logic"]
             cameraAspectRatioMode: Scene3D.AutomaticAspectRatio
-            AnimatedEntity {
+            SceneEntity {
                 id: entity
             }
 
