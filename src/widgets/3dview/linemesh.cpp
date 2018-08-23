@@ -1,6 +1,7 @@
 /* Atelier KDE Printer Host for 3D Printing
-    Copyright (C) <2017>
+    Copyright (C) <2017-2018>
     Author: Patrick José Pereira - patrickjp@kde.org
+            Kevin Ottens - ervin@kde.org
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -18,6 +19,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+
 #include <QGeometryRenderer>
 #include <QVector3D>
 #include <QVector4D>
@@ -54,8 +56,15 @@ void LineMesh::read(const QString &path)
 
 void LineMesh::posUpdate(const QList<QVector4D> &pos)
 {
-    _vertices = pos;
-    _lineMeshGeo = new LineMeshGeometry(_vertices, this);
+    QList<QVector3D> vertices;
+    vertices.reserve(pos.size());
+    std::transform(pos.cbegin(), pos.cend(),
+                   std::back_inserter(vertices),
+                   [](const QVector4D & x) {
+                       return x.toVector3D();
+                   });
+
+    _lineMeshGeo = new LineMeshGeometry(vertices, this);
     setVertexCount(_lineMeshGeo->vertexCount());
     setGeometry(_lineMeshGeo);
     emit finished();

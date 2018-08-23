@@ -1,6 +1,7 @@
 /* Atelier KDE Printer Host for 3D Printing
-    Copyright (C) <2017>
+    Copyright (C) <2017-2018>
     Author: Patrick José Pereira - patrickjp@kde.org
+            Kevin Ottens - ervin@kde.org
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -18,6 +19,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+
 #pragma once
 
 #include <QAttribute>
@@ -29,7 +31,7 @@ class LineMeshGeometry : public Qt3DRender::QGeometry
     Q_OBJECT
 
 public:
-    LineMeshGeometry(const QList<QVector4D> &vertices, Qt3DCore::QNode *parent = Q_NULLPTR);
+    LineMeshGeometry(const QList<QVector3D> &vertices, Qt3DCore::QNode *parent = Q_NULLPTR);
     ~LineMeshGeometry();
     int vertexCount();
 

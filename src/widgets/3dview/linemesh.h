@@ -18,6 +18,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+
 #pragma once
 
 #include <QList>
@@ -28,7 +29,6 @@
 
 class LineMeshGeometry;
 class QString;
-class QVector4D;
 
 class LineMesh : public Qt3DRender::QGeometryRenderer
 {
@@ -48,5 +48,4 @@ signals:
 private:
     GcodeTo4D _gcode;
     LineMeshGeometry *_lineMeshGeo;
-    QList<QVector4D> _vertices;
 };
