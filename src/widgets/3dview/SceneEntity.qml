@@ -26,25 +26,8 @@ Entity {
 
     components: [
         RenderSettings {
-            activeFrameGraph: ClearBuffers {
-                buffers: ClearBuffers.ColorDepthBuffer
-                clearColor: "transparent"
-
-                RenderSurfaceSelector {
-                    id: surfaceSelector
-                    ClearBuffers {
-                        buffers : ClearBuffers.ColorDepthBuffer
-                        NoDraw {}
-                    }
-
-                    Viewport {
-                        id: topLeftViewport
-                        CameraSelector {
-                            id: cameraSelectorTopLeftViewport
-                            camera: camera
-                        }
-                    }
-                }
+            activeFrameGraph: ForwardRenderer {
+                camera: camera
             }
         },
         InputSettings { }
