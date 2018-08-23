@@ -1,6 +1,7 @@
 /* Atelier KDE Printer Host for 3D Printing
-    Copyright (C) <2017>
+    Copyright (C) <2017-2018>
     Author: Patrick José Pereira - patrickjp@kde.org
+            Kevin Ottens - ervin@kde.org
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -18,10 +19,10 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include <QList>
 #include <QString>
 #include <QTextStream>
 #include <QVariant>
+#include <QVector>
 #include <QVector4D>
 #include "fileloader.h"
 
@@ -48,7 +49,7 @@ FileLoader::~FileLoader()
 
 void FileLoader::run()
 {
-    QList<QVector4D> pos;
+    QVector<QVector4D> pos;
     qint64 totalSize = _file.bytesAvailable();
     qint64 stillSize = totalSize;
 

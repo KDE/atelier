@@ -21,9 +21,9 @@
 #pragma once
 
 #include <QFile>
-#include <QList>
 #include <QObject>
 #include <QVariant>
+#include <QVector>
 
 class QString;
 class QVector4D;
@@ -41,7 +41,7 @@ private:
 
 signals:
     void percentUpdate(QVariant var);
-    void posFinished(const QList<QVector4D> &pos);
+    void posFinished(const QVector<QVector4D> &pos);
 
 public slots:
     void run();

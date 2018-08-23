@@ -35,7 +35,7 @@ public:
 
 signals:
     void percentUpdate(const QVariant &percent);
-    void posFinished(const QList<QVector4D> &pos);
+    void posFinished(const QVector<QVector4D> &pos);
 
 private:
     QThread *_thread;

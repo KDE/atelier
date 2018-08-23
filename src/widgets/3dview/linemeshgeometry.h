@@ -31,7 +31,7 @@ class LineMeshGeometry : public Qt3DRender::QGeometry
     Q_OBJECT
 
 public:
-    LineMeshGeometry(const QList<QVector3D> &vertices, Qt3DCore::QNode *parent = Q_NULLPTR);
+    LineMeshGeometry(const QVector<QVector3D> &vertices, Qt3DCore::QNode *parent = Q_NULLPTR);
     ~LineMeshGeometry();
     int vertexCount();
 

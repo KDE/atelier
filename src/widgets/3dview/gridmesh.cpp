@@ -34,7 +34,7 @@ GridMesh::GridMesh(Qt3DCore::QNode *parent) : Qt3DRender::QGeometryRenderer(pare
     setPrimitiveType(Qt3DRender::QGeometryRenderer::Lines);
 
     QVector2D s(20, 20);
-    QList<QVector3D> vertices;
+    QVector<QVector3D> vertices;
     for (uint i = 0; i <= s.x(); i++) {
         for (uint j = 0; j <= s.y(); j++) {
             vertices.append(QVector3D(i, 0, 0));

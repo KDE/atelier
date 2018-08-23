@@ -1,6 +1,7 @@
 /* Atelier KDE Printer Host for 3D Printing
-    Copyright (C) <2017>
+    Copyright (C) <2017-2018>
     Author: Patrick José Pereira - patrickjp@kde.org
+            Kevin Ottens - ervin@kde.org
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -21,7 +22,7 @@
 
 #pragma once
 
-#include <QList>
+#include <QVector>
 #include <QObject>
 #include <QNode>
 #include <QGeometryRenderer>
@@ -39,7 +40,7 @@ public:
     ~LineMesh();
     void read(const QString &path);
     Q_INVOKABLE void readAndRun(const QString &path);
-    void posUpdate(const QList<QVector4D> &pos);
+    void posUpdate(const QVector<QVector4D> &pos);
 
 signals:
     void finished();

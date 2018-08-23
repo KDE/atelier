@@ -36,7 +36,7 @@ LineMesh::LineMesh(Qt3DCore::QNode *parent) :
     setFirstInstance(0);
     setPrimitiveType(Qt3DRender::QGeometryRenderer::LineStrip);
 
-    qRegisterMetaType<QList<QVector4D>>("QList<QVector4D>");
+    qRegisterMetaType<QVector<QVector4D>>("QVector<QVector4D>");
     connect(&_gcode, &GcodeTo4D::posFinished, this, &LineMesh::posUpdate);
 }
 
@@ -54,9 +54,9 @@ void LineMesh::read(const QString &path)
     emit run(path);
 }
 
-void LineMesh::posUpdate(const QList<QVector4D> &pos)
+void LineMesh::posUpdate(const QVector<QVector4D> &pos)
 {
-    QList<QVector3D> vertices;
+    QVector<QVector3D> vertices;
     vertices.reserve(pos.size());
     std::transform(pos.cbegin(), pos.cend(),
                    std::back_inserter(vertices),
