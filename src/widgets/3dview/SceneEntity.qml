@@ -55,13 +55,11 @@ Entity {
 
     GridMesh {
         id: gridMesh
-        enabled: true
     }
 
     LineMesh {
         id: lineMesh
         objectName: "lineMesh"
-        enabled: true
     }
 
     PhongMaterial {
