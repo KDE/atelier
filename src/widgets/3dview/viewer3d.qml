@@ -27,9 +27,6 @@ Item {
             cameraAspectRatioMode: Scene3D.AutomaticAspectRatio
             AnimatedEntity {
                 id: entity
-                onFpsChanged: {
-                    // print(fps)
-                }
             }
 
         }

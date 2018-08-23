@@ -3,14 +3,11 @@ import Qt3D.Core 2.0
 import Qt3D.Render 2.0
 import Qt3D.Input 2.0
 import Qt3D.Extras 2.0
-import Qt3D.Logic 2.0
 import GridMesh 1.0
 import LineMesh 1.0
 
 Entity {
     id: sceneRoot
-
-    signal fpsChanged(var fps)
 
     function runLineMesh(path) {
         lineMesh.readAndRun(path)
@@ -55,14 +52,6 @@ Entity {
         },
         InputSettings { }
     ]
-
-    FrameAction {
-        id: frameAction
-
-        onTriggered: {
-            sceneRoot.fpsChanged(1/dt)
-        }
-    }
 
     GridMesh {
         id: gridMesh
