@@ -1,5 +1,6 @@
 set(3d_SRCS
     axisgnomonentity.cpp
+    cameracontroller.cpp
     fileloader.cpp
     gcodeto4d.cpp
     gridmesh.cpp
