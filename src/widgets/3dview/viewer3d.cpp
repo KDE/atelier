@@ -38,8 +38,8 @@ Viewer3D::Viewer3D(QWidget *parent) :
 {
     Q_INIT_RESOURCE(viewer3d);
 
-    qmlRegisterType<GridMesh>("GridMesh", 1, 0, "GridMesh");
-    qmlRegisterType<LineMesh>("LineMesh", 1, 0, "LineMesh");
+    qmlRegisterType<GridMesh>("Atelier", 1, 0, "GridMesh");
+    qmlRegisterType<LineMesh>("Atelier", 1, 0, "LineMesh");
 
     _view = new QQuickView(&_engine, nullptr);
     _view->setResizeMode(QQuickView::SizeRootObjectToView);

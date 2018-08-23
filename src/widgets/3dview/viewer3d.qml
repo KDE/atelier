@@ -22,7 +22,6 @@
 
 import QtQuick 2.0
 import QtQuick.Scene3D 2.0
-import LineMesh 1.0
 
 Item {
     id: item
