@@ -1,4 +1,5 @@
 set(3d_SRCS
+    axisgnomonentity.cpp
     fileloader.cpp
     gcodeto4d.cpp
     gridmesh.cpp

@@ -2,5 +2,8 @@
     <qresource prefix="/">
         <file>SceneEntity.qml</file>
         <file>viewer3d.qml</file>
+        <file>axisgnomon.gltf</file>
+        <file>axisgnomon.bin</file>
+        <file>axisgnomon.vert</file>
     </qresource>
 </RCC>

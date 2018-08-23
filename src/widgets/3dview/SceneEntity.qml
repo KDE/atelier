@@ -45,6 +45,7 @@ Entity {
         RenderSettings {
             activeFrameGraph: ForwardRenderer {
                 camera: camera
+                frustumCulling: false
             }
         },
         InputSettings { }
@@ -67,5 +68,10 @@ Entity {
                 onCurrentFileChanged: readAndRun(currentFile)
             }
         ]
+    }
+
+    AxisGnomonEntity {
+        scale: 0.05
+        position: Qt.vector2d(0.075, 0.075)
     }
 }

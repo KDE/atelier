@@ -28,6 +28,8 @@
 #include <QQmlEngine>
 #include <QQuickItem>
 #include <QQuickView>
+
+#include "axisgnomonentity.h"
 #include "gridmesh.h"
 #include "viewer3d.h"
 #include "linemesh.h"
@@ -38,6 +40,7 @@ Viewer3D::Viewer3D(QWidget *parent) :
 {
     Q_INIT_RESOURCE(viewer3d);
 
+    qmlRegisterType<AxisGnomonEntity>("Atelier", 1, 0, "AxisGnomonEntity");
     qmlRegisterType<GridMesh>("Atelier", 1, 0, "GridMesh");
     qmlRegisterType<LineMesh>("Atelier", 1, 0, "LineMesh");
 
