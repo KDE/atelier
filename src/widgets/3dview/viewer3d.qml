@@ -37,7 +37,7 @@ Item {
         id: fileName
         text: ""
         onTextChanged: {
-            entity.runLineMesh(text)
+            entity.currentFile = text
         }
     }
 }

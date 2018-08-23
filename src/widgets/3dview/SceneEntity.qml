@@ -8,10 +8,7 @@ import LineMesh 1.0
 
 Entity {
     id: sceneRoot
-
-    function runLineMesh(path) {
-        lineMesh.readAndRun(path)
-    }
+    property string currentFile
 
     Camera {
         id: camera
@@ -59,6 +56,8 @@ Entity {
 
     LineMesh {
         id: lineMesh
+        readonly property string currentFile: sceneRoot.currentFile
+        onCurrentFileChanged: readAndRun(currentFile)
     }
 
     PhongMaterial {
