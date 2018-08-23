@@ -42,6 +42,12 @@ Viewer3D::Viewer3D(QWidget *parent) :
     qmlRegisterType<LineMesh>("Atelier", 1, 0, "LineMesh");
 
     _view = new QQuickView(&_engine, nullptr);
+
+    auto format = QSurfaceFormat();
+    format.setVersion(3, 1);
+    format.setProfile(QSurfaceFormat::CoreProfile);
+    _view->setFormat(format);
+
     _view->setResizeMode(QQuickView::SizeRootObjectToView);
     _view->setSource(QUrl(QStringLiteral("qrc:/viewer3d.qml")));
     QHBoxLayout *mainLayout = new QHBoxLayout;
