@@ -7,14 +7,9 @@ set(3d_SRCS
     viewer3d.cpp
 )
 
-file(GLOB 3d_SRC_QML
-    AnimatedEntity.qml
-    viewer3d.qml
-)
-
 qt5_add_resources(3dfiles_RCS viewer3d.qrc)
 
-add_library(Atelier3D STATIC ${3d_SRCS} ${3dfiles_RCS} ${3d_SRC_QML})
+add_library(Atelier3D STATIC ${3d_SRCS} ${3dfiles_RCS})
 
 target_link_libraries(Atelier3D 
     Qt5::Core 
