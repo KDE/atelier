@@ -50,33 +50,22 @@ Entity {
         InputSettings { }
     ]
 
-    GridMesh {
-        id: gridMesh
-    }
-
-    LineMesh {
-        id: lineMesh
-        readonly property string currentFile: sceneRoot.currentFile
-        onCurrentFileChanged: readAndRun(currentFile)
-    }
-
-    PhongMaterial {
-        id: material
-        ambient: "darkBlue"
-    }
-
-    PhongMaterial {
-        id: lineMaterial
-        ambient: "darkGreen"
-    }
-
     Entity {
         id: gridEntity
-        components: [ gridMesh, material ]
+        components: [
+            PhongMaterial { ambient: "darkBlue" },
+            GridMesh {}
+        ]
     }
 
     Entity {
         id: lineEntity
-        components: [ lineMesh, lineMaterial ]
+        components: [
+            PhongMaterial { ambient: "darkGreen" },
+            LineMesh {
+                readonly property string currentFile: sceneRoot.currentFile
+                onCurrentFileChanged: readAndRun(currentFile)
+            }
+        ]
     }
 }
