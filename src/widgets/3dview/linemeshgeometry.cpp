@@ -30,16 +30,8 @@ LineMeshGeometry::LineMeshGeometry(const QVector<QVector3D> &vertices, Qt3DCore:
     , _vertexBuffer(new Qt3DRender::QBuffer(Qt3DRender::QBuffer::VertexBuffer, this))
 {
     QByteArray vertexBufferData;
-    vertexBufferData.resize(vertices.size() * 3 * sizeof(float));
-    float *rawVertexArray = reinterpret_cast<float *>(vertexBufferData.data());
-    int idx = 0;
-    for (const auto &v : vertices) {
-        rawVertexArray[idx++] = v.x();
-        rawVertexArray[idx++] = v.y();
-        rawVertexArray[idx++] = v.z();
-        _vertices.append(v);
-    }
-
+    vertexBufferData.resize(vertices.size() * static_cast<int>(sizeof(QVector3D)));
+    memcpy(vertexBufferData.data(), vertices.constData(), static_cast<size_t>(vertexBufferData.size()));
     _vertexBuffer->setData(vertexBufferData);
 
     _positionAttribute->setAttributeType(Qt3DRender::QAttribute::VertexAttribute);
@@ -57,5 +49,5 @@ LineMeshGeometry::~LineMeshGeometry()
 
 int LineMeshGeometry::vertexCount()
 {
-    return _vertices.size();
+    return _vertexBuffer->data().size() / static_cast<int>(sizeof(QVector3D));
 }

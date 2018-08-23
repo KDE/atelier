@@ -38,5 +38,4 @@ public:
 private:
     Qt3DRender::QAttribute *_positionAttribute;
     Qt3DRender::QBuffer *_vertexBuffer;
-    QVector<QVector3D> _vertices;
 };
