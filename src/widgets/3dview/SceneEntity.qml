@@ -59,7 +59,6 @@ Entity {
 
     LineMesh {
         id: lineMesh
-        objectName: "lineMesh"
     }
 
     PhongMaterial {
