@@ -311,7 +311,22 @@ void AtCoreInstanceWidget::initConnectsToAtCore()
 
 void AtCoreInstanceWidget::printFile(const QUrl &fileName)
 {
-    if (!fileName.isEmpty() && (m_core.state() == AtCore::IDLE)) {
+    if (fileName.isEmpty()) {
+        QMessageBox::critical(
+            this
+            , i18n("Filename Empty")
+            , i18n("No filename sent from calling method, please check and try again.")
+        );
+        return;
+    } else if (!QFileInfo(fileName.toString()).isReadable()) {
+        QMessageBox::critical(
+            this
+            , i18n("File not found")
+            , i18n("%1 \nIs not readable, please check and try again.", fileName.toString())
+        );
+        return;
+    }
+    if (m_core.state() == AtCore::IDLE) {
         m_logWidget->appendLog(i18n("Printing:%1", fileName.toLocalFile()));
         m_core.print(fileName.toLocalFile());
     }
