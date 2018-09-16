@@ -271,6 +271,12 @@ void AtCoreInstanceWidget::initConnectsToAtCore()
         m_logWidget->appendLog(GCode::description(GCode::G1));
         m_core.move(axis, value);
     });
+
+    connect(m_movementWidget, &MovementWidget::unitsChanged, this, [this](int units) {
+        auto selection = static_cast<AtCore::UNITS>(units);
+        m_core.setUnits(selection);
+    });
+
     connect(m_movementWidget, &MovementWidget::relativeMove, this, [this](const QLatin1Char & axis, const double value) {
         m_logWidget->appendLog(i18n("Relative Move: %1, %2", axis, QString::number(value)));
         m_core.setRelativePosition();
