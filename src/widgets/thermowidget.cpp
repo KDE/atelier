@@ -29,7 +29,7 @@
 
 ThermoWidget::ThermoWidget(QWidget *parent, QString name) :
     QwtDial(parent)
-    , m_targetTemperatureNeedle(new QwtDialSimpleNeedle(QwtDialSimpleNeedle::Arrow, Qt::red, Qt::darkRed))
+    , m_targetTemperatureNeedle(new QwtDialSimpleNeedle(QwtDialSimpleNeedle::Arrow, false, Qt::red, Qt::darkRed))
     , m_name(name)
     , m_tempChangedTimer(new QTimer())
     , m_currentTemperature(0)
@@ -106,11 +106,11 @@ void ThermoWidget::keyPressEvent(QKeyEvent *event)
     } else if (event->key() == Qt::Key_Escape) {
         m_currentTemperatureTextFromEditor = '0';
     } else if (event->key() == Qt::Key_Up || event->key() == Qt::Key_Plus) {
-        if (m_targetTemperature != upperBound()) {
+        if (!isEqual(m_targetTemperature, upperBound())) {
             m_currentTemperatureTextFromEditor = QString::number(m_targetTemperature + 1);
         }
     } else if (event->key() == Qt::Key_Down || event->key() == Qt::Key_Minus) {
-        if (m_targetTemperature != lowerBound()) {
+        if (!isEqual(m_targetTemperature, lowerBound())) {
             m_currentTemperatureTextFromEditor = QString::number(m_targetTemperature - 1);
         }
     } else if (event->key() == Qt::Key_PageUp) {
@@ -125,9 +125,7 @@ void ThermoWidget::keyPressEvent(QKeyEvent *event)
         } else {
             m_currentTemperatureTextFromEditor = QString::number(m_targetTemperature - 10);
         }
-    }
-
-    else if (event->key() == Qt::Key_Right) {
+    } else if (event->key() == Qt::Key_Right) {
         if (m_cursorPos < slen) {
             m_cursorPos++;
         }
@@ -196,22 +194,22 @@ void ThermoWidget::paintEvent(QPaintEvent *event)
     const QString currentText = QString::number(m_currentTemperature);
 
     QFontMetrics fm(font());
-    const double targetWidth = fm.width(m_currentTemperatureTextFromEditor);
-    const double currentWidth = fm.width(currentText);
-    const double nameWidth = fm.width(m_name);
-    const double wWidth = fm.width('W');
-    const double cursorWidth = fm.width('0');
-    const double height = fm.height();
-    const double halfWidth = geometry().width() / 2;
-    const double xposTarget = halfWidth - (targetWidth / 2);
-    const double xposCurrent = halfWidth - (currentWidth / 2);
-    const double xposName = halfWidth - (nameWidth / 2);
-    const double xposCursor = xposTarget + (cursorWidth * m_cursorPos);
-    double ypos = geometry().height() / 2 + height * 2;
+    const int targetWidth = fm.width(m_currentTemperatureTextFromEditor);
+    const int currentWidth = fm.width(currentText);
+    const int nameWidth = fm.width(m_name);
+    const int wWidth = fm.width('W');
+    const int cursorWidth = fm.width('0');
+    const int height = fm.height();
+    const int halfWidth = geometry().width() / 2;
+    const int xposTarget = int(halfWidth - (targetWidth / 2));
+    const int xposCurrent = int(halfWidth - (currentWidth / 2));
+    const int xposName = halfWidth - (nameWidth / 2);
+    const int xposCursor = xposTarget + (cursorWidth * m_cursorPos);
+    int ypos = geometry().height() / 2 + height * 2;
     QPainter p(this);
     QColor color = palette().color(QPalette::Text);
     //draw a box to put our target into as a user hint.
-    p.fillRect(QRect(halfWidth - wWidth, ypos - (height * 0.66), wWidth * 2, (height * 0.9)), palette().color(QPalette::AlternateBase));
+    p.fillRect(QRect(int(halfWidth - wWidth), int(ypos - (height * 0.66)), int(wWidth * 2), int(height * 0.9)), palette().color(QPalette::AlternateBase));
 
     if (m_paintCursor) {
         p.setPen(palette().color(QPalette::Text));
@@ -238,6 +236,8 @@ void ThermoWidget::paintEvent(QPaintEvent *event)
 void ThermoWidget::drawNeedle(QPainter *painter, const QPointF &center, double radius, double dir, QPalette::ColorGroup colorGroup) const
 {
     Q_UNUSED(dir);
+    //save a copy of radius as int to avoid casting it several times.
+    int radiusAsInt = int(radius);
     const double relativePercent = upperBound() - lowerBound();
     const double currentTemperaturePercent = (m_currentTemperature - lowerBound()) / relativePercent;
     const double targetTemperaturePercent = (m_targetTemperature - lowerBound()) / relativePercent;
@@ -247,10 +247,10 @@ void ThermoWidget::drawNeedle(QPainter *painter, const QPointF &center, double r
     // the "begin" of our coordinates in Qt: -130
     // the "span" of our coordinates in Qt: -180
     // Negative values means clockwise in Qt dialect.
-    const double qtBeginAngle = -130;
-    const double coolZone =  - (targetTemperatureAngle - minScaleArc());
-    int yPos = geometry().height() / 2 - radius;
-    int xPos = geometry().width() / 2 - radius;
+    const int qtBeginAngle = -130;
+    const int coolZone =  int (- (targetTemperatureAngle - minScaleArc()));
+    int yPos = geometry().height() / 2 - radiusAsInt;
+    int xPos = geometry().width() / 2 - radiusAsInt;
 
     QRadialGradient grad(center, radius);
     grad.setColorAt(0.75, QColor(0, 0, 0, 0));
@@ -258,7 +258,7 @@ void ThermoWidget::drawNeedle(QPainter *painter, const QPointF &center, double r
     grad.setColorAt(0.95, QColor(255, 110, 60, 196));
 
     painter->setBrush(grad);
-    painter->drawPie(xPos, yPos, radius * 2, radius * 2, qtBeginAngle * 16, coolZone * 16);
+    painter->drawPie(xPos, yPos, radiusAsInt * 2, radiusAsInt * 2, qtBeginAngle * 16, coolZone * 16);
 
     m_targetTemperatureNeedle->draw(painter, center, radius * 1.3, 360 - targetTemperatureAngle - origin(), colorGroup);
     m_currentTemperatureNeedle->draw(painter, center, radius, 360 - currentTemperatureAngle - origin(), colorGroup);
@@ -266,13 +266,13 @@ void ThermoWidget::drawNeedle(QPainter *painter, const QPointF &center, double r
 
 void ThermoWidget::setCurrentTemperature(double temperature)
 {
-    if (m_currentTemperature != temperature) {
+    if (!isEqual(m_currentTemperature, temperature)) {
         m_currentTemperature = temperature;
         update();
     }
 }
 
-void ThermoWidget::setTargetTemperature(double temperature)
+void ThermoWidget::setTargetTemperature(int temperature)
 {
     if (m_targetTemperature != temperature) {
         m_currentTemperatureTextFromEditor = QString::number(temperature);
@@ -285,4 +285,22 @@ void ThermoWidget::setTargetTemperature(double temperature)
 void ThermoWidget::resetTimer()
 {
     m_tempChangedTimer->start(500);
+}
+
+bool ThermoWidget::isEqual(double a, double b)
+{
+//qFuzzyCompare always returns false if a || b ==0
+    if (qFuzzyIsNull(a) || qFuzzyIsNull(b)) {
+        if (a < 0.0 || b < 0.0) {
+            //One number is 0 and the other negative
+            //to prevent a issue if a or b == -1 and the other 0
+            //we will subtract one from each value
+            a -= 1;
+            b -= 1;
+        } else {
+            a += 1;
+            b += 1;
+        }
+    }
+    return qFuzzyCompare(a, b);
 }
