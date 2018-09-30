@@ -54,15 +54,15 @@ void FileLoader::run()
     qint64 stillSize = totalSize;
 
     if (_file.open(QIODevice::ReadOnly)) {
-        float lastPerc = 0.0;
+        int lastPerc = 0;
         QTextStream in(&_file);
         while (!in.atEnd()) {
             //Get each line
             QString line = in.readLine();
             stillSize -= line.size() + 1; // +1 endl
-            const float perc = (totalSize -  stillSize) * 100.0 / totalSize;
+            const int perc = int((totalSize -  stillSize) * 100.0 / totalSize);
             if (perc - lastPerc > 1) {
-                emit percentUpdate((int)perc);
+                emit percentUpdate(perc);
                 lastPerc = perc;
             }
             line = line.simplified();
