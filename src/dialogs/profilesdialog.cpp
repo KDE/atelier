@@ -54,11 +54,8 @@ ProfilesDialog::ProfilesDialog(QWidget *parent) :
     });
 
     connect(ui->removeProfilePB, &QPushButton::clicked, this, &ProfilesDialog::removeProfile);
-#ifdef Q_OS_LINUX
-    ui->removeProfilePB->setIcon(QIcon::fromTheme("edit-delete"));
-#else
-    ui->removeProfilePB->setIcon(style()->standardIcon(QStyle::SP_TrashIcon));
-#endif
+    ui->removeProfilePB->setIcon(QIcon::fromTheme(QStringLiteral("edit-delete"), style()->standardIcon(QStyle::SP_TrashIcon)));
+
 //if any control is modifed and no load / save has happend contents are not saved.
     auto modify = [this] {setModified(true);};
     connect(ui->baudCB, &QComboBox::currentTextChanged, modify);
