@@ -47,14 +47,14 @@ BedExtruderWidget::BedExtruderWidget(QWidget *parent) :
     //Add Default Extruder
     setExtruderCount(1);
 
-    connect(m_bedThermo, &ThermoWidget::targetTemperatureChanged, this, [this](double v) {
+    connect(m_bedThermo, &ThermoWidget::targetTemperatureChanged, this, [this](int v) {
         qDebug() << "Receiving the temperature change for bed";
-        emit bedTemperatureChanged((int)v, false);
+        emit bedTemperatureChanged(v, false);
     });
 
-    connect(m_extruderThermo, &ThermoWidget::targetTemperatureChanged, this, [this](double v) {
+    connect(m_extruderThermo, &ThermoWidget::targetTemperatureChanged, this, [this](int v) {
         qDebug() << "Receiving the temperature changed for thermo";
-        emit extTemperatureChanged((int)v, currentExtruder(), false);
+        emit extTemperatureChanged(v, currentExtruder(), false);
     });
 }
 
@@ -84,20 +84,20 @@ void BedExtruderWidget::setExtruderCount(int value)
 
 void BedExtruderWidget::updateBedTemp(const float temp)
 {
-    m_bedThermo->setCurrentTemperature(temp);
+    m_bedThermo->setCurrentTemperature(double(temp));
 }
 
 void BedExtruderWidget::updateExtTemp(const float temp)
 {
-    m_extruderThermo->setCurrentTemperature(temp);
+    m_extruderThermo->setCurrentTemperature(double(temp));
 }
 
-void BedExtruderWidget::updateBedTargetTemp(const float temp)
+void BedExtruderWidget::updateBedTargetTemp(const int temp)
 {
     m_bedThermo->setTargetTemperature(temp);
 }
 
-void BedExtruderWidget::updateExtTargetTemp(const float temp)
+void BedExtruderWidget::updateExtTargetTemp(const int temp)
 {
     m_extruderThermo->setTargetTemperature(temp);
 }

@@ -37,8 +37,8 @@ public:
     void setExtruderMaxTemperature(int value);
     void updateBedTemp(const float temp);
     void updateExtTemp(const float temp);
-    void updateBedTargetTemp(const float temp);
-    void updateExtTargetTemp(const float temp);
+    void updateBedTargetTemp(const int temp);
+    void updateExtTargetTemp(const int temp);
     void setBedThermoHidden(bool hidden);
 
 private:

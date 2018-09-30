@@ -251,7 +251,7 @@ void MainWindow::setupLateralArea()
     auto *viewer3D = new Viewer3D(this);
     connect(viewer3D, &Viewer3D::droppedUrls, this, &MainWindow::processDropEvent);
 
-    connect(m_gcodeEditor, &GCodeEditorWidget::currentFileChanged, this, [this, viewer3D](const QUrl & url) {
+    connect(m_gcodeEditor, &GCodeEditorWidget::currentFileChanged, this, [viewer3D](const QUrl & url) {
         viewer3D->drawModel(url.toString());
     });
 

@@ -54,11 +54,8 @@ ProfilesDialog::ProfilesDialog(QWidget *parent) :
     });
 
     connect(ui->removeProfilePB, &QPushButton::clicked, this, &ProfilesDialog::removeProfile);
-#ifdef Q_OS_LINUX
-    ui->removeProfilePB->setIcon(QIcon::fromTheme("edit-delete"));
-#else
-    ui->removeProfilePB->setIcon(style()->standardIcon(QStyle::SP_TrashIcon));
-#endif
+    ui->removeProfilePB->setIcon(QIcon::fromTheme(QStringLiteral("edit-delete"), style()->standardIcon(QStyle::SP_TrashIcon)));
+
 //if any control is modifed and no load / save has happend contents are not saved.
     auto modify = [this] {setModified(true);};
     connect(ui->baudCB, &QComboBox::currentTextChanged, modify);
@@ -174,8 +171,8 @@ void ProfilesDialog::loadSettings(const QString &currentProfile)
         ui->printerTypeStack->setCurrentIndex(0);
         ui->deltaRB->setChecked(true);
         ui->cartesianRB->setChecked(false);
-        ui->radiusSB->setValue(m_settings.value(QStringLiteral("radius"), QStringLiteral("0")).toFloat());
-        ui->z_delta_dimensionSB->setValue(m_settings.value(QStringLiteral("z_delta_dimension"), QStringLiteral("0")).toFloat());
+        ui->radiusSB->setValue(m_settings.value(QStringLiteral("radius"), QStringLiteral("0")).toInt());
+        ui->z_delta_dimensionSB->setValue(m_settings.value(QStringLiteral("z_delta_dimension"), QStringLiteral("0")).toInt());
     }
 
     ui->heatedBedCK->setChecked(m_settings.value(QStringLiteral("heatedBed"), QStringLiteral("true")).toBool());
