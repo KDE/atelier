@@ -118,7 +118,7 @@ void AtCoreInstanceWidget::buildToolbar()
     for (auto homes : std::map<QString, int> {{"X", AtCore::X}, {"Y", AtCore::Y}, {"Z", AtCore::Z}}) {
         auto home = new QAction(homes.first);
         connect(home, &QAction::triggered, this, [this, homes] {
-            m_core.home(homes.second);
+            m_core.home(uchar(homes.second));
         });
         m_toolBar->addAction(home);
     }
@@ -443,7 +443,7 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
     m_statusWidget->setState(stateString);
 }
 
-void AtCoreInstanceWidget::checkTemperature(uint sensorType, uint number, uint temp)
+void AtCoreInstanceWidget::checkTemperature(uint sensorType, uint number, float temp)
 {
     static QString msg;
     switch (sensorType) {
@@ -474,7 +474,7 @@ void AtCoreInstanceWidget::checkTemperature(uint sensorType, uint number, uint t
 
     msg.append(QString::fromLatin1("[%1] : %2"));
     msg = msg.arg(QString::number(number))
-          .arg(QString::number(temp));
+          .arg(QString::number(temp, 'f', 2));
     m_logWidget->appendLog(msg);
 }
 

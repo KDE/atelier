@@ -81,7 +81,7 @@ private:
     QWidget *m_connectWidget;
     void buildConnectionToolbar();
     void buildToolbar();
-    void checkTemperature(uint sensorType, uint number, uint temp);
+    void checkTemperature(uint sensorType, uint number, float temp);
     void connectButtonClicked();
     void connectBedTemperatureData(bool connected);
     void connectExtruderTemperatureData(bool connected);
