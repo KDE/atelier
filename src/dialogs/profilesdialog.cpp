@@ -174,8 +174,8 @@ void ProfilesDialog::loadSettings(const QString &currentProfile)
         ui->printerTypeStack->setCurrentIndex(0);
         ui->deltaRB->setChecked(true);
         ui->cartesianRB->setChecked(false);
-        ui->radiusSB->setValue(m_settings.value(QStringLiteral("radius"), QStringLiteral("0")).toFloat());
-        ui->z_delta_dimensionSB->setValue(m_settings.value(QStringLiteral("z_delta_dimension"), QStringLiteral("0")).toFloat());
+        ui->radiusSB->setValue(m_settings.value(QStringLiteral("radius"), QStringLiteral("0")).toInt());
+        ui->z_delta_dimensionSB->setValue(m_settings.value(QStringLiteral("z_delta_dimension"), QStringLiteral("0")).toInt());
     }
 
     ui->heatedBedCK->setChecked(m_settings.value(QStringLiteral("heatedBed"), QStringLiteral("true")).toBool());
