@@ -29,6 +29,7 @@ AtCoreInstanceWidget::AtCoreInstanceWidget(QWidget *parent):
     , m_printAction(nullptr)
     , m_stopAction(nullptr)
     , m_toolBar(nullptr)
+    , m_bedSize(200, 200)
 {
     m_theme = palette().text().color().value() >= QColor(Qt::lightGray).value() ? QString("dark") : QString("light") ;
     m_iconSize = QSize(fontMetrics().lineSpacing(), fontMetrics().lineSpacing());
@@ -230,6 +231,17 @@ void AtCoreInstanceWidget::connectButtonClicked()
             m_bedExtWidget->setExtruderMaxTemperature(m_profileData["hotendTemp"].toInt());
             //AddFan Support to profile
             m_printWidget->updateFanCount(2);
+            //Adjust bed size
+            QSize newSize;
+            if (m_profileData["isCartesian"].toBool()) {
+                newSize = QSize(m_profileData["dimensionX"].toInt(), m_profileData["dimensionY"].toInt());
+            } else {
+                newSize = QSize(m_profileData["radius"].toInt(), 0);
+            }
+            if (newSize != m_bedSize) {
+                m_bedSize = newSize;
+                emit bedSizeChanged(m_bedSize);
+            }
         }
     } else {
         m_core.closeConnection();
@@ -564,6 +576,12 @@ QMap<QString, QVariant> AtCoreInstanceWidget::readProfile()
         , {"postPause", m_settings.value(QStringLiteral("postPause"), QStringLiteral(""))}
         , {"heatedBed", m_settings.value(QStringLiteral("heatedBed"), true)}
         , {"name", profile}
+        , {"isCartesian", m_settings.value(QStringLiteral("isCartesian"), true)}
+        , {"dimensionX", m_settings.value(QStringLiteral("dimensionX"), QStringLiteral("200"))}
+        , {"dimensionY", m_settings.value(QStringLiteral("dimensionY"), QStringLiteral("200"))}
+        , {"dimensionZ", m_settings.value(QStringLiteral("dimensionZ"), QStringLiteral("180"))}
+        , {"radius", m_settings.value(QStringLiteral("radius"), QStringLiteral("200"))}
+        , {"z_delta_dimension", m_settings.value(QStringLiteral("z_delta_dimension"), QStringLiteral("180"))}
     };
     m_settings.endGroup();
     m_settings.endGroup();
@@ -625,4 +643,9 @@ void AtCoreInstanceWidget::connectExtruderTemperatureData(bool connected)
             disconnect(&m_core.temperature(), &Temperature::extruderTargetTemperatureChanged, this, nullptr);
         }
     }
+}
+
+QSize AtCoreInstanceWidget::bedSize()
+{
+    return m_bedSize;
 }

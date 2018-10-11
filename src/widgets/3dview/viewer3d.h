@@ -31,20 +31,25 @@ class QString;
 class Viewer3D : public QWidget
 {
     Q_OBJECT
+    Q_PROPERTY(QSize bedSize READ bedSize WRITE setBedSize NOTIFY bedSizeChanged)
 
 public slots:
     void dropCatch(const QVariant &var);
+    void setBedSize(const QSize &newBedSize);
 
 public:
     explicit Viewer3D(QWidget *parent = nullptr);
     ~Viewer3D() override;
+    QSize bedSize();
     void drawModel(QString file);
 
 private:
     LineMesh *_lineMesh;
     QQmlApplicationEngine _engine;
     QQuickView *_view;
+    QSize _bedSize = QSize(50, 50);
 
 signals:
     void droppedUrls(QList<QUrl> fileList);
+    void bedSizeChanged(QSize bedSize);
 };

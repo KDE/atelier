@@ -78,3 +78,16 @@ void Viewer3D::drawModel(QString file)
     QObject *fileName = object->findChild<QObject *>(QStringLiteral("fileName"));
     fileName->setProperty("text", QVariant(file));
 }
+
+void Viewer3D::setBedSize(const QSize &newBedSize)
+{
+    if (newBedSize != _bedSize) {
+        _bedSize = newBedSize;
+        emit bedSizeChanged(_bedSize);
+    }
+}
+
+QSize Viewer3D::bedSize()
+{
+    return _bedSize;
+}

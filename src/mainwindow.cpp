@@ -36,6 +36,7 @@
 MainWindow::MainWindow(QWidget *parent) :
     KXmlGuiWindow(parent)
     , m_currEditorView(nullptr)
+    , m_currInstance(0)
     , m_theme(getTheme())
     , m_instances(new QTabWidget(this))
 {
@@ -188,6 +189,12 @@ void MainWindow::newAtCoreInstance()
         newInstanceWidget->printFile(file);
     });
 
+    connect(newInstanceWidget, &AtCoreInstanceWidget::bedSizeChanged, this, [this](const QSize & newSize) {
+        if (m_currInstance == m_instances->currentIndex()) {
+            updateBedSize(newSize);
+        }
+    });
+
     connect(newInstanceWidget, &AtCoreInstanceWidget::connectionChanged, this, &MainWindow::atCoreInstanceNameChange);
 
     if (m_instances->count() > 1) {
@@ -250,6 +257,12 @@ void MainWindow::setupLateralArea()
 
     auto *viewer3D = new Viewer3D(this);
     connect(viewer3D, &Viewer3D::droppedUrls, this, &MainWindow::processDropEvent);
+    //Connect for bed size
+    connect(m_instances, &QTabWidget::currentChanged, this, [this](int index) {
+        m_currInstance = index;
+        auto tempWidget = qobject_cast<AtCoreInstanceWidget *>(m_instances->widget(index));
+        updateBedSize(tempWidget->bedSize());
+    });
 
     connect(m_gcodeEditor, &GCodeEditorWidget::currentFileChanged, this, [viewer3D](const QUrl & url) {
         viewer3D->drawModel(url.toLocalFile());
@@ -472,4 +485,9 @@ bool MainWindow::askToSave(const QVector<QUrl> &fileList)
     dialog->setLayout(layout);
 
     return dialog->exec();
+}
+
+void MainWindow::updateBedSize(const QSize &newSize)
+{
+    m_lateral.get<Viewer3D>("3d")->setBedSize(newSize);
 }

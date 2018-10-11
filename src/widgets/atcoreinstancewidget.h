@@ -51,6 +51,7 @@ public:
 
 public slots:
     bool isPrinting();
+    QSize bedSize();
     void printFile(const QUrl &fileName);
     void updateProfileData();
 
@@ -79,6 +80,7 @@ private:
     QToolBar *m_toolBar;
     QWidget *m_advancedTab;
     QWidget *m_connectWidget;
+    QSize m_bedSize;
     void buildConnectionToolbar();
     void buildToolbar();
     void checkTemperature(uint sensorType, uint number, float temp);
@@ -97,6 +99,7 @@ private:
     void togglePrintButtons(bool shown);
 
 signals:
+    void bedSizeChanged(QSize bedSize);
     void connectionChanged(QString name);
     void disableDisconnect(bool b);
     void extruderCountChanged(int count);
