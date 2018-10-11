@@ -61,6 +61,7 @@ protected:
 private:
     GCodeEditorWidget *m_gcodeEditor;
     KTextEditor::View *m_currEditorView;
+    int m_currInstance;
     LateralArea m_lateral;
     QList<QUrl> m_openFiles;
     QString m_theme;
@@ -77,6 +78,7 @@ private:
     void setupActions();
     void setupLateralArea();
     void toggleGCodeActions();
+    void updateBedSize(const QSize &newSize);
     void updateClientFactory(KTextEditor::View *view);
 
 signals:
