@@ -378,7 +378,7 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
         connect(m_core.serial(), &SerialLayer::pushedCommand, m_logWidget, &LogWidget::appendSLog);
     } break;
     case AtCore::IDLE: {
-        stateString = i18n("Connected to %1", m_core.serial()->portName());
+        stateString = i18n("Connected to %1", m_core.connectedPort());
         emit extruderCountChanged(m_core.extruderCount());
         m_logWidget->appendLog(stateString);
         emit disableDisconnect(false);
@@ -474,7 +474,7 @@ void AtCoreInstanceWidget::checkTemperature(uint sensorType, uint number, float 
 
     msg.append(QString::fromLatin1("[%1] : %2"));
     msg = msg.arg(QString::number(number))
-          .arg(QString::number(temp, 'f', 2));
+          .arg(QString::number(double(temp), 'f', 2));
     m_logWidget->appendLog(msg);
 }
 
@@ -586,7 +586,7 @@ void AtCoreInstanceWidget::connectBedTemperatureData(bool connected)
         connect(&m_core.temperature(), &Temperature::bedTargetTemperatureChanged, [this](const float & temp) {
             checkTemperature(0x01, 0, temp);
             m_plotWidget->appendPoint(i18n("Target Bed"), temp);
-            m_bedExtWidget->updateBedTargetTemp(temp);
+            m_bedExtWidget->updateBedTargetTemp(int(temp));
         });
     } else {
         if (m_plotWidget->plots().contains(i18n("Actual Bed"))) {
@@ -615,7 +615,7 @@ void AtCoreInstanceWidget::connectExtruderTemperatureData(bool connected)
         connect(&m_core.temperature(), &Temperature::extruderTargetTemperatureChanged, this, [this](const float & temp) {
             checkTemperature(0x03, 0, temp);
             m_plotWidget->appendPoint(i18n("Target Ext.1"), temp);
-            m_bedExtWidget->updateExtTargetTemp(temp);
+            m_bedExtWidget->updateExtTargetTemp(int(temp));
         });
     } else {
         if (m_plotWidget->plots().contains(i18n("Actual Ext.1"))) {
