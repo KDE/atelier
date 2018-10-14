@@ -375,7 +375,7 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
         stateString = i18n("Connecting...");
         m_logWidget->appendLog(i18n("Attempting to Connect"));
         connect(&m_core, &AtCore::receivedMessage, m_logWidget, &LogWidget::appendRLog);
-        connect(m_core.serial(), &SerialLayer::pushedCommand, m_logWidget, &LogWidget::appendSLog);
+        connect(&m_core, &AtCore::pushedCommand, m_logWidget, &LogWidget::appendSLog);
     } break;
     case AtCore::IDLE: {
         stateString = i18n("Connected to %1", m_core.connectedPort());
@@ -391,7 +391,7 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
     case AtCore::DISCONNECTED: {
         stateString = i18n("Not Connected");
         disconnect(&m_core, &AtCore::receivedMessage, m_logWidget, &LogWidget::appendRLog);
-        disconnect(m_core.serial(), &SerialLayer::pushedCommand, m_logWidget, &LogWidget::appendSLog);
+        disconnect(&m_core, &AtCore::pushedCommand, m_logWidget, &LogWidget::appendSLog);
         m_logWidget->appendLog(i18n("Serial disconnected"));
         m_core.setSerialTimerInterval(100);
         m_connectButton->setText(i18n("Connect"));
