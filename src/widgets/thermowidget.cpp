@@ -58,7 +58,7 @@ void ThermoWidget::keyPressEvent(QKeyEvent *event)
 {
     //set our target text length.
     int slen = m_currentTemperatureTextFromEditor.length() - 1;
-    // be sure our cursor posistion is valid.
+    // be sure our cursor position is valid.
     if (slen < 0) {
         m_currentTemperatureTextFromEditor = '-';
         m_cursorPos = 0;
