@@ -324,11 +324,11 @@ void AtCoreInstanceWidget::printFile(const QUrl &fileName)
             , i18n("No filename sent from calling method, please check and try again.")
         );
         return;
-    } else if (!QFileInfo(fileName.toString()).isReadable()) {
+    } else if (!QFileInfo(fileName.toLocalFile()).isReadable()) {
         QMessageBox::critical(
             this
             , i18n("File not found")
-            , i18n("%1 \nIs not readable, please check and try again.", fileName.toString())
+            , i18n("%1 \nIs not readable, please check and try again.", fileName.toLocalFile())
         );
         return;
     }

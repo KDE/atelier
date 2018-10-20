@@ -252,7 +252,7 @@ void MainWindow::setupLateralArea()
     connect(viewer3D, &Viewer3D::droppedUrls, this, &MainWindow::processDropEvent);
 
     connect(m_gcodeEditor, &GCodeEditorWidget::currentFileChanged, this, [viewer3D](const QUrl & url) {
-        viewer3D->drawModel(url.toString());
+        viewer3D->drawModel(url.toLocalFile());
     });
 
     setupButton("welcome", i18n("&Welcome"), QIcon::fromTheme("go-home", QIcon(QString(":/%1/home").arg(m_theme))), new WelcomeWidget(this));
@@ -319,7 +319,7 @@ void MainWindow::loadFile(const QUrl &fileName)
     if (!fileName.isEmpty()) {
 
         m_lateral.get<GCodeEditorWidget>("gcode")->loadFile(fileName);
-        m_lateral.get<Viewer3D>("3d")->drawModel(fileName.toString());
+        m_lateral.get<Viewer3D>("3d")->drawModel(fileName.toLocalFile());
         // Make 3dview focused when opening a file
         if (m_openFiles.isEmpty() && m_lateral.m_stack->currentWidget() == m_lateral.get<WelcomeWidget>("welcome")) {
             m_lateral.getButton<QPushButton>("3d")->setChecked(true);
