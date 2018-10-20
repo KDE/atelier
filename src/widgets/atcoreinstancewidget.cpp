@@ -328,7 +328,7 @@ void AtCoreInstanceWidget::printFile(const QUrl &fileName)
         QMessageBox::critical(
             this
             , i18n("File not found")
-            , i18n("%1 \nIs not readable, please check and try again.", fileName.toString())
+            , i18n("%1 \nIs not readable, please check and try again.", fileName.toLocalFile())
         );
         return;
     }
