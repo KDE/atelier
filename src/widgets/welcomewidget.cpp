@@ -137,9 +137,6 @@ void WelcomeWidget::retrieveRssFeed()
             }
         });
     }
-    // Since the calls above are async, I need to wait a little time
-    // to have the responses processed before building the widget feed
-    QTimer::singleShot(500, this, &WelcomeWidget::setupRssFeed);
 }
 
 void WelcomeWidget::parseRss(const QDomDocument &document)
@@ -162,6 +159,7 @@ void WelcomeWidget::parseRss(const QDomDocument &document)
             }
         }
     }
+    setupRssFeed();
 }
 
 void WelcomeWidget::setupRssFeed()
