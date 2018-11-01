@@ -1,7 +1,6 @@
 /* Atelier KDE Printer Host for 3D Printing
-    Copyright (C) <2017-2018>
-    Author: Patrick José Pereira - patrickjp@kde.org
-            Kevin Ottens - ervin@kde.org
+    Copyright (C) <2018>
+    Author: Kevin Ottens - ervin@kde.org
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -23,26 +22,26 @@
 #pragma once
 
 #include <QObject>
-#include <QNode>
-#include <QGeometryRenderer>
-#include <QSize>
 
-class GridMesh : public Qt3DRender::QGeometryRenderer
+class BedProperties : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QSize meshResolution READ meshResolution WRITE setMeshResolution NOTIFY meshResolutionChanged)
+    Q_PROPERTY(int width READ width NOTIFY widthChanged)
+    Q_PROPERTY(int depth READ depth NOTIFY depthChanged)
 public:
-    explicit GridMesh(Qt3DCore::QNode *parent = nullptr);
-    ~GridMesh();
+    explicit BedProperties(QObject *parent = nullptr);
+    ~BedProperties();
 
-    QSize meshResolution() const;
-
-public slots:
-    void setMeshResolution(const QSize &meshResolution);
+    int width() const;
+    int depth() const;
 
 signals:
-    void meshResolutionChanged(const QSize &meshResolution);
+    void widthChanged(int width);
+    void depthChanged(int depth);
 
 private:
-    QSize m_meshResolution;
+    void updateBedSize(const QSize &size);
+
+    int m_width;
+    int m_depth;
 };

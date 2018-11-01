@@ -31,6 +31,10 @@ Entity {
     id: sceneRoot
     property string currentFile
 
+    BedProperties {
+        id: bedProperties
+    }
+
     Camera {
         id: camera
         fieldOfView: 45
@@ -55,7 +59,15 @@ Entity {
         id: gridEntity
         components: [
             PhongMaterial { ambient: "darkBlue" },
-            GridMesh {}
+            GridMesh {
+                meshResolution: Qt.size(Math.floor(bedProperties.width / 10),
+                                        Math.floor(bedProperties.depth / 10))
+            },
+            Transform {
+                scale3D: Qt.vector3d(bedProperties.width / 10,
+                                     bedProperties.depth / 10,
+                                     1)
+            }
         ]
     }
 
