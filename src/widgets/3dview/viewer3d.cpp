@@ -30,6 +30,7 @@
 #include <QQuickView>
 
 #include "axisgnomonentity.h"
+#include "bedproperties.h"
 #include "cameracontroller.h"
 #include "gridmesh.h"
 #include "viewer3d.h"
@@ -45,6 +46,7 @@ Viewer3D::Viewer3D(QWidget *parent) :
     qmlRegisterType<CameraController>("Atelier", 1, 0, "CameraController");
     qmlRegisterType<GridMesh>("Atelier", 1, 0, "GridMesh");
     qmlRegisterType<LineMesh>("Atelier", 1, 0, "LineMesh");
+    qmlRegisterType<BedProperties>("Atelier", 1, 0, "BedProperties");
 
     _view = new QQuickView(&_engine, nullptr);
 
@@ -53,6 +55,7 @@ Viewer3D::Viewer3D(QWidget *parent) :
     format.setProfile(QSurfaceFormat::CoreProfile);
     _view->setFormat(format);
 
+    _view->rootContext()->setContextProperty("viewer3d", this);
     _view->setResizeMode(QQuickView::SizeRootObjectToView);
     _view->setSource(QUrl(QStringLiteral("qrc:/viewer3d.qml")));
     QHBoxLayout *mainLayout = new QHBoxLayout;
