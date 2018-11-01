@@ -31,14 +31,16 @@ BedProperties::BedProperties(QObject *parent)
     , m_width(200)
     , m_depth(200)
 {
-    QTimer::singleShot(0, [=] {
+    QTimer::singleShot(0, [ = ] {
         auto context = qmlContext(this);
-        if (!context) {
+        if (!context)
+        {
             return;
         }
 
-        auto viewer = context->contextProperty("viewer3d").value<Viewer3D*>();
-        if (!viewer) {
+        auto viewer = context->contextProperty("viewer3d").value<Viewer3D *>();
+        if (!viewer)
+        {
             return;
         }
 

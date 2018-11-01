@@ -47,8 +47,9 @@ QSize GridMesh::meshResolution() const
 
 void GridMesh::setMeshResolution(const QSize &meshResolution)
 {
-    if (meshResolution == m_meshResolution)
+    if (meshResolution == m_meshResolution) {
         return;
+    }
 
     QVector<QVector3D> vertices;
 
