@@ -215,15 +215,16 @@ void MainWindow::setupLateralArea()
         btn->setToolTip(text);
         btn->setAutoExclusive(true);
         btn->setCheckable(true);
-        //3d view is on top set it checked so users see its selected.
+        //Check the top most widget, so users see its selected at startup time.
         btn->setChecked(key == QStringLiteral("welcome"));
         btn->setIcon(icon);
         //Set an iconSize based on the DPI.
         //96 was considered to be the "standard" DPI for years.
-        //Hi-dpi monitors have a higher DPI
+        //Hi-dpi monitors have a higher DPI; 150+
         //Tiny or old screen could have a lower DPI.
-        //Start our iconSize at 16 so with a DPI less then 96 we get a sane iconsize.
-        int iconSize = 16 + ((logicalDpiX() / 96) * 16);
+        //Start our iconSize at 16 so with a low DPI we get a sane iconsize.
+        //Use 72 to better scale for less dense Hi-Dpi screens
+        int iconSize = 16 + ((logicalDpiX() / 72) * 16);
         btn->setIconSize(QSize(iconSize, iconSize));
         btn->setFixedSize(btn->iconSize());
         btn->setFlat(true);
