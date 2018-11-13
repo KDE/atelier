@@ -140,7 +140,7 @@ void MainWindow::initWidgets()
 
 void MainWindow::newAtCoreInstance()
 {
-    auto newInstanceWidget = new AtCoreInstanceWidget();
+    auto newInstanceWidget = new AtCoreInstanceWidget(this);
     QString name = QString::number(m_instances->addTab(newInstanceWidget, i18n("Connect a printer")));
     newInstanceWidget->setObjectName(name);
     newInstanceWidget->setFileCount(m_openFiles.size());
