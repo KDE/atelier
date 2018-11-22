@@ -39,9 +39,9 @@ public slots:
 
 public:
     explicit Viewer3D(QWidget *parent = nullptr);
-    ~Viewer3D() override;
+    ~Viewer3D() override = default;
     QSize bedSize();
-    void drawModel(QString file);
+    void drawModel(const QString &file);
 
 private:
     LineMesh *_lineMesh;

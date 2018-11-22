@@ -58,7 +58,7 @@ Viewer3D::Viewer3D(QWidget *parent) :
     _view->rootContext()->setContextProperty("viewer3d", this);
     _view->setResizeMode(QQuickView::SizeRootObjectToView);
     _view->setSource(QUrl(QStringLiteral("qrc:/viewer3d.qml")));
-    QHBoxLayout *mainLayout = new QHBoxLayout;
+    auto mainLayout = new QHBoxLayout;
     mainLayout->addWidget(QWidget::createWindowContainer(_view));
     QObject *item = _view->rootObject();
     //Connect the drop pass from the QML part.
@@ -66,19 +66,15 @@ Viewer3D::Viewer3D(QWidget *parent) :
     this->setLayout(mainLayout);
 }
 
-Viewer3D::~Viewer3D()
-{
-}
-
 void Viewer3D::dropCatch(const QVariant &var)
 {
     emit droppedUrls(var.value<QList<QUrl> >());
 }
 
-void Viewer3D::drawModel(QString file)
+void Viewer3D::drawModel(const QString &file)
 {
     QObject *object = _view->rootObject();
-    QObject *fileName = object->findChild<QObject *>(QStringLiteral("fileName"));
+    auto fileName = object->findChild<QObject *>(QStringLiteral("fileName"));
     fileName->setProperty("text", QVariant(file));
 }
 
