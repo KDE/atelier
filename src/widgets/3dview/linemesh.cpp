@@ -40,10 +40,6 @@ LineMesh::LineMesh(Qt3DCore::QNode *parent) :
     connect(&_gcode, &GcodeTo4D::posFinished, this, &LineMesh::posUpdate);
 }
 
-LineMesh::~LineMesh()
-{
-}
-
 void LineMesh::readAndRun(const QString &path)
 {
     _gcode.read(path);

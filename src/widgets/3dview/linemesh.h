@@ -37,7 +37,7 @@ class LineMesh : public Qt3DRender::QGeometryRenderer
 
 public:
     explicit LineMesh(Qt3DCore::QNode *parent = Q_NULLPTR);
-    ~LineMesh();
+    ~LineMesh() = default;
     void read(const QString &path);
     Q_INVOKABLE void readAndRun(const QString &path);
     void posUpdate(const QVector<QVector4D> &pos);
