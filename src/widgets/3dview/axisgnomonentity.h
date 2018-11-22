@@ -36,7 +36,7 @@ class AxisGnomonEntity : public Qt3DCore::QEntity
     Q_PROPERTY(float scale READ scale WRITE setScale NOTIFY scaleChanged)
 public:
     explicit AxisGnomonEntity(Qt3DCore::QNode *parent = nullptr);
-    ~AxisGnomonEntity();
+    ~AxisGnomonEntity() = default;
 
     QVector2D position() const;
     float scale() const;

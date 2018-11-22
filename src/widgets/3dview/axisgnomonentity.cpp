@@ -85,10 +85,6 @@ AxisGnomonEntity::AxisGnomonEntity(QNode *parent)
     addComponent(material);
 }
 
-AxisGnomonEntity::~AxisGnomonEntity()
-{
-}
-
 QVector2D AxisGnomonEntity::position() const
 {
     return _position;
