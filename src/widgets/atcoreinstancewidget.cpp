@@ -33,38 +33,38 @@ AtCoreInstanceWidget::AtCoreInstanceWidget(QWidget *parent):
 {
     m_theme = palette().text().color().value() >= QColor(Qt::lightGray).value() ? QString("dark") : QString("light") ;
     m_iconSize = QSize(fontMetrics().lineSpacing(), fontMetrics().lineSpacing());
-    QHBoxLayout *HLayout = new QHBoxLayout;
-    m_bedExtWidget = new BedExtruderWidget;
+    auto HLayout = new QHBoxLayout;
+    m_bedExtWidget = new BedExtruderWidget(this);
     HLayout->addWidget(m_bedExtWidget);
 
-    m_movementWidget = new MovementWidget(false);
+    m_movementWidget = new MovementWidget(false, this);
     m_movementWidget->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Minimum);
     HLayout->addWidget(m_movementWidget);
 
-    QVBoxLayout *VLayout = new QVBoxLayout;
+    auto VLayout = new QVBoxLayout;
     VLayout->addLayout(HLayout);
 
-    m_plotWidget = new PlotWidget();
+    m_plotWidget = new PlotWidget(this);
     VLayout->addWidget(m_plotWidget, 80);
 
-    QWidget *controlTab = new QWidget();
+    auto controlTab = new QWidget(this);
     controlTab->setLayout(VLayout);
 
     //AdvancedTab
     VLayout = new QVBoxLayout;
-    m_printWidget = new PrintWidget(false);
+    m_printWidget = new PrintWidget(false, this);
     VLayout->addWidget(m_printWidget);
 
-    m_commandWidget = new CommandWidget;
+    m_commandWidget = new CommandWidget(this);
     VLayout->addWidget(m_commandWidget);
 
-    m_logWidget = new LogWidget(new QTemporaryFile(QDir::tempPath() + QStringLiteral("/Atelier_")));
+    m_logWidget = new LogWidget(new QTemporaryFile(QDir::tempPath() + QStringLiteral("/Atelier_")), this);
     VLayout->addWidget(m_logWidget);
 
-    m_advancedTab = new QWidget;
+    m_advancedTab = new QWidget(this);
     m_advancedTab->setLayout(VLayout);
 
-    m_sdWidget = new SdWidget;
+    m_sdWidget = new SdWidget(this);
 
     VLayout = new QVBoxLayout();
     buildToolbar();
@@ -76,13 +76,13 @@ AtCoreInstanceWidget::AtCoreInstanceWidget(QWidget *parent):
     VLayout->addLayout(HLayout);
     m_toolBar->setHidden(true);
 
-    m_tabWidget = new QTabWidget;
+    m_tabWidget = new QTabWidget(this);
     m_tabWidget->addTab(controlTab, i18n("Controls"));
     m_tabWidget->addTab(m_advancedTab, i18n("Advanced"));
     m_tabWidget->addTab(m_sdWidget, i18n("Sd Card"));
     VLayout->addWidget(m_tabWidget);
 
-    m_statusWidget = new StatusWidget(false);
+    m_statusWidget = new StatusWidget(false, this);
     m_statusWidget->showPrintArea(false);
     VLayout->addWidget(m_statusWidget);
     setLayout(VLayout);
@@ -99,15 +99,15 @@ AtCoreInstanceWidget::~AtCoreInstanceWidget()
 
 void AtCoreInstanceWidget::buildToolbar()
 {
-    m_toolBar = new QToolBar();
+    m_toolBar = new QToolBar(this);
     m_toolBar->setIconSize(m_iconSize);
     m_toolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
 
-    auto lb = new QLabel;
+    auto lb = new QLabel(this);
     QIcon icon = QIcon::fromTheme("go-home", QIcon(QString(":/%1/home").arg(m_theme)));
     lb->setPixmap(icon.pixmap(m_iconSize));
     m_toolBar->addWidget(lb);
-    lb = new QLabel(i18n("Home:"));
+    lb = new QLabel(i18n("Home:"), this);
     m_toolBar->addWidget(lb);
 
     auto homeAll = new QAction(i18n("All"));
@@ -116,8 +116,8 @@ void AtCoreInstanceWidget::buildToolbar()
     });
     m_toolBar->addAction(homeAll);
 
-    for (auto homes : std::map<QString, int> {{"X", AtCore::X}, {"Y", AtCore::Y}, {"Z", AtCore::Z}}) {
-        auto home = new QAction(homes.first);
+    for (const auto &homes : std::map<QString, int> {{"X", AtCore::X}, {"Y", AtCore::Y}, {"Z", AtCore::Z}}) {
+        auto home = new QAction(homes.first, this);
         connect(home, &QAction::triggered, this, [this, homes] {
             m_core.home(uchar(homes.second));
         });
@@ -126,16 +126,14 @@ void AtCoreInstanceWidget::buildToolbar()
 
     m_toolBar->addSeparator();
 
-    m_printAction = new QAction(QIcon::fromTheme("media-playback-start", style()->standardIcon(QStyle::SP_MediaPlay)), i18n("Print"));
+    m_printAction = new QAction(QIcon::fromTheme("media-playback-start", style()->standardIcon(QStyle::SP_MediaPlay)), i18n("Print"), this);
     connect(m_printAction, &QAction::triggered, this, [this] {
-
         if (m_core.state() == AtCore::BUSY)
         {
             m_logWidget->appendLog(i18n("Pause Print"));
             pausePrint();
             return;
         }
-
         if (m_core.state() == AtCore::IDLE)
         {
             print();
@@ -147,7 +145,7 @@ void AtCoreInstanceWidget::buildToolbar()
     });
     m_toolBar->addAction(m_printAction);
 
-    m_stopAction = new QAction(QIcon::fromTheme("media-playback-stop", QIcon(QString(":/%1/stop").arg(m_theme))), i18n("Stop"));
+    m_stopAction = new QAction(QIcon::fromTheme("media-playback-stop", QIcon(QString(":/%1/stop").arg(m_theme))), i18n("Stop"), this);
     connect(m_stopAction, &QAction::triggered, this, &AtCoreInstanceWidget::stopPrint);
     connect(m_stopAction, &QAction::triggered, this, [this] {
         m_printAction->setText(i18n("Print"));
@@ -155,7 +153,7 @@ void AtCoreInstanceWidget::buildToolbar()
     });
     m_toolBar->addAction(m_stopAction);
 
-    auto disableMotorsAction = new QAction(style()->standardIcon(QStyle::SP_MediaStop), i18n("Disable Motors"));
+    auto disableMotorsAction = new QAction(style()->standardIcon(QStyle::SP_MediaStop), i18n("Disable Motors"), this);
     connect(disableMotorsAction, &QAction::triggered, this, &AtCoreInstanceWidget::disableMotors);
     m_toolBar->addAction(disableMotorsAction);
 
@@ -164,30 +162,30 @@ void AtCoreInstanceWidget::buildToolbar()
 
 void AtCoreInstanceWidget::buildConnectionToolbar()
 {
-    m_connectToolBar = new QToolBar();
-    m_comboPort = new QComboBox;
+    m_connectToolBar = new QToolBar(this);
+    m_comboPort = new QComboBox(this);
     m_comboPort->setEditable(true);
-    QLabel *deviceLabel = new QLabel(i18n("Device"));
-    QHBoxLayout *deviceLayout = new QHBoxLayout;
+    auto deviceLabel = new QLabel(i18n("Device"), this);
+    auto deviceLayout = new QHBoxLayout;
     deviceLayout->addWidget(deviceLabel);
     deviceLayout->addWidget(m_comboPort, 100);
 
-    m_comboProfile = new QComboBox;
+    m_comboProfile = new QComboBox(this);
     m_comboProfile->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-    QHBoxLayout *profileLayout = new QHBoxLayout;
-    QLabel *profileLabel = new QLabel(i18n("Profile"));
+    auto profileLayout = new QHBoxLayout;
+    auto profileLabel = new QLabel(i18n("Profile"), this);
     profileLayout->addWidget(profileLabel);
     profileLayout->addWidget(m_comboProfile, 100);
 
-    QHBoxLayout *connectLayout = new QHBoxLayout;
+    auto connectLayout = new QHBoxLayout;
     connectLayout->addLayout(deviceLayout, 50);
     connectLayout->addLayout(profileLayout, 50);
 
-    m_connectWidget = new QWidget();
+    m_connectWidget = new QWidget(this);
     m_connectWidget->setLayout(connectLayout);
     m_connectToolBar->addWidget(m_connectWidget);
 
-    m_connectButton = new QPushButton(QIcon::fromTheme("network-connect", QIcon(QString(":/%1/connect").arg(m_theme))), i18n("Connect"));
+    m_connectButton = new QPushButton(QIcon::fromTheme("network-connect", QIcon(QString(":/%1/connect").arg(m_theme))), i18n("Connect"), this);
     m_connectButton->setIconSize(m_iconSize);
     m_connectButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     connect(this, &AtCoreInstanceWidget::disableDisconnect, m_connectButton, &QPushButton::setDisabled);
@@ -336,7 +334,8 @@ void AtCoreInstanceWidget::printFile(const QUrl &fileName)
             , i18n("No filename sent from calling method, please check and try again.")
         );
         return;
-    } else if (!QFileInfo(fileName.toLocalFile()).isReadable()) {
+    }
+    if (!QFileInfo(fileName.toLocalFile()).isReadable()) {
         QMessageBox::critical(
             this
             , i18n("File not found")
@@ -449,7 +448,6 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
     } break;
     default:
         m_logWidget->appendLog(i18n("Unknown AtCore State, %1", newState));
-        qWarning("AtCore State not Recognized.");
         break;
     }
     m_statusWidget->setState(stateString);
@@ -573,7 +571,7 @@ QMap<QString, QVariant> AtCoreInstanceWidget::readProfile()
         , {"bedTemp", m_settings.value(QStringLiteral("maximumTemperatureBed"), QStringLiteral("0"))}
         , {"hotendTemp", m_settings.value(QStringLiteral("maximumTemperatureExtruder"), QStringLiteral("0"))}
         , {"firmware", m_settings.value(QStringLiteral("firmware"), QStringLiteral("Auto-Detect"))}
-        , {"postPause", m_settings.value(QStringLiteral("postPause"), QStringLiteral(""))}
+        , {"postPause", m_settings.value(QStringLiteral("postPause"), QString())}
         , {"heatedBed", m_settings.value(QStringLiteral("heatedBed"), true)}
         , {"name", profile}
         , {"isCartesian", m_settings.value(QStringLiteral("isCartesian"), true)}
