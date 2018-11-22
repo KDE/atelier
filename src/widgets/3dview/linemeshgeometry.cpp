@@ -43,10 +43,6 @@ LineMeshGeometry::LineMeshGeometry(const QVector<QVector3D> &vertices, Qt3DCore:
     addAttribute(_positionAttribute);
 }
 
-LineMeshGeometry::~LineMeshGeometry()
-{
-}
-
 int LineMeshGeometry::vertexCount()
 {
     return _vertexBuffer->data().size() / static_cast<int>(sizeof(QVector3D));
