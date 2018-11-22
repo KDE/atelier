@@ -25,10 +25,6 @@
 
 AtCoreInstanceWidget::AtCoreInstanceWidget(QWidget *parent):
     QWidget(parent)
-    , m_fileCount(0)
-    , m_printAction(nullptr)
-    , m_stopAction(nullptr)
-    , m_toolBar(nullptr)
     , m_bedSize(200, 200)
 {
     m_theme = palette().text().color().value() >= QColor(Qt::lightGray).value() ? QString("dark") : QString("light") ;
@@ -145,11 +141,11 @@ void AtCoreInstanceWidget::buildToolbar()
     });
     m_toolBar->addAction(m_printAction);
 
-    m_stopAction = new QAction(QIcon::fromTheme("media-playback-stop", QIcon(QString(":/%1/stop").arg(m_theme))), i18n("Stop"), this);
+    m_stopAction = new QAction(QIcon::fromTheme("media-playback-stop", QIcon(QStringLiteral(":/%1/stop").arg(m_theme))), i18n("Stop"), this);
     connect(m_stopAction, &QAction::triggered, this, &AtCoreInstanceWidget::stopPrint);
     connect(m_stopAction, &QAction::triggered, this, [this] {
         m_printAction->setText(i18n("Print"));
-        m_printAction->setIcon(QIcon::fromTheme("media-playback-start", QIcon(QString(":/%1/start").arg(m_theme))));
+        m_printAction->setIcon(QIcon::fromTheme("media-playback-start", QIcon(QStringLiteral(":/%1/start").arg(m_theme))));
     });
     m_toolBar->addAction(m_stopAction);
 
@@ -458,33 +454,31 @@ void AtCoreInstanceWidget::checkTemperature(uint sensorType, uint number, float 
     static QString msg;
     switch (sensorType) {
     case 0x00: // bed
-        msg = QString::fromLatin1("Bed Temperature ");
+        msg = QString::fromLatin1("Bed Temperature");
         break;
 
     case 0x01: // bed target
-        msg = QString::fromLatin1("Bed Target Temperature ");
+        msg = QString::fromLatin1("Bed Target Temperature");
         break;
 
     case 0x02: // extruder
-        msg = QString::fromLatin1("Extruder Temperature ");
+        msg = QString::fromLatin1("Extruder[%1] Temperature").arg(QString::number(number));
         break;
 
     case 0x03: // extruder target
-        msg = QString::fromLatin1("Extruder Target Temperature ");
+        msg = QString::fromLatin1("Extruder[%1] Target Temperature").arg(QString::number(number));
         break;
 
     case 0x04: // enclosure
-        msg = QString::fromLatin1("Enclosure Temperature ");
+        msg = QString::fromLatin1("Enclosure Temperature");
         break;
 
     case 0x05: // enclosure target
-        msg = QString::fromLatin1("Enclosure Target Temperature ");
+        msg = QString::fromLatin1("Enclosure Target Temperature");
         break;
     }
 
-    msg.append(QString::fromLatin1("[%1] : %2"));
-    msg = msg.arg(QString::number(number))
-          .arg(QString::number(double(temp), 'f', 2));
+    msg.append(QString::fromLatin1(": %1").arg(QString::number(double(temp), 'f', 2)));
     m_logWidget->appendLog(msg);
 }
 
