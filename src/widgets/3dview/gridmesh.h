@@ -33,7 +33,7 @@ class GridMesh : public Qt3DRender::QGeometryRenderer
     Q_PROPERTY(QSize meshResolution READ meshResolution WRITE setMeshResolution NOTIFY meshResolutionChanged)
 public:
     explicit GridMesh(Qt3DCore::QNode *parent = nullptr);
-    ~GridMesh();
+    ~GridMesh() = default;
 
     QSize meshResolution() const;
 
