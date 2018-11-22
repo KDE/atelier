@@ -25,12 +25,12 @@
 
 GCodeEditorWidget::GCodeEditorWidget(QWidget *parent) :
     QWidget(parent)
-    , m_tabwidget(new QTabWidget())
+    , m_tabwidget(new QTabWidget(this))
 {
     setAcceptDrops(true);
     m_editor = KTextEditor::Editor::instance();
     setupTabWidget();
-    QVBoxLayout *layout = new QVBoxLayout();
+    auto layout = new QVBoxLayout();
     layout->addWidget(m_tabwidget);
     setLayout(layout);
 }
