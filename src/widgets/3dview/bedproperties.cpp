@@ -50,10 +50,6 @@ BedProperties::BedProperties(QObject *parent)
     });
 }
 
-BedProperties::~BedProperties()
-{
-}
-
 int BedProperties::width() const
 {
     return m_width;

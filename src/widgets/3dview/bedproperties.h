@@ -30,7 +30,7 @@ class BedProperties : public QObject
     Q_PROPERTY(int depth READ depth NOTIFY depthChanged)
 public:
     explicit BedProperties(QObject *parent = nullptr);
-    ~BedProperties();
+    ~BedProperties() = default;
 
     int width() const;
     int depth() const;
