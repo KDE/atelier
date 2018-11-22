@@ -28,7 +28,7 @@ class CameraController : public Qt3DExtras::QAbstractCameraController
     Q_OBJECT
 public:
     explicit CameraController(Qt3DCore::QNode *parent = nullptr);
-    ~CameraController();
+    ~CameraController() = default;
 
 private:
     void moveCamera(const QAbstractCameraController::InputState &state, float dt) override;
