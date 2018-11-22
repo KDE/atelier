@@ -27,9 +27,10 @@ class VideoMonitorWidget : public QWidget
 
 public:
     explicit VideoMonitorWidget(QWidget *parent = nullptr);
+    ~VideoMonitorWidget() = default;
 
 private:
-    QLabel *_errorlabel;
+    QLabel *_errorlabel = nullptr;
     QMediaPlayer _mediaplayer;
     void handleError();
 };

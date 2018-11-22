@@ -25,13 +25,14 @@
 
 VideoMonitorWidget::VideoMonitorWidget(QWidget *parent) :
     QWidget(parent)
-    , _mediaplayer(nullptr, QMediaPlayer::StreamPlayback)
+    , _errorlabel(new QLabel(this))
+    , _mediaplayer(this, QMediaPlayer::StreamPlayback)
 {
     auto _layout = new QGridLayout();
-    auto _label = new QLabel(i18n("Source url:"));
+    auto _label = new QLabel(i18n("Source url:"), this);
     _layout->addWidget(_label, 0, 0);
 
-    auto _sourceCB = new QComboBox();
+    auto _sourceCB = new QComboBox(this);
     _sourceCB->setEditable(true);
     _sourceCB->setToolTip(i18n("Valid Urls:\n\
         http://www.example.com/stream.avi\n\
@@ -40,15 +41,14 @@ VideoMonitorWidget::VideoMonitorWidget(QWidget *parent) :
         rtsp://server.example.org:8080/test.sdp"));
     _layout->addWidget(_sourceCB, 0, 1);
 
-    auto _playPB = new QPushButton();
+    auto _playPB = new QPushButton(this);
     _playPB->setCheckable(true);
     _playPB->setIcon(QIcon::fromTheme("media-playback-start", style()->standardIcon(QStyle::SP_MediaPlay)));
     _layout->addWidget(_playPB, 0, 2);
 
-    auto _videoWidget = new QVideoWidget();
+    auto _videoWidget = new QVideoWidget(this);
     _layout->addWidget(_videoWidget, 1, 0, -1, -1);
 
-    _errorlabel = new QLabel;
     _layout->addWidget(_errorlabel, 2, 0, 0, -1);
 
     this->setLayout(_layout);
@@ -77,8 +77,7 @@ VideoMonitorWidget::VideoMonitorWidget(QWidget *parent) :
         }
         _videoWidget->setVisible(b);
     });
-
-    typedef void (QMediaPlayer::*ErrorSignal)(QMediaPlayer::Error);
+    using ErrorSignal = void (QMediaPlayer::*)(QMediaPlayer::Error);
     connect(&_mediaplayer, static_cast<ErrorSignal>(&QMediaPlayer::error),
             this, &VideoMonitorWidget::handleError);
 }
