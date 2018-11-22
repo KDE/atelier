@@ -36,7 +36,7 @@ class WelcomeWidget : public QWidget
 
 public:
     WelcomeWidget(QWidget *parent = nullptr);
-    ~WelcomeWidget();
+    ~WelcomeWidget() = default;
 
 private:
     QWidget *m_newsFeedWidget;
@@ -46,4 +46,7 @@ private:
     void retrieveRssFeed();
     void setNewsLayout(QLayout *newLayout);
     void setupRssFeed();
+    static const QString m_telegramLink;
+    static const QString m_documentsLink;
+    static const QString m_linkClose;
 };

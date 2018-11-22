@@ -1,6 +1,7 @@
 /* Atelier KDE Printer Host for 3D Printing
     Copyright (C) <2018>
     Author: Lays Rodrigues - lays.rodrigues@kde.org
+            Chris Rizzitello - rizzitello@kde.org
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -33,73 +34,78 @@
 #include "welcomewidget.h"
 
 #define POSTS_LIMIT 5
+const QString WelcomeWidget::m_telegramLink = QStringLiteral(R"(<a href="http://t.me/KDEAtelier">)");
+const QString WelcomeWidget::m_documentsLink = QStringLiteral(R"(<a href="http://atelier.kde.org/documentation/atelier">)");
+const QString WelcomeWidget::m_linkClose = QStringLiteral("</a>");
 
-WelcomeWidget::WelcomeWidget(QWidget *parent): QWidget(parent), m_newsFeedWidget(new QWidget)
+WelcomeWidget::WelcomeWidget(QWidget *parent)
+    : QWidget(parent)
+    , m_newsFeedWidget(new QWidget(this))
 {
     QFont appFont = font();
 
     auto hlayout = new QHBoxLayout;
     auto layout = new QVBoxLayout;
-    auto label = new QLabel;
+    auto label = new QLabel(this);
 
     label->setText(i18n("Welcome to Atelier!"));
     appFont.setPointSize(font().pointSize() + 4);
     label->setFont(appFont);
     hlayout->addWidget(label);
 
-    label = new QLabel;
+    label = new QLabel(this);
     label->setPixmap(QPixmap(":/icon/logo"));
     label->setLayoutDirection(Qt::LayoutDirection::RightToLeft);
     hlayout->addWidget(label);
     layout->addItem(hlayout);
 
-    auto line = new QFrame;
+    auto line = new QFrame(this);
     line->setFrameShape(QFrame::HLine);
     layout->addWidget(line);
 
     appFont.setPointSize(font().pointSize() + 2);
-    label = new QLabel(i18n("Quick Connect Guide"));
+    label = new QLabel(i18n("Quick Connect Guide"), this);
     label->setFont(appFont);
     layout->addWidget(label);
 
     for (const QString &sentence : {
                 i18n("1 - Create a Profile."), i18n("2 - Select the device."), i18n("3 - Select the profile and connect.")
             }) {
-        label = new QLabel(sentence);
+        label = new QLabel(sentence, this);
         layout->addWidget(label);
     }
 
-    label = new QLabel(i18n("Having a connection problem?"));
+    label = new QLabel(i18n("Having a connection problem?"), this);
     label->setFont(appFont);
     layout->addWidget(label);
 
-    label = new QLabel(i18n("See the info section of the Log for common problems."));
+    label = new QLabel(i18n("See the info section of the Log for common problems."), this);
     layout->addWidget(label);
 
-    label = new QLabel(i18n("Check our <a href=\"http://atelier.kde.org/documentation/atelier\">Atelier Docs</a> for more information."));
+    label = new QLabel(i18n("Check our %1Atelier Docs%2 for more information.", m_documentsLink, m_linkClose), this);
     label->setOpenExternalLinks(true);
     layout->addWidget(label);
 
-    label = new QLabel(i18n("Check our last news!"));
+    label = new QLabel(i18n("Atelier news!"), this);
     label->setFont(appFont);
     layout->addWidget(label);
     retrieveRssFeed();
     layout->addWidget(m_newsFeedWidget);
 
-    label = new QLabel(i18n("Get Involved"));
+    label = new QLabel(i18n("Get Involved"), this);
     label->setFont(appFont);
     layout->addWidget(label);
 
-    label = new QLabel(QString("<a href=\"http://t.me/KDEAtelier\">") + i18n("Join our Telegram Group!") + QString("</a>"));
+    label = new QLabel(i18n("Join our %1Telegram Group%2!", m_telegramLink, m_linkClose), this);
     label->setOpenExternalLinks(true);
     layout->addWidget(label);
 
-    label = new QLabel(i18n("You can also find us on Freenode IRC #kde-atelier"));
+    label = new QLabel(i18n("You can also find us on Freenode IRC #kde-atelier"), this);
     layout->addWidget(label);
 
     layout->addStretch();
 
-    auto infoWidget = new QWidget();
+    auto infoWidget = new QWidget(this);
     infoWidget->setLayout(layout);
 
     auto scrollArea = new QScrollArea(this);
@@ -111,14 +117,9 @@ WelcomeWidget::WelcomeWidget(QWidget *parent): QWidget(parent), m_newsFeedWidget
     setLayout(layout);
 }
 
-WelcomeWidget::~WelcomeWidget()
-{
-
-}
-
 void WelcomeWidget::retrieveRssFeed()
 {
-    auto manager = new QNetworkAccessManager();
+    auto manager = new QNetworkAccessManager(this);
     for (const QUrl &url : {
                 QUrl("https://rizzitello.wordpress.com/category/atelier/feed/"),
                 QUrl("https://laysrodriguesdev.wordpress.com/category/atelier/feed/")
@@ -129,11 +130,10 @@ void WelcomeWidget::retrieveRssFeed()
         connect(manager, &QNetworkAccessManager::finished, this, [&](QNetworkReply * reply) {
             if (reply->error()) {
                 return;
-            } else {
-                QDomDocument document;
-                if (document.setContent(reply->readAll())) {
-                    parseRss(document);
-                }
+            }
+            QDomDocument document;
+            if (document.setContent(reply->readAll())) {
+                parseRss(document);
             }
         });
     }
@@ -142,7 +142,7 @@ void WelcomeWidget::retrieveRssFeed()
 void WelcomeWidget::parseRss(const QDomDocument &document)
 {
     auto itemList = document.elementsByTagName("item");
-    QRegularExpression dateRegex("(?<date>\\d{2} \\w{3} \\d{4})");
+    QRegularExpression dateRegex(QStringLiteral(R"((?<date>\d{2} \w{3} \d{4}))"));
 
     for (int i = 0; i < itemList.count(); ++i) {
         auto node = itemList.at(i);
