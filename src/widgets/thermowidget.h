@@ -32,7 +32,8 @@ class ThermoWidget : public QwtDial
     Q_OBJECT
 
 public:
-    ThermoWidget(QWidget *parent, QString name);
+    ThermoWidget(QWidget *parent, const QString &name);
+    ~ThermoWidget() = default;
 
     void drawNeedle(QPainter *painter, const QPointF &center,
                     double radius, double dir, QPalette::ColorGroup colorGroup) const;
