@@ -165,9 +165,10 @@ void MainWindow::newAtCoreInstance()
             break;
         default:
             ChooseFileDialog dialog(this, m_openFiles);
-            if (dialog.exec() == QDialog::Accepted) {
-                file = dialog.choosenFile();
+            if (dialog.exec() != QDialog::Accepted) {
+                return;
             }
+            file = dialog.choosenFile();
             break;
         }
         if (m_gcodeEditor->modifiedFiles().contains(file))
