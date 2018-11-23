@@ -426,6 +426,12 @@ bool MainWindow::askToSave(const QVector<QUrl> &fileList)
     auto hLayout = new QHBoxLayout();
     auto saveBtn = new QPushButton(QIcon::fromTheme("document-save", QIcon(QStringLiteral(":/%1/save").arg(m_theme))), i18n("Save Selected"));
     saveBtn->setIconSize(iconSize);
+    saveBtn->setEnabled(false);
+
+    connect(listWidget, &QListWidget::currentRowChanged, this, [saveBtn](const int currentRow) {
+        saveBtn->setEnabled(currentRow >= 0);
+    });
+
     connect(saveBtn, &QPushButton::clicked, this, [this, &listWidget, &fileList, &dialog] {
         if (!m_gcodeEditor->saveFile(fileList.at(listWidget->currentRow())))
         {
@@ -471,7 +477,7 @@ bool MainWindow::askToSave(const QVector<QUrl> &fileList)
     });
     hLayout->addWidget(cancelBtn);
 
-    auto ignoreBtn = new QPushButton(QIcon::fromTheme("window-close", QIcon(QStringLiteral(":/icon/close"))), i18n("Ignore"));
+    auto ignoreBtn = new QPushButton(QIcon::fromTheme("edit-delete", style()->standardIcon(QStyle::SP_TrashIcon)), i18n("Discard Changes"), dialog);
     ignoreBtn->setIconSize(iconSize);
     connect(ignoreBtn, &QPushButton::clicked, this, [&dialog] {
         dialog->accept();
