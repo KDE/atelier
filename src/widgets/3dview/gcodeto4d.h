@@ -28,7 +28,7 @@ class GcodeTo4D : public QObject
 
 public:
     explicit GcodeTo4D(QObject *parent = 0);
-    ~GcodeTo4D();
+    ~GcodeTo4D() = default;
 
 public:
     void read(const QString &url);
@@ -38,6 +38,6 @@ signals:
     void posFinished(const QVector<QVector4D> &pos);
 
 private:
-    QThread *_thread;
-    bool _wait;
+    QThread *_thread = nullptr;
+    bool _wait = false;
 };

@@ -59,13 +59,13 @@ protected:
     void dropEvent(QDropEvent *event);
 
 private:
-    GCodeEditorWidget *m_gcodeEditor;
-    KTextEditor::View *m_currEditorView;
+    GCodeEditorWidget *m_gcodeEditor = nullptr;
+    KTextEditor::View *m_currEditorView = nullptr;
     int m_currInstance;
     LateralArea m_lateral;
     QList<QUrl> m_openFiles;
     QString m_theme;
-    QTabWidget *m_instances;
+    QTabWidget *m_instances = nullptr;
     bool askToClose();
     bool askToSave(const QVector<QUrl> &fileList);
     void atCoreInstanceNameChange(const QString &name);

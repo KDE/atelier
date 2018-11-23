@@ -30,13 +30,9 @@ GcodeTo4D::GcodeTo4D(QObject *parent) : QObject(parent)
 {
 }
 
-GcodeTo4D::~GcodeTo4D()
-{
-}
-
 void GcodeTo4D::read(const QString &url)
 {
-    _thread = new QThread;
+    _thread = new QThread(this);
     QString path = QUrl(url).path();
     auto fileLoader = new FileLoader(path);
     fileLoader->moveToThread(_thread);

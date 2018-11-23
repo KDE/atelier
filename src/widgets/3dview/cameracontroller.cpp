@@ -42,10 +42,6 @@ CameraController::CameraController(QNode *parent)
 {
 }
 
-CameraController::~CameraController()
-{
-}
-
 void CameraController::moveCamera(const Qt3DExtras::QAbstractCameraController::InputState &state, float dt)
 {
     auto cam = camera();

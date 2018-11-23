@@ -26,24 +26,17 @@
 #include <QVector4D>
 #include "fileloader.h"
 
-namespace
-{
-const static QString _commentChar = QStringLiteral(";");
-const static QStringList _moveCommands = {QStringLiteral("G0"), QStringLiteral("G1")};
-const static QString _space = QStringLiteral(" ");
-const static QString _E = QStringLiteral("E");
-const static QString _X = QStringLiteral("X");
-const static QString _Y = QStringLiteral("Y");
-const static QString _Z = QStringLiteral("Z");
-}
+const QString FileLoader::_commentChar = QStringLiteral(";");
+const QStringList FileLoader::_moveCommands = {QStringLiteral("G0"), QStringLiteral("G1")};
+const QString FileLoader::_space = QStringLiteral(" ");
+const QString FileLoader::_E = QStringLiteral("E");
+const QString FileLoader::_X = QStringLiteral("X");
+const QString FileLoader::_Y = QStringLiteral("Y");
+const QString FileLoader::_Z = QStringLiteral("Z");
 
 FileLoader::FileLoader(QString &fileName, QObject *parent) :
     QObject(parent)
     , _file(fileName)
-{
-}
-
-FileLoader::~FileLoader()
 {
 }
 

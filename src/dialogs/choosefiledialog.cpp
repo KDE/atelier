@@ -26,24 +26,25 @@ ChooseFileDialog::ChooseFileDialog(QWidget *parent, QList<QUrl> files) :
     QDialog(parent)
 {
     const int padding = 30;
-    auto listWigdet = new QListWidget();
-    listWigdet->setMinimumWidth(fontMetrics().height() / 2  * padding);
+    auto listWidget = new QListWidget(this);
+    listWidget->setMinimumWidth(fontMetrics().height() / 2  * padding);
 
     foreach (const auto &url, files) {
-        listWigdet->addItem(url.toLocalFile());
+        listWidget->addItem(url.toLocalFile());
     }
-    connect(listWigdet, &QListWidget::currentRowChanged, this, [this, &files](const int t) {
+    listWidget->setCurrentRow(0);
+    connect(listWidget, &QListWidget::currentRowChanged, this, [this, &files](const int t) {
         m_choosen_file = files.at(t);
     });
 
-    auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+    auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
     connect(buttonBox, &QDialogButtonBox::accepted, this, &ChooseFileDialog::accept);
     connect(buttonBox, &QDialogButtonBox::rejected, this, &ChooseFileDialog::reject);
 
     auto layout = new QVBoxLayout;
-    auto label = new QLabel(i18n("Choose a file to print:"));
+    auto label = new QLabel(i18n("Choose a file to print:"), this);
     layout->addWidget(label);
-    layout->addWidget(listWigdet);
+    layout->addWidget(listWidget);
     layout->addWidget(buttonBox);
     setLayout(layout);
 }

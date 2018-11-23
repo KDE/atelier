@@ -35,7 +35,6 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     KXmlGuiWindow(parent)
-    , m_currEditorView(nullptr)
     , m_currInstance(0)
     , m_theme(getTheme())
     , m_instances(new QTabWidget(this))
@@ -70,7 +69,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
     bool closePrompt = false;
     for (int i = 0; i < m_instances->count(); i++) {
-        AtCoreInstanceWidget *instance = qobject_cast<AtCoreInstanceWidget *>(m_instances->widget(i));
+        auto instance = qobject_cast<AtCoreInstanceWidget *>(m_instances->widget(i));
         if (instance->isPrinting()) {
             closePrompt = true;
             break;
@@ -117,11 +116,11 @@ void MainWindow::initWidgets()
     // View:
     // Sidebar, Sidebar Controls, Printer Tabs.
     // Sidebar Controls and Printer Tabs can be resized, Sidebar can't.
-    auto splitter = new QSplitter();
+    auto splitter = new QSplitter(this);
     splitter->addWidget(m_lateral.m_stack);
     splitter->addWidget(m_instances);
 
-    auto addTabBtn = new QToolButton();
+    auto addTabBtn = new QToolButton(this);
     addTabBtn->setIconSize(QSize(fontMetrics().lineSpacing(), fontMetrics().lineSpacing()));
     addTabBtn->setIcon(QIcon::fromTheme("list-add", QIcon(QString(":/%1/addTab").arg(m_theme))));
     addTabBtn->setToolTip(i18n("Create new instance"));
@@ -133,7 +132,7 @@ void MainWindow::initWidgets()
     centralLayout->addWidget(m_lateral.m_toolBar);
     centralLayout->addWidget(splitter);
 
-    auto *centralWidget = new QWidget();
+    auto *centralWidget = new QWidget(this);
     centralWidget->setLayout(centralLayout);
     setCentralWidget(centralWidget);
 }
@@ -146,7 +145,7 @@ void MainWindow::newAtCoreInstance()
     newInstanceWidget->setFileCount(m_openFiles.size());
     connect(this, &MainWindow::profilesChanged, newInstanceWidget, &AtCoreInstanceWidget::updateProfileData);
     connect(newInstanceWidget, &AtCoreInstanceWidget::requestProfileDialog, this, [this] {
-        std::unique_ptr<ProfilesDialog> pd(new ProfilesDialog);
+        std::unique_ptr<ProfilesDialog> pd(new ProfilesDialog(this));
         pd->exec();
         emit(profilesChanged());
     });
@@ -183,7 +182,8 @@ void MainWindow::newAtCoreInstance()
                          );
             if (result == QMessageBox::Cancel) {
                 return;
-            } else if (result == QMessageBox::Save) {
+            }
+            if (result == QMessageBox::Save) {
                 m_gcodeEditor->saveFile(file);
             }
         }
@@ -207,8 +207,8 @@ void MainWindow::newAtCoreInstance()
 // Move to LateralArea.
 void MainWindow::setupLateralArea()
 {
-    m_lateral.m_toolBar = new QWidget();
-    m_lateral.m_stack = new QStackedWidget();
+    m_lateral.m_toolBar = new QWidget(this);
+    m_lateral.m_stack = new QStackedWidget(this);
     auto buttonLayout = new QVBoxLayout();
 
     auto setupButton = [this, buttonLayout](const QString & key, const QString & text, const QIcon & icon, QWidget * w) {

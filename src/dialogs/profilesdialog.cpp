@@ -184,7 +184,7 @@ void ProfilesDialog::loadSettings(const QString &currentProfile)
     //Baud
     ui->baudCB->setCurrentText(m_settings.value(QStringLiteral("bps"), QStringLiteral("115200")).toString());
     ui->firmwareCB->setCurrentText(m_settings.value(QStringLiteral("firmware"), QStringLiteral("Auto-Detect")).toString());
-    ui->postPauseLE->setText(m_settings.value(QStringLiteral("postPause"), QStringLiteral("")).toString());
+    ui->postPauseLE->setText(m_settings.value(QStringLiteral("postPause"), QString()).toString());
     m_settings.endGroup();
     m_settings.endGroup();
     setModified(false);
@@ -220,10 +220,11 @@ QStringList ProfilesDialog::detectFWPlugins()
     QStringList firmwares;
     QStringList paths = AtCoreDirectories::pluginDir;
     //Add our runtime paths
-    paths.prepend(qApp->applicationDirPath() + QStringLiteral("/../Plugins/AtCore"));
-    paths.prepend(qApp->applicationDirPath() + QStringLiteral("/AtCore"));
-    paths.prepend(qApp->applicationDirPath() + QStringLiteral("/plugins"));
-    for (const QString &path : paths) {
+    const QString &path(qApp->applicationDirPath());
+    paths.prepend(path + QStringLiteral("/../Plugins/AtCore"));
+    paths.prepend(path + QStringLiteral("/AtCore"));
+    paths.prepend(path + QStringLiteral("/plugins"));
+    for (const QString &path : qAsConst(paths)) {
         firmwares = firmwaresInPath(path);
         if (!firmwares.isEmpty()) {
             //use path where plugins were detected.

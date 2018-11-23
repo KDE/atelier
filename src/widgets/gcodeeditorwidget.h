@@ -30,6 +30,7 @@ class GCodeEditorWidget : public QWidget
     Q_OBJECT
 public:
     explicit GCodeEditorWidget(QWidget *parent = nullptr);
+    ~GCodeEditorWidget() = default;
     void loadFile(const QUrl &file);
     QVector<QUrl> modifiedFiles();
     bool saveFile(const QUrl &url);
@@ -37,7 +38,7 @@ public:
 private:
     QMap<QUrl, KTextEditor::Document *> urlDoc;
     QMap<QUrl, QWidget *> urlTab;
-    KTextEditor::ConfigInterface *m_interface;
+    KTextEditor::ConfigInterface *m_interface = nullptr;
     KTextEditor::Document *newDoc(const QUrl &file);
     KTextEditor::Editor *m_editor;
     KTextEditor::View *newView(KTextEditor::Document *doc);

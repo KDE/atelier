@@ -65,8 +65,8 @@ int main(int argc, char *argv[])
     aboutData.setOtherText(i18n("Using AtCore:%1", QString(ATCORE_VERSION_STRING)));
     KAboutData::setApplicationData(aboutData);
 
-    MainWindow *m = new MainWindow();
-    m->setWindowIcon(QIcon(":/icon/atelier"));
-    m->show();
+    auto mainWindow = new MainWindow();
+    mainWindow->setWindowIcon(QIcon(":/icon/atelier"));
+    mainWindow->show();
     return app.exec();
 }

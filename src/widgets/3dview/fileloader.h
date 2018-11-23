@@ -34,10 +34,17 @@ class FileLoader : public QObject
 
 public:
     FileLoader(QString &fileName, QObject *parent = nullptr);
-    ~FileLoader();
+    ~FileLoader() = default;
 
 private:
     QFile _file;
+    const static QString _commentChar;
+    const static QStringList _moveCommands;
+    const static QString _space;
+    const static QString _E;
+    const static QString _X;
+    const static QString _Y;
+    const static QString _Z;
 
 signals:
     void percentUpdate(QVariant var);

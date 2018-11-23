@@ -36,10 +36,6 @@ GridMesh::GridMesh(Qt3DCore::QNode *parent)
     setMeshResolution(QSize(20, 20));
 }
 
-GridMesh::~GridMesh()
-{
-}
-
 QSize GridMesh::meshResolution() const
 {
     return m_meshResolution;

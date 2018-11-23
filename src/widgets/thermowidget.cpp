@@ -27,11 +27,11 @@
 #include <QWheelEvent>
 #include "thermowidget.h"
 
-ThermoWidget::ThermoWidget(QWidget *parent, QString name) :
+ThermoWidget::ThermoWidget(QWidget *parent, const QString &name) :
     QwtDial(parent)
     , m_targetTemperatureNeedle(new QwtDialSimpleNeedle(QwtDialSimpleNeedle::Arrow, false, Qt::red, Qt::darkRed))
     , m_name(name)
-    , m_tempChangedTimer(new QTimer())
+    , m_tempChangedTimer(new QTimer(this))
     , m_currentTemperature(0)
     , m_targetTemperature(0)
 {
@@ -42,7 +42,7 @@ ThermoWidget::ThermoWidget(QWidget *parent, QString name) :
     setReadOnly(false);
     setFocusPolicy(Qt::StrongFocus);
 
-    m_cursorTimer = new QTimer();
+    m_cursorTimer = new QTimer(this);
     connect(m_cursorTimer, &QTimer::timeout, this, [this] {
         m_paintCursor = !m_paintCursor;
         update();
