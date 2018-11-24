@@ -436,15 +436,12 @@ bool MainWindow::askToSave(const QVector<QUrl> &fileList)
     connect(saveBtn, &QPushButton::clicked, this, [this, listWidget, &fileList, dialog] {
         if (!m_gcodeEditor->saveFile(fileList.at(listWidget->currentRow())))
         {
-            QMessageBox::information(this, i18n("Save Failed"), i18n("Failed to save file: %1").arg(fileList.at(listWidget->currentRow()).toLocalFile()));
+            QMessageBox::information(this, i18n("Save Failed"), i18n("Failed to save file: %1", fileList.at(listWidget->currentRow()).toLocalFile()));
         } else
         {
-            QString txt = listWidget->item(listWidget->currentRow())->text();
-            txt.remove(" [*]");
-            listWidget->item(listWidget->currentRow())->setText(txt);
+            listWidget->item(listWidget->currentRow())->setText(listWidget->item(listWidget->currentRow())->text().remove(" [*]"));
             for (int i = 0; i < listWidget->count(); i++) {
-                QString string = listWidget->item(i)->text();
-                if (string.endsWith(" [*]")) {
+                if (listWidget->item(i)->text().endsWith(" [*]")) {
                     return;
                 }
             }
@@ -459,12 +456,10 @@ bool MainWindow::askToSave(const QVector<QUrl> &fileList)
         for (int i = 0; i < listWidget->count(); i++)
         {
             if (!m_gcodeEditor->saveFile(fileList.at(i))) {
-                QMessageBox::information(this, i18n("Save Failed"), i18n("Failed to save file: %1").arg(fileList.at(i).toLocalFile()));
+                QMessageBox::information(this, i18n("Save Failed"), i18n("Failed to save file: %1", fileList.at(i).toLocalFile()));
                 dialog->reject();
             } else {
-                QString txt = listWidget->item(listWidget->currentRow())->text();
-                txt.remove(" [*]");
-                listWidget->item(listWidget->currentRow())->setText(txt);
+                listWidget->item(i)->setText(listWidget->item(i)->text().remove(" [*]"));
             }
         }
         dialog->accept();
@@ -473,6 +468,7 @@ bool MainWindow::askToSave(const QVector<QUrl> &fileList)
 
     auto cancelBtn = new QPushButton(QIcon::fromTheme("dialog-cancel", QIcon(QStringLiteral(":/%1/cancel").arg(m_theme))), i18n("Cancel"), dialog);
     cancelBtn->setIconSize(iconSize);
+    cancelBtn->setDefault(true);
     connect(cancelBtn, &QPushButton::clicked, this, [dialog] {
         dialog->reject();
     });
