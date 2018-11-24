@@ -416,16 +416,16 @@ bool MainWindow::askToSave(const QVector<QUrl> &fileList)
         return true;
     }
     QSize iconSize = QSize(fontMetrics().lineSpacing(), fontMetrics().lineSpacing());
-    auto dialog = new QDialog();
+    auto dialog = new QDialog(this);
     const int padding = 30;
-    auto listWidget = new QListWidget();
+    auto listWidget = new QListWidget(dialog);
     listWidget->setMinimumWidth(fontMetrics().height() / 2  * padding);
     for (const auto &url : fileList) {
         listWidget->addItem(url.toLocalFile() + " [*]");
     }
 
     auto hLayout = new QHBoxLayout();
-    auto saveBtn = new QPushButton(QIcon::fromTheme("document-save", QIcon(QStringLiteral(":/%1/save").arg(m_theme))), i18n("Save Selected"));
+    auto saveBtn = new QPushButton(QIcon::fromTheme("document-save", QIcon(QStringLiteral(":/%1/save").arg(m_theme))), i18n("Save Selected"), dialog);
     saveBtn->setIconSize(iconSize);
     saveBtn->setEnabled(false);
 
@@ -433,18 +433,15 @@ bool MainWindow::askToSave(const QVector<QUrl> &fileList)
         saveBtn->setEnabled(currentRow >= 0);
     });
 
-    connect(saveBtn, &QPushButton::clicked, this, [this, &listWidget, &fileList, &dialog] {
+    connect(saveBtn, &QPushButton::clicked, this, [this, listWidget, &fileList, dialog] {
         if (!m_gcodeEditor->saveFile(fileList.at(listWidget->currentRow())))
         {
-            QMessageBox::information(this, i18n("Save Failed"), i18n("Failed to save file: %1").arg(fileList.at(listWidget->currentRow()).toLocalFile()));
+            QMessageBox::information(this, i18n("Save Failed"), i18n("Failed to save file: %1", fileList.at(listWidget->currentRow()).toLocalFile()));
         } else
         {
-            QString txt = listWidget->item(listWidget->currentRow())->text();
-            txt.remove(" [*]");
-            listWidget->item(listWidget->currentRow())->setText(txt);
+            listWidget->item(listWidget->currentRow())->setText(listWidget->item(listWidget->currentRow())->text().remove(" [*]"));
             for (int i = 0; i < listWidget->count(); i++) {
-                QString string = listWidget->item(i)->text();
-                if (string.endsWith(" [*]")) {
+                if (listWidget->item(i)->text().endsWith(" [*]")) {
                     return;
                 }
             }
@@ -453,40 +450,39 @@ bool MainWindow::askToSave(const QVector<QUrl> &fileList)
     });
     hLayout->addWidget(saveBtn);
 
-    auto saveAllBtn = new QPushButton(QIcon::fromTheme("document-save-all", QIcon(QStringLiteral(":/%1/saveAll").arg(m_theme))), i18n("Save All"));
+    auto saveAllBtn = new QPushButton(QIcon::fromTheme("document-save-all", QIcon(QStringLiteral(":/%1/saveAll").arg(m_theme))), i18n("Save All"), dialog);
     saveAllBtn->setIconSize(iconSize);
-    connect(saveAllBtn, &QPushButton::clicked, this, [this, &listWidget, &fileList, &dialog] {
+    connect(saveAllBtn, &QPushButton::clicked, this, [this, listWidget, &fileList, dialog] {
         for (int i = 0; i < listWidget->count(); i++)
         {
             if (!m_gcodeEditor->saveFile(fileList.at(i))) {
-                QMessageBox::information(this, i18n("Save Failed"), i18n("Failed to save file: %1").arg(fileList.at(i).toLocalFile()));
+                QMessageBox::information(this, i18n("Save Failed"), i18n("Failed to save file: %1", fileList.at(i).toLocalFile()));
                 dialog->reject();
             } else {
-                QString txt = listWidget->item(listWidget->currentRow())->text();
-                txt.remove(" [*]");
-                listWidget->item(listWidget->currentRow())->setText(txt);
+                listWidget->item(i)->setText(listWidget->item(i)->text().remove(" [*]"));
             }
         }
         dialog->accept();
     });
     hLayout->addWidget(saveAllBtn);
 
-    auto cancelBtn = new QPushButton(QIcon::fromTheme("dialog-cancel", QIcon(QStringLiteral(":/%1/cancel").arg(m_theme))), i18n("Cancel"));
+    auto cancelBtn = new QPushButton(QIcon::fromTheme("dialog-cancel", QIcon(QStringLiteral(":/%1/cancel").arg(m_theme))), i18n("Cancel"), dialog);
     cancelBtn->setIconSize(iconSize);
-    connect(cancelBtn, &QPushButton::clicked, this, [&dialog] {
+    cancelBtn->setDefault(true);
+    connect(cancelBtn, &QPushButton::clicked, this, [dialog] {
         dialog->reject();
     });
     hLayout->addWidget(cancelBtn);
 
     auto ignoreBtn = new QPushButton(QIcon::fromTheme("edit-delete", style()->standardIcon(QStyle::SP_TrashIcon)), i18n("Discard Changes"), dialog);
     ignoreBtn->setIconSize(iconSize);
-    connect(ignoreBtn, &QPushButton::clicked, this, [&dialog] {
+    connect(ignoreBtn, &QPushButton::clicked, this, [dialog] {
         dialog->accept();
     });
     hLayout->addWidget(ignoreBtn);
 
     auto layout = new QVBoxLayout;
-    auto label = new QLabel(i18n("Files with Unsaved Changes."));
+    auto label = new QLabel(i18n("Files with Unsaved Changes."), dialog);
     layout->addWidget(label);
     layout->addWidget(listWidget);
     layout->addItem(hLayout);
