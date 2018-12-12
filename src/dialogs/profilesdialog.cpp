@@ -131,7 +131,7 @@ void ProfilesDialog::save()
     } else {
         m_settings.setValue(QStringLiteral("isCartesian"), false);
         m_settings.setValue(QStringLiteral("radius"), ui->radiusSB->value());
-        m_settings.setValue(QStringLiteral("z_delta_dimension"), ui->z_dimensionSB->value());
+        m_settings.setValue(QStringLiteral("z_delta_dimension"), ui->z_delta_dimensionSB->value());
     }
 
     m_settings.setValue(QStringLiteral("heatedBed"), ui->heatedBedCK->isChecked());
