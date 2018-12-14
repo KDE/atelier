@@ -49,7 +49,7 @@ int main(int argc, char *argv[])
         i18n("(c) 2016"),
         // Optional text shown in the About box.
         // Can contain any information desired. (otherText)
-        i18n(""),
+        QString(),
         // The program homepage string. (homePageAddress = QString())
         QStringLiteral("http://atelier.kde.org"),
         // The bug report email address
