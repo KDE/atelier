@@ -119,6 +119,7 @@ WelcomeWidget::WelcomeWidget(QWidget *parent)
 
 void WelcomeWidget::retrieveRssFeed()
 {
+    m_postList.clear();
     auto manager = new QNetworkAccessManager(this);
     for (const QUrl &url : {
                 QUrl("https://rizzitello.wordpress.com/category/atelier/feed/"),
