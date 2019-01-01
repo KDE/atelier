@@ -186,6 +186,14 @@ void AtCoreInstanceWidget::buildConnectionToolbar()
     m_connectButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     connect(this, &AtCoreInstanceWidget::disableDisconnect, m_connectButton, &QPushButton::setDisabled);
     connect(m_connectButton, &QPushButton::clicked, this, &AtCoreInstanceWidget::connectButtonClicked);
+
+    m_connectionTimer = new QTimer(this);
+    m_connectionTimer->setInterval(20000);
+    m_connectionTimer->setSingleShot(true);
+    connect(m_connectionTimer, &QTimer::timeout, this, [this] {
+        m_connectButton->clicked();
+        QMessageBox::critical(this, tr("Connection Error"), tr("Your machine did not respond after 20 seconds.\n\nBefore connecting again check that your printer is on and your are connecting using the correct BAUD Rate for your device."));
+    });
 }
 
 void AtCoreInstanceWidget::connectButtonClicked()
@@ -374,6 +382,7 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
     static QString stateString;
     switch (newState) {
     case AtCore::CONNECTING: {
+        m_connectionTimer->start();
         m_core.setSerialTimerInterval(0);
         m_connectButton->setText(i18n("Disconnect"));
         m_connectButton->setIcon(QIcon::fromTheme("network-disconnect", QIcon(QString(":/%1/disconnect").arg(m_theme))));
@@ -385,6 +394,9 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
         connect(&m_core, &AtCore::pushedCommand, m_logWidget, &LogWidget::appendSLog);
     } break;
     case AtCore::IDLE: {
+        if (m_connectionTimer->isActive()) {
+            m_connectionTimer->stop();
+        }
         stateString = i18n("Connected to %1", m_core.connectedPort());
         emit extruderCountChanged(m_core.extruderCount());
         m_logWidget->appendLog(stateString);
@@ -396,6 +408,9 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
         }
     } break;
     case AtCore::DISCONNECTED: {
+        if (m_connectionTimer->isActive()) {
+            m_connectionTimer->stop();
+        }
         stateString = i18n("Not Connected");
         disconnect(&m_core, &AtCore::receivedMessage, m_logWidget, &LogWidget::appendRLog);
         disconnect(&m_core, &AtCore::pushedCommand, m_logWidget, &LogWidget::appendSLog);

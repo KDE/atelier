@@ -81,6 +81,7 @@ private:
     QWidget *m_advancedTab = nullptr;
     QWidget *m_connectWidget = nullptr;
     QSize m_bedSize;
+    QTimer *m_connectionTimer = nullptr;
     void buildConnectionToolbar();
     void buildToolbar();
     void checkTemperature(uint sensorType, uint number, float temp);
