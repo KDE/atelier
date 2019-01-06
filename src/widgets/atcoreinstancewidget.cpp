@@ -220,12 +220,7 @@ void AtCoreInstanceWidget::connectButtonClicked()
         //Get profile data before connecting.
         m_profileData = readProfile();
         //then connect
-        if (m_core.initSerial(m_comboPort->currentText(), m_profileData["bps"].toInt())) {
-            QString fw = m_profileData["firmware"].toString();
-            m_logWidget->appendLog(i18n("Firmware: %1", fw));
-            if (fw != QString("Auto-Detect")) {
-                m_core.loadFirmwarePlugin(fw);
-            }
+        if (m_core.newConnection(m_comboPort->currentText(), m_profileData["bps"].toInt(), m_profileData["firmware"].toString())) {
             emit(connectionChanged(m_profileData["name"].toString()));
             m_profileData["heatedBed"].toBool() ? m_bedExtWidget->setBedMaxTemperature(m_profileData["bedTemp"].toInt()) :
             m_bedExtWidget->setBedThermoHidden(true);
