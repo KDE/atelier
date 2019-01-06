@@ -94,6 +94,7 @@ private:
     void initConnectsToAtCore();
     void stopPrint();
     QMap<QString, QVariant> readProfile();
+    void saveProfile();
     void pausePrint();
     void print();
     void updateSerialPort(QStringList ports);
