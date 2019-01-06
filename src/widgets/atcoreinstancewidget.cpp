@@ -401,6 +401,10 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
         if (m_profileData["heatedBed"].toBool()) {
             connectBedTemperatureData(true);
         }
+        if (!m_core.availableFirmwarePlugins().contains(m_profileData["firmware"].toString())) {
+            m_profileData["firmware"] = m_core.firmwarePlugin()->name().toLower();
+            saveProfile();
+        }
     } break;
     case AtCore::DISCONNECTED: {
         if (m_connectionTimer->isActive()) {
@@ -588,6 +592,16 @@ QMap<QString, QVariant> AtCoreInstanceWidget::readProfile()
     m_settings.endGroup();
     m_settings.endGroup();
     return data;
+}
+
+void AtCoreInstanceWidget::saveProfile()
+{
+    QString profile = m_comboProfile->currentText();
+    m_settings.beginGroup("Profiles");
+    m_settings.beginGroup(m_profileData["name"].toString());
+    m_settings.setValue(QStringLiteral("firmware"), m_profileData["firmware"]);
+    m_settings.endGroup();
+    m_settings.endGroup();
 }
 
 void AtCoreInstanceWidget::connectBedTemperatureData(bool connected)
