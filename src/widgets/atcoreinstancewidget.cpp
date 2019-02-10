@@ -253,6 +253,13 @@ void AtCoreInstanceWidget::initConnectsToAtCore()
     m_core.setSerialTimerInterval(100);
     // Handle device changes
     connect(&m_core, &AtCore::portsChanged, this, &AtCoreInstanceWidget::updateSerialPort);
+
+    connect(&m_core, &AtCore::autoTemperatureReportChanged, this, [this](const bool autoReport) {
+        if (m_profileData["autoReportTemp"].toBool() != autoReport) {
+            m_profileData["autoReportTemp"] = autoReport;
+            saveProfile();
+        }
+    });
     // Handle AtCore status change
     connect(&m_core, &AtCore::stateChanged, this, &AtCoreInstanceWidget::handlePrinterStatusChanged);
     // If the number of extruders from the printer change, we need to update the radiobuttons on the widget
@@ -390,6 +397,7 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
     } break;
     case AtCore::IDLE: {
         if (m_connectionTimer->isActive()) {
+            m_core.setAutoTemperatureReport(m_profileData["autoReportTemp"].toBool());
             m_connectionTimer->stop();
         }
         stateString = i18n("Connected to %1", m_core.connectedPort());
@@ -588,6 +596,7 @@ QMap<QString, QVariant> AtCoreInstanceWidget::readProfile()
         , {"dimensionZ", m_settings.value(QStringLiteral("dimensionZ"), QStringLiteral("180"))}
         , {"radius", m_settings.value(QStringLiteral("radius"), QStringLiteral("200"))}
         , {"z_delta_dimension", m_settings.value(QStringLiteral("z_delta_dimension"), QStringLiteral("180"))}
+        , {"autoReportTemp", m_settings.value(QStringLiteral("autoReportTemp"), false)}
     };
     m_settings.endGroup();
     m_settings.endGroup();
@@ -600,6 +609,7 @@ void AtCoreInstanceWidget::saveProfile()
     m_settings.beginGroup("Profiles");
     m_settings.beginGroup(m_profileData["name"].toString());
     m_settings.setValue(QStringLiteral("firmware"), m_profileData["firmware"]);
+    m_settings.setValue(QStringLiteral("autoReportTemp"), m_profileData["autoReportTemp"]);
     m_settings.endGroup();
     m_settings.endGroup();
 }

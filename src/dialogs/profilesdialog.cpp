@@ -34,7 +34,7 @@ ProfilesDialog::ProfilesDialog(QWidget *parent) :
     ui->baudCB->addItems(SERIAL::BAUDS);
     ui->baudCB->setCurrentText(QLatin1String("115200"));
     ui->profileCB->setAutoCompletion(true);
-    connect(ui->profileCB, static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, [this](const int newIndex) {
+    connect(ui->profileCB, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this](const int newIndex) {
         blockSignals(true);
         ui->profileCB->setCurrentIndex(m_prevIndex);
         blockSignals(false);
@@ -76,6 +76,7 @@ ProfilesDialog::ProfilesDialog(QWidget *parent) :
     connect(ui->extruderTempSB, &QSpinBox::editingFinished, modify);
     connect(ui->postPauseLE, &QLineEdit::editingFinished, modify);
     connect(ui->firmwareCB, &QComboBox::currentTextChanged, modify);
+    connect(ui->autoReportTempCK, &QCheckBox::stateChanged, modify);
 }
 
 ProfilesDialog::~ProfilesDialog()
@@ -145,6 +146,7 @@ void ProfilesDialog::save()
     m_settings.setValue(QStringLiteral("maximumTemperatureBed"), ui->bedTempSB->value());
     //HOTEND
     m_settings.setValue(QStringLiteral("maximumTemperatureExtruder"), ui->extruderTempSB->value());
+    m_settings.setValue(QStringLiteral("autoReportTemp"), ui->autoReportTempCK->isChecked());
     //Baud
     m_settings.setValue(QStringLiteral("bps"), ui->baudCB->currentText());
     m_settings.setValue(QStringLiteral("firmware"), ui->firmwareCB->currentText());
@@ -185,6 +187,7 @@ void ProfilesDialog::loadSettings(const QString &currentProfile)
     ui->heatedBedCK->setChecked(m_settings.value(QStringLiteral("heatedBed"), QStringLiteral("true")).toBool());
     ui->bedTempSB->setEnabled(ui->heatedBedCK->isChecked());
     ui->bedTempSB->setValue(m_settings.value(QStringLiteral("maximumTemperatureBed"), QStringLiteral("0")).toInt());
+    ui->autoReportTempCK->setChecked(m_settings.value(QStringLiteral("autoReportTemp"), QStringLiteral("false")).toBool());
 
     //HOTEND
     ui->extruderTempSB->setValue(m_settings.value(QStringLiteral("maximumTemperatureExtruder"), QStringLiteral("0")).toInt());
