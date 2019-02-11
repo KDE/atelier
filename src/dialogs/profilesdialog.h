@@ -47,7 +47,7 @@ private:
     void updateCBProfiles();
     void setModified(bool modified);
     bool m_modified;
-
+    int m_prevIndex = 0;
 signals:
     void updateProfiles();
 };

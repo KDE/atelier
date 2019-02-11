@@ -34,8 +34,15 @@ ProfilesDialog::ProfilesDialog(QWidget *parent) :
     ui->baudCB->addItems(SERIAL::BAUDS);
     ui->baudCB->setCurrentText(QLatin1String("115200"));
     ui->profileCB->setAutoCompletion(true);
-    connect(ui->profileCB, static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, [this] {
+    connect(ui->profileCB, static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, [this](const int newIndex) {
+        blockSignals(true);
+        ui->profileCB->setCurrentIndex(m_prevIndex);
+        blockSignals(false);
         askToSave();
+        blockSignals(true);
+        m_prevIndex = newIndex;
+        ui->profileCB->setCurrentIndex(m_prevIndex);
+        blockSignals(false);
         loadSettings();
     });
     updateCBProfiles();
