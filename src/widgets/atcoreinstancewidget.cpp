@@ -429,9 +429,7 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
         m_toolBar->setHidden(true);
         enableControls(false);
         connectExtruderTemperatureData(false);
-        if (m_profileData["heatedBed"].toBool()) {
-            connectBedTemperatureData(false);
-        }
+        connectBedTemperatureData(false);
     } break;
     case AtCore::STARTPRINT: {
         stateString = i18n("Starting Print");
@@ -617,7 +615,7 @@ void AtCoreInstanceWidget::saveProfile()
 void AtCoreInstanceWidget::connectBedTemperatureData(bool connected)
 {
     if (connected) {
-        if (m_plotWidget->plots().contains((i18n("Actual Bed")))) {
+        if (m_plotWidget->plots().contains(i18n("Actual Bed"))) {
             return;
         }
         m_plotWidget->addPlot(i18n("Actual Bed"));
@@ -637,9 +635,9 @@ void AtCoreInstanceWidget::connectBedTemperatureData(bool connected)
     } else {
         if (m_plotWidget->plots().contains(i18n("Actual Bed"))) {
             m_plotWidget->removePlot(i18n("Actual Bed"));
-            disconnect(m_core.temperature().get(), &Temperature::bedTemperatureChanged, this, nullptr);
+            disconnect(m_core.temperature().get(), &Temperature::bedTemperatureChanged, nullptr, nullptr);
             m_plotWidget->removePlot(i18n("Target Bed"));
-            disconnect(m_core.temperature().get(), &Temperature::bedTargetTemperatureChanged, this, nullptr);
+            disconnect(m_core.temperature().get(), &Temperature::bedTargetTemperatureChanged, nullptr, nullptr);
         }
     }
 }
@@ -668,9 +666,9 @@ void AtCoreInstanceWidget::connectExtruderTemperatureData(bool connected)
     } else {
         if (m_plotWidget->plots().contains(i18n("Actual Ext.1"))) {
             m_plotWidget->removePlot(i18n("Actual Ext.1"));
-            disconnect(m_core.temperature().get(), &Temperature::extruderTemperatureChanged, this, nullptr);
+            disconnect(m_core.temperature().get(), &Temperature::extruderTemperatureChanged, nullptr, nullptr);
             m_plotWidget->removePlot(i18n("Target Ext.1"));
-            disconnect(m_core.temperature().get(), &Temperature::extruderTargetTemperatureChanged, this, nullptr);
+            disconnect(m_core.temperature().get(), &Temperature::extruderTargetTemperatureChanged, nullptr, nullptr);
         }
     }
 }
