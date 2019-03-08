@@ -255,7 +255,7 @@
       <item row="3" column="0">
        <widget class="QLabel" name="label_10">
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Temperature reporting using M155 command. When enabled the printer will return temperature data automaticly at a set interval.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Temperature reporting using M155 command. When enabled the printer will return temperature data automatically at a set interval.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="text">
          <string>Auto Temperature Report</string>

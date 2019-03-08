@@ -203,7 +203,7 @@ void AtCoreInstanceWidget::connectButtonClicked()
             QMessageBox::information(
                 this
                 , i18n("No Profiles!")
-                , i18n("Connecting Requires creating a profile for your printer. Create a profile in the next dialog then try again.")
+                , i18n("Connecting requires creating a profile for your printer. Create a profile in the next dialog then try again.")
             );
             emit(requestProfileDialog());
             return;
@@ -310,7 +310,7 @@ void AtCoreInstanceWidget::initConnectsToAtCore()
             QMessageBox::information(
                 this
                 , i18n("Print Error")
-                , i18n("You must Select a file from the list")
+                , i18n("You must select a file from the list")
             );
         } else  {
             m_core.print(fileName, true);
@@ -323,7 +323,7 @@ void AtCoreInstanceWidget::initConnectsToAtCore()
             QMessageBox::information(
                 this
                 , i18n("Delete Error")
-                , i18n("You must Select a file from the list")
+                , i18n("You must select a file from the list")
             );
         } else  {
             m_core.sdDelete(fileName);
@@ -350,7 +350,7 @@ void AtCoreInstanceWidget::printFile(const QUrl &fileName)
         return;
     }
     if (m_core.state() == AtCore::IDLE) {
-        m_logWidget->appendLog(i18n("Printing:%1", fileName.toLocalFile()));
+        m_logWidget->appendLog(i18n("Printing: %1", fileName.toLocalFile()));
         m_core.print(fileName.toLocalFile());
     }
 }
@@ -458,7 +458,7 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
         m_printAction->setIcon(QIcon::fromTheme("media-playback-start", QIcon(QString(":/%1/start").arg(m_theme))));
     } break;
     case AtCore::STOP: {
-        stateString = i18n("Stoping Print");
+        stateString = i18n("Stopping Print");
         m_logWidget->appendLog(stateString);
     } break;
     case AtCore::ERRORSTATE: {

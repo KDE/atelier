@@ -281,7 +281,7 @@ void ProfilesDialog::askToSave()
         int ret = QMessageBox::question(
                       this
                       , i18n("Save?")
-                      , i18n("This Profile has been modified, Would you like to Save it?")
+                      , i18n("This profile has been modified, Would you like to Save it?")
                       , QMessageBox::Save
                       , QMessageBox::No
                   );

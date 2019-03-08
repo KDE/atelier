@@ -156,7 +156,7 @@ void MainWindow::newAtCoreInstance()
         {
         case 0:
             QMessageBox::warning(this, i18n("Error"),
-                                 i18n("There's no GCode File open. \n Please select a file and try again."),
+                                 i18n("There's no GCode file open.\nPlease select a file and try again."),
                                  QMessageBox::Ok);
             break;
         case 1:
@@ -175,7 +175,7 @@ void MainWindow::newAtCoreInstance()
             int result = QMessageBox::question(
                              this
                              , i18n("Document Modified")
-                             , i18n("%1 \n Contains Unsaved Changes That will not be in the print.\n Would you like to Save before printing?", file.toLocalFile())
+                             , i18n("%1 \nContains unsaved changes that will not be in the print.\nWould you like to save them before printing?", file.toLocalFile())
                              , QMessageBox::Save
                              , QMessageBox::Cancel
                              , QMessageBox::Ignore

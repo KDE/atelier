@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
                         QStringLiteral("http://patrickjp.com"));
     aboutData.addAuthor(i18n("Tomaz Canabrava"), i18n("Contributor"), QStringLiteral("tcanabrava@kde.org"),
                         QStringLiteral("http://angrycane.com.br"));
-    aboutData.setOtherText(i18n("Using AtCore:%1", QString(ATCORE_VERSION_STRING)));
+    aboutData.setOtherText(i18n("Using AtCore: %1", QString(ATCORE_VERSION_STRING)));
     KAboutData::setApplicationData(aboutData);
 
     auto mainWindow = new MainWindow();
