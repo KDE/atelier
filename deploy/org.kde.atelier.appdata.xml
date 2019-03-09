@@ -4,16 +4,23 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license> GPL-3.0</project_license>
   <name>Atelier</name>
+  <name xml:lang="ca">Atelier</name>
+  <name xml:lang="uk">Atelier</name>
+  <name xml:lang="x-test">xxAtelierxx</name>
   <summary> 3D Printer Host </summary>
+  <summary xml:lang="ca">Amfitrió d'impressora en 3D</summary>
+  <summary xml:lang="uk">Вузол для тривимірного друку</summary>
+  <summary xml:lang="x-test">xx3D Printer Hostxx</summary>
   <description>
-      <p>Atelier allows you to connect to and control a 3D printer from your computer. You can control any number of printers and open any number of files. Aside from printing, you can preview the gcodes, view an attached camera, edit your files, and manage your machine(s). </p>
+    <p>Atelier allows you to connect to and control a 3D printer from your computer. You can control any number of printers and open any number of files. Aside from printing, you can preview the gcodes, view an attached camera, edit your files, and manage your machine(s). </p>
+    <p xml:lang="ca">L'Atelier permet connectar i controlar una impressora en 3D des de l'ordinador. Podreu controlar qualsevol nombre d'impressores i obrir qualsevol nombre de fitxers. A part de la impressió, podreu previsualitzar els gcodes, veure una càmera adjunta, editar els vostres fitxers i gestionar la/es màquina/es.</p>
+    <p xml:lang="uk">За допомогою Atelier ви зможете встановити з'єднання між вашим тривимірним принтером та комп'ютером та керувати принтером. Передбачено керування довільною кількістю принтерів та відкриття довільної кількості файлів. Окрім друку, ви можете переглядати код gcode, переглядати зображення із приєднаної камери, редагувати файли та керувати вашими машинами.</p>
+    <p xml:lang="x-test">xxAtelier allows you to connect to and control a 3D printer from your computer. You can control any number of printers and open any number of files. Aside from printing, you can preview the gcodes, view an attached camera, edit your files, and manage your machine(s).xx</p>
   </description>
   <url type="homepage">https://atelier.kde.org</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=Atelier</url>
   <url type="donation">https://www.kde.org/community/donations/?app=atelier</url>
-  <screenshots>
-    <screenshot type="default">
-    <caption>The Atelier main window.</caption>
+  <screenshots><screenshot type="default"><caption>The Atelier main window.</caption>
 ​    <image type="source" width="1600" height="900">https://cdn.kde.org/screenshots/atelier/atelier.png</image>
     </screenshot>
 ​   </screenshots>
