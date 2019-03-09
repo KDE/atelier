@@ -1,6 +1,12 @@
 [Desktop Entry]
 Name=Atelier
+Name[ca]=Atelier
+Name[uk]=Atelier
+Name[x-test]=xxAtelierxx
 GenericName=3D Printer Host
+GenericName[ca]=Amfitrió d'impressora en 3D
+GenericName[uk]=Вузол для тривимірного друку
+GenericName[x-test]=xx3D Printer Hostxx
 Exec=atelier
 Icon=atelier
 Categories=Qt;KDE;Utility;
