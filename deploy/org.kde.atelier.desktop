@@ -1,10 +1,16 @@
 [Desktop Entry]
 Name=Atelier
 Name[ca]=Atelier
+Name[gl]=Atelier
+Name[nl]=Atelier
+Name[sv]=Atelier
 Name[uk]=Atelier
 Name[x-test]=xxAtelierxx
 GenericName=3D Printer Host
 GenericName[ca]=Amfitrió d'impressora en 3D
+GenericName[gl]=Máquina de impresora 3D
+GenericName[nl]=3D-printerhost
+GenericName[sv]=Skrivarvärd för tredimensionella skrivare
 GenericName[uk]=Вузол для тривимірного друку
 GenericName[x-test]=xx3D Printer Hostxx
 Exec=atelier
