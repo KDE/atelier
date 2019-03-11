@@ -1,6 +1,8 @@
 [Desktop Entry]
 Name=Atelier
 Name[ca]=Atelier
+Name[ca@valencia]=Atelier
+Name[es]=Atelier
 Name[gl]=Atelier
 Name[nl]=Atelier
 Name[sv]=Atelier
@@ -8,6 +10,8 @@ Name[uk]=Atelier
 Name[x-test]=xxAtelierxx
 GenericName=3D Printer Host
 GenericName[ca]=Amfitrió d'impressora en 3D
+GenericName[ca@valencia]=Amfitrió d'impressora en 3D
+GenericName[es]=Servidor de impresión 3D
 GenericName[gl]=Máquina de impresora 3D
 GenericName[nl]=3D-printerhost
 GenericName[sv]=Skrivarvärd för tredimensionella skrivare
