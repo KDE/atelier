@@ -9,6 +9,7 @@
   <name xml:lang="es">Atelier</name>
   <name xml:lang="gl">Atelier</name>
   <name xml:lang="nl">Atelier</name>
+  <name xml:lang="sk">Atelier</name>
   <name xml:lang="sv">Atelier</name>
   <name xml:lang="uk">Atelier</name>
   <name xml:lang="x-test">xxAtelierxx</name>
@@ -19,6 +20,7 @@
   <summary xml:lang="es">Servidor de impresión 3D</summary>
   <summary xml:lang="gl">Máquina de impresora 3D</summary>
   <summary xml:lang="nl">3D-printerhost</summary>
+  <summary xml:lang="sk">Hostiteľ 3D tlače</summary>
   <summary xml:lang="sv">Skrivarvärd för tredimensionella skrivare</summary>
   <summary xml:lang="uk">Вузол для тривимірного друку</summary>
   <summary xml:lang="x-test">xx3D Printer Hostxx</summary>
@@ -30,6 +32,7 @@
     <p xml:lang="es">Atelier le permite conectarse y controlar una impresora 3D desde su equipo. Puede controlar cualquier número de impresoras y abrir cualquier número de archivos. Además de imprimir, puede previsualizar los gcodes, ver una cámara emparejada, editar sus archivos y administrar sus máquinas.</p>
     <p xml:lang="gl">Atelier permítelle conectar o computador a impresoras 3D e controlalas. Pode controlar tantas impresoras e abrir tanto ficheiros como queira. Ademais de imprimir pode obter unha vista previa do código G, ver a cámara conectada, editar os ficheiros e xestionar as máquinas.</p>
     <p xml:lang="nl">Atelier stelt u in staat om te verbinden met een 3D-printer en deze te besturen vanaf uw computer. U kunt elk aantal printers besturen en elke aantal bestanden openen. Naast printen, kunt u de gcodes bekijken een aangekoppelde camera bekijken, uw bestanden bewerken en uw machine(s) beheren.</p>
+    <p xml:lang="sk">Atelier vám umožní pripojiť a ovládať 3D tlačiareň z vášho počítača. Môžete ovládať ľubovoľný počet tlačiarní a súborov. Okrem tlače si môžete prezerať gcodes, pripojené kamery, upravovať vaše súbory a spravovať vaše stroje.</p>
     <p xml:lang="sv">Atelier gör det möjligt att ansluta till och styra en tredimensionell skrivare från datorn. Det går att styra hur många skrivare som helst och öppna hur många filer som helst. Förutom utskrift kan man förhandsgranska Gcode, visa en ansluten kamera, redigera filer och hantera maskiner.</p>
     <p xml:lang="uk">За допомогою Atelier ви зможете встановити з'єднання між вашим тривимірним принтером та комп'ютером та керувати принтером. Передбачено керування довільною кількістю принтерів та відкриття довільної кількості файлів. Окрім друку, ви можете переглядати код gcode, переглядати зображення із приєднаної камери, редагувати файли та керувати вашими машинами.</p>
     <p xml:lang="x-test">xxAtelier allows you to connect to and control a 3D printer from your computer. You can control any number of printers and open any number of files. Aside from printing, you can preview the gcodes, view an attached camera, edit your files, and manage your machine(s).xx</p>
