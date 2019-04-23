@@ -19,8 +19,8 @@
 */
 #pragma once
 
-#include <qwt_dial.h>
-#include <qwt_dial_needle.h>
+#include <qwt/qwt_dial.h>
+#include <qwt/qwt_dial_needle.h>
 
 class QKeyEvent;
 class QPaintEvent;
@@ -36,7 +36,7 @@ public:
     ~ThermoWidget() = default;
 
     void drawNeedle(QPainter *painter, const QPointF &center,
-                    double radius, double dir, QPalette::ColorGroup colorGroup) const;
+                    double radius, double dir, QPalette::ColorGroup colorGroup) const override;
 
     void setCurrentTemperature(double temperature);
     void setTargetTemperature(int temperature);
@@ -45,11 +45,11 @@ signals:
     void targetTemperatureChanged(double targetTemperature);
 
 protected:
-    void focusInEvent(QFocusEvent *event);
-    void focusOutEvent(QFocusEvent *event);
-    void keyPressEvent(QKeyEvent *event);
-    void paintEvent(QPaintEvent *event);
-    void wheelEvent(QWheelEvent *event);
+    void focusInEvent(QFocusEvent *event) override;
+    void focusOutEvent(QFocusEvent *event) override;
+    void keyPressEvent(QKeyEvent *event) override;
+    void paintEvent(QPaintEvent *event) override;
+    void wheelEvent(QWheelEvent *event) override;
 
 private:
     bool isEqual(double a = 0, double b = 0);

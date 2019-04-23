@@ -54,9 +54,9 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
 
 protected:
-    void closeEvent(QCloseEvent *event);
-    void dragEnterEvent(QDragEnterEvent *event);
-    void dropEvent(QDropEvent *event);
+    void closeEvent(QCloseEvent *event) override;
+    void dragEnterEvent(QDragEnterEvent *event) override;
+    void dropEvent(QDropEvent *event) override;
 
 private:
     GCodeEditorWidget *m_gcodeEditor = nullptr;
