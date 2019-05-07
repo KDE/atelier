@@ -1,5 +1,5 @@
 /* Atelier KDE Printer Host for 3D Printing
-    Copyright (C) <2016>
+    Copyright (C) <2016 - 2019>
     Author: Lays Rodrigues - lays.rodrigues@kde.org
             Chris Rizzitello - rizzitello@kde.org
     This program is free software: you can redistribute it and/or modify
@@ -16,14 +16,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #pragma once
-#include <QAbstractButton>
 #include <QDialog>
-#include <QSettings>
-
-namespace Ui
-{
-class ProfilesDialog;
-}
 
 class ProfilesDialog : public QDialog
 {
@@ -31,42 +24,9 @@ class ProfilesDialog : public QDialog
 
 public:
     explicit ProfilesDialog(QWidget *parent = nullptr);
-    ~ProfilesDialog();
+    ~ProfilesDialog() = default;
 
-private:
-    Ui::ProfilesDialog *ui;
-    QSettings m_settings;
-    void askToSave();
-    void buttonBoxClicked(QAbstractButton *btn);
-    QStringList detectFWPlugins();
-    QStringList firmwaresInPath(const QString &path);
-    void loadSettings(const QString &currentProfile = QString());
-    void removeProfile();
-    void save();
-    void saveSettings();
-    void updateCBProfiles();
-    void setModified(bool modified);
-    bool m_modified;
-    int m_prevIndex = 0;
 signals:
     void updateProfiles();
 };
 
-namespace SERIAL
-{
-static const QStringList BAUDS = {
-    QStringList() <<
-                  QStringLiteral("9600") <<
-                  QStringLiteral("14400") <<
-                  QStringLiteral("19200") <<
-                  QStringLiteral("28800") <<
-                  QStringLiteral("38400") <<
-                  QStringLiteral("57600") <<
-                  QStringLiteral("76800") <<
-                  QStringLiteral("115200") <<
-                  QStringLiteral("230400") <<
-                  QStringLiteral("250000") <<
-                  QStringLiteral("500000") <<
-                  QStringLiteral("1000000")
-};
-}

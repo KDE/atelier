@@ -21,6 +21,7 @@
 #include <AtCore>
 #include <CommandWidget>
 #include <LogWidget>
+#include <MachineInfo>
 #include <MovementWidget>
 #include <PlotWidget>
 #include <PrintWidget>
@@ -70,7 +71,7 @@ private:
     QAction *m_stopAction = nullptr;
     QComboBox *m_comboPort = nullptr;
     QComboBox *m_comboProfile = nullptr;
-    QMap<QString, QVariant> m_profileData;
+    QVariantMap m_profileData;
     QPushButton *m_connectButton = nullptr;
     QSettings m_settings;
     QSize m_iconSize;
@@ -93,12 +94,12 @@ private:
     void handlePrinterStatusChanged(AtCore::STATES newState);
     void initConnectsToAtCore();
     void stopPrint();
-    QMap<QString, QVariant> readProfile();
     void saveProfile();
     void pausePrint();
     void print();
     void updateSerialPort(QStringList ports);
     void togglePrintButtons(bool shown);
+    static const QMap<MachineInfo::KEY, QString> keyString;
 
 signals:
     void bedSizeChanged(QSize bedSize);

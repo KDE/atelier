@@ -22,6 +22,21 @@
 #include <SerialLayer>
 #include <QToolBar>
 #include "atcoreinstancewidget.h"
+#include "machineinfo.h"
+
+const QMap<MachineInfo::KEY, QString> AtCoreInstanceWidget::keyString = {
+    {MachineInfo::KEY::NAME, QStringLiteral("Name")},
+    {MachineInfo::KEY::BAUDRATE, QStringLiteral("bps")},
+    {MachineInfo::KEY::FIRMWARE, QStringLiteral("firmware")},
+    {MachineInfo::KEY::MAXBEDTEMP, QStringLiteral("maximumTemperatureBed")},
+    {MachineInfo::KEY::MAXEXTTEMP, QStringLiteral("maximumTemperatureExtruder")},
+    {MachineInfo::KEY::POSTPAUSE, QStringLiteral("postPause")},
+    {MachineInfo::KEY::ISCARTESIAN, QStringLiteral("isCartesian")},
+    {MachineInfo::KEY::XMAX, QStringLiteral("dimensionX")},
+    {MachineInfo::KEY::YMAX, QStringLiteral("dimensionY")},
+    {MachineInfo::KEY::ZMAX, QStringLiteral("dimensionZ")},
+    {MachineInfo::KEY::AUTOTEMPREPORT, QStringLiteral("autoReportTemp")}
+};
 
 AtCoreInstanceWidget::AtCoreInstanceWidget(QWidget *parent):
     QWidget(parent)
@@ -218,22 +233,22 @@ void AtCoreInstanceWidget::connectButtonClicked()
             return;
         }
         //Get profile data before connecting.
-        m_profileData = readProfile();
+        m_profileData = MachineInfo::instance()->readProfile(m_comboProfile->currentText());
         //then connect
-        if (m_core.newConnection(m_comboPort->currentText(), m_profileData["bps"].toInt(), m_profileData["firmware"].toString())) {
-            emit(connectionChanged(m_profileData["name"].toString()));
-            m_profileData["heatedBed"].toBool() ? m_bedExtWidget->setBedMaxTemperature(m_profileData["bedTemp"].toInt()) :
+        if (m_core.newConnection(m_comboPort->currentText(), m_profileData[keyString[MachineInfo::KEY::BAUDRATE]].toInt(), m_profileData[keyString[MachineInfo::KEY::FIRMWARE]].toString())) {
+            emit(connectionChanged(m_profileData[keyString[MachineInfo::KEY::BAUDRATE]].toString()));
+            m_profileData[keyString[MachineInfo::KEY::MAXBEDTEMP]].toBool() ? m_bedExtWidget->setBedMaxTemperature(m_profileData[keyString[MachineInfo::KEY::MAXBEDTEMP]].toInt()) :
             m_bedExtWidget->setBedThermoHidden(true);
 
-            m_bedExtWidget->setExtruderMaxTemperature(m_profileData["hotendTemp"].toInt());
+            m_bedExtWidget->setExtruderMaxTemperature(m_profileData[keyString[MachineInfo::KEY::MAXEXTTEMP]].toInt());
             //AddFan Support to profile
             m_printWidget->updateFanCount(2);
             //Adjust bed size
             QSize newSize;
-            if (m_profileData["isCartesian"].toBool()) {
-                newSize = QSize(m_profileData["dimensionX"].toInt(), m_profileData["dimensionY"].toInt());
+            if (m_profileData[keyString[MachineInfo::KEY::ISCARTESIAN]].toBool()) {
+                newSize = QSize(m_profileData[keyString[MachineInfo::KEY::XMAX]].toInt(), m_profileData[keyString[MachineInfo::KEY::YMAX]].toInt());
             } else {
-                newSize = QSize(m_profileData["radius"].toInt(), 0);
+                newSize = QSize(m_profileData[keyString[MachineInfo::KEY::XMAX]].toInt(), 0);
             }
             if (newSize != m_bedSize) {
                 m_bedSize = newSize;
@@ -255,8 +270,8 @@ void AtCoreInstanceWidget::initConnectsToAtCore()
     connect(&m_core, &AtCore::portsChanged, this, &AtCoreInstanceWidget::updateSerialPort);
 
     connect(&m_core, &AtCore::autoTemperatureReportChanged, this, [this](const bool autoReport) {
-        if (m_profileData["autoReportTemp"].toBool() != autoReport) {
-            m_profileData["autoReportTemp"] = autoReport;
+        if (m_profileData[keyString[MachineInfo::KEY::AUTOTEMPREPORT]].toBool() != autoReport) {
+            m_profileData[keyString[MachineInfo::KEY::AUTOTEMPREPORT]] = autoReport;
             saveProfile();
         }
     });
@@ -363,7 +378,7 @@ void AtCoreInstanceWidget::print()
 void AtCoreInstanceWidget::pausePrint()
 {
     if (m_core.state() == AtCore::BUSY) {
-        m_core.pause(m_profileData["postPause"].toString());
+        m_core.pause(m_profileData[keyString[MachineInfo::KEY::POSTPAUSE]].toString());
     } else if (m_core.state() == AtCore::PAUSE) {
         m_core.resume();
     }
@@ -397,7 +412,7 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
     } break;
     case AtCore::IDLE: {
         if (m_connectionTimer->isActive()) {
-            m_core.setAutoTemperatureReport(m_profileData["autoReportTemp"].toBool());
+            m_core.setAutoTemperatureReport(m_profileData[keyString[MachineInfo::KEY::AUTOTEMPREPORT]].toBool());
             m_connectionTimer->stop();
         }
         stateString = i18n("Connected to %1", m_core.connectedPort());
@@ -406,11 +421,11 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
         emit disableDisconnect(false);
         enableControls(true);
         connectExtruderTemperatureData(true);
-        if (m_profileData["heatedBed"].toBool()) {
+        if (m_profileData[keyString[MachineInfo::KEY::MAXBEDTEMP]].toBool()) {
             connectBedTemperatureData(true);
         }
-        if (!m_core.availableFirmwarePlugins().contains(m_profileData["firmware"].toString())) {
-            m_profileData["firmware"] = m_core.firmwarePlugin()->name().toLower();
+        if (!m_core.availableFirmwarePlugins().contains(m_profileData[keyString[MachineInfo::KEY::FIRMWARE]].toString())) {
+            m_profileData[keyString[MachineInfo::KEY::FIRMWARE]] = m_core.firmwarePlugin()->name().toLower();
             saveProfile();
         }
     } break;
@@ -548,19 +563,16 @@ void AtCoreInstanceWidget::updateSerialPort(QStringList ports)
 
 void AtCoreInstanceWidget::updateProfileData()
 {
-    m_settings.beginGroup("Profiles");
-    QStringList profiles = m_settings.childGroups();
-    m_settings.endGroup();
     m_comboProfile->clear();
-    m_comboProfile->addItems(profiles);
+    m_comboProfile->addItems(MachineInfo::instance()->profileNames());
 
     if (m_core.state() != AtCore::DISCONNECTED) {
-        m_profileData = readProfile();
-        bool hBed = m_profileData["heatedBed"].toBool();
+        m_profileData = MachineInfo::instance()->readProfile(m_comboProfile->currentText());
+        bool hBed = MachineInfo::instance()->readKey(m_comboProfile->currentText(), MachineInfo::KEY::MAXBEDTEMP).toInt() > 0;
         m_bedExtWidget->setBedThermoHidden(!hBed);
         connectBedTemperatureData(hBed);
-        m_bedExtWidget->setBedMaxTemperature(m_profileData["bedTemp"].toInt());
-        m_bedExtWidget->setExtruderMaxTemperature(m_profileData["hotendTemp"].toInt());
+        m_bedExtWidget->setBedMaxTemperature(MachineInfo::instance()->readKey(m_comboProfile->currentText(), MachineInfo::KEY::MAXBEDTEMP).toInt());
+        m_bedExtWidget->setExtruderMaxTemperature(MachineInfo::instance()->readKey(m_comboProfile->currentText(), MachineInfo::KEY::MAXEXTTEMP).toInt());
     }
 }
 
@@ -575,41 +587,11 @@ bool AtCoreInstanceWidget::isPrinting()
     return (m_core.state() == AtCore::BUSY);
 }
 
-QMap<QString, QVariant> AtCoreInstanceWidget::readProfile()
-{
-    QString profile = m_comboProfile->currentText();
-    m_settings.beginGroup("Profiles");
-    m_settings.beginGroup(profile);
-    QMap<QString, QVariant> data{
-        {"bps", m_settings.value(QStringLiteral("bps"), QStringLiteral("115200"))}
-        , {"bedTemp", m_settings.value(QStringLiteral("maximumTemperatureBed"), QStringLiteral("0"))}
-        , {"hotendTemp", m_settings.value(QStringLiteral("maximumTemperatureExtruder"), QStringLiteral("0"))}
-        , {"firmware", m_settings.value(QStringLiteral("firmware"), QStringLiteral("Auto-Detect"))}
-        , {"postPause", m_settings.value(QStringLiteral("postPause"), QString())}
-        , {"heatedBed", m_settings.value(QStringLiteral("heatedBed"), true)}
-        , {"name", profile}
-        , {"isCartesian", m_settings.value(QStringLiteral("isCartesian"), true)}
-        , {"dimensionX", m_settings.value(QStringLiteral("dimensionX"), QStringLiteral("200"))}
-        , {"dimensionY", m_settings.value(QStringLiteral("dimensionY"), QStringLiteral("200"))}
-        , {"dimensionZ", m_settings.value(QStringLiteral("dimensionZ"), QStringLiteral("180"))}
-        , {"radius", m_settings.value(QStringLiteral("radius"), QStringLiteral("200"))}
-        , {"z_delta_dimension", m_settings.value(QStringLiteral("z_delta_dimension"), QStringLiteral("180"))}
-        , {"autoReportTemp", m_settings.value(QStringLiteral("autoReportTemp"), false)}
-    };
-    m_settings.endGroup();
-    m_settings.endGroup();
-    return data;
-}
-
 void AtCoreInstanceWidget::saveProfile()
 {
     QString profile = m_comboProfile->currentText();
-    m_settings.beginGroup("Profiles");
-    m_settings.beginGroup(m_profileData["name"].toString());
-    m_settings.setValue(QStringLiteral("firmware"), m_profileData["firmware"]);
-    m_settings.setValue(QStringLiteral("autoReportTemp"), m_profileData["autoReportTemp"]);
-    m_settings.endGroup();
-    m_settings.endGroup();
+    MachineInfo::instance()->storeKey(profile, MachineInfo::KEY::FIRMWARE, m_profileData[keyString[MachineInfo::KEY::FIRMWARE]]);
+    MachineInfo::instance()->storeKey(profile, MachineInfo::KEY::AUTOTEMPREPORT, m_profileData[keyString[MachineInfo::KEY::AUTOTEMPREPORT]]);
 }
 
 void AtCoreInstanceWidget::connectBedTemperatureData(bool connected)

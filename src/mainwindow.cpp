@@ -20,6 +20,7 @@
 #include <KLocalizedString>
 #include <KStandardAction>
 #include <KXMLGUIFactory>
+#include <MachineInfo>
 #include <memory>
 #include <QFileDialog>
 #include <QHBoxLayout>
@@ -143,7 +144,7 @@ void MainWindow::newAtCoreInstance()
     QString name = QString::number(m_instances->addTab(newInstanceWidget, i18n("Connect a printer")));
     newInstanceWidget->setObjectName(name);
     newInstanceWidget->setFileCount(m_openFiles.size());
-    connect(this, &MainWindow::profilesChanged, newInstanceWidget, &AtCoreInstanceWidget::updateProfileData);
+    connect(MachineInfo::instance(), &MachineInfo::profilesChanged, newInstanceWidget, &AtCoreInstanceWidget::updateProfileData);
     connect(newInstanceWidget, &AtCoreInstanceWidget::requestProfileDialog, this, [this] {
         std::unique_ptr<ProfilesDialog> pd(new ProfilesDialog(this));
         pd->exec();
