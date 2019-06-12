@@ -235,7 +235,7 @@ void AtCoreInstanceWidget::connectButtonClicked()
         m_profileData = MachineInfo::instance()->readProfile(m_comboProfile->currentText());
         //then connect
         if (m_core.newConnection(m_comboPort->currentText(), m_profileData[keyString[MachineInfo::KEY::BAUDRATE]].toInt(), m_profileData[keyString[MachineInfo::KEY::FIRMWARE]].toString())) {
-            emit(connectionChanged(m_profileData[keyString[MachineInfo::KEY::BAUDRATE]].toString()));
+            emit(connectionChanged(QStringLiteral("%1 @ %2").arg(m_profileData[keyString[MachineInfo::KEY::NAME]].toString(), m_comboPort->currentText())));
             m_profileData[keyString[MachineInfo::KEY::MAXBEDTEMP]].toBool() ? m_bedExtWidget->setBedMaxTemperature(m_profileData[keyString[MachineInfo::KEY::MAXBEDTEMP]].toInt()) :
             m_bedExtWidget->setBedThermoHidden(true);
 
