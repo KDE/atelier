@@ -102,10 +102,9 @@ AtCoreInstanceWidget::AtCoreInstanceWidget(QWidget *parent):
     updateProfileData();
     initConnectsToAtCore();
 }
-
 AtCoreInstanceWidget::~AtCoreInstanceWidget()
 {
-    m_core.closeConnection();
+    m_core.close();
 }
 
 void AtCoreInstanceWidget::buildToolbar()
