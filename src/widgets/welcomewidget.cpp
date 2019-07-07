@@ -170,7 +170,7 @@ void WelcomeWidget::setupRssFeed()
         return;
     }
     QLocale locale(QLocale::English);
-    std::stable_sort(m_postList.begin(), m_postList.end(), [locale](const Post & p1, const Post & p2) {
+    std::sort(m_postList.begin(), m_postList.end(), [locale](const Post & p1, const Post & p2) {
         return locale.toDate(p1.date, "dd MMM yyyy") > locale.toDate(p2.date, "dd MMM yyyy");
     });
     auto layout = new QVBoxLayout;
