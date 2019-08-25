@@ -46,15 +46,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(m_instances, &QTabWidget::tabCloseRequested, this, [this](int index) {
         auto tempWidget = qobject_cast<AtCoreInstanceWidget *>(m_instances->widget(index));
-        if (tempWidget->isPrinting()) {
-            if (askToClose()) {
-                delete tempWidget;
-            } else {
-                return;
-            }
-        } else {
-            delete tempWidget;
+        if (tempWidget->isPrinting() && !askToClose()) {
+            return;
         }
+
+        tempWidget->disconnect();
+        tempWidget->close();
+        m_instances->removeTab(index);
+
         if (m_instances->count() == 1) {
             m_instances->setTabsClosable(false);
             m_instances->setMovable(false);
