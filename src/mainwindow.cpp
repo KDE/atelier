@@ -196,7 +196,9 @@ void MainWindow::newAtCoreInstance()
         }
     });
 
-    connect(newInstanceWidget, &AtCoreInstanceWidget::connectionChanged, this, &MainWindow::atCoreInstanceNameChange);
+    connect(newInstanceWidget, &AtCoreInstanceWidget::connectionChanged, this, [this, newInstanceWidget](const QString & newName) {
+        m_instances->setTabText(m_instances->indexOf(newInstanceWidget), newName);
+    });
 
     if (m_instances->count() > 1) {
         m_instances->setTabsClosable(true);
@@ -351,11 +353,6 @@ void MainWindow::loadFile(const QUrl &fileName)
             instance->setFileCount(m_openFiles.size());
         }
     }
-}
-
-void MainWindow::atCoreInstanceNameChange(const QString &name)
-{
-    m_instances->setTabText(sender()->objectName().toInt(), name);
 }
 
 QString MainWindow::getTheme()
