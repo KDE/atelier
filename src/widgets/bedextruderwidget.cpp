@@ -31,8 +31,8 @@ BedExtruderWidget::BedExtruderWidget(QWidget *parent) :
     , m_extrudersLayout(new QHBoxLayout)
     , m_extruderBox(new QWidget(this))
 {
-    m_bedThermo->setScale(0, 150);
-    m_extruderThermo->setScale(0, 250);
+    m_bedThermo->setRange(0, 150);
+    m_extruderThermo->setRange(0, 250);
     m_extruderBox->setLayout(m_extrudersLayout);
 
     auto *label = new QLabel(i18n("Active Extruder:"), this);
@@ -116,12 +116,12 @@ int BedExtruderWidget::currentExtruder()
 
 void BedExtruderWidget::setBedMaxTemperature(int value)
 {
-    m_bedThermo->setScale(0, value);
+    m_bedThermo->setRange(0, value);
 }
 
 void BedExtruderWidget::setExtruderMaxTemperature(int value)
 {
-    m_extruderThermo->setScale(0, value);
+    m_extruderThermo->setRange(0, value);
 }
 
 void BedExtruderWidget::setBedThermoHidden(bool hidden)

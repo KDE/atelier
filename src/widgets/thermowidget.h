@@ -1,5 +1,5 @@
 /* Atelier KDE Printer Host for 3D Printing
-    Copyright (C) <2018>
+    Copyright (C) <2019>
     Author: Tomaz Canabrava - tcanabrava@kde.org
             Chris Rizzitello - rizzitello@kde.org
             Lays Rodrigues - lays.rodrigues@kde.org
@@ -18,50 +18,49 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #pragma once
-
-#include <qwt/qwt_dial.h>
-#include <qwt/qwt_dial_needle.h>
+#include "qcgaugewidget.h"
 
 class QKeyEvent;
 class QPaintEvent;
 class QFocusEvent;
 class QWheelEvent;
 
-class ThermoWidget : public QwtDial
+class ThermoWidget : public QcGaugeWidget
 {
     Q_OBJECT
-
 public:
     ThermoWidget(QWidget *parent, const QString &name);
-    ~ThermoWidget() = default;
-
-    void drawNeedle(QPainter *painter, const QPointF &center,
-                    double radius, double dir, QPalette::ColorGroup colorGroup) const override;
-
+    ~ThermoWidget() override = default;
     void setCurrentTemperature(double temperature);
     void setTargetTemperature(int temperature);
+    void setRange(int min, int max);
+    void setName(const QString &name);
 
 signals:
     void targetTemperatureChanged(double targetTemperature);
-
 protected:
+    void keyPressEvent(QKeyEvent *event) override;
+    void wheelEvent(QWheelEvent *event) override;
     void focusInEvent(QFocusEvent *event) override;
     void focusOutEvent(QFocusEvent *event) override;
-    void keyPressEvent(QKeyEvent *event) override;
     void paintEvent(QPaintEvent *event) override;
-    void wheelEvent(QWheelEvent *event) override;
 
 private:
-    bool isEqual(double a = 0, double b = 0);
-    QwtDialSimpleNeedle *m_currentTemperatureNeedle;
-    QwtDialSimpleNeedle *m_targetTemperatureNeedle;
-    QString m_currentTemperatureTextFromEditor = QString("-");
-    QString m_name;
+    QcNeedleItem *m_currentTemperatureNeedle = nullptr;
+    QcNeedleItem *m_targetTemperatureNeedle = nullptr;
+    QcDegreesItem *m_ticksItem = nullptr;
+    QcDegreesItem *m_subTicksItem = nullptr;
+    QcLabelItem *m_nameLabel = nullptr;
+    QcValuesItem *m_valueDisplay = nullptr;
     QTimer *m_cursorTimer = nullptr;
     QTimer *m_tempChangedTimer = nullptr;
+    QString m_targetTemperatureText = QStringLiteral("0");
     bool m_paintCursor = false;
     int m_cursorPos = 0;
     double m_currentTemperature;
     int m_targetTemperature;
+    int m_maxValue = 100;
+    int m_minValue = 0;
     void resetTimer();
+    bool isEqual(double a = 0, double b = 0);
 };
