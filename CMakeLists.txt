@@ -29,8 +29,6 @@ find_package(AtCore REQUIRED COMPONENTS
                 AtCoreWidgets
             )
 
-find_package(Qwt6 REQUIRED)
-
 find_package(KF5 ${KF5_DEP_VERSION} REQUIRED COMPONENTS
                 I18n
                 XmlGui

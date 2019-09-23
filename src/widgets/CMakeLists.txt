@@ -1,11 +1,11 @@
 include_directories(../dialogs)
-include_directories(${QWT_INCLUDE_DIR})
 
 set(widgets_SRCS
     atcoreinstancewidget.cpp
     bedextruderwidget.cpp
     gcodeeditorwidget.cpp
     thermowidget.cpp
+    qcgaugewidget.cpp
     videomonitorwidget.cpp
     welcomewidget.cpp
 )
@@ -21,11 +21,10 @@ target_link_libraries(AtelierWidgets
     Qt5::Multimedia
     Qt5::MultimediaWidgets
     Qt5::Widgets
-    ${QWT_LIBRARY}
 )
 
 if(WIN32)
-    target_compile_definitions(AtelierWidgets PRIVATE -DQWT_DLL)
+    target_compile_definitions(AtelierWidgets PRIVATE)
 endif()
 
 add_subdirectory(3dview)
