@@ -5,7 +5,7 @@ Atelier has the goal to be the best open source printer host to control
 3DPrinters from your computer in any platform: Linux, Windows and MacOs.
 This project is under GPL V3, for more information read COPYING.GPL3.
 
-Atelier depends on [AtCore](https://github.com/KDE/atcore), the API to manage the serial connection between the computer and 3D Printers/CNC.
+Atelier depends on [AtCore](https://invent.kde.org/libraries/atcore), the API to manage the serial connection between the computer and 3D Printers/CNC.
 AtCore is also on development by team Atelier.
 
 ---
@@ -50,7 +50,7 @@ Dependencies for Atelier:
  ----
  #### Building on Linux
  ```bash
- $ git clone https://github.com/KDE/atelier.git
+ $ git clone https://invent.kde.org/utilities/atelier.git
  $ cmake atelier
  $ make
  $ make install
