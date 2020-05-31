@@ -33,6 +33,7 @@
   <summary xml:lang="et">3D printimine</summary>
   <summary xml:lang="eu">3D inprimagailu ostalaria</summary>
   <summary xml:lang="fi">3D-tulostuspalvelin</summary>
+  <summary xml:lang="fr">Hôte d'imprimante pour imprimantes 3D</summary>
   <summary xml:lang="gl">Máquina de impresora 3D</summary>
   <summary xml:lang="id">Host Printer 3D</summary>
   <summary xml:lang="it">Host di stampa 3D</summary>
@@ -53,6 +54,7 @@
     <p xml:lang="et">Atelier võimaldab otse arvutist ühendada 3D printeri ja seda juhtida. Võimalik on juhtida piiramatul arvul printereid ja avada nii palju faile, kui tarvis. Lisaks trükkimisele saab näha G-koodi eelvaatlust ja uurida ühendatud kaamerat, muuta faile ning hallata masinaid.</p>
     <p xml:lang="eu">Atelierrek 3D inprimagailuetara konektatu eta haiek kontrolatzeko aukera ematen dizu. Edozein inprimagailu kopuru kontrolatu eta edozein fitxategi kopuru ireki dezakezu. Inprimatzeaz gain, G-kode fitxategiak aurreikusi, atxikitako kamera batetik ikusi, zure fitxategiak editatu, eta zure makinak kudeatu ditzakezu.</p>
     <p xml:lang="fi">Atelier’lla voit yhdistää tietokoneelta 3D-tulostimeen ja hallita sitä. Tulostinten ja avointen tiedostojen määrää ei ole rajoitettu. Tulostamisen lisäksi voit esikatsella gcodeja, nähdä liitetyn kameran, muokata tiedostoja ja hallita konetta.</p>
+    <p xml:lang="fr">Le programme Atelier vous permet de vous connecter et de contrôler une imprimante 3D à partir de votre ordinateur. Vous pouvez contrôler n'importe quel nombre d'imprimantes et ouvrir n'importe quel nombre de fichiers. En plus de l'impression, vous pouvez afficher un aperçu des « gcodes », afficher l'image d'une caméra embarquée, modifier vos fichiers et gérer vos machines.</p>
     <p xml:lang="gl">Atelier permítelle conectar o computador a impresoras 3D e controlalas. Pode controlar tantas impresoras e abrir tanto ficheiros como queira. Ademais de imprimir pode obter unha vista previa do código G, ver a cámara conectada, editar os ficheiros e xestionar as máquinas.</p>
     <p xml:lang="id">Atelier memungkinkan kamu untuk terkoneksi dan mengendalikan pencetak 3D dari komputermu. Kamu bisa mengendalikan sejumlah pencetak dan membuka sejumlah file. Selain mencetak, kamu bisa melihat pratinjau gcode, menampilkan kamera yang terpasang, mengedit file-mu, dan mengelola mesinmu.</p>
     <p xml:lang="it">Atelier ti permette di connettere la tua stampante 3D al computer e di controllarla per mezzo di esso. Puoi controllare un qualsiasi numero di stampanti ed aprire tutti i file che vuoi. Oltre alla stampa puoi fare un'anteprima del codice G, visualizzare una fotocamera collegata, modificare i file e gestire le tue macchine.</p>
