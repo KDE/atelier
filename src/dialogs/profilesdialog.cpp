@@ -20,6 +20,7 @@
 #include <KLocalizedString>
 #include <QDialogButtonBox>
 #include <ProfileManager>
+#include <QVBoxLayout>
 
 #include "profilesdialog.h"
 
