@@ -21,8 +21,8 @@
 */
 #pragma once
 
-#include <QQuickView>
 #include <QQmlApplicationEngine>
+#include <QQuickView>
 #include <QWidget>
 
 class LineMesh;

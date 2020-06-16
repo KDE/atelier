@@ -22,11 +22,11 @@
 
 #pragma once
 
-#include <QVector>
-#include <QObject>
-#include <QNode>
-#include <QGeometryRenderer>
 #include "gcodeto4d.h"
+#include <QGeometryRenderer>
+#include <QNode>
+#include <QObject>
+#include <QVector>
 
 class LineMeshGeometry;
 class QString;

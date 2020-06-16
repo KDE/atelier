@@ -20,15 +20,15 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "linemesh.h"
+#include "gcodeto4d.h"
+#include "linemeshgeometry.h"
 #include <QGeometryRenderer>
 #include <QVector3D>
 #include <QVector4D>
-#include "gcodeto4d.h"
-#include "linemesh.h"
-#include "linemeshgeometry.h"
 
-LineMesh::LineMesh(Qt3DCore::QNode *parent) :
-    Qt3DRender::QGeometryRenderer(parent)
+LineMesh::LineMesh(Qt3DCore::QNode *parent)
+    : Qt3DRender::QGeometryRenderer(parent)
     , _lineMeshGeo(nullptr)
 {
     setInstanceCount(1);
@@ -54,9 +54,7 @@ void LineMesh::posUpdate(const QVector<QVector4D> &pos)
 {
     QVector<QVector3D> vertices;
     vertices.reserve(pos.size());
-    std::transform(pos.cbegin(), pos.cend(), std::back_inserter(vertices), [](const QVector4D & x) {
-        return x.toVector3D();
-    });
+    std::transform(pos.cbegin(), pos.cend(), std::back_inserter(vertices), [](const QVector4D &x) { return x.toVector3D(); });
 
     _lineMeshGeo = new LineMeshGeometry(vertices, this);
     setVertexCount(_lineMeshGeo->vertexCount());

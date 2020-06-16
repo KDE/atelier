@@ -38,6 +38,7 @@ public:
 
 signals:
     void targetTemperatureChanged(double targetTemperature);
+
 protected:
     void keyPressEvent(QKeyEvent *event) override;
     void wheelEvent(QWheelEvent *event) override;

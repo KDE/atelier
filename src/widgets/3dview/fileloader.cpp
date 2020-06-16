@@ -19,12 +19,12 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+#include "fileloader.h"
 #include <QString>
 #include <QTextStream>
 #include <QVariant>
-#include <QVector>
 #include <QVector4D>
-#include "fileloader.h"
+#include <QVector>
 
 const QString FileLoader::_commentChar = QStringLiteral(";");
 const QStringList FileLoader::_moveCommands = {QStringLiteral("G0"), QStringLiteral("G1")};
@@ -34,8 +34,8 @@ const QString FileLoader::_X = QStringLiteral("X");
 const QString FileLoader::_Y = QStringLiteral("Y");
 const QString FileLoader::_Z = QStringLiteral("Z");
 
-FileLoader::FileLoader(QString &fileName, QObject *parent) :
-    QObject(parent)
+FileLoader::FileLoader(QString &fileName, QObject *parent)
+    : QObject(parent)
     , _file(fileName)
 {
 }
@@ -50,32 +50,32 @@ void FileLoader::run()
         int lastPerc = 0;
         QTextStream in(&_file);
         while (!in.atEnd()) {
-            //Get each line
+            // Get each line
             QString line = in.readLine();
             stillSize -= line.size() + 1; // +1 endl
-            const int perc = int((totalSize -  stillSize) * 100.0 / totalSize);
+            const int perc = int((totalSize - stillSize) * 100.0 / totalSize);
             if (perc - lastPerc > 1) {
                 emit percentUpdate(perc);
                 lastPerc = perc;
             }
             line = line.simplified();
-            //Is it a comment ? Drop it
+            // Is it a comment ? Drop it
             if (line.isEmpty()) {
                 continue;
             }
-            //Remove comment in the end of command
+            // Remove comment in the end of command
             if (line.indexOf(_commentChar) != -1) {
                 line.resize(line.indexOf(_commentChar));
-                //Remove trailing spaces
+                // Remove trailing spaces
                 line = line.simplified();
             }
 
-            //Split command and args
+            // Split command and args
             QStringList commAndArgs = line.split(_space);
 
             if (_moveCommands.contains(commAndArgs[0])) {
                 QVector4D actualPos;
-                //Compute args
+                // Compute args
                 commAndArgs.removeFirst();
                 for (QString element : commAndArgs) {
                     if (element.contains(_X)) {

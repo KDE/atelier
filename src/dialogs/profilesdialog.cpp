@@ -18,14 +18,14 @@
 */
 
 #include <KLocalizedString>
-#include <QDialogButtonBox>
 #include <ProfileManager>
+#include <QDialogButtonBox>
 #include <QVBoxLayout>
 
 #include "profilesdialog.h"
 
-ProfilesDialog::ProfilesDialog(QWidget *parent) :
-    QDialog(parent)
+ProfilesDialog::ProfilesDialog(QWidget *parent)
+    : QDialog(parent)
 {
     setWindowTitle(i18n("Profiles"));
     ProfileManager *pm = new ProfileManager(this);

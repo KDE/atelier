@@ -57,6 +57,5 @@ void CameraController::moveCamera(const Qt3DExtras::QAbstractCameraController::I
 
     // Keyboard
     cam->panAboutViewCenter((state.txAxisValue * lookSpeed()) * dt, QVector3D(0.0f, 0.0f, 1.0f));
-    cam->translate(QVector3D(0.0f, 0.0f, state.tyAxisValue * linearSpeed() * dt),
-                   Qt3DRender::QCamera::DontTranslateViewCenter);
+    cam->translate(QVector3D(0.0f, 0.0f, state.tyAxisValue * linearSpeed() * dt), Qt3DRender::QCamera::DontTranslateViewCenter);
 }

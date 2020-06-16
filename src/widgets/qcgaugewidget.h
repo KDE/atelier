@@ -32,18 +32,18 @@
 ****************************************************************************/
 #pragma once
 
-#include <QWidget>
-#include <QPainter>
 #include <QObject>
+#include <QPainter>
 #include <QRectF>
+#include <QWidget>
 #include <QtMath>
 
 #if defined(QCGAUGE_COMPILE_LIBRARY)
-#  define QCGAUGE_DECL  Q_DECL_EXPORT
+#define QCGAUGE_DECL Q_DECL_EXPORT
 #elif defined(QCGAUGE_USE_LIBRARY)
-#  define QCGAUGE_DECL Q_DECL_IMPORT
+#define QCGAUGE_DECL Q_DECL_IMPORT
 #else
-#  define QCGAUGE_DECL
+#define QCGAUGE_DECL
 #endif
 
 class QcGaugeWidget;
@@ -74,14 +74,13 @@ public:
 
     void addItem(QcItem *item, float position);
     int removeItem(QcItem *item);
-    QList <QcItem *> items();
+    QList<QcItem *> items();
 
 private:
-    QList <QcItem *> mItems;
+    QList<QcItem *> mItems;
 
 protected:
     void paintEvent(QPaintEvent *) override;
-
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -99,7 +98,7 @@ public:
     void setPosition(float percentage);
     float position();
     QRectF rect();
-    enum Error {InvalidValueRange, InvalidDegreeRange, InvalidStep};
+    enum Error { InvalidValueRange, InvalidDegreeRange, InvalidStep };
 
 protected:
     QRectF adjustRect(float percentage);
@@ -143,7 +142,6 @@ private:
     float mMaxValue;
     float mMinDegree;
     float mMaxDegree;
-
 };
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -160,7 +158,7 @@ public:
 
 private:
     QPen mPen;
-    QList<QPair<float, QColor> > mColors;
+    QList<QPair<float, QColor>> mColors;
     QLinearGradient mLinearGrad;
 };
 
@@ -207,7 +205,6 @@ private:
 signals:
 
 public slots:
-
 };
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -222,6 +219,7 @@ public:
     void setStep(float step);
     void setColor(const QColor &color);
     void setSubDegree(bool);
+
 private:
     float mStep;
     QColor mColor;
@@ -265,8 +263,9 @@ public:
     void setFont(const QFont &font);
     void setStep(float step);
     void setColor(const QColor &color);
+
 private:
-    float mStep{10};
+    float mStep {10};
     QFont mFont;
     QColor mColor;
 };

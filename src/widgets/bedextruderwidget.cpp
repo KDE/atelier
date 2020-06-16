@@ -17,15 +17,15 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+#include "bedextruderwidget.h"
+#include "thermowidget.h"
 #include <KLocalizedString>
 #include <QBoxLayout>
 #include <QLabel>
 #include <QRadioButton>
-#include "bedextruderwidget.h"
-#include "thermowidget.h"
 
-BedExtruderWidget::BedExtruderWidget(QWidget *parent) :
-    QWidget(parent)
+BedExtruderWidget::BedExtruderWidget(QWidget *parent)
+    : QWidget(parent)
     , m_bedThermo(new ThermoWidget(this, QString(i18n("Bed"))))
     , m_extruderThermo(new ThermoWidget(this, QString(i18n("HotEnd"))))
     , m_extrudersLayout(new QHBoxLayout)
@@ -44,16 +44,12 @@ BedExtruderWidget::BedExtruderWidget(QWidget *parent) :
     layout->addWidget(m_extruderThermo);
 
     setLayout(layout);
-    //Add Default Extruder
+    // Add Default Extruder
     setExtruderCount(1);
 
-    connect(m_bedThermo, &ThermoWidget::targetTemperatureChanged, this, [this](int v) {
-        emit bedTemperatureChanged(v, false);
-    });
+    connect(m_bedThermo, &ThermoWidget::targetTemperatureChanged, this, [this](int v) { emit bedTemperatureChanged(v, false); });
 
-    connect(m_extruderThermo, &ThermoWidget::targetTemperatureChanged, this, [this](int v) {
-        emit extTemperatureChanged(v, currentExtruder(), false);
-    });
+    connect(m_extruderThermo, &ThermoWidget::targetTemperatureChanged, this, [this](int v) { emit extTemperatureChanged(v, currentExtruder(), false); });
 }
 
 void BedExtruderWidget::setExtruderCount(int value)
@@ -64,14 +60,14 @@ void BedExtruderWidget::setExtruderCount(int value)
     }
 
     if (m_extruderCount < value) {
-        //loop for the new buttons
+        // loop for the new buttons
         for (int i = m_extruderCount; i < value; i++) {
             auto *rb = new QRadioButton(QString::number(i + 1), this);
             m_extrudersLayout->addWidget(rb);
             extruderMap.insert(i, rb);
         }
     } else {
-        //remove buttons - need to test it!
+        // remove buttons - need to test it!
         for (int i = m_extruderCount; i >= value; i--) {
             auto *rb = extruderMap.value(i);
             m_extrudersLayout->removeWidget(rb);

@@ -29,4 +29,3 @@ public:
 signals:
     void updateProfiles();
 };
-

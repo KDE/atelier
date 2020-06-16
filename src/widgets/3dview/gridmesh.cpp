@@ -20,11 +20,11 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "gridmesh.h"
+#include "linemeshgeometry.h"
 #include <QGeometryRenderer>
 #include <QSize>
 #include <QVector3D>
-#include "gridmesh.h"
-#include "linemeshgeometry.h"
 
 GridMesh::GridMesh(Qt3DCore::QNode *parent)
     : Qt3DRender::QGeometryRenderer(parent)

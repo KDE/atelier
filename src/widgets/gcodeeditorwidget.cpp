@@ -16,15 +16,15 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+#include "gcodeeditorwidget.h"
 #include <KLocalizedString>
 #include <QDropEvent>
 #include <QLabel>
 #include <QMimeData>
 #include <QVBoxLayout>
-#include "gcodeeditorwidget.h"
 
-GCodeEditorWidget::GCodeEditorWidget(QWidget *parent) :
-    QWidget(parent)
+GCodeEditorWidget::GCodeEditorWidget(QWidget *parent)
+    : QWidget(parent)
     , m_tabwidget(new QTabWidget(this))
 {
     setAcceptDrops(true);
@@ -44,7 +44,7 @@ void GCodeEditorWidget::setupTabWidget()
 
 void GCodeEditorWidget::loadFile(const QUrl &file)
 {
-    //if the file is loaded then reload the document.
+    // if the file is loaded then reload the document.
     if (urlDoc.contains(file)) {
         urlDoc[file]->documentReload();
         m_tabwidget->setCurrentIndex(m_tabwidget->indexOf(urlTab[file]));
@@ -54,8 +54,8 @@ void GCodeEditorWidget::loadFile(const QUrl &file)
     int t = m_tabwidget->addTab(newView(doc), file.fileName());
     urlDoc[doc->url()] = doc;
     urlTab[doc->url()] = m_tabwidget->widget(t);
-    //connect our new document's modified state changed signal.
-    connect(doc, &KTextEditor::Document::modifiedChanged, this, [this, t](const KTextEditor::Document * document) {
+    // connect our new document's modified state changed signal.
+    connect(doc, &KTextEditor::Document::modifiedChanged, this, [this, t](const KTextEditor::Document *document) {
         QString filename = document->url().fileName(QUrl::FullyDecoded);
         if (document->isModified()) {
             filename.append(" *");
@@ -118,7 +118,6 @@ void GCodeEditorWidget::dropCatch(QDropEvent *event)
     if (event->mimeData()->hasUrls()) {
         emit droppedUrls(event->mimeData()->urls());
     }
-
 }
 
 QVector<QUrl> GCodeEditorWidget::modifiedFiles()

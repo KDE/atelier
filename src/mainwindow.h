@@ -18,6 +18,7 @@
 */
 #pragma once
 
+#include "widgets/gcodeeditorwidget.h"
 #include <KTextEditor/View>
 #include <KXmlGui/KXmlGuiWindow>
 #include <QMap>
@@ -25,7 +26,6 @@
 #include <QPushButton>
 #include <QStackedWidget>
 #include <QUrl>
-#include "widgets/gcodeeditorwidget.h"
 
 struct LateralArea {
     // Area with the the lateral buttons that will open the views.

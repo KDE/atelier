@@ -38,8 +38,8 @@
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-QcGaugeWidget::QcGaugeWidget(QWidget *parent) :
-    QWidget(parent)
+QcGaugeWidget::QcGaugeWidget(QWidget *parent)
+    : QWidget(parent)
 {
     setMinimumSize(250, 250);
 }
@@ -111,7 +111,7 @@ QList<QcItem *> QcGaugeWidget::items()
     return mItems;
 }
 
-void QcGaugeWidget::paintEvent(QPaintEvent */*paintEvt*/)
+void QcGaugeWidget::paintEvent(QPaintEvent * /*paintEvt*/)
 {
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
@@ -124,10 +124,9 @@ void QcGaugeWidget::paintEvent(QPaintEvent */*paintEvt*/)
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-QcItem::QcItem(QObject *parent) :
-    QObject(parent)
+QcItem::QcItem(QObject *parent)
+    : QObject(parent)
 {
-
     parentWidget = qobject_cast<QWidget *>(parent);
     mPosition = 50;
 }
@@ -167,7 +166,7 @@ void QcItem::setPosition(float position)
 QRectF QcItem::adjustRect(float percentage)
 {
     float r = getRadius(mRect);
-    float offset =   r - (percentage * r) / 100.0;
+    float offset = r - (percentage * r) / 100.0;
     QRectF tmpRect = mRect.adjusted(offset, offset, -offset, -offset);
     return tmpRect;
 }
@@ -217,8 +216,8 @@ float QcItem::getAngle(const QPointF &pt, const QRectF &tmpRect)
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-QcScaleItem::QcScaleItem(QObject *parent) :
-    QcItem(parent)
+QcScaleItem::QcScaleItem(QObject *parent)
+    : QcItem(parent)
 {
     mMinDegree = -45;
     mMaxDegree = 225;
@@ -235,7 +234,6 @@ void QcScaleItem::setValueRange(float minValue, float maxValue)
         mMinValue = minValue;
         mMaxValue = maxValue;
     }
-
 }
 
 void QcScaleItem::setDgereeRange(float minDegree, float maxDegree)
@@ -314,8 +312,8 @@ float QcScaleItem::maxDegree()
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-QcBackgroundItem::QcBackgroundItem(QObject *parent) :
-    QcItem(parent)
+QcBackgroundItem::QcBackgroundItem(QObject *parent)
+    : QcItem(parent)
 {
     setPosition(88);
     mPen = Qt::NoPen;
@@ -323,7 +321,6 @@ QcBackgroundItem::QcBackgroundItem(QObject *parent) :
 
     addColor(0.4, Qt::darkGray);
     addColor(0.8, Qt::black);
-
 }
 
 void QcBackgroundItem::draw(QPainter *painter)
@@ -360,8 +357,8 @@ void QcBackgroundItem::clearrColors()
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-QcLabelItem::QcLabelItem(QObject *parent) :
-    QcItem(parent)
+QcLabelItem::QcLabelItem(QObject *parent)
+    : QcItem(parent)
 {
     setPosition(50);
     mAngle = 270;
@@ -384,7 +381,6 @@ void QcLabelItem::draw(QPainter *painter)
     txtRect.moveCenter(txtCenter);
 
     painter->drawText(txtRect, Qt::TextSingleLine, mText);
-
 }
 
 void QcLabelItem::setAngle(float a)
@@ -431,8 +427,8 @@ QColor QcLabelItem::color()
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-QcArcItem::QcArcItem(QObject *parent) :
-    QcScaleItem(parent)
+QcArcItem::QcArcItem(QObject *parent)
+    : QcScaleItem(parent)
 {
     setPosition(80);
     mColor = Qt::black;
@@ -460,8 +456,8 @@ void QcArcItem::setColor(const QColor &color)
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-QcDegreesItem::QcDegreesItem(QObject *parent) :
-    QcScaleItem(parent)
+QcDegreesItem::QcDegreesItem(QObject *parent)
+    : QcScaleItem(parent)
 {
     mStep = 10;
     mColor = Qt::black;
@@ -493,7 +489,6 @@ void QcDegreesItem::draw(QPainter *painter)
 
         painter->setPen(pen);
         painter->drawLine(pt, newPt);
-
     }
 }
 
@@ -519,8 +514,8 @@ void QcDegreesItem::setSubDegree(bool b)
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-QcNeedleItem::QcNeedleItem(QObject *parent) :
-    QcScaleItem(parent)
+QcNeedleItem::QcNeedleItem(QObject *parent)
+    : QcScaleItem(parent)
     , mCurrentValue(0)
     , mColor(Qt::black)
     , mLabel(nullptr)
@@ -601,8 +596,8 @@ void QcNeedleItem::createDiamonNeedle(float r)
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-QcValuesItem::QcValuesItem(QObject *parent) :
-    QcScaleItem(parent)
+QcValuesItem::QcValuesItem(QObject *parent)
+    : QcScaleItem(parent)
     , mStep(10)
     , mColor(Qt::black)
 {
@@ -611,7 +606,7 @@ QcValuesItem::QcValuesItem(QObject *parent) :
 
 void QcValuesItem::draw(QPainter *painter)
 {
-    QRectF  tmpRect = resetRect();
+    QRectF tmpRect = resetRect();
     float r = getRadius(adjustRect(99));
     painter->setFont(mFont);
     painter->setPen(mColor);

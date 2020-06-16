@@ -31,22 +31,19 @@ BedProperties::BedProperties(QObject *parent)
     , m_width(200)
     , m_depth(200)
 {
-    QTimer::singleShot(0, [ = ] {
+    QTimer::singleShot(0, [=] {
         auto context = qmlContext(this);
-        if (!context)
-        {
+        if (!context) {
             return;
         }
 
         auto viewer = context->contextProperty("viewer3d").value<Viewer3D *>();
-        if (!viewer)
-        {
+        if (!viewer) {
             return;
         }
 
         updateBedSize(viewer->bedSize());
-        connect(viewer, &Viewer3D::bedSizeChanged,
-                this, &BedProperties::updateBedSize);
+        connect(viewer, &Viewer3D::bedSizeChanged, this, &BedProperties::updateBedSize);
     });
 }
 

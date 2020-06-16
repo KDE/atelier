@@ -36,10 +36,10 @@ using namespace Qt3DCore;
 using namespace Qt3DRender;
 
 AxisGnomonEntity::AxisGnomonEntity(QNode *parent)
-    : QEntity(parent),
-      _modelMatrixParameter(new QParameter(QStringLiteral("axisGnomonModelMatrix"), QMatrix4x4())),
-      _position(0.1f, 0.1f),
-      _scale(0.1f)
+    : QEntity(parent)
+    , _modelMatrixParameter(new QParameter(QStringLiteral("axisGnomonModelMatrix"), QMatrix4x4()))
+    , _position(0.1f, 0.1f)
+    , _scale(0.1f)
 {
     auto mesh = new QMesh(this);
     mesh->setSource(QUrl("qrc:/axisgnomon.gltf"));
@@ -120,4 +120,3 @@ void AxisGnomonEntity::applyModelMatrix()
     modelMatrix.scale(_scale);
     _modelMatrixParameter->setValue(modelMatrix);
 }
-

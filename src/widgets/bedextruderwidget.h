@@ -46,7 +46,7 @@ private:
     int m_extruderCount = 0;
     ThermoWidget *m_bedThermo = nullptr;
     ThermoWidget *m_extruderThermo = nullptr;
-    QMap <int, QRadioButton *> extruderMap;
+    QMap<int, QRadioButton *> extruderMap;
     QHBoxLayout *m_extrudersLayout = nullptr;
     QWidget *m_extruderBox = nullptr;
     int currentExtruder();

@@ -18,6 +18,7 @@
 */
 
 #pragma once
+#include "bedextruderwidget.h"
 #include <AtCore>
 #include <CommandWidget>
 #include <LogWidget>
@@ -25,8 +26,6 @@
 #include <MovementWidget>
 #include <PlotWidget>
 #include <PrintWidget>
-#include <SdWidget>
-#include <StatusWidget>
 #include <QComboBox>
 #include <QList>
 #include <QPushButton>
@@ -34,7 +33,8 @@
 #include <QToolBar>
 #include <QUrl>
 #include <QWidget>
-#include "bedextruderwidget.h"
+#include <SdWidget>
+#include <StatusWidget>
 
 /**
  * @todo write docs

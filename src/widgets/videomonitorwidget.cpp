@@ -15,16 +15,16 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+#include "videomonitorwidget.h"
 #include <KLocalizedString>
 #include <QComboBox>
 #include <QDir>
 #include <QGridLayout>
 #include <QPushButton>
 #include <QVideoWidget>
-#include "videomonitorwidget.h"
 
-VideoMonitorWidget::VideoMonitorWidget(QWidget *parent) :
-    QWidget(parent)
+VideoMonitorWidget::VideoMonitorWidget(QWidget *parent)
+    : QWidget(parent)
     , _errorlabel(new QLabel(this))
     , _mediaplayer(this, QMediaPlayer::StreamPlayback)
 {
@@ -34,7 +34,8 @@ VideoMonitorWidget::VideoMonitorWidget(QWidget *parent) :
 
     auto _sourceCB = new QComboBox(this);
     _sourceCB->setEditable(true);
-    _sourceCB->setToolTip(i18n("Valid Urls:\n\
+    _sourceCB->setToolTip(
+        i18n("Valid Urls:\n\
         http://www.example.com/stream.avi\n\
         rtp://@:1234\n\
         mms://mms.examples.com/stream.asx\n\
@@ -58,9 +59,7 @@ VideoMonitorWidget::VideoMonitorWidget(QWidget *parent) :
 #ifdef Q_OS_LINUX
     QStringList sources;
     sources << QString("video*");
-    _sourceCB->addItems(QDir("/dev/")\
-                        .entryList(sources, QDir::System)\
-                        .replaceInStrings(QRegExp("^"), "v4l2:///dev/"));
+    _sourceCB->addItems(QDir("/dev/").entryList(sources, QDir::System).replaceInStrings(QRegExp("^"), "v4l2:///dev/"));
 #endif
 
     connect(_playPB, &QPushButton::clicked, this, [this, _playPB, _sourceCB, _videoWidget](bool b) {
@@ -78,8 +77,7 @@ VideoMonitorWidget::VideoMonitorWidget(QWidget *parent) :
         _videoWidget->setVisible(b);
     });
     using ErrorSignal = void (QMediaPlayer::*)(QMediaPlayer::Error);
-    connect(&_mediaplayer, static_cast<ErrorSignal>(&QMediaPlayer::error),
-            this, &VideoMonitorWidget::handleError);
+    connect(&_mediaplayer, static_cast<ErrorSignal>(&QMediaPlayer::error), this, &VideoMonitorWidget::handleError);
 }
 
 void VideoMonitorWidget::handleError()

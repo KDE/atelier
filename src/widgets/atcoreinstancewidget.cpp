@@ -17,32 +17,30 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <GCodeCommands>
-#include <KLocalizedString>
-#include <SerialLayer>
-#include <QToolBar>
 #include "atcoreinstancewidget.h"
 #include "machineinfo.h"
+#include <GCodeCommands>
+#include <KLocalizedString>
+#include <QToolBar>
+#include <SerialLayer>
 
-const QMap<MachineInfo::KEY, QString> AtCoreInstanceWidget::keyString = {
-    {MachineInfo::KEY::NAME, QStringLiteral("Name")},
-    {MachineInfo::KEY::BAUDRATE, QStringLiteral("bps")},
-    {MachineInfo::KEY::FIRMWARE, QStringLiteral("firmware")},
-    {MachineInfo::KEY::MAXBEDTEMP, QStringLiteral("maximumTemperatureBed")},
-    {MachineInfo::KEY::MAXEXTTEMP, QStringLiteral("maximumTemperatureExtruder")},
-    {MachineInfo::KEY::POSTPAUSE, QStringLiteral("postPause")},
-    {MachineInfo::KEY::ISCARTESIAN, QStringLiteral("isCartesian")},
-    {MachineInfo::KEY::XMAX, QStringLiteral("dimensionX")},
-    {MachineInfo::KEY::YMAX, QStringLiteral("dimensionY")},
-    {MachineInfo::KEY::ZMAX, QStringLiteral("dimensionZ")},
-    {MachineInfo::KEY::AUTOTEMPREPORT, QStringLiteral("autoReportTemp")}
-};
+const QMap<MachineInfo::KEY, QString> AtCoreInstanceWidget::keyString = {{MachineInfo::KEY::NAME, QStringLiteral("Name")},
+                                                                         {MachineInfo::KEY::BAUDRATE, QStringLiteral("bps")},
+                                                                         {MachineInfo::KEY::FIRMWARE, QStringLiteral("firmware")},
+                                                                         {MachineInfo::KEY::MAXBEDTEMP, QStringLiteral("maximumTemperatureBed")},
+                                                                         {MachineInfo::KEY::MAXEXTTEMP, QStringLiteral("maximumTemperatureExtruder")},
+                                                                         {MachineInfo::KEY::POSTPAUSE, QStringLiteral("postPause")},
+                                                                         {MachineInfo::KEY::ISCARTESIAN, QStringLiteral("isCartesian")},
+                                                                         {MachineInfo::KEY::XMAX, QStringLiteral("dimensionX")},
+                                                                         {MachineInfo::KEY::YMAX, QStringLiteral("dimensionY")},
+                                                                         {MachineInfo::KEY::ZMAX, QStringLiteral("dimensionZ")},
+                                                                         {MachineInfo::KEY::AUTOTEMPREPORT, QStringLiteral("autoReportTemp")}};
 
-AtCoreInstanceWidget::AtCoreInstanceWidget(QWidget *parent):
-    QWidget(parent)
+AtCoreInstanceWidget::AtCoreInstanceWidget(QWidget *parent)
+    : QWidget(parent)
     , m_bedSize(200, 200)
 {
-    m_theme = palette().text().color().value() >= QColor(Qt::lightGray).value() ? QString("dark") : QString("light") ;
+    m_theme = palette().text().color().value() >= QColor(Qt::lightGray).value() ? QString("dark") : QString("light");
     m_iconSize = QSize(fontMetrics().lineSpacing(), fontMetrics().lineSpacing());
     auto HLayout = new QHBoxLayout;
     m_bedExtWidget = new BedExtruderWidget(this);
@@ -61,7 +59,7 @@ AtCoreInstanceWidget::AtCoreInstanceWidget(QWidget *parent):
     auto controlTab = new QWidget(this);
     controlTab->setLayout(VLayout);
 
-    //AdvancedTab
+    // AdvancedTab
     VLayout = new QVBoxLayout;
     m_printWidget = new PrintWidget(false, this);
     VLayout->addWidget(m_printWidget);
@@ -121,16 +119,12 @@ void AtCoreInstanceWidget::buildToolbar()
     m_toolBar->addWidget(lb);
 
     auto homeAll = new QAction(i18n("All"));
-    connect(homeAll, &QAction::triggered, this, [this] {
-        m_core.home();
-    });
+    connect(homeAll, &QAction::triggered, this, [this] { m_core.home(); });
     m_toolBar->addAction(homeAll);
 
     for (const auto &homes : std::map<QString, int> {{"X", AtCore::X}, {"Y", AtCore::Y}, {"Z", AtCore::Z}}) {
         auto home = new QAction(homes.first, this);
-        connect(home, &QAction::triggered, this, [this, homes] {
-            m_core.home(uchar(homes.second));
-        });
+        connect(home, &QAction::triggered, this, [this, homes] { m_core.home(uchar(homes.second)); });
         m_toolBar->addAction(home);
     }
 
@@ -138,17 +132,14 @@ void AtCoreInstanceWidget::buildToolbar()
 
     m_printAction = new QAction(QIcon::fromTheme("media-playback-start", style()->standardIcon(QStyle::SP_MediaPlay)), i18n("Print"), this);
     connect(m_printAction, &QAction::triggered, this, [this] {
-        if (m_core.state() == AtCore::BUSY)
-        {
+        if (m_core.state() == AtCore::BUSY) {
             m_logWidget->appendLog(i18n("Pause Print"));
             pausePrint();
             return;
         }
-        if (m_core.state() == AtCore::IDLE)
-        {
+        if (m_core.state() == AtCore::IDLE) {
             print();
-        } else if (m_core.state() == AtCore::PAUSE)
-        {
+        } else if (m_core.state() == AtCore::PAUSE) {
             m_logWidget->appendLog(i18n("Resume Print"));
             m_core.resume();
         }
@@ -214,35 +205,26 @@ void AtCoreInstanceWidget::connectButtonClicked()
 {
     if (m_core.state() == AtCore::DISCONNECTED) {
         if (m_comboProfile->currentText().isEmpty()) {
-            QMessageBox::information(
-                this
-                , i18n("No Profiles!")
-                , i18n("Connecting requires creating a profile for your printer. Create a profile in the next dialog then try again.")
-            );
+            QMessageBox::information(this, i18n("No Profiles!"), i18n("Connecting requires creating a profile for your printer. Create a profile in the next dialog then try again."));
             emit(requestProfileDialog());
             return;
         }
 
         if (m_comboPort->currentText().isEmpty()) {
-            QMessageBox::critical(
-                this
-                , i18n("Error")
-                , i18n("Please, connect a serial device to continue!")
-            );
+            QMessageBox::critical(this, i18n("Error"), i18n("Please, connect a serial device to continue!"));
             return;
         }
-        //Get profile data before connecting.
+        // Get profile data before connecting.
         m_profileData = MachineInfo::instance()->readProfile(m_comboProfile->currentText());
-        //then connect
+        // then connect
         if (m_core.newConnection(m_comboPort->currentText(), m_profileData[keyString[MachineInfo::KEY::BAUDRATE]].toInt(), m_profileData[keyString[MachineInfo::KEY::FIRMWARE]].toString())) {
             emit(connectionChanged(QStringLiteral("%1 @ %2").arg(m_profileData[keyString[MachineInfo::KEY::NAME]].toString(), m_comboPort->currentText())));
-            m_profileData[keyString[MachineInfo::KEY::MAXBEDTEMP]].toBool() ? m_bedExtWidget->setBedMaxTemperature(m_profileData[keyString[MachineInfo::KEY::MAXBEDTEMP]].toInt()) :
-            m_bedExtWidget->setBedThermoHidden(true);
+            m_profileData[keyString[MachineInfo::KEY::MAXBEDTEMP]].toBool() ? m_bedExtWidget->setBedMaxTemperature(m_profileData[keyString[MachineInfo::KEY::MAXBEDTEMP]].toInt()) : m_bedExtWidget->setBedThermoHidden(true);
 
             m_bedExtWidget->setExtruderMaxTemperature(m_profileData[keyString[MachineInfo::KEY::MAXEXTTEMP]].toInt());
-            //AddFan Support to profile
+            // AddFan Support to profile
             m_printWidget->updateFanCount(2);
-            //Adjust bed size
+            // Adjust bed size
             QSize newSize;
             if (m_profileData[keyString[MachineInfo::KEY::ISCARTESIAN]].toBool()) {
                 newSize = QSize(m_profileData[keyString[MachineInfo::KEY::XMAX]].toInt(), m_profileData[keyString[MachineInfo::KEY::YMAX]].toInt());
@@ -262,7 +244,7 @@ void AtCoreInstanceWidget::connectButtonClicked()
 
 void AtCoreInstanceWidget::initConnectsToAtCore()
 {
-    //connect log to atcoreMessages
+    // connect log to atcoreMessages
     connect(&m_core, &AtCore::atcoreMessage, m_logWidget, &LogWidget::appendLog);
     m_core.setSerialTimerInterval(100);
     // Handle device changes
@@ -281,13 +263,13 @@ void AtCoreInstanceWidget::initConnectsToAtCore()
     // Bed and Extruder temperatures management
     connect(m_bedExtWidget, &BedExtruderWidget::bedTemperatureChanged, &m_core, &AtCore::setBedTemp);
     connect(m_bedExtWidget, &BedExtruderWidget::extTemperatureChanged, &m_core, &AtCore::setExtruderTemp);
-    //command Widget
-    connect(m_commandWidget, &CommandWidget::commandPressed, this, [this](const QString & command) {
+    // command Widget
+    connect(m_commandWidget, &CommandWidget::commandPressed, this, [this](const QString &command) {
         m_logWidget->appendLog(i18n("Push: %1", command));
         m_core.pushCommand(command);
     });
 
-    connect(m_commandWidget, &CommandWidget::messagePressed, [this](const QString & message) {
+    connect(m_commandWidget, &CommandWidget::messagePressed, [this](const QString &message) {
         m_logWidget->appendLog(i18n("Display: %1", message));
         m_core.showMessage(message);
     });
@@ -296,8 +278,8 @@ void AtCoreInstanceWidget::initConnectsToAtCore()
     connect(m_printWidget, &PrintWidget::fanSpeedChanged, &m_core, &AtCore::setFanSpeed);
     connect(m_printWidget, &PrintWidget::flowRateChanged, &m_core, &AtCore::setFlowRate);
     connect(m_printWidget, &PrintWidget::printSpeedChanged, &m_core, &AtCore::setPrinterSpeed);
-    //Movement Widget
-    connect(m_movementWidget, &MovementWidget::absoluteMove, this, [this](const QLatin1Char & axis, const double value) {
+    // Movement Widget
+    connect(m_movementWidget, &MovementWidget::absoluteMove, this, [this](const QLatin1Char &axis, const double value) {
         m_logWidget->appendLog(GCode::description(GCode::G1));
         m_core.move(axis, value);
     });
@@ -307,39 +289,31 @@ void AtCoreInstanceWidget::initConnectsToAtCore()
         m_core.setUnits(selection);
     });
 
-    connect(m_movementWidget, &MovementWidget::relativeMove, this, [this](const QLatin1Char & axis, const double value) {
+    connect(m_movementWidget, &MovementWidget::relativeMove, this, [this](const QLatin1Char &axis, const double value) {
         m_logWidget->appendLog(i18n("Relative Move: %1, %2", axis, QString::number(value)));
         m_core.setRelativePosition();
         m_core.move(axis, value);
         m_core.setAbsolutePosition();
     });
 
-    //Sd Card Stuff
+    // Sd Card Stuff
     connect(&m_core, &AtCore::sdCardFileListChanged, m_sdWidget, &SdWidget::updateFilelist);
     connect(m_sdWidget, &SdWidget::requestSdList, &m_core, &AtCore::sdFileList);
     connect(&m_core, &AtCore::sdMountChanged, m_statusWidget, &StatusWidget::setSD);
 
-    connect(m_sdWidget, &SdWidget::printSdFile, this, [this](const QString & fileName) {
+    connect(m_sdWidget, &SdWidget::printSdFile, this, [this](const QString &fileName) {
         if (fileName.isEmpty()) {
-            QMessageBox::information(
-                this
-                , i18n("Print Error")
-                , i18n("You must select a file from the list")
-            );
-        } else  {
+            QMessageBox::information(this, i18n("Print Error"), i18n("You must select a file from the list"));
+        } else {
             m_core.print(fileName, true);
             togglePrintButtons(true);
         }
     });
 
-    connect(m_sdWidget, &SdWidget::deleteSdFile, this, [this](const QString & fileName) {
+    connect(m_sdWidget, &SdWidget::deleteSdFile, this, [this](const QString &fileName) {
         if (fileName.isEmpty()) {
-            QMessageBox::information(
-                this
-                , i18n("Delete Error")
-                , i18n("You must select a file from the list")
-            );
-        } else  {
+            QMessageBox::information(this, i18n("Delete Error"), i18n("You must select a file from the list"));
+        } else {
             m_core.sdDelete(fileName);
         }
     });
@@ -348,19 +322,11 @@ void AtCoreInstanceWidget::initConnectsToAtCore()
 void AtCoreInstanceWidget::printFile(const QUrl &fileName)
 {
     if (fileName.isEmpty()) {
-        QMessageBox::critical(
-            this
-            , i18n("Filename Empty")
-            , i18n("No filename sent from calling method, please check and try again.")
-        );
+        QMessageBox::critical(this, i18n("Filename Empty"), i18n("No filename sent from calling method, please check and try again."));
         return;
     }
     if (!QFileInfo(fileName.toLocalFile()).isReadable()) {
-        QMessageBox::critical(
-            this
-            , i18n("File not found")
-            , i18n("%1 \nIs not readable, please check and try again.", fileName.toLocalFile())
-        );
+        QMessageBox::critical(this, i18n("File not found"), i18n("%1 \nIs not readable, please check and try again.", fileName.toLocalFile()));
         return;
     }
     if (m_core.state() == AtCore::IDLE) {
@@ -547,7 +513,7 @@ void AtCoreInstanceWidget::setFileCount(int count)
 void AtCoreInstanceWidget::updateSerialPort(QStringList ports)
 {
     m_comboPort->clear();
-    //Remove any strings that match ttyS## from the port list.
+    // Remove any strings that match ttyS## from the port list.
     ports = ports.filter(QRegularExpression("^((?!ttyS\\d+).)*$"));
     if (!ports.isEmpty()) {
         m_comboPort->addItems(ports);
@@ -629,7 +595,7 @@ void AtCoreInstanceWidget::connectExtruderTemperatureData(bool connected)
         if (m_plotWidget->plots().contains((i18n("Actual Ext.1")))) {
             return;
         }
-        //Add Extruder.
+        // Add Extruder.
         m_plotWidget->addPlot(i18n("Actual Ext.1"));
         connect(m_core.temperature(), &Temperature::extruderTemperatureChanged, this, [this] {
             const float temp = m_core.temperature()->extruderTemperature();

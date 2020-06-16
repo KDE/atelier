@@ -15,27 +15,25 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+#include "choosefiledialog.h"
 #include <KLocalizedString>
 #include <QDialogButtonBox>
 #include <QLabel>
 #include <QListWidget>
 #include <QVBoxLayout>
-#include "choosefiledialog.h"
 
-ChooseFileDialog::ChooseFileDialog(QWidget *parent, QList<QUrl> files) :
-    QDialog(parent)
+ChooseFileDialog::ChooseFileDialog(QWidget *parent, QList<QUrl> files)
+    : QDialog(parent)
 {
     const int padding = 30;
     auto listWidget = new QListWidget(this);
-    listWidget->setMinimumWidth(fontMetrics().height() / 2  * padding);
+    listWidget->setMinimumWidth(fontMetrics().height() / 2 * padding);
 
     foreach (const auto &url, files) {
         listWidget->addItem(url.toLocalFile());
     }
     listWidget->setCurrentRow(0);
-    connect(listWidget, &QListWidget::currentRowChanged, this, [this, &files](const int t) {
-        m_choosen_file = files.at(t);
-    });
+    connect(listWidget, &QListWidget::currentRowChanged, this, [this, &files](const int t) { m_choosen_file = files.at(t); });
 
     auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
     connect(buttonBox, &QDialogButtonBox::accepted, this, &ChooseFileDialog::accept);

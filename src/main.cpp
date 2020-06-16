@@ -16,16 +16,15 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include <atcore_version.h>
+#include "config.h"
+#include "mainwindow.h"
 #include <KAboutData>
 #include <KLocalizedString>
 #include <QApplication>
-#include "config.h"
-#include "mainwindow.h"
+#include <atcore_version.h>
 
 int main(int argc, char *argv[])
 {
-
     QApplication app(argc, argv);
 
     QCoreApplication::setOrganizationName("KDE");
@@ -53,14 +52,10 @@ int main(int argc, char *argv[])
         QStringLiteral("http://atelier.kde.org"),
         // The bug report email address
         QStringLiteral("atelier@bugs.kde.org"));
-    aboutData.addAuthor(i18n("Lays Rodrigues"), i18n("Developer"), QStringLiteral("lays.rodrigues@kde.org"),
-                        QStringLiteral("http://laysrodriguesdev.wordpress.com"));
-    aboutData.addAuthor(i18n("Chris Rizzitello"), i18n("Developer"), QStringLiteral("rizzitello@kde.org"),
-                        QStringLiteral("http://rizzitello.wordpress.com"));
-    aboutData.addAuthor(i18n("Patrick Pereira"), i18n("Developer"), QStringLiteral("patrickjp@kde.org"),
-                        QStringLiteral("http://patrickjp.com"));
-    aboutData.addAuthor(i18n("Tomaz Canabrava"), i18n("Contributor"), QStringLiteral("tcanabrava@kde.org"),
-                        QStringLiteral("http://angrycane.com.br"));
+    aboutData.addAuthor(i18n("Lays Rodrigues"), i18n("Developer"), QStringLiteral("lays.rodrigues@kde.org"), QStringLiteral("http://laysrodriguesdev.wordpress.com"));
+    aboutData.addAuthor(i18n("Chris Rizzitello"), i18n("Developer"), QStringLiteral("rizzitello@kde.org"), QStringLiteral("http://rizzitello.wordpress.com"));
+    aboutData.addAuthor(i18n("Patrick Pereira"), i18n("Developer"), QStringLiteral("patrickjp@kde.org"), QStringLiteral("http://patrickjp.com"));
+    aboutData.addAuthor(i18n("Tomaz Canabrava"), i18n("Contributor"), QStringLiteral("tcanabrava@kde.org"), QStringLiteral("http://angrycane.com.br"));
     aboutData.setOtherText(i18n("Using AtCore: %1", QString(ATCORE_VERSION_STRING)));
     KAboutData::setApplicationData(aboutData);
 

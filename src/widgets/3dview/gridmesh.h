@@ -22,9 +22,9 @@
 
 #pragma once
 
-#include <QObject>
-#include <QNode>
 #include <QGeometryRenderer>
+#include <QNode>
+#include <QObject>
 #include <QSize>
 
 class GridMesh : public Qt3DRender::QGeometryRenderer

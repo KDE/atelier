@@ -23,21 +23,21 @@
 #include <QDirIterator>
 #include <QHBoxLayout>
 #include <QObject>
-#include <QString>
 #include <QQmlContext>
 #include <QQmlEngine>
 #include <QQuickItem>
 #include <QQuickView>
+#include <QString>
 
 #include "axisgnomonentity.h"
 #include "bedproperties.h"
 #include "cameracontroller.h"
 #include "gridmesh.h"
-#include "viewer3d.h"
 #include "linemesh.h"
+#include "viewer3d.h"
 
-Viewer3D::Viewer3D(QWidget *parent) :
-    QWidget(parent)
+Viewer3D::Viewer3D(QWidget *parent)
+    : QWidget(parent)
     , _lineMesh(new LineMesh)
 {
     Q_INIT_RESOURCE(viewer3d);
@@ -61,14 +61,14 @@ Viewer3D::Viewer3D(QWidget *parent) :
     auto mainLayout = new QHBoxLayout;
     mainLayout->addWidget(QWidget::createWindowContainer(_view));
     QObject *item = _view->rootObject();
-    //Connect the drop pass from the QML part.
+    // Connect the drop pass from the QML part.
     connect(item, SIGNAL(droppedUrls(QVariant)), this, SLOT(dropCatch(QVariant)));
     this->setLayout(mainLayout);
 }
 
 void Viewer3D::dropCatch(const QVariant &var)
 {
-    emit droppedUrls(var.value<QList<QUrl> >());
+    emit droppedUrls(var.value<QList<QUrl>>());
 }
 
 void Viewer3D::drawModel(const QString &file)

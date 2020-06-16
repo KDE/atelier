@@ -17,19 +17,19 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+#include "thermowidget.h"
+#include <QApplication>
 #include <QBrush>
 #include <QFocusEvent>
 #include <QKeyEvent>
-#include <QPainter>
 #include <QPaintEvent>
+#include <QPainter>
 #include <QPen>
 #include <QTimer>
 #include <QWheelEvent>
-#include <QApplication>
-#include "thermowidget.h"
 
-ThermoWidget::ThermoWidget(QWidget *parent, const QString &name) :
-    QcGaugeWidget(parent)
+ThermoWidget::ThermoWidget(QWidget *parent, const QString &name)
+    : QcGaugeWidget(parent)
     , m_tempChangedTimer(new QTimer(this))
     , m_currentTemperature(0)
     , m_targetTemperature(0)
@@ -82,9 +82,7 @@ ThermoWidget::ThermoWidget(QWidget *parent, const QString &name) :
     });
 
     m_tempChangedTimer->setSingleShot(true);
-    connect(m_tempChangedTimer, &QTimer::timeout, this, [this] {
-        emit targetTemperatureChanged(m_targetTemperature);
-    });
+    connect(m_tempChangedTimer, &QTimer::timeout, this, [this] { emit targetTemperatureChanged(m_targetTemperature); });
 }
 
 void ThermoWidget::setRange(int min, int max)
@@ -134,7 +132,7 @@ void ThermoWidget::setTargetTemperature(int temperature)
 }
 void ThermoWidget::keyPressEvent(QKeyEvent *event)
 {
-    //set our target text length.
+    // set our target text length.
     int slen = m_targetTemperatureText.length() - 1;
     // be sure our cursor position is valid.
     if (slen < 0) {
@@ -143,7 +141,7 @@ void ThermoWidget::keyPressEvent(QKeyEvent *event)
     } else if (slen > 2) {
         m_cursorPos = 2;
     }
-    //parse the key events.
+    // parse the key events.
     if (event->key() >= Qt::Key_0 && event->key() <= Qt::Key_9) {
         auto tmp = QString::number(m_targetTemperature);
 
@@ -295,14 +293,14 @@ void ThermoWidget::paintEvent(QPaintEvent *event)
     const double relativePercent = m_maxValue - m_minValue;
     const double targetTemperaturePercent = (m_targetTemperature - m_minValue) / relativePercent;
     const double targetTemperatureAngle = (225 - -45) * targetTemperaturePercent + -45;
-    const int coolZone =  int (- (targetTemperatureAngle - -45));
+    const int coolZone = int(-(targetTemperatureAngle - -45));
     const int qtBeginAngle = -135;
     int PieYPos = geometry().height() / 2 - radiusAsInt;
     int PieXPos = geometry().width() / 2 - radiusAsInt;
 
     QPainter p(this);
     p.setFont(font);
-    //draw a box to put our target into as a user hint.
+    // draw a box to put our target into as a user hint.
     p.fillRect(QRect(int(halfWidth - wWidth), int(ypos - (height * 1.2)), int(wWidth * 2), int(height * 0.8)), palette().color(QPalette::AlternateBase));
 
     if (m_paintCursor) {
@@ -321,17 +319,16 @@ void ThermoWidget::paintEvent(QPaintEvent *event)
     p.setPen(Qt::transparent);
     p.setBrush(grad);
     p.drawPie(PieXPos, PieYPos, radiusAsInt * 2, radiusAsInt * 2, qtBeginAngle * 16, coolZone * 16);
-
 }
 
 bool ThermoWidget::isEqual(double a, double b)
 {
-//qFuzzyCompare always returns false if a || b ==0
+    // qFuzzyCompare always returns false if a || b ==0
     if (qFuzzyIsNull(a) || qFuzzyIsNull(b)) {
         if (a < 0.0 || b < 0.0) {
-            //One number is 0 and the other negative
-            //to prevent a issue if a or b == -1 and the other 0
-            //we will subtract one from each value
+            // One number is 0 and the other negative
+            // to prevent a issue if a or b == -1 and the other 0
+            // we will subtract one from each value
             a -= 1;
             b -= 1;
         } else {

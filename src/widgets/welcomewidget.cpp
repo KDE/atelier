@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include <algorithm>
+#include "welcomewidget.h"
 #include <KLocalizedString>
 #include <QDomDocument>
 #include <QHBoxLayout>
@@ -31,7 +31,7 @@
 #include <QTimer>
 #include <QToolButton>
 #include <QVBoxLayout>
-#include "welcomewidget.h"
+#include <algorithm>
 
 #define POSTS_LIMIT 5
 const QString WelcomeWidget::m_telegramLink = QStringLiteral(R"(<a href="http://t.me/KDEAtelier">)");
@@ -68,9 +68,7 @@ WelcomeWidget::WelcomeWidget(QWidget *parent)
     label->setFont(appFont);
     layout->addWidget(label);
 
-    for (const QString &sentence : {
-                i18n("1 - Create a Profile."), i18n("2 - Select the device."), i18n("3 - Select the profile and connect.")
-            }) {
+    for (const QString &sentence : {i18n("1 - Create a Profile."), i18n("2 - Select the device."), i18n("3 - Select the profile and connect.")}) {
         label = new QLabel(sentence, this);
         layout->addWidget(label);
     }
@@ -121,14 +119,11 @@ void WelcomeWidget::retrieveRssFeed()
 {
     m_postList.clear();
     auto manager = new QNetworkAccessManager(this);
-    for (const QUrl &url : {
-                QUrl("https://rizzitello.wordpress.com/category/atelier/feed/"),
-                QUrl("https://laysrodriguesdev.wordpress.com/category/atelier/feed/")
-            }) {
+    for (const QUrl &url : {QUrl("https://rizzitello.wordpress.com/category/atelier/feed/"), QUrl("https://laysrodriguesdev.wordpress.com/category/atelier/feed/")}) {
         QNetworkRequest request(url);
         request.setRawHeader("User-Agent", "Atelier 1.0");
         manager->get(request);
-        connect(manager, &QNetworkAccessManager::finished, this, [&](QNetworkReply * reply) {
+        connect(manager, &QNetworkAccessManager::finished, this, [&](QNetworkReply *reply) {
             if (reply->error()) {
                 return;
             }
@@ -148,7 +143,7 @@ void WelcomeWidget::parseRss(const QDomDocument &document)
     for (int i = 0; i < itemList.count(); ++i) {
         auto node = itemList.at(i);
         if (node.isElement()) {
-            //Sample of date format Wed, 24 May 2017 13:46:07 +0000
+            // Sample of date format Wed, 24 May 2017 13:46:07 +0000
             QString pDate = node.firstChildElement("pubDate").toElement().text();
             QRegularExpressionMatch match = dateRegex.match(pDate);
             if (match.hasMatch()) {
@@ -170,9 +165,7 @@ void WelcomeWidget::setupRssFeed()
         return;
     }
     QLocale locale(QLocale::English);
-    std::sort(m_postList.begin(), m_postList.end(), [locale](const Post & p1, const Post & p2) {
-        return locale.toDate(p1.date, "dd MMM yyyy") > locale.toDate(p2.date, "dd MMM yyyy");
-    });
+    std::sort(m_postList.begin(), m_postList.end(), [locale](const Post &p1, const Post &p2) { return locale.toDate(p1.date, "dd MMM yyyy") > locale.toDate(p2.date, "dd MMM yyyy"); });
     auto layout = new QVBoxLayout;
     int count = m_postList.count() > POSTS_LIMIT ? POSTS_LIMIT : m_postList.count();
     for (int i = 0; i < count; ++i) {
@@ -187,7 +180,7 @@ void WelcomeWidget::setupRssFeed()
 
 void WelcomeWidget::fallback()
 {
-    auto theme = palette().text().color().value() >= QColor(Qt::lightGray).value() ? QStringLiteral("dark") : QStringLiteral("light") ;
+    auto theme = palette().text().color().value() >= QColor(Qt::lightGray).value() ? QStringLiteral("dark") : QStringLiteral("light");
     auto layout = new QHBoxLayout;
     layout->addWidget(new QLabel(i18n("Failed to fetch the News.")));
     auto button = new QToolButton;

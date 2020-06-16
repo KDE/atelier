@@ -20,12 +20,12 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <QVector>
-#include <QVector3D>
 #include "linemeshgeometry.h"
+#include <QVector3D>
+#include <QVector>
 
-LineMeshGeometry::LineMeshGeometry(const QVector<QVector3D> &vertices, Qt3DCore::QNode *parent) :
-    Qt3DRender::QGeometry(parent)
+LineMeshGeometry::LineMeshGeometry(const QVector<QVector3D> &vertices, Qt3DCore::QNode *parent)
+    : Qt3DRender::QGeometry(parent)
     , _positionAttribute(new Qt3DRender::QAttribute(this))
     , _vertexBuffer(new Qt3DRender::QBuffer(Qt3DRender::QBuffer::VertexBuffer, this))
 {

@@ -18,15 +18,16 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+#include "gcodeto4d.h"
+#include "fileloader.h"
 #include <QFile>
 #include <QThread>
 #include <QUrl>
-#include <QVector4D>
 #include <QVariant>
-#include "fileloader.h"
-#include "gcodeto4d.h"
+#include <QVector4D>
 
-GcodeTo4D::GcodeTo4D(QObject *parent) : QObject(parent)
+GcodeTo4D::GcodeTo4D(QObject *parent)
+    : QObject(parent)
 {
 }
 
@@ -43,4 +44,3 @@ void GcodeTo4D::read(const QString &url)
     connect(_thread, &QThread::finished, fileLoader, &FileLoader::deleteLater);
     _thread->start();
 }
-
