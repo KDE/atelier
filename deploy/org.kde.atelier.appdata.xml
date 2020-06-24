@@ -23,6 +23,7 @@
   <name xml:lang="pt">Atelier</name>
   <name xml:lang="ru">Atelier</name>
   <name xml:lang="sk">Atelier</name>
+  <name xml:lang="sl">Atelier</name>
   <name xml:lang="sv">Atelier</name>
   <name xml:lang="uk">Atelier</name>
   <name xml:lang="x-test">xxAtelierxx</name>
@@ -44,6 +45,7 @@
   <summary xml:lang="pl">Gospodarz drukarek 3D</summary>
   <summary xml:lang="pt">Assistente de Impressoras 3D</summary>
   <summary xml:lang="sk">Hostiteľ 3D tlače</summary>
+  <summary xml:lang="sl">Gostitelj 3D tiskalnika</summary>
   <summary xml:lang="sv">Skrivarvärd för tredimensionella skrivare</summary>
   <summary xml:lang="uk">Вузол для тривимірного друку</summary>
   <summary xml:lang="x-test">xx3D Printer Hostxx</summary>
@@ -66,6 +68,7 @@
     <p xml:lang="pl">Atelier umożliwia podłączenie i sterowanie drukarką 3D z komputera. Można sterować dowolną licz”ą drukarek i otworzyć dowolną liczbę plików. Poza drukowaniem, można przeglądać pliki gcode, obejrzeć załączony aparat, edytować pliki i zarządzać maszyną.</p>
     <p xml:lang="pt">O Atelier permite-lhe contactar e controlar uma impressora 3D a partir do seu computador. Poderá controlar um número qualquer de impressoras e abrir uma quantidade qualquer de ficheiros. Para além de imprimir, poderá antever os 'gcodes', ver uma câmara ligada, editar os seus ficheiros e gerir as suas máquinas.</p>
     <p xml:lang="sk">Atelier vám umožní pripojiť a ovládať 3D tlačiareň z vášho počítača. Môžete ovládať ľubovoľný počet tlačiarní a súborov. Okrem tlače si môžete prezerať gcodes, pripojené kamery, upravovať vaše súbory a spravovať vaše stroje.</p>
+    <p xml:lang="sl">Atelier vam omogoča povezavo in upravljanje 3D-tiskalnika s svojega računalnika. Nadzorujete lahko poljubno število tiskalnikov in odprete poljubno število datotek. Poleg tiskanja si lahko predhodno ogledate gcode, imate pogled skozi priloženo kamero, urejate datoteke in upravljate z vašimi stroji.</p>
     <p xml:lang="sv">Atelier gör det möjligt att ansluta till och styra en tredimensionell skrivare från datorn. Det går att styra hur många skrivare som helst och öppna hur många filer som helst. Förutom utskrift kan man förhandsgranska Gcode, visa en ansluten kamera, redigera filer och hantera maskiner.</p>
     <p xml:lang="uk">За допомогою Atelier ви зможете встановити з'єднання між вашим тривимірним принтером та комп'ютером та керувати принтером. Передбачено керування довільною кількістю принтерів та відкриття довільної кількості файлів. Окрім друку, ви можете переглядати код gcode, переглядати зображення із приєднаної камери, редагувати файли та керувати вашими машинами.</p>
     <p xml:lang="x-test">xxAtelier allows you to connect to and control a 3D printer from your computer. You can control any number of printers and open any number of files. Aside from printing, you can preview the gcodes, view an attached camera, edit your files, and manage your machine(s).xx</p>
@@ -73,7 +76,7 @@
   <url type="homepage">https://atelier.kde.org</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=Atelier</url>
   <url type="donation">https://www.kde.org/community/donations/?app=atelier</url>
-  <screenshots><screenshot type="default"><caption>The Atelier main window.</caption><caption xml:lang="ca">La finestra principal de l'Atelier.</caption><caption xml:lang="ca-valencia">La finestra principal de l'Atelier.</caption><caption xml:lang="de">Das Hauptfenster von Atelier.</caption><caption xml:lang="es">La ventana principal de Atelier.</caption><caption xml:lang="et">Atelieri peaaken.</caption><caption xml:lang="eu">Atelierren leiho nagusia.</caption><caption xml:lang="fi">Atelier’n pääikkuna</caption><caption xml:lang="fr">La fenêtre principale d'Atelier.</caption><caption xml:lang="gl">A xanela principal de Atelier.</caption><caption xml:lang="id">Window utama Atelier.</caption><caption xml:lang="it">La finestra principale di Atelier.</caption><caption xml:lang="ko">Atelier 주 창입니다.</caption><caption xml:lang="nl">Het hoofdvenster van Atelier.</caption><caption xml:lang="nn">Hovudvindauget i Atelier.</caption><caption xml:lang="pl">Główne okno Atelier.</caption><caption xml:lang="pt">A janela principal do Atelier.</caption><caption xml:lang="sk">Hlavné okno Atelier.</caption><caption xml:lang="sv">Huvudfönstret i Atelier.</caption><caption xml:lang="uk">Головне вікно Atelier.</caption><caption xml:lang="x-test">xxThe Atelier main window.xx</caption><caption xml:lang="zh-TW">Atelier 的主視窗。</caption>
+  <screenshots><screenshot type="default"><caption>The Atelier main window.</caption><caption xml:lang="ca">La finestra principal de l'Atelier.</caption><caption xml:lang="ca-valencia">La finestra principal de l'Atelier.</caption><caption xml:lang="de">Das Hauptfenster von Atelier.</caption><caption xml:lang="es">La ventana principal de Atelier.</caption><caption xml:lang="et">Atelieri peaaken.</caption><caption xml:lang="eu">Atelierren leiho nagusia.</caption><caption xml:lang="fi">Atelier’n pääikkuna</caption><caption xml:lang="fr">La fenêtre principale d'Atelier.</caption><caption xml:lang="gl">A xanela principal de Atelier.</caption><caption xml:lang="id">Window utama Atelier.</caption><caption xml:lang="it">La finestra principale di Atelier.</caption><caption xml:lang="ko">Atelier 주 창입니다.</caption><caption xml:lang="nl">Het hoofdvenster van Atelier.</caption><caption xml:lang="nn">Hovudvindauget i Atelier.</caption><caption xml:lang="pl">Główne okno Atelier.</caption><caption xml:lang="pt">A janela principal do Atelier.</caption><caption xml:lang="sk">Hlavné okno Atelier.</caption><caption xml:lang="sl">Glavno okno Ateliera.</caption><caption xml:lang="sv">Huvudfönstret i Atelier.</caption><caption xml:lang="uk">Головне вікно Atelier.</caption><caption xml:lang="x-test">xxThe Atelier main window.xx</caption><caption xml:lang="zh-TW">Atelier 的主視窗。</caption>
 ​    <image type="source" width="1600" height="900">https://cdn.kde.org/screenshots/atelier/atelier.png</image>
     </screenshot>
 ​   </screenshots>
