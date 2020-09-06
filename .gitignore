@@ -2,3 +2,4 @@ CMakeLists.txt.user
 .directory
 build
 *kdev4
+.clang-format
