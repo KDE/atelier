@@ -46,7 +46,9 @@ AtCoreInstanceWidget::AtCoreInstanceWidget(QWidget *parent)
     m_bedExtWidget = new BedExtruderWidget(this);
     HLayout->addWidget(m_bedExtWidget);
 
-    m_movementWidget = new MovementWidget(false, this);
+    m_movementWidget = new MovementWidget(this);
+    m_movementWidget->setDisableMotorsButtonVisible(false);
+    m_movementWidget->setHomeButtonsVisible(false);
     m_movementWidget->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Minimum);
     HLayout->addWidget(m_movementWidget);
 
@@ -222,14 +224,19 @@ void AtCoreInstanceWidget::connectButtonClicked()
             m_profileData[keyString[MachineInfo::KEY::MAXBEDTEMP]].toBool() ? m_bedExtWidget->setBedMaxTemperature(m_profileData[keyString[MachineInfo::KEY::MAXBEDTEMP]].toInt()) : m_bedExtWidget->setBedThermoHidden(true);
 
             m_bedExtWidget->setExtruderMaxTemperature(m_profileData[keyString[MachineInfo::KEY::MAXEXTTEMP]].toInt());
+
+            int xMax = m_profileData[keyString[MachineInfo::KEY::XMAX]].toInt();
+            int yMax = m_profileData[keyString[MachineInfo::KEY::YMAX]].toInt();
+            int zMax = m_profileData[keyString[MachineInfo::KEY::ZMAX]].toInt();
+            m_movementWidget->setAxisMax(xMax, yMax, zMax);
             // AddFan Support to profile
             m_printWidget->updateFanCount(2);
             // Adjust bed size
             QSize newSize;
             if (m_profileData[keyString[MachineInfo::KEY::ISCARTESIAN]].toBool()) {
-                newSize = QSize(m_profileData[keyString[MachineInfo::KEY::XMAX]].toInt(), m_profileData[keyString[MachineInfo::KEY::YMAX]].toInt());
+                newSize = QSize(xMax, yMax);
             } else {
-                newSize = QSize(m_profileData[keyString[MachineInfo::KEY::XMAX]].toInt(), 0);
+                newSize = QSize(xMax, 0);
             }
             if (newSize != m_bedSize) {
                 m_bedSize = newSize;
