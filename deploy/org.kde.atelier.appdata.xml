@@ -78,6 +78,7 @@
     <p xml:lang="sv">Atelier gör det möjligt att ansluta till och styra en tredimensionell skrivare från datorn. Det går att styra hur många skrivare som helst och öppna hur många filer som helst. Förutom utskrift kan man förhandsgranska Gcode, visa en ansluten kamera, redigera filer och hantera maskiner.</p>
     <p xml:lang="uk">За допомогою Atelier ви зможете встановити з'єднання між вашим тривимірним принтером та комп'ютером та керувати принтером. Передбачено керування довільною кількістю принтерів та відкриття довільної кількості файлів. Окрім друку, ви можете переглядати код gcode, переглядати зображення із приєднаної камери, редагувати файли та керувати вашими машинами.</p>
     <p xml:lang="x-test">xxAtelier allows you to connect to and control a 3D printer from your computer. You can control any number of printers and open any number of files. Aside from printing, you can preview the gcodes, view an attached camera, edit your files, and manage your machine(s).xx</p>
+    <p xml:lang="zh-TW">Atelier 讓您可以從您的電腦連線並控制 3D 印表機。您可以控制任意數量的印表機，並開啟任意數量的檔案。除了列印以外，您還可以預覽 gcodes，檢視附加的攝影機、編輯您的檔案以及管理您的機器。</p>
   </description>
   <url type="homepage">https://atelier.kde.org</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=Atelier</url>
