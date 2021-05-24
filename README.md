@@ -58,14 +58,14 @@ Dependencies for Atelier:
 ---
 ### Getting in Touch
 You can reach us via: <br/>
-[IRC] - freenode #kde-atelier <br/>
+[IRC] - Libera Chat #kde-atelier <br/>
 [Telegram] - KDE Atelier group <br/>
 [Mail List] - Our Mail List <br/>
 ---
 ### Bugs
 Please report any bugs to our [Bug Tracker]. Please remember to include as much information about your issue and provide a backtrace if possible.
 
-[IRC]: https://webchat.freenode.net/
+[IRC]: https://web.libera.chat/
 [Telegram]: telegram.me/KDEAtelier
 [Bug Tracker]: https://bugs.kde.org/enter_bug.cgi?product=Atelier
 [Mail List]: atelier@kde.org

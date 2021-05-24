@@ -98,7 +98,7 @@ WelcomeWidget::WelcomeWidget(QWidget *parent)
     label->setOpenExternalLinks(true);
     layout->addWidget(label);
 
-    label = new QLabel(i18n("You can also find us on Freenode IRC #kde-atelier"), this);
+    label = new QLabel(i18n("You can also find us on Libera Chat IRC #kde-atelier"), this);
     layout->addWidget(label);
 
     layout->addStretch();
