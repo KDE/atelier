@@ -19,6 +19,7 @@
   <name xml:lang="gl">Atelier</name>
   <name xml:lang="id">Atelier</name>
   <name xml:lang="it">Atelier</name>
+  <name xml:lang="ka">Atelier</name>
   <name xml:lang="ko">Atelier</name>
   <name xml:lang="nl">Atelier</name>
   <name xml:lang="nn">Atelier</name>
@@ -49,6 +50,7 @@
   <summary xml:lang="gl">Máquina de impresora 3D</summary>
   <summary xml:lang="id">Host Printer 3D</summary>
   <summary xml:lang="it">Host di stampa 3D</summary>
+  <summary xml:lang="ka">3D პრინტერის ჰოსტი</summary>
   <summary xml:lang="ko">3D 프린터 호스트</summary>
   <summary xml:lang="nl">3D-printerhost</summary>
   <summary xml:lang="nn">3D-skrivarvert</summary>
@@ -78,6 +80,7 @@
     <p xml:lang="gl">Atelier permítelle conectar o computador a impresoras 3D e controlalas. Pode controlar tantas impresoras e abrir tanto ficheiros como queira. Ademais de imprimir pode obter unha vista previa do código G, ver a cámara conectada, editar os ficheiros e xestionar as máquinas.</p>
     <p xml:lang="id">Atelier memungkinkan kamu untuk terkoneksi dan mengendalikan printer 3D dari komputermu. Kamu bisa mengendalikan sejumlah printer dan membuka sejumlah file. Selain mencetak, kamu bisa melihat pratinjau gcode, menampilkan kamera yang terpasang, mengedit file-mu, dan mengelola mesinmu.</p>
     <p xml:lang="it">Atelier ti permette di connettere la tua stampante 3D al computer e di controllarla per mezzo di esso. Puoi controllare un qualsiasi numero di stampanti ed aprire tutti i file che vuoi. Oltre alla stampa puoi fare un'anteprima del codice G, visualizzare una fotocamera collegata, modificare i file e gestire le tue macchine.</p>
+    <p xml:lang="ka">Atelier საშუალებას გაძლევთ თქვენს კომპიუტერზე მიბმული 3D პრინტერი აკონტროლოთ. შეგიძლიათ აკონტროლოთ ნებისმიერი რაოდენობის პრინტერები და გახსნათ ნებისმიერი რაოდენობის ფაილი. ბეჭდვის გარდა, შეგიძლიათ გადახედოთ gcode-ს, შეხედოთ მიბმულ კამერას, ჩაასწოროთ ფაილები და მართოთ თქვენი მანქანები.</p>
     <p xml:lang="ko">Atelier를 사용하여 컴퓨터에 연결된 3D 프린터를 제어할 수 있습니다. 임의의 프린터와 파일을 동시에 제어할 수 있습니다. 인쇄 작업 이외에도 G 코드 미리 보기, 연결된 카메라 미리 보기, 파일 편집, 머신 관리를 지원합니다.</p>
     <p xml:lang="nl">Atelier stelt u in staat om te verbinden met een 3D-printer en deze te besturen vanaf uw computer. U kunt elk aantal printers besturen en elke aantal bestanden openen. Naast printen, kunt u de gcodes bekijken een aangekoppelde camera bekijken, uw bestanden bewerken en uw machine(s) beheren.</p>
     <p xml:lang="nn">Atelier lèg deg kopla til og styra 3D-skrivarar frå datamaskina. Det finst inga grense på talet på skrivarar du kan styra eller filer du kan opna. I tillegg til 3D-skriving kan du førehandsvisa G-kodar, bruka tilkopla kamera, redigera filer og setja opp maskinene.</p>
@@ -95,7 +98,7 @@
   <url type="homepage">https://atelier.kde.org</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=Atelier</url>
   <url type="donation">https://www.kde.org/community/donations/?app=atelier</url>
-  <screenshots><screenshot type="default"><caption>The Atelier main window</caption><caption xml:lang="ca">La finestra principal de l'Atelier</caption><caption xml:lang="ca-valencia">La finestra principal d'Atelier</caption><caption xml:lang="cs">Hlavní okno Atelieru</caption><caption xml:lang="de">Das Hauptfenster von Atelier</caption><caption xml:lang="el">Το κύριο παράθυρο του Atelier</caption><caption xml:lang="en-GB">The Atelier main window</caption><caption xml:lang="es">La ventana principal de Atelier</caption><caption xml:lang="eu">Atelier-ren leiho nagusia</caption><caption xml:lang="fi">Atelier’n pääikkuna</caption><caption xml:lang="fr">La fenêtre principale d'Atelier.</caption><caption xml:lang="id">Window utama Atelier</caption><caption xml:lang="it">La finestra principale di Atelier</caption><caption xml:lang="ko">Atelier 주 창</caption><caption xml:lang="nl">Het hoofdvenster van Atelier</caption><caption xml:lang="nn">Hovudvindauget i Atelier</caption><caption xml:lang="pl">Główne okno Atelier</caption><caption xml:lang="pt">A janela principal do Atelier</caption><caption xml:lang="sk">Hlavné okno Atelier</caption><caption xml:lang="sl">Glavno okno programa Atelier</caption><caption xml:lang="sv">Huvudfönstret i Atelier</caption><caption xml:lang="tr">Atölye ana penceresi</caption><caption xml:lang="uk">Головне вікно Atelier</caption><caption xml:lang="x-test">xxThe Atelier main windowxx</caption><caption xml:lang="zh-CN">Atelier 主窗口</caption>
+  <screenshots><screenshot type="default"><caption>The Atelier main window</caption><caption xml:lang="ca">La finestra principal de l'Atelier</caption><caption xml:lang="ca-valencia">La finestra principal d'Atelier</caption><caption xml:lang="cs">Hlavní okno Atelieru</caption><caption xml:lang="de">Das Hauptfenster von Atelier</caption><caption xml:lang="el">Το κύριο παράθυρο του Atelier</caption><caption xml:lang="en-GB">The Atelier main window</caption><caption xml:lang="es">La ventana principal de Atelier</caption><caption xml:lang="eu">Atelier-ren leiho nagusia</caption><caption xml:lang="fi">Atelier’n pääikkuna</caption><caption xml:lang="fr">La fenêtre principale d'Atelier.</caption><caption xml:lang="id">Window utama Atelier</caption><caption xml:lang="it">La finestra principale di Atelier</caption><caption xml:lang="ka">Atelier-ის მთავარი ფანჯარა</caption><caption xml:lang="ko">Atelier 주 창</caption><caption xml:lang="nl">Het hoofdvenster van Atelier</caption><caption xml:lang="nn">Hovudvindauget i Atelier</caption><caption xml:lang="pl">Główne okno Atelier</caption><caption xml:lang="pt">A janela principal do Atelier</caption><caption xml:lang="sk">Hlavné okno Atelier</caption><caption xml:lang="sl">Glavno okno programa Atelier</caption><caption xml:lang="sv">Huvudfönstret i Atelier</caption><caption xml:lang="tr">Atölye ana penceresi</caption><caption xml:lang="uk">Головне вікно Atelier</caption><caption xml:lang="x-test">xxThe Atelier main windowxx</caption><caption xml:lang="zh-CN">Atelier 主窗口</caption>
 ​    <image type="source" width="1600" height="900">https://cdn.kde.org/screenshots/atelier/atelier.png</image>
     </screenshot>
 ​   </screenshots>
