@@ -1,0 +1,592 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the atelier package.
+#
+# pan93412 <pan93412@gmail.com>, 2019.
+# Jeff Huang <s8321414@gmail.com>, 2020.
+msgid ""
+msgstr ""
+"Project-Id-Version: atelier\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-06-19 00:19+0000\n"
+"PO-Revision-Date: 2020-09-17 14:07+0800\n"
+"Last-Translator: Jeff Huang <s8321414@gmail.com>\n"
+"Language-Team: Chinese <zh-l10n@linux.org.tw>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 19.08.3\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "pan93412, Jeff Huang"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "pan93412@gmail.com, s8321414@gmail.com"
+
+#: src/dialogs/choosefiledialog.cpp:43
+#, kde-format
+msgid "Choose a file to print:"
+msgstr "選擇欲列印檔案："
+
+#: src/dialogs/profilesdialog.cpp:30
+#, kde-format
+msgid "Profiles"
+msgstr "設定檔"
+
+#: src/main.cpp:39
+#, kde-format
+msgid "Atelier"
+msgstr "Atelier"
+
+#: src/main.cpp:43
+#, kde-format
+msgid "Printer Host for 3DPrinters"
+msgstr "適用於 3D 列印機的列印主機"
+
+#: src/main.cpp:47
+#, kde-format
+msgid "(c) 2016"
+msgstr "(c) 2016"
+
+#: src/main.cpp:55
+#, kde-format
+msgid "Lays Rodrigues"
+msgstr "Lays Rodrigues"
+
+#: src/main.cpp:55 src/main.cpp:56 src/main.cpp:57
+#, kde-format
+msgid "Developer"
+msgstr "開發者"
+
+#: src/main.cpp:56
+#, kde-format
+msgid "Chris Rizzitello"
+msgstr "Chris Rizzitello"
+
+#: src/main.cpp:57
+#, kde-format
+msgid "Patrick Pereira"
+msgstr "Patrick Pereira"
+
+#: src/main.cpp:58
+#, kde-format
+msgid "Tomaz Canabrava"
+msgstr "Tomaz Canabrava"
+
+#: src/main.cpp:58
+#, kde-format
+msgid "Contributor"
+msgstr "貢獻者"
+
+#: src/main.cpp:59
+#, kde-format
+msgid "Using AtCore: %1"
+msgstr "使用 AtCore：%1"
+
+#: src/mainwindow.cpp:125
+#, kde-format
+msgid "Create new instance"
+msgstr "建立新實例"
+
+#: src/mainwindow.cpp:142
+#, kde-format
+msgid "Connect a printer"
+msgstr "連結印表機"
+
+#: src/mainwindow.cpp:156 src/widgets/atcoreinstancewidget.cpp:216
+#: src/widgets/atcoreinstancewidget.cpp:450
+#, kde-format
+msgid "Error"
+msgstr "錯誤"
+
+#: src/mainwindow.cpp:156
+#, kde-format
+msgid ""
+"There's no GCode file open.\n"
+"Please select a file and try again."
+msgstr ""
+"未找到開啟的 GCode 檔案。\n"
+"請選擇檔案後重試。"
+
+#: src/mainwindow.cpp:171
+#, kde-format
+msgid "Document Modified"
+msgstr "已變更文件"
+
+#: src/mainwindow.cpp:172
+#, kde-format
+msgid ""
+"%1 \n"
+"Contains unsaved changes that will not be in the print.\n"
+"Would you like to save them before printing?"
+msgstr ""
+"%1 \n"
+"包含了未儲存的變更，其將不會被列印。\n"
+"您想要在列印前先儲存嗎？"
+
+#: src/mainwindow.cpp:260
+#, kde-format
+msgid "Welcome"
+msgstr "歡迎"
+
+#: src/mainwindow.cpp:261
+#, kde-format
+msgid "3D"
+msgstr "3D"
+
+#: src/mainwindow.cpp:262
+#, kde-format
+msgid "GCode"
+msgstr "GCode"
+
+#: src/mainwindow.cpp:263
+#, kde-format
+msgid "Video"
+msgstr "影片"
+
+#: src/mainwindow.cpp:275
+#, kde-format
+msgid "&Open"
+msgstr "開啟(&O)"
+
+#: src/mainwindow.cpp:282
+#, kde-format
+msgid "&New Connection"
+msgstr "新連結(&N)"
+
+#: src/mainwindow.cpp:289
+#, kde-format
+msgid "&Profiles"
+msgstr "設定檔(&P)"
+
+#: src/mainwindow.cpp:299
+#, kde-format
+msgid "&Quit"
+msgstr "退出(&Q)"
+
+#: src/mainwindow.cpp:308
+#, kde-format
+msgid "Open GCode"
+msgstr "開啟 GCode"
+
+#: src/mainwindow.cpp:308
+#, kde-format
+msgid "GCode(*.gco *.gcode);;All Files(*.*)"
+msgstr "GCode(*.gco *.gcode);;所有檔案(*.*)"
+
+#: src/mainwindow.cpp:345 src/widgets/atcoreinstancewidget.cpp:435
+#, kde-format
+msgid "Printing"
+msgstr "正在列印"
+
+#: src/mainwindow.cpp:345
+#, kde-format
+msgid ""
+"Currently printing! \n"
+"Are you sure you want to close?"
+msgstr ""
+"目前正在列印！\n"
+"是否關閉？"
+
+#: src/mainwindow.cpp:396
+#, kde-format
+msgid "Save Selected"
+msgstr "儲存選取項目"
+
+#: src/mainwindow.cpp:404 src/mainwindow.cpp:422
+#, kde-format
+msgid "Save Failed"
+msgstr "儲存失敗"
+
+#: src/mainwindow.cpp:404 src/mainwindow.cpp:422
+#, kde-format
+msgid "Failed to save file: %1"
+msgstr "無法儲存檔案：%1"
+
+#: src/mainwindow.cpp:417
+#, kde-format
+msgid "Save All"
+msgstr "全部儲存"
+
+#: src/mainwindow.cpp:432
+#, kde-format
+msgid "Cancel"
+msgstr "取消"
+
+#: src/mainwindow.cpp:438
+#, kde-format
+msgid "Discard Changes"
+msgstr "放棄變更"
+
+#: src/mainwindow.cpp:444
+#, kde-format
+msgid "Files with Unsaved Changes."
+msgstr "包含未儲存變更的檔案。"
+
+#: src/widgets/atcoreinstancewidget.cpp:91
+#, kde-format
+msgid "Controls"
+msgstr "控制"
+
+#: src/widgets/atcoreinstancewidget.cpp:92
+#, kde-format
+msgid "Advanced"
+msgstr "進階"
+
+#: src/widgets/atcoreinstancewidget.cpp:93
+#, kde-format
+msgid "Sd Card"
+msgstr "SD 卡"
+
+#: src/widgets/atcoreinstancewidget.cpp:120
+#, kde-format
+msgid "Home:"
+msgstr "家目錄："
+
+#: src/widgets/atcoreinstancewidget.cpp:123
+#, kde-format
+msgid "All"
+msgstr "全部"
+
+#: src/widgets/atcoreinstancewidget.cpp:135
+#: src/widgets/atcoreinstancewidget.cpp:154
+#: src/widgets/atcoreinstancewidget.cpp:430
+#, kde-format
+msgid "Print"
+msgstr "列印"
+
+#: src/widgets/atcoreinstancewidget.cpp:138
+#, kde-format
+msgid "Pause Print"
+msgstr "暫停列印"
+
+#: src/widgets/atcoreinstancewidget.cpp:145
+#, kde-format
+msgid "Resume Print"
+msgstr "繼續列印"
+
+#: src/widgets/atcoreinstancewidget.cpp:151
+#, kde-format
+msgid "Stop"
+msgstr "停止"
+
+#: src/widgets/atcoreinstancewidget.cpp:159
+#, kde-format
+msgid "Disable Motors"
+msgstr "關閉馬達"
+
+#: src/widgets/atcoreinstancewidget.cpp:171
+#, kde-format
+msgid "Device"
+msgstr "裝置"
+
+#: src/widgets/atcoreinstancewidget.cpp:179
+#, kde-format
+msgid "Profile"
+msgstr "設定檔"
+
+#: src/widgets/atcoreinstancewidget.cpp:191
+#: src/widgets/atcoreinstancewidget.cpp:413
+#, kde-format
+msgid "Connect"
+msgstr "連結"
+
+#: src/widgets/atcoreinstancewidget.cpp:210
+#, kde-format
+msgid "No Profiles!"
+msgstr "無設定檔！"
+
+#: src/widgets/atcoreinstancewidget.cpp:210
+#, kde-format
+msgid ""
+"Connecting requires creating a profile for your printer. Create a profile in "
+"the next dialog then try again."
+msgstr ""
+"連線必須為您的印表機建立設定檔。在下一個對話框建立設定檔，然後再試一次。"
+
+#: src/widgets/atcoreinstancewidget.cpp:216
+#, kde-format
+msgid "Please, connect a serial device to continue!"
+msgstr "請連結序列埠裝置後繼續！"
+
+#: src/widgets/atcoreinstancewidget.cpp:248
+#, kde-format
+msgid "Connect a Printer"
+msgstr "連結列印機"
+
+#: src/widgets/atcoreinstancewidget.cpp:275
+#, kde-format
+msgid "Push: %1"
+msgstr "推送：%1"
+
+#: src/widgets/atcoreinstancewidget.cpp:280
+#, kde-format
+msgid "Display: %1"
+msgstr "顯示：%1"
+
+#: src/widgets/atcoreinstancewidget.cpp:300
+#, kde-format
+msgid "Relative Move: %1, %2"
+msgstr "相對移動：%1, %2"
+
+#: src/widgets/atcoreinstancewidget.cpp:313
+#, kde-format
+msgid "Print Error"
+msgstr "列印時發生錯誤"
+
+#: src/widgets/atcoreinstancewidget.cpp:313
+#: src/widgets/atcoreinstancewidget.cpp:322
+#, kde-format
+msgid "You must select a file from the list"
+msgstr "您必須從列表選取一個檔案"
+
+#: src/widgets/atcoreinstancewidget.cpp:322
+#, kde-format
+msgid "Delete Error"
+msgstr "刪除時發生錯誤"
+
+#: src/widgets/atcoreinstancewidget.cpp:332
+#, kde-format
+msgid "Filename Empty"
+msgstr "檔名為空"
+
+#: src/widgets/atcoreinstancewidget.cpp:332
+#, kde-format
+msgid "No filename sent from calling method, please check and try again."
+msgstr "未從呼叫的方法傳送檔案名稱，請檢查並再試一次。"
+
+#: src/widgets/atcoreinstancewidget.cpp:336
+#, kde-format
+msgid "File not found"
+msgstr "未找到檔案"
+
+#: src/widgets/atcoreinstancewidget.cpp:336
+#, kde-format
+msgid ""
+"%1 \n"
+"Is not readable, please check and try again."
+msgstr ""
+"%1 \n"
+"無法讀取，請檢查並重試。"
+
+#: src/widgets/atcoreinstancewidget.cpp:340
+#, kde-format
+msgid "Printing: %1"
+msgstr "列印中：%1"
+
+#: src/widgets/atcoreinstancewidget.cpp:376
+#, kde-format
+msgid "Disconnect"
+msgstr "中斷連線"
+
+#: src/widgets/atcoreinstancewidget.cpp:380
+#, kde-format
+msgid "Connecting..."
+msgstr "連線中…"
+
+#: src/widgets/atcoreinstancewidget.cpp:381
+#, kde-format
+msgid "Attempting to Connect"
+msgstr "嘗試連線"
+
+#: src/widgets/atcoreinstancewidget.cpp:390
+#, kde-format
+msgid "Connected to %1"
+msgstr "已連線至 %1"
+
+#: src/widgets/atcoreinstancewidget.cpp:408
+#, kde-format
+msgid "Not Connected"
+msgstr "未連線"
+
+#: src/widgets/atcoreinstancewidget.cpp:411
+#, kde-format
+msgid "Serial disconnected"
+msgstr "已中斷序列埠連線"
+
+#: src/widgets/atcoreinstancewidget.cpp:422
+#, kde-format
+msgid "Starting Print"
+msgstr "開始列印"
+
+#: src/widgets/atcoreinstancewidget.cpp:427
+#, kde-format
+msgid "Finished Print"
+msgstr "列印完成"
+
+#: src/widgets/atcoreinstancewidget.cpp:432
+#, kde-format
+msgid "Finished Print Job"
+msgstr "列印作業完成"
+
+#: src/widgets/atcoreinstancewidget.cpp:437
+#, kde-format
+msgid "Pause"
+msgstr "暫停"
+
+#: src/widgets/atcoreinstancewidget.cpp:441
+#, kde-format
+msgid "Paused"
+msgstr "已暫停"
+
+#: src/widgets/atcoreinstancewidget.cpp:442
+#, kde-format
+msgid "Resume"
+msgstr "繼續"
+
+#: src/widgets/atcoreinstancewidget.cpp:446
+#, kde-format
+msgid "Stopping Print"
+msgstr "停止列印"
+
+#: src/widgets/atcoreinstancewidget.cpp:453
+#, kde-format
+msgid "Unknown AtCore State, %1"
+msgstr "未知 AtCore 狀態，%1"
+
+#: src/widgets/atcoreinstancewidget.cpp:527
+#, kde-format
+msgid "Found %1 Ports"
+msgstr "找到 %1 個連線埠"
+
+#: src/widgets/atcoreinstancewidget.cpp:529
+#, kde-format
+msgid "No available ports! Please connect a serial device to continue!"
+msgstr "沒有可供使用的連線埠！請連線一個序列埠裝置後繼續！"
+
+#: src/widgets/atcoreinstancewidget.cpp:572
+#: src/widgets/atcoreinstancewidget.cpp:575
+#: src/widgets/atcoreinstancewidget.cpp:579
+#: src/widgets/atcoreinstancewidget.cpp:590
+#: src/widgets/atcoreinstancewidget.cpp:591
+#, kde-format
+msgid "Actual Bed"
+msgstr "實際的床"
+
+#: src/widgets/atcoreinstancewidget.cpp:582
+#: src/widgets/atcoreinstancewidget.cpp:586
+#: src/widgets/atcoreinstancewidget.cpp:593
+#, kde-format
+msgid "Target Bed"
+msgstr "目標的床"
+
+#: src/widgets/atcoreinstancewidget.cpp:602
+#: src/widgets/atcoreinstancewidget.cpp:606
+#: src/widgets/atcoreinstancewidget.cpp:610
+#: src/widgets/atcoreinstancewidget.cpp:621
+#: src/widgets/atcoreinstancewidget.cpp:622
+#, kde-format
+msgid "Actual Ext.1"
+msgstr "實際的 Ext.1"
+
+#: src/widgets/atcoreinstancewidget.cpp:613
+#: src/widgets/atcoreinstancewidget.cpp:617
+#: src/widgets/atcoreinstancewidget.cpp:624
+#, kde-format
+msgid "Target Ext.1"
+msgstr "目標的 Ext.1"
+
+#: src/widgets/bedextruderwidget.cpp:29
+#, kde-format
+msgid "Bed"
+msgstr "床"
+
+#: src/widgets/bedextruderwidget.cpp:30
+#, kde-format
+msgid "HotEnd"
+msgstr "HotEnd"
+
+#: src/widgets/bedextruderwidget.cpp:38
+#, kde-format
+msgid "Active Extruder:"
+msgstr "作用中的壓出機："
+
+#: src/widgets/videomonitorwidget.cpp:32
+#, kde-format
+msgid "Source url:"
+msgstr "來源 URL："
+
+#: src/widgets/videomonitorwidget.cpp:38
+#, kde-format
+msgid ""
+"Valid Urls:\n"
+"        http://www.example.com/stream.avi\n"
+"        rtp://@:1234\n"
+"        mms://mms.examples.com/stream.asx\n"
+"        rtsp://server.example.org:8080/test.sdp"
+msgstr ""
+"有效網址：        http://www.example.com/stream.avi\n"
+"        rtp://@:1234\n"
+"        mms://mms.examples.com/stream.asx\n"
+"        rtsp://server.example.org:8080/test.sdp"
+
+#: src/widgets/welcomewidget.cpp:51
+#, kde-format
+msgid "Welcome to Atelier!"
+msgstr "歡迎使用 Atelier！"
+
+#: src/widgets/welcomewidget.cpp:67
+#, kde-format
+msgid "Quick Connect Guide"
+msgstr "快速連線教學"
+
+#: src/widgets/welcomewidget.cpp:71
+#, kde-format
+msgid "1 - Create a Profile."
+msgstr "1 - 建立設定檔。"
+
+#: src/widgets/welcomewidget.cpp:71
+#, kde-format
+msgid "2 - Select the device."
+msgstr "2 - 選取裝置。"
+
+#: src/widgets/welcomewidget.cpp:71
+#, kde-format
+msgid "3 - Select the profile and connect."
+msgstr "3 - 選取設定檔並連線。"
+
+#: src/widgets/welcomewidget.cpp:76
+#, kde-format
+msgid "Having a connection problem?"
+msgstr "有連線問題嗎？"
+
+#: src/widgets/welcomewidget.cpp:80
+#, kde-format
+msgid "See the info section of the Log for common problems."
+msgstr "看看記錄的「資訊」部份以取得常見問題。"
+
+#: src/widgets/welcomewidget.cpp:83
+#, kde-format
+msgid "Check our %1Atelier Docs%2 for more information."
+msgstr "看看我們的 %1Atelier 文件%2 取得更多資訊。"
+
+#: src/widgets/welcomewidget.cpp:87
+#, kde-format
+msgid "Atelier news!"
+msgstr "Atelier 新聞！"
+
+#: src/widgets/welcomewidget.cpp:93
+#, kde-format
+msgid "Get Involved"
+msgstr "參與其中"
+
+#: src/widgets/welcomewidget.cpp:97
+#, kde-format
+msgid "Join our %1Telegram Group%2!"
+msgstr "加入我們的 %1Telegram 群組%2！"
+
+#: src/widgets/welcomewidget.cpp:101
+#, fuzzy, kde-format
+#| msgid "You can also find us on Freenode IRC #kde-atelier"
+msgid "You can also find us on Libera Chat IRC #kde-atelier"
+msgstr "您也可以在 Freenode IRC #kde-atelier 找到我們。"
+
+#: src/widgets/welcomewidget.cpp:185
+#, kde-format
+msgid "Failed to fetch the News."
+msgstr "無法取得「新聞」。"

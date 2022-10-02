@@ -1,0 +1,598 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the atelier package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: atelier\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-06-19 00:19+0000\n"
+"PO-Revision-Date: 2021-06-21 19:46+0100\n"
+"Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
+"Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-POFile-SpellExtra: Firmware Rizzitello Freenode Tomaz GCode AtCore Ext\n"
+"X-POFile-SpellExtra: gco Telegram Canabrava Lays gcode Chris SD Chat\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "José Nuno Pires"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "zepires@gmail.com"
+
+#: src/dialogs/choosefiledialog.cpp:43
+#, kde-format
+msgid "Choose a file to print:"
+msgstr "Seleccione um ficheiro a imprimir:"
+
+#: src/dialogs/profilesdialog.cpp:30
+#, kde-format
+msgid "Profiles"
+msgstr "Perfis"
+
+#: src/main.cpp:39
+#, kde-format
+msgid "Atelier"
+msgstr "Atelier"
+
+#: src/main.cpp:43
+#, kde-format
+msgid "Printer Host for 3DPrinters"
+msgstr "Assistente de impressão para Impressoras 3D"
+
+#: src/main.cpp:47
+#, kde-format
+msgid "(c) 2016"
+msgstr "(c) 2016"
+
+#: src/main.cpp:55
+#, kde-format
+msgid "Lays Rodrigues"
+msgstr "Lays Rodrigues"
+
+#: src/main.cpp:55 src/main.cpp:56 src/main.cpp:57
+#, kde-format
+msgid "Developer"
+msgstr "Desenvolvimento"
+
+#: src/main.cpp:56
+#, kde-format
+msgid "Chris Rizzitello"
+msgstr "Chris Rizzitello"
+
+#: src/main.cpp:57
+#, kde-format
+msgid "Patrick Pereira"
+msgstr "Patrick Pereira"
+
+#: src/main.cpp:58
+#, kde-format
+msgid "Tomaz Canabrava"
+msgstr "Tomaz Canabrava"
+
+#: src/main.cpp:58
+#, kde-format
+msgid "Contributor"
+msgstr "Contribuinte"
+
+#: src/main.cpp:59
+#, kde-format
+msgid "Using AtCore: %1"
+msgstr "A Usar o AtCore: %1"
+
+#: src/mainwindow.cpp:125
+#, kde-format
+msgid "Create new instance"
+msgstr "Criar uma nova instância"
+
+#: src/mainwindow.cpp:142
+#, kde-format
+msgid "Connect a printer"
+msgstr "Ligar uma impressora"
+
+#: src/mainwindow.cpp:156 src/widgets/atcoreinstancewidget.cpp:216
+#: src/widgets/atcoreinstancewidget.cpp:450
+#, kde-format
+msgid "Error"
+msgstr "Erro"
+
+#: src/mainwindow.cpp:156
+#, kde-format
+msgid ""
+"There's no GCode file open.\n"
+"Please select a file and try again."
+msgstr ""
+"Não existe nenhum ficheiro de GCode aberto.\n"
+"Seleccione por favor um ficheiro e tente de novo."
+
+#: src/mainwindow.cpp:171
+#, kde-format
+msgid "Document Modified"
+msgstr "Documento Modificado"
+
+#: src/mainwindow.cpp:172
+#, kde-format
+msgid ""
+"%1 \n"
+"Contains unsaved changes that will not be in the print.\n"
+"Would you like to save them before printing?"
+msgstr ""
+"%1 \n"
+"Contém modificações não-gravadas que não irão sair na impressão.\n"
+"Deseja gravá-las antes de imprimir?"
+
+#: src/mainwindow.cpp:260
+#, kde-format
+msgid "Welcome"
+msgstr "Bem-vindo"
+
+#: src/mainwindow.cpp:261
+#, kde-format
+msgid "3D"
+msgstr "3D"
+
+#: src/mainwindow.cpp:262
+#, kde-format
+msgid "GCode"
+msgstr "GCode"
+
+#: src/mainwindow.cpp:263
+#, kde-format
+msgid "Video"
+msgstr "Vídeo"
+
+#: src/mainwindow.cpp:275
+#, kde-format
+msgid "&Open"
+msgstr "&Abrir"
+
+#: src/mainwindow.cpp:282
+#, kde-format
+msgid "&New Connection"
+msgstr "&Nova Ligação"
+
+#: src/mainwindow.cpp:289
+#, kde-format
+msgid "&Profiles"
+msgstr "&Perfis"
+
+#: src/mainwindow.cpp:299
+#, kde-format
+msgid "&Quit"
+msgstr "&Sair"
+
+#: src/mainwindow.cpp:308
+#, kde-format
+msgid "Open GCode"
+msgstr "Abrir o GCode"
+
+#: src/mainwindow.cpp:308
+#, kde-format
+msgid "GCode(*.gco *.gcode);;All Files(*.*)"
+msgstr "GCode(*.gco *.gcode);;Todos os Ficheiros(*.*)"
+
+#: src/mainwindow.cpp:345 src/widgets/atcoreinstancewidget.cpp:435
+#, kde-format
+msgid "Printing"
+msgstr "A imprimir"
+
+#: src/mainwindow.cpp:345
+#, kde-format
+msgid ""
+"Currently printing! \n"
+"Are you sure you want to close?"
+msgstr ""
+"A imprimir neste momento!\n"
+"Tem a certeza que deseja fechar?"
+
+#: src/mainwindow.cpp:396
+#, kde-format
+msgid "Save Selected"
+msgstr "Gravar o Seleccionado"
+
+#: src/mainwindow.cpp:404 src/mainwindow.cpp:422
+#, kde-format
+msgid "Save Failed"
+msgstr "A Gravação Falhou"
+
+#: src/mainwindow.cpp:404 src/mainwindow.cpp:422
+#, kde-format
+msgid "Failed to save file: %1"
+msgstr "Não foi possível gravar o ficheiro: %1"
+
+#: src/mainwindow.cpp:417
+#, kde-format
+msgid "Save All"
+msgstr "Gravar Tudo"
+
+#: src/mainwindow.cpp:432
+#, kde-format
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: src/mainwindow.cpp:438
+#, kde-format
+msgid "Discard Changes"
+msgstr "Esquecer as Alterações"
+
+#: src/mainwindow.cpp:444
+#, kde-format
+msgid "Files with Unsaved Changes."
+msgstr "Ficheiros com Modificações Não-Gravadas."
+
+#: src/widgets/atcoreinstancewidget.cpp:91
+#, kde-format
+msgid "Controls"
+msgstr "Controlos"
+
+#: src/widgets/atcoreinstancewidget.cpp:92
+#, kde-format
+msgid "Advanced"
+msgstr "Avançado"
+
+#: src/widgets/atcoreinstancewidget.cpp:93
+#, kde-format
+msgid "Sd Card"
+msgstr "Cartão SD"
+
+#: src/widgets/atcoreinstancewidget.cpp:120
+#, kde-format
+msgid "Home:"
+msgstr "Início:"
+
+#: src/widgets/atcoreinstancewidget.cpp:123
+#, kde-format
+msgid "All"
+msgstr "Tudo"
+
+#: src/widgets/atcoreinstancewidget.cpp:135
+#: src/widgets/atcoreinstancewidget.cpp:154
+#: src/widgets/atcoreinstancewidget.cpp:430
+#, kde-format
+msgid "Print"
+msgstr "Imprimir"
+
+#: src/widgets/atcoreinstancewidget.cpp:138
+#, kde-format
+msgid "Pause Print"
+msgstr "Pausar a Impressão"
+
+#: src/widgets/atcoreinstancewidget.cpp:145
+#, kde-format
+msgid "Resume Print"
+msgstr "Retomar a Impressão"
+
+#: src/widgets/atcoreinstancewidget.cpp:151
+#, kde-format
+msgid "Stop"
+msgstr "Parar"
+
+#: src/widgets/atcoreinstancewidget.cpp:159
+#, kde-format
+msgid "Disable Motors"
+msgstr "Desactivar os Motores"
+
+#: src/widgets/atcoreinstancewidget.cpp:171
+#, kde-format
+msgid "Device"
+msgstr "Dispositivo"
+
+#: src/widgets/atcoreinstancewidget.cpp:179
+#, kde-format
+msgid "Profile"
+msgstr "Perfil"
+
+#: src/widgets/atcoreinstancewidget.cpp:191
+#: src/widgets/atcoreinstancewidget.cpp:413
+#, kde-format
+msgid "Connect"
+msgstr "Ligar"
+
+#: src/widgets/atcoreinstancewidget.cpp:210
+#, kde-format
+msgid "No Profiles!"
+msgstr "Sem Perfis!"
+
+#: src/widgets/atcoreinstancewidget.cpp:210
+#, kde-format
+msgid ""
+"Connecting requires creating a profile for your printer. Create a profile in "
+"the next dialog then try again."
+msgstr ""
+"A ligação obriga à criação de um perfil para a sua impressora. Crie um "
+"perfil na janela seguinte e tente de novo."
+
+#: src/widgets/atcoreinstancewidget.cpp:216
+#, kde-format
+msgid "Please, connect a serial device to continue!"
+msgstr "Por favor, ligue um dispositivo série para continuar!"
+
+#: src/widgets/atcoreinstancewidget.cpp:248
+#, kde-format
+msgid "Connect a Printer"
+msgstr "Ligar uma Impressora"
+
+#: src/widgets/atcoreinstancewidget.cpp:275
+#, kde-format
+msgid "Push: %1"
+msgstr "Envio: %1"
+
+#: src/widgets/atcoreinstancewidget.cpp:280
+#, kde-format
+msgid "Display: %1"
+msgstr "Apresentação: %1"
+
+#: src/widgets/atcoreinstancewidget.cpp:300
+#, kde-format
+msgid "Relative Move: %1, %2"
+msgstr "Movimento Relativo: %1, %2"
+
+#: src/widgets/atcoreinstancewidget.cpp:313
+#, kde-format
+msgid "Print Error"
+msgstr "Erro de Impressão"
+
+#: src/widgets/atcoreinstancewidget.cpp:313
+#: src/widgets/atcoreinstancewidget.cpp:322
+#, kde-format
+msgid "You must select a file from the list"
+msgstr "Tem de seleccionar um ficheiro da lista"
+
+#: src/widgets/atcoreinstancewidget.cpp:322
+#, kde-format
+msgid "Delete Error"
+msgstr "Erro na Remoção"
+
+#: src/widgets/atcoreinstancewidget.cpp:332
+#, kde-format
+msgid "Filename Empty"
+msgstr "Nome do Ficheiro em Branco"
+
+#: src/widgets/atcoreinstancewidget.cpp:332
+#, kde-format
+msgid "No filename sent from calling method, please check and try again."
+msgstr ""
+"Não foi indicado nenhum ficheiro na invocação do método; verifique por favor "
+"e tente de novo."
+
+#: src/widgets/atcoreinstancewidget.cpp:336
+#, kde-format
+msgid "File not found"
+msgstr "O ficheiro não foi encontrado"
+
+#: src/widgets/atcoreinstancewidget.cpp:336
+#, kde-format
+msgid ""
+"%1 \n"
+"Is not readable, please check and try again."
+msgstr ""
+"%1 \n"
+"Não é legível; verifique por favor e tente de novo."
+
+#: src/widgets/atcoreinstancewidget.cpp:340
+#, kde-format
+msgid "Printing: %1"
+msgstr "A imprimir: %1"
+
+#: src/widgets/atcoreinstancewidget.cpp:376
+#, kde-format
+msgid "Disconnect"
+msgstr "Desligar"
+
+#: src/widgets/atcoreinstancewidget.cpp:380
+#, kde-format
+msgid "Connecting..."
+msgstr "A ligar..."
+
+#: src/widgets/atcoreinstancewidget.cpp:381
+#, kde-format
+msgid "Attempting to Connect"
+msgstr "A tentar ligar-se"
+
+#: src/widgets/atcoreinstancewidget.cpp:390
+#, kde-format
+msgid "Connected to %1"
+msgstr "Ligado a %1"
+
+#: src/widgets/atcoreinstancewidget.cpp:408
+#, kde-format
+msgid "Not Connected"
+msgstr "Desligado"
+
+#: src/widgets/atcoreinstancewidget.cpp:411
+#, kde-format
+msgid "Serial disconnected"
+msgstr "O dispositivo série desligou-se"
+
+#: src/widgets/atcoreinstancewidget.cpp:422
+#, kde-format
+msgid "Starting Print"
+msgstr "A Iniciar a Impressão"
+
+#: src/widgets/atcoreinstancewidget.cpp:427
+#, kde-format
+msgid "Finished Print"
+msgstr "A Terminar a Impressão"
+
+#: src/widgets/atcoreinstancewidget.cpp:432
+#, kde-format
+msgid "Finished Print Job"
+msgstr "Tarefa de Impressão Terminada"
+
+#: src/widgets/atcoreinstancewidget.cpp:437
+#, kde-format
+msgid "Pause"
+msgstr "Pausa"
+
+#: src/widgets/atcoreinstancewidget.cpp:441
+#, kde-format
+msgid "Paused"
+msgstr "Em pausa"
+
+#: src/widgets/atcoreinstancewidget.cpp:442
+#, kde-format
+msgid "Resume"
+msgstr "Continuar"
+
+#: src/widgets/atcoreinstancewidget.cpp:446
+#, kde-format
+msgid "Stopping Print"
+msgstr "A Parar a Impressão"
+
+#: src/widgets/atcoreinstancewidget.cpp:453
+#, kde-format
+msgid "Unknown AtCore State, %1"
+msgstr "Estado do AtCore Desconhecido, %1"
+
+#: src/widgets/atcoreinstancewidget.cpp:527
+#, kde-format
+msgid "Found %1 Ports"
+msgstr "Foram Detectadas %1 Portas"
+
+#: src/widgets/atcoreinstancewidget.cpp:529
+#, kde-format
+msgid "No available ports! Please connect a serial device to continue!"
+msgstr ""
+"Não existem portas disponíveis! Ligue por favor um dispositivo série para "
+"continuar!"
+
+#: src/widgets/atcoreinstancewidget.cpp:572
+#: src/widgets/atcoreinstancewidget.cpp:575
+#: src/widgets/atcoreinstancewidget.cpp:579
+#: src/widgets/atcoreinstancewidget.cpp:590
+#: src/widgets/atcoreinstancewidget.cpp:591
+#, kde-format
+msgid "Actual Bed"
+msgstr "Base Actual"
+
+#: src/widgets/atcoreinstancewidget.cpp:582
+#: src/widgets/atcoreinstancewidget.cpp:586
+#: src/widgets/atcoreinstancewidget.cpp:593
+#, kde-format
+msgid "Target Bed"
+msgstr "Base-Alvo"
+
+#: src/widgets/atcoreinstancewidget.cpp:602
+#: src/widgets/atcoreinstancewidget.cpp:606
+#: src/widgets/atcoreinstancewidget.cpp:610
+#: src/widgets/atcoreinstancewidget.cpp:621
+#: src/widgets/atcoreinstancewidget.cpp:622
+#, kde-format
+msgid "Actual Ext.1"
+msgstr "Ext.1 Actual"
+
+#: src/widgets/atcoreinstancewidget.cpp:613
+#: src/widgets/atcoreinstancewidget.cpp:617
+#: src/widgets/atcoreinstancewidget.cpp:624
+#, kde-format
+msgid "Target Ext.1"
+msgstr "Ext.1 Alvo"
+
+#: src/widgets/bedextruderwidget.cpp:29
+#, kde-format
+msgid "Bed"
+msgstr "Base"
+
+#: src/widgets/bedextruderwidget.cpp:30
+#, kde-format
+msgid "HotEnd"
+msgstr "Cabeça"
+
+#: src/widgets/bedextruderwidget.cpp:38
+#, kde-format
+msgid "Active Extruder:"
+msgstr "Extrusão Activa:"
+
+#: src/widgets/videomonitorwidget.cpp:32
+#, kde-format
+msgid "Source url:"
+msgstr "URL de Origem:"
+
+#: src/widgets/videomonitorwidget.cpp:38
+#, kde-format
+msgid ""
+"Valid Urls:\n"
+"        http://www.example.com/stream.avi\n"
+"        rtp://@:1234\n"
+"        mms://mms.examples.com/stream.asx\n"
+"        rtsp://server.example.org:8080/test.sdp"
+msgstr ""
+"URL's Válidos:\n"
+"        http://www.exemplo.com/transmissao.avi\n"
+"        rtp://@:1234\n"
+"        mms://mms.exemplos.com/transmissao.asx\n"
+"        rtsp://servidor.exemplo.org:8080/teste.sdp"
+
+#: src/widgets/welcomewidget.cpp:51
+#, kde-format
+msgid "Welcome to Atelier!"
+msgstr "Bem-vindo ao Atelier!"
+
+#: src/widgets/welcomewidget.cpp:67
+#, kde-format
+msgid "Quick Connect Guide"
+msgstr "Guia de Ligação Rápida"
+
+#: src/widgets/welcomewidget.cpp:71
+#, kde-format
+msgid "1 - Create a Profile."
+msgstr "1 - Crie um Perfil."
+
+#: src/widgets/welcomewidget.cpp:71
+#, kde-format
+msgid "2 - Select the device."
+msgstr "2 - Seleccione o dispositivo."
+
+#: src/widgets/welcomewidget.cpp:71
+#, kde-format
+msgid "3 - Select the profile and connect."
+msgstr "3 - Seleccione o perfil e ligue-se."
+
+#: src/widgets/welcomewidget.cpp:76
+#, kde-format
+msgid "Having a connection problem?"
+msgstr "Está a ter um problema na ligação?"
+
+#: src/widgets/welcomewidget.cpp:80
+#, kde-format
+msgid "See the info section of the Log for common problems."
+msgstr "Veja a secção de informação do Registo para problemas comuns."
+
+#: src/widgets/welcomewidget.cpp:83
+#, kde-format
+msgid "Check our %1Atelier Docs%2 for more information."
+msgstr "Veja a nossa %1Documentação do Atelier%2 para obter mais informações."
+
+#: src/widgets/welcomewidget.cpp:87
+#, kde-format
+msgid "Atelier news!"
+msgstr "Notícias do Atelier!"
+
+#: src/widgets/welcomewidget.cpp:93
+#, kde-format
+msgid "Get Involved"
+msgstr "Envolva-se"
+
+#: src/widgets/welcomewidget.cpp:97
+#, kde-format
+msgid "Join our %1Telegram Group%2!"
+msgstr "Junte-se ao nosso %1Grupo do Telegram%2!"
+
+#: src/widgets/welcomewidget.cpp:101
+#, kde-format
+msgid "You can also find us on Libera Chat IRC #kde-atelier"
+msgstr "Poder-nos-á também encontrar no IRC no Libera Chat #kde-atelier"
+
+#: src/widgets/welcomewidget.cpp:185
+#, kde-format
+msgid "Failed to fetch the News."
+msgstr "Não foi possível obter as notícias."

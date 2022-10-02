@@ -1,0 +1,685 @@
+# Translation of atelier.po to Ukrainian
+# Copyright (C) 2019 This_file_is_part_of_KDE
+# This file is distributed under the license LGPL version 2.1 or
+# version 3 or later versions approved by the membership of KDE e.V.
+#
+# Yuri Chornoivan <yurchor@ukr.net>, 2019, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: atelier\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-06-19 00:19+0000\n"
+"PO-Revision-Date: 2021-06-19 09:17+0300\n"
+"Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
+"Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Lokalize 20.12.0\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Юрій Чорноіван"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "yurchor@ukr.net"
+
+#: src/dialogs/choosefiledialog.cpp:43
+#, kde-format
+msgid "Choose a file to print:"
+msgstr "Виберіть файл для друку:"
+
+#: src/dialogs/profilesdialog.cpp:30
+#, kde-format
+msgid "Profiles"
+msgstr "Профілі"
+
+#: src/main.cpp:39
+#, kde-format
+msgid "Atelier"
+msgstr "Atelier"
+
+#: src/main.cpp:43
+#, kde-format
+msgid "Printer Host for 3DPrinters"
+msgstr "Вузол друку для тривимірних принтерів"
+
+#: src/main.cpp:47
+#, kde-format
+msgid "(c) 2016"
+msgstr "© 2016"
+
+#: src/main.cpp:55
+#, kde-format
+msgid "Lays Rodrigues"
+msgstr "Lays Rodrigues"
+
+#: src/main.cpp:55 src/main.cpp:56 src/main.cpp:57
+#, kde-format
+msgid "Developer"
+msgstr "Розробник"
+
+#: src/main.cpp:56
+#, kde-format
+msgid "Chris Rizzitello"
+msgstr "Chris Rizzitello"
+
+#: src/main.cpp:57
+#, kde-format
+msgid "Patrick Pereira"
+msgstr "Patrick Pereira"
+
+#: src/main.cpp:58
+#, kde-format
+msgid "Tomaz Canabrava"
+msgstr "Tomaz Canabrava"
+
+#: src/main.cpp:58
+#, kde-format
+msgid "Contributor"
+msgstr "Внески"
+
+#: src/main.cpp:59
+#, kde-format
+msgid "Using AtCore: %1"
+msgstr "Використовуємо AtCore:%1"
+
+#: src/mainwindow.cpp:125
+#, kde-format
+msgid "Create new instance"
+msgstr "Створити екземпляр"
+
+#: src/mainwindow.cpp:142
+#, kde-format
+msgid "Connect a printer"
+msgstr "З'єднати принтер"
+
+#: src/mainwindow.cpp:156 src/widgets/atcoreinstancewidget.cpp:216
+#: src/widgets/atcoreinstancewidget.cpp:450
+#, kde-format
+msgid "Error"
+msgstr "Помилка"
+
+#: src/mainwindow.cpp:156
+#, kde-format
+msgid ""
+"There's no GCode file open.\n"
+"Please select a file and try again."
+msgstr ""
+"Немає файла GCode для відкриття. \n"
+"Будь ласка, виберіть файл і повторіть спробу."
+
+#: src/mainwindow.cpp:171
+#, kde-format
+msgid "Document Modified"
+msgstr "Документ змінено"
+
+#: src/mainwindow.cpp:172
+#, kde-format
+msgid ""
+"%1 \n"
+"Contains unsaved changes that will not be in the print.\n"
+"Would you like to save them before printing?"
+msgstr ""
+"%1 \n"
+"Містить незбережені зміни, які не буде надруковано.\n"
+"Хочете зберегти їх до друку?"
+
+#: src/mainwindow.cpp:260
+#, kde-format
+msgid "Welcome"
+msgstr "Вітаємо"
+
+#: src/mainwindow.cpp:261
+#, kde-format
+msgid "3D"
+msgstr "3D"
+
+#: src/mainwindow.cpp:262
+#, kde-format
+msgid "GCode"
+msgstr "GCode"
+
+#: src/mainwindow.cpp:263
+#, kde-format
+msgid "Video"
+msgstr "Відео"
+
+#: src/mainwindow.cpp:275
+#, kde-format
+msgid "&Open"
+msgstr "&Відкрити"
+
+#: src/mainwindow.cpp:282
+#, kde-format
+msgid "&New Connection"
+msgstr "&Створити з'єднання"
+
+#: src/mainwindow.cpp:289
+#, kde-format
+msgid "&Profiles"
+msgstr "П&рофілі"
+
+#: src/mainwindow.cpp:299
+#, kde-format
+msgid "&Quit"
+msgstr "Ви&йти"
+
+#: src/mainwindow.cpp:308
+#, kde-format
+msgid "Open GCode"
+msgstr "Відкрити GCode"
+
+#: src/mainwindow.cpp:308
+#, kde-format
+msgid "GCode(*.gco *.gcode);;All Files(*.*)"
+msgstr "GCode(*.gco *.gcode);;усі файли(*.*)"
+
+#: src/mainwindow.cpp:345 src/widgets/atcoreinstancewidget.cpp:435
+#, kde-format
+msgid "Printing"
+msgstr "Друк"
+
+#: src/mainwindow.cpp:345
+#, kde-format
+msgid ""
+"Currently printing! \n"
+"Are you sure you want to close?"
+msgstr ""
+"Зараз друкуємо!\n"
+"Ви справді хочете завершити роботу програми?"
+
+#: src/mainwindow.cpp:396
+#, kde-format
+msgid "Save Selected"
+msgstr "Вибрано зберігання"
+
+#: src/mainwindow.cpp:404 src/mainwindow.cpp:422
+#, kde-format
+msgid "Save Failed"
+msgstr "Помилка збереження"
+
+#: src/mainwindow.cpp:404 src/mainwindow.cpp:422
+#, kde-format
+msgid "Failed to save file: %1"
+msgstr "Не вдалося зберегти файл: %1"
+
+#: src/mainwindow.cpp:417
+#, kde-format
+msgid "Save All"
+msgstr "Зберегти всі"
+
+#: src/mainwindow.cpp:432
+#, kde-format
+msgid "Cancel"
+msgstr "Скасувати"
+
+#: src/mainwindow.cpp:438
+#, kde-format
+msgid "Discard Changes"
+msgstr "Відкинути зміни"
+
+#: src/mainwindow.cpp:444
+#, kde-format
+msgid "Files with Unsaved Changes."
+msgstr "Файли із незбереженими змінами."
+
+#: src/widgets/atcoreinstancewidget.cpp:91
+#, kde-format
+msgid "Controls"
+msgstr "Керування"
+
+#: src/widgets/atcoreinstancewidget.cpp:92
+#, kde-format
+msgid "Advanced"
+msgstr "Додатково"
+
+#: src/widgets/atcoreinstancewidget.cpp:93
+#, kde-format
+msgid "Sd Card"
+msgstr "Картка SD"
+
+#: src/widgets/atcoreinstancewidget.cpp:120
+#, kde-format
+msgid "Home:"
+msgstr "Домівка:"
+
+#: src/widgets/atcoreinstancewidget.cpp:123
+#, kde-format
+msgid "All"
+msgstr "Всі"
+
+#: src/widgets/atcoreinstancewidget.cpp:135
+#: src/widgets/atcoreinstancewidget.cpp:154
+#: src/widgets/atcoreinstancewidget.cpp:430
+#, kde-format
+msgid "Print"
+msgstr "Друк"
+
+#: src/widgets/atcoreinstancewidget.cpp:138
+#, kde-format
+msgid "Pause Print"
+msgstr "Призупинити друк"
+
+#: src/widgets/atcoreinstancewidget.cpp:145
+#, kde-format
+msgid "Resume Print"
+msgstr "Відновити друк"
+
+#: src/widgets/atcoreinstancewidget.cpp:151
+#, kde-format
+msgid "Stop"
+msgstr "Зупинити"
+
+#: src/widgets/atcoreinstancewidget.cpp:159
+#, kde-format
+msgid "Disable Motors"
+msgstr "Вимкнути мотори"
+
+#: src/widgets/atcoreinstancewidget.cpp:171
+#, kde-format
+msgid "Device"
+msgstr "Пристрій"
+
+#: src/widgets/atcoreinstancewidget.cpp:179
+#, kde-format
+msgid "Profile"
+msgstr "Профіль"
+
+#: src/widgets/atcoreinstancewidget.cpp:191
+#: src/widgets/atcoreinstancewidget.cpp:413
+#, kde-format
+msgid "Connect"
+msgstr "З'єднати"
+
+#: src/widgets/atcoreinstancewidget.cpp:210
+#, kde-format
+msgid "No Profiles!"
+msgstr "Немає профілів!"
+
+#: src/widgets/atcoreinstancewidget.cpp:210
+#, kde-format
+msgid ""
+"Connecting requires creating a profile for your printer. Create a profile in "
+"the next dialog then try again."
+msgstr ""
+"Встановлення з'єднання потребує створення профілю для вашого принтера. "
+"Створіть профіль за допомогою наступного діалогового вікна і повторіть "
+"спробу."
+
+#: src/widgets/atcoreinstancewidget.cpp:216
+#, kde-format
+msgid "Please, connect a serial device to continue!"
+msgstr ""
+"Будь ласка, з'єднайте пристрій за допомогою послідовного порту, щоб "
+"продовжити роботу!"
+
+#: src/widgets/atcoreinstancewidget.cpp:248
+#, kde-format
+msgid "Connect a Printer"
+msgstr "З'єднання принтера"
+
+#: src/widgets/atcoreinstancewidget.cpp:275
+#, kde-format
+msgid "Push: %1"
+msgstr "Надіслати: %1"
+
+#: src/widgets/atcoreinstancewidget.cpp:280
+#, kde-format
+msgid "Display: %1"
+msgstr "Показ: %1"
+
+#: src/widgets/atcoreinstancewidget.cpp:300
+#, kde-format
+msgid "Relative Move: %1, %2"
+msgstr "Відносний рух: %1, %2"
+
+#: src/widgets/atcoreinstancewidget.cpp:313
+#, kde-format
+msgid "Print Error"
+msgstr "Помилка друку"
+
+#: src/widgets/atcoreinstancewidget.cpp:313
+#: src/widgets/atcoreinstancewidget.cpp:322
+#, kde-format
+msgid "You must select a file from the list"
+msgstr "Вам слід вибрати файл зі списку"
+
+#: src/widgets/atcoreinstancewidget.cpp:322
+#, kde-format
+msgid "Delete Error"
+msgstr "Помилка вилучення"
+
+#: src/widgets/atcoreinstancewidget.cpp:332
+#, kde-format
+msgid "Filename Empty"
+msgstr "Порожня назва файла"
+
+#: src/widgets/atcoreinstancewidget.cpp:332
+#, kde-format
+msgid "No filename sent from calling method, please check and try again."
+msgstr ""
+"Від підпрограми, яка викликала це завдання, не надійшло назви файла. Будь "
+"ласка, усуньте цю проблему і повторіть спробу."
+
+#: src/widgets/atcoreinstancewidget.cpp:336
+#, kde-format
+msgid "File not found"
+msgstr "Файл не знайдено"
+
+#: src/widgets/atcoreinstancewidget.cpp:336
+#, kde-format
+msgid ""
+"%1 \n"
+"Is not readable, please check and try again."
+msgstr ""
+"%1 \n"
+"Не непридатним до читання. Будь ласка, усуньте проблему і повторіть спробу."
+
+#: src/widgets/atcoreinstancewidget.cpp:340
+#, kde-format
+msgid "Printing: %1"
+msgstr "Друк: %1"
+
+#: src/widgets/atcoreinstancewidget.cpp:376
+#, kde-format
+msgid "Disconnect"
+msgstr "Роз'єднати"
+
+#: src/widgets/atcoreinstancewidget.cpp:380
+#, kde-format
+msgid "Connecting..."
+msgstr "З'єднання…"
+
+#: src/widgets/atcoreinstancewidget.cpp:381
+#, kde-format
+msgid "Attempting to Connect"
+msgstr "Намагаємося встановити з'єднання"
+
+#: src/widgets/atcoreinstancewidget.cpp:390
+#, kde-format
+msgid "Connected to %1"
+msgstr "З’єднано з %1"
+
+#: src/widgets/atcoreinstancewidget.cpp:408
+#, kde-format
+msgid "Not Connected"
+msgstr "Не з'єднано"
+
+#: src/widgets/atcoreinstancewidget.cpp:411
+#, kde-format
+msgid "Serial disconnected"
+msgstr "Послідовний порт від'єднано"
+
+#: src/widgets/atcoreinstancewidget.cpp:422
+#, kde-format
+msgid "Starting Print"
+msgstr "Розпочинаємо друк"
+
+#: src/widgets/atcoreinstancewidget.cpp:427
+#, kde-format
+msgid "Finished Print"
+msgstr "Завершено друк"
+
+#: src/widgets/atcoreinstancewidget.cpp:432
+#, kde-format
+msgid "Finished Print Job"
+msgstr "Завдання з друку виконано"
+
+#: src/widgets/atcoreinstancewidget.cpp:437
+#, kde-format
+msgid "Pause"
+msgstr "Пауза"
+
+#: src/widgets/atcoreinstancewidget.cpp:441
+#, kde-format
+msgid "Paused"
+msgstr "Призупинено"
+
+#: src/widgets/atcoreinstancewidget.cpp:442
+#, kde-format
+msgid "Resume"
+msgstr "Продовжити"
+
+#: src/widgets/atcoreinstancewidget.cpp:446
+#, kde-format
+msgid "Stopping Print"
+msgstr "Зупиняємо друк"
+
+#: src/widgets/atcoreinstancewidget.cpp:453
+#, kde-format
+msgid "Unknown AtCore State, %1"
+msgstr "Невідомий стан AtCore, %1"
+
+#: src/widgets/atcoreinstancewidget.cpp:527
+#, kde-format
+msgid "Found %1 Ports"
+msgstr "Виявлено порти %1"
+
+#: src/widgets/atcoreinstancewidget.cpp:529
+#, kde-format
+msgid "No available ports! Please connect a serial device to continue!"
+msgstr ""
+"Немає доступних портів. Будь ласка, з'єднайте пристрій з комп'ютером за "
+"допомогою послідовного порту."
+
+#: src/widgets/atcoreinstancewidget.cpp:572
+#: src/widgets/atcoreinstancewidget.cpp:575
+#: src/widgets/atcoreinstancewidget.cpp:579
+#: src/widgets/atcoreinstancewidget.cpp:590
+#: src/widgets/atcoreinstancewidget.cpp:591
+#, kde-format
+msgid "Actual Bed"
+msgstr "Фактичний стенд"
+
+#: src/widgets/atcoreinstancewidget.cpp:582
+#: src/widgets/atcoreinstancewidget.cpp:586
+#: src/widgets/atcoreinstancewidget.cpp:593
+#, kde-format
+msgid "Target Bed"
+msgstr "Стенд призначення"
+
+#: src/widgets/atcoreinstancewidget.cpp:602
+#: src/widgets/atcoreinstancewidget.cpp:606
+#: src/widgets/atcoreinstancewidget.cpp:610
+#: src/widgets/atcoreinstancewidget.cpp:621
+#: src/widgets/atcoreinstancewidget.cpp:622
+#, kde-format
+msgid "Actual Ext.1"
+msgstr "Фактичне розш.1"
+
+#: src/widgets/atcoreinstancewidget.cpp:613
+#: src/widgets/atcoreinstancewidget.cpp:617
+#: src/widgets/atcoreinstancewidget.cpp:624
+#, kde-format
+msgid "Target Ext.1"
+msgstr "Розш.1 призначення"
+
+#: src/widgets/bedextruderwidget.cpp:29
+#, kde-format
+msgid "Bed"
+msgstr "Основа"
+
+#: src/widgets/bedextruderwidget.cpp:30
+#, kde-format
+msgid "HotEnd"
+msgstr "Гарячий кінець"
+
+#: src/widgets/bedextruderwidget.cpp:38
+#, kde-format
+msgid "Active Extruder:"
+msgstr "Активний екструдер:"
+
+#: src/widgets/videomonitorwidget.cpp:32
+#, kde-format
+msgid "Source url:"
+msgstr "Адреса джерела:"
+
+#: src/widgets/videomonitorwidget.cpp:38
+#, kde-format
+msgid ""
+"Valid Urls:\n"
+"        http://www.example.com/stream.avi\n"
+"        rtp://@:1234\n"
+"        mms://mms.examples.com/stream.asx\n"
+"        rtsp://server.example.org:8080/test.sdp"
+msgstr ""
+"Коректні адреси:\n"
+"        http://www.example.com/stream.avi\n"
+"        rtp://@:1234\n"
+"        mms://mms.examples.com/stream.asx\n"
+"        rtsp://server.example.org:8080/test.sdp"
+
+#: src/widgets/welcomewidget.cpp:51
+#, kde-format
+msgid "Welcome to Atelier!"
+msgstr "Вітаємо у Atelier!"
+
+#: src/widgets/welcomewidget.cpp:67
+#, kde-format
+msgid "Quick Connect Guide"
+msgstr "Настанови зі швидкого з'єднання"
+
+#: src/widgets/welcomewidget.cpp:71
+#, kde-format
+msgid "1 - Create a Profile."
+msgstr "1 — створіть профіль."
+
+#: src/widgets/welcomewidget.cpp:71
+#, kde-format
+msgid "2 - Select the device."
+msgstr "2 — виберіть пристрій."
+
+#: src/widgets/welcomewidget.cpp:71
+#, kde-format
+msgid "3 - Select the profile and connect."
+msgstr "3 — виберіть профіль і встановіть з'єднання."
+
+#: src/widgets/welcomewidget.cpp:76
+#, kde-format
+msgid "Having a connection problem?"
+msgstr "Маєте проблеми зі з'єднанням?"
+
+#: src/widgets/welcomewidget.cpp:80
+#, kde-format
+msgid "See the info section of the Log for common problems."
+msgstr ""
+"Записи щодо типових проблем можна знайти у інформаційному розділі журналу."
+
+#: src/widgets/welcomewidget.cpp:83
+#, kde-format
+msgid "Check our %1Atelier Docs%2 for more information."
+msgstr "Ознайомтеся із %1документацією до Atelier%2, щоб дізнатися більше."
+
+#: src/widgets/welcomewidget.cpp:87
+#, kde-format
+msgid "Atelier news!"
+msgstr "Новини Atelier!"
+
+#: src/widgets/welcomewidget.cpp:93
+#, kde-format
+msgid "Get Involved"
+msgstr "Приєднатися до команди"
+
+#: src/widgets/welcomewidget.cpp:97
+#, kde-format
+msgid "Join our %1Telegram Group%2!"
+msgstr "Приєднуйтеся до нашої %1групи у Telegram%2!"
+
+#: src/widgets/welcomewidget.cpp:101
+#, kde-format
+msgid "You can also find us on Libera Chat IRC #kde-atelier"
+msgstr "Ви також можете знайти нас на каналі IRC Libera Chat #kde-atelier"
+
+#: src/widgets/welcomewidget.cpp:185
+#, kde-format
+msgid "Failed to fetch the News."
+msgstr "Не вдалося отримати новини."
+
+#~ msgid "Overwrite Profile?"
+#~ msgstr "Перезаписати профіль?"
+
+#~ msgid ""
+#~ "A profile with this name already exists. \n"
+#~ " Are you sure you want to overwrite it?"
+#~ msgstr ""
+#~ "Профіль з вказаною вами назвою вже існує.\n"
+#~ "Ви справді хочете його перезаписати?"
+
+#~ msgid "Save?"
+#~ msgstr "Зберегти?"
+
+#~ msgid "This profile has been modified, Would you like to Save it?"
+#~ msgstr "До цього профілю було внесено зміни. Хочете його зберегти?"
+
+#~ msgid "Remove Profile"
+#~ msgstr "Вилучити профіль"
+
+#~ msgid "Mechanics"
+#~ msgstr "Механіка"
+
+#~ msgid "Printer Type"
+#~ msgstr "Тип принтера"
+
+#~ msgid "&Cartesian"
+#~ msgstr "Пр&ямокутний"
+
+#~ msgid "&Delta"
+#~ msgstr "&Дельта"
+
+#~ msgid "Radi&us"
+#~ msgstr "&Радіус"
+
+#~ msgid " mm"
+#~ msgstr " мм"
+
+#~ msgid "Dimension &Z"
+#~ msgstr "Розмірність &Z"
+
+#~ msgid "Dimension &X"
+#~ msgstr "Розмірність &X"
+
+#~ msgid "Dimension &Y"
+#~ msgstr "Розмірність &Y"
+
+#~ msgid "Temperatures"
+#~ msgstr "Температури"
+
+#~ msgid "Maxim&um Bed"
+#~ msgstr "&Максимальна основа"
+
+#~ msgid " ºC"
+#~ msgstr " ºC"
+
+#~ msgid ""
+#~ "<html><head/><body><p>Temperature reporting using M155 command. When "
+#~ "enabled the printer will return temperature data automatically at a set "
+#~ "interval.</p></body></html>"
+#~ msgstr ""
+#~ "<html><head/><body><p>Звітування щодо температури за допомогою команди "
+#~ "M155. Якщо увімкнути, принтер автоматично надсилатиме дані щодо "
+#~ "температури із вказаним проміжком між вимірами.</p></body></html>"
+
+#~ msgid "Auto Temperature Report"
+#~ msgstr "Автоматичне звітування щодо температури"
+
+#~ msgid "Ma&ximum Hotend"
+#~ msgstr "М&аксимальний гарячий кінець"
+
+#~ msgid "Hea&ted bed?"
+#~ msgstr "Ос&нова із підігрівом?"
+
+#~ msgid "Bi&ts per second"
+#~ msgstr "&Біти за секунду"
+
+#~ msgid "Firmware"
+#~ msgstr "Мікропрограма"
+
+#~ msgid "PostPa&use"
+#~ msgstr "Постпау&за"

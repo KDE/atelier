@@ -1,0 +1,596 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the atelier package.
+#
+# Matjaž Jeran <matjaz.jeran@amis.net>, 2020, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: atelier\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-06-19 00:19+0000\n"
+"PO-Revision-Date: 2021-06-25 22:04+0200\n"
+"Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
+"Language-Team: Slovenian <lugos-slo@lugos.si>\n"
+"Language: sl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 20.12.2\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
+"%100==4 ? 3 : 0);\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Matjaž Jeran"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "matjaz.jeran@amis.net"
+
+#: src/dialogs/choosefiledialog.cpp:43
+#, kde-format
+msgid "Choose a file to print:"
+msgstr "Izberite datoteko za tisk:"
+
+#: src/dialogs/profilesdialog.cpp:30
+#, kde-format
+msgid "Profiles"
+msgstr "Profili"
+
+#: src/main.cpp:39
+#, kde-format
+msgid "Atelier"
+msgstr "Atelier"
+
+#: src/main.cpp:43
+#, kde-format
+msgid "Printer Host for 3DPrinters"
+msgstr "Gostitelj tiskalnikov za 3D tisk"
+
+#: src/main.cpp:47
+#, kde-format
+msgid "(c) 2016"
+msgstr "(c) 2016"
+
+#: src/main.cpp:55
+#, kde-format
+msgid "Lays Rodrigues"
+msgstr "Lays Rodrigues"
+
+#: src/main.cpp:55 src/main.cpp:56 src/main.cpp:57
+#, kde-format
+msgid "Developer"
+msgstr "Razvijalec"
+
+#: src/main.cpp:56
+#, kde-format
+msgid "Chris Rizzitello"
+msgstr "Chris Rizzitello"
+
+#: src/main.cpp:57
+#, kde-format
+msgid "Patrick Pereira"
+msgstr "Patrick Pereira"
+
+#: src/main.cpp:58
+#, kde-format
+msgid "Tomaz Canabrava"
+msgstr "Tomaz Canabrava"
+
+#: src/main.cpp:58
+#, kde-format
+msgid "Contributor"
+msgstr "Prispeval"
+
+#: src/main.cpp:59
+#, kde-format
+msgid "Using AtCore: %1"
+msgstr "Uporablja AtCore: %1"
+
+#: src/mainwindow.cpp:125
+#, kde-format
+msgid "Create new instance"
+msgstr "Ustvari nov pojavek"
+
+#: src/mainwindow.cpp:142
+#, kde-format
+msgid "Connect a printer"
+msgstr "Poveži tiskalnik"
+
+#: src/mainwindow.cpp:156 src/widgets/atcoreinstancewidget.cpp:216
+#: src/widgets/atcoreinstancewidget.cpp:450
+#, kde-format
+msgid "Error"
+msgstr "Napaka"
+
+#: src/mainwindow.cpp:156
+#, kde-format
+msgid ""
+"There's no GCode file open.\n"
+"Please select a file and try again."
+msgstr ""
+"Ni datoteka GCode, da bi jo odprl.\n"
+"Izberite datoteko in poskusite znova."
+
+#: src/mainwindow.cpp:171
+#, kde-format
+msgid "Document Modified"
+msgstr "Dokument je spremenjen"
+
+#: src/mainwindow.cpp:172
+#, kde-format
+msgid ""
+"%1 \n"
+"Contains unsaved changes that will not be in the print.\n"
+"Would you like to save them before printing?"
+msgstr ""
+"%1\n"
+"Vsebuje neshranjene spremembe, ki ne bodo šle v tisk.\n"
+"Bi jih radi shranili pred tiskanjem?"
+
+#: src/mainwindow.cpp:260
+#, kde-format
+msgid "Welcome"
+msgstr "Dobrodošli"
+
+#: src/mainwindow.cpp:261
+#, kde-format
+msgid "3D"
+msgstr "3D"
+
+#: src/mainwindow.cpp:262
+#, kde-format
+msgid "GCode"
+msgstr "GCode"
+
+#: src/mainwindow.cpp:263
+#, kde-format
+msgid "Video"
+msgstr "Video"
+
+#: src/mainwindow.cpp:275
+#, kde-format
+msgid "&Open"
+msgstr "&Odpri"
+
+#: src/mainwindow.cpp:282
+#, kde-format
+msgid "&New Connection"
+msgstr "&Nova povezava"
+
+#: src/mainwindow.cpp:289
+#, kde-format
+msgid "&Profiles"
+msgstr "&Profili"
+
+#: src/mainwindow.cpp:299
+#, kde-format
+msgid "&Quit"
+msgstr "Zapusti"
+
+#: src/mainwindow.cpp:308
+#, kde-format
+msgid "Open GCode"
+msgstr "Odpri GCode"
+
+#: src/mainwindow.cpp:308
+#, kde-format
+msgid "GCode(*.gco *.gcode);;All Files(*.*)"
+msgstr "GCode(*.gco *.gcode);;Vse datoteke(*.*)"
+
+#: src/mainwindow.cpp:345 src/widgets/atcoreinstancewidget.cpp:435
+#, kde-format
+msgid "Printing"
+msgstr "Tiskam"
+
+#: src/mainwindow.cpp:345
+#, kde-format
+msgid ""
+"Currently printing! \n"
+"Are you sure you want to close?"
+msgstr ""
+"Trenutno tiskam!\n"
+"Ali ste prepričani, da želite zapreti?"
+
+#: src/mainwindow.cpp:396
+#, kde-format
+msgid "Save Selected"
+msgstr "Shrani izbrano"
+
+#: src/mainwindow.cpp:404 src/mainwindow.cpp:422
+#, kde-format
+msgid "Save Failed"
+msgstr "Shranjevanje ni uspelo"
+
+#: src/mainwindow.cpp:404 src/mainwindow.cpp:422
+#, kde-format
+msgid "Failed to save file: %1"
+msgstr "Neuspelo shranjevanje datoteke: %1"
+
+#: src/mainwindow.cpp:417
+#, kde-format
+msgid "Save All"
+msgstr "Shrani vse"
+
+#: src/mainwindow.cpp:432
+#, kde-format
+msgid "Cancel"
+msgstr "Prekliči"
+
+#: src/mainwindow.cpp:438
+#, kde-format
+msgid "Discard Changes"
+msgstr "Zavrzi spremembe"
+
+#: src/mainwindow.cpp:444
+#, kde-format
+msgid "Files with Unsaved Changes."
+msgstr "Datoteke z neshranjenimi spremembami."
+
+#: src/widgets/atcoreinstancewidget.cpp:91
+#, kde-format
+msgid "Controls"
+msgstr "Kontrole"
+
+#: src/widgets/atcoreinstancewidget.cpp:92
+#, kde-format
+msgid "Advanced"
+msgstr "Napredno"
+
+#: src/widgets/atcoreinstancewidget.cpp:93
+#, kde-format
+msgid "Sd Card"
+msgstr "Kartica Sd"
+
+#: src/widgets/atcoreinstancewidget.cpp:120
+#, kde-format
+msgid "Home:"
+msgstr "Domov:"
+
+#: src/widgets/atcoreinstancewidget.cpp:123
+#, kde-format
+msgid "All"
+msgstr "Vse"
+
+#: src/widgets/atcoreinstancewidget.cpp:135
+#: src/widgets/atcoreinstancewidget.cpp:154
+#: src/widgets/atcoreinstancewidget.cpp:430
+#, kde-format
+msgid "Print"
+msgstr "Tisk"
+
+#: src/widgets/atcoreinstancewidget.cpp:138
+#, kde-format
+msgid "Pause Print"
+msgstr "Zaustavi tisk"
+
+#: src/widgets/atcoreinstancewidget.cpp:145
+#, kde-format
+msgid "Resume Print"
+msgstr "Nadaljuj tisk"
+
+#: src/widgets/atcoreinstancewidget.cpp:151
+#, kde-format
+msgid "Stop"
+msgstr "Ustavi"
+
+#: src/widgets/atcoreinstancewidget.cpp:159
+#, kde-format
+msgid "Disable Motors"
+msgstr "Onemogoči motorje"
+
+#: src/widgets/atcoreinstancewidget.cpp:171
+#, kde-format
+msgid "Device"
+msgstr "Naprava"
+
+#: src/widgets/atcoreinstancewidget.cpp:179
+#, kde-format
+msgid "Profile"
+msgstr "Profil"
+
+#: src/widgets/atcoreinstancewidget.cpp:191
+#: src/widgets/atcoreinstancewidget.cpp:413
+#, kde-format
+msgid "Connect"
+msgstr "Poveži"
+
+#: src/widgets/atcoreinstancewidget.cpp:210
+#, kde-format
+msgid "No Profiles!"
+msgstr "Ni profilov!"
+
+#: src/widgets/atcoreinstancewidget.cpp:210
+#, kde-format
+msgid ""
+"Connecting requires creating a profile for your printer. Create a profile in "
+"the next dialog then try again."
+msgstr ""
+"Za povezovanje je treba ustvariti profil za tiskalnik. Ustvarite profil v "
+"naslednjem pogovornem oknu in poskusite znova."
+
+#: src/widgets/atcoreinstancewidget.cpp:216
+#, kde-format
+msgid "Please, connect a serial device to continue!"
+msgstr "Za nadaljevanje priključite serijsko napravo!"
+
+#: src/widgets/atcoreinstancewidget.cpp:248
+#, kde-format
+msgid "Connect a Printer"
+msgstr "Povežite tiskalnik"
+
+#: src/widgets/atcoreinstancewidget.cpp:275
+#, kde-format
+msgid "Push: %1"
+msgstr "Porini: %1"
+
+#: src/widgets/atcoreinstancewidget.cpp:280
+#, kde-format
+msgid "Display: %1"
+msgstr "Prikaži: %1"
+
+#: src/widgets/atcoreinstancewidget.cpp:300
+#, kde-format
+msgid "Relative Move: %1, %2"
+msgstr "Relativni pomik: %1, %2"
+
+#: src/widgets/atcoreinstancewidget.cpp:313
+#, kde-format
+msgid "Print Error"
+msgstr "Napaka tiska"
+
+#: src/widgets/atcoreinstancewidget.cpp:313
+#: src/widgets/atcoreinstancewidget.cpp:322
+#, kde-format
+msgid "You must select a file from the list"
+msgstr "Izbrati morate datoteko s seznama"
+
+#: src/widgets/atcoreinstancewidget.cpp:322
+#, kde-format
+msgid "Delete Error"
+msgstr "Napaka brisanja"
+
+#: src/widgets/atcoreinstancewidget.cpp:332
+#, kde-format
+msgid "Filename Empty"
+msgstr "Datoteka je prazna"
+
+#: src/widgets/atcoreinstancewidget.cpp:332
+#, kde-format
+msgid "No filename sent from calling method, please check and try again."
+msgstr ""
+"Iz klicne metode ni poslano nobeno ime datoteke, preverite in poskusite "
+"znova."
+
+#: src/widgets/atcoreinstancewidget.cpp:336
+#, kde-format
+msgid "File not found"
+msgstr "Datoteke ni mogoče najti"
+
+#: src/widgets/atcoreinstancewidget.cpp:336
+#, kde-format
+msgid ""
+"%1 \n"
+"Is not readable, please check and try again."
+msgstr ""
+"%1 \n"
+"ni berljiva, preverite in poskusite ponovno."
+
+#: src/widgets/atcoreinstancewidget.cpp:340
+#, kde-format
+msgid "Printing: %1"
+msgstr "Tiskam: %1"
+
+#: src/widgets/atcoreinstancewidget.cpp:376
+#, kde-format
+msgid "Disconnect"
+msgstr "Odklopi"
+
+#: src/widgets/atcoreinstancewidget.cpp:380
+#, kde-format
+msgid "Connecting..."
+msgstr "Povezujem se..."
+
+#: src/widgets/atcoreinstancewidget.cpp:381
+#, kde-format
+msgid "Attempting to Connect"
+msgstr "Poskus povezovanja"
+
+#: src/widgets/atcoreinstancewidget.cpp:390
+#, kde-format
+msgid "Connected to %1"
+msgstr "Povezan na %1"
+
+#: src/widgets/atcoreinstancewidget.cpp:408
+#, kde-format
+msgid "Not Connected"
+msgstr "Ni povezan"
+
+#: src/widgets/atcoreinstancewidget.cpp:411
+#, kde-format
+msgid "Serial disconnected"
+msgstr "Serijsko nepovezan"
+
+#: src/widgets/atcoreinstancewidget.cpp:422
+#, kde-format
+msgid "Starting Print"
+msgstr "Začenjam tiskanje"
+
+#: src/widgets/atcoreinstancewidget.cpp:427
+#, kde-format
+msgid "Finished Print"
+msgstr "Zaključeno tiskanje"
+
+#: src/widgets/atcoreinstancewidget.cpp:432
+#, kde-format
+msgid "Finished Print Job"
+msgstr "Končan postopek tiska"
+
+#: src/widgets/atcoreinstancewidget.cpp:437
+#, kde-format
+msgid "Pause"
+msgstr "Premor"
+
+#: src/widgets/atcoreinstancewidget.cpp:441
+#, kde-format
+msgid "Paused"
+msgstr "V premoru"
+
+#: src/widgets/atcoreinstancewidget.cpp:442
+#, kde-format
+msgid "Resume"
+msgstr "Nadaljuj"
+
+#: src/widgets/atcoreinstancewidget.cpp:446
+#, kde-format
+msgid "Stopping Print"
+msgstr "Zaustavljam tisk"
+
+#: src/widgets/atcoreinstancewidget.cpp:453
+#, kde-format
+msgid "Unknown AtCore State, %1"
+msgstr "Neznano stanje AtCore, %1"
+
+#: src/widgets/atcoreinstancewidget.cpp:527
+#, kde-format
+msgid "Found %1 Ports"
+msgstr "Najdena %1 vrata"
+
+#: src/widgets/atcoreinstancewidget.cpp:529
+#, kde-format
+msgid "No available ports! Please connect a serial device to continue!"
+msgstr ""
+"Nobenih vrat ni na voljo! Povežite se na serijsko napravo za nadaljevanje!"
+
+#: src/widgets/atcoreinstancewidget.cpp:572
+#: src/widgets/atcoreinstancewidget.cpp:575
+#: src/widgets/atcoreinstancewidget.cpp:579
+#: src/widgets/atcoreinstancewidget.cpp:590
+#: src/widgets/atcoreinstancewidget.cpp:591
+#, kde-format
+msgid "Actual Bed"
+msgstr "Trenutna podlaga"
+
+#: src/widgets/atcoreinstancewidget.cpp:582
+#: src/widgets/atcoreinstancewidget.cpp:586
+#: src/widgets/atcoreinstancewidget.cpp:593
+#, kde-format
+msgid "Target Bed"
+msgstr "Ciljna podlaga"
+
+#: src/widgets/atcoreinstancewidget.cpp:602
+#: src/widgets/atcoreinstancewidget.cpp:606
+#: src/widgets/atcoreinstancewidget.cpp:610
+#: src/widgets/atcoreinstancewidget.cpp:621
+#: src/widgets/atcoreinstancewidget.cpp:622
+#, kde-format
+msgid "Actual Ext.1"
+msgstr "Trenutna razširitev.1"
+
+#: src/widgets/atcoreinstancewidget.cpp:613
+#: src/widgets/atcoreinstancewidget.cpp:617
+#: src/widgets/atcoreinstancewidget.cpp:624
+#, kde-format
+msgid "Target Ext.1"
+msgstr "Ciljna razširitev.1"
+
+#: src/widgets/bedextruderwidget.cpp:29
+#, kde-format
+msgid "Bed"
+msgstr "Podlaga"
+
+#: src/widgets/bedextruderwidget.cpp:30
+#, kde-format
+msgid "HotEnd"
+msgstr "Vročikonec"
+
+#: src/widgets/bedextruderwidget.cpp:38
+#, kde-format
+msgid "Active Extruder:"
+msgstr "Dejavni ekstruder:"
+
+#: src/widgets/videomonitorwidget.cpp:32
+#, kde-format
+msgid "Source url:"
+msgstr "Url vira:"
+
+#: src/widgets/videomonitorwidget.cpp:38
+#, kde-format
+msgid ""
+"Valid Urls:\n"
+"        http://www.example.com/stream.avi\n"
+"        rtp://@:1234\n"
+"        mms://mms.examples.com/stream.asx\n"
+"        rtsp://server.example.org:8080/test.sdp"
+msgstr ""
+"Veljavni naslovi:\n"
+"       http://www.example.com/stream.avi\n"
+"        rtp://@:1234\n"
+"        mms://mms.examples.com/stream.asx\n"
+"        rtsp://server.example.org:8080/test.sdp"
+
+#: src/widgets/welcomewidget.cpp:51
+#, kde-format
+msgid "Welcome to Atelier!"
+msgstr "Dobrodošli v Atelier!"
+
+#: src/widgets/welcomewidget.cpp:67
+#, kde-format
+msgid "Quick Connect Guide"
+msgstr "Hitra navodila za priklop"
+
+#: src/widgets/welcomewidget.cpp:71
+#, kde-format
+msgid "1 - Create a Profile."
+msgstr "1- Ustvarite profil."
+
+#: src/widgets/welcomewidget.cpp:71
+#, kde-format
+msgid "2 - Select the device."
+msgstr "2- Izberite napravo."
+
+#: src/widgets/welcomewidget.cpp:71
+#, kde-format
+msgid "3 - Select the profile and connect."
+msgstr "3 - Izberite profil in se povežite."
+
+#: src/widgets/welcomewidget.cpp:76
+#, kde-format
+msgid "Having a connection problem?"
+msgstr "Imate težavo s povezovanjem?"
+
+#: src/widgets/welcomewidget.cpp:80
+#, kde-format
+msgid "See the info section of the Log for common problems."
+msgstr "Za pogoste težave poglejte razdelek z informacijami v dnevniku."
+
+#: src/widgets/welcomewidget.cpp:83
+#, kde-format
+msgid "Check our %1Atelier Docs%2 for more information."
+msgstr "Za več informacij poglejte v naše %1Atelier dokumente%2."
+
+#: src/widgets/welcomewidget.cpp:87
+#, kde-format
+msgid "Atelier news!"
+msgstr "Novice o Atelieru!"
+
+#: src/widgets/welcomewidget.cpp:93
+#, kde-format
+msgid "Get Involved"
+msgstr "Bodite vpleteni"
+
+#: src/widgets/welcomewidget.cpp:97
+#, kde-format
+msgid "Join our %1Telegram Group%2!"
+msgstr "Pridružite se naši skupini na %1Telegram Group%2!"
+
+#: src/widgets/welcomewidget.cpp:101
+#, kde-format
+msgid "You can also find us on Libera Chat IRC #kde-atelier"
+msgstr "Lahko nas najdete tudi na Libera Chat IRC #kde-atelier"
+
+#: src/widgets/welcomewidget.cpp:185
+#, kde-format
+msgid "Failed to fetch the News."
+msgstr "Novic ni bilo mogoče pridobiti."

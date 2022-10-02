@@ -1,0 +1,595 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the atelier package.
+#
+# Marek Laane <qiilaq69@gmail.com>, 2020.
+msgid ""
+msgstr ""
+"Project-Id-Version: atelier\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-06-19 00:19+0000\n"
+"PO-Revision-Date: 2020-06-05 19:29+0300\n"
+"Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
+"Language-Team: Estonian <kde-et@lists.linux.ee>\n"
+"Language: et\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 19.12.3\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Marek Laane"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "qiilaq69@gmail.com"
+
+#: src/dialogs/choosefiledialog.cpp:43
+#, kde-format
+msgid "Choose a file to print:"
+msgstr "Trükitav fail:"
+
+#: src/dialogs/profilesdialog.cpp:30
+#, kde-format
+msgid "Profiles"
+msgstr "Profiilid"
+
+#: src/main.cpp:39
+#, kde-format
+msgid "Atelier"
+msgstr "Atelier"
+
+#: src/main.cpp:43
+#, kde-format
+msgid "Printer Host for 3DPrinters"
+msgstr "3D printimine"
+
+#: src/main.cpp:47
+#, kde-format
+msgid "(c) 2016"
+msgstr "(c) 2016"
+
+#: src/main.cpp:55
+#, kde-format
+msgid "Lays Rodrigues"
+msgstr "Lays Rodrigues"
+
+#: src/main.cpp:55 src/main.cpp:56 src/main.cpp:57
+#, kde-format
+msgid "Developer"
+msgstr "Arendaja"
+
+#: src/main.cpp:56
+#, kde-format
+msgid "Chris Rizzitello"
+msgstr "Chris Rizzitello"
+
+#: src/main.cpp:57
+#, kde-format
+msgid "Patrick Pereira"
+msgstr "Patrick Pereira"
+
+#: src/main.cpp:58
+#, kde-format
+msgid "Tomaz Canabrava"
+msgstr "Tomaz Canabrava"
+
+#: src/main.cpp:58
+#, kde-format
+msgid "Contributor"
+msgstr "Kaasautor"
+
+#: src/main.cpp:59
+#, kde-format
+msgid "Using AtCore: %1"
+msgstr "AtCore versioon: %1"
+
+#: src/mainwindow.cpp:125
+#, kde-format
+msgid "Create new instance"
+msgstr "Uue isendi loomine"
+
+#: src/mainwindow.cpp:142
+#, kde-format
+msgid "Connect a printer"
+msgstr "Ühenda printer"
+
+#: src/mainwindow.cpp:156 src/widgets/atcoreinstancewidget.cpp:216
+#: src/widgets/atcoreinstancewidget.cpp:450
+#, kde-format
+msgid "Error"
+msgstr "Tõrge"
+
+#: src/mainwindow.cpp:156
+#, kde-format
+msgid ""
+"There's no GCode file open.\n"
+"Please select a file and try again."
+msgstr ""
+"Ühtegi G-koodi faili ei ole avatud.\n"
+"Palun vali fail ja proovi uuesti."
+
+#: src/mainwindow.cpp:171
+#, kde-format
+msgid "Document Modified"
+msgstr "Dokumenti on muudetud"
+
+#: src/mainwindow.cpp:172
+#, kde-format
+msgid ""
+"%1 \n"
+"Contains unsaved changes that will not be in the print.\n"
+"Would you like to save them before printing?"
+msgstr ""
+"%1\n"
+"sisaldab salvestamata muudatusi, mida ei trükita.\n"
+"Kas salvestada muudatused enne trükkimist?"
+
+#: src/mainwindow.cpp:260
+#, kde-format
+msgid "Welcome"
+msgstr "Tere tulemast"
+
+#: src/mainwindow.cpp:261
+#, kde-format
+msgid "3D"
+msgstr "3D"
+
+#: src/mainwindow.cpp:262
+#, kde-format
+msgid "GCode"
+msgstr "G-kood"
+
+#: src/mainwindow.cpp:263
+#, kde-format
+msgid "Video"
+msgstr "Video"
+
+#: src/mainwindow.cpp:275
+#, kde-format
+msgid "&Open"
+msgstr "&Ava"
+
+#: src/mainwindow.cpp:282
+#, kde-format
+msgid "&New Connection"
+msgstr "&Uus ühendus"
+
+#: src/mainwindow.cpp:289
+#, kde-format
+msgid "&Profiles"
+msgstr "&Profiilid"
+
+#: src/mainwindow.cpp:299
+#, kde-format
+msgid "&Quit"
+msgstr "&Välju"
+
+#: src/mainwindow.cpp:308
+#, kde-format
+msgid "Open GCode"
+msgstr "G-koodi avamine"
+
+#: src/mainwindow.cpp:308
+#, kde-format
+msgid "GCode(*.gco *.gcode);;All Files(*.*)"
+msgstr "G-kood(*.gco *.gcode);;Kõik failid(*.*)"
+
+#: src/mainwindow.cpp:345 src/widgets/atcoreinstancewidget.cpp:435
+#, kde-format
+msgid "Printing"
+msgstr "Trükkimine"
+
+#: src/mainwindow.cpp:345
+#, kde-format
+msgid ""
+"Currently printing! \n"
+"Are you sure you want to close?"
+msgstr ""
+"Parajasti trükitakse! \n"
+"Kas tõesti sulgeda?"
+
+#: src/mainwindow.cpp:396
+#, kde-format
+msgid "Save Selected"
+msgstr "Salvesta valitud"
+
+#: src/mainwindow.cpp:404 src/mainwindow.cpp:422
+#, kde-format
+msgid "Save Failed"
+msgstr "Salvestamine nurjus"
+
+#: src/mainwindow.cpp:404 src/mainwindow.cpp:422
+#, kde-format
+msgid "Failed to save file: %1"
+msgstr "Faili salvestamine nurjus: %1"
+
+#: src/mainwindow.cpp:417
+#, kde-format
+msgid "Save All"
+msgstr "Salvesta kõik"
+
+#: src/mainwindow.cpp:432
+#, kde-format
+msgid "Cancel"
+msgstr "Loobu"
+
+#: src/mainwindow.cpp:438
+#, kde-format
+msgid "Discard Changes"
+msgstr "Tühista muudatused"
+
+#: src/mainwindow.cpp:444
+#, kde-format
+msgid "Files with Unsaved Changes."
+msgstr "Faili salvestamata muudatustega."
+
+#: src/widgets/atcoreinstancewidget.cpp:91
+#, kde-format
+msgid "Controls"
+msgstr "Juhtelemendid"
+
+#: src/widgets/atcoreinstancewidget.cpp:92
+#, kde-format
+msgid "Advanced"
+msgstr "Muu"
+
+#: src/widgets/atcoreinstancewidget.cpp:93
+#, kde-format
+msgid "Sd Card"
+msgstr "SD-kaart"
+
+#: src/widgets/atcoreinstancewidget.cpp:120
+#, kde-format
+msgid "Home:"
+msgstr "Kodu:"
+
+#: src/widgets/atcoreinstancewidget.cpp:123
+#, kde-format
+msgid "All"
+msgstr "Kõik"
+
+#: src/widgets/atcoreinstancewidget.cpp:135
+#: src/widgets/atcoreinstancewidget.cpp:154
+#: src/widgets/atcoreinstancewidget.cpp:430
+#, kde-format
+msgid "Print"
+msgstr "Trüki"
+
+#: src/widgets/atcoreinstancewidget.cpp:138
+#, kde-format
+msgid "Pause Print"
+msgstr "Paus"
+
+#: src/widgets/atcoreinstancewidget.cpp:145
+#, kde-format
+msgid "Resume Print"
+msgstr "Jätka trükkimist"
+
+#: src/widgets/atcoreinstancewidget.cpp:151
+#, kde-format
+msgid "Stop"
+msgstr "Peata"
+
+#: src/widgets/atcoreinstancewidget.cpp:159
+#, kde-format
+msgid "Disable Motors"
+msgstr "Lülita mootorid välja"
+
+#: src/widgets/atcoreinstancewidget.cpp:171
+#, kde-format
+msgid "Device"
+msgstr "Seade"
+
+#: src/widgets/atcoreinstancewidget.cpp:179
+#, kde-format
+msgid "Profile"
+msgstr "Profiil"
+
+#: src/widgets/atcoreinstancewidget.cpp:191
+#: src/widgets/atcoreinstancewidget.cpp:413
+#, kde-format
+msgid "Connect"
+msgstr "Ühenda"
+
+#: src/widgets/atcoreinstancewidget.cpp:210
+#, kde-format
+msgid "No Profiles!"
+msgstr "Profiile pole!"
+
+#: src/widgets/atcoreinstancewidget.cpp:210
+#, kde-format
+msgid ""
+"Connecting requires creating a profile for your printer. Create a profile in "
+"the next dialog then try again."
+msgstr ""
+"Ühendumiseks on tarvis luua printeri profiil. Loo see järgmises dialoogis ja "
+"proovi uuesti."
+
+#: src/widgets/atcoreinstancewidget.cpp:216
+#, kde-format
+msgid "Please, connect a serial device to continue!"
+msgstr "Palun ühenda jätkamiseks jadaseade!"
+
+#: src/widgets/atcoreinstancewidget.cpp:248
+#, kde-format
+msgid "Connect a Printer"
+msgstr "Ühenda printer"
+
+#: src/widgets/atcoreinstancewidget.cpp:275
+#, kde-format
+msgid "Push: %1"
+msgstr ""
+
+#: src/widgets/atcoreinstancewidget.cpp:280
+#, kde-format
+msgid "Display: %1"
+msgstr ""
+
+#: src/widgets/atcoreinstancewidget.cpp:300
+#, kde-format
+msgid "Relative Move: %1, %2"
+msgstr "Suhteline liikumine: %1, %2"
+
+#: src/widgets/atcoreinstancewidget.cpp:313
+#, kde-format
+msgid "Print Error"
+msgstr "Tõrge trükkimisel"
+
+#: src/widgets/atcoreinstancewidget.cpp:313
+#: src/widgets/atcoreinstancewidget.cpp:322
+#, kde-format
+msgid "You must select a file from the list"
+msgstr "Loendist tuleb valida fail"
+
+#: src/widgets/atcoreinstancewidget.cpp:322
+#, kde-format
+msgid "Delete Error"
+msgstr "Tõrge kustutamisel"
+
+#: src/widgets/atcoreinstancewidget.cpp:332
+#, kde-format
+msgid "Filename Empty"
+msgstr "Failinimi puudub"
+
+#: src/widgets/atcoreinstancewidget.cpp:332
+#, kde-format
+msgid "No filename sent from calling method, please check and try again."
+msgstr ""
+"Väljakutsemeetodile ei saadetud ühtegi failinime, palun kontrolli ja proovi "
+"uuesti."
+
+#: src/widgets/atcoreinstancewidget.cpp:336
+#, kde-format
+msgid "File not found"
+msgstr "Faili ei leitud"
+
+#: src/widgets/atcoreinstancewidget.cpp:336
+#, kde-format
+msgid ""
+"%1 \n"
+"Is not readable, please check and try again."
+msgstr ""
+"%1 \n"
+"ei ole loetav, palun kontrolli ja proovi uuestti."
+
+#: src/widgets/atcoreinstancewidget.cpp:340
+#, kde-format
+msgid "Printing: %1"
+msgstr "Trükkimine: %1"
+
+#: src/widgets/atcoreinstancewidget.cpp:376
+#, kde-format
+msgid "Disconnect"
+msgstr "Lahuta"
+
+#: src/widgets/atcoreinstancewidget.cpp:380
+#, kde-format
+msgid "Connecting..."
+msgstr "Ühendumine ..."
+
+#: src/widgets/atcoreinstancewidget.cpp:381
+#, kde-format
+msgid "Attempting to Connect"
+msgstr "Püütakse ühendada"
+
+#: src/widgets/atcoreinstancewidget.cpp:390
+#, kde-format
+msgid "Connected to %1"
+msgstr "Ühendatud porti %1"
+
+#: src/widgets/atcoreinstancewidget.cpp:408
+#, kde-format
+msgid "Not Connected"
+msgstr "Pole ühendatud"
+
+#: src/widgets/atcoreinstancewidget.cpp:411
+#, kde-format
+msgid "Serial disconnected"
+msgstr "Jadaseade lahutatud"
+
+#: src/widgets/atcoreinstancewidget.cpp:422
+#, kde-format
+msgid "Starting Print"
+msgstr "Trükkimise alustamine"
+
+#: src/widgets/atcoreinstancewidget.cpp:427
+#, kde-format
+msgid "Finished Print"
+msgstr "Trükkimine lõpetatud"
+
+#: src/widgets/atcoreinstancewidget.cpp:432
+#, kde-format
+msgid "Finished Print Job"
+msgstr "Trükitöö lõpetatud"
+
+#: src/widgets/atcoreinstancewidget.cpp:437
+#, kde-format
+msgid "Pause"
+msgstr "Paus"
+
+#: src/widgets/atcoreinstancewidget.cpp:441
+#, kde-format
+msgid "Paused"
+msgstr "Pausil"
+
+#: src/widgets/atcoreinstancewidget.cpp:442
+#, kde-format
+msgid "Resume"
+msgstr "Jätka"
+
+#: src/widgets/atcoreinstancewidget.cpp:446
+#, kde-format
+msgid "Stopping Print"
+msgstr "Trükkimise peatamine"
+
+#: src/widgets/atcoreinstancewidget.cpp:453
+#, kde-format
+msgid "Unknown AtCore State, %1"
+msgstr "Teadmata AtCore olek, %1"
+
+#: src/widgets/atcoreinstancewidget.cpp:527
+#, kde-format
+msgid "Found %1 Ports"
+msgstr "Leiti %1 porti"
+
+#: src/widgets/atcoreinstancewidget.cpp:529
+#, kde-format
+msgid "No available ports! Please connect a serial device to continue!"
+msgstr "Porte pole saada! Palun ühenda jätkamiseks jadaseade!"
+
+#: src/widgets/atcoreinstancewidget.cpp:572
+#: src/widgets/atcoreinstancewidget.cpp:575
+#: src/widgets/atcoreinstancewidget.cpp:579
+#: src/widgets/atcoreinstancewidget.cpp:590
+#: src/widgets/atcoreinstancewidget.cpp:591
+#, kde-format
+msgid "Actual Bed"
+msgstr "Tegelik trükialus"
+
+#: src/widgets/atcoreinstancewidget.cpp:582
+#: src/widgets/atcoreinstancewidget.cpp:586
+#: src/widgets/atcoreinstancewidget.cpp:593
+#, kde-format
+msgid "Target Bed"
+msgstr "Sihttrükialus"
+
+#: src/widgets/atcoreinstancewidget.cpp:602
+#: src/widgets/atcoreinstancewidget.cpp:606
+#: src/widgets/atcoreinstancewidget.cpp:610
+#: src/widgets/atcoreinstancewidget.cpp:621
+#: src/widgets/atcoreinstancewidget.cpp:622
+#, kde-format
+msgid "Actual Ext.1"
+msgstr "Tegelik trükipea 1"
+
+#: src/widgets/atcoreinstancewidget.cpp:613
+#: src/widgets/atcoreinstancewidget.cpp:617
+#: src/widgets/atcoreinstancewidget.cpp:624
+#, kde-format
+msgid "Target Ext.1"
+msgstr "Sihttrükipea 1"
+
+#: src/widgets/bedextruderwidget.cpp:29
+#, kde-format
+msgid "Bed"
+msgstr "Trükialus"
+
+#: src/widgets/bedextruderwidget.cpp:30
+#, kde-format
+msgid "HotEnd"
+msgstr ""
+
+#: src/widgets/bedextruderwidget.cpp:38
+#, kde-format
+msgid "Active Extruder:"
+msgstr "Aktiivne trükipea:"
+
+#: src/widgets/videomonitorwidget.cpp:32
+#, kde-format
+msgid "Source url:"
+msgstr ""
+
+#: src/widgets/videomonitorwidget.cpp:38
+#, kde-format
+msgid ""
+"Valid Urls:\n"
+"        http://www.example.com/stream.avi\n"
+"        rtp://@:1234\n"
+"        mms://mms.examples.com/stream.asx\n"
+"        rtsp://server.example.org:8080/test.sdp"
+msgstr ""
+"Korrektsed URL-id:\n"
+"        http://www.example.com/stream.avi\n"
+"        rtp://@:1234\n"
+"        mms://mms.examples.com/stream.asx\n"
+"        rtsp://server.example.org:8080/test.sdp"
+
+#: src/widgets/welcomewidget.cpp:51
+#, kde-format
+msgid "Welcome to Atelier!"
+msgstr "Tere tulemast kasutama Atelieri!"
+
+#: src/widgets/welcomewidget.cpp:67
+#, kde-format
+msgid "Quick Connect Guide"
+msgstr "Ühenduse loomise lühijuhis"
+
+#: src/widgets/welcomewidget.cpp:71
+#, kde-format
+msgid "1 - Create a Profile."
+msgstr "1 - loo profiil."
+
+#: src/widgets/welcomewidget.cpp:71
+#, kde-format
+msgid "2 - Select the device."
+msgstr "2 - vali seade."
+
+#: src/widgets/welcomewidget.cpp:71
+#, kde-format
+msgid "3 - Select the profile and connect."
+msgstr "3 - vali profiil ja ühendu."
+
+#: src/widgets/welcomewidget.cpp:76
+#, kde-format
+msgid "Having a connection problem?"
+msgstr "Kas ühendusega on probleeme?"
+
+#: src/widgets/welcomewidget.cpp:80
+#, kde-format
+msgid "See the info section of the Log for common problems."
+msgstr "Levinumate probleemide kohta leiab teavet logi infosektsioonist."
+
+#: src/widgets/welcomewidget.cpp:83
+#, kde-format
+msgid "Check our %1Atelier Docs%2 for more information."
+msgstr "Täpsemat teavet annab meie %1Atelieri dokumentatsioon%2."
+
+#: src/widgets/welcomewidget.cpp:87
+#, kde-format
+msgid "Atelier news!"
+msgstr "Atelieri uudised!"
+
+#: src/widgets/welcomewidget.cpp:93
+#, kde-format
+msgid "Get Involved"
+msgstr "Löö kaasa"
+
+#: src/widgets/welcomewidget.cpp:97
+#, kde-format
+msgid "Join our %1Telegram Group%2!"
+msgstr "Ühine meie %1Telegrami kanaliga%2!"
+
+#: src/widgets/welcomewidget.cpp:101
+#, fuzzy, kde-format
+#| msgid "You can also find us on Freenode IRC #kde-atelier"
+msgid "You can also find us on Libera Chat IRC #kde-atelier"
+msgstr "Meid leiab ka Freenode IRC kanalilt #kde-atelier"
+
+#: src/widgets/welcomewidget.cpp:185
+#, kde-format
+msgid "Failed to fetch the News."
+msgstr "Uudiste tõmbamine nurjus."
