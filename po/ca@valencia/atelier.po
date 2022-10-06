@@ -154,7 +154,7 @@ msgstr "Vídeo"
 #: src/mainwindow.cpp:275
 #, kde-format
 msgid "&Open"
-msgstr "&Obri"
+msgstr "O&bri"
 
 #: src/mainwindow.cpp:282
 #, kde-format
