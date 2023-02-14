@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2021-06-19 00:19+0000\n"
-"PO-Revision-Date: 2023-02-10 11:05+0100\n"
+"PO-Revision-Date: 2023-02-10 15:20+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -20,12 +20,12 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
+msgstr "Vít Pelčák"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
+msgstr "vit@pelcak.org"
 
 #: src/dialogs/choosefiledialog.cpp:43
 #, kde-format
@@ -95,7 +95,7 @@ msgstr ""
 #: src/mainwindow.cpp:142
 #, kde-format
 msgid "Connect a printer"
-msgstr ""
+msgstr "Připojte tiskárnu"
 
 #: src/mainwindow.cpp:156 src/widgets/atcoreinstancewidget.cpp:216
 #: src/widgets/atcoreinstancewidget.cpp:450
@@ -113,7 +113,7 @@ msgstr ""
 #: src/mainwindow.cpp:171
 #, kde-format
 msgid "Document Modified"
-msgstr ""
+msgstr "Dokument byl upraven"
 
 #: src/mainwindow.cpp:172
 #, kde-format
@@ -233,7 +233,7 @@ msgstr "Pokročilé"
 #: src/widgets/atcoreinstancewidget.cpp:93
 #, kde-format
 msgid "Sd Card"
-msgstr ""
+msgstr "SD karta"
 
 #: src/widgets/atcoreinstancewidget.cpp:120
 #, kde-format
@@ -255,12 +255,12 @@ msgstr "Tisk"
 #: src/widgets/atcoreinstancewidget.cpp:138
 #, kde-format
 msgid "Pause Print"
-msgstr ""
+msgstr "Pozastavit tisk"
 
 #: src/widgets/atcoreinstancewidget.cpp:145
 #, kde-format
 msgid "Resume Print"
-msgstr ""
+msgstr "Pokračovat v tisku"
 
 #: src/widgets/atcoreinstancewidget.cpp:151
 #, kde-format
@@ -308,17 +308,17 @@ msgstr ""
 #: src/widgets/atcoreinstancewidget.cpp:248
 #, kde-format
 msgid "Connect a Printer"
-msgstr ""
+msgstr "Připojte tiskárnu"
 
 #: src/widgets/atcoreinstancewidget.cpp:275
 #, kde-format
 msgid "Push: %1"
-msgstr ""
+msgstr "Odeslat: %1"
 
 #: src/widgets/atcoreinstancewidget.cpp:280
 #, kde-format
 msgid "Display: %1"
-msgstr ""
+msgstr "Obrazovka: %1"
 
 #: src/widgets/atcoreinstancewidget.cpp:300
 #, kde-format
@@ -339,12 +339,12 @@ msgstr ""
 #: src/widgets/atcoreinstancewidget.cpp:322
 #, kde-format
 msgid "Delete Error"
-msgstr ""
+msgstr "Chyba při mazání"
 
 #: src/widgets/atcoreinstancewidget.cpp:332
 #, kde-format
 msgid "Filename Empty"
-msgstr ""
+msgstr "Název souboru je prázdný"
 
 #: src/widgets/atcoreinstancewidget.cpp:332
 #, kde-format
@@ -366,7 +366,7 @@ msgstr ""
 #: src/widgets/atcoreinstancewidget.cpp:340
 #, kde-format
 msgid "Printing: %1"
-msgstr ""
+msgstr "Tisk: %1"
 
 #: src/widgets/atcoreinstancewidget.cpp:376
 #, kde-format
@@ -401,12 +401,12 @@ msgstr ""
 #: src/widgets/atcoreinstancewidget.cpp:422
 #, kde-format
 msgid "Starting Print"
-msgstr ""
+msgstr "Zahájen tisk"
 
 #: src/widgets/atcoreinstancewidget.cpp:427
 #, kde-format
 msgid "Finished Print"
-msgstr ""
+msgstr "Dokončen tisk"
 
 #: src/widgets/atcoreinstancewidget.cpp:432
 #, kde-format
@@ -509,6 +509,11 @@ msgid ""
 "        mms://mms.examples.com/stream.asx\n"
 "        rtsp://server.example.org:8080/test.sdp"
 msgstr ""
+"Platné Valid Url:\n"
+"        http://www.example.com/stream.avi\n"
+"        rtp://@:1234\n"
+"        mms://mms.examples.com/stream.asx\n"
+"        rtsp://server.example.org:8080/test.sdp"
 
 #: src/widgets/welcomewidget.cpp:51
 #, kde-format
@@ -523,17 +528,17 @@ msgstr ""
 #: src/widgets/welcomewidget.cpp:71
 #, kde-format
 msgid "1 - Create a Profile."
-msgstr ""
+msgstr "1 - Vytvořte profil."
 
 #: src/widgets/welcomewidget.cpp:71
 #, kde-format
 msgid "2 - Select the device."
-msgstr ""
+msgstr "2 - Vyberte zařízení."
 
 #: src/widgets/welcomewidget.cpp:71
 #, kde-format
 msgid "3 - Select the profile and connect."
-msgstr ""
+msgstr "3 - Vyberte profil a připojte se."
 
 #: src/widgets/welcomewidget.cpp:76
 #, kde-format
