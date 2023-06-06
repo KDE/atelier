@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2021-06-19 00:19+0000\n"
-"PO-Revision-Date: 2023-04-23 07:01+0200\n"
+"PO-Revision-Date: 2023-06-05 12:55+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.04.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -542,17 +542,17 @@ msgstr "Guía de conexión rápida"
 #: src/widgets/welcomewidget.cpp:71
 #, kde-format
 msgid "1 - Create a Profile."
-msgstr "1.- Cree un perfil."
+msgstr "1. Cree un perfil."
 
 #: src/widgets/welcomewidget.cpp:71
 #, kde-format
 msgid "2 - Select the device."
-msgstr "2.- Seleccione un dispositivo."
+msgstr "2. Seleccione un dispositivo."
 
 #: src/widgets/welcomewidget.cpp:71
 #, kde-format
 msgid "3 - Select the profile and connect."
-msgstr "3.- Seleccione o perfil ao que conectar."
+msgstr "3. Seleccione o perfil ao que conectar."
 
 #: src/widgets/welcomewidget.cpp:76
 #, kde-format
