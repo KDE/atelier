@@ -327,7 +327,7 @@ msgstr "Puxar: %1"
 #: src/widgets/atcoreinstancewidget.cpp:280
 #, kde-format
 msgid "Display: %1"
-msgstr "Mostrar: %1"
+msgstr "Amosar: %1"
 
 #: src/widgets/atcoreinstancewidget.cpp:300
 #, kde-format
