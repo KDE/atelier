@@ -11,6 +11,7 @@
   <name xml:lang="de">Atelier</name>
   <name xml:lang="el">Atelier</name>
   <name xml:lang="en-GB">Atelier</name>
+  <name xml:lang="eo">Atelier</name>
   <name xml:lang="es">Atelier</name>
   <name xml:lang="et">Atelier</name>
   <name xml:lang="eu">Atelier</name>
@@ -42,6 +43,7 @@
   <summary xml:lang="da">Vært til 3D-printer</summary>
   <summary xml:lang="el">Υπολογιστής για 3D εκτυπωτή</summary>
   <summary xml:lang="en-GB">3D Printer Host</summary>
+  <summary xml:lang="eo">3D-Printila Gastiganto</summary>
   <summary xml:lang="es">Servidor de impresión 3D</summary>
   <summary xml:lang="et">3D printimine</summary>
   <summary xml:lang="eu">3D inprimagailu ostalaria</summary>
@@ -98,7 +100,7 @@
   <url type="homepage">https://atelier.kde.org</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=Atelier</url>
   <url type="donation">https://www.kde.org/community/donations/?app=atelier</url>
-  <screenshots><screenshot type="default"><caption>The Atelier main window</caption><caption xml:lang="ca">La finestra principal de l'Atelier</caption><caption xml:lang="ca-valencia">La finestra principal d'Atelier</caption><caption xml:lang="cs">Hlavní okno Atelieru</caption><caption xml:lang="de">Das Hauptfenster von Atelier</caption><caption xml:lang="el">Το κύριο παράθυρο του Atelier</caption><caption xml:lang="en-GB">The Atelier main window</caption><caption xml:lang="es">La ventana principal de Atelier</caption><caption xml:lang="eu">Atelier-ren leiho nagusia</caption><caption xml:lang="fi">Atelier’n pääikkuna</caption><caption xml:lang="fr">La fenêtre principale d'Atelier.</caption><caption xml:lang="gl">A xanela principal de Atelier.</caption><caption xml:lang="id">Jendela utama Atelier</caption><caption xml:lang="it">La finestra principale di Atelier</caption><caption xml:lang="ka">Atelier-ის მთავარი ფანჯარა</caption><caption xml:lang="ko">Atelier 주 창</caption><caption xml:lang="nl">Het hoofdvenster van Atelier</caption><caption xml:lang="nn">Hovudvindauget i Atelier</caption><caption xml:lang="pl">Główne okno Atelier</caption><caption xml:lang="pt">A janela principal do Atelier</caption><caption xml:lang="sk">Hlavné okno Atelier</caption><caption xml:lang="sl">Glavno okno programa Atelier</caption><caption xml:lang="sv">Huvudfönstret i Atelier</caption><caption xml:lang="tr">Atölye ana penceresi</caption><caption xml:lang="uk">Головне вікно Atelier</caption><caption xml:lang="x-test">xxThe Atelier main windowxx</caption><caption xml:lang="zh-CN">Atelier 主窗口</caption><caption xml:lang="zh-TW">Atelier 的主視窗</caption>
+  <screenshots><screenshot type="default"><caption>The Atelier main window</caption><caption xml:lang="ca">La finestra principal de l'Atelier</caption><caption xml:lang="ca-valencia">La finestra principal d'Atelier</caption><caption xml:lang="cs">Hlavní okno Atelieru</caption><caption xml:lang="de">Das Hauptfenster von Atelier</caption><caption xml:lang="el">Το κύριο παράθυρο του Atelier</caption><caption xml:lang="en-GB">The Atelier main window</caption><caption xml:lang="eo">La ĉefa fenestro de Atelier</caption><caption xml:lang="es">La ventana principal de Atelier</caption><caption xml:lang="eu">Atelier-ren leiho nagusia</caption><caption xml:lang="fi">Atelier’n pääikkuna</caption><caption xml:lang="fr">La fenêtre principale d'Atelier.</caption><caption xml:lang="gl">A xanela principal de Atelier.</caption><caption xml:lang="id">Jendela utama Atelier</caption><caption xml:lang="it">La finestra principale di Atelier</caption><caption xml:lang="ka">Atelier-ის მთავარი ფანჯარა</caption><caption xml:lang="ko">Atelier 주 창</caption><caption xml:lang="nl">Het hoofdvenster van Atelier</caption><caption xml:lang="nn">Hovudvindauget i Atelier</caption><caption xml:lang="pl">Główne okno Atelier</caption><caption xml:lang="pt">A janela principal do Atelier</caption><caption xml:lang="sk">Hlavné okno Atelier</caption><caption xml:lang="sl">Glavno okno programa Atelier</caption><caption xml:lang="sv">Huvudfönstret i Atelier</caption><caption xml:lang="tr">Atölye ana penceresi</caption><caption xml:lang="uk">Головне вікно Atelier</caption><caption xml:lang="x-test">xxThe Atelier main windowxx</caption><caption xml:lang="zh-CN">Atelier 主窗口</caption><caption xml:lang="zh-TW">Atelier 的主視窗</caption>
 ​    <image type="source" width="1600" height="900">https://cdn.kde.org/screenshots/atelier/atelier.png</image>
     </screenshot>
 ​   </screenshots>
