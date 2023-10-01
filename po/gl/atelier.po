@@ -205,7 +205,7 @@ msgstr "A garda fallou"
 #: src/mainwindow.cpp:404 src/mainwindow.cpp:422
 #, kde-format
 msgid "Failed to save file: %1"
-msgstr "Non se puido gardar o ficheiro: %1."
+msgstr "Non foi posíbel gardar o ficheiro: %1."
 
 #: src/mainwindow.cpp:417
 #, kde-format
@@ -592,7 +592,7 @@ msgstr "Tamén pode atoparnos #kde-atelier no IRC de Libera Chat"
 #: src/widgets/welcomewidget.cpp:185
 #, kde-format
 msgid "Failed to fetch the News."
-msgstr "Non se puideron obter as novas."
+msgstr "Non foi posíbel obter as novas."
 
 #~ msgid "Overwrite Profile?"
 #~ msgstr "Sobrescribir o perfil?"
