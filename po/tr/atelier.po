@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the atelier package.
 #
-# Emir SARI <emir_sari@icloud.com>, 2022, 2023.
+# SPDX-FileCopyrightText: 2022, 2023, 2024 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:40+0000\n"
-"PO-Revision-Date: 2023-01-13 01:14+0300\n"
+"PO-Revision-Date: 2024-02-09 18:00+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.1\n"
+"X-Generator: Lokalize 24.01.95\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -511,7 +511,7 @@ msgstr "Etkin Ekstrüder:"
 #: src/widgets/videomonitorwidget.cpp:32
 #, kde-format
 msgid "Source url:"
-msgstr "Kaynak URL'si:"
+msgstr "Kaynak URL’si:"
 
 #: src/widgets/videomonitorwidget.cpp:38
 #, kde-format
@@ -522,7 +522,7 @@ msgid ""
 "        mms://mms.examples.com/stream.asx\n"
 "        rtsp://server.example.org:8080/test.sdp"
 msgstr ""
-"Geçerli URL'ler:\n"
+"Geçerli URL’ler:\n"
 "        http://www.example.com/stream.avi\n"
 "        rtp://@:1234\n"
 "        mms://mms.examples.com/stream.asx\n"
@@ -531,7 +531,7 @@ msgstr ""
 #: src/widgets/welcomewidget.cpp:51
 #, kde-format
 msgid "Welcome to Atelier!"
-msgstr "Atölye'ye hoş geldiniz!"
+msgstr "Atölye’ye hoş geldiniz!"
 
 #: src/widgets/welcomewidget.cpp:67
 #, kde-format
