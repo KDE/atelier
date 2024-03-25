@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:40+0000\n"
-"PO-Revision-Date: 2024-02-26 21:30+0100\n"
+"PO-Revision-Date: 2024-03-24 10:34+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo.org>\n"
 "Language: eo\n"
@@ -31,7 +31,7 @@ msgstr ""
 #: src/dialogs/choosefiledialog.cpp:43
 #, kde-format
 msgid "Choose a file to print:"
-msgstr ""
+msgstr "Elekti dosieron por presi:"
 
 #: src/dialogs/profilesdialog.cpp:30
 #, kde-format
@@ -46,17 +46,17 @@ msgstr "Atelier"
 #: src/main.cpp:43
 #, kde-format
 msgid "Printer Host for 3DPrinters"
-msgstr ""
+msgstr "Presilo Gastiganto por 3D Presiloj"
 
 #: src/main.cpp:47
 #, kde-format
 msgid "(c) 2016"
-msgstr ""
+msgstr "(c) 2016"
 
 #: src/main.cpp:55
 #, kde-format
 msgid "Lays Rodrigues"
-msgstr ""
+msgstr "Lays Rodrigues"
 
 #: src/main.cpp:55 src/main.cpp:56 src/main.cpp:57
 #, kde-format
@@ -66,12 +66,12 @@ msgstr "Ellaboranto"
 #: src/main.cpp:56
 #, kde-format
 msgid "Chris Rizzitello"
-msgstr ""
+msgstr "Chris Rizzitello"
 
 #: src/main.cpp:57
 #, kde-format
 msgid "Patrick Pereira"
-msgstr ""
+msgstr "Patrick Pereira"
 
 #: src/main.cpp:58
 #, kde-format
@@ -86,17 +86,17 @@ msgstr "Kontribuanto"
 #: src/main.cpp:59
 #, kde-format
 msgid "Using AtCore: %1"
-msgstr ""
+msgstr "Uzante AtCore: %1"
 
 #: src/mainwindow.cpp:125
 #, kde-format
 msgid "Create new instance"
-msgstr ""
+msgstr "Krei novan instancon"
 
 #: src/mainwindow.cpp:142
 #, kde-format
 msgid "Connect a printer"
-msgstr ""
+msgstr "Konekti presilon"
 
 #: src/mainwindow.cpp:156 src/widgets/atcoreinstancewidget.cpp:216
 #: src/widgets/atcoreinstancewidget.cpp:450
@@ -114,7 +114,7 @@ msgstr ""
 #: src/mainwindow.cpp:171
 #, kde-format
 msgid "Document Modified"
-msgstr ""
+msgstr "Dokumento Modifita"
 
 #: src/mainwindow.cpp:172
 #, kde-format
@@ -137,7 +137,7 @@ msgstr "3D"
 #: src/mainwindow.cpp:262
 #, kde-format
 msgid "GCode"
-msgstr ""
+msgstr "GKodo"
 
 #: src/mainwindow.cpp:263
 #, kde-format
@@ -157,7 +157,7 @@ msgstr "&Nova Konekto"
 #: src/mainwindow.cpp:289
 #, kde-format
 msgid "&Profiles"
-msgstr ""
+msgstr "&Profiloj"
 
 #: src/mainwindow.cpp:299
 #, kde-format
@@ -167,12 +167,12 @@ msgstr "&Forlasi"
 #: src/mainwindow.cpp:308
 #, kde-format
 msgid "Open GCode"
-msgstr ""
+msgstr "Malfermi GCode"
 
 #: src/mainwindow.cpp:308
 #, kde-format
 msgid "GCode(*.gco *.gcode);;All Files(*.*)"
-msgstr ""
+msgstr "GCode(*.gco *.gcode);;Ĉiuj dosieroj(*.*)"
 
 #: src/mainwindow.cpp:345 src/widgets/atcoreinstancewidget.cpp:435
 #, kde-format
@@ -189,12 +189,12 @@ msgstr ""
 #: src/mainwindow.cpp:396
 #, kde-format
 msgid "Save Selected"
-msgstr ""
+msgstr "Konservi Elektitajn"
 
 #: src/mainwindow.cpp:404 src/mainwindow.cpp:422
 #, kde-format
 msgid "Save Failed"
-msgstr ""
+msgstr "Konservi Malsukcesis"
 
 #: src/mainwindow.cpp:404 src/mainwindow.cpp:422
 #, kde-format
@@ -219,7 +219,7 @@ msgstr "Forĵeti Ŝanĝojn"
 #: src/mainwindow.cpp:444
 #, kde-format
 msgid "Files with Unsaved Changes."
-msgstr ""
+msgstr "Dosieroj kun Nekonservitaj Ŝanĝoj."
 
 #: src/widgets/atcoreinstancewidget.cpp:91
 #, kde-format
@@ -234,7 +234,7 @@ msgstr "Altnivela"
 #: src/widgets/atcoreinstancewidget.cpp:93
 #, kde-format
 msgid "Sd Card"
-msgstr ""
+msgstr "Sd-karto"
 
 #: src/widgets/atcoreinstancewidget.cpp:120
 #, kde-format
@@ -256,12 +256,12 @@ msgstr "Presi"
 #: src/widgets/atcoreinstancewidget.cpp:138
 #, kde-format
 msgid "Pause Print"
-msgstr ""
+msgstr "Paŭzi Preson"
 
 #: src/widgets/atcoreinstancewidget.cpp:145
 #, kde-format
 msgid "Resume Print"
-msgstr ""
+msgstr "Rekomenci Presi"
 
 #: src/widgets/atcoreinstancewidget.cpp:151
 #, kde-format
@@ -271,7 +271,7 @@ msgstr "Halti"
 #: src/widgets/atcoreinstancewidget.cpp:159
 #, kde-format
 msgid "Disable Motors"
-msgstr ""
+msgstr "Malebligi Motorojn"
 
 #: src/widgets/atcoreinstancewidget.cpp:171
 #, kde-format
@@ -292,7 +292,7 @@ msgstr "Konekti"
 #: src/widgets/atcoreinstancewidget.cpp:210
 #, kde-format
 msgid "No Profiles!"
-msgstr ""
+msgstr "Neniuj Profiloj!"
 
 #: src/widgets/atcoreinstancewidget.cpp:210
 #, kde-format
@@ -304,27 +304,27 @@ msgstr ""
 #: src/widgets/atcoreinstancewidget.cpp:216
 #, kde-format
 msgid "Please, connect a serial device to continue!"
-msgstr ""
+msgstr "Bonvolu konekti serian aparaton por daŭrigi!"
 
 #: src/widgets/atcoreinstancewidget.cpp:248
 #, kde-format
 msgid "Connect a Printer"
-msgstr ""
+msgstr "Konekti Presilon"
 
 #: src/widgets/atcoreinstancewidget.cpp:275
 #, kde-format
 msgid "Push: %1"
-msgstr ""
+msgstr "Puŝo: %1"
 
 #: src/widgets/atcoreinstancewidget.cpp:280
 #, kde-format
 msgid "Display: %1"
-msgstr ""
+msgstr "Montriĝo: %1"
 
 #: src/widgets/atcoreinstancewidget.cpp:300
 #, kde-format
 msgid "Relative Move: %1, %2"
-msgstr ""
+msgstr "Relativa Movo: %1, %2"
 
 #: src/widgets/atcoreinstancewidget.cpp:313
 #, kde-format
@@ -335,22 +335,23 @@ msgstr "Presa Eraro"
 #: src/widgets/atcoreinstancewidget.cpp:322
 #, kde-format
 msgid "You must select a file from the list"
-msgstr ""
+msgstr "Vi devas elekti dosieron el la listo"
 
 #: src/widgets/atcoreinstancewidget.cpp:322
 #, kde-format
 msgid "Delete Error"
-msgstr ""
+msgstr "Forigi Eraron"
 
 #: src/widgets/atcoreinstancewidget.cpp:332
 #, kde-format
 msgid "Filename Empty"
-msgstr ""
+msgstr "Dosiernomo Malplena"
 
 #: src/widgets/atcoreinstancewidget.cpp:332
 #, kde-format
 msgid "No filename sent from calling method, please check and try again."
 msgstr ""
+"Neniu dosiernomo sendita de voka metodo, bonvolu kontroli kaj provi denove."
 
 #: src/widgets/atcoreinstancewidget.cpp:336
 #, kde-format
@@ -367,7 +368,7 @@ msgstr ""
 #: src/widgets/atcoreinstancewidget.cpp:340
 #, kde-format
 msgid "Printing: %1"
-msgstr ""
+msgstr "Presado: %1"
 
 #: src/widgets/atcoreinstancewidget.cpp:376
 #, kde-format
@@ -382,7 +383,7 @@ msgstr "Konektante..."
 #: src/widgets/atcoreinstancewidget.cpp:381
 #, kde-format
 msgid "Attempting to Connect"
-msgstr ""
+msgstr "Provante Konekti"
 
 #: src/widgets/atcoreinstancewidget.cpp:390
 #, kde-format
@@ -397,22 +398,22 @@ msgstr "Ne Konektita"
 #: src/widgets/atcoreinstancewidget.cpp:411
 #, kde-format
 msgid "Serial disconnected"
-msgstr ""
+msgstr "Seria malkonektita"
 
 #: src/widgets/atcoreinstancewidget.cpp:422
 #, kde-format
 msgid "Starting Print"
-msgstr ""
+msgstr "Komencante Print"
 
 #: src/widgets/atcoreinstancewidget.cpp:427
 #, kde-format
 msgid "Finished Print"
-msgstr ""
+msgstr "Finita Preso"
 
 #: src/widgets/atcoreinstancewidget.cpp:432
 #, kde-format
 msgid "Finished Print Job"
-msgstr ""
+msgstr "Finita Presa Laboro"
 
 #: src/widgets/atcoreinstancewidget.cpp:437
 #, kde-format
@@ -432,22 +433,23 @@ msgstr "Rekomenci"
 #: src/widgets/atcoreinstancewidget.cpp:446
 #, kde-format
 msgid "Stopping Print"
-msgstr ""
+msgstr "Ĉesigante Preson"
 
 #: src/widgets/atcoreinstancewidget.cpp:453
 #, kde-format
 msgid "Unknown AtCore State, %1"
-msgstr ""
+msgstr "Nekonata AtCore Ŝtato, %1"
 
 #: src/widgets/atcoreinstancewidget.cpp:527
 #, kde-format
 msgid "Found %1 Ports"
-msgstr ""
+msgstr "Trovis %1 Pordojn"
 
 #: src/widgets/atcoreinstancewidget.cpp:529
 #, kde-format
 msgid "No available ports! Please connect a serial device to continue!"
 msgstr ""
+"Neniuj disponeblaj pordoj! Bonvolu konekti serian aparaton por daŭrigi!"
 
 #: src/widgets/atcoreinstancewidget.cpp:572
 #: src/widgets/atcoreinstancewidget.cpp:575
@@ -456,14 +458,14 @@ msgstr ""
 #: src/widgets/atcoreinstancewidget.cpp:591
 #, kde-format
 msgid "Actual Bed"
-msgstr ""
+msgstr "Fakta Lito"
 
 #: src/widgets/atcoreinstancewidget.cpp:582
 #: src/widgets/atcoreinstancewidget.cpp:586
 #: src/widgets/atcoreinstancewidget.cpp:593
 #, kde-format
 msgid "Target Bed"
-msgstr ""
+msgstr "Celo Lito"
 
 #: src/widgets/atcoreinstancewidget.cpp:602
 #: src/widgets/atcoreinstancewidget.cpp:606
@@ -472,14 +474,14 @@ msgstr ""
 #: src/widgets/atcoreinstancewidget.cpp:622
 #, kde-format
 msgid "Actual Ext.1"
-msgstr ""
+msgstr "Fakta Ext.1"
 
 #: src/widgets/atcoreinstancewidget.cpp:613
 #: src/widgets/atcoreinstancewidget.cpp:617
 #: src/widgets/atcoreinstancewidget.cpp:624
 #, kde-format
 msgid "Target Ext.1"
-msgstr ""
+msgstr "Celo Ext.1"
 
 #: src/widgets/bedextruderwidget.cpp:29
 #, kde-format
@@ -489,17 +491,17 @@ msgstr "Lito"
 #: src/widgets/bedextruderwidget.cpp:30
 #, kde-format
 msgid "HotEnd"
-msgstr ""
+msgstr "HotEnd"
 
 #: src/widgets/bedextruderwidget.cpp:38
 #, kde-format
 msgid "Active Extruder:"
-msgstr ""
+msgstr "Aktiva Ekstrudilo:"
 
 #: src/widgets/videomonitorwidget.cpp:32
 #, kde-format
 msgid "Source url:"
-msgstr ""
+msgstr "Fonta URL:"
 
 #: src/widgets/videomonitorwidget.cpp:38
 #, kde-format
@@ -514,47 +516,47 @@ msgstr ""
 #: src/widgets/welcomewidget.cpp:51
 #, kde-format
 msgid "Welcome to Atelier!"
-msgstr ""
+msgstr "Bonvenon al Ateliero!"
 
 #: src/widgets/welcomewidget.cpp:67
 #, kde-format
 msgid "Quick Connect Guide"
-msgstr ""
+msgstr "Gvidilo pri Rapida Konekto"
 
 #: src/widgets/welcomewidget.cpp:71
 #, kde-format
 msgid "1 - Create a Profile."
-msgstr ""
+msgstr "1 - Krei Profilon."
 
 #: src/widgets/welcomewidget.cpp:71
 #, kde-format
 msgid "2 - Select the device."
-msgstr ""
+msgstr "2 - Elektu la aparaton."
 
 #: src/widgets/welcomewidget.cpp:71
 #, kde-format
 msgid "3 - Select the profile and connect."
-msgstr ""
+msgstr "3 - Elektu la profilon kaj konektiĝu."
 
 #: src/widgets/welcomewidget.cpp:76
 #, kde-format
 msgid "Having a connection problem?"
-msgstr ""
+msgstr "Ĉu vi havas konektan problemon?"
 
 #: src/widgets/welcomewidget.cpp:80
 #, kde-format
 msgid "See the info section of the Log for common problems."
-msgstr ""
+msgstr "Vidu la informsekcion de la Protokolo por oftaj problemoj."
 
 #: src/widgets/welcomewidget.cpp:83
 #, kde-format
 msgid "Check our %1Atelier Docs%2 for more information."
-msgstr ""
+msgstr "Kontrolu nian %1Atelier Docs%2 por pliaj informoj."
 
 #: src/widgets/welcomewidget.cpp:87
 #, kde-format
 msgid "Atelier news!"
-msgstr ""
+msgstr "Novaĵoj pri Ateliero!"
 
 #: src/widgets/welcomewidget.cpp:93
 #, kde-format
@@ -564,14 +566,14 @@ msgstr "Implikiĝi"
 #: src/widgets/welcomewidget.cpp:97
 #, kde-format
 msgid "Join our %1Telegram Group%2!"
-msgstr ""
+msgstr "Aliĝu al nia %1Telegram-Grupo%2!"
 
 #: src/widgets/welcomewidget.cpp:101
 #, kde-format
 msgid "You can also find us on Libera Chat IRC #kde-atelier"
-msgstr ""
+msgstr "Vi ankaŭ povas trovi nin ĉe Libera Chat IRC #kde-atelier"
 
 #: src/widgets/welcomewidget.cpp:185
 #, kde-format
 msgid "Failed to fetch the News."
-msgstr ""
+msgstr "Malsukcesis alporti la Novaĵojn."
