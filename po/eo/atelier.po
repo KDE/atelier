@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:40+0000\n"
-"PO-Revision-Date: 2024-03-24 10:34+0100\n"
-"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
+"PO-Revision-Date: 2024-05-29 23:46+0200\n"
+"Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo.org>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
@@ -21,12 +21,12 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
+msgstr "Oliver Kellogg"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
+msgstr "olivermkellogg@gmail.com"
 
 #: src/dialogs/choosefiledialog.cpp:43
 #, kde-format
@@ -110,6 +110,8 @@ msgid ""
 "There's no GCode file open.\n"
 "Please select a file and try again."
 msgstr ""
+"Ne estas malfermita iu GCode-dosiero.\n"
+"Bonvolu elekti dosieron kaj reprovi."
 
 #: src/mainwindow.cpp:171
 #, kde-format
@@ -123,6 +125,9 @@ msgid ""
 "Contains unsaved changes that will not be in the print.\n"
 "Would you like to save them before printing?"
 msgstr ""
+"%1 \n"
+"Enhavas nokonservitajn ŝanĝojn kiuj ne estos en la preso.\n"
+"Ĉu vi ŝatus konservi ilin antaŭ ol presi?"
 
 #: src/mainwindow.cpp:260
 #, kde-format
@@ -185,6 +190,8 @@ msgid ""
 "Currently printing! \n"
 "Are you sure you want to close?"
 msgstr ""
+"Aktuale presanta! \n"
+"Ĉu vi certas voli fermi?"
 
 #: src/mainwindow.cpp:396
 #, kde-format
@@ -300,6 +307,8 @@ msgid ""
 "Connecting requires creating a profile for your printer. Create a profile in "
 "the next dialog then try again."
 msgstr ""
+"Konektado postulas krei profilon por via presilo. Kreu profilon en la sekva "
+"dialogo, poste reprovu."
 
 #: src/widgets/atcoreinstancewidget.cpp:216
 #, kde-format
@@ -364,6 +373,8 @@ msgid ""
 "%1 \n"
 "Is not readable, please check and try again."
 msgstr ""
+"%1 \n"
+"Estas nelegebla, bonvolu kontroli kaj reprovi."
 
 #: src/widgets/atcoreinstancewidget.cpp:340
 #, kde-format
@@ -512,6 +523,11 @@ msgid ""
 "        mms://mms.examples.com/stream.asx\n"
 "        rtsp://server.example.org:8080/test.sdp"
 msgstr ""
+"Validaj URL-oj:\n"
+"        http://www.example.com/stream.avi\n"
+"        rtp://@:1234\n"
+"        mms://mms.examples.com/stream.asx\n"
+"        rtsp://server.example.org:8080/test.sdp"
 
 #: src/widgets/welcomewidget.cpp:51
 #, kde-format
