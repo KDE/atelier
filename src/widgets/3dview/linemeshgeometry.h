@@ -24,9 +24,9 @@
 
 #include <QAttribute>
 #include <QGeometry>
-#include <Qt3DRender/QBuffer>
+#include <Qt3DCore/QBuffer>
 
-class LineMeshGeometry : public Qt3DRender::QGeometry
+class LineMeshGeometry : public Qt3DCore::QGeometry
 {
     Q_OBJECT
 
@@ -36,6 +36,6 @@ public:
     int vertexCount();
 
 private:
-    Qt3DRender::QAttribute *_positionAttribute;
-    Qt3DRender::QBuffer *_vertexBuffer;
+    Qt3DCore::QAttribute *_positionAttribute;
+    Qt3DCore::QBuffer *_vertexBuffer;
 };

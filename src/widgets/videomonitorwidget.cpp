@@ -26,7 +26,7 @@
 VideoMonitorWidget::VideoMonitorWidget(QWidget *parent)
     : QWidget(parent)
     , _errorlabel(new QLabel(this))
-    , _mediaplayer(this, QMediaPlayer::StreamPlayback)
+    , _mediaplayer(this)
 {
     auto _layout = new QGridLayout();
     auto _label = new QLabel(i18n("Source url:"), this);
@@ -59,14 +59,14 @@ VideoMonitorWidget::VideoMonitorWidget(QWidget *parent)
 #ifdef Q_OS_LINUX
     QStringList sources;
     sources << QString("video*");
-    _sourceCB->addItems(QDir("/dev/").entryList(sources, QDir::System).replaceInStrings(QRegExp("^"), "v4l2:///dev/"));
+    _sourceCB->addItems(QDir("/dev/").entryList(sources, QDir::System).replaceInStrings(QRegularExpression("^"), "v4l2:///dev/"));
 #endif
 
     connect(_playPB, &QPushButton::clicked, this, [this, _playPB, _sourceCB, _videoWidget](bool b) {
         if (b) {
-            if (_mediaplayer.state() != QMediaPlayer::PausedState) {
+            if (_mediaplayer.playbackState() != QMediaPlayer::PausedState) {
                 QString source = _sourceCB->currentText();
-                _mediaplayer.setMedia(QUrl(source));
+                _mediaplayer.setSource(QUrl(source));
             }
             _playPB->setIcon(QIcon::fromTheme("media-playback-pause", style()->standardIcon(QStyle::SP_MediaPause)));
             _mediaplayer.play();
@@ -76,8 +76,7 @@ VideoMonitorWidget::VideoMonitorWidget(QWidget *parent)
         }
         _videoWidget->setVisible(b);
     });
-    using ErrorSignal = void (QMediaPlayer::*)(QMediaPlayer::Error);
-    connect(&_mediaplayer, static_cast<ErrorSignal>(&QMediaPlayer::error), this, &VideoMonitorWidget::handleError);
+    connect(&_mediaplayer, &QMediaPlayer::errorChanged, this, &VideoMonitorWidget::handleError);
 }
 
 void VideoMonitorWidget::handleError()

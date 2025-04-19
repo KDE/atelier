@@ -65,15 +65,6 @@ void GCodeEditorWidget::loadFile(const QUrl &file)
     m_tabwidget->setCurrentIndex(t);
 }
 
-void GCodeEditorWidget::setupInterface(const KTextEditor::View *view)
-{
-    m_interface = qobject_cast<KTextEditor::ConfigInterface *>(view);
-    m_interface->setConfigValue("line-numbers", true);
-    m_interface->setConfigValue("dynamic-word-wrap", false);
-    m_interface->setConfigValue("modification-markers", true);
-    m_interface->setConfigValue("scrollbar-minimap", false);
-}
-
 KTextEditor::Document *GCodeEditorWidget::newDoc(const QUrl &file)
 {
     KTextEditor::Document *doc = m_editor->createDocument(this);
@@ -91,7 +82,10 @@ KTextEditor::View *GCodeEditorWidget::newView(KTextEditor::Document *doc)
     // Hopefully we can get that added and use it in the future.
     // This must be the older style connect string or it will not work.
     connect(view, SIGNAL(dropEventPass(QDropEvent *)), this, SLOT(dropCatch(QDropEvent *)));
-    setupInterface(view);
+    view->setConfigValue("line-numbers", true);
+    view->setConfigValue("dynamic-word-wrap", false);
+    view->setConfigValue("modification-markers", true);
+    view->setConfigValue("scrollbar-minimap", false);
     return view;
 }
 

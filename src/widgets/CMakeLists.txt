@@ -14,13 +14,13 @@ add_library(AtelierWidgets STATIC ${widgets_SRCS})
 
 target_link_libraries(AtelierWidgets
     AtCore::AtCore
-    KF5::I18n
-    KF5::TextEditor
-    Qt5::Charts
-    Qt5::Core
-    Qt5::Multimedia
-    Qt5::MultimediaWidgets
-    Qt5::Widgets
+    KF6::I18n
+    KF6::TextEditor
+    Qt::Charts
+    Qt::Core
+    Qt::Multimedia
+    Qt::MultimediaWidgets
+    Qt::Widgets
 )
 
 if(WIN32)

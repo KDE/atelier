@@ -20,7 +20,7 @@
 
 #include "widgets/gcodeeditorwidget.h"
 #include <KTextEditor/View>
-#include <KXmlGui/KXmlGuiWindow>
+#include <KXmlGuiWindow>
 #include <QMap>
 #include <QPair>
 #include <QPushButton>

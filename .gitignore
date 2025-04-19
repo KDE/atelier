@@ -3,3 +3,5 @@ CMakeLists.txt.user
 build
 *kdev4
 .clang-format
+.cache/
+compile_commands.json

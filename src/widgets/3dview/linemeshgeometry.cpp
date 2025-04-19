@@ -25,20 +25,20 @@
 #include <QVector>
 
 LineMeshGeometry::LineMeshGeometry(const QVector<QVector3D> &vertices, Qt3DCore::QNode *parent)
-    : Qt3DRender::QGeometry(parent)
-    , _positionAttribute(new Qt3DRender::QAttribute(this))
-    , _vertexBuffer(new Qt3DRender::QBuffer(Qt3DRender::QBuffer::VertexBuffer, this))
+    : Qt3DCore::QGeometry(parent)
+    , _positionAttribute(new Qt3DCore::QAttribute(this))
+    , _vertexBuffer(new Qt3DCore::QBuffer(this))
 {
     QByteArray vertexBufferData;
     vertexBufferData.resize(vertices.size() * static_cast<int>(sizeof(QVector3D)));
     memcpy(vertexBufferData.data(), vertices.constData(), static_cast<size_t>(vertexBufferData.size()));
     _vertexBuffer->setData(vertexBufferData);
 
-    _positionAttribute->setAttributeType(Qt3DRender::QAttribute::VertexAttribute);
+    _positionAttribute->setAttributeType(Qt3DCore::QAttribute::VertexAttribute);
     _positionAttribute->setBuffer(_vertexBuffer);
-    _positionAttribute->setDataType(Qt3DRender::QAttribute::Float);
-    _positionAttribute->setDataSize(3);
-    _positionAttribute->setName(Qt3DRender::QAttribute::defaultPositionAttributeName());
+    _positionAttribute->setVertexBaseType(Qt3DCore::QAttribute::Float);
+    _positionAttribute->setVertexSize(3);
+    _positionAttribute->setName(Qt3DCore::QAttribute::defaultPositionAttributeName());
 
     addAttribute(_positionAttribute);
 }

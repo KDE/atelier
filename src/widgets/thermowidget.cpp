@@ -146,9 +146,9 @@ void ThermoWidget::keyPressEvent(QKeyEvent *event)
         auto tmp = QString::number(m_targetTemperature);
 
         if (m_cursorPos == slen) {
-            tmp.append(event->key());
+            tmp.append(QChar(event->key()));
         } else {
-            tmp.insert(m_cursorPos, event->key());
+            tmp.insert(m_cursorPos, QChar(event->key()));
         }
 
         if (tmp.toInt() <= m_maxValue && tmp.toInt() >= m_minValue) {

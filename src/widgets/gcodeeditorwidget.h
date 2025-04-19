@@ -18,7 +18,6 @@
 */
 #pragma once
 
-#include <KTextEditor/ConfigInterface>
 #include <KTextEditor/Document>
 #include <KTextEditor/Editor>
 #include <KTextEditor/View>
@@ -38,14 +37,12 @@ public:
 private:
     QMap<QUrl, KTextEditor::Document *> urlDoc;
     QMap<QUrl, QWidget *> urlTab;
-    KTextEditor::ConfigInterface *m_interface = nullptr;
     KTextEditor::Document *newDoc(const QUrl &file);
     KTextEditor::Editor *m_editor;
     KTextEditor::View *newView(KTextEditor::Document *doc);
     QTabWidget *m_tabwidget;
     void closeTab(int index);
     void currentIndexChanged(int index);
-    void setupInterface(const KTextEditor::View *view);
     void setupTabWidget();
 
 signals:

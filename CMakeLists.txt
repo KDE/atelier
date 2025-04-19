@@ -1,9 +1,17 @@
-cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 project(atelier)
 
-find_package(ECM REQUIRED NO_MODULE)
+set(QT_MIN_VERSION "6.7")
+set(KF_MIN_VERSION "6.10")
+
+find_package(ECM ${KF_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
-include(KDECompilerSettings)
+include(KDECompilerSettings NO_POLICY_SCOPE)
+remove_definitions(
+    -DQT_NO_CAST_FROM_ASCII
+    -DQT_NO_FOREACH
+    -DQT_NO_KEYWORDS
+)
 include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(ECMInstallIcons)
@@ -16,8 +24,6 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(QT_MIN_VERSION "5.9.0")
-set(KF5_DEP_VERSION "5.30.0")
 set(KDE_APPLICATIONS_VERSION_MAJOR "0")
 set(KDE_APPLICATIONS_VERSION_MINOR "70")
 set(KDE_APPLICATIONS_VERSION_MICRO "0")
@@ -29,14 +35,14 @@ find_package(AtCore REQUIRED COMPONENTS
                 AtCoreWidgets
             )
 
-find_package(KF5 ${KF5_DEP_VERSION} REQUIRED COMPONENTS
+find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS
                 I18n
                 XmlGui
                 ConfigWidgets
                 TextEditor
             )
 
-find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS
+find_package(Qt6 ${QT_MIN_VERSION} REQUIRED COMPONENTS
                 Core
                 Widgets
                 SerialPort
@@ -52,7 +58,7 @@ find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS
             )
 
 if(BUILD_TESTING)
-    find_package(Qt5Test ${QT_MIN_VERSION} CONFIG REQUIRED)
+    find_package(Qt6Test ${QT_MIN_VERSION} CONFIG REQUIRED)
 endif()
 
 # config.h

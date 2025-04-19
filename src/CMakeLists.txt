@@ -35,6 +35,6 @@ target_link_libraries(atelier
     AtelierWidgets
     AtCore::AtCore
     AtCore::AtCoreWidgets
-    KF5::ConfigWidgets
-    KF5::XmlGui
+    KF6::ConfigWidgets
+    KF6::XmlGui
 )
