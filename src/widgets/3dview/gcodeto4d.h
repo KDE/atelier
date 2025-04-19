@@ -27,7 +27,7 @@ class GcodeTo4D : public QObject
     Q_OBJECT
 
 public:
-    explicit GcodeTo4D(QObject *parent = 0);
+    explicit GcodeTo4D(QObject *parent = nullptr);
     ~GcodeTo4D() = default;
 
 public:
