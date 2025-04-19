@@ -116,7 +116,7 @@ void QcGaugeWidget::paintEvent(QPaintEvent * /*paintEvt*/)
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
 
-    for (QcItem *item : qAsConst(mItems)) {
+    for (QcItem *item : std::as_const(mItems)) {
         item->draw(&painter);
     }
 }

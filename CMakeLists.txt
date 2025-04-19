@@ -15,6 +15,11 @@ remove_definitions(
 include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(ECMInstallIcons)
+include(ECMDeprecationSettings)
+ecm_set_disabled_deprecation_versions(
+  QT 6.8.0
+  KF 6.12.0
+)
 
 if (POLICY CMP0063)
     cmake_policy(SET CMP0063 NEW)

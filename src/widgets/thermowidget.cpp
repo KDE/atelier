@@ -157,13 +157,13 @@ void ThermoWidget::keyPressEvent(QKeyEvent *event)
                 m_cursorPos++;
             }
         }
-    } else if (event->key() == Qt::Key_Delete && m_targetTemperatureText.count()) {
+    } else if (event->key() == Qt::Key_Delete && m_targetTemperatureText.size()) {
         m_targetTemperatureText.remove(m_cursorPos, 1);
         if (m_cursorPos < slen) {
             m_cursorPos = slen;
         }
         m_cursorPos--;
-    } else if (event->key() == Qt::Key_Backspace && m_targetTemperatureText.count()) {
+    } else if (event->key() == Qt::Key_Backspace && m_targetTemperatureText.size()) {
         if (m_cursorPos <= slen) {
             m_cursorPos--;
             m_targetTemperatureText.remove(m_cursorPos, 1);

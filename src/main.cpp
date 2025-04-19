@@ -30,7 +30,6 @@ int main(int argc, char *argv[])
     QCoreApplication::setOrganizationName("KDE");
     QCoreApplication::setOrganizationDomain("kde.org");
     QCoreApplication::setApplicationName("atelier");
-    QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
 
     KAboutData aboutData(
         // The program name used internally. (componentName)

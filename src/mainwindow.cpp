@@ -123,7 +123,7 @@ void MainWindow::initWidgets()
     addTabBtn->setIconSize(QSize(fontMetrics().lineSpacing(), fontMetrics().lineSpacing()));
     addTabBtn->setIcon(QIcon::fromTheme("list-add", QIcon(QString(":/%1/addTab").arg(m_theme))));
     addTabBtn->setToolTip(i18n("Create new instance"));
-    addTabBtn->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_T));
+    addTabBtn->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_T));
     connect(addTabBtn, &QToolButton::clicked, this, &MainWindow::newAtCoreInstance);
     m_instances->setCornerWidget(addTabBtn, Qt::TopLeftCorner);
 
@@ -167,12 +167,11 @@ void MainWindow::newAtCoreInstance()
             break;
         }
         if (m_gcodeEditor->modifiedFiles().contains(file)) {
-            int result = QMessageBox::question(this,
-                                               i18n("Document Modified"),
-                                               i18n("%1 \nContains unsaved changes that will not be in the print.\nWould you like to save them before printing?", file.toLocalFile()),
-                                               QMessageBox::Save,
-                                               QMessageBox::Cancel,
-                                               QMessageBox::Ignore);
+            int result = QMessageBox::question(
+                this,
+                i18n("Document Modified"),
+                i18n("%1 \nContains unsaved changes that will not be in the print.\nWould you like to save them before printing?", file.toLocalFile()),
+                QMessageBox::Save | QMessageBox::Cancel | QMessageBox::Ignore);
             if (result == QMessageBox::Cancel) {
                 return;
             }
