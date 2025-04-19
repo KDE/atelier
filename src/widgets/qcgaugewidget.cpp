@@ -370,7 +370,6 @@ void QcLabelItem::draw(QPainter *painter)
 {
     resetRect();
     QRectF tmpRect = adjustRect(position());
-    float r = getRadius(rect());
     painter->setFont(mFont);
     painter->setPen(QPen(mColor));
 
@@ -607,7 +606,6 @@ QcValuesItem::QcValuesItem(QObject *parent)
 void QcValuesItem::draw(QPainter *painter)
 {
     QRectF tmpRect = resetRect();
-    float r = getRadius(adjustRect(99));
     painter->setFont(mFont);
     painter->setPen(mColor);
     for (float val = minValue(); val <= maxValue(); val += mStep) {
