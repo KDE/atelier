@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
     KAboutData::setApplicationData(aboutData);
 
     auto mainWindow = new MainWindow();
-    mainWindow->setWindowIcon(QIcon(":/icon/atelier"));
+    mainWindow->setWindowIcon(QIcon::fromTheme(QStringLiteral("org.kde.atelier")));
     mainWindow->show();
     return app.exec();
 }

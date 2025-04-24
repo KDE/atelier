@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/icon">
-        <file alias="atelier">../deploy/atelier.png</file>
         <file alias="close">icons/close.svg</file>
         <file alias="exit">icons/application-exit.svg</file>
         <file alias="video">icons/camera-web.svg</file>
