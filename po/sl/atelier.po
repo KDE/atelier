@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:40+0000\n"
+"POT-Creation-Date: 2025-04-26 00:44+0000\n"
 "PO-Revision-Date: 2021-06-25 22:04+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -38,52 +38,52 @@ msgstr "Izberite datoteko za tisk:"
 msgid "Profiles"
 msgstr "Profili"
 
-#: src/main.cpp:39
+#: src/main.cpp:40
 #, kde-format
 msgid "Atelier"
 msgstr "Atelier"
 
-#: src/main.cpp:43
+#: src/main.cpp:44
 #, kde-format
 msgid "Printer Host for 3DPrinters"
 msgstr "Gostitelj tiskalnikov za 3D tisk"
 
-#: src/main.cpp:47
+#: src/main.cpp:48
 #, kde-format
 msgid "(c) 2016"
 msgstr "(c) 2016"
 
-#: src/main.cpp:55
+#: src/main.cpp:56
 #, kde-format
 msgid "Lays Rodrigues"
 msgstr "Lays Rodrigues"
 
-#: src/main.cpp:55 src/main.cpp:56 src/main.cpp:57
+#: src/main.cpp:56 src/main.cpp:57 src/main.cpp:58
 #, kde-format
 msgid "Developer"
 msgstr "Razvijalec"
 
-#: src/main.cpp:56
+#: src/main.cpp:57
 #, kde-format
 msgid "Chris Rizzitello"
 msgstr "Chris Rizzitello"
 
-#: src/main.cpp:57
+#: src/main.cpp:58
 #, kde-format
 msgid "Patrick Pereira"
 msgstr "Patrick Pereira"
 
-#: src/main.cpp:58
+#: src/main.cpp:59
 #, kde-format
 msgid "Tomaz Canabrava"
 msgstr "Tomaz Canabrava"
 
-#: src/main.cpp:58
+#: src/main.cpp:59
 #, kde-format
 msgid "Contributor"
 msgstr "Prispeval"
 
-#: src/main.cpp:59
+#: src/main.cpp:60
 #, kde-format
 msgid "Using AtCore: %1"
 msgstr "Uporablja AtCore: %1"
@@ -113,12 +113,12 @@ msgstr ""
 "Ni datoteka GCode, da bi jo odprl.\n"
 "Izberite datoteko in poskusite znova."
 
-#: src/mainwindow.cpp:171
+#: src/mainwindow.cpp:172
 #, kde-format
 msgid "Document Modified"
 msgstr "Dokument je spremenjen"
 
-#: src/mainwindow.cpp:172
+#: src/mainwindow.cpp:173
 #, kde-format
 msgid ""
 "%1 \n"
@@ -129,62 +129,62 @@ msgstr ""
 "Vsebuje neshranjene spremembe, ki ne bodo šle v tisk.\n"
 "Bi jih radi shranili pred tiskanjem?"
 
-#: src/mainwindow.cpp:260
+#: src/mainwindow.cpp:259
 #, kde-format
 msgid "Welcome"
 msgstr "Dobrodošli"
 
-#: src/mainwindow.cpp:261
+#: src/mainwindow.cpp:260
 #, kde-format
 msgid "3D"
 msgstr "3D"
 
-#: src/mainwindow.cpp:262
+#: src/mainwindow.cpp:261
 #, kde-format
 msgid "GCode"
 msgstr "GCode"
 
-#: src/mainwindow.cpp:263
+#: src/mainwindow.cpp:262
 #, kde-format
 msgid "Video"
 msgstr "Video"
 
-#: src/mainwindow.cpp:275
+#: src/mainwindow.cpp:274
 #, kde-format
 msgid "&Open"
 msgstr "&Odpri"
 
-#: src/mainwindow.cpp:282
+#: src/mainwindow.cpp:281
 #, kde-format
 msgid "&New Connection"
 msgstr "&Nova povezava"
 
-#: src/mainwindow.cpp:289
+#: src/mainwindow.cpp:288
 #, kde-format
 msgid "&Profiles"
 msgstr "&Profili"
 
-#: src/mainwindow.cpp:299
+#: src/mainwindow.cpp:298
 #, kde-format
 msgid "&Quit"
 msgstr "Zapusti"
 
-#: src/mainwindow.cpp:308
+#: src/mainwindow.cpp:307
 #, kde-format
 msgid "Open GCode"
 msgstr "Odpri GCode"
 
-#: src/mainwindow.cpp:308
+#: src/mainwindow.cpp:307
 #, kde-format
 msgid "GCode(*.gco *.gcode);;All Files(*.*)"
 msgstr "GCode(*.gco *.gcode);;Vse datoteke(*.*)"
 
-#: src/mainwindow.cpp:345 src/widgets/atcoreinstancewidget.cpp:435
+#: src/mainwindow.cpp:344 src/widgets/atcoreinstancewidget.cpp:435
 #, kde-format
 msgid "Printing"
 msgstr "Tiskam"
 
-#: src/mainwindow.cpp:345
+#: src/mainwindow.cpp:344
 #, kde-format
 msgid ""
 "Currently printing! \n"
@@ -193,37 +193,37 @@ msgstr ""
 "Trenutno tiskam!\n"
 "Ali ste prepričani, da želite zapreti?"
 
-#: src/mainwindow.cpp:396
+#: src/mainwindow.cpp:395
 #, kde-format
 msgid "Save Selected"
 msgstr "Shrani izbrano"
 
-#: src/mainwindow.cpp:404 src/mainwindow.cpp:422
+#: src/mainwindow.cpp:403 src/mainwindow.cpp:421
 #, kde-format
 msgid "Save Failed"
 msgstr "Shranjevanje ni uspelo"
 
-#: src/mainwindow.cpp:404 src/mainwindow.cpp:422
+#: src/mainwindow.cpp:403 src/mainwindow.cpp:421
 #, kde-format
 msgid "Failed to save file: %1"
 msgstr "Neuspelo shranjevanje datoteke: %1"
 
-#: src/mainwindow.cpp:417
+#: src/mainwindow.cpp:416
 #, kde-format
 msgid "Save All"
 msgstr "Shrani vse"
 
-#: src/mainwindow.cpp:432
+#: src/mainwindow.cpp:431
 #, kde-format
 msgid "Cancel"
 msgstr "Prekliči"
 
-#: src/mainwindow.cpp:438
+#: src/mainwindow.cpp:437
 #, kde-format
 msgid "Discard Changes"
 msgstr "Zavrzi spremembe"
 
-#: src/mainwindow.cpp:444
+#: src/mainwindow.cpp:443
 #, kde-format
 msgid "Files with Unsaved Changes."
 msgstr "Datoteke z neshranjenimi spremembami."

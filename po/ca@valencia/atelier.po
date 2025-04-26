@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:40+0000\n"
+"POT-Creation-Date: 2025-04-26 00:44+0000\n"
 "PO-Revision-Date: 2024-06-27 13:45+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -40,52 +40,52 @@ msgstr "Escolliu un fitxer per a imprimir:"
 msgid "Profiles"
 msgstr "Perfils"
 
-#: src/main.cpp:39
+#: src/main.cpp:40
 #, kde-format
 msgid "Atelier"
 msgstr "Atelier"
 
-#: src/main.cpp:43
+#: src/main.cpp:44
 #, kde-format
 msgid "Printer Host for 3DPrinters"
 msgstr "Amfitrió d'impressora per a impressores en 3D"
 
-#: src/main.cpp:47
+#: src/main.cpp:48
 #, kde-format
 msgid "(c) 2016"
 msgstr "(c) 2016"
 
-#: src/main.cpp:55
+#: src/main.cpp:56
 #, kde-format
 msgid "Lays Rodrigues"
 msgstr "Lays Rodrigues"
 
-#: src/main.cpp:55 src/main.cpp:56 src/main.cpp:57
+#: src/main.cpp:56 src/main.cpp:57 src/main.cpp:58
 #, kde-format
 msgid "Developer"
 msgstr "Desenvolupadora"
 
-#: src/main.cpp:56
+#: src/main.cpp:57
 #, kde-format
 msgid "Chris Rizzitello"
 msgstr "Chris Rizzitello"
 
-#: src/main.cpp:57
+#: src/main.cpp:58
 #, kde-format
 msgid "Patrick Pereira"
 msgstr "Patrick Pereira"
 
-#: src/main.cpp:58
+#: src/main.cpp:59
 #, kde-format
 msgid "Tomaz Canabrava"
 msgstr "Tomaz Canabrava"
 
-#: src/main.cpp:58
+#: src/main.cpp:59
 #, kde-format
 msgid "Contributor"
 msgstr "Col·laborador"
 
-#: src/main.cpp:59
+#: src/main.cpp:60
 #, kde-format
 msgid "Using AtCore: %1"
 msgstr "Utilitzant AtCore: %1"
@@ -115,12 +115,12 @@ msgstr ""
 "No hi ha obert cap fitxer de GCode.\n"
 "Seleccioneu un fitxer i torneu-ho a provar."
 
-#: src/mainwindow.cpp:171
+#: src/mainwindow.cpp:172
 #, kde-format
 msgid "Document Modified"
 msgstr "S'ha modificat el document"
 
-#: src/mainwindow.cpp:172
+#: src/mainwindow.cpp:173
 #, kde-format
 msgid ""
 "%1 \n"
@@ -131,62 +131,62 @@ msgstr ""
 "Conté canvis sense guardar que no es mostraran en la impressió.\n"
 "Voleu guardar-los abans d'imprimir?"
 
-#: src/mainwindow.cpp:260
+#: src/mainwindow.cpp:259
 #, kde-format
 msgid "Welcome"
 msgstr "Us donem la benvinguda"
 
-#: src/mainwindow.cpp:261
+#: src/mainwindow.cpp:260
 #, kde-format
 msgid "3D"
 msgstr "3D"
 
-#: src/mainwindow.cpp:262
+#: src/mainwindow.cpp:261
 #, kde-format
 msgid "GCode"
 msgstr "GCode"
 
-#: src/mainwindow.cpp:263
+#: src/mainwindow.cpp:262
 #, kde-format
 msgid "Video"
 msgstr "Vídeo"
 
-#: src/mainwindow.cpp:275
+#: src/mainwindow.cpp:274
 #, kde-format
 msgid "&Open"
 msgstr "O&bri"
 
-#: src/mainwindow.cpp:282
+#: src/mainwindow.cpp:281
 #, kde-format
 msgid "&New Connection"
 msgstr "Connexió &nova"
 
-#: src/mainwindow.cpp:289
+#: src/mainwindow.cpp:288
 #, kde-format
 msgid "&Profiles"
 msgstr "&Perfils"
 
-#: src/mainwindow.cpp:299
+#: src/mainwindow.cpp:298
 #, kde-format
 msgid "&Quit"
 msgstr "I&x"
 
-#: src/mainwindow.cpp:308
+#: src/mainwindow.cpp:307
 #, kde-format
 msgid "Open GCode"
 msgstr "Obri un GCode"
 
-#: src/mainwindow.cpp:308
+#: src/mainwindow.cpp:307
 #, kde-format
 msgid "GCode(*.gco *.gcode);;All Files(*.*)"
 msgstr "GCode (*.gco *.gcode);;Tots els fitxers (*.*)"
 
-#: src/mainwindow.cpp:345 src/widgets/atcoreinstancewidget.cpp:435
+#: src/mainwindow.cpp:344 src/widgets/atcoreinstancewidget.cpp:435
 #, kde-format
 msgid "Printing"
 msgstr "Imprimix"
 
-#: src/mainwindow.cpp:345
+#: src/mainwindow.cpp:344
 #, kde-format
 msgid ""
 "Currently printing! \n"
@@ -195,37 +195,37 @@ msgstr ""
 "Actualment s'està imprimint! \n"
 "Segur que voleu tancar?"
 
-#: src/mainwindow.cpp:396
+#: src/mainwindow.cpp:395
 #, kde-format
 msgid "Save Selected"
 msgstr "S'ha seleccionat la guardada"
 
-#: src/mainwindow.cpp:404 src/mainwindow.cpp:422
+#: src/mainwindow.cpp:403 src/mainwindow.cpp:421
 #, kde-format
 msgid "Save Failed"
 msgstr "No s'ha pogut fer la guardada"
 
-#: src/mainwindow.cpp:404 src/mainwindow.cpp:422
+#: src/mainwindow.cpp:403 src/mainwindow.cpp:421
 #, kde-format
 msgid "Failed to save file: %1"
 msgstr "No s'ha pogut guardar el fitxer: %1"
 
-#: src/mainwindow.cpp:417
+#: src/mainwindow.cpp:416
 #, kde-format
 msgid "Save All"
 msgstr "Guarda-ho tot"
 
-#: src/mainwindow.cpp:432
+#: src/mainwindow.cpp:431
 #, kde-format
 msgid "Cancel"
 msgstr "Cancel·la"
 
-#: src/mainwindow.cpp:438
+#: src/mainwindow.cpp:437
 #, kde-format
 msgid "Discard Changes"
 msgstr "Descarta els canvis"
 
-#: src/mainwindow.cpp:444
+#: src/mainwindow.cpp:443
 #, kde-format
 msgid "Files with Unsaved Changes."
 msgstr "Fitxers amb canvis sense guardar."

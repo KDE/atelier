@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:40+0000\n"
+"POT-Creation-Date: 2025-04-26 00:44+0000\n"
 "PO-Revision-Date: 2022-12-30 18:55+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -39,52 +39,52 @@ msgstr "選擇欲列印檔案："
 msgid "Profiles"
 msgstr "設定檔"
 
-#: src/main.cpp:39
+#: src/main.cpp:40
 #, kde-format
 msgid "Atelier"
 msgstr "Atelier"
 
-#: src/main.cpp:43
+#: src/main.cpp:44
 #, kde-format
 msgid "Printer Host for 3DPrinters"
 msgstr "適用於 3D 列印機的列印主機"
 
-#: src/main.cpp:47
+#: src/main.cpp:48
 #, kde-format
 msgid "(c) 2016"
 msgstr "(c) 2016"
 
-#: src/main.cpp:55
+#: src/main.cpp:56
 #, kde-format
 msgid "Lays Rodrigues"
 msgstr "Lays Rodrigues"
 
-#: src/main.cpp:55 src/main.cpp:56 src/main.cpp:57
+#: src/main.cpp:56 src/main.cpp:57 src/main.cpp:58
 #, kde-format
 msgid "Developer"
 msgstr "開發者"
 
-#: src/main.cpp:56
+#: src/main.cpp:57
 #, kde-format
 msgid "Chris Rizzitello"
 msgstr "Chris Rizzitello"
 
-#: src/main.cpp:57
+#: src/main.cpp:58
 #, kde-format
 msgid "Patrick Pereira"
 msgstr "Patrick Pereira"
 
-#: src/main.cpp:58
+#: src/main.cpp:59
 #, kde-format
 msgid "Tomaz Canabrava"
 msgstr "Tomaz Canabrava"
 
-#: src/main.cpp:58
+#: src/main.cpp:59
 #, kde-format
 msgid "Contributor"
 msgstr "貢獻者"
 
-#: src/main.cpp:59
+#: src/main.cpp:60
 #, kde-format
 msgid "Using AtCore: %1"
 msgstr "使用 AtCore：%1"
@@ -114,12 +114,12 @@ msgstr ""
 "未找到開啟的 GCode 檔案。\n"
 "請選擇檔案後重試。"
 
-#: src/mainwindow.cpp:171
+#: src/mainwindow.cpp:172
 #, kde-format
 msgid "Document Modified"
 msgstr "已變更文件"
 
-#: src/mainwindow.cpp:172
+#: src/mainwindow.cpp:173
 #, kde-format
 msgid ""
 "%1 \n"
@@ -130,62 +130,62 @@ msgstr ""
 "包含了未儲存的變更，其將不會被列印。\n"
 "您想要在列印前先儲存嗎？"
 
-#: src/mainwindow.cpp:260
+#: src/mainwindow.cpp:259
 #, kde-format
 msgid "Welcome"
 msgstr "歡迎"
 
-#: src/mainwindow.cpp:261
+#: src/mainwindow.cpp:260
 #, kde-format
 msgid "3D"
 msgstr "3D"
 
-#: src/mainwindow.cpp:262
+#: src/mainwindow.cpp:261
 #, kde-format
 msgid "GCode"
 msgstr "GCode"
 
-#: src/mainwindow.cpp:263
+#: src/mainwindow.cpp:262
 #, kde-format
 msgid "Video"
 msgstr "影片"
 
-#: src/mainwindow.cpp:275
+#: src/mainwindow.cpp:274
 #, kde-format
 msgid "&Open"
 msgstr "開啟(&O)"
 
-#: src/mainwindow.cpp:282
+#: src/mainwindow.cpp:281
 #, kde-format
 msgid "&New Connection"
 msgstr "新連結(&N)"
 
-#: src/mainwindow.cpp:289
+#: src/mainwindow.cpp:288
 #, kde-format
 msgid "&Profiles"
 msgstr "設定檔(&P)"
 
-#: src/mainwindow.cpp:299
+#: src/mainwindow.cpp:298
 #, kde-format
 msgid "&Quit"
 msgstr "退出(&Q)"
 
-#: src/mainwindow.cpp:308
+#: src/mainwindow.cpp:307
 #, kde-format
 msgid "Open GCode"
 msgstr "開啟 GCode"
 
-#: src/mainwindow.cpp:308
+#: src/mainwindow.cpp:307
 #, kde-format
 msgid "GCode(*.gco *.gcode);;All Files(*.*)"
 msgstr "GCode(*.gco *.gcode);;所有檔案(*.*)"
 
-#: src/mainwindow.cpp:345 src/widgets/atcoreinstancewidget.cpp:435
+#: src/mainwindow.cpp:344 src/widgets/atcoreinstancewidget.cpp:435
 #, kde-format
 msgid "Printing"
 msgstr "正在列印"
 
-#: src/mainwindow.cpp:345
+#: src/mainwindow.cpp:344
 #, kde-format
 msgid ""
 "Currently printing! \n"
@@ -194,37 +194,37 @@ msgstr ""
 "目前正在列印！\n"
 "是否關閉？"
 
-#: src/mainwindow.cpp:396
+#: src/mainwindow.cpp:395
 #, kde-format
 msgid "Save Selected"
 msgstr "儲存選取項目"
 
-#: src/mainwindow.cpp:404 src/mainwindow.cpp:422
+#: src/mainwindow.cpp:403 src/mainwindow.cpp:421
 #, kde-format
 msgid "Save Failed"
 msgstr "儲存失敗"
 
-#: src/mainwindow.cpp:404 src/mainwindow.cpp:422
+#: src/mainwindow.cpp:403 src/mainwindow.cpp:421
 #, kde-format
 msgid "Failed to save file: %1"
 msgstr "無法儲存檔案：%1"
 
-#: src/mainwindow.cpp:417
+#: src/mainwindow.cpp:416
 #, kde-format
 msgid "Save All"
 msgstr "全部儲存"
 
-#: src/mainwindow.cpp:432
+#: src/mainwindow.cpp:431
 #, kde-format
 msgid "Cancel"
 msgstr "取消"
 
-#: src/mainwindow.cpp:438
+#: src/mainwindow.cpp:437
 #, kde-format
 msgid "Discard Changes"
 msgstr "放棄變更"
 
-#: src/mainwindow.cpp:444
+#: src/mainwindow.cpp:443
 #, kde-format
 msgid "Files with Unsaved Changes."
 msgstr "包含未儲存變更的檔案。"

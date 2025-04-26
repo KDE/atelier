@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:40+0000\n"
+"POT-Creation-Date: 2025-04-26 00:44+0000\n"
 "PO-Revision-Date: 2021-07-04 14:00+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
@@ -37,52 +37,52 @@ msgstr "Choose a file to print:"
 msgid "Profiles"
 msgstr "Profiles"
 
-#: src/main.cpp:39
+#: src/main.cpp:40
 #, kde-format
 msgid "Atelier"
 msgstr "Atelier"
 
-#: src/main.cpp:43
+#: src/main.cpp:44
 #, kde-format
 msgid "Printer Host for 3DPrinters"
 msgstr "Printer Host for 3DPrinters"
 
-#: src/main.cpp:47
+#: src/main.cpp:48
 #, kde-format
 msgid "(c) 2016"
 msgstr "(c) 2016"
 
-#: src/main.cpp:55
+#: src/main.cpp:56
 #, kde-format
 msgid "Lays Rodrigues"
 msgstr "Lays Rodrigues"
 
-#: src/main.cpp:55 src/main.cpp:56 src/main.cpp:57
+#: src/main.cpp:56 src/main.cpp:57 src/main.cpp:58
 #, kde-format
 msgid "Developer"
 msgstr "Developer"
 
-#: src/main.cpp:56
+#: src/main.cpp:57
 #, kde-format
 msgid "Chris Rizzitello"
 msgstr "Chris Rizzitello"
 
-#: src/main.cpp:57
+#: src/main.cpp:58
 #, kde-format
 msgid "Patrick Pereira"
 msgstr "Patrick Pereira"
 
-#: src/main.cpp:58
+#: src/main.cpp:59
 #, kde-format
 msgid "Tomaz Canabrava"
 msgstr "Tomaz Canabrava"
 
-#: src/main.cpp:58
+#: src/main.cpp:59
 #, kde-format
 msgid "Contributor"
 msgstr "Contributor"
 
-#: src/main.cpp:59
+#: src/main.cpp:60
 #, kde-format
 msgid "Using AtCore: %1"
 msgstr "Using AtCore: %1"
@@ -112,12 +112,12 @@ msgstr ""
 "There's no GCode file open.\n"
 "Please select a file and try again."
 
-#: src/mainwindow.cpp:171
+#: src/mainwindow.cpp:172
 #, kde-format
 msgid "Document Modified"
 msgstr "Document Modified"
 
-#: src/mainwindow.cpp:172
+#: src/mainwindow.cpp:173
 #, kde-format
 msgid ""
 "%1 \n"
@@ -128,62 +128,62 @@ msgstr ""
 "Contains unsaved changes that will not be in the print.\n"
 "Would you like to save them before printing?"
 
-#: src/mainwindow.cpp:260
+#: src/mainwindow.cpp:259
 #, kde-format
 msgid "Welcome"
 msgstr "Welcome"
 
-#: src/mainwindow.cpp:261
+#: src/mainwindow.cpp:260
 #, kde-format
 msgid "3D"
 msgstr "3D"
 
-#: src/mainwindow.cpp:262
+#: src/mainwindow.cpp:261
 #, kde-format
 msgid "GCode"
 msgstr "GCode"
 
-#: src/mainwindow.cpp:263
+#: src/mainwindow.cpp:262
 #, kde-format
 msgid "Video"
 msgstr "Video"
 
-#: src/mainwindow.cpp:275
+#: src/mainwindow.cpp:274
 #, kde-format
 msgid "&Open"
 msgstr "&Open"
 
-#: src/mainwindow.cpp:282
+#: src/mainwindow.cpp:281
 #, kde-format
 msgid "&New Connection"
 msgstr "&New Connection"
 
-#: src/mainwindow.cpp:289
+#: src/mainwindow.cpp:288
 #, kde-format
 msgid "&Profiles"
 msgstr "&Profiles"
 
-#: src/mainwindow.cpp:299
+#: src/mainwindow.cpp:298
 #, kde-format
 msgid "&Quit"
 msgstr "&Quit"
 
-#: src/mainwindow.cpp:308
+#: src/mainwindow.cpp:307
 #, kde-format
 msgid "Open GCode"
 msgstr "Open GCode"
 
-#: src/mainwindow.cpp:308
+#: src/mainwindow.cpp:307
 #, kde-format
 msgid "GCode(*.gco *.gcode);;All Files(*.*)"
 msgstr "GCode(*.gco *.gcode);;All Files(*.*)"
 
-#: src/mainwindow.cpp:345 src/widgets/atcoreinstancewidget.cpp:435
+#: src/mainwindow.cpp:344 src/widgets/atcoreinstancewidget.cpp:435
 #, kde-format
 msgid "Printing"
 msgstr "Printing"
 
-#: src/mainwindow.cpp:345
+#: src/mainwindow.cpp:344
 #, kde-format
 msgid ""
 "Currently printing! \n"
@@ -192,37 +192,37 @@ msgstr ""
 "Currently printing! \n"
 "Are you sure you want to close?"
 
-#: src/mainwindow.cpp:396
+#: src/mainwindow.cpp:395
 #, kde-format
 msgid "Save Selected"
 msgstr "Save Selected"
 
-#: src/mainwindow.cpp:404 src/mainwindow.cpp:422
+#: src/mainwindow.cpp:403 src/mainwindow.cpp:421
 #, kde-format
 msgid "Save Failed"
 msgstr "Save Failed"
 
-#: src/mainwindow.cpp:404 src/mainwindow.cpp:422
+#: src/mainwindow.cpp:403 src/mainwindow.cpp:421
 #, kde-format
 msgid "Failed to save file: %1"
 msgstr "Failed to save file: %1"
 
-#: src/mainwindow.cpp:417
+#: src/mainwindow.cpp:416
 #, kde-format
 msgid "Save All"
 msgstr "Save All"
 
-#: src/mainwindow.cpp:432
+#: src/mainwindow.cpp:431
 #, kde-format
 msgid "Cancel"
 msgstr "Cancel"
 
-#: src/mainwindow.cpp:438
+#: src/mainwindow.cpp:437
 #, kde-format
 msgid "Discard Changes"
 msgstr "Discard Changes"
 
-#: src/mainwindow.cpp:444
+#: src/mainwindow.cpp:443
 #, kde-format
 msgid "Files with Unsaved Changes."
 msgstr "Files with Unsaved Changes."

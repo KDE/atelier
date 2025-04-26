@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:40+0000\n"
+"POT-Creation-Date: 2025-04-26 00:44+0000\n"
 "PO-Revision-Date: 2021-06-19 09:17+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -40,52 +40,52 @@ msgstr "Виберіть файл для друку:"
 msgid "Profiles"
 msgstr "Профілі"
 
-#: src/main.cpp:39
+#: src/main.cpp:40
 #, kde-format
 msgid "Atelier"
 msgstr "Atelier"
 
-#: src/main.cpp:43
+#: src/main.cpp:44
 #, kde-format
 msgid "Printer Host for 3DPrinters"
 msgstr "Вузол друку для тривимірних принтерів"
 
-#: src/main.cpp:47
+#: src/main.cpp:48
 #, kde-format
 msgid "(c) 2016"
 msgstr "© 2016"
 
-#: src/main.cpp:55
+#: src/main.cpp:56
 #, kde-format
 msgid "Lays Rodrigues"
 msgstr "Lays Rodrigues"
 
-#: src/main.cpp:55 src/main.cpp:56 src/main.cpp:57
+#: src/main.cpp:56 src/main.cpp:57 src/main.cpp:58
 #, kde-format
 msgid "Developer"
 msgstr "Розробник"
 
-#: src/main.cpp:56
+#: src/main.cpp:57
 #, kde-format
 msgid "Chris Rizzitello"
 msgstr "Chris Rizzitello"
 
-#: src/main.cpp:57
+#: src/main.cpp:58
 #, kde-format
 msgid "Patrick Pereira"
 msgstr "Patrick Pereira"
 
-#: src/main.cpp:58
+#: src/main.cpp:59
 #, kde-format
 msgid "Tomaz Canabrava"
 msgstr "Tomaz Canabrava"
 
-#: src/main.cpp:58
+#: src/main.cpp:59
 #, kde-format
 msgid "Contributor"
 msgstr "Внески"
 
-#: src/main.cpp:59
+#: src/main.cpp:60
 #, kde-format
 msgid "Using AtCore: %1"
 msgstr "Використовуємо AtCore:%1"
@@ -115,12 +115,12 @@ msgstr ""
 "Немає файла GCode для відкриття. \n"
 "Будь ласка, виберіть файл і повторіть спробу."
 
-#: src/mainwindow.cpp:171
+#: src/mainwindow.cpp:172
 #, kde-format
 msgid "Document Modified"
 msgstr "Документ змінено"
 
-#: src/mainwindow.cpp:172
+#: src/mainwindow.cpp:173
 #, kde-format
 msgid ""
 "%1 \n"
@@ -131,62 +131,62 @@ msgstr ""
 "Містить незбережені зміни, які не буде надруковано.\n"
 "Хочете зберегти їх до друку?"
 
-#: src/mainwindow.cpp:260
+#: src/mainwindow.cpp:259
 #, kde-format
 msgid "Welcome"
 msgstr "Вітаємо"
 
-#: src/mainwindow.cpp:261
+#: src/mainwindow.cpp:260
 #, kde-format
 msgid "3D"
 msgstr "3D"
 
-#: src/mainwindow.cpp:262
+#: src/mainwindow.cpp:261
 #, kde-format
 msgid "GCode"
 msgstr "GCode"
 
-#: src/mainwindow.cpp:263
+#: src/mainwindow.cpp:262
 #, kde-format
 msgid "Video"
 msgstr "Відео"
 
-#: src/mainwindow.cpp:275
+#: src/mainwindow.cpp:274
 #, kde-format
 msgid "&Open"
 msgstr "&Відкрити"
 
-#: src/mainwindow.cpp:282
+#: src/mainwindow.cpp:281
 #, kde-format
 msgid "&New Connection"
 msgstr "&Створити з'єднання"
 
-#: src/mainwindow.cpp:289
+#: src/mainwindow.cpp:288
 #, kde-format
 msgid "&Profiles"
 msgstr "П&рофілі"
 
-#: src/mainwindow.cpp:299
+#: src/mainwindow.cpp:298
 #, kde-format
 msgid "&Quit"
 msgstr "Ви&йти"
 
-#: src/mainwindow.cpp:308
+#: src/mainwindow.cpp:307
 #, kde-format
 msgid "Open GCode"
 msgstr "Відкрити GCode"
 
-#: src/mainwindow.cpp:308
+#: src/mainwindow.cpp:307
 #, kde-format
 msgid "GCode(*.gco *.gcode);;All Files(*.*)"
 msgstr "GCode(*.gco *.gcode);;усі файли(*.*)"
 
-#: src/mainwindow.cpp:345 src/widgets/atcoreinstancewidget.cpp:435
+#: src/mainwindow.cpp:344 src/widgets/atcoreinstancewidget.cpp:435
 #, kde-format
 msgid "Printing"
 msgstr "Друк"
 
-#: src/mainwindow.cpp:345
+#: src/mainwindow.cpp:344
 #, kde-format
 msgid ""
 "Currently printing! \n"
@@ -195,37 +195,37 @@ msgstr ""
 "Зараз друкуємо!\n"
 "Ви справді хочете завершити роботу програми?"
 
-#: src/mainwindow.cpp:396
+#: src/mainwindow.cpp:395
 #, kde-format
 msgid "Save Selected"
 msgstr "Вибрано зберігання"
 
-#: src/mainwindow.cpp:404 src/mainwindow.cpp:422
+#: src/mainwindow.cpp:403 src/mainwindow.cpp:421
 #, kde-format
 msgid "Save Failed"
 msgstr "Помилка збереження"
 
-#: src/mainwindow.cpp:404 src/mainwindow.cpp:422
+#: src/mainwindow.cpp:403 src/mainwindow.cpp:421
 #, kde-format
 msgid "Failed to save file: %1"
 msgstr "Не вдалося зберегти файл: %1"
 
-#: src/mainwindow.cpp:417
+#: src/mainwindow.cpp:416
 #, kde-format
 msgid "Save All"
 msgstr "Зберегти всі"
 
-#: src/mainwindow.cpp:432
+#: src/mainwindow.cpp:431
 #, kde-format
 msgid "Cancel"
 msgstr "Скасувати"
 
-#: src/mainwindow.cpp:438
+#: src/mainwindow.cpp:437
 #, kde-format
 msgid "Discard Changes"
 msgstr "Відкинути зміни"
 
-#: src/mainwindow.cpp:444
+#: src/mainwindow.cpp:443
 #, kde-format
 msgid "Files with Unsaved Changes."
 msgstr "Файли із незбереженими змінами."
