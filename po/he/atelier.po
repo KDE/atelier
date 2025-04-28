@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-26 00:44+0000\n"
-"PO-Revision-Date: 2025-04-26 14:04+0300\n"
+"PO-Revision-Date: 2025-04-27 08:09+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -109,6 +109,8 @@ msgid ""
 "There's no GCode file open.\n"
 "Please select a file and try again."
 msgstr ""
+"אין קובץ GCode פתוח.\n"
+"נא לבחור קובץ ולנסות שוב."
 
 #: src/mainwindow.cpp:172
 #, kde-format
@@ -122,6 +124,9 @@ msgid ""
 "Contains unsaved changes that will not be in the print.\n"
 "Would you like to save them before printing?"
 msgstr ""
+"%1 \n"
+"מכיל שינויים שלא יהיו חלק מההדפסה.\n"
+"לשמור אותם לפני ההדפסה?"
 
 #: src/mainwindow.cpp:259
 #, kde-format
@@ -141,7 +146,7 @@ msgstr "GCode"
 #: src/mainwindow.cpp:262
 #, kde-format
 msgid "Video"
-msgstr ""
+msgstr "וידאו"
 
 #: src/mainwindow.cpp:274
 #, kde-format
@@ -171,7 +176,7 @@ msgstr "פתיחת GCode"
 #: src/mainwindow.cpp:307
 #, kde-format
 msgid "GCode(*.gco *.gcode);;All Files(*.*)"
-msgstr ""
+msgstr "GCode(*.gco *.gcode);;כל הקבצים(*.*)"
 
 #: src/mainwindow.cpp:344 src/widgets/atcoreinstancewidget.cpp:435
 #, kde-format
@@ -301,6 +306,8 @@ msgid ""
 "Connecting requires creating a profile for your printer. Create a profile in "
 "the next dialog then try again."
 msgstr ""
+"התחברות דורשת יצירת פרופיל למדפסת שלך. נא ליצור פרופיל בחלונית הבאה ואז "
+"לנסות שוב."
 
 #: src/widgets/atcoreinstancewidget.cpp:216
 #, kde-format
@@ -351,7 +358,7 @@ msgstr "שם הקובץ ריק"
 #: src/widgets/atcoreinstancewidget.cpp:332
 #, kde-format
 msgid "No filename sent from calling method, please check and try again."
-msgstr ""
+msgstr "לא נשלח שם קובץ מהמתודה שקראה, נא לבדוק ולנסות שוב."
 
 #: src/widgets/atcoreinstancewidget.cpp:336
 #, kde-format
@@ -364,91 +371,93 @@ msgid ""
 "%1 \n"
 "Is not readable, please check and try again."
 msgstr ""
+"%1 \n"
+"בלתי קריא, נא לבדוק ולנסות שוב."
 
 #: src/widgets/atcoreinstancewidget.cpp:340
 #, kde-format
 msgid "Printing: %1"
-msgstr ""
+msgstr "בהדפסה: %1"
 
 #: src/widgets/atcoreinstancewidget.cpp:376
 #, kde-format
 msgid "Disconnect"
-msgstr ""
+msgstr "ניתוק"
 
 #: src/widgets/atcoreinstancewidget.cpp:380
 #, kde-format
 msgid "Connecting..."
-msgstr ""
+msgstr "התחברות…"
 
 #: src/widgets/atcoreinstancewidget.cpp:381
 #, kde-format
 msgid "Attempting to Connect"
-msgstr ""
+msgstr "מתבצע ניסיון להתחבר"
 
 #: src/widgets/atcoreinstancewidget.cpp:390
 #, kde-format
 msgid "Connected to %1"
-msgstr ""
+msgstr "יש חיבור אל %1"
 
 #: src/widgets/atcoreinstancewidget.cpp:408
 #, kde-format
 msgid "Not Connected"
-msgstr ""
+msgstr "אין חיבור"
 
 #: src/widgets/atcoreinstancewidget.cpp:411
 #, kde-format
 msgid "Serial disconnected"
-msgstr ""
+msgstr "החיבור הטורי מנותק"
 
 #: src/widgets/atcoreinstancewidget.cpp:422
 #, kde-format
 msgid "Starting Print"
-msgstr ""
+msgstr "הדפסה מתחילה"
 
 #: src/widgets/atcoreinstancewidget.cpp:427
 #, kde-format
 msgid "Finished Print"
-msgstr ""
+msgstr "הדפסה הסתיימה"
 
 #: src/widgets/atcoreinstancewidget.cpp:432
 #, kde-format
 msgid "Finished Print Job"
-msgstr ""
+msgstr "משימת ההדפסה הסתיימה"
 
 #: src/widgets/atcoreinstancewidget.cpp:437
 #, kde-format
 msgid "Pause"
-msgstr ""
+msgstr "השהיה"
 
 #: src/widgets/atcoreinstancewidget.cpp:441
 #, kde-format
 msgid "Paused"
-msgstr ""
+msgstr "מושהית"
 
 #: src/widgets/atcoreinstancewidget.cpp:442
 #, kde-format
 msgid "Resume"
-msgstr ""
+msgstr "המשך"
 
 #: src/widgets/atcoreinstancewidget.cpp:446
 #, kde-format
 msgid "Stopping Print"
-msgstr ""
+msgstr "ההדפסה נעצרת"
 
 #: src/widgets/atcoreinstancewidget.cpp:453
 #, kde-format
 msgid "Unknown AtCore State, %1"
-msgstr ""
+msgstr "מצב AtCore לא ידוע, %1"
 
 #: src/widgets/atcoreinstancewidget.cpp:527
 #, kde-format
 msgid "Found %1 Ports"
-msgstr ""
+msgstr "נמצאו %1 פתחות"
 
 #: src/widgets/atcoreinstancewidget.cpp:529
 #, kde-format
 msgid "No available ports! Please connect a serial device to continue!"
-msgstr ""
+msgstr "אין פתחות זמינות! נא לחבר התקן טורי כדי להמשיך!"
 
 #: src/widgets/atcoreinstancewidget.cpp:572
 #: src/widgets/atcoreinstancewidget.cpp:575
@@ -457,14 +466,14 @@ msgstr ""
 #: src/widgets/atcoreinstancewidget.cpp:591
 #, kde-format
 msgid "Actual Bed"
-msgstr ""
+msgstr "מצע בפועל"
 
 #: src/widgets/atcoreinstancewidget.cpp:582
 #: src/widgets/atcoreinstancewidget.cpp:586
 #: src/widgets/atcoreinstancewidget.cpp:593
 #, kde-format
 msgid "Target Bed"
-msgstr ""
+msgstr "מצע יעד"
 
 #: src/widgets/atcoreinstancewidget.cpp:602
 #: src/widgets/atcoreinstancewidget.cpp:606
@@ -473,34 +482,34 @@ msgstr ""
 #: src/widgets/atcoreinstancewidget.cpp:622
 #, kde-format
 msgid "Actual Ext.1"
-msgstr ""
+msgstr "משחיל בפועל 1"
 
 #: src/widgets/atcoreinstancewidget.cpp:613
 #: src/widgets/atcoreinstancewidget.cpp:617
 #: src/widgets/atcoreinstancewidget.cpp:624
 #, kde-format
 msgid "Target Ext.1"
-msgstr ""
+msgstr "משחיל יעד 1"
 
 #: src/widgets/bedextruderwidget.cpp:29
 #, kde-format
 msgid "Bed"
-msgstr ""
+msgstr "מצע"
 
 #: src/widgets/bedextruderwidget.cpp:30
 #, kde-format
 msgid "HotEnd"
-msgstr ""
+msgstr "ראש הדפסה/HotEnd"
 
 #: src/widgets/bedextruderwidget.cpp:38
 #, kde-format
 msgid "Active Extruder:"
-msgstr ""
+msgstr "משחיל פעיל:"
 
 #: src/widgets/videomonitorwidget.cpp:32
 #, kde-format
 msgid "Source url:"
-msgstr ""
+msgstr "כתובת מקור:"
 
 #: src/widgets/videomonitorwidget.cpp:38
 #, kde-format
@@ -511,68 +520,73 @@ msgid ""
 "        mms://mms.examples.com/stream.asx\n"
 "        rtsp://server.example.org:8080/test.sdp"
 msgstr ""
+"כתובות תקפות:\n"
+"        http://www.example.com/stream.avi\n"
+"        rtp://@:1234\n"
+"        mms://mms.examples.com/stream.asx\n"
+"        rtsp://server.example.org:8080/test.sdp"
 
 #: src/widgets/welcomewidget.cpp:51
 #, kde-format
 msgid "Welcome to Atelier!"
-msgstr ""
+msgstr "ברוך בואך ל־Atelier!"
 
 #: src/widgets/welcomewidget.cpp:67
 #, kde-format
 msgid "Quick Connect Guide"
-msgstr ""
+msgstr "מדריך להתחברות מהירה"
 
 #: src/widgets/welcomewidget.cpp:71
 #, kde-format
 msgid "1 - Create a Profile."
-msgstr ""
+msgstr "1 - ליצור פרופיל."
 
 #: src/widgets/welcomewidget.cpp:71
 #, kde-format
 msgid "2 - Select the device."
-msgstr ""
+msgstr "2 - לבחור את ההתקן."
 
 #: src/widgets/welcomewidget.cpp:71
 #, kde-format
 msgid "3 - Select the profile and connect."
-msgstr ""
+msgstr "3 - לבחור את הפרופיל ולהתחבר."
 
 #: src/widgets/welcomewidget.cpp:76
 #, kde-format
 msgid "Having a connection problem?"
-msgstr ""
+msgstr "בעיות בחיבור?"
 
 #: src/widgets/welcomewidget.cpp:80
 #, kde-format
 msgid "See the info section of the Log for common problems."
-msgstr ""
+msgstr "לעיין בסעיף הפרטים של היומן לפתרון לתקלות נפוצות."
 
 #: src/widgets/welcomewidget.cpp:83
 #, kde-format
 msgid "Check our %1Atelier Docs%2 for more information."
-msgstr ""
+msgstr "לעיין ב%1מסמכים של Atelier%2 לקבלת מידע נוסף."
 
 #: src/widgets/welcomewidget.cpp:87
 #, kde-format
 msgid "Atelier news!"
-msgstr ""
+msgstr "חדשות Atelier!"
 
 #: src/widgets/welcomewidget.cpp:93
 #, kde-format
 msgid "Get Involved"
-msgstr ""
+msgstr "הצטרפות"
 
 #: src/widgets/welcomewidget.cpp:97
 #, kde-format
 msgid "Join our %1Telegram Group%2!"
-msgstr ""
+msgstr "להצטרף ל%1קבוצת הטלגרם%2 שלנו!"
 
 #: src/widgets/welcomewidget.cpp:101
 #, kde-format
 msgid "You can also find us on Libera Chat IRC #kde-atelier"
-msgstr ""
+msgstr "אפשר גם למצוא אותנו ב־IRC ברשת Libera Chat בחדר ‎#kde-atelier"
 
 #: src/widgets/welcomewidget.cpp:185
 #, kde-format
 msgid "Failed to fetch the News."
-msgstr ""
+msgstr "משיכת החדשות נכשלה."
