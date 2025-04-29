@@ -45,7 +45,7 @@ msgstr "Atölye"
 #: src/main.cpp:44
 #, kde-format
 msgid "Printer Host for 3DPrinters"
-msgstr "3B Yazıcılar için Denetleyici"
+msgstr "3B yazıcılar için denetleyici"
 
 #: src/main.cpp:48
 #, kde-format
@@ -90,12 +90,12 @@ msgstr "AtCore kullanılıyor: %1"
 #: src/mainwindow.cpp:125
 #, kde-format
 msgid "Create new instance"
-msgstr "Yeni örnek oluştur"
+msgstr "Yeni Örnek Oluştur"
 
 #: src/mainwindow.cpp:142
 #, kde-format
 msgid "Connect a printer"
-msgstr "Bir yazıcı bağla"
+msgstr "Bir Yazıcı Bağla"
 
 #: src/mainwindow.cpp:156 src/widgets/atcoreinstancewidget.cpp:216
 #: src/widgets/atcoreinstancewidget.cpp:450
@@ -176,7 +176,7 @@ msgstr "GCode Aç"
 #: src/mainwindow.cpp:307
 #, kde-format
 msgid "GCode(*.gco *.gcode);;All Files(*.*)"
-msgstr "GCode(*.gco *.gcode);;Tüm Dosyalar(*.*)"
+msgstr "GCode(*.gco *.gcode);;Tüm dosyalar(*.*)"
 
 #: src/mainwindow.cpp:344 src/widgets/atcoreinstancewidget.cpp:435
 #, kde-format
@@ -189,7 +189,7 @@ msgid ""
 "Currently printing! \n"
 "Are you sure you want to close?"
 msgstr ""
-"Şu anda yazdırma sürüyor! \n"
+"Yazdırma şu anda sürüyor!\n"
 "Çıkmak istediğinizden emin misiniz?"
 
 #: src/mainwindow.cpp:395
@@ -225,7 +225,7 @@ msgstr "Değişiklikleri At"
 #: src/mainwindow.cpp:443
 #, kde-format
 msgid "Files with Unsaved Changes."
-msgstr "Kaydedilmemiş Değişiklikler Olan Dosyalar."
+msgstr "Kaydedilmemiş değişiklikler olan dosyalar"
 
 #: src/widgets/atcoreinstancewidget.cpp:91
 #, kde-format
@@ -245,7 +245,7 @@ msgstr "SD Kart"
 #: src/widgets/atcoreinstancewidget.cpp:120
 #, kde-format
 msgid "Home:"
-msgstr "Ana Klasör:"
+msgstr "Ana klasör:"
 
 #: src/widgets/atcoreinstancewidget.cpp:123
 #, kde-format
@@ -298,7 +298,7 @@ msgstr "Bağlan"
 #: src/widgets/atcoreinstancewidget.cpp:210
 #, kde-format
 msgid "No Profiles!"
-msgstr "Profil Yok!"
+msgstr "Profil yok!"
 
 #: src/widgets/atcoreinstancewidget.cpp:210
 #, kde-format
@@ -332,7 +332,7 @@ msgstr "Görüntüle: %1"
 #: src/widgets/atcoreinstancewidget.cpp:300
 #, kde-format
 msgid "Relative Move: %1, %2"
-msgstr "Göreceli Hareket: %1, %2"
+msgstr "Göreceli hareket: %1, %2"
 
 #: src/widgets/atcoreinstancewidget.cpp:313
 #, kde-format
@@ -389,12 +389,12 @@ msgstr "Bağlantıyı Kes"
 #: src/widgets/atcoreinstancewidget.cpp:380
 #, kde-format
 msgid "Connecting..."
-msgstr "Bağlanıyor..."
+msgstr "Bağlanıyor…"
 
 #: src/widgets/atcoreinstancewidget.cpp:381
 #, kde-format
 msgid "Attempting to Connect"
-msgstr "Bağlanmaya Çalışılıyor"
+msgstr "Bağlanmaya çalışılıyor"
 
 #: src/widgets/atcoreinstancewidget.cpp:390
 #, kde-format
@@ -404,7 +404,7 @@ msgstr "%1 konumuna bağlandı"
 #: src/widgets/atcoreinstancewidget.cpp:408
 #, kde-format
 msgid "Not Connected"
-msgstr "Bağlı Değil"
+msgstr "Bağlı değil"
 
 #: src/widgets/atcoreinstancewidget.cpp:411
 #, kde-format
@@ -414,17 +414,17 @@ msgstr "Seri bağlantı kesildi"
 #: src/widgets/atcoreinstancewidget.cpp:422
 #, kde-format
 msgid "Starting Print"
-msgstr "Yazdırma Başlatılıyor"
+msgstr "Yazdırma başlatılıyor"
 
 #: src/widgets/atcoreinstancewidget.cpp:427
 #, kde-format
 msgid "Finished Print"
-msgstr "Yazdırma Bitti"
+msgstr "Yazdırma bitti"
 
 #: src/widgets/atcoreinstancewidget.cpp:432
 #, kde-format
 msgid "Finished Print Job"
-msgstr "Yazdırma İşi Bitti"
+msgstr "Yazdırma işi bitti"
 
 #: src/widgets/atcoreinstancewidget.cpp:437
 #, kde-format
@@ -506,7 +506,7 @@ msgstr "Sıcak Bitiş"
 #: src/widgets/bedextruderwidget.cpp:38
 #, kde-format
 msgid "Active Extruder:"
-msgstr "Etkin Ekstrüder:"
+msgstr "Etkin ekstrüder:"
 
 #: src/widgets/videomonitorwidget.cpp:32
 #, kde-format
@@ -536,22 +536,22 @@ msgstr "Atölye’ye hoş geldiniz!"
 #: src/widgets/welcomewidget.cpp:67
 #, kde-format
 msgid "Quick Connect Guide"
-msgstr "Hızlı Bağlanma Kılavuzu"
+msgstr "Tez Bağlanma Kılavuzu"
 
 #: src/widgets/welcomewidget.cpp:71
 #, kde-format
 msgid "1 - Create a Profile."
-msgstr "1 - Profil oluştur."
+msgstr "1. Profil oluşturun."
 
 #: src/widgets/welcomewidget.cpp:71
 #, kde-format
 msgid "2 - Select the device."
-msgstr "2 - Aygıt seç."
+msgstr "2. Aygıt seçin."
 
 #: src/widgets/welcomewidget.cpp:71
 #, kde-format
 msgid "3 - Select the profile and connect."
-msgstr "3 - Profili seç ve bağlan."
+msgstr "3. Profili seçin ve bağlanın."
 
 #: src/widgets/welcomewidget.cpp:76
 #, kde-format
