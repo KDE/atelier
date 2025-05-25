@@ -33,7 +33,7 @@ msgstr "antonibella5@yahoo.com"
 #: src/dialogs/choosefiledialog.cpp:43
 #, kde-format
 msgid "Choose a file to print:"
-msgstr "Escolliu un fitxer per a imprimir:"
+msgstr "Trieu un fitxer per a imprimir:"
 
 #: src/dialogs/profilesdialog.cpp:30
 #, kde-format
