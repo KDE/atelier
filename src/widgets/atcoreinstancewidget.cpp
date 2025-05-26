@@ -377,7 +377,7 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
         m_connectButton->setIcon(QIcon::fromTheme("network-disconnect", QIcon(QString(":/%1/disconnect").arg(m_theme))));
         m_connectToolBar->setHidden(true);
         m_toolBar->setHidden(false);
-        stateString = i18n("Connecting...");
+        stateString = i18n("Connecting…");
         m_logWidget->appendLog(i18n("Attempting to Connect"));
         connect(&m_core, &AtCore::receivedMessage, m_logWidget, &LogWidget::appendRLog);
         connect(&m_core, &AtCore::pushedCommand, m_logWidget, &LogWidget::appendSLog);

@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
         // The license this code is released under
         KAboutLicense::GPL_V3,
         // Copyright Statement (copyrightStatement = QString())
-        i18n("(c) 2016"),
+        i18n("© 2016"),
         // Optional text shown in the About box.
         // Can contain any information desired. (otherText)
         QString(),
