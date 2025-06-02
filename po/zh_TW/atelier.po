@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-26 00:44+0000\n"
+"POT-Creation-Date: 2025-06-02 00:45+0000\n"
 "PO-Revision-Date: 2022-12-30 18:55+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -50,8 +50,9 @@ msgid "Printer Host for 3DPrinters"
 msgstr "適用於 3D 列印機的列印主機"
 
 #: src/main.cpp:48
-#, kde-format
-msgid "(c) 2016"
+#, fuzzy, kde-format
+#| msgid "(c) 2016"
+msgid "© 2016"
 msgstr "(c) 2016"
 
 #: src/main.cpp:56
@@ -386,8 +387,9 @@ msgid "Disconnect"
 msgstr "中斷連線"
 
 #: src/widgets/atcoreinstancewidget.cpp:380
-#, kde-format
-msgid "Connecting..."
+#, fuzzy, kde-format
+#| msgid "Connecting..."
+msgid "Connecting…"
 msgstr "連線中…"
 
 #: src/widgets/atcoreinstancewidget.cpp:381

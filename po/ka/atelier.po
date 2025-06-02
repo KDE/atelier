@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-26 00:44+0000\n"
+"POT-Creation-Date: 2025-06-02 00:45+0000\n"
 "PO-Revision-Date: 2022-12-01 08:46+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -49,8 +49,9 @@ msgid "Printer Host for 3DPrinters"
 msgstr "პრინტერის ჰოსტი 3D პრინტერებისთვის"
 
 #: src/main.cpp:48
-#, kde-format
-msgid "(c) 2016"
+#, fuzzy, kde-format
+#| msgid "(c) 2016"
+msgid "© 2016"
 msgstr "(c) 2016"
 
 #: src/main.cpp:56
@@ -388,8 +389,9 @@ msgid "Disconnect"
 msgstr "გათიშვა"
 
 #: src/widgets/atcoreinstancewidget.cpp:380
-#, kde-format
-msgid "Connecting..."
+#, fuzzy, kde-format
+#| msgid "Connecting..."
+msgid "Connecting…"
 msgstr "დაკავშირება..."
 
 #: src/widgets/atcoreinstancewidget.cpp:381

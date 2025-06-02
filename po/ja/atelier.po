@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-26 00:44+0000\n"
+"POT-Creation-Date: 2025-06-02 00:45+0000\n"
 "PO-Revision-Date: 2019-03-12 21:36-0700\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -46,7 +46,7 @@ msgstr ""
 
 #: src/main.cpp:48
 #, kde-format
-msgid "(c) 2016"
+msgid "© 2016"
 msgstr ""
 
 #: src/main.cpp:56
@@ -372,7 +372,7 @@ msgstr ""
 
 #: src/widgets/atcoreinstancewidget.cpp:380
 #, kde-format
-msgid "Connecting..."
+msgid "Connecting…"
 msgstr ""
 
 #: src/widgets/atcoreinstancewidget.cpp:381

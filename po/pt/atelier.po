@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-26 00:44+0000\n"
+"POT-Creation-Date: 2025-06-02 00:45+0000\n"
 "PO-Revision-Date: 2021-06-21 19:46+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -50,8 +50,9 @@ msgid "Printer Host for 3DPrinters"
 msgstr "Assistente de impressão para Impressoras 3D"
 
 #: src/main.cpp:48
-#, kde-format
-msgid "(c) 2016"
+#, fuzzy, kde-format
+#| msgid "(c) 2016"
+msgid "© 2016"
 msgstr "(c) 2016"
 
 #: src/main.cpp:56
@@ -389,8 +390,9 @@ msgid "Disconnect"
 msgstr "Desligar"
 
 #: src/widgets/atcoreinstancewidget.cpp:380
-#, kde-format
-msgid "Connecting..."
+#, fuzzy, kde-format
+#| msgid "Connecting..."
+msgid "Connecting…"
 msgstr "A ligar..."
 
 #: src/widgets/atcoreinstancewidget.cpp:381
