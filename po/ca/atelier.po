@@ -1,16 +1,16 @@
 # Translation of atelier.po to Catalan
-# Copyright (C) 2019-2024 This_file_is_part_of_KDE
+# Copyright (C) 2019-2025 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
 # Antoni Bella Pérez <antonibella5@yahoo.com>, 2019, 2020, 2021.
-# Josep M. Ferrer <txemaq@gmail.com>, 2019, 2020, 2021, 2024.
+# Josep M. Ferrer <txemaq@gmail.com>, 2019, 2020, 2021, 2024, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-02 00:45+0000\n"
-"PO-Revision-Date: 2024-06-27 13:45+0200\n"
+"PO-Revision-Date: 2025-06-02 10:49+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -51,10 +51,9 @@ msgid "Printer Host for 3DPrinters"
 msgstr "Amfitrió d'impressora per a impressores en 3D"
 
 #: src/main.cpp:48
-#, fuzzy, kde-format
-#| msgid "(c) 2016"
+#, kde-format
 msgid "© 2016"
-msgstr "(c) 2016"
+msgstr "© 2016"
 
 #: src/main.cpp:56
 #, kde-format
@@ -391,10 +390,9 @@ msgid "Disconnect"
 msgstr "Desconnecta"
 
 #: src/widgets/atcoreinstancewidget.cpp:380
-#, fuzzy, kde-format
-#| msgid "Connecting..."
+#, kde-format
 msgid "Connecting…"
-msgstr "S'està connectant..."
+msgstr "S'està connectant…"
 
 #: src/widgets/atcoreinstancewidget.cpp:381
 #, kde-format
@@ -600,85 +598,3 @@ msgstr "També ens trobareu a l'irc de Libera Chat, al canal #kde-atelier"
 #, kde-format
 msgid "Failed to fetch the News."
 msgstr "Ha fallat en recuperar les notícies."
-
-#~ msgid "Overwrite Profile?"
-#~ msgstr "Sobreescric el perfil?"
-
-#~ msgid ""
-#~ "A profile with this name already exists. \n"
-#~ " Are you sure you want to overwrite it?"
-#~ msgstr ""
-#~ "Ja hi ha un perfil amb aquest nom.\n"
-#~ "Segur que voleu sobreescriure'l?"
-
-#~ msgid "Save?"
-#~ msgstr "El deso?"
-
-#~ msgid "This profile has been modified, Would you like to Save it?"
-#~ msgstr "Aquest perfil s'ha modificat. Voleu desar-lo?"
-
-#~ msgid "Remove Profile"
-#~ msgstr "Elimina el perfil"
-
-#~ msgid "Mechanics"
-#~ msgstr "Mecànica"
-
-#~ msgid "Printer Type"
-#~ msgstr "Tipus d'impressora"
-
-#~ msgid "&Cartesian"
-#~ msgstr "&Cartesiana"
-
-#~ msgid "&Delta"
-#~ msgstr "&Delta"
-
-#~ msgid "Radi&us"
-#~ msgstr "Rad&i"
-
-#~ msgid " mm"
-#~ msgstr " mm"
-
-#~ msgid "Dimension &Z"
-#~ msgstr "Dimensió &Z"
-
-#~ msgid "Dimension &X"
-#~ msgstr "Dimensió &X"
-
-#~ msgid "Dimension &Y"
-#~ msgstr "Dimensió &Y"
-
-#~ msgid "Temperatures"
-#~ msgstr "Temperatures"
-
-#~ msgid "Maxim&um Bed"
-#~ msgstr "Llit màx&im"
-
-#~ msgid " ºC"
-#~ msgstr " ºC"
-
-#~ msgid ""
-#~ "<html><head/><body><p>Temperature reporting using M155 command. When "
-#~ "enabled the printer will return temperature data automatically at a set "
-#~ "interval.</p></body></html>"
-#~ msgstr ""
-#~ "<html><head/><body><p>Informes de temperatura emprant l'ordre M155. Quan "
-#~ "s'habiliten, la impressora retornarà automàticament les dades de la "
-#~ "temperatura a un interval establert.</p></body></html>"
-
-#~ msgid "Auto Temperature Report"
-#~ msgstr "Informa automàticament de la temperatura"
-
-#~ msgid "Ma&ximum Hotend"
-#~ msgstr "Escalfament final mà&xim"
-
-#~ msgid "Hea&ted bed?"
-#~ msgstr "Està el llit calefactat?"
-
-#~ msgid "Bi&ts per second"
-#~ msgstr "Bi&ts per segon"
-
-#~ msgid "Firmware"
-#~ msgstr "Microprogramari"
-
-#~ msgid "PostPa&use"
-#~ msgstr "Postpa&usa"

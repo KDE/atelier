@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-02 00:45+0000\n"
-"PO-Revision-Date: 2025-04-27 08:09+0300\n"
+"PO-Revision-Date: 2025-06-02 08:28+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 24.12.3\n"
+"X-Generator: Lokalize 25.04.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -49,10 +49,9 @@ msgid "Printer Host for 3DPrinters"
 msgstr "מארח מדפסות תלת־ממד"
 
 #: src/main.cpp:48
-#, fuzzy, kde-format
-#| msgid "(c) 2016"
+#, kde-format
 msgid "© 2016"
-msgstr "(c) 2016"
+msgstr "© 2016"
 
 #: src/main.cpp:56
 #, kde-format
@@ -387,8 +386,7 @@ msgid "Disconnect"
 msgstr "ניתוק"
 
 #: src/widgets/atcoreinstancewidget.cpp:380
-#, fuzzy, kde-format
-#| msgid "Connecting..."
+#, kde-format
 msgid "Connecting…"
 msgstr "התחברות…"
 
