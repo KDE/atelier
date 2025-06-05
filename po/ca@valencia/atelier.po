@@ -1,16 +1,16 @@
 # Translation of atelier.po to Catalan (Valencian)
-# Copyright (C) 2019-2024 This_file_is_part_of_KDE
+# Copyright (C) 2019-2025 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
 # Antoni Bella Pérez <antonibella5@yahoo.com>, 2019, 2020, 2021.
-# Josep M. Ferrer <txemaq@gmail.com>, 2019, 2020, 2021, 2024.
+# Josep M. Ferrer <txemaq@gmail.com>, 2019, 2020, 2021, 2024, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-02 00:45+0000\n"
-"PO-Revision-Date: 2024-06-27 13:45+0200\n"
+"PO-Revision-Date: 2025-06-02 10:49+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -51,10 +51,9 @@ msgid "Printer Host for 3DPrinters"
 msgstr "Amfitrió d'impressora per a impressores en 3D"
 
 #: src/main.cpp:48
-#, fuzzy, kde-format
-#| msgid "(c) 2016"
+#, kde-format
 msgid "© 2016"
-msgstr "(c) 2016"
+msgstr "© 2016"
 
 #: src/main.cpp:56
 #, kde-format
@@ -391,8 +390,7 @@ msgid "Disconnect"
 msgstr "Desconnecta"
 
 #: src/widgets/atcoreinstancewidget.cpp:380
-#, fuzzy, kde-format
-#| msgid "Connecting..."
+#, kde-format
 msgid "Connecting…"
 msgstr "S'està connectant…"
 
