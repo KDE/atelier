@@ -48,10 +48,9 @@ msgid "Printer Host for 3DPrinters"
 msgstr "3D 打印机主机"
 
 #: src/main.cpp:48
-#, fuzzy, kde-format
-#| msgid "(c) 2016"
+#, kde-format
 msgid "© 2016"
-msgstr "(c) 2016"
+msgstr ""
 
 #: src/main.cpp:56
 #, kde-format
@@ -384,10 +383,9 @@ msgid "Disconnect"
 msgstr "断开连接"
 
 #: src/widgets/atcoreinstancewidget.cpp:380
-#, fuzzy, kde-format
-#| msgid "Connecting..."
+#, kde-format
 msgid "Connecting…"
-msgstr "正在连接…"
+msgstr ""
 
 #: src/widgets/atcoreinstancewidget.cpp:381
 #, kde-format
