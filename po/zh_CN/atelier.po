@@ -50,7 +50,7 @@ msgstr "3D 打印机主机"
 #: src/main.cpp:48
 #, kde-format
 msgid "© 2016"
-msgstr ""
+msgstr "© 2016"
 
 #: src/main.cpp:56
 #, kde-format
@@ -385,7 +385,7 @@ msgstr "断开连接"
 #: src/widgets/atcoreinstancewidget.cpp:380
 #, kde-format
 msgid "Connecting…"
-msgstr ""
+msgstr "正在连接..."
 
 #: src/widgets/atcoreinstancewidget.cpp:381
 #, kde-format
