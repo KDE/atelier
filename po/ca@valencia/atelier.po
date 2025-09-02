@@ -113,7 +113,7 @@ msgid ""
 "Please select a file and try again."
 msgstr ""
 "No hi ha obert cap fitxer de GCode.\n"
-"Seleccioneu un fitxer i torneu-ho a provar."
+"Trieu un fitxer i torneu-ho a provar."
 
 #: src/mainwindow.cpp:172
 #, kde-format
@@ -550,12 +550,12 @@ msgstr "1 - Creeu un perfil."
 #: src/widgets/welcomewidget.cpp:71
 #, kde-format
 msgid "2 - Select the device."
-msgstr "2 - Seleccioneu el dispositiu."
+msgstr "2 - Trieu el dispositiu."
 
 #: src/widgets/welcomewidget.cpp:71
 #, kde-format
 msgid "3 - Select the profile and connect."
-msgstr "3 - Seleccioneu el perfil i connecteu."
+msgstr "3 - Trieu el perfil i connecteu."
 
 #: src/widgets/welcomewidget.cpp:76
 #, kde-format
