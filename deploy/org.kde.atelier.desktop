@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Atelier
+Name[ar]=ورشة
 Name[ca]=Atelier
 Name[ca@valencia]=Atelier
 Name[cs]=Atelier
@@ -32,6 +33,7 @@ Name[uk]=Atelier
 Name[zh_CN]=Atelier
 Name[zh_TW]=Atelier
 GenericName=3D Printer Host
+GenericName[ar]=مضيف طابعة ثلاثية الأبعاد
 GenericName[ca]=Amfitrió d'impressora en 3D
 GenericName[ca@valencia]=Amfitrió d'impressora en 3D
 GenericName[cs]=Nástroj na ovládání 3D tiskárny
