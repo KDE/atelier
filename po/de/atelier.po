@@ -49,10 +49,9 @@ msgid "Printer Host for 3DPrinters"
 msgstr ""
 
 #: src/main.cpp:48
-#, fuzzy, kde-format
-#| msgid "(c) 2016"
+#, kde-format
 msgid "© 2016"
-msgstr "Copyright © 2016"
+msgstr "© 2016"
 
 #: src/main.cpp:56
 #, kde-format
