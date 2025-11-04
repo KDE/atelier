@@ -309,7 +309,7 @@ msgid ""
 "the next dialog then try again."
 msgstr ""
 "Une connexion nécessite la création d'un profil pour votre imprimante. "
-"Veuillez créer un profil dans la prochaine boîte de dialogue et essayer à "
+"Veuillez créer un profil dans la prochaine boite de dialogue et essayer à "
 "nouveau."
 
 #: src/widgets/atcoreinstancewidget.cpp:216
