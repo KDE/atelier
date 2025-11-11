@@ -13,7 +13,8 @@
         "--share=network",
         "--socket=wayland",
         "--filesystem=host",
-        "--device=all"
+        "--device=all",
+        "--system-talk-name=org.freedesktop.UDisks2"
     ],
     "modules": [
         {
