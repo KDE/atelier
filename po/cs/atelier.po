@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the atelier package.
-# Vit Pelcak <vit@pelcak.org>, 2019, 2023.
+# SPDX-FileCopyrightText: 2019, 2023, 2025 Vit Pelcak <vit@pelcak.org>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:55+0000\n"
-"PO-Revision-Date: 2023-06-14 13:47+0200\n"
+"PO-Revision-Date: 2025-12-02 11:33+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 23.04.2\n"
+"X-Generator: Lokalize 25.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -50,7 +50,7 @@ msgstr ""
 #: src/main.cpp:48
 #, kde-format
 msgid "© 2016"
-msgstr ""
+msgstr "© 2016"
 
 #: src/main.cpp:56
 #, kde-format
@@ -376,7 +376,7 @@ msgstr "Odpojit"
 #: src/widgets/atcoreinstancewidget.cpp:380
 #, kde-format
 msgid "Connecting…"
-msgstr ""
+msgstr "Navazuji spojení…"
 
 #: src/widgets/atcoreinstancewidget.cpp:381
 #, kde-format
