@@ -13,7 +13,7 @@ remove_definitions(
     -DQT_NO_KEYWORDS
 )
 include(KDEInstallDirs)
-include(KDECMakeSettings)
+include(KDECMakeSettings NO_POLICY_SCOPE)
 include(ECMInstallIcons)
 include(ECMDeprecationSettings)
 ecm_set_disabled_deprecation_versions(
