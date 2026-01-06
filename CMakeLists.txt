@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.16...4.1 FATAL_ERROR)
 project(atelier)
 
 set(QT_MIN_VERSION "6.7")
@@ -20,10 +20,6 @@ ecm_set_disabled_deprecation_versions(
   QT 6.10.0
   KF 6.21.0
 )
-
-if (POLICY CMP0063)
-    cmake_policy(SET CMP0063 NEW)
-endif()
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_AUTOMOC ON)
