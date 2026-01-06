@@ -7,9 +7,6 @@ set(KF_MIN_VERSION "6.10")
 find_package(ECM ${KF_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 include(KDECompilerSettings NO_POLICY_SCOPE)
-remove_definitions(
-    -DQT_NO_CAST_FROM_ASCII
-)
 include(KDEInstallDirs)
 include(KDECMakeSettings NO_POLICY_SCOPE)
 include(ECMInstallIcons)

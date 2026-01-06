@@ -33,6 +33,8 @@
 #include <QVBoxLayout>
 #include <algorithm>
 
+using namespace Qt::StringLiterals;
+
 #define POSTS_LIMIT 5
 const QString WelcomeWidget::m_telegramLink = QStringLiteral(R"(<a href="http://t.me/KDEAtelier">)");
 const QString WelcomeWidget::m_documentsLink = QStringLiteral(R"(<a href="http://atelier.kde.org/documentation/atelier">)");
@@ -54,7 +56,7 @@ WelcomeWidget::WelcomeWidget(QWidget *parent)
     hlayout->addWidget(label);
 
     label = new QLabel(this);
-    label->setPixmap(QPixmap(":/icon/logo"));
+    label->setPixmap(QPixmap(u":/icon/logo"_s));
     label->setLayoutDirection(Qt::LayoutDirection::RightToLeft);
     hlayout->addWidget(label);
     layout->addItem(hlayout);
@@ -120,7 +122,7 @@ void WelcomeWidget::retrieveRssFeed()
     m_postList.clear();
     auto manager = new QNetworkAccessManager(this);
     for (const QUrl &url :
-         {QUrl("https://rizzitello.wordpress.com/category/atelier/feed/"), QUrl("https://laysrodriguesdev.wordpress.com/category/atelier/feed/")}) {
+         {QUrl(u"https://rizzitello.wordpress.com/category/atelier/feed/"_s), QUrl(u"https://laysrodriguesdev.wordpress.com/category/atelier/feed/"_s)}) {
         QNetworkRequest request(url);
         request.setRawHeader("User-Agent", "Atelier 1.0");
         manager->get(request);
@@ -138,19 +140,19 @@ void WelcomeWidget::retrieveRssFeed()
 
 void WelcomeWidget::parseRss(const QDomDocument &document)
 {
-    auto itemList = document.elementsByTagName("item");
+    auto itemList = document.elementsByTagName(u"item"_s);
     QRegularExpression dateRegex(QStringLiteral(R"((?<date>\d{2} \w{3} \d{4}))"));
 
     for (int i = 0; i < itemList.count(); ++i) {
         auto node = itemList.at(i);
         if (node.isElement()) {
             // Sample of date format Wed, 24 May 2017 13:46:07 +0000
-            QString pDate = node.firstChildElement("pubDate").toElement().text();
+            QString pDate = node.firstChildElement(u"pubDate"_s).toElement().text();
             QRegularExpressionMatch match = dateRegex.match(pDate);
             if (match.hasMatch()) {
                 Post p;
-                p.title = node.firstChildElement("title").toElement().text();
-                p.url = node.firstChildElement("link").toElement().text();
+                p.title = node.firstChildElement(u"title"_s).toElement().text();
+                p.url = node.firstChildElement(u"link"_s).toElement().text();
                 p.date = match.captured("date");
                 m_postList.append(p);
             }
@@ -167,13 +169,13 @@ void WelcomeWidget::setupRssFeed()
     }
     QLocale locale(QLocale::English);
     std::sort(m_postList.begin(), m_postList.end(), [locale](const Post &p1, const Post &p2) {
-        return locale.toDate(p1.date, "dd MMM yyyy") > locale.toDate(p2.date, "dd MMM yyyy");
+        return locale.toDate(p1.date, u"dd MMM yyyy"_s) > locale.toDate(p2.date, u"dd MMM yyyy"_s);
     });
     auto layout = new QVBoxLayout;
     int count = m_postList.count() > POSTS_LIMIT ? POSTS_LIMIT : m_postList.count();
     for (int i = 0; i < count; ++i) {
         Post item = m_postList.at(i);
-        QString url = QString("<a href=\"%1\">%2</a>").arg(item.url, QString(item.title + " - " + item.date));
+        QString url = QStringLiteral("<a href=\"%1\">%2</a>").arg(item.url, QString(item.title + " - "_L1 + item.date));
         auto lb = new QLabel(url);
         lb->setOpenExternalLinks(true);
         layout->addWidget(lb);
@@ -187,7 +189,7 @@ void WelcomeWidget::fallback()
     auto layout = new QHBoxLayout;
     layout->addWidget(new QLabel(i18n("Failed to fetch the News.")));
     auto button = new QToolButton;
-    button->setIcon(QIcon::fromTheme("view-refresh", QIcon(QString(":/%1/refresh").arg(theme))));
+    button->setIcon(QIcon::fromTheme(u"view-refresh"_s, QIcon(QStringLiteral(":/%1/refresh").arg(theme))));
     button->setIconSize(QSize(fontMetrics().lineSpacing(), fontMetrics().lineSpacing()));
     layout->addWidget(button);
     layout->addStretch();

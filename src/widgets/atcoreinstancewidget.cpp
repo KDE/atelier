@@ -24,6 +24,8 @@
 #include <QToolBar>
 #include <SerialLayer>
 
+using namespace Qt::StringLiterals;
+
 const QMap<MachineInfo::KEY, QString> AtCoreInstanceWidget::keyString = {{MachineInfo::KEY::NAME, QStringLiteral("Name")},
                                                                          {MachineInfo::KEY::BAUDRATE, QStringLiteral("bps")},
                                                                          {MachineInfo::KEY::FIRMWARE, QStringLiteral("firmware")},
@@ -40,7 +42,7 @@ AtCoreInstanceWidget::AtCoreInstanceWidget(QWidget *parent)
     : QWidget(parent)
     , m_bedSize(200, 200)
 {
-    m_theme = palette().text().color().value() >= QColor(Qt::lightGray).value() ? QString("dark") : QString("light");
+    m_theme = palette().text().color().value() >= QColor(Qt::lightGray).value() ? u"dark"_s : u"light"_s;
     m_iconSize = QSize(fontMetrics().lineSpacing(), fontMetrics().lineSpacing());
     auto HLayout = new QHBoxLayout;
     m_bedExtWidget = new BedExtruderWidget(this);
@@ -114,7 +116,7 @@ void AtCoreInstanceWidget::buildToolbar()
     m_toolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
 
     auto lb = new QLabel(this);
-    QIcon icon = QIcon::fromTheme("go-home", QIcon(QString(":/%1/home").arg(m_theme)));
+    QIcon icon = QIcon::fromTheme(u"go-home"_s, QIcon(QStringLiteral(":/%1/home").arg(m_theme)));
     lb->setPixmap(icon.pixmap(m_iconSize));
     m_toolBar->addWidget(lb);
     lb = new QLabel(i18n("Home:"), this);
@@ -126,7 +128,7 @@ void AtCoreInstanceWidget::buildToolbar()
     });
     m_toolBar->addAction(homeAll);
 
-    for (const auto &homes : std::map<QString, int>{{"X", AtCore::X}, {"Y", AtCore::Y}, {"Z", AtCore::Z}}) {
+    for (const auto &homes : std::map<QString, int>{{u"X"_s, AtCore::X}, {u"Y"_s, AtCore::Y}, {u"Z"_s, AtCore::Z}}) {
         auto home = new QAction(homes.first, this);
         connect(home, &QAction::triggered, this, [this, homes] {
             m_core.home(uchar(homes.second));
@@ -136,7 +138,7 @@ void AtCoreInstanceWidget::buildToolbar()
 
     m_toolBar->addSeparator();
 
-    m_printAction = new QAction(QIcon::fromTheme("media-playback-start", style()->standardIcon(QStyle::SP_MediaPlay)), i18n("Print"), this);
+    m_printAction = new QAction(QIcon::fromTheme(u"media-playback-start"_s, style()->standardIcon(QStyle::SP_MediaPlay)), i18n("Print"), this);
     connect(m_printAction, &QAction::triggered, this, [this] {
         if (m_core.state() == AtCore::BUSY) {
             m_logWidget->appendLog(i18n("Pause Print"));
@@ -152,11 +154,11 @@ void AtCoreInstanceWidget::buildToolbar()
     });
     m_toolBar->addAction(m_printAction);
 
-    m_stopAction = new QAction(QIcon::fromTheme("media-playback-stop", QIcon(QStringLiteral(":/%1/stop").arg(m_theme))), i18n("Stop"), this);
+    m_stopAction = new QAction(QIcon::fromTheme(u"media-playback-stop"_s, QIcon(QStringLiteral(":/%1/stop").arg(m_theme))), i18n("Stop"), this);
     connect(m_stopAction, &QAction::triggered, this, &AtCoreInstanceWidget::stopPrint);
     connect(m_stopAction, &QAction::triggered, this, [this] {
         m_printAction->setText(i18n("Print"));
-        m_printAction->setIcon(QIcon::fromTheme("media-playback-start", QIcon(QStringLiteral(":/%1/start").arg(m_theme))));
+        m_printAction->setIcon(QIcon::fromTheme(u"media-playback-start"_s, QIcon(QStringLiteral(":/%1/start").arg(m_theme))));
     });
     m_toolBar->addAction(m_stopAction);
 
@@ -192,7 +194,7 @@ void AtCoreInstanceWidget::buildConnectionToolbar()
     m_connectWidget->setLayout(connectLayout);
     m_connectToolBar->addWidget(m_connectWidget);
 
-    m_connectButton = new QPushButton(QIcon::fromTheme("network-connect", QIcon(QString(":/%1/connect").arg(m_theme))), i18n("Connect"), this);
+    m_connectButton = new QPushButton(QIcon::fromTheme(u"network-connect"_s, QIcon(QStringLiteral(":/%1/connect").arg(m_theme))), i18n("Connect"), this);
     m_connectButton->setIconSize(m_iconSize);
     m_connectButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     connect(this, &AtCoreInstanceWidget::disableDisconnect, m_connectButton, &QPushButton::setDisabled);
@@ -387,7 +389,7 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
         m_connectionTimer->start();
         m_core.setSerialTimerInterval(0);
         m_connectButton->setText(i18n("Disconnect"));
-        m_connectButton->setIcon(QIcon::fromTheme("network-disconnect", QIcon(QString(":/%1/disconnect").arg(m_theme))));
+        m_connectButton->setIcon(QIcon::fromTheme(u"network-disconnect"_s, QIcon(QStringLiteral(":/%1/disconnect").arg(m_theme))));
         m_connectToolBar->setHidden(true);
         m_toolBar->setHidden(false);
         stateString = i18n("Connecting…");
@@ -424,7 +426,7 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
         m_logWidget->appendLog(i18n("Serial disconnected"));
         m_core.setSerialTimerInterval(100);
         m_connectButton->setText(i18n("Connect"));
-        m_connectButton->setIcon(QIcon::fromTheme("network-connect", QIcon(QString(":/%1/connect").arg(m_theme))));
+        m_connectButton->setIcon(QIcon::fromTheme(u"network-connect"_s, QIcon(QStringLiteral(":/%1/connect").arg(m_theme))));
         m_connectToolBar->setHidden(false);
         m_toolBar->setHidden(true);
         enableControls(false);
@@ -441,19 +443,19 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
         m_statusWidget->showPrintArea(false);
         disconnect(&m_core, &AtCore::printProgressChanged, m_statusWidget, &StatusWidget::updatePrintProgress);
         m_printAction->setText(i18n("Print"));
-        m_printAction->setIcon(QIcon::fromTheme("media-playback-start", QIcon(QString(":/%1/start").arg(m_theme))));
+        m_printAction->setIcon(QIcon::fromTheme(u"media-playback-start"_s, QIcon(QStringLiteral(":/%1/start").arg(m_theme))));
         m_logWidget->appendLog(i18n("Finished Print Job"));
     } break;
     case AtCore::BUSY: {
         stateString = i18n("Printing");
         Q_EMIT disableDisconnect(true);
         m_printAction->setText(i18n("Pause"));
-        m_printAction->setIcon(QIcon::fromTheme("media-playback-pause", QIcon(QString(":/%1/pause").arg(m_theme))));
+        m_printAction->setIcon(QIcon::fromTheme(u"media-playback-pause"_s, QIcon(QStringLiteral(":/%1/pause").arg(m_theme))));
     } break;
     case AtCore::PAUSE: {
         stateString = i18n("Paused");
         m_printAction->setText(i18n("Resume"));
-        m_printAction->setIcon(QIcon::fromTheme("media-playback-start", QIcon(QString(":/%1/start").arg(m_theme))));
+        m_printAction->setIcon(QIcon::fromTheme(u"media-playback-start"_s, QIcon(QStringLiteral(":/%1/start").arg(m_theme))));
     } break;
     case AtCore::STOP: {
         stateString = i18n("Stopping Print");
@@ -534,7 +536,7 @@ void AtCoreInstanceWidget::updateSerialPort(QStringList ports)
 {
     m_comboPort->clear();
     // Remove any strings that match ttyS## from the port list.
-    ports = ports.filter(QRegularExpression("^((?!ttyS\\d+).)*$"));
+    ports = ports.filter(QRegularExpression(u"^((?!ttyS\\d+).)*$"_s));
     if (!ports.isEmpty()) {
         m_comboPort->addItems(ports);
         m_logWidget->appendLog(i18n("Found %1 Ports", QString::number(ports.count())));

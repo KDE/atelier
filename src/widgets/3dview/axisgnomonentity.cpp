@@ -42,7 +42,7 @@ AxisGnomonEntity::AxisGnomonEntity(QNode *parent)
     , _scale(0.1f)
 {
     auto mesh = new QMesh(this);
-    mesh->setSource(QUrl("qrc:/axisgnomon.gltf"));
+    mesh->setSource(QUrl(QStringLiteral("qrc:/axisgnomon.gltf")));
     addComponent(mesh);
 
     auto material = new QMaterial(this);

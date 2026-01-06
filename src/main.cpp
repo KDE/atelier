@@ -23,15 +23,17 @@
 #include <QApplication>
 #include <atcore_version.h>
 
+using namespace Qt::StringLiterals;
+
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
     KLocalizedString::setApplicationDomain(QByteArrayLiteral("atelier"));
 
-    QCoreApplication::setOrganizationName("KDE");
-    QCoreApplication::setOrganizationDomain("kde.org");
-    QCoreApplication::setApplicationName("atelier");
+    QCoreApplication::setOrganizationName(u"KDE"_s);
+    QCoreApplication::setOrganizationDomain(u"kde.org"_s);
+    QCoreApplication::setApplicationName(u"atelier"_s);
 
     KAboutData aboutData(
         // The program name used internally. (componentName)
@@ -60,7 +62,7 @@ int main(int argc, char *argv[])
     aboutData.addAuthor(i18n("Chris Rizzitello"), i18n("Developer"), QStringLiteral("rizzitello@kde.org"), QStringLiteral("http://rizzitello.wordpress.com"));
     aboutData.addAuthor(i18n("Patrick Pereira"), i18n("Developer"), QStringLiteral("patrickjp@kde.org"), QStringLiteral("http://patrickjp.com"));
     aboutData.addAuthor(i18n("Tomaz Canabrava"), i18n("Contributor"), QStringLiteral("tcanabrava@kde.org"), QStringLiteral("http://angrycane.com.br"));
-    aboutData.setOtherText(i18n("Using AtCore: %1", QString(ATCORE_VERSION_STRING)));
+    aboutData.setOtherText(i18n("Using AtCore: %1", QStringLiteral(ATCORE_VERSION_STRING)));
     KAboutData::setApplicationData(aboutData);
 
     auto mainWindow = new MainWindow();

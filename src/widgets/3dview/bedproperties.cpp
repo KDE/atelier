@@ -37,7 +37,7 @@ BedProperties::BedProperties(QObject *parent)
             return;
         }
 
-        auto viewer = context->contextProperty("viewer3d").value<Viewer3D *>();
+        auto viewer = context->contextProperty(QStringLiteral("viewer3d")).value<Viewer3D *>();
         if (!viewer) {
             return;
         }

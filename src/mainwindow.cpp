@@ -34,6 +34,8 @@
 #include <QToolButton>
 #include <memory>
 
+using namespace Qt::StringLiterals;
+
 MainWindow::MainWindow(QWidget *parent)
     : KXmlGuiWindow(parent)
     , m_currInstance(0)
@@ -101,8 +103,8 @@ void MainWindow::processDropEvent(const QList<QUrl> &fileList)
 {
     for (const auto &url : fileList) {
         // Loop thru the urls and only load ones ending our "supported" formats
-        QString ext = url.toLocalFile().split('.').last();
-        if (ext.contains("gcode", Qt::CaseInsensitive) || ext.contains("gco", Qt::CaseInsensitive)) {
+        QString ext = url.toLocalFile().split('.'_L1).last();
+        if (ext.contains(u"gcode"_s, Qt::CaseInsensitive) || ext.contains(u"gco"_s, Qt::CaseInsensitive)) {
             loadFile(url);
         }
     }
@@ -121,7 +123,7 @@ void MainWindow::initWidgets()
 
     auto addTabBtn = new QToolButton(this);
     addTabBtn->setIconSize(QSize(fontMetrics().lineSpacing(), fontMetrics().lineSpacing()));
-    addTabBtn->setIcon(QIcon::fromTheme("list-add", QIcon(QString(":/%1/addTab").arg(m_theme))));
+    addTabBtn->setIcon(QIcon::fromTheme(u"list-add"_s, QIcon(QStringLiteral(":/%1/addTab").arg(m_theme))));
     addTabBtn->setToolTip(i18n("Create new instance"));
     addTabBtn->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_T));
     connect(addTabBtn, &QToolButton::clicked, this, &MainWindow::newAtCoreInstance);
@@ -262,10 +264,10 @@ void MainWindow::setupLateralArea()
         viewer3D->drawModel(url.toLocalFile());
     });
 
-    setupButton("welcome", i18n("Welcome"), QIcon::fromTheme("go-home", QIcon(QString(":/%1/home").arg(m_theme))), new WelcomeWidget(this));
-    setupButton("3d", i18n("3D"), QIcon::fromTheme("draw-cuboid", QIcon(QString(":/%1/3d").arg(m_theme))), viewer3D);
-    setupButton("gcode", i18n("GCode"), QIcon::fromTheme("accessories-text-editor", QIcon(":/icon/edit")), m_gcodeEditor);
-    setupButton("video", i18n("Video"), QIcon::fromTheme("camera-web", QIcon(":/icon/video")), new VideoMonitorWidget(this));
+    setupButton(u"welcome"_s, i18n("Welcome"), QIcon::fromTheme(u"go-home"_s, QIcon(QStringLiteral(":/%1/home").arg(m_theme))), new WelcomeWidget(this));
+    setupButton(u"3d"_s, i18n("3D"), QIcon::fromTheme(u"draw-cuboid"_s, QIcon(QStringLiteral(":/%1/3d").arg(m_theme))), viewer3D);
+    setupButton(u"gcode"_s, i18n("GCode"), QIcon::fromTheme(u"accessories-text-editor"_s, QIcon(u":/icon/edit"_s)), m_gcodeEditor);
+    setupButton(u"video"_s, i18n("Video"), QIcon::fromTheme(u"camera-web"_s, QIcon(u":/icon/video"_s)), new VideoMonitorWidget(this));
     buttonLayout->addStretch();
     m_lateral.m_toolBar->setLayout(buttonLayout);
 }
@@ -275,21 +277,21 @@ void MainWindow::setupActions()
     // Actions for the Toolbar
     QAction *action;
     action = actionCollection()->addAction(QStringLiteral("open"));
-    action->setIcon(QIcon::fromTheme("document-open", QIcon(QString(":/%1/open").arg(m_theme))));
+    action->setIcon(QIcon::fromTheme(u"document-open"_s, QIcon(QStringLiteral(":/%1/open").arg(m_theme))));
 
     action->setText(i18n("&Open"));
     actionCollection()->setDefaultShortcut(action, QKeySequence::Open);
     connect(action, &QAction::triggered, this, &MainWindow::openActionTriggered);
 
     action = actionCollection()->addAction(QStringLiteral("new_instance"));
-    action->setIcon(QIcon::fromTheme("list-add", QIcon(QString(":/%1/addTab").arg(m_theme))));
+    action->setIcon(QIcon::fromTheme(u"list-add"_s, QIcon(QStringLiteral(":/%1/addTab").arg(m_theme))));
 
     action->setText(i18n("&New Connection"));
     actionCollection()->setDefaultShortcut(action, QKeySequence::AddTab);
     connect(action, &QAction::triggered, this, &MainWindow::newAtCoreInstance);
 
     action = actionCollection()->addAction(QStringLiteral("profiles"));
-    action->setIcon(QIcon::fromTheme("document-properties", QIcon(QString(":/%1/configure").arg(m_theme))));
+    action->setIcon(QIcon::fromTheme(u"document-properties"_s, QIcon(QStringLiteral(":/%1/configure").arg(m_theme))));
 
     action->setText(i18n("&Profiles"));
     connect(action, &QAction::triggered, this, [this] {
@@ -299,13 +301,13 @@ void MainWindow::setupActions()
     });
 
     action = actionCollection()->addAction(QStringLiteral("quit"));
-    action->setIcon(QIcon::fromTheme("application-exit", QIcon(":/icon/exit")));
+    action->setIcon(QIcon::fromTheme(u"application-exit"_s, QIcon(u":/icon/exit"_s)));
 
     action->setText(i18n("&Quit"));
     actionCollection()->setDefaultShortcut(action, QKeySequence::Quit);
     connect(action, &QAction::triggered, this, &MainWindow::close);
 
-    setupGUI(Default, "atelierui");
+    setupGUI(Default, u"atelierui"_s);
 }
 
 void MainWindow::openActionTriggered()
@@ -320,12 +322,12 @@ void MainWindow::openActionTriggered()
 void MainWindow::loadFile(const QUrl &fileName)
 {
     if (!fileName.isEmpty()) {
-        m_lateral.get<GCodeEditorWidget>("gcode")->loadFile(fileName);
-        m_lateral.get<Viewer3D>("3d")->drawModel(fileName.toLocalFile());
+        m_lateral.get<GCodeEditorWidget>(u"gcode"_s)->loadFile(fileName);
+        m_lateral.get<Viewer3D>(u"3d"_s)->drawModel(fileName.toLocalFile());
         // Make 3dview focused when opening a file
-        if (m_openFiles.isEmpty() && m_lateral.m_stack->currentWidget() == m_lateral.get<WelcomeWidget>("welcome")) {
-            m_lateral.getButton<QPushButton>("3d")->setChecked(true);
-            m_lateral.m_stack->setCurrentWidget(m_lateral.get<Viewer3D>("3d"));
+        if (m_openFiles.isEmpty() && m_lateral.m_stack->currentWidget() == m_lateral.get<WelcomeWidget>(u"welcome"_s)) {
+            m_lateral.getButton<QPushButton>(u"3d"_s)->setChecked(true);
+            m_lateral.m_stack->setCurrentWidget(m_lateral.get<Viewer3D>(u"3d"_s));
         }
 
         const int tabs = m_instances->count();
@@ -342,7 +344,7 @@ void MainWindow::loadFile(const QUrl &fileName)
 
 QString MainWindow::getTheme()
 {
-    return palette().text().color().value() >= QColor(Qt::lightGray).value() ? QString("dark") : QString("light");
+    return palette().text().color().value() >= QColor(Qt::lightGray).value() ? u"dark"_s : u"light"_s;
 }
 
 bool MainWindow::askToClose()
@@ -363,7 +365,7 @@ bool MainWindow::askToClose()
 
 void MainWindow::toggleGCodeActions()
 {
-    if (m_lateral.m_stack->currentWidget() == m_lateral.m_map["gcode"].second && m_lateral.m_stack->isVisible()) {
+    if (m_lateral.m_stack->currentWidget() == m_lateral.m_map[u"gcode"_s].second && m_lateral.m_stack->isVisible()) {
         if (m_currEditorView) {
             guiFactory()->addClient(m_currEditorView);
         }
@@ -374,7 +376,7 @@ void MainWindow::toggleGCodeActions()
 
 void MainWindow::updateClientFactory(KTextEditor::View *view)
 {
-    if (m_lateral.m_stack->currentWidget() == m_lateral.m_map["gcode"].second) {
+    if (m_lateral.m_stack->currentWidget() == m_lateral.m_map[u"gcode"_s].second) {
         if (m_currEditorView) {
             guiFactory()->removeClient(m_currEditorView);
         }
@@ -396,11 +398,11 @@ bool MainWindow::askToSave(const QVector<QUrl> &fileList)
     auto listWidget = new QListWidget(dialog);
     listWidget->setMinimumWidth(fontMetrics().height() / 2 * padding);
     for (const auto &url : fileList) {
-        listWidget->addItem(url.toLocalFile() + " [*]");
+        listWidget->addItem(url.toLocalFile() + u" [*]"_s);
     }
 
     auto hLayout = new QHBoxLayout();
-    auto saveBtn = new QPushButton(QIcon::fromTheme("document-save", QIcon(QStringLiteral(":/%1/save").arg(m_theme))), i18n("Save Selected"), dialog);
+    auto saveBtn = new QPushButton(QIcon::fromTheme(u"document-save"_s, QIcon(QStringLiteral(":/%1/save").arg(m_theme))), i18n("Save Selected"), dialog);
     saveBtn->setIconSize(iconSize);
     saveBtn->setEnabled(false);
 
@@ -412,9 +414,9 @@ bool MainWindow::askToSave(const QVector<QUrl> &fileList)
         if (!m_gcodeEditor->saveFile(fileList.at(listWidget->currentRow()))) {
             QMessageBox::information(this, i18n("Save Failed"), i18n("Failed to save file: %1", fileList.at(listWidget->currentRow()).toLocalFile()));
         } else {
-            listWidget->item(listWidget->currentRow())->setText(listWidget->item(listWidget->currentRow())->text().remove(" [*]"));
+            listWidget->item(listWidget->currentRow())->setText(listWidget->item(listWidget->currentRow())->text().remove(u" [*]"_s));
             for (int i = 0; i < listWidget->count(); i++) {
-                if (listWidget->item(i)->text().endsWith(" [*]")) {
+                if (listWidget->item(i)->text().endsWith(u" [*]"_s)) {
                     return;
                 }
             }
@@ -423,7 +425,7 @@ bool MainWindow::askToSave(const QVector<QUrl> &fileList)
     });
     hLayout->addWidget(saveBtn);
 
-    auto saveAllBtn = new QPushButton(QIcon::fromTheme("document-save-all", QIcon(QStringLiteral(":/%1/saveAll").arg(m_theme))), i18n("Save All"), dialog);
+    auto saveAllBtn = new QPushButton(QIcon::fromTheme(u"document-save-all"_s, QIcon(QStringLiteral(":/%1/saveAll").arg(m_theme))), i18n("Save All"), dialog);
     saveAllBtn->setIconSize(iconSize);
     connect(saveAllBtn, &QPushButton::clicked, this, [this, listWidget, &fileList, dialog] {
         for (int i = 0; i < listWidget->count(); i++) {
@@ -431,14 +433,14 @@ bool MainWindow::askToSave(const QVector<QUrl> &fileList)
                 QMessageBox::information(this, i18n("Save Failed"), i18n("Failed to save file: %1", fileList.at(i).toLocalFile()));
                 dialog->reject();
             } else {
-                listWidget->item(i)->setText(listWidget->item(i)->text().remove(" [*]"));
+                listWidget->item(i)->setText(listWidget->item(i)->text().remove(u" [*]"_s));
             }
         }
         dialog->accept();
     });
     hLayout->addWidget(saveAllBtn);
 
-    auto cancelBtn = new QPushButton(QIcon::fromTheme("dialog-cancel", QIcon(QStringLiteral(":/%1/cancel").arg(m_theme))), i18n("Cancel"), dialog);
+    auto cancelBtn = new QPushButton(QIcon::fromTheme(u"dialog-cancel"_s, QIcon(QStringLiteral(":/%1/cancel").arg(m_theme))), i18n("Cancel"), dialog);
     cancelBtn->setIconSize(iconSize);
     cancelBtn->setDefault(true);
     connect(cancelBtn, &QPushButton::clicked, this, [dialog] {
@@ -446,7 +448,7 @@ bool MainWindow::askToSave(const QVector<QUrl> &fileList)
     });
     hLayout->addWidget(cancelBtn);
 
-    auto ignoreBtn = new QPushButton(QIcon::fromTheme("edit-delete", style()->standardIcon(QStyle::SP_TrashIcon)), i18n("Discard Changes"), dialog);
+    auto ignoreBtn = new QPushButton(QIcon::fromTheme(u"edit-delete"_s, style()->standardIcon(QStyle::SP_TrashIcon)), i18n("Discard Changes"), dialog);
     ignoreBtn->setIconSize(iconSize);
     connect(ignoreBtn, &QPushButton::clicked, this, [dialog] {
         dialog->accept();
@@ -465,5 +467,5 @@ bool MainWindow::askToSave(const QVector<QUrl> &fileList)
 
 void MainWindow::updateBedSize(const QSize &newSize)
 {
-    m_lateral.get<Viewer3D>("3d")->setBedSize(newSize);
+    m_lateral.get<Viewer3D>(u"3d"_s)->setBedSize(newSize);
 }
