@@ -51,7 +51,7 @@ private:
     QWidget *m_extruderBox = nullptr;
     int currentExtruder();
 
-signals:
+Q_SIGNALS:
     void bedTemperatureChanged(int tmp, bool andWait);
     void extTemperatureChanged(int tmp, int currExt, bool andWait);
 };

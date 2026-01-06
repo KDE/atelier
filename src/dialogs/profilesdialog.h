@@ -26,6 +26,6 @@ public:
     explicit ProfilesDialog(QWidget *parent = nullptr);
     ~ProfilesDialog() = default;
 
-signals:
+Q_SIGNALS:
     void updateProfiles();
 };

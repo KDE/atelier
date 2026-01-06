@@ -33,7 +33,7 @@ class Viewer3D : public QWidget
     Q_OBJECT
     Q_PROPERTY(QSize bedSize READ bedSize WRITE setBedSize NOTIFY bedSizeChanged)
 
-public slots:
+public Q_SLOTS:
     void dropCatch(const QVariant &var);
     void setBedSize(const QSize &newBedSize);
 
@@ -49,7 +49,7 @@ private:
     QQuickView *_view;
     QSize _bedSize = QSize(50, 50);
 
-signals:
+Q_SIGNALS:
     void droppedUrls(QList<QUrl> fileList);
     void bedSizeChanged(QSize bedSize);
 };

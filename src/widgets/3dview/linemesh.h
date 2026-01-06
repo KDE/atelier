@@ -42,7 +42,7 @@ public:
     Q_INVOKABLE void readAndRun(const QString &path);
     void posUpdate(const QVector<QVector4D> &pos);
 
-signals:
+Q_SIGNALS:
     void finished();
     void run(const QString &path);
 

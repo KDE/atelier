@@ -217,7 +217,7 @@ void AtCoreInstanceWidget::connectButtonClicked()
             QMessageBox::information(this,
                                      i18n("No Profiles!"),
                                      i18n("Connecting requires creating a profile for your printer. Create a profile in the next dialog then try again."));
-            emit(requestProfileDialog());
+            Q_EMIT(requestProfileDialog());
             return;
         }
 
@@ -231,7 +231,7 @@ void AtCoreInstanceWidget::connectButtonClicked()
         if (m_core.newConnection(m_comboPort->currentText(),
                                  m_profileData[keyString[MachineInfo::KEY::BAUDRATE]].toInt(),
                                  m_profileData[keyString[MachineInfo::KEY::FIRMWARE]].toString())) {
-            emit(connectionChanged(QStringLiteral("%1 @ %2").arg(m_profileData[keyString[MachineInfo::KEY::NAME]].toString(), m_comboPort->currentText())));
+            Q_EMIT(connectionChanged(QStringLiteral("%1 @ %2").arg(m_profileData[keyString[MachineInfo::KEY::NAME]].toString(), m_comboPort->currentText())));
             m_profileData[keyString[MachineInfo::KEY::MAXBEDTEMP]].toBool()
                 ? m_bedExtWidget->setBedMaxTemperature(m_profileData[keyString[MachineInfo::KEY::MAXBEDTEMP]].toInt())
                 : m_bedExtWidget->setBedThermoHidden(true);
@@ -253,12 +253,12 @@ void AtCoreInstanceWidget::connectButtonClicked()
             }
             if (newSize != m_bedSize) {
                 m_bedSize = newSize;
-                emit bedSizeChanged(m_bedSize);
+                Q_EMIT bedSizeChanged(m_bedSize);
             }
         }
     } else {
         m_core.closeConnection();
-        emit(connectionChanged(i18n("Connect a Printer")));
+        Q_EMIT(connectionChanged(i18n("Connect a Printer")));
     }
 }
 
@@ -357,7 +357,7 @@ void AtCoreInstanceWidget::printFile(const QUrl &fileName)
 
 void AtCoreInstanceWidget::print()
 {
-    emit(requestFileChooser());
+    Q_EMIT(requestFileChooser());
 }
 
 void AtCoreInstanceWidget::pausePrint()
@@ -401,9 +401,9 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
             m_connectionTimer->stop();
         }
         stateString = i18n("Connected to %1", m_core.connectedPort());
-        emit extruderCountChanged(m_core.extruderCount());
+        Q_EMIT extruderCountChanged(m_core.extruderCount());
         m_logWidget->appendLog(stateString);
-        emit disableDisconnect(false);
+        Q_EMIT disableDisconnect(false);
         enableControls(true);
         connectExtruderTemperatureData(true);
         if (m_profileData[keyString[MachineInfo::KEY::MAXBEDTEMP]].toBool()) {
@@ -446,7 +446,7 @@ void AtCoreInstanceWidget::handlePrinterStatusChanged(AtCore::STATES newState)
     } break;
     case AtCore::BUSY: {
         stateString = i18n("Printing");
-        emit disableDisconnect(true);
+        Q_EMIT disableDisconnect(true);
         m_printAction->setText(i18n("Pause"));
         m_printAction->setIcon(QIcon::fromTheme("media-playback-pause", QIcon(QString(":/%1/pause").arg(m_theme))));
     } break;

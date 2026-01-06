@@ -48,11 +48,11 @@ BedExtruderWidget::BedExtruderWidget(QWidget *parent)
     setExtruderCount(1);
 
     connect(m_bedThermo, &ThermoWidget::targetTemperatureChanged, this, [this](int v) {
-        emit bedTemperatureChanged(v, false);
+        Q_EMIT bedTemperatureChanged(v, false);
     });
 
     connect(m_extruderThermo, &ThermoWidget::targetTemperatureChanged, this, [this](int v) {
-        emit extTemperatureChanged(v, currentExtruder(), false);
+        Q_EMIT extTemperatureChanged(v, currentExtruder(), false);
     });
 }
 

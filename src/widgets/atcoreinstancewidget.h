@@ -50,7 +50,7 @@ public:
     void setFileCount(int count);
     void startConnection(const QString &serialPort, const QMap<QString, QVariant> &profile);
 
-public slots:
+public Q_SLOTS:
     bool isPrinting();
     QSize bedSize();
     void printFile(const QUrl &fileName);
@@ -101,7 +101,7 @@ private:
     void togglePrintButtons(bool shown);
     static const QMap<MachineInfo::KEY, QString> keyString;
 
-signals:
+Q_SIGNALS:
     void bedSizeChanged(QSize bedSize);
     void connectionChanged(QString name);
     void disableDisconnect(bool b);

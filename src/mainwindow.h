@@ -82,7 +82,7 @@ private:
     void updateBedSize(const QSize &newSize);
     void updateClientFactory(KTextEditor::View *view);
 
-signals:
+Q_SIGNALS:
     void extruderCountChanged(int count);
     void profilesChanged();
 };

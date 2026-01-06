@@ -9,7 +9,6 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${CMAKE_CURRENT_SO
 include(KDECompilerSettings NO_POLICY_SCOPE)
 remove_definitions(
     -DQT_NO_CAST_FROM_ASCII
-    -DQT_NO_KEYWORDS
 )
 include(KDEInstallDirs)
 include(KDECMakeSettings NO_POLICY_SCOPE)

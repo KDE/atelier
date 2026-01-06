@@ -68,7 +68,7 @@ Viewer3D::Viewer3D(QWidget *parent)
 
 void Viewer3D::dropCatch(const QVariant &var)
 {
-    emit droppedUrls(var.value<QList<QUrl>>());
+    Q_EMIT droppedUrls(var.value<QList<QUrl>>());
 }
 
 void Viewer3D::drawModel(const QString &file)
@@ -82,7 +82,7 @@ void Viewer3D::setBedSize(const QSize &newBedSize)
 {
     if (newBedSize != _bedSize) {
         _bedSize = newBedSize;
-        emit bedSizeChanged(_bedSize);
+        Q_EMIT bedSizeChanged(_bedSize);
     }
 }
 

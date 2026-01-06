@@ -46,10 +46,10 @@ private:
     const static QString _Y;
     const static QString _Z;
 
-signals:
+Q_SIGNALS:
     void percentUpdate(QVariant var);
     void posFinished(const QVector<QVector4D> &pos);
 
-public slots:
+public Q_SLOTS:
     void run();
 };
