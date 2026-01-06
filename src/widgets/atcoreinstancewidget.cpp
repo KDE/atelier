@@ -204,9 +204,9 @@ void AtCoreInstanceWidget::buildConnectionToolbar()
     connect(m_connectionTimer, &QTimer::timeout, this, [this] {
         m_connectButton->clicked();
         QMessageBox::critical(this,
-                              tr("Connection Error"),
-                              tr("Your machine did not respond after 20 seconds.\n\nBefore connecting again check that your printer is on and your are "
-                                 "connecting using the correct BAUD Rate for your device."));
+                              i18n("Connection Error"),
+                              i18n("Your machine did not respond after 20 seconds.\n\nBefore connecting again check that your printer is on and your are "
+                                   "connecting using the correct BAUD Rate for your device."));
     });
 }
 
