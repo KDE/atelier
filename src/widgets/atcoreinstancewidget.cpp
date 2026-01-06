@@ -121,12 +121,16 @@ void AtCoreInstanceWidget::buildToolbar()
     m_toolBar->addWidget(lb);
 
     auto homeAll = new QAction(i18n("All"));
-    connect(homeAll, &QAction::triggered, this, [this] { m_core.home(); });
+    connect(homeAll, &QAction::triggered, this, [this] {
+        m_core.home();
+    });
     m_toolBar->addAction(homeAll);
 
-    for (const auto &homes : std::map<QString, int> {{"X", AtCore::X}, {"Y", AtCore::Y}, {"Z", AtCore::Z}}) {
+    for (const auto &homes : std::map<QString, int>{{"X", AtCore::X}, {"Y", AtCore::Y}, {"Z", AtCore::Z}}) {
         auto home = new QAction(homes.first, this);
-        connect(home, &QAction::triggered, this, [this, homes] { m_core.home(uchar(homes.second)); });
+        connect(home, &QAction::triggered, this, [this, homes] {
+            m_core.home(uchar(homes.second));
+        });
         m_toolBar->addAction(home);
     }
 
@@ -199,7 +203,10 @@ void AtCoreInstanceWidget::buildConnectionToolbar()
     m_connectionTimer->setSingleShot(true);
     connect(m_connectionTimer, &QTimer::timeout, this, [this] {
         m_connectButton->clicked();
-        QMessageBox::critical(this, tr("Connection Error"), tr("Your machine did not respond after 20 seconds.\n\nBefore connecting again check that your printer is on and your are connecting using the correct BAUD Rate for your device."));
+        QMessageBox::critical(this,
+                              tr("Connection Error"),
+                              tr("Your machine did not respond after 20 seconds.\n\nBefore connecting again check that your printer is on and your are "
+                                 "connecting using the correct BAUD Rate for your device."));
     });
 }
 
@@ -207,7 +214,9 @@ void AtCoreInstanceWidget::connectButtonClicked()
 {
     if (m_core.state() == AtCore::DISCONNECTED) {
         if (m_comboProfile->currentText().isEmpty()) {
-            QMessageBox::information(this, i18n("No Profiles!"), i18n("Connecting requires creating a profile for your printer. Create a profile in the next dialog then try again."));
+            QMessageBox::information(this,
+                                     i18n("No Profiles!"),
+                                     i18n("Connecting requires creating a profile for your printer. Create a profile in the next dialog then try again."));
             emit(requestProfileDialog());
             return;
         }
@@ -219,9 +228,13 @@ void AtCoreInstanceWidget::connectButtonClicked()
         // Get profile data before connecting.
         m_profileData = MachineInfo::instance()->readProfile(m_comboProfile->currentText());
         // then connect
-        if (m_core.newConnection(m_comboPort->currentText(), m_profileData[keyString[MachineInfo::KEY::BAUDRATE]].toInt(), m_profileData[keyString[MachineInfo::KEY::FIRMWARE]].toString())) {
+        if (m_core.newConnection(m_comboPort->currentText(),
+                                 m_profileData[keyString[MachineInfo::KEY::BAUDRATE]].toInt(),
+                                 m_profileData[keyString[MachineInfo::KEY::FIRMWARE]].toString())) {
             emit(connectionChanged(QStringLiteral("%1 @ %2").arg(m_profileData[keyString[MachineInfo::KEY::NAME]].toString(), m_comboPort->currentText())));
-            m_profileData[keyString[MachineInfo::KEY::MAXBEDTEMP]].toBool() ? m_bedExtWidget->setBedMaxTemperature(m_profileData[keyString[MachineInfo::KEY::MAXBEDTEMP]].toInt()) : m_bedExtWidget->setBedThermoHidden(true);
+            m_profileData[keyString[MachineInfo::KEY::MAXBEDTEMP]].toBool()
+                ? m_bedExtWidget->setBedMaxTemperature(m_profileData[keyString[MachineInfo::KEY::MAXBEDTEMP]].toInt())
+                : m_bedExtWidget->setBedThermoHidden(true);
 
             m_bedExtWidget->setExtruderMaxTemperature(m_profileData[keyString[MachineInfo::KEY::MAXEXTTEMP]].toInt());
 

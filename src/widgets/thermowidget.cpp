@@ -82,7 +82,9 @@ ThermoWidget::ThermoWidget(QWidget *parent, const QString &name)
     });
 
     m_tempChangedTimer->setSingleShot(true);
-    connect(m_tempChangedTimer, &QTimer::timeout, this, [this] { emit targetTemperatureChanged(m_targetTemperature); });
+    connect(m_tempChangedTimer, &QTimer::timeout, this, [this] {
+        emit targetTemperatureChanged(m_targetTemperature);
+    });
 }
 
 void ThermoWidget::setRange(int min, int max)

@@ -53,7 +53,10 @@ int main(int argc, char *argv[])
         QStringLiteral("http://atelier.kde.org"),
         // The bug report email address
         QStringLiteral("atelier@bugs.kde.org"));
-    aboutData.addAuthor(i18n("Lays Rodrigues"), i18n("Developer"), QStringLiteral("lays.rodrigues@kde.org"), QStringLiteral("http://laysrodriguesdev.wordpress.com"));
+    aboutData.addAuthor(i18n("Lays Rodrigues"),
+                        i18n("Developer"),
+                        QStringLiteral("lays.rodrigues@kde.org"),
+                        QStringLiteral("http://laysrodriguesdev.wordpress.com"));
     aboutData.addAuthor(i18n("Chris Rizzitello"), i18n("Developer"), QStringLiteral("rizzitello@kde.org"), QStringLiteral("http://rizzitello.wordpress.com"));
     aboutData.addAuthor(i18n("Patrick Pereira"), i18n("Developer"), QStringLiteral("patrickjp@kde.org"), QStringLiteral("http://patrickjp.com"));
     aboutData.addAuthor(i18n("Tomaz Canabrava"), i18n("Contributor"), QStringLiteral("tcanabrava@kde.org"), QStringLiteral("http://angrycane.com.br"));

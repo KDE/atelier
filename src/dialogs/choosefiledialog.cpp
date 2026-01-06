@@ -33,7 +33,9 @@ ChooseFileDialog::ChooseFileDialog(QWidget *parent, QList<QUrl> files)
         listWidget->addItem(url.toLocalFile());
     }
     listWidget->setCurrentRow(0);
-    connect(listWidget, &QListWidget::currentRowChanged, this, [this, &files](const int t) { m_choosen_file = files.at(t); });
+    connect(listWidget, &QListWidget::currentRowChanged, this, [this, &files](const int t) {
+        m_choosen_file = files.at(t);
+    });
 
     auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
     connect(buttonBox, &QDialogButtonBox::accepted, this, &ChooseFileDialog::accept);

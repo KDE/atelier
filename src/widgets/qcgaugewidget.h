@@ -98,7 +98,11 @@ public:
     void setPosition(float percentage);
     float position();
     QRectF rect();
-    enum Error { InvalidValueRange, InvalidDegreeRange, InvalidStep };
+    enum Error {
+        InvalidValueRange,
+        InvalidDegreeRange,
+        InvalidStep,
+    };
 
 protected:
     QRectF adjustRect(float percentage);
@@ -265,7 +269,7 @@ public:
     void setColor(const QColor &color);
 
 private:
-    float mStep {10};
+    float mStep{10};
     QFont mFont;
     QColor mColor;
 };

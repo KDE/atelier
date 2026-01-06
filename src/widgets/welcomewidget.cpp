@@ -119,7 +119,8 @@ void WelcomeWidget::retrieveRssFeed()
 {
     m_postList.clear();
     auto manager = new QNetworkAccessManager(this);
-    for (const QUrl &url : {QUrl("https://rizzitello.wordpress.com/category/atelier/feed/"), QUrl("https://laysrodriguesdev.wordpress.com/category/atelier/feed/")}) {
+    for (const QUrl &url :
+         {QUrl("https://rizzitello.wordpress.com/category/atelier/feed/"), QUrl("https://laysrodriguesdev.wordpress.com/category/atelier/feed/")}) {
         QNetworkRequest request(url);
         request.setRawHeader("User-Agent", "Atelier 1.0");
         manager->get(request);
@@ -165,7 +166,9 @@ void WelcomeWidget::setupRssFeed()
         return;
     }
     QLocale locale(QLocale::English);
-    std::sort(m_postList.begin(), m_postList.end(), [locale](const Post &p1, const Post &p2) { return locale.toDate(p1.date, "dd MMM yyyy") > locale.toDate(p2.date, "dd MMM yyyy"); });
+    std::sort(m_postList.begin(), m_postList.end(), [locale](const Post &p1, const Post &p2) {
+        return locale.toDate(p1.date, "dd MMM yyyy") > locale.toDate(p2.date, "dd MMM yyyy");
+    });
     auto layout = new QVBoxLayout;
     int count = m_postList.count() > POSTS_LIMIT ? POSTS_LIMIT : m_postList.count();
     for (int i = 0; i < count; ++i) {

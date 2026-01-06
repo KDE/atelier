@@ -36,11 +36,13 @@ struct LateralArea {
     QWidget *m_toolBar;
     QStackedWidget *m_stack;
     WidgetMap m_map;
-    template<typename T> T *get(const QString &s)
+    template<typename T>
+    T *get(const QString &s)
     {
         return qobject_cast<T *>(m_map[s].second);
     }
-    template<typename T> T *getButton(const QString &s)
+    template<typename T>
+    T *getButton(const QString &s)
     {
         return qobject_cast<T *>(m_map[s].first);
     }
