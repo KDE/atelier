@@ -29,7 +29,7 @@ ChooseFileDialog::ChooseFileDialog(QWidget *parent, QList<QUrl> files)
     auto listWidget = new QListWidget(this);
     listWidget->setMinimumWidth(fontMetrics().height() / 2 * padding);
 
-    foreach (const auto &url, files) {
+    for (const auto &url : files) {
         listWidget->addItem(url.toLocalFile());
     }
     listWidget->setCurrentRow(0);
