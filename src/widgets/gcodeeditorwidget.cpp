@@ -23,6 +23,8 @@
 #include <QMimeData>
 #include <QVBoxLayout>
 
+using namespace Qt::StringLiterals;
+
 GCodeEditorWidget::GCodeEditorWidget(QWidget *parent)
     : QWidget(parent)
     , m_tabwidget(new QTabWidget(this))
@@ -58,7 +60,7 @@ void GCodeEditorWidget::loadFile(const QUrl &file)
     connect(doc, &KTextEditor::Document::modifiedChanged, this, [this, t](const KTextEditor::Document *document) {
         QString filename = document->url().fileName(QUrl::FullyDecoded);
         if (document->isModified()) {
-            filename.append(" *");
+            filename.append(u" *"_s);
         }
         m_tabwidget->setTabText(t, filename);
     });
@@ -68,9 +70,9 @@ void GCodeEditorWidget::loadFile(const QUrl &file)
 KTextEditor::Document *GCodeEditorWidget::newDoc(const QUrl &file)
 {
     KTextEditor::Document *doc = m_editor->createDocument(this);
-    doc->setMode("G-Code");
+    doc->setMode(u"G-Code"_s);
     doc->openUrl(file);
-    doc->setHighlightingMode(QString("G-Code"));
+    doc->setHighlightingMode(u"G-Code"_s);
     return doc;
 }
 
@@ -82,10 +84,10 @@ KTextEditor::View *GCodeEditorWidget::newView(KTextEditor::Document *doc)
     // Hopefully we can get that added and use it in the future.
     // This must be the older style connect string or it will not work.
     connect(view, SIGNAL(dropEventPass(QDropEvent *)), this, SLOT(dropCatch(QDropEvent *)));
-    view->setConfigValue("line-numbers", true);
-    view->setConfigValue("dynamic-word-wrap", false);
-    view->setConfigValue("modification-markers", true);
-    view->setConfigValue("scrollbar-minimap", false);
+    view->setConfigValue(u"line-numbers"_s, true);
+    view->setConfigValue(u"dynamic-word-wrap"_s, false);
+    view->setConfigValue(u"modification-markers"_s, true);
+    view->setConfigValue(u"scrollbar-minimap"_s, false);
     return view;
 }
 

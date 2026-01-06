@@ -23,6 +23,8 @@
 #include <QPushButton>
 #include <QVideoWidget>
 
+using namespace Qt::StringLiterals;
+
 VideoMonitorWidget::VideoMonitorWidget(QWidget *parent)
     : QWidget(parent)
     , _errorlabel(new QLabel(this))
@@ -44,7 +46,7 @@ VideoMonitorWidget::VideoMonitorWidget(QWidget *parent)
 
     auto _playPB = new QPushButton(this);
     _playPB->setCheckable(true);
-    _playPB->setIcon(QIcon::fromTheme("media-playback-start", style()->standardIcon(QStyle::SP_MediaPlay)));
+    _playPB->setIcon(QIcon::fromTheme(u"media-playback-start"_s, style()->standardIcon(QStyle::SP_MediaPlay)));
     _layout->addWidget(_playPB, 0, 2);
 
     auto _videoWidget = new QVideoWidget(this);
@@ -58,8 +60,8 @@ VideoMonitorWidget::VideoMonitorWidget(QWidget *parent)
 
 #ifdef Q_OS_LINUX
     QStringList sources;
-    sources << QString("video*");
-    _sourceCB->addItems(QDir("/dev/").entryList(sources, QDir::System).replaceInStrings(QRegularExpression("^"), "v4l2:///dev/"));
+    sources << u"video*"_s;
+    _sourceCB->addItems(QDir(u"/dev/"_s).entryList(sources, QDir::System).replaceInStrings(QRegularExpression(u"^"_s), u"v4l2:///dev/"_s));
 #endif
 
     connect(_playPB, &QPushButton::clicked, this, [this, _playPB, _sourceCB, _videoWidget](bool b) {
@@ -68,11 +70,11 @@ VideoMonitorWidget::VideoMonitorWidget(QWidget *parent)
                 QString source = _sourceCB->currentText();
                 _mediaplayer.setSource(QUrl(source));
             }
-            _playPB->setIcon(QIcon::fromTheme("media-playback-pause", style()->standardIcon(QStyle::SP_MediaPause)));
+            _playPB->setIcon(QIcon::fromTheme(u"media-playback-pause"_s, style()->standardIcon(QStyle::SP_MediaPause)));
             _mediaplayer.play();
         } else {
             _mediaplayer.pause();
-            _playPB->setIcon(QIcon::fromTheme("media-playback-start", style()->standardIcon(QStyle::SP_MediaPlay)));
+            _playPB->setIcon(QIcon::fromTheme(u"media-playback-start"_s, style()->standardIcon(QStyle::SP_MediaPlay)));
         }
         _videoWidget->setVisible(b);
     });
@@ -82,9 +84,9 @@ VideoMonitorWidget::VideoMonitorWidget(QWidget *parent)
 void VideoMonitorWidget::handleError()
 {
     const QString errorString = _mediaplayer.errorString();
-    QString message = "Error: ";
+    QString message = i18n("Error: ");
     if (errorString.isEmpty()) {
-        message += " #" + QString::number(int(_mediaplayer.error()));
+        message += u" #"_s + QString::number(int(_mediaplayer.error()));
     } else {
         message += errorString;
     }

@@ -362,7 +362,7 @@ QcLabelItem::QcLabelItem(QObject *parent)
 {
     setPosition(50);
     mAngle = 270;
-    mText = "%";
+    mText = QStringLiteral("%");
     mColor = Qt::black;
 }
 

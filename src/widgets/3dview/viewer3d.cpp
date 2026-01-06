@@ -55,7 +55,7 @@ Viewer3D::Viewer3D(QWidget *parent)
     format.setProfile(QSurfaceFormat::CoreProfile);
     _view->setFormat(format);
 
-    _view->rootContext()->setContextProperty("viewer3d", this);
+    _view->rootContext()->setContextProperty(QStringLiteral("viewer3d"), this);
     _view->setResizeMode(QQuickView::SizeRootObjectToView);
     _view->setSource(QUrl(QStringLiteral("qrc:/viewer3d.qml")));
     auto mainLayout = new QHBoxLayout;

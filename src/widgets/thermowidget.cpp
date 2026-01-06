@@ -28,6 +28,8 @@
 #include <QTimer>
 #include <QWheelEvent>
 
+using namespace Qt::StringLiterals;
+
 ThermoWidget::ThermoWidget(QWidget *parent, const QString &name)
     : QcGaugeWidget(parent)
     , m_tempChangedTimer(new QTimer(this))
@@ -285,8 +287,8 @@ void ThermoWidget::paintEvent(QPaintEvent *event)
     QFont font(QApplication::font().family(), radiusAsInt / 10, QFont::Normal);
     QFontMetrics fm(font);
     const int targetWidth = fm.horizontalAdvance(m_targetTemperatureText);
-    const int wWidth = fm.horizontalAdvance('W');
-    const int cursorWidth = fm.horizontalAdvance('0');
+    const int wWidth = fm.horizontalAdvance('W'_L1);
+    const int cursorWidth = fm.horizontalAdvance('0'_L1);
     const int height = fm.height();
     const int halfWidth = geometry().width() / 2;
     const int xposTarget = int(halfWidth - (targetWidth / 2));
@@ -307,7 +309,7 @@ void ThermoWidget::paintEvent(QPaintEvent *event)
 
     if (m_paintCursor) {
         p.setPen(palette().color(QPalette::Text));
-        p.drawText(xposCursor, int(ypos - (height * 0.60)), QChar('_'));
+        p.drawText(xposCursor, int(ypos - (height * 0.60)), u"_"_s);
     }
 
     p.setPen(Qt::red);
