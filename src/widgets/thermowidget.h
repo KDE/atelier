@@ -36,7 +36,7 @@ public:
     void setRange(int min, int max);
     void setName(const QString &name);
 
-signals:
+Q_SIGNALS:
     void targetTemperatureChanged(double targetTemperature);
 
 protected:

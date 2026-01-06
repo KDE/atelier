@@ -74,5 +74,5 @@ void GridMesh::setMeshResolution(const QSize &meshResolution)
     setGeometry(geom);
 
     m_meshResolution = meshResolution;
-    emit meshResolutionChanged(m_meshResolution);
+    Q_EMIT meshResolutionChanged(m_meshResolution);
 }

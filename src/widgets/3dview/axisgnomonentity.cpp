@@ -100,7 +100,7 @@ void AxisGnomonEntity::setPosition(const QVector2D &position)
     if (_position != position) {
         _position = position;
         applyModelMatrix();
-        emit positionChanged(position);
+        Q_EMIT positionChanged(position);
     }
 }
 
@@ -109,7 +109,7 @@ void AxisGnomonEntity::setScale(float scale)
     if (!qFuzzyCompare(_scale, scale)) {
         _scale = scale;
         applyModelMatrix();
-        emit scaleChanged(scale);
+        Q_EMIT scaleChanged(scale);
     }
 }
 

@@ -45,12 +45,12 @@ private:
     void currentIndexChanged(int index);
     void setupTabWidget();
 
-signals:
+Q_SIGNALS:
     void currentFileChanged(const QUrl &file);
     void updateClientFactory(KTextEditor::View *view);
     void fileClosed(const QUrl &file);
     void droppedUrls(QList<QUrl> fileList);
 
-private slots:
+private Q_SLOTS:
     void dropCatch(QDropEvent *event);
 };

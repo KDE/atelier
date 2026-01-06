@@ -47,7 +47,7 @@ void LineMesh::readAndRun(const QString &path)
 
 void LineMesh::read(const QString &path)
 {
-    emit run(path);
+    Q_EMIT run(path);
 }
 
 void LineMesh::posUpdate(const QVector<QVector4D> &pos)
@@ -61,5 +61,5 @@ void LineMesh::posUpdate(const QVector<QVector4D> &pos)
     _lineMeshGeo = new LineMeshGeometry(vertices, this);
     setVertexCount(_lineMeshGeo->vertexCount());
     setGeometry(_lineMeshGeo);
-    emit finished();
+    Q_EMIT finished();
 }

@@ -146,7 +146,7 @@ void MainWindow::newAtCoreInstance()
     connect(newInstanceWidget, &AtCoreInstanceWidget::requestProfileDialog, this, [this] {
         std::unique_ptr<ProfilesDialog> pd(new ProfilesDialog(this));
         pd->exec();
-        emit(profilesChanged());
+        Q_EMIT(profilesChanged());
     });
 
     connect(newInstanceWidget, &AtCoreInstanceWidget::requestFileChooser, this, [newInstanceWidget, this] {
@@ -295,7 +295,7 @@ void MainWindow::setupActions()
     connect(action, &QAction::triggered, this, [this] {
         std::unique_ptr<ProfilesDialog> pd(new ProfilesDialog);
         pd->exec();
-        emit(profilesChanged());
+        Q_EMIT(profilesChanged());
     });
 
     action = actionCollection()->addAction(QStringLiteral("quit"));

@@ -97,20 +97,20 @@ void GCodeEditorWidget::closeTab(int index)
         m_tabwidget->removeTab(index);
         urlTab.remove(url);
         urlDoc.remove(url);
-        emit fileClosed(url);
+        Q_EMIT fileClosed(url);
     }
 }
 
 void GCodeEditorWidget::currentIndexChanged(int index)
 {
-    emit currentFileChanged(urlTab.key(m_tabwidget->widget(index)));
-    emit updateClientFactory(qobject_cast<KTextEditor::View *>(m_tabwidget->widget(index)));
+    Q_EMIT currentFileChanged(urlTab.key(m_tabwidget->widget(index)));
+    Q_EMIT updateClientFactory(qobject_cast<KTextEditor::View *>(m_tabwidget->widget(index)));
 }
 
 void GCodeEditorWidget::dropCatch(QDropEvent *event)
 {
     if (event->mimeData()->hasUrls()) {
-        emit droppedUrls(event->mimeData()->urls());
+        Q_EMIT droppedUrls(event->mimeData()->urls());
     }
 }
 

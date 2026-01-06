@@ -37,10 +37,10 @@ public:
 
     QSize meshResolution() const;
 
-public slots:
+public Q_SLOTS:
     void setMeshResolution(const QSize &meshResolution);
 
-signals:
+Q_SIGNALS:
     void meshResolutionChanged(const QSize &meshResolution);
 
 private:

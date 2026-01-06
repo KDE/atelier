@@ -33,7 +33,7 @@ public:
 public:
     void read(const QString &url);
 
-signals:
+Q_SIGNALS:
     void percentUpdate(const QVariant &percent);
     void posFinished(const QVector<QVector4D> &pos);
 

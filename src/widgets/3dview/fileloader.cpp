@@ -55,7 +55,7 @@ void FileLoader::run()
             stillSize -= line.size() + 1; // +1 endl
             const int perc = int((totalSize - stillSize) * 100.0 / totalSize);
             if (perc - lastPerc > 1) {
-                emit percentUpdate(perc);
+                Q_EMIT percentUpdate(perc);
                 lastPerc = perc;
             }
             line = line.simplified();
@@ -117,6 +117,6 @@ void FileLoader::run()
             }
         }
     }
-    emit percentUpdate(100);
-    emit posFinished(pos);
+    Q_EMIT percentUpdate(100);
+    Q_EMIT posFinished(pos);
 };

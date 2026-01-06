@@ -35,7 +35,7 @@ public:
     int width() const;
     int depth() const;
 
-signals:
+Q_SIGNALS:
     void widthChanged(int width);
     void depthChanged(int depth);
 

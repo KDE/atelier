@@ -61,11 +61,11 @@ void BedProperties::updateBedSize(const QSize &size)
 {
     if (size.width() != m_width) {
         m_width = size.width();
-        emit widthChanged(m_width);
+        Q_EMIT widthChanged(m_width);
     }
 
     if (size.height() != m_depth) {
         m_depth = size.height();
-        emit depthChanged(m_depth);
+        Q_EMIT depthChanged(m_depth);
     }
 }
