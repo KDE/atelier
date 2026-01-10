@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16...4.1 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.16...4.1)
 project(atelier)
 
 set(QT_MIN_VERSION "6.7")
