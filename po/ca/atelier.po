@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:55+0000\n"
+"POT-Creation-Date: 2026-01-11 00:46+0000\n"
 "PO-Revision-Date: 2025-06-02 10:49+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -30,7 +30,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "antonibella5@yahoo.com"
 
-#: src/dialogs/choosefiledialog.cpp:43
+#: src/dialogs/choosefiledialog.cpp:45
 #, kde-format
 msgid "Choose a file to print:"
 msgstr "Escolliu un fitxer per a imprimir:"
@@ -60,32 +60,32 @@ msgstr "© 2016"
 msgid "Lays Rodrigues"
 msgstr "Lays Rodrigues"
 
-#: src/main.cpp:56 src/main.cpp:57 src/main.cpp:58
+#: src/main.cpp:57 src/main.cpp:60 src/main.cpp:61
 #, kde-format
 msgid "Developer"
 msgstr "Desenvolupadora"
 
-#: src/main.cpp:57
+#: src/main.cpp:60
 #, kde-format
 msgid "Chris Rizzitello"
 msgstr "Chris Rizzitello"
 
-#: src/main.cpp:58
+#: src/main.cpp:61
 #, kde-format
 msgid "Patrick Pereira"
 msgstr "Patrick Pereira"
 
-#: src/main.cpp:59
+#: src/main.cpp:62
 #, kde-format
 msgid "Tomaz Canabrava"
 msgstr "Tomaz Canabrava"
 
-#: src/main.cpp:59
+#: src/main.cpp:62
 #, kde-format
 msgid "Contributor"
 msgstr "Col·laborador"
 
-#: src/main.cpp:60
+#: src/main.cpp:63
 #, kde-format
 msgid "Using AtCore: %1"
 msgstr "Usant l'AtCore: %1"
@@ -100,8 +100,8 @@ msgstr "Crea una instància nova"
 msgid "Connect a printer"
 msgstr "Connecta amb la impressora"
 
-#: src/mainwindow.cpp:156 src/widgets/atcoreinstancewidget.cpp:216
-#: src/widgets/atcoreinstancewidget.cpp:450
+#: src/mainwindow.cpp:156 src/widgets/atcoreinstancewidget.cpp:225
+#: src/widgets/atcoreinstancewidget.cpp:463
 #, kde-format
 msgid "Error"
 msgstr "Error"
@@ -131,62 +131,62 @@ msgstr ""
 "Conté canvis sense desar que no es mostraran a la impressió.\n"
 "Voleu desar-los abans d'imprimir?"
 
-#: src/mainwindow.cpp:259
+#: src/mainwindow.cpp:265
 #, kde-format
 msgid "Welcome"
 msgstr "Us donem la benvinguda"
 
-#: src/mainwindow.cpp:260
+#: src/mainwindow.cpp:266
 #, kde-format
 msgid "3D"
 msgstr "3D"
 
-#: src/mainwindow.cpp:261
+#: src/mainwindow.cpp:267
 #, kde-format
 msgid "GCode"
 msgstr "GCode"
 
-#: src/mainwindow.cpp:262
+#: src/mainwindow.cpp:268
 #, kde-format
 msgid "Video"
 msgstr "Vídeo"
 
-#: src/mainwindow.cpp:274
+#: src/mainwindow.cpp:280
 #, kde-format
 msgid "&Open"
 msgstr "&Obre"
 
-#: src/mainwindow.cpp:281
+#: src/mainwindow.cpp:287
 #, kde-format
 msgid "&New Connection"
 msgstr "Connexió &nova"
 
-#: src/mainwindow.cpp:288
+#: src/mainwindow.cpp:294
 #, kde-format
 msgid "&Profiles"
 msgstr "&Perfils"
 
-#: src/mainwindow.cpp:298
+#: src/mainwindow.cpp:304
 #, kde-format
 msgid "&Quit"
 msgstr "&Surt"
 
-#: src/mainwindow.cpp:307
+#: src/mainwindow.cpp:314
 #, kde-format
 msgid "Open GCode"
 msgstr "Obre un GCode"
 
-#: src/mainwindow.cpp:307
+#: src/mainwindow.cpp:314
 #, kde-format
 msgid "GCode(*.gco *.gcode);;All Files(*.*)"
 msgstr "GCode (*.gco *.gcode);;Tots els fitxers (*.*)"
 
-#: src/mainwindow.cpp:344 src/widgets/atcoreinstancewidget.cpp:435
+#: src/mainwindow.cpp:352 src/widgets/atcoreinstancewidget.cpp:448
 #, kde-format
 msgid "Printing"
 msgstr "Impressió"
 
-#: src/mainwindow.cpp:344
+#: src/mainwindow.cpp:352
 #, kde-format
 msgid ""
 "Currently printing! \n"
@@ -195,37 +195,37 @@ msgstr ""
 "Actualment s'està imprimint! \n"
 "Segur que voleu tancar?"
 
-#: src/mainwindow.cpp:395
+#: src/mainwindow.cpp:403
 #, kde-format
 msgid "Save Selected"
 msgstr "S'ha seleccionat el desament"
 
-#: src/mainwindow.cpp:403 src/mainwindow.cpp:421
+#: src/mainwindow.cpp:413 src/mainwindow.cpp:431
 #, kde-format
 msgid "Save Failed"
 msgstr "Ha fallat el desament"
 
-#: src/mainwindow.cpp:403 src/mainwindow.cpp:421
+#: src/mainwindow.cpp:413 src/mainwindow.cpp:431
 #, kde-format
 msgid "Failed to save file: %1"
 msgstr "No s'ha pogut desar el fitxer: %1"
 
-#: src/mainwindow.cpp:416
+#: src/mainwindow.cpp:426
 #, kde-format
 msgid "Save All"
 msgstr "Desa-ho tot"
 
-#: src/mainwindow.cpp:431
+#: src/mainwindow.cpp:441
 #, kde-format
 msgid "Cancel"
 msgstr "Cancel·la"
 
-#: src/mainwindow.cpp:437
+#: src/mainwindow.cpp:449
 #, kde-format
 msgid "Discard Changes"
 msgstr "Descarta els canvis"
 
-#: src/mainwindow.cpp:443
+#: src/mainwindow.cpp:457
 #, kde-format
 msgid "Files with Unsaved Changes."
 msgstr "Fitxers amb canvis sense desar."
@@ -255,55 +255,70 @@ msgstr "Inici:"
 msgid "All"
 msgstr "Tot"
 
-#: src/widgets/atcoreinstancewidget.cpp:135
-#: src/widgets/atcoreinstancewidget.cpp:154
-#: src/widgets/atcoreinstancewidget.cpp:430
+#: src/widgets/atcoreinstancewidget.cpp:139
+#: src/widgets/atcoreinstancewidget.cpp:158
+#: src/widgets/atcoreinstancewidget.cpp:443
 #, kde-format
 msgid "Print"
 msgstr "Imprimeix"
 
-#: src/widgets/atcoreinstancewidget.cpp:138
+#: src/widgets/atcoreinstancewidget.cpp:142
 #, kde-format
 msgid "Pause Print"
 msgstr "Fa pausa de la impressió"
 
-#: src/widgets/atcoreinstancewidget.cpp:145
+#: src/widgets/atcoreinstancewidget.cpp:149
 #, kde-format
 msgid "Resume Print"
 msgstr "Reprèn la impressió"
 
-#: src/widgets/atcoreinstancewidget.cpp:151
+#: src/widgets/atcoreinstancewidget.cpp:155
 #, kde-format
 msgid "Stop"
 msgstr "Atura"
 
-#: src/widgets/atcoreinstancewidget.cpp:159
+#: src/widgets/atcoreinstancewidget.cpp:163
 #, kde-format
 msgid "Disable Motors"
 msgstr "Inhabilita els motors"
 
-#: src/widgets/atcoreinstancewidget.cpp:171
+#: src/widgets/atcoreinstancewidget.cpp:175
 #, kde-format
 msgid "Device"
 msgstr "Dispositiu"
 
-#: src/widgets/atcoreinstancewidget.cpp:179
+#: src/widgets/atcoreinstancewidget.cpp:183
 #, kde-format
 msgid "Profile"
 msgstr "Perfil"
 
-#: src/widgets/atcoreinstancewidget.cpp:191
-#: src/widgets/atcoreinstancewidget.cpp:413
+#: src/widgets/atcoreinstancewidget.cpp:195
+#: src/widgets/atcoreinstancewidget.cpp:426
 #, kde-format
 msgid "Connect"
 msgstr "Connecta"
 
-#: src/widgets/atcoreinstancewidget.cpp:210
+#: src/widgets/atcoreinstancewidget.cpp:207
+#, fuzzy, kde-format
+#| msgid "&New Connection"
+msgid "Connection Error"
+msgstr "Connexió &nova"
+
+#: src/widgets/atcoreinstancewidget.cpp:208
+#, kde-format
+msgid ""
+"Your machine did not respond after 20 seconds.\n"
+"\n"
+"Before connecting again check that your printer is on and your are "
+"connecting using the correct BAUD Rate for your device."
+msgstr ""
+
+#: src/widgets/atcoreinstancewidget.cpp:218
 #, kde-format
 msgid "No Profiles!"
 msgstr "Sense perfils!"
 
-#: src/widgets/atcoreinstancewidget.cpp:210
+#: src/widgets/atcoreinstancewidget.cpp:219
 #, kde-format
 msgid ""
 "Connecting requires creating a profile for your printer. Create a profile in "
@@ -312,65 +327,65 @@ msgstr ""
 "El fet de connectar requereix crear un perfil per a la vostra impressora. "
 "Creeu un perfil al diàleg següent i torneu-ho a provar."
 
-#: src/widgets/atcoreinstancewidget.cpp:216
+#: src/widgets/atcoreinstancewidget.cpp:225
 #, kde-format
 msgid "Please, connect a serial device to continue!"
 msgstr "Connecteu amb un dispositiu sèrie per a continuar!"
 
-#: src/widgets/atcoreinstancewidget.cpp:248
+#: src/widgets/atcoreinstancewidget.cpp:261
 #, kde-format
 msgid "Connect a Printer"
 msgstr "Connecta amb la impressora"
 
-#: src/widgets/atcoreinstancewidget.cpp:275
+#: src/widgets/atcoreinstancewidget.cpp:288
 #, kde-format
 msgid "Push: %1"
 msgstr "Premut: %1"
 
-#: src/widgets/atcoreinstancewidget.cpp:280
+#: src/widgets/atcoreinstancewidget.cpp:293
 #, kde-format
 msgid "Display: %1"
 msgstr "Pantalla: %1"
 
-#: src/widgets/atcoreinstancewidget.cpp:300
+#: src/widgets/atcoreinstancewidget.cpp:313
 #, kde-format
 msgid "Relative Move: %1, %2"
 msgstr "Mode relatiu: %1, %2"
 
-#: src/widgets/atcoreinstancewidget.cpp:313
+#: src/widgets/atcoreinstancewidget.cpp:326
 #, kde-format
 msgid "Print Error"
 msgstr "Error en imprimir"
 
-#: src/widgets/atcoreinstancewidget.cpp:313
-#: src/widgets/atcoreinstancewidget.cpp:322
+#: src/widgets/atcoreinstancewidget.cpp:326
+#: src/widgets/atcoreinstancewidget.cpp:335
 #, kde-format
 msgid "You must select a file from the list"
 msgstr "Heu de seleccionar un fitxer de la llista"
 
-#: src/widgets/atcoreinstancewidget.cpp:322
+#: src/widgets/atcoreinstancewidget.cpp:335
 #, kde-format
 msgid "Delete Error"
 msgstr "Error en suprimir"
 
-#: src/widgets/atcoreinstancewidget.cpp:332
+#: src/widgets/atcoreinstancewidget.cpp:345
 #, kde-format
 msgid "Filename Empty"
 msgstr "Nom de fitxer buit"
 
-#: src/widgets/atcoreinstancewidget.cpp:332
+#: src/widgets/atcoreinstancewidget.cpp:345
 #, kde-format
 msgid "No filename sent from calling method, please check and try again."
 msgstr ""
 "No s'ha enviat un nom de fitxer des del mètode de crida, comproveu i torneu-"
 "ho a provar."
 
-#: src/widgets/atcoreinstancewidget.cpp:336
+#: src/widgets/atcoreinstancewidget.cpp:349
 #, kde-format
 msgid "File not found"
 msgstr "No s'ha trobat el fitxer"
 
-#: src/widgets/atcoreinstancewidget.cpp:336
+#: src/widgets/atcoreinstancewidget.cpp:349
 #, kde-format
 msgid ""
 "%1 \n"
@@ -379,120 +394,120 @@ msgstr ""
 "%1 \n"
 "No es pot llegir, comproveu i torna-ho a provar."
 
-#: src/widgets/atcoreinstancewidget.cpp:340
+#: src/widgets/atcoreinstancewidget.cpp:353
 #, kde-format
 msgid "Printing: %1"
 msgstr "Imprimint: %1"
 
-#: src/widgets/atcoreinstancewidget.cpp:376
+#: src/widgets/atcoreinstancewidget.cpp:389
 #, kde-format
 msgid "Disconnect"
 msgstr "Desconnecta"
 
-#: src/widgets/atcoreinstancewidget.cpp:380
+#: src/widgets/atcoreinstancewidget.cpp:393
 #, kde-format
 msgid "Connecting…"
 msgstr "S'està connectant…"
 
-#: src/widgets/atcoreinstancewidget.cpp:381
+#: src/widgets/atcoreinstancewidget.cpp:394
 #, kde-format
 msgid "Attempting to Connect"
 msgstr "S'està intentant connectar"
 
-#: src/widgets/atcoreinstancewidget.cpp:390
+#: src/widgets/atcoreinstancewidget.cpp:403
 #, kde-format
 msgid "Connected to %1"
 msgstr "Connectat amb %1"
 
-#: src/widgets/atcoreinstancewidget.cpp:408
+#: src/widgets/atcoreinstancewidget.cpp:421
 #, kde-format
 msgid "Not Connected"
 msgstr "Sense connectar"
 
-#: src/widgets/atcoreinstancewidget.cpp:411
+#: src/widgets/atcoreinstancewidget.cpp:424
 #, kde-format
 msgid "Serial disconnected"
 msgstr "Sèrie desconnectat"
 
-#: src/widgets/atcoreinstancewidget.cpp:422
+#: src/widgets/atcoreinstancewidget.cpp:435
 #, kde-format
 msgid "Starting Print"
 msgstr "S'està iniciant la impressió"
 
-#: src/widgets/atcoreinstancewidget.cpp:427
+#: src/widgets/atcoreinstancewidget.cpp:440
 #, kde-format
 msgid "Finished Print"
 msgstr "Ha finalitzat la impressió"
 
-#: src/widgets/atcoreinstancewidget.cpp:432
+#: src/widgets/atcoreinstancewidget.cpp:445
 #, kde-format
 msgid "Finished Print Job"
 msgstr "Ha finalitzat la tasca d'impressió"
 
-#: src/widgets/atcoreinstancewidget.cpp:437
+#: src/widgets/atcoreinstancewidget.cpp:450
 #, kde-format
 msgid "Pause"
 msgstr "Pausa"
 
-#: src/widgets/atcoreinstancewidget.cpp:441
+#: src/widgets/atcoreinstancewidget.cpp:454
 #, kde-format
 msgid "Paused"
 msgstr "En pausa"
 
-#: src/widgets/atcoreinstancewidget.cpp:442
+#: src/widgets/atcoreinstancewidget.cpp:455
 #, kde-format
 msgid "Resume"
 msgstr "Reprèn"
 
-#: src/widgets/atcoreinstancewidget.cpp:446
+#: src/widgets/atcoreinstancewidget.cpp:459
 #, kde-format
 msgid "Stopping Print"
 msgstr "S'està aturant la impressió"
 
-#: src/widgets/atcoreinstancewidget.cpp:453
+#: src/widgets/atcoreinstancewidget.cpp:466
 #, kde-format
 msgid "Unknown AtCore State, %1"
 msgstr "Estat desconegut de l'AtCore, %1"
 
-#: src/widgets/atcoreinstancewidget.cpp:527
+#: src/widgets/atcoreinstancewidget.cpp:540
 #, kde-format
 msgid "Found %1 Ports"
 msgstr "S'han trobat %1 ports"
 
-#: src/widgets/atcoreinstancewidget.cpp:529
+#: src/widgets/atcoreinstancewidget.cpp:542
 #, kde-format
 msgid "No available ports! Please connect a serial device to continue!"
 msgstr ""
 "No hi ha cap port disponible! Connecteu un dispositiu sèrie per a continuar."
 
-#: src/widgets/atcoreinstancewidget.cpp:572
-#: src/widgets/atcoreinstancewidget.cpp:575
-#: src/widgets/atcoreinstancewidget.cpp:579
-#: src/widgets/atcoreinstancewidget.cpp:590
-#: src/widgets/atcoreinstancewidget.cpp:591
+#: src/widgets/atcoreinstancewidget.cpp:585
+#: src/widgets/atcoreinstancewidget.cpp:588
+#: src/widgets/atcoreinstancewidget.cpp:592
+#: src/widgets/atcoreinstancewidget.cpp:603
+#: src/widgets/atcoreinstancewidget.cpp:604
 #, kde-format
 msgid "Actual Bed"
 msgstr "Llit real"
 
-#: src/widgets/atcoreinstancewidget.cpp:582
-#: src/widgets/atcoreinstancewidget.cpp:586
-#: src/widgets/atcoreinstancewidget.cpp:593
+#: src/widgets/atcoreinstancewidget.cpp:595
+#: src/widgets/atcoreinstancewidget.cpp:599
+#: src/widgets/atcoreinstancewidget.cpp:606
 #, kde-format
 msgid "Target Bed"
 msgstr "Llit objectiu"
 
-#: src/widgets/atcoreinstancewidget.cpp:602
-#: src/widgets/atcoreinstancewidget.cpp:606
-#: src/widgets/atcoreinstancewidget.cpp:610
-#: src/widgets/atcoreinstancewidget.cpp:621
-#: src/widgets/atcoreinstancewidget.cpp:622
+#: src/widgets/atcoreinstancewidget.cpp:615
+#: src/widgets/atcoreinstancewidget.cpp:619
+#: src/widgets/atcoreinstancewidget.cpp:623
+#: src/widgets/atcoreinstancewidget.cpp:634
+#: src/widgets/atcoreinstancewidget.cpp:635
 #, kde-format
 msgid "Actual Ext.1"
 msgstr "Ext.1 real"
 
-#: src/widgets/atcoreinstancewidget.cpp:613
-#: src/widgets/atcoreinstancewidget.cpp:617
-#: src/widgets/atcoreinstancewidget.cpp:624
+#: src/widgets/atcoreinstancewidget.cpp:626
+#: src/widgets/atcoreinstancewidget.cpp:630
+#: src/widgets/atcoreinstancewidget.cpp:637
 #, kde-format
 msgid "Target Ext.1"
 msgstr "Ext.1 objectiu"
@@ -594,7 +609,7 @@ msgstr "Uniu-vos al nostre grup %2 de Telegram %1!"
 msgid "You can also find us on Libera Chat IRC #kde-atelier"
 msgstr "També ens trobareu a l'irc de Libera Chat, al canal #kde-atelier"
 
-#: src/widgets/welcomewidget.cpp:185
+#: src/widgets/welcomewidget.cpp:188
 #, kde-format
 msgid "Failed to fetch the News."
 msgstr "Ha fallat en recuperar les notícies."
