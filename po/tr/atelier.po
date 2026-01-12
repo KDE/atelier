@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the atelier package.
 #
-# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025 Emir SARI <emir_sari@icloud.com>
+# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025, 2026 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-11 00:46+0000\n"
-"PO-Revision-Date: 2025-06-03 13:29+0300\n"
+"PO-Revision-Date: 2026-01-11 13:03+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.04.1\n"
+"X-Generator: Lokalize 25.12.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -296,10 +296,9 @@ msgid "Connect"
 msgstr "Bağlan"
 
 #: src/widgets/atcoreinstancewidget.cpp:207
-#, fuzzy, kde-format
-#| msgid "&New Connection"
+#, kde-format
 msgid "Connection Error"
-msgstr "&Yeni Bağlantı"
+msgstr "Bağlantı Hatası"
 
 #: src/widgets/atcoreinstancewidget.cpp:208
 #, kde-format
@@ -309,6 +308,10 @@ msgid ""
 "Before connecting again check that your printer is on and your are "
 "connecting using the correct BAUD Rate for your device."
 msgstr ""
+"Makineniz 20 saniye geçmesine rağmen yanıt vermedi.\n"
+"\n"
+"Yeniden bağlanmadan önce yazıcınızın açık olduğundan ve aygıtınız için olan "
+"doğru BAUD hızıyla bağlandığınızdan emin olun."
 
 #: src/widgets/atcoreinstancewidget.cpp:218
 #, kde-format

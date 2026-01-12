@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-11 00:46+0000\n"
-"PO-Revision-Date: 2025-06-02 06:57+0200\n"
+"PO-Revision-Date: 2026-01-11 08:54+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.8\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -297,10 +297,9 @@ msgid "Connect"
 msgstr "Poveži"
 
 #: src/widgets/atcoreinstancewidget.cpp:207
-#, fuzzy, kde-format
-#| msgid "&New Connection"
+#, kde-format
 msgid "Connection Error"
-msgstr "&Nova povezava"
+msgstr "Napaka povezave"
 
 #: src/widgets/atcoreinstancewidget.cpp:208
 #, kde-format
@@ -310,6 +309,10 @@ msgid ""
 "Before connecting again check that your printer is on and your are "
 "connecting using the correct BAUD Rate for your device."
 msgstr ""
+"Vaša naprava se po 20 sekundah ni odzvala.\n"
+"\n"
+"Pred ponovno povezavo preverite, ali je tiskalnik vklopljen in ali se "
+"povezujete s pravilno hitrostjo prenosa podatkov (BAUD Rate) za vašo napravo."
 
 #: src/widgets/atcoreinstancewidget.cpp:218
 #, kde-format
