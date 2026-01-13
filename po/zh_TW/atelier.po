@@ -3,13 +3,13 @@
 #
 # pan93412 <pan93412@gmail.com>, 2019.
 # Jeff Huang <s8321414@gmail.com>, 2020.
-# SPDX-FileCopyrightText: 2022, 2025 Kisaragi Hiu <mail@kisaragi-hiu.com>
+# SPDX-FileCopyrightText: 2022, 2025, 2026 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-11 00:46+0000\n"
-"PO-Revision-Date: 2025-06-04 07:30+0900\n"
+"PO-Revision-Date: 2026-01-13 01:24+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 25.07.70\n"
+"X-Generator: Lokalize 26.03.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -298,10 +298,9 @@ msgid "Connect"
 msgstr "連結"
 
 #: src/widgets/atcoreinstancewidget.cpp:207
-#, fuzzy, kde-format
-#| msgid "&New Connection"
+#, kde-format
 msgid "Connection Error"
-msgstr "新連結(&N)"
+msgstr "連線錯誤"
 
 #: src/widgets/atcoreinstancewidget.cpp:208
 #, kde-format
@@ -311,6 +310,10 @@ msgid ""
 "Before connecting again check that your printer is on and your are "
 "connecting using the correct BAUD Rate for your device."
 msgstr ""
+"您的機器過了 20 秒都沒有回應。\n"
+"\n"
+"在嘗試連線之前請先檢查您的印表機已開啟，且您已使用正確的傳輸速率與您的裝置連"
+"線。"
 
 #: src/widgets/atcoreinstancewidget.cpp:218
 #, kde-format

@@ -294,10 +294,9 @@ msgid "Connect"
 msgstr "连接"
 
 #: src/widgets/atcoreinstancewidget.cpp:207
-#, fuzzy, kde-format
-#| msgid "&New Connection"
+#, kde-format
 msgid "Connection Error"
-msgstr "新建连接(&N)"
+msgstr ""
 
 #: src/widgets/atcoreinstancewidget.cpp:208
 #, kde-format
