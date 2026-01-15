@@ -1,13 +1,13 @@
 # Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the atelier package.
-# SPDX-FileCopyrightText: 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
+# SPDX-FileCopyrightText: 2025, 2026 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-11 00:46+0000\n"
-"PO-Revision-Date: 2025-10-06 12:08+0400\n"
+"PO-Revision-Date: 2026-01-14 07:45+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -297,10 +297,9 @@ msgid "Connect"
 msgstr "اتّصل"
 
 #: src/widgets/atcoreinstancewidget.cpp:207
-#, fuzzy, kde-format
-#| msgid "&New Connection"
+#, kde-format
 msgid "Connection Error"
-msgstr "ا&تصال جديد"
+msgstr "خطأ في الاتّصال"
 
 #: src/widgets/atcoreinstancewidget.cpp:208
 #, kde-format
@@ -310,6 +309,10 @@ msgid ""
 "Before connecting again check that your printer is on and your are "
 "connecting using the correct BAUD Rate for your device."
 msgstr ""
+"لم تستجِب آلتك بعد 20 ثانية.\n"
+"\n"
+"تحقّق قبل الاتصال مرة أخرى من أن طابعتك شغالة ومن أنك تتصل باستخدام معدل BAUD "
+"الصحيح لجهازك."
 
 #: src/widgets/atcoreinstancewidget.cpp:218
 #, kde-format
