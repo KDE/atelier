@@ -1,12 +1,12 @@
-Atelier - KDE Printer Host for 3DPrinters
+Atelier - KDE Printer Host for 3D Printers
 ---
 
 Atelier has the goal to be the best open source printer host to control
-3DPrinters from your computer in any platform: Linux, Windows and MacOs.
+3D printers from your computer on any platform: Linux, Windows and MacOS.
 This project is under GPL V3, for more information read COPYING.GPL3.
 
 Atelier depends on [AtCore](https://invent.kde.org/libraries/atcore), the API to manage the serial connection between the computer and 3D Printers/CNC.
-AtCore is also on development by team Atelier.
+AtCore is also under development by team Atelier.
 
 ---
 ### AtCore Supported Firmwares
@@ -26,12 +26,12 @@ Atelier gives to you a user friendly interface to control and manage your printe
 - Log: You can log everything that comes and go from your printer in a file to check if everything is ok.
 - GCode Editor: A complete editor inside Atelier to make editions on your gcode file.
 
-> Atelier is under development, beta version comming out soon.
+> Atelier is under development, beta version coming out soon.
 ---
 #### Atelier is powered by [Qt](qt.io) and [KDE Frameworks](https://api.kde.org/frameworks/)
 ---
 ### Build Atelier for Development
-##### Minimal Qt Version: 5.7
+##### Minimal Qt Version: 6.7
 
 Dependencies for Atelier:
  - Build and install AtCore, see AtCore README to check the build information.
@@ -41,7 +41,7 @@ Dependencies for Atelier:
  - QtSerialPort
  - Qt3D
 
- KDE API's
+ KDE Frameworks
  - KI18n
  - KXMLGui
  - KConfigWidgets
