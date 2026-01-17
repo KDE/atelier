@@ -36,8 +36,7 @@
 using namespace Qt::StringLiterals;
 
 #define POSTS_LIMIT 5
-const QString WelcomeWidget::m_telegramLink = QStringLiteral(R"(<a href="http://t.me/KDEAtelier">)");
-const QString WelcomeWidget::m_documentsLink = QStringLiteral(R"(<a href="http://atelier.kde.org/documentation/atelier">)");
+const QString WelcomeWidget::m_matrixLink = QStringLiteral(R"(<a href="https://matrix.to/#/#kde-atelier:kde.org">)");
 const QString WelcomeWidget::m_linkClose = QStringLiteral("</a>");
 
 WelcomeWidget::WelcomeWidget(QWidget *parent)
@@ -82,10 +81,6 @@ WelcomeWidget::WelcomeWidget(QWidget *parent)
     label = new QLabel(i18n("See the info section of the Log for common problems."), this);
     layout->addWidget(label);
 
-    label = new QLabel(i18n("Check our %1Atelier Docs%2 for more information.", m_documentsLink, m_linkClose), this);
-    label->setOpenExternalLinks(true);
-    layout->addWidget(label);
-
     label = new QLabel(i18n("Atelier news!"), this);
     label->setFont(appFont);
     layout->addWidget(label);
@@ -96,7 +91,7 @@ WelcomeWidget::WelcomeWidget(QWidget *parent)
     label->setFont(appFont);
     layout->addWidget(label);
 
-    label = new QLabel(i18n("Join our %1Telegram Group%2!", m_telegramLink, m_linkClose), this);
+    label = new QLabel(i18n("Join our %1Matrix Room%2!", m_matrixLink, m_linkClose), this);
     label->setOpenExternalLinks(true);
     layout->addWidget(label);
 
