@@ -1,6 +1,6 @@
 
 # Contributing To Atelier
-Atelier is an open source project and all open source projects need contrubitors. Thank you for taking the time to read this document and Thank you for your future contributions to this project. 
+Atelier is an open source project and all open source projects need contributors. Thank you for taking the time to read this document and thank you for your future contributions to this project.
 
 ----
 ## Prerequisites
@@ -15,7 +15,7 @@ There are several ways you can contribute
  - Commit new code or code to fix bugs. 
 
 ## General Contribution Workflow
-The Following Is the General work flow for most contrubitions
+The following is the general work flow for most contributions
  - Create changes on your local fork in a new branch
  - Submit your change create a Merge Request on [KDE Invent]
  - Wait for review
@@ -25,14 +25,14 @@ The Following Is the General work flow for most contrubitions
  - A Maintainer will Merge when the changes is ready.
  
 ### General Coding Guidelines
-The following guidelines apply to all submited code.
+The following guidelines apply to all submitted code.
 
  - Follow the [KDE style guidelines]
- - Use constant referances when possible
+ - Use constant references when possible
  - Includes should be alphabetical.
  - Headers should use `#pragma once`.
- - Auto should not be used if the type is not explict.
- - Objects should have logical varible and function names
+ - Auto should not be used if the type is not explicit.
+ - Objects should have logical variable and function names
  - Code should always be readable, comment your code when it makes sense.
 
 ### Commit Guidelines
@@ -41,9 +41,9 @@ Keeping a clean project history requires that we take care when choosing how we 
  - Follow the [KDE commit guidelines]
  - Reviewers: laysrodrigues, rizzitello, patrickelectric, tcanabrava
  - Be sure to make any review issues as resolved.
- - Keep your base upto date. 
+ - Keep your base up to date.
  - Amend your local commits to fix review issues.
- - Always Ammend commits to update them
+ - Always Amend commits to update them
  - Never fix a commit with another commit.
  - Update your commits with `git commit --amend`
  - Update your MR with `git push --force`
