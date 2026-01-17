@@ -52,9 +52,9 @@ int main(int argc, char *argv[])
         // Can contain any information desired. (otherText)
         QString(),
         // The program homepage string. (homePageAddress = QString())
-        QStringLiteral("http://atelier.kde.org"),
+        QStringLiteral("https://apps.kde.org/atelier/"),
         // The bug report email address
-        QStringLiteral("atelier@bugs.kde.org"));
+        QStringLiteral("https://bugs.kde.org/enter_bug.cgi?product=Atelier"));
     aboutData.addAuthor(i18n("Lays Rodrigues"),
                         i18n("Developer"),
                         QStringLiteral("lays.rodrigues@kde.org"),
