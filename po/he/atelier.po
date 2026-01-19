@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-18 00:46+0000\n"
-"PO-Revision-Date: 2026-01-11 20:52+0200\n"
+"PO-Revision-Date: 2026-01-18 20:32+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -546,10 +546,9 @@ msgstr ""
 "        rtsp://server.example.org:8080/test.sdp"
 
 #: src/widgets/videomonitorwidget.cpp:87
-#, fuzzy, kde-format
-#| msgid "Error"
+#, kde-format
 msgid "Error: "
-msgstr "שגיאה"
+msgstr "שגיאה: "
 
 #: src/widgets/welcomewidget.cpp:53
 #, kde-format

@@ -530,10 +530,9 @@ msgstr ""
 "        rtsp://server.example.org:8080/test.sdp"
 
 #: src/widgets/videomonitorwidget.cpp:87
-#, fuzzy, kde-format
-#| msgid "Error"
+#, kde-format
 msgid "Error: "
-msgstr "Chyba"
+msgstr "Chyba: "
 
 #: src/widgets/welcomewidget.cpp:53
 #, kde-format

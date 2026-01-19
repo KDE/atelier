@@ -1,22 +1,22 @@
 # Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the atelier package.
-# SPDX-FileCopyrightText: 2019, 2020, 2021, 2022, 2025 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+# SPDX-FileCopyrightText: 2019, 2020, 2021, 2022, 2025, 2026 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-18 00:46+0000\n"
-"PO-Revision-Date: 2025-06-14 13:31+0200\n"
+"PO-Revision-Date: 2026-01-18 15:54+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
-"Language-Team: Polish <kde-i18n-doc@kde.org>\n"
+"Language-Team: pl\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 24.12.3\n"
+"X-Generator: Lokalize 25.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -297,10 +297,9 @@ msgid "Connect"
 msgstr "Połącz"
 
 #: src/widgets/atcoreinstancewidget.cpp:209
-#, fuzzy, kde-format
-#| msgid "&New Connection"
+#, kde-format
 msgid "Connection Error"
-msgstr "&Nowe połączenie"
+msgstr "Błąd połączenia"
 
 #: src/widgets/atcoreinstancewidget.cpp:210
 #, kde-format
@@ -310,6 +309,10 @@ msgid ""
 "Before connecting again check that your printer is on and your are "
 "connecting using the correct BAUD Rate for your device."
 msgstr ""
+"Twoja maszyna nie odpowiedziała po 20 sekundach.\n"
+"\n"
+"Zanim spróbujesz podłączyć się ponownie, sprawdź, czy drukarka jest włączona "
+"i czy szybkość BAUD połączenia jest poprawnie dla niej ustawiona."
 
 #: src/widgets/atcoreinstancewidget.cpp:220
 #, kde-format
@@ -543,10 +546,9 @@ msgstr ""
 "        rtsp://server.example.org:8080/test.sdp"
 
 #: src/widgets/videomonitorwidget.cpp:87
-#, fuzzy, kde-format
-#| msgid "Error"
+#, kde-format
 msgid "Error: "
-msgstr "Błąd"
+msgstr "Błąd: "
 
 #: src/widgets/welcomewidget.cpp:53
 #, kde-format

@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-18 00:46+0000\n"
-"PO-Revision-Date: 2026-01-12 03:04+0200\n"
+"PO-Revision-Date: 2026-01-18 15:03+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -556,10 +556,9 @@ msgstr ""
 "        rtsp://server.example.org:8080/test.sdp"
 
 #: src/widgets/videomonitorwidget.cpp:87
-#, fuzzy, kde-format
-#| msgid "Error"
+#, kde-format
 msgid "Error: "
-msgstr "Помилка"
+msgstr "Помилка: "
 
 #: src/widgets/welcomewidget.cpp:53
 #, kde-format
