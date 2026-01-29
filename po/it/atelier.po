@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-18 00:46+0000\n"
+"POT-Creation-Date: 2026-01-29 00:47+0000\n"
 "PO-Revision-Date: 2026-01-16 14:57+0100\n"
 "Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -551,71 +551,71 @@ msgstr ""
 msgid "Error: "
 msgstr "Errore"
 
-#: src/widgets/welcomewidget.cpp:53
+#: src/widgets/welcomewidget.cpp:52
 #, kde-format
 msgid "Welcome to Atelier!"
 msgstr "Benvenuti in Atelier!"
 
-#: src/widgets/welcomewidget.cpp:69
+#: src/widgets/welcomewidget.cpp:68
 #, kde-format
 msgid "Quick Connect Guide"
 msgstr "Guida rapida alla connessione"
 
-#: src/widgets/welcomewidget.cpp:73
+#: src/widgets/welcomewidget.cpp:72
 #, kde-format
 msgid "1 - Create a Profile."
 msgstr "1 - Crea un profilo."
 
-#: src/widgets/welcomewidget.cpp:73
+#: src/widgets/welcomewidget.cpp:72
 #, kde-format
 msgid "2 - Select the device."
 msgstr "2 - Seleziona il dispositivo."
 
-#: src/widgets/welcomewidget.cpp:73
+#: src/widgets/welcomewidget.cpp:72
 #, kde-format
 msgid "3 - Select the profile and connect."
 msgstr "3 - Seleziona il profilo e connetti."
 
-#: src/widgets/welcomewidget.cpp:78
+#: src/widgets/welcomewidget.cpp:77
 #, kde-format
 msgid "Having a connection problem?"
 msgstr "Hai un problema di connessione?"
 
-#: src/widgets/welcomewidget.cpp:82
+#: src/widgets/welcomewidget.cpp:81
 #, kde-format
 msgid "See the info section of the Log for common problems."
 msgstr "Vedi la sezione informazioni del registro per i problema comuni."
 
-#: src/widgets/welcomewidget.cpp:85
-#, kde-format
-msgid "Check our %1Atelier Docs%2 for more information."
-msgstr ""
-"Controlla la nostra %1documentazione di Atelier%2 per maggiori informazioni."
-
-#: src/widgets/welcomewidget.cpp:89
+#: src/widgets/welcomewidget.cpp:84
 #, kde-format
 msgid "Atelier news!"
 msgstr "Notizie su Atelier."
 
-#: src/widgets/welcomewidget.cpp:95
+#: src/widgets/welcomewidget.cpp:90
 #, kde-format
 msgid "Get Involved"
 msgstr "Partecipa"
 
-#: src/widgets/welcomewidget.cpp:99
-#, kde-format
-msgid "Join our %1Telegram Group%2!"
+#: src/widgets/welcomewidget.cpp:94
+#, fuzzy, kde-format
+#| msgid "Join our %1Telegram Group%2!"
+msgid "Join our %1Matrix Room%2!"
 msgstr "Unisciti al nostro %1gruppo Telegram%2!"
 
-#: src/widgets/welcomewidget.cpp:103
+#: src/widgets/welcomewidget.cpp:98
 #, kde-format
 msgid "You can also find us on Libera Chat IRC #kde-atelier"
 msgstr "Ci puoi trovare anche sul canale IRC #kde-atelier di Libera Chat"
 
-#: src/widgets/welcomewidget.cpp:190
+#: src/widgets/welcomewidget.cpp:185
 #, kde-format
 msgid "Failed to fetch the News."
 msgstr "Recupero delle notizie non riuscito."
+
+#~ msgid "Check our %1Atelier Docs%2 for more information."
+#~ msgstr ""
+#~ "Controlla la nostra %1documentazione di Atelier%2 per maggiori "
+#~ "informazioni."
 
 #~ msgid "Overwrite Profile?"
 #~ msgstr "Sovrascrivo il profilo?"

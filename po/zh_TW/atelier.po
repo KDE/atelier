@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-18 00:46+0000\n"
+"POT-Creation-Date: 2026-01-29 00:47+0000\n"
 "PO-Revision-Date: 2026-01-19 19:17+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -549,67 +549,66 @@ msgstr ""
 msgid "Error: "
 msgstr "錯誤："
 
-#: src/widgets/welcomewidget.cpp:53
+#: src/widgets/welcomewidget.cpp:52
 #, kde-format
 msgid "Welcome to Atelier!"
 msgstr "歡迎使用 Atelier！"
 
-#: src/widgets/welcomewidget.cpp:69
+#: src/widgets/welcomewidget.cpp:68
 #, kde-format
 msgid "Quick Connect Guide"
 msgstr "快速連線教學"
 
-#: src/widgets/welcomewidget.cpp:73
+#: src/widgets/welcomewidget.cpp:72
 #, kde-format
 msgid "1 - Create a Profile."
 msgstr "1 - 建立設定檔。"
 
-#: src/widgets/welcomewidget.cpp:73
+#: src/widgets/welcomewidget.cpp:72
 #, kde-format
 msgid "2 - Select the device."
 msgstr "2 - 選取裝置。"
 
-#: src/widgets/welcomewidget.cpp:73
+#: src/widgets/welcomewidget.cpp:72
 #, kde-format
 msgid "3 - Select the profile and connect."
 msgstr "3 - 選取設定檔並連線。"
 
-#: src/widgets/welcomewidget.cpp:78
+#: src/widgets/welcomewidget.cpp:77
 #, kde-format
 msgid "Having a connection problem?"
 msgstr "有連線問題嗎？"
 
-#: src/widgets/welcomewidget.cpp:82
+#: src/widgets/welcomewidget.cpp:81
 #, kde-format
 msgid "See the info section of the Log for common problems."
 msgstr "看看記錄的「資訊」部份以取得常見問題。"
 
-#: src/widgets/welcomewidget.cpp:85
-#, kde-format
-msgid "Check our %1Atelier Docs%2 for more information."
-msgstr "看看我們的 %1Atelier 文件%2 取得更多資訊。"
-
-#: src/widgets/welcomewidget.cpp:89
+#: src/widgets/welcomewidget.cpp:84
 #, kde-format
 msgid "Atelier news!"
 msgstr "Atelier 新聞！"
 
-#: src/widgets/welcomewidget.cpp:95
+#: src/widgets/welcomewidget.cpp:90
 #, kde-format
 msgid "Get Involved"
 msgstr "參與其中"
 
-#: src/widgets/welcomewidget.cpp:99
-#, kde-format
-msgid "Join our %1Telegram Group%2!"
+#: src/widgets/welcomewidget.cpp:94
+#, fuzzy, kde-format
+#| msgid "Join our %1Telegram Group%2!"
+msgid "Join our %1Matrix Room%2!"
 msgstr "加入我們的 %1Telegram 群組%2！"
 
-#: src/widgets/welcomewidget.cpp:103
+#: src/widgets/welcomewidget.cpp:98
 #, kde-format
 msgid "You can also find us on Libera Chat IRC #kde-atelier"
 msgstr "您也可以在 Libera Chat IRC #kde-atelier 找到我們。"
 
-#: src/widgets/welcomewidget.cpp:190
+#: src/widgets/welcomewidget.cpp:185
 #, kde-format
 msgid "Failed to fetch the News."
 msgstr "無法取得「新聞」。"
+
+#~ msgid "Check our %1Atelier Docs%2 for more information."
+#~ msgstr "看看我們的 %1Atelier 文件%2 取得更多資訊。"
