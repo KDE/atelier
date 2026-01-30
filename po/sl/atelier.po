@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-29 00:47+0000\n"
-"PO-Revision-Date: 2026-01-18 09:06+0100\n"
+"PO-Revision-Date: 2026-01-29 06:56+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -599,10 +599,9 @@ msgid "Get Involved"
 msgstr "Bodite vpleteni"
 
 #: src/widgets/welcomewidget.cpp:94
-#, fuzzy, kde-format
-#| msgid "Join our %1Telegram Group%2!"
+#, kde-format
 msgid "Join our %1Matrix Room%2!"
-msgstr "Pridružite se naši skupini na %1Telegram Group%2!"
+msgstr "Pridružite se naši %1Matrix sobi%2!"
 
 #: src/widgets/welcomewidget.cpp:98
 #, kde-format

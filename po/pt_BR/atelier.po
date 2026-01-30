@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-29 00:47+0000\n"
-"PO-Revision-Date: 2026-01-18 11:43-0300\n"
+"PO-Revision-Date: 2026-01-29 06:50-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -598,10 +598,9 @@ msgid "Get Involved"
 msgstr "Participe"
 
 #: src/widgets/welcomewidget.cpp:94
-#, fuzzy, kde-format
-#| msgid "Join our %1Telegram Group%2!"
+#, kde-format
 msgid "Join our %1Matrix Room%2!"
-msgstr "Entre no nosso %1Grupo do Telegram%2!"
+msgstr "Entre na nossa %1Sala da Matrix%2!"
 
 #: src/widgets/welcomewidget.cpp:98
 #, kde-format
