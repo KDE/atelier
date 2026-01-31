@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-29 00:47+0000\n"
-"PO-Revision-Date: 2026-01-18 20:32+0200\n"
+"PO-Revision-Date: 2026-01-30 08:03+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -596,10 +596,9 @@ msgid "Get Involved"
 msgstr "הצטרפות"
 
 #: src/widgets/welcomewidget.cpp:94
-#, fuzzy, kde-format
-#| msgid "Join our %1Telegram Group%2!"
+#, kde-format
 msgid "Join our %1Matrix Room%2!"
-msgstr "להצטרף ל%1קבוצת הטלגרם%2 שלנו!"
+msgstr "להצטרף ל%1חדר שלנו ב־Matrix%2!"
 
 #: src/widgets/welcomewidget.cpp:98
 #, kde-format
