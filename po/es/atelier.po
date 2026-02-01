@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-29 00:47+0000\n"
-"PO-Revision-Date: 2026-01-25 00:37+0100\n"
+"PO-Revision-Date: 2026-02-01 00:25+0100\n"
 "Last-Translator: Víctor Rodrigo Córdoba <vrcordoba@gmail.com>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -602,10 +602,9 @@ msgid "Get Involved"
 msgstr "Involúcrese"
 
 #: src/widgets/welcomewidget.cpp:94
-#, fuzzy, kde-format
-#| msgid "Join our %1Telegram Group%2!"
+#, kde-format
 msgid "Join our %1Matrix Room%2!"
-msgstr "¡Forme parte de nuestro %1grupo de Telegram%2!"
+msgstr "¡Forme parte de nuestro %1sala de Matrix%2!"
 
 #: src/widgets/welcomewidget.cpp:98
 #, kde-format
@@ -616,7 +615,3 @@ msgstr "Puede encontrarnos también en el chat Libera IRC #kde-atelier"
 #, kde-format
 msgid "Failed to fetch the News."
 msgstr "No se pudieron recuperar las noticias."
-
-#~ msgid "Check our %1Atelier Docs%2 for more information."
-#~ msgstr ""
-#~ "Compruebe nuestra %1documentación de Atelier%2 para información adicional."

@@ -589,10 +589,9 @@ msgid "Get Involved"
 msgstr "参与贡献"
 
 #: src/widgets/welcomewidget.cpp:94
-#, fuzzy, kde-format
-#| msgid "Join our %1Telegram Group%2!"
+#, kde-format
 msgid "Join our %1Matrix Room%2!"
-msgstr "加入我们的 %1Telegram 群聊 %2！"
+msgstr ""
 
 #: src/widgets/welcomewidget.cpp:98
 #, kde-format
@@ -603,6 +602,3 @@ msgstr "你也可以在 Libera Chat IRC 的 #kde-atellier 频道上找到我们"
 #, kde-format
 msgid "Failed to fetch the News."
 msgstr "新闻获取失败！"
-
-#~ msgid "Check our %1Atelier Docs%2 for more information."
-#~ msgstr "查阅我们的 %1Atelier Docs%2 以获取更多信息。"
