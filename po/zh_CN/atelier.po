@@ -20,12 +20,12 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "KDE 中国, Zhou Wenqing"
+msgstr "KDE 中国, Tyson Tan, Zhou Wenqing"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "kde-china@kde.org, zhouwenqing655@gmail.com"
+msgstr "kde-china@kde.org, tds00@qq.com, zhouwenqing655@gmail.com"
 
 #: src/dialogs/choosefiledialog.cpp:45
 #, kde-format
@@ -296,7 +296,7 @@ msgstr "连接"
 #: src/widgets/atcoreinstancewidget.cpp:209
 #, kde-format
 msgid "Connection Error"
-msgstr ""
+msgstr "连接错误"
 
 #: src/widgets/atcoreinstancewidget.cpp:210
 #, kde-format
@@ -306,6 +306,10 @@ msgid ""
 "Before connecting again check that your printer is on and your are "
 "connecting using the correct BAUD Rate for your device."
 msgstr ""
+"你的机器在 20 秒之内没有响应。\n"
+"\n"
+"在再次连接之前，请检查您的打印机是否开启，确认您正在使用正确的波特率连接您的"
+"设备。"
 
 #: src/widgets/atcoreinstancewidget.cpp:220
 #, kde-format
@@ -541,7 +545,7 @@ msgstr ""
 #: src/widgets/videomonitorwidget.cpp:87
 #, kde-format
 msgid "Error: "
-msgstr ""
+msgstr "错误："
 
 #: src/widgets/welcomewidget.cpp:52
 #, kde-format
@@ -591,7 +595,7 @@ msgstr "参与贡献"
 #: src/widgets/welcomewidget.cpp:94
 #, kde-format
 msgid "Join our %1Matrix Room%2!"
-msgstr ""
+msgstr "请加入我们的 %1Matrix 聊天室 %2！"
 
 #: src/widgets/welcomewidget.cpp:98
 #, kde-format

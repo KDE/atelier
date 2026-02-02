@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-29 00:47+0000\n"
-"PO-Revision-Date: 2026-01-16 14:57+0100\n"
+"PO-Revision-Date: 2026-01-29 21:02+0100\n"
 "Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -546,10 +546,9 @@ msgstr ""
 "        rtsp://server.example.org:8080/test.sdp"
 
 #: src/widgets/videomonitorwidget.cpp:87
-#, fuzzy, kde-format
-#| msgid "Error"
+#, kde-format
 msgid "Error: "
-msgstr "Errore"
+msgstr "Errore: "
 
 #: src/widgets/welcomewidget.cpp:52
 #, kde-format
@@ -597,10 +596,9 @@ msgid "Get Involved"
 msgstr "Partecipa"
 
 #: src/widgets/welcomewidget.cpp:94
-#, fuzzy, kde-format
-#| msgid "Join our %1Telegram Group%2!"
+#, kde-format
 msgid "Join our %1Matrix Room%2!"
-msgstr "Unisciti al nostro %1gruppo Telegram%2!"
+msgstr "Unisciti alla nostra %1stanza Matrix%2."
 
 #: src/widgets/welcomewidget.cpp:98
 #, kde-format
