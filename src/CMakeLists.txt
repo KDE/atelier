@@ -29,6 +29,7 @@ endif()
 
 target_link_libraries(atelier 
     Atelier3D
+    Atelier3Dplugin
     AtelierDialogs
     AtelierWidgets
     AtCore::AtCore

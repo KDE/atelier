@@ -42,7 +42,7 @@ AxisGnomonEntity::AxisGnomonEntity(QNode *parent)
     , _scale(0.1f)
 {
     auto mesh = new QMesh(this);
-    mesh->setSource(QUrl(QStringLiteral("qrc:/axisgnomon.gltf")));
+    mesh->setSource(QUrl(QStringLiteral("qrc:/qt/qml/org/kde/atelier/viewer3d/axisgnomon.gltf")));
     addComponent(mesh);
 
     auto material = new QMaterial(this);
@@ -57,7 +57,7 @@ AxisGnomonEntity::AxisGnomonEntity(QNode *parent)
     material->addParameter(_modelMatrixParameter);
 
     auto shaderProgram = new QShaderProgram(material);
-    shaderProgram->setVertexShaderCode(QShaderProgram::loadSource(QUrl(QStringLiteral("qrc:/axisgnomon.vert"))));
+    shaderProgram->setVertexShaderCode(QShaderProgram::loadSource(QUrl(QStringLiteral("qrc:/qt/qml/org/kde/atelier/viewer3d/axisgnomon.vert"))));
     shaderProgram->setFragmentShaderCode(QShaderProgram::loadSource(QUrl(QStringLiteral("qrc:/shaders/gl3/pervertexcolor.frag"))));
 
     auto technique = new QTechnique(material);

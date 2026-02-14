@@ -10,6 +10,7 @@ include(KDECompilerSettings NO_POLICY_SCOPE)
 include(KDEInstallDirs)
 include(KDECMakeSettings NO_POLICY_SCOPE)
 include(ECMInstallIcons)
+include(ECMQmlModule)
 include(ECMDeprecationSettings)
 ecm_set_disabled_deprecation_versions(
   QT 6.10.0
