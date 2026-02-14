@@ -57,7 +57,7 @@ Viewer3D::Viewer3D(QWidget *parent)
 
     _view->rootContext()->setContextProperty(QStringLiteral("viewer3d"), this);
     _view->setResizeMode(QQuickView::SizeRootObjectToView);
-    _view->setSource(QUrl(QStringLiteral("qrc:/viewer3d.qml")));
+    _view->loadFromModule("org.kde.atelier.viewer3d", "Viewer3d");
     auto mainLayout = new QHBoxLayout;
     mainLayout->addWidget(QWidget::createWindowContainer(_view));
     QObject *item = _view->rootObject();
