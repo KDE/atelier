@@ -32,8 +32,10 @@ Item {
     DropArea {
         id: dropArea
         anchors.fill: parent
-        onDropped: if(drop.hasUrls) {
-            droppedUrls(drop.urls)
+        onDropped: function(drop) {
+            if(drop.hasUrls) {
+                item.droppedUrls(drop.urls)
+            }
         }
     }
 
