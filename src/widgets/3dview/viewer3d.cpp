@@ -23,14 +23,11 @@
 #include <QDirIterator>
 #include <QHBoxLayout>
 #include <QObject>
-#include <QQmlContext>
-#include <QQmlEngine>
 #include <QQuickItem>
 #include <QQuickView>
 #include <QString>
 
 #include "axisgnomonentity.h"
-#include "bedproperties.h"
 #include "cameracontroller.h"
 #include "gridmesh.h"
 #include "linemesh.h"
@@ -44,7 +41,6 @@ Viewer3D::Viewer3D(QWidget *parent)
     qmlRegisterType<CameraController>("Atelier", 1, 0, "CameraController");
     qmlRegisterType<GridMesh>("Atelier", 1, 0, "GridMesh");
     qmlRegisterType<LineMesh>("Atelier", 1, 0, "LineMesh");
-    qmlRegisterType<BedProperties>("Atelier", 1, 0, "BedProperties");
 
     _view = new QQuickView(&_engine, nullptr);
 
@@ -53,7 +49,7 @@ Viewer3D::Viewer3D(QWidget *parent)
     format.setProfile(QSurfaceFormat::CoreProfile);
     _view->setFormat(format);
 
-    _view->rootContext()->setContextProperty(QStringLiteral("viewer3d"), this);
+    _view->setInitialProperties({{QStringLiteral("bedSize"), bedSize()}});
     _view->setResizeMode(QQuickView::SizeRootObjectToView);
     _view->loadFromModule("org.kde.atelier.viewer3d", "Viewer3d");
     auto mainLayout = new QHBoxLayout;
@@ -61,6 +57,9 @@ Viewer3D::Viewer3D(QWidget *parent)
     QObject *item = _view->rootObject();
     // Connect the drop pass from the QML part.
     connect(item, SIGNAL(droppedUrls(QVariant)), this, SLOT(dropCatch(QVariant)));
+    connect(this, &Viewer3D::bedSizeChanged, item, [item](const QSize &size) {
+        item->setProperty("bedSize", size);
+    });
     this->setLayout(mainLayout);
 }
 

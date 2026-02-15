@@ -25,6 +25,7 @@ import QtQuick.Scene3D
 
 Item {
     id: item
+    required property size bedSize
     width: 1000
     height: 1000
     signal droppedUrls (var urls)
@@ -50,6 +51,7 @@ Item {
             cameraAspectRatioMode: Scene3D.AutomaticAspectRatio
             SceneEntity {
                 id: entity
+                bedSize: item.bedSize
             }
 
         }

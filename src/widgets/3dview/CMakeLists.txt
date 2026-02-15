@@ -1,6 +1,5 @@
 set(3d_SRCS
     axisgnomonentity.cpp
-    bedproperties.cpp
     cameracontroller.cpp
     fileloader.cpp
     gcodeto4d.cpp
