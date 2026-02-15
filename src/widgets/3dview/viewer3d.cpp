@@ -35,7 +35,6 @@
 
 Viewer3D::Viewer3D(QWidget *parent)
     : QWidget(parent)
-    , _lineMesh(new LineMesh)
 {
     qmlRegisterType<AxisGnomonEntity>("Atelier", 1, 0, "AxisGnomonEntity");
     qmlRegisterType<CameraController>("Atelier", 1, 0, "CameraController");

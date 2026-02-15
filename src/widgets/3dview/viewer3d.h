@@ -25,7 +25,6 @@
 #include <QQuickView>
 #include <QWidget>
 
-class LineMesh;
 class QString;
 
 class Viewer3D : public QWidget
@@ -44,7 +43,6 @@ public:
     void drawModel(const QString &file);
 
 private:
-    LineMesh *_lineMesh;
     QQmlApplicationEngine _engine;
     QQuickView *_view;
     QSize _bedSize = QSize(50, 50);
