@@ -22,10 +22,12 @@
 #pragma once
 
 #include <Qt3DExtras/QAbstractCameraController>
+#include <QtQmlIntegration/qqmlintegration.h>
 
 class CameraController : public Qt3DExtras::QAbstractCameraController
 {
     Q_OBJECT
+    QML_ELEMENT
 public:
     explicit CameraController(Qt3DCore::QNode *parent = nullptr);
     ~CameraController() = default;

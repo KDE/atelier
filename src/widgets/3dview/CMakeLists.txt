@@ -19,6 +19,10 @@ ecm_add_qml_module(Atelier3D GENERATE_PLUGIN_SOURCE
         axisgnomon.gltf
         axisgnomon.bin
         axisgnomon.vert
+    DEPENDENCIES
+        Qt3D.Core
+        Qt3D.Extras
+        Qt3D.Render
 )
 
 target_link_libraries(Atelier3D PRIVATE

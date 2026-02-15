@@ -27,6 +27,7 @@
 #include <QNode>
 #include <QObject>
 #include <QVector>
+#include <QtQmlIntegration/qqmlintegration.h>
 
 class LineMeshGeometry;
 class QString;
@@ -34,6 +35,7 @@ class QString;
 class LineMesh : public Qt3DRender::QGeometryRenderer
 {
     Q_OBJECT
+    QML_ELEMENT
 
 public:
     explicit LineMesh(Qt3DCore::QNode *parent = Q_NULLPTR);
