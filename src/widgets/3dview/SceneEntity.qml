@@ -29,11 +29,8 @@ import Atelier
 
 Entity {
     id: sceneRoot
+    required property size bedSize
     property string currentFile
-
-    BedProperties {
-        id: bedProperties
-    }
 
     Camera {
         id: camera
@@ -60,12 +57,12 @@ Entity {
         components: [
             PhongMaterial { ambient: "darkBlue" },
             GridMesh {
-                meshResolution: Qt.size(Math.floor(bedProperties.width / 10),
-                                        Math.floor(bedProperties.depth / 10))
+                meshResolution: Qt.size(Math.floor(sceneRoot.bedSize.width / 10),
+                                        Math.floor(sceneRoot.bedSize.height / 10))
             },
             Transform {
-                scale3D: Qt.vector3d(bedProperties.width / 10,
-                                     bedProperties.depth / 10,
+                scale3D: Qt.vector3d(sceneRoot.bedSize.width / 10,
+                                     sceneRoot.bedSize.height / 10,
                                      1)
             }
         ]
