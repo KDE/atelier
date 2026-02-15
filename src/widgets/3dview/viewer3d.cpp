@@ -19,6 +19,9 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+#include "viewer3d.h"
+
 #include <QDebug>
 #include <QDirIterator>
 #include <QHBoxLayout>
@@ -27,21 +30,10 @@
 #include <QQuickView>
 #include <QString>
 
-#include "axisgnomonentity.h"
-#include "cameracontroller.h"
-#include "gridmesh.h"
-#include "linemesh.h"
-#include "viewer3d.h"
-
 Viewer3D::Viewer3D(QWidget *parent)
     : QWidget(parent)
 {
     Q_INIT_RESOURCE(viewer3d);
-
-    qmlRegisterType<AxisGnomonEntity>("Atelier", 1, 0, "AxisGnomonEntity");
-    qmlRegisterType<CameraController>("Atelier", 1, 0, "CameraController");
-    qmlRegisterType<GridMesh>("Atelier", 1, 0, "GridMesh");
-    qmlRegisterType<LineMesh>("Atelier", 1, 0, "LineMesh");
 
     _view = new QQuickView(&_engine, nullptr);
 

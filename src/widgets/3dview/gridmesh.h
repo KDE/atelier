@@ -22,14 +22,16 @@
 
 #pragma once
 
-#include <QGeometryRenderer>
-#include <QNode>
 #include <QObject>
 #include <QSize>
+#include <Qt3DCore/QNode>
+#include <Qt3DRender/QGeometryRenderer>
+#include <QtQmlIntegration/qqmlintegration.h>
 
 class GridMesh : public Qt3DRender::QGeometryRenderer
 {
     Q_OBJECT
+    QML_ELEMENT
     Q_PROPERTY(QSize meshResolution READ meshResolution WRITE setMeshResolution NOTIFY meshResolutionChanged)
 public:
     explicit GridMesh(Qt3DCore::QNode *parent = nullptr);

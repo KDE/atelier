@@ -23,6 +23,7 @@
 
 #include <QVector2D>
 #include <Qt3DCore/QEntity>
+#include <QtQmlIntegration/qqmlintegration.h>
 
 namespace Qt3DRender
 {
@@ -32,6 +33,7 @@ class QParameter;
 class AxisGnomonEntity : public Qt3DCore::QEntity
 {
     Q_OBJECT
+    QML_ELEMENT
     Q_PROPERTY(QVector2D position READ position WRITE setPosition NOTIFY positionChanged)
     Q_PROPERTY(float scale READ scale WRITE setScale NOTIFY scaleChanged)
 public:

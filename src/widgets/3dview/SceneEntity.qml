@@ -25,7 +25,8 @@ import Qt3D.Core
 import Qt3D.Render
 import Qt3D.Input
 import Qt3D.Extras
-import Atelier
+
+import org.kde.atelier.viewer3d
 
 Entity {
     id: sceneRoot
