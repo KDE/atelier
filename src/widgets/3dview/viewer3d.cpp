@@ -35,7 +35,6 @@
 
 Viewer3D::Viewer3D(QWidget *parent)
     : QWidget(parent)
-    , _lineMesh(new LineMesh)
 {
     Q_INIT_RESOURCE(viewer3d);
 
