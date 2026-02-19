@@ -1,14 +1,15 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2026 This file is copyright:
 # This file is distributed under the same license as the atelier package.
 #
 # Alexander Potashev <aspotashev@gmail.com>, 2019.
+# SPDX-FileCopyrightText: 2026 Alexander Yavorskiy <kekcuha@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-29 00:47+0000\n"
-"PO-Revision-Date: 2019-08-16 02:22+0300\n"
-"Last-Translator: Alexander Potashev <aspotashev@gmail.com>\n"
+"PO-Revision-Date: 2026-02-18 12:20+0200\n"
+"Last-Translator: Alexander Yavorskiy <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -16,27 +17,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 19.07.70\n"
+"X-Generator: Lokalize 25.12.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
+msgstr "Александр Яворский"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
+msgstr "Адреса электронной почты переводчиков"
 
 #: src/dialogs/choosefiledialog.cpp:45
 #, kde-format
 msgid "Choose a file to print:"
-msgstr ""
+msgstr "Выбор файла для печати:"
 
 #: src/dialogs/profilesdialog.cpp:30
 #, kde-format
 msgid "Profiles"
-msgstr ""
+msgstr "Профили"
 
 #: src/main.cpp:42
 #, kde-format
@@ -46,11 +47,10 @@ msgstr "Atelier"
 #: src/main.cpp:46
 #, kde-format
 msgid "Printer Host for 3DPrinters"
-msgstr ""
+msgstr "Программа управления 3D‑принтером"
 
 #: src/main.cpp:50
-#, fuzzy, kde-format
-#| msgid "(c) 2016"
+#, kde-format
 msgid "© 2016"
 msgstr "© 2016"
 
@@ -82,28 +82,28 @@ msgstr "Tomaz Canabrava"
 #: src/main.cpp:64
 #, kde-format
 msgid "Contributor"
-msgstr ""
+msgstr "Участник проекта"
 
 #: src/main.cpp:65
 #, kde-format
 msgid "Using AtCore: %1"
-msgstr ""
+msgstr "Используется AtCore: %1"
 
 #: src/mainwindow.cpp:127
 #, kde-format
 msgid "Create new instance"
-msgstr ""
+msgstr "Новый экземпляр"
 
 #: src/mainwindow.cpp:144
 #, kde-format
 msgid "Connect a printer"
-msgstr ""
+msgstr "Подключение принтера"
 
 #: src/mainwindow.cpp:158 src/widgets/atcoreinstancewidget.cpp:227
 #: src/widgets/atcoreinstancewidget.cpp:465
 #, kde-format
 msgid "Error"
-msgstr ""
+msgstr "Ошибка"
 
 #: src/mainwindow.cpp:158
 #, kde-format
@@ -111,11 +111,13 @@ msgid ""
 "There's no GCode file open.\n"
 "Please select a file and try again."
 msgstr ""
+"Файл G-кода не открыт.\n"
+"Выберите файл и повторите попытку."
 
 #: src/mainwindow.cpp:174
 #, kde-format
 msgid "Document Modified"
-msgstr ""
+msgstr "Документ изменён"
 
 #: src/mainwindow.cpp:175
 #, kde-format
@@ -124,26 +126,29 @@ msgid ""
 "Contains unsaved changes that will not be in the print.\n"
 "Would you like to save them before printing?"
 msgstr ""
+"%1\n"
+"Содержит несохранённые изменения, которые не будут включены в печать.\n"
+"Сохранить их перед печатью?"
 
 #: src/mainwindow.cpp:267
 #, kde-format
 msgid "Welcome"
-msgstr ""
+msgstr "Добро пожаловать"
 
 #: src/mainwindow.cpp:268
 #, kde-format
 msgid "3D"
-msgstr ""
+msgstr "3D"
 
 #: src/mainwindow.cpp:269
 #, kde-format
 msgid "GCode"
-msgstr ""
+msgstr "G-код"
 
 #: src/mainwindow.cpp:270
 #, kde-format
 msgid "Video"
-msgstr ""
+msgstr "Видео"
 
 #: src/mainwindow.cpp:282
 #, kde-format
@@ -153,7 +158,7 @@ msgstr ""
 #: src/mainwindow.cpp:289
 #, kde-format
 msgid "&New Connection"
-msgstr ""
+msgstr "&Новое подключение"
 
 #: src/mainwindow.cpp:296
 #, kde-format
@@ -272,28 +277,28 @@ msgstr ""
 #: src/widgets/atcoreinstancewidget.cpp:165
 #, kde-format
 msgid "Disable Motors"
-msgstr ""
+msgstr "Отключить двигатели"
 
 #: src/widgets/atcoreinstancewidget.cpp:177
 #, kde-format
 msgid "Device"
-msgstr ""
+msgstr "Устройство"
 
 #: src/widgets/atcoreinstancewidget.cpp:185
 #, kde-format
 msgid "Profile"
-msgstr ""
+msgstr "Профиль"
 
 #: src/widgets/atcoreinstancewidget.cpp:197
 #: src/widgets/atcoreinstancewidget.cpp:428
 #, kde-format
 msgid "Connect"
-msgstr ""
+msgstr "Подключить"
 
 #: src/widgets/atcoreinstancewidget.cpp:209
 #, kde-format
 msgid "Connection Error"
-msgstr ""
+msgstr "Ошибка подключения"
 
 #: src/widgets/atcoreinstancewidget.cpp:210
 #, kde-format
@@ -303,11 +308,15 @@ msgid ""
 "Before connecting again check that your printer is on and your are "
 "connecting using the correct BAUD Rate for your device."
 msgstr ""
+"Устройство не ответило в течение 20 секунд. \n"
+"\n"
+"Перед повторным подключением убедитесь, что принтер включён и используется "
+"правильная скорость передачи (BAUD Rate) для вашего устройства."
 
 #: src/widgets/atcoreinstancewidget.cpp:220
 #, kde-format
 msgid "No Profiles!"
-msgstr ""
+msgstr "Профили отсутствуют"
 
 #: src/widgets/atcoreinstancewidget.cpp:221
 #, kde-format
