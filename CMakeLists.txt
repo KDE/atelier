@@ -57,15 +57,11 @@ endif()
 # config.h
 configure_file (config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/src/config.h)
 
-include(ECMPoQmTools)
-
 include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
 add_subdirectory(src)
 add_subdirectory(deploy)
 
-if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
-    ecm_install_po_files_as_qm(po)
-endif()
+ki18n_install(po)
 
 include(KDEClangFormat)
 file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES src/*.cpp src/*.h)

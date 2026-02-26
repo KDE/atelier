@@ -7,8 +7,6 @@ set(atelier_SRCS
 add_subdirectory(dialogs)
 add_subdirectory(widgets)
 
-ecm_create_qm_loader(atelier_SRCS atelier)
-
 if (NOT APPLE)
     add_executable(atelier ${atelier_SRCS} resources.qrc)
     install(TARGETS atelier RUNTIME DESTINATION bin)
