@@ -22,9 +22,9 @@
 #pragma once
 
 #include <QQmlApplicationEngine>
-#include <QQuickView>
 #include <QWidget>
 
+class QQuickView;
 class QString;
 
 class Viewer3D : public QWidget
