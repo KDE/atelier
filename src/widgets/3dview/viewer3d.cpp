@@ -33,7 +33,7 @@
 Viewer3D::Viewer3D(QWidget *parent)
     : QWidget(parent)
 {
-    _view = new QQuickView(&_engine, nullptr);
+    _view = new QQuickView(nullptr);
 
     auto format = QSurfaceFormat();
     format.setVersion(3, 1);

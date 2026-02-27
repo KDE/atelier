@@ -21,7 +21,9 @@
 */
 #pragma once
 
-#include <QQmlApplicationEngine>
+#include <QList>
+#include <QObject>
+#include <QUrl>
 #include <QWidget>
 
 class QQuickView;
@@ -43,7 +45,6 @@ public:
     void drawModel(const QString &file);
 
 private:
-    QQmlApplicationEngine _engine;
     QQuickView *_view;
     QSize _bedSize = QSize(50, 50);
 
