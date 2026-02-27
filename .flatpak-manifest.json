@@ -16,18 +16,20 @@
         "--socket=wayland",
         "--system-talk-name=org.freedesktop.UDisks2"
     ],
+    "cleanup": [
+        "/mkspecs",
+        "/include",
+        "/*/cmake"
+    ],
     "modules": [
         {
             "name": "atcore",
             "config-opts": [
+                "-DBUILD_DOCS=OFF",
+                "-DBUILD_TESTING=OFF",
                 "-DBUILD_GUI=OFF"
             ],
             "buildsystem": "cmake-ninja",
-            "cleanup": [
-                "/mkspecs",
-                "/include",
-                "/*/cmake"
-            ],
             "sources": [
                 {
                     "type": "git",
