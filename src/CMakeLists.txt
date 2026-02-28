@@ -8,14 +8,14 @@ add_executable(atelier
     resources.qrc
 )
 
-if (APPLE)
-    set(MACOSX_BUNDLE_DISPLAY_NAME "atelier")
-    set(MACOSX_BUNDLE_GUI_IDENTIFIER "org.kde.atelier")
-    set(MACOSX_BUNDLE_BUNDLE_NAME "atelier")
-    set(MACOSX_BUNDLE_DISPLAY_NAME "atelier")
-    set(MACOSX_BUNDLE_INFO_STRING "Atelier")
-    set(MACOSX_BUNDLE_COPYRIGHT "2016-2018 The Atelier Authors")
-endif()
+set_target_properties(atelier PROPERTIES
+    MACOSX_BUNDLE_DISPLAY_NAME "atelier"
+    MACOSX_BUNDLE_GUI_IDENTIFIER "org.kde.atelier"
+    MACOSX_BUNDLE_BUNDLE_NAME "atelier"
+    MACOSX_BUNDLE_DISPLAY_NAME "atelier"
+    MACOSX_BUNDLE_INFO_STRING "Atelier"
+    MACOSX_BUNDLE_COPYRIGHT "2016-2018 The Atelier Authors"
+)
 
 target_link_libraries(atelier 
     Atelier3D
