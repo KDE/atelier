@@ -1,23 +1,20 @@
 
-set(atelier_SRCS
-    main.cpp
-    mainwindow.cpp
-)
-
 add_subdirectory(dialogs)
 add_subdirectory(widgets)
 
-if (NOT APPLE)
-    add_executable(atelier ${atelier_SRCS} resources.qrc)
-else()
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++ -std=c++11")
+add_executable(atelier
+    main.cpp
+    mainwindow.cpp
+    resources.qrc
+)
+
+if (APPLE)
     set(MACOSX_BUNDLE_DISPLAY_NAME "atelier")
     set(MACOSX_BUNDLE_GUI_IDENTIFIER "org.kde.atelier")
     set(MACOSX_BUNDLE_BUNDLE_NAME "atelier")
     set(MACOSX_BUNDLE_DISPLAY_NAME "atelier")
     set(MACOSX_BUNDLE_INFO_STRING "Atelier")
     set(MACOSX_BUNDLE_COPYRIGHT "2016-2018 The Atelier Authors")
-    add_executable(atelier MACOSX_BUNDLE ${atelier_SRCS} resources.qrc)
 endif()
 
 target_link_libraries(atelier 
