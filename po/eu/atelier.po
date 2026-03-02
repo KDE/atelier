@@ -1,16 +1,16 @@
 # Translation for atelier.po to Euskara/Basque (eu).
-# Copyright (C) 2020-2025 This file is copyright:
+# Copyright (C) 2020-2026 This file is copyright:
 # This file is distributed under the same license as the atelier package.
-# SPDX-FileCopyrightText: 2025 KDE euskaratzeko proiektuaren arduraduna <xalba@ni.eus>
+# SPDX-FileCopyrightText: 2025, 2026 KDE euskaratzeko proiektuaren arduraduna <xalba@ni.eus>
 #
 # Translators:
-# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2020, 2021, 2025.
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2020, 2021, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-29 00:47+0000\n"
-"PO-Revision-Date: 2025-06-07 20:13+0200\n"
+"PO-Revision-Date: 2026-03-01 10:00+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.04.1\n"
+"X-Generator: Lokalize 25.12.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -28,7 +28,7 @@ msgstr "Iñigo Salvador Azurmendi"
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "xalba@euskalnet.net"
+msgstr "xalba@ni.eus"
 
 #: src/dialogs/choosefiledialog.cpp:45
 #, kde-format
@@ -299,10 +299,9 @@ msgid "Connect"
 msgstr "Konektatu"
 
 #: src/widgets/atcoreinstancewidget.cpp:209
-#, fuzzy, kde-format
-#| msgid "&New Connection"
+#, kde-format
 msgid "Connection Error"
-msgstr "Konexio &berria"
+msgstr "Konexio-errorea"
 
 #: src/widgets/atcoreinstancewidget.cpp:210
 #, kde-format
@@ -312,6 +311,10 @@ msgid ""
 "Before connecting again check that your printer is on and your are "
 "connecting using the correct BAUD Rate for your device."
 msgstr ""
+"Zure makinak ez du erantzun 20 segundo igaro ondoren.\n"
+"\n"
+"Berriz konektatu aurretik, egiaztatu zure inprimagailua piztuta dagoela eta "
+"zure gailurako BAUD abiadura zuzena erabiltzen ari zarela."
 
 #: src/widgets/atcoreinstancewidget.cpp:220
 #, kde-format
@@ -547,10 +550,9 @@ msgstr ""
 "        rtsp://server.example.org:8080/test.sdp"
 
 #: src/widgets/videomonitorwidget.cpp:87
-#, fuzzy, kde-format
-#| msgid "Error"
+#, kde-format
 msgid "Error: "
-msgstr "Errorea"
+msgstr "Errorea: "
 
 #: src/widgets/welcomewidget.cpp:52
 #, kde-format
@@ -598,10 +600,9 @@ msgid "Get Involved"
 msgstr "Engaia zaitez"
 
 #: src/widgets/welcomewidget.cpp:94
-#, fuzzy, kde-format
-#| msgid "Join our %1Telegram Group%2!"
+#, kde-format
 msgid "Join our %1Matrix Room%2!"
-msgstr "Batu gure %1Telegram taldera%2!"
+msgstr "Batu gure %1Matrix gelara%2!"
 
 #: src/widgets/welcomewidget.cpp:98
 #, kde-format
