@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-29 00:47+0000\n"
-"PO-Revision-Date: 2026-02-18 12:20+0200\n"
+"PO-Revision-Date: 2026-02-23 18:18+0200\n"
 "Last-Translator: Alexander Yavorskiy <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -153,7 +153,7 @@ msgstr "Видео"
 #: src/mainwindow.cpp:282
 #, kde-format
 msgid "&Open"
-msgstr ""
+msgstr "&Открыть"
 
 #: src/mainwindow.cpp:289
 #, kde-format
@@ -163,27 +163,27 @@ msgstr "&Новое подключение"
 #: src/mainwindow.cpp:296
 #, kde-format
 msgid "&Profiles"
-msgstr ""
+msgstr "&Профили"
 
 #: src/mainwindow.cpp:306
 #, kde-format
 msgid "&Quit"
-msgstr ""
+msgstr "&Выход"
 
 #: src/mainwindow.cpp:316
 #, kde-format
 msgid "Open GCode"
-msgstr ""
+msgstr "Открыть G-код"
 
 #: src/mainwindow.cpp:316
 #, kde-format
 msgid "GCode(*.gco *.gcode);;All Files(*.*)"
-msgstr ""
+msgstr "G-код (*.gco *.gcode);;Все файлы (*.*)"
 
 #: src/mainwindow.cpp:354 src/widgets/atcoreinstancewidget.cpp:450
 #, kde-format
 msgid "Printing"
-msgstr ""
+msgstr "Печать"
 
 #: src/mainwindow.cpp:354
 #, kde-format
@@ -191,88 +191,90 @@ msgid ""
 "Currently printing! \n"
 "Are you sure you want to close?"
 msgstr ""
+"Выполняется печать! \n"
+"Действительно закрыть?"
 
 #: src/mainwindow.cpp:405
 #, kde-format
 msgid "Save Selected"
-msgstr ""
+msgstr "Сохранение выбранного"
 
 #: src/mainwindow.cpp:415 src/mainwindow.cpp:433
 #, kde-format
 msgid "Save Failed"
-msgstr ""
+msgstr "Ошибка при сохранении"
 
 #: src/mainwindow.cpp:415 src/mainwindow.cpp:433
 #, kde-format
 msgid "Failed to save file: %1"
-msgstr ""
+msgstr "Не удалось сохранить файл: %1"
 
 #: src/mainwindow.cpp:428
 #, kde-format
 msgid "Save All"
-msgstr ""
+msgstr "Сохранить все"
 
 #: src/mainwindow.cpp:443
 #, kde-format
 msgid "Cancel"
-msgstr ""
+msgstr "Отмена"
 
 #: src/mainwindow.cpp:451
 #, kde-format
 msgid "Discard Changes"
-msgstr ""
+msgstr "Отменить изменения"
 
 #: src/mainwindow.cpp:459
 #, kde-format
 msgid "Files with Unsaved Changes."
-msgstr ""
+msgstr "Файлы с несохранённными изменениями."
 
 #: src/widgets/atcoreinstancewidget.cpp:93
 #, kde-format
 msgid "Controls"
-msgstr ""
+msgstr "Элементы управления"
 
 #: src/widgets/atcoreinstancewidget.cpp:94
 #, kde-format
 msgid "Advanced"
-msgstr ""
+msgstr "Дополнительно"
 
 #: src/widgets/atcoreinstancewidget.cpp:95
 #, kde-format
 msgid "Sd Card"
-msgstr ""
+msgstr "SD-карта"
 
 #: src/widgets/atcoreinstancewidget.cpp:122
 #, kde-format
 msgid "Home:"
-msgstr ""
+msgstr "Главная:"
 
 #: src/widgets/atcoreinstancewidget.cpp:125
 #, kde-format
 msgid "All"
-msgstr ""
+msgstr "Все"
 
 #: src/widgets/atcoreinstancewidget.cpp:141
 #: src/widgets/atcoreinstancewidget.cpp:160
 #: src/widgets/atcoreinstancewidget.cpp:445
 #, kde-format
 msgid "Print"
-msgstr ""
+msgstr "Печать"
 
 #: src/widgets/atcoreinstancewidget.cpp:144
 #, kde-format
 msgid "Pause Print"
-msgstr ""
+msgstr "Приостановить печать"
 
 #: src/widgets/atcoreinstancewidget.cpp:151
 #, kde-format
 msgid "Resume Print"
-msgstr ""
+msgstr "Возобновить печать"
 
 #: src/widgets/atcoreinstancewidget.cpp:157
 #, kde-format
 msgid "Stop"
-msgstr ""
+msgstr "Остановить"
 
 #: src/widgets/atcoreinstancewidget.cpp:165
 #, kde-format
@@ -324,62 +326,65 @@ msgid ""
 "Connecting requires creating a profile for your printer. Create a profile in "
 "the next dialog then try again."
 msgstr ""
+"Для подключения требуется создать профиль принтера. Создайте профиль в "
+"следующем диалоговом окне, затем повторите попытку."
 
 #: src/widgets/atcoreinstancewidget.cpp:227
 #, kde-format
 msgid "Please, connect a serial device to continue!"
-msgstr ""
+msgstr "Подключите последовательное устройство для продолжения!"
 
 #: src/widgets/atcoreinstancewidget.cpp:263
 #, kde-format
 msgid "Connect a Printer"
-msgstr ""
+msgstr "Подключение принтера"
 
 #: src/widgets/atcoreinstancewidget.cpp:290
 #, kde-format
 msgid "Push: %1"
-msgstr ""
+msgstr "Отправка: %1"
 
 #: src/widgets/atcoreinstancewidget.cpp:295
 #, kde-format
 msgid "Display: %1"
-msgstr ""
+msgstr "Экран: %1"
 
 #: src/widgets/atcoreinstancewidget.cpp:315
 #, kde-format
 msgid "Relative Move: %1, %2"
-msgstr ""
+msgstr "Относительное перемещение: %1, %2"
 
 #: src/widgets/atcoreinstancewidget.cpp:328
 #, kde-format
 msgid "Print Error"
-msgstr ""
+msgstr "Ошибка печати"
 
 #: src/widgets/atcoreinstancewidget.cpp:328
 #: src/widgets/atcoreinstancewidget.cpp:337
 #, kde-format
 msgid "You must select a file from the list"
-msgstr ""
+msgstr "Выберите файл из списка."
 
 #: src/widgets/atcoreinstancewidget.cpp:337
 #, kde-format
 msgid "Delete Error"
-msgstr ""
+msgstr "Ошибка удаления"
 
 #: src/widgets/atcoreinstancewidget.cpp:347
 #, kde-format
 msgid "Filename Empty"
-msgstr ""
+msgstr "Пустое имя файла"
 
 #: src/widgets/atcoreinstancewidget.cpp:347
 #, kde-format
 msgid "No filename sent from calling method, please check and try again."
 msgstr ""
+"Имя файла не передано из вызывающего метода. Проверьте и повторите попытку."
 
 #: src/widgets/atcoreinstancewidget.cpp:351
 #, kde-format
 msgid "File not found"
-msgstr ""
+msgstr "Файл не найден"
 
 #: src/widgets/atcoreinstancewidget.cpp:351
 #, kde-format
@@ -387,91 +392,95 @@ msgid ""
 "%1 \n"
 "Is not readable, please check and try again."
 msgstr ""
+"%1 \n"
+"Файл не читается. Проверьте и повторите попытку."
 
 #: src/widgets/atcoreinstancewidget.cpp:355
 #, kde-format
 msgid "Printing: %1"
-msgstr ""
+msgstr "Печать: %1"
 
 #: src/widgets/atcoreinstancewidget.cpp:391
 #, kde-format
 msgid "Disconnect"
-msgstr ""
+msgstr "Отключить"
 
 #: src/widgets/atcoreinstancewidget.cpp:395
 #, kde-format
 msgid "Connecting…"
-msgstr ""
+msgstr "Подключение…"
 
 #: src/widgets/atcoreinstancewidget.cpp:396
 #, kde-format
 msgid "Attempting to Connect"
-msgstr ""
+msgstr "Установление подключения…"
 
 #: src/widgets/atcoreinstancewidget.cpp:405
 #, kde-format
 msgid "Connected to %1"
-msgstr ""
+msgstr "Подключено к %1"
 
 #: src/widgets/atcoreinstancewidget.cpp:423
 #, kde-format
 msgid "Not Connected"
-msgstr ""
+msgstr "Не подключено"
 
 #: src/widgets/atcoreinstancewidget.cpp:426
 #, kde-format
 msgid "Serial disconnected"
-msgstr ""
+msgstr "Последовательное соединение разорвано"
 
 #: src/widgets/atcoreinstancewidget.cpp:437
 #, kde-format
 msgid "Starting Print"
-msgstr ""
+msgstr "Начало печати"
 
 #: src/widgets/atcoreinstancewidget.cpp:442
 #, kde-format
 msgid "Finished Print"
-msgstr ""
+msgstr "Завершение печати"
 
 #: src/widgets/atcoreinstancewidget.cpp:447
 #, kde-format
 msgid "Finished Print Job"
-msgstr ""
+msgstr "Завершение задания печати"
 
 #: src/widgets/atcoreinstancewidget.cpp:452
 #, kde-format
 msgid "Pause"
-msgstr ""
+msgstr "Приостановить"
 
 #: src/widgets/atcoreinstancewidget.cpp:456
 #, kde-format
 msgid "Paused"
-msgstr ""
+msgstr "Приостановлено"
 
 #: src/widgets/atcoreinstancewidget.cpp:457
 #, kde-format
 msgid "Resume"
-msgstr ""
+msgstr "Продолжить"
 
 #: src/widgets/atcoreinstancewidget.cpp:461
 #, kde-format
 msgid "Stopping Print"
-msgstr ""
+msgstr "Остановка печати"
 
 #: src/widgets/atcoreinstancewidget.cpp:468
 #, kde-format
 msgid "Unknown AtCore State, %1"
-msgstr ""
+msgstr "Неизвестное состояние AtCore: %1"
 
 #: src/widgets/atcoreinstancewidget.cpp:542
 #, kde-format
 msgid "Found %1 Ports"
-msgstr ""
+msgstr "Найдено портов: %1"
 
 #: src/widgets/atcoreinstancewidget.cpp:544
 #, kde-format
 msgid "No available ports! Please connect a serial device to continue!"
 msgstr ""
+"Нет доступных портов! Подключите устройство для последовательной передачи "
+"данных, чтобы продолжить!"
 
 #: src/widgets/atcoreinstancewidget.cpp:587
 #: src/widgets/atcoreinstancewidget.cpp:590
@@ -480,14 +489,14 @@ msgstr ""
 #: src/widgets/atcoreinstancewidget.cpp:606
 #, kde-format
 msgid "Actual Bed"
-msgstr ""
+msgstr "Фактический стенд"
 
 #: src/widgets/atcoreinstancewidget.cpp:597
 #: src/widgets/atcoreinstancewidget.cpp:601
 #: src/widgets/atcoreinstancewidget.cpp:608
 #, kde-format
 msgid "Target Bed"
-msgstr ""
+msgstr "Целевой стенд"
 
 #: src/widgets/atcoreinstancewidget.cpp:617
 #: src/widgets/atcoreinstancewidget.cpp:621
@@ -496,34 +505,34 @@ msgstr ""
 #: src/widgets/atcoreinstancewidget.cpp:637
 #, kde-format
 msgid "Actual Ext.1"
-msgstr ""
+msgstr "Фактический экст.1"
 
 #: src/widgets/atcoreinstancewidget.cpp:628
 #: src/widgets/atcoreinstancewidget.cpp:632
 #: src/widgets/atcoreinstancewidget.cpp:639
 #, kde-format
 msgid "Target Ext.1"
-msgstr ""
+msgstr "Целевой экст.1"
 
 #: src/widgets/bedextruderwidget.cpp:29
 #, kde-format
 msgid "Bed"
-msgstr ""
+msgstr "Кровать"
 
 #: src/widgets/bedextruderwidget.cpp:30
 #, kde-format
 msgid "HotEnd"
-msgstr ""
+msgstr "HotEnd"
 
 #: src/widgets/bedextruderwidget.cpp:38
 #, kde-format
 msgid "Active Extruder:"
-msgstr ""
+msgstr "Активный экструдер:"
 
 #: src/widgets/videomonitorwidget.cpp:34
 #, kde-format
 msgid "Source url:"
-msgstr ""
+msgstr "URL источника:"
 
 #: src/widgets/videomonitorwidget.cpp:40
 #, kde-format
@@ -534,11 +543,16 @@ msgid ""
 "        mms://mms.examples.com/stream.asx\n"
 "        rtsp://server.example.org:8080/test.sdp"
 msgstr ""
+"Допустимые URL-адреса:\n"
+"        http://www.example.com/stream.avi\n"
+"        rtp://@:1234\n"
+"        mms://mms.examples.com/stream.asx\n"
+"        rtsp://server.example.org:8080/test.sdp"
 
 #: src/widgets/videomonitorwidget.cpp:87
 #, kde-format
 msgid "Error: "
-msgstr ""
+msgstr "Ошибка:"
 
 #: src/widgets/welcomewidget.cpp:52
 #, kde-format
@@ -548,54 +562,54 @@ msgstr "Добро пожаловать в Atelier!"
 #: src/widgets/welcomewidget.cpp:68
 #, kde-format
 msgid "Quick Connect Guide"
-msgstr ""
+msgstr "Краткое руководство по подключению"
 
 #: src/widgets/welcomewidget.cpp:72
 #, kde-format
 msgid "1 - Create a Profile."
-msgstr ""
+msgstr "1 — Создайте профиль."
 
 #: src/widgets/welcomewidget.cpp:72
 #, kde-format
 msgid "2 - Select the device."
-msgstr ""
+msgstr "2 — Выберите устройство."
 
 #: src/widgets/welcomewidget.cpp:72
 #, kde-format
 msgid "3 - Select the profile and connect."
-msgstr ""
+msgstr "3 — Выберите профиль и подключитесь."
 
 #: src/widgets/welcomewidget.cpp:77
 #, kde-format
 msgid "Having a connection problem?"
-msgstr ""
+msgstr "Проблемы с подключением?"
 
 #: src/widgets/welcomewidget.cpp:81
 #, kde-format
 msgid "See the info section of the Log for common problems."
-msgstr ""
+msgstr "В разделе сведений журнала перечислены типичные проблемы."
 
 #: src/widgets/welcomewidget.cpp:84
 #, kde-format
 msgid "Atelier news!"
-msgstr ""
+msgstr "Новости Atelier!"
 
 #: src/widgets/welcomewidget.cpp:90
 #, kde-format
 msgid "Get Involved"
-msgstr ""
+msgstr "Принять участие"
 
 #: src/widgets/welcomewidget.cpp:94
 #, kde-format
 msgid "Join our %1Matrix Room%2!"
-msgstr ""
+msgstr "Присоединитесь к нашей комнате в %1Matrix%2!"
 
 #: src/widgets/welcomewidget.cpp:98
 #, kde-format
 msgid "You can also find us on Libera Chat IRC #kde-atelier"
-msgstr ""
+msgstr "Можно также найти нас в IRC-канале #kde-atelier на Libera Chat."
 
 #: src/widgets/welcomewidget.cpp:185
 #, kde-format
 msgid "Failed to fetch the News."
-msgstr ""
+msgstr "Не удалось получить новости."
