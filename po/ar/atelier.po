@@ -132,7 +132,7 @@ msgstr ""
 #: src/mainwindow.cpp:267
 #, kde-format
 msgid "Welcome"
-msgstr "مرحباً"
+msgstr "مرحبًا"
 
 #: src/mainwindow.cpp:268
 #, kde-format
@@ -553,7 +553,7 @@ msgstr "الخطأ: "
 #: src/widgets/welcomewidget.cpp:52
 #, kde-format
 msgid "Welcome to Atelier!"
-msgstr "مرحبا بك في برنامج ورشة!"
+msgstr "مرحبًا بك في برنامج ورشة!"
 
 #: src/widgets/welcomewidget.cpp:68
 #, kde-format
