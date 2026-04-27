@@ -1,13 +1,13 @@
 # Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the atelier package.
-# SPDX-FileCopyrightText: 2019, 2020, 2021, 2025 Shinjo Park <kde@peremen.name>
+# SPDX-FileCopyrightText: 2019, 2020, 2021, 2025, 2026 Shinjo Park <kde@peremen.name>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-29 00:47+0000\n"
-"PO-Revision-Date: 2025-06-11 00:13+0200\n"
+"PO-Revision-Date: 2026-04-26 22:55+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 24.12.3\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -296,10 +296,9 @@ msgid "Connect"
 msgstr "연결"
 
 #: src/widgets/atcoreinstancewidget.cpp:209
-#, fuzzy, kde-format
-#| msgid "&New Connection"
+#, kde-format
 msgid "Connection Error"
-msgstr "새 연결(&N)"
+msgstr "연결 오류"
 
 #: src/widgets/atcoreinstancewidget.cpp:210
 #, kde-format
@@ -309,6 +308,10 @@ msgid ""
 "Before connecting again check that your printer is on and your are "
 "connecting using the correct BAUD Rate for your device."
 msgstr ""
+"20초가 지났으나 머신이 응답하지 않았습니다.\n"
+"\n"
+"다시 연결하기 전에 프린터 연결 상태와 올바른 전송률을 사용하는지 확인하십시"
+"오."
 
 #: src/widgets/atcoreinstancewidget.cpp:220
 #, kde-format
@@ -544,10 +547,9 @@ msgstr ""
 "        rtsp://server.example.org:8080/test.sdp"
 
 #: src/widgets/videomonitorwidget.cpp:87
-#, fuzzy, kde-format
-#| msgid "Error"
+#, kde-format
 msgid "Error: "
-msgstr "오류"
+msgstr "오류: "
 
 #: src/widgets/welcomewidget.cpp:52
 #, kde-format
@@ -595,10 +597,9 @@ msgid "Get Involved"
 msgstr "참여하기"
 
 #: src/widgets/welcomewidget.cpp:94
-#, fuzzy, kde-format
-#| msgid "Join our %1Telegram Group%2!"
+#, kde-format
 msgid "Join our %1Matrix Room%2!"
-msgstr "%1텔레그램 대화방%2에 참여하십시오!"
+msgstr "%1Matrix 대화방%2에 참여하십시오!"
 
 #: src/widgets/welcomewidget.cpp:98
 #, kde-format
