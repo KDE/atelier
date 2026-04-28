@@ -309,7 +309,7 @@ msgstr ""
 "Vaše zariadenie neodpovedalo po 20 sekundách.\n"
 "\n"
 "Pred opätovným pripojením skontrolujte, či je vaša tlačiareň zapnutá a "
-"pripájate sa pomocou správneho BAUD rate for your device."
+"pripájate sa pomocou správnej prenosovej rýchlosti BAUD pre vaše zariadenie."
 
 #: src/widgets/atcoreinstancewidget.cpp:220
 #, kde-format
