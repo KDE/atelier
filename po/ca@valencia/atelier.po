@@ -568,17 +568,17 @@ msgstr "Guia de connexió ràpida"
 #: src/widgets/welcomewidget.cpp:72
 #, kde-format
 msgid "1 - Create a Profile."
-msgstr "1 - Creeu un perfil."
+msgstr "1 – Creeu un perfil."
 
 #: src/widgets/welcomewidget.cpp:72
 #, kde-format
 msgid "2 - Select the device."
-msgstr "2 - Trieu el dispositiu."
+msgstr "2 – Trieu el dispositiu."
 
 #: src/widgets/welcomewidget.cpp:72
 #, kde-format
 msgid "3 - Select the profile and connect."
-msgstr "3 - Trieu el perfil i connecteu."
+msgstr "3 – Trieu el perfil i connecteu."
 
 #: src/widgets/welcomewidget.cpp:77
 #, kde-format
