@@ -1,36 +1,37 @@
 # Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the atelier package.
 # SPDX-FileCopyrightText: 2019, 2023, 2025 Vit Pelcak <vit@pelcak.org>
+# SPDX-FileCopyrightText: 2026 Libor Filípek <libor.filipek@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-29 00:47+0000\n"
-"PO-Revision-Date: 2025-12-02 11:33+0100\n"
-"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
+"PO-Revision-Date: 2026-07-02 00:12+0200\n"
+"Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 25.08.3\n"
+"X-Generator: Poedit 3.9\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Vít Pelčák"
+msgstr "Vít Pelčák,Libor Filípek"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "vit@pelcak.org"
+msgstr "vit@pelcak.org,libor.filipek@gmail.com"
 
 #: src/dialogs/choosefiledialog.cpp:45
 #, kde-format
 msgid "Choose a file to print:"
-msgstr ""
+msgstr "Vyberte soubor k tisku:"
 
 #: src/dialogs/profilesdialog.cpp:30
 #, kde-format
@@ -45,7 +46,7 @@ msgstr "Atelier"
 #: src/main.cpp:46
 #, kde-format
 msgid "Printer Host for 3DPrinters"
-msgstr ""
+msgstr "Hostitelský server pro 3D tiskárny"
 
 #: src/main.cpp:50
 #, kde-format
@@ -85,12 +86,12 @@ msgstr "Spolupracovník"
 #: src/main.cpp:65
 #, kde-format
 msgid "Using AtCore: %1"
-msgstr ""
+msgstr "Použití AtCore: %1"
 
 #: src/mainwindow.cpp:127
 #, kde-format
 msgid "Create new instance"
-msgstr ""
+msgstr "Vytvořit novou instanci"
 
 #: src/mainwindow.cpp:144
 #, kde-format
@@ -109,6 +110,8 @@ msgid ""
 "There's no GCode file open.\n"
 "Please select a file and try again."
 msgstr ""
+"Není otevřen žádný soubor GCode.\n"
+"Vyberte prosím soubor a zkuste to znovu."
 
 #: src/mainwindow.cpp:174
 #, kde-format
@@ -122,6 +125,9 @@ msgid ""
 "Contains unsaved changes that will not be in the print.\n"
 "Would you like to save them before printing?"
 msgstr ""
+"%1 \n"
+"Obsahuje neuložené změny, které se do tisku nezahrnou.\n"
+"Chcete je před tiskem uložit?"
 
 #: src/mainwindow.cpp:267
 #, kde-format
@@ -184,6 +190,8 @@ msgid ""
 "Currently printing! \n"
 "Are you sure you want to close?"
 msgstr ""
+"Právě se tiskne! \n"
+"Opravdu chcete zavřít?"
 
 #: src/mainwindow.cpp:405
 #, kde-format
@@ -218,7 +226,7 @@ msgstr "Zahodit změny"
 #: src/mainwindow.cpp:459
 #, kde-format
 msgid "Files with Unsaved Changes."
-msgstr ""
+msgstr "Soubory s neuloženými změnami."
 
 #: src/widgets/atcoreinstancewidget.cpp:93
 #, kde-format
@@ -270,7 +278,7 @@ msgstr "Zastavit"
 #: src/widgets/atcoreinstancewidget.cpp:165
 #, kde-format
 msgid "Disable Motors"
-msgstr ""
+msgstr "Vypnout motory"
 
 #: src/widgets/atcoreinstancewidget.cpp:177
 #, kde-format
@@ -301,11 +309,15 @@ msgid ""
 "Before connecting again check that your printer is on and your are "
 "connecting using the correct BAUD Rate for your device."
 msgstr ""
+"Vaše zařízení nereagovalo po 20 sekund.\n"
+"\n"
+"Než se pokusíte o připojení znovu, zkontrolujte, zda je tiskárna zapnutá a "
+"zda používáte správnou přenosovou rychlost (BAUD Rate) pro dané zařízení."
 
 #: src/widgets/atcoreinstancewidget.cpp:220
 #, kde-format
 msgid "No Profiles!"
-msgstr ""
+msgstr "Žádné profily!"
 
 #: src/widgets/atcoreinstancewidget.cpp:221
 #, kde-format
@@ -313,11 +325,13 @@ msgid ""
 "Connecting requires creating a profile for your printer. Create a profile in "
 "the next dialog then try again."
 msgstr ""
+"Pro připojení je nutné vytvořit profil vaší tiskárny. Vytvořte profil v "
+"následujícím dialogovém okně a zkuste to znovu."
 
 #: src/widgets/atcoreinstancewidget.cpp:227
 #, kde-format
 msgid "Please, connect a serial device to continue!"
-msgstr ""
+msgstr "Prosím, připojte sériové zařízení, abyste mohli pokračovat!"
 
 #: src/widgets/atcoreinstancewidget.cpp:263
 #, kde-format
@@ -337,7 +351,7 @@ msgstr "Obrazovka: %1"
 #: src/widgets/atcoreinstancewidget.cpp:315
 #, kde-format
 msgid "Relative Move: %1, %2"
-msgstr ""
+msgstr "Relativní pohyb: %1, %2"
 
 #: src/widgets/atcoreinstancewidget.cpp:328
 #, kde-format
@@ -348,7 +362,7 @@ msgstr "Chyba tisku"
 #: src/widgets/atcoreinstancewidget.cpp:337
 #, kde-format
 msgid "You must select a file from the list"
-msgstr ""
+msgstr "Musíte vybrat soubor ze seznamu"
 
 #: src/widgets/atcoreinstancewidget.cpp:337
 #, kde-format
@@ -364,6 +378,8 @@ msgstr "Název souboru je prázdný"
 #, kde-format
 msgid "No filename sent from calling method, please check and try again."
 msgstr ""
+"Z volající metody nebyl odeslán žádný název souboru. Zkontrolujte to a "
+"zkuste to znovu."
 
 #: src/widgets/atcoreinstancewidget.cpp:351
 #, kde-format
@@ -376,6 +392,8 @@ msgid ""
 "%1 \n"
 "Is not readable, please check and try again."
 msgstr ""
+"%1 \n"
+"Nelze přečíst, zkontrolujte to a zkuste to znovu."
 
 #: src/widgets/atcoreinstancewidget.cpp:355
 #, kde-format
@@ -390,12 +408,12 @@ msgstr "Odpojit"
 #: src/widgets/atcoreinstancewidget.cpp:395
 #, kde-format
 msgid "Connecting…"
-msgstr "Navazuji spojení…"
+msgstr "Připojování…"
 
 #: src/widgets/atcoreinstancewidget.cpp:396
 #, kde-format
 msgid "Attempting to Connect"
-msgstr ""
+msgstr "Pokus o připojení"
 
 #: src/widgets/atcoreinstancewidget.cpp:405
 #, kde-format
@@ -410,7 +428,7 @@ msgstr "Nepřipojen"
 #: src/widgets/atcoreinstancewidget.cpp:426
 #, kde-format
 msgid "Serial disconnected"
-msgstr ""
+msgstr "Sériové připojení přerušeno"
 
 #: src/widgets/atcoreinstancewidget.cpp:437
 #, kde-format
@@ -425,7 +443,7 @@ msgstr "Dokončen tisk"
 #: src/widgets/atcoreinstancewidget.cpp:447
 #, kde-format
 msgid "Finished Print Job"
-msgstr ""
+msgstr "Dokončená tisková úloha"
 
 #: src/widgets/atcoreinstancewidget.cpp:452
 #, kde-format
@@ -445,22 +463,22 @@ msgstr "Obnovit"
 #: src/widgets/atcoreinstancewidget.cpp:461
 #, kde-format
 msgid "Stopping Print"
-msgstr ""
+msgstr "Zastavení tisku"
 
 #: src/widgets/atcoreinstancewidget.cpp:468
 #, kde-format
 msgid "Unknown AtCore State, %1"
-msgstr ""
+msgstr "Neznámý stav AtCore, %1"
 
 #: src/widgets/atcoreinstancewidget.cpp:542
 #, kde-format
 msgid "Found %1 Ports"
-msgstr ""
+msgstr "Nalezeno %1 portů"
 
 #: src/widgets/atcoreinstancewidget.cpp:544
 #, kde-format
 msgid "No available ports! Please connect a serial device to continue!"
-msgstr ""
+msgstr "Žádné volné porty! Pro pokračování prosím připojte sériové zařízení!"
 
 #: src/widgets/atcoreinstancewidget.cpp:587
 #: src/widgets/atcoreinstancewidget.cpp:590
@@ -469,14 +487,14 @@ msgstr ""
 #: src/widgets/atcoreinstancewidget.cpp:606
 #, kde-format
 msgid "Actual Bed"
-msgstr ""
+msgstr "Aktuální podložka"
 
 #: src/widgets/atcoreinstancewidget.cpp:597
 #: src/widgets/atcoreinstancewidget.cpp:601
 #: src/widgets/atcoreinstancewidget.cpp:608
 #, kde-format
 msgid "Target Bed"
-msgstr ""
+msgstr "Cílová podložka"
 
 #: src/widgets/atcoreinstancewidget.cpp:617
 #: src/widgets/atcoreinstancewidget.cpp:621
@@ -485,34 +503,34 @@ msgstr ""
 #: src/widgets/atcoreinstancewidget.cpp:637
 #, kde-format
 msgid "Actual Ext.1"
-msgstr ""
+msgstr "Aktuální Ext.1"
 
 #: src/widgets/atcoreinstancewidget.cpp:628
 #: src/widgets/atcoreinstancewidget.cpp:632
 #: src/widgets/atcoreinstancewidget.cpp:639
 #, kde-format
 msgid "Target Ext.1"
-msgstr ""
+msgstr "Cílový Ext.1"
 
 #: src/widgets/bedextruderwidget.cpp:29
 #, kde-format
 msgid "Bed"
-msgstr ""
+msgstr "Podložka"
 
 #: src/widgets/bedextruderwidget.cpp:30
 #, kde-format
 msgid "HotEnd"
-msgstr ""
+msgstr "HotEnd"
 
 #: src/widgets/bedextruderwidget.cpp:38
 #, kde-format
 msgid "Active Extruder:"
-msgstr ""
+msgstr "Aktivní extrudér:"
 
 #: src/widgets/videomonitorwidget.cpp:34
 #, kde-format
 msgid "Source url:"
-msgstr ""
+msgstr "Zdrojová url:"
 
 #: src/widgets/videomonitorwidget.cpp:40
 #, kde-format
@@ -537,12 +555,12 @@ msgstr "Chyba: "
 #: src/widgets/welcomewidget.cpp:52
 #, kde-format
 msgid "Welcome to Atelier!"
-msgstr ""
+msgstr "Vítejte v Atelieru!"
 
 #: src/widgets/welcomewidget.cpp:68
 #, kde-format
 msgid "Quick Connect Guide"
-msgstr ""
+msgstr "Stručný návod k připojení"
 
 #: src/widgets/welcomewidget.cpp:72
 #, kde-format
@@ -562,17 +580,17 @@ msgstr "3 - Vyberte profil a připojte se."
 #: src/widgets/welcomewidget.cpp:77
 #, kde-format
 msgid "Having a connection problem?"
-msgstr ""
+msgstr "Máte potíže s připojením?"
 
 #: src/widgets/welcomewidget.cpp:81
 #, kde-format
 msgid "See the info section of the Log for common problems."
-msgstr ""
+msgstr "Běžné problémy najdete v informační části protokolu."
 
 #: src/widgets/welcomewidget.cpp:84
 #, kde-format
 msgid "Atelier news!"
-msgstr ""
+msgstr "Novinky v Atelieru!"
 
 #: src/widgets/welcomewidget.cpp:90
 #, kde-format
@@ -582,14 +600,14 @@ msgstr "Zapojte se"
 #: src/widgets/welcomewidget.cpp:94
 #, kde-format
 msgid "Join our %1Matrix Room%2!"
-msgstr ""
+msgstr "Přidejte se do naší %1Matrix místnosti%2!"
 
 #: src/widgets/welcomewidget.cpp:98
 #, kde-format
 msgid "You can also find us on Libera Chat IRC #kde-atelier"
-msgstr ""
+msgstr "Najdete nás také na Libera Chat IRC v kanálu #kde-atelier"
 
 #: src/widgets/welcomewidget.cpp:185
 #, kde-format
 msgid "Failed to fetch the News."
-msgstr ""
+msgstr "Nepodařilo se načíst novinky."
