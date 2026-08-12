@@ -31,7 +31,7 @@ msgstr "zayed.alsaidi@gmail.com"
 #: src/dialogs/choosefiledialog.cpp:45
 #, kde-format
 msgid "Choose a file to print:"
-msgstr "اختر ملفاً للطّباعة:"
+msgstr "اختر ملفًا للطّباعة:"
 
 #: src/dialogs/profilesdialog.cpp:30
 #, kde-format
@@ -91,7 +91,7 @@ msgstr "يستخدم AtCore: %1"
 #: src/mainwindow.cpp:127
 #, kde-format
 msgid "Create new instance"
-msgstr "أنشئ مثيلاً جديداً"
+msgstr "أنشئ مثيلًا جديدًا"
 
 #: src/mainwindow.cpp:144
 #, kde-format
@@ -111,7 +111,7 @@ msgid ""
 "Please select a file and try again."
 msgstr ""
 "لا يوجد ملف GCode مفتوح.\n"
-"من فضلك، اختر ملفاً وأعد المحاولة."
+"من فضلك، اختر ملفًا وأعد المحاولة."
 
 #: src/mainwindow.cpp:174
 #, kde-format
@@ -190,7 +190,7 @@ msgid ""
 "Currently printing! \n"
 "Are you sure you want to close?"
 msgstr ""
-"يطبع حالياً! \n"
+"يطبع حاليًا! \n"
 "أتأكد من أنك تريد الإغلاق؟"
 
 #: src/mainwindow.cpp:405
@@ -331,7 +331,7 @@ msgstr ""
 #: src/widgets/atcoreinstancewidget.cpp:227
 #, kde-format
 msgid "Please, connect a serial device to continue!"
-msgstr "من فضلك، وصّل جهازاً تسلسليّاً للمتابعة!"
+msgstr "من فضلك، وصّل جهازًا تسلسليًّا للمتابعة!"
 
 #: src/widgets/atcoreinstancewidget.cpp:263
 #, kde-format
@@ -471,7 +471,7 @@ msgstr "حالة AtCore غير معروفة، %1"
 #: src/widgets/atcoreinstancewidget.cpp:542
 #, kde-format
 msgid "Found %1 Ports"
-msgstr "وجد %1 منفذاً"
+msgstr "وجد %1 منفذًا"
 
 #: src/widgets/atcoreinstancewidget.cpp:544
 #, kde-format
