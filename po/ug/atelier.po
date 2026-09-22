@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: atelier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-29 00:47+0000\n"
-"PO-Revision-Date: 2026-05-28 17:05-0400\n"
+"PO-Revision-Date: 2026-09-22 18:02+0900\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
 "Language: ug\n"
@@ -51,12 +51,12 @@ msgstr ""
 #: src/main.cpp:50
 #, kde-format
 msgid "© 2016"
-msgstr "© 2016"
+msgstr ""
 
 #: src/main.cpp:58
 #, kde-format
 msgid "Lays Rodrigues"
-msgstr "Lays Rodrigues"
+msgstr ""
 
 #: src/main.cpp:59 src/main.cpp:62 src/main.cpp:63
 #, kde-format
@@ -66,17 +66,17 @@ msgstr "ئىجادكار"
 #: src/main.cpp:62
 #, kde-format
 msgid "Chris Rizzitello"
-msgstr "Chris Rizzitello"
+msgstr ""
 
 #: src/main.cpp:63
 #, kde-format
 msgid "Patrick Pereira"
-msgstr "Patrick Pereira"
+msgstr ""
 
 #: src/main.cpp:64
 #, kde-format
 msgid "Tomaz Canabrava"
-msgstr "Tomaz Canabrava"
+msgstr ""
 
 #: src/main.cpp:64
 #, kde-format
@@ -132,7 +132,7 @@ msgstr "مەرھابا"
 #: src/mainwindow.cpp:268
 #, kde-format
 msgid "3D"
-msgstr "3D"
+msgstr ""
 
 #: src/mainwindow.cpp:269
 #, kde-format
@@ -406,7 +406,7 @@ msgstr "%1 غا باغلاندى"
 #: src/widgets/atcoreinstancewidget.cpp:423
 #, kde-format
 msgid "Not Connected"
-msgstr ""
+msgstr "باغلانمىغان"
 
 #: src/widgets/atcoreinstancewidget.cpp:426
 #, kde-format
